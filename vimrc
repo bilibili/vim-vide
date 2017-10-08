@@ -47,19 +47,19 @@ let $VIMFILES=$HOME.'/.vim'
 let @w = 'x~n'
 nmap <c-l> <esc>:noh<cr>
 nmap <leader>3 :NERDTreeFind<cr>
-nmap <leader>ta :set filetype=awk        <CR>
-nmap <leader>tc :set filetype=css        <CR>
-nmap <leader>td :set filetype=htmldjango <CR>
-nmap <leader>te :set filetype=sed        <CR>
-nmap <leader>th :set filetype=html       <CR>
-nmap <leader>tj :set filetype=javascript <CR>
-nmap <leader>tl :set filetype=lua        <CR>
-nmap <leader>tm :set filetype=markdown   <CR>
-nmap <leader>tp :set filetype=php        <CR>
-nmap <leader>ts :set filetype=sh         <CR>
-nmap <leader>tt :set filetype=txt        <CR>
-nmap <leader>tv :set filetype=vim        <CR>
-nmap <leader>ty :set filetype=python     <CR>
+nmap <leader>a :set filetype=awk        <CR>
+nmap <leader>c :set filetype=css        <CR>
+nmap <leader>d :set filetype=htmldjango <CR>
+nmap <leader>e :set filetype=sed        <CR>
+nmap <leader>h :set filetype=html       <CR>
+nmap <leader>j :set filetype=javascript <CR>
+nmap <leader>l :set filetype=lua        <CR>
+nmap <leader>m :set filetype=markdown   <CR>
+nmap <leader>p :set filetype=php        <CR>
+nmap <leader>s :set filetype=sh         <CR>
+nmap <leader>t :set filetype=txt        <CR>
+nmap <leader>v :set filetype=vim        <CR>
+nmap <leader>y :set filetype=python     <CR>
 set ambiwidth=double
 set autoindent    
 set autoread                                " 设置当文件被改动时自动载入
