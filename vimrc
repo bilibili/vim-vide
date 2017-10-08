@@ -6,14 +6,6 @@
 "     \__/     |__| |_______/ |_______|
 "                                      
 
-
-"
-" utime.vim
-"
-let g:timeStampFormat = '170101'
-let g:timeStampString = '%y%m%d'
-let g:timeStampLeader = 'version'
-
 autocmd BufNewFile *.lua 0r /tmp/lua.template
 autocmd BufNewFile *.lua normal gnp
 autocmd BufNewFile *.php 0r /tmp/php.template
@@ -55,26 +47,22 @@ nmap <leader>t :set filetype=txt        <CR>
 nmap <leader>v :set filetype=vim        <CR>
 nmap <leader>y :set filetype=python     <CR>
 set ambiwidth=double
-set autoindent    
 set autoread
 set autowriteall
 set backup
-set backupdir=~/.vimtmp/backupdir
 set bs+=start
-set cindent       
+set smartindent cindent autoindent
+set smarttab
 set clipboard+=unnamed
 set complete-=i
 set cursorline
-set directory=~/.vimtmp/directory
 set encoding=utf-8
 set expandtab  
 set fileencodings=ucs-bom,utf-8,cp936       
 set fileencoding=utf-8
 set foldmethod=manual
-set helplang=cn                             " 中文帮助文档
-set hidden     
-set hlsearch
-set ignorecase smartcase                    " 搜索时忽略大小写，除非在有一个或以上大写字母时
+set hidden hlsearch
+set ignorecase smartcase
 set noautochdir
 set nocompatible               
 set noshowmatch
@@ -86,16 +74,16 @@ set printoptions=formfeed:y,header:0,paper:A4,duplex:off,syntax:n
 set scrolloff=1                             " 光标移动到buffer的顶部和底部时保持3行距离
 set shell=/bin/bash
 set shiftwidth=4
-set showcmd                                 " 输入的命令显示出来，看的清楚些
-set smartindent   
-set smarttab     
+set showcmd                                 " Show cmd in vim-cmdline.
 set tabstop=4   
-set t_Co=256                                " 兼容putty下的vim
-set textwidth=0                             " 关闭自动换行
-set undodir=$HOME/.vimtmp/undodir
+set t_Co=256                                " Make vim look better in putty.
+set textwidth=0
+set undodir=$HOME/.vimtmp/undodir 
+            \ directory=~/.vimtmp/directory 
+            \ backupdir=~/.vimtmp/backupdir 
+            \ viewdir=~/.vimtmp/view
 set undofile 
-set vb t_vb=                                " vim彻底关闭报错声
-set viewdir=~/.vimtmp/view
+set vb t_vb=                                " Turn off bi-sound of vim.
 set wildignore+=*\\.git\\*,*\\.hg\\*,*\\.svn\\*,*.tgz,*.zip,*.url,*.pyc,*.class
 syntax on
 
@@ -193,3 +181,11 @@ let g:ctrlp_user_command = [
 let g:ctrlp_match_window       = 'bottom,order:btt,min:5,max:5,results:10'
 let g:ctrlp_cmd                = 'CtrlPMixed'
 let g:ctrlp_mruf_default_order = 1
+
+"
+" utime.vim
+"
+let g:timeStampFormat = '170101'
+let g:timeStampString = '%y%m%d'
+let g:timeStampLeader = 'version'
+
