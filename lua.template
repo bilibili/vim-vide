@@ -1,0 +1,4 @@
+echo "--"
+echo "-- User: tangjunxing"
+echo "-- Date : `date +%Y/%m/%d`"
+echo "--"
