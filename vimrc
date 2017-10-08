@@ -7,18 +7,10 @@
 "        |__|            \__/        |__|    |__|  |__| 
 " 
 " 
-" Install
-"
-" cd ~ &&\
-"     git clone http://git.oschina.net/mrytsr/tvim .vim &&\
-"     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim &&\
-"     cd .vim && vim +BundleInstall +qa
-"
 
 let g:timeStampFormat = '170101'
 let g:timeStampString = '%y%m%d'
 let g:timeStampLeader = 'version'
-
 
 autocmd BufNewFile *.lua 0r /tmp/lua.template
 autocmd BufNewFile *.lua normal gnp
