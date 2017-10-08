@@ -4,16 +4,12 @@ Vide is short cut for [Vi]m I[DE]. This is a vim config project.
 
 ## install
 
-### Vundle
+### Manual
 
-###
-
-Install
-
-cd ~ &&\
-    git clone http://git.oschina.net/mrytsr/tvim .vim &&\
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim &&\
-    cd .vim && vim +BundleInstall +qa
+cd ~
+git clone https://github.com/mrytsr/vide .vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+cd .vim && vim +BundleInstall +qa
 
 ## status bar
 
@@ -27,8 +23,9 @@ cd ~ &&\
 - \j set filetype=js
 
 
-
 ## Plugins
+
+### Vundle
 
 ### php-manual
 

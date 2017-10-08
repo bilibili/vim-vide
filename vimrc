@@ -91,7 +91,7 @@ set smarttab
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 set statusline+=\ [%{&ff}:%{&fenc}:%Y]
 set statusline+=\ %{getcwd()}
-set statusline=T$\ %<%f
+set statusline=Vide\ $\ %<%f
 set statusline+=%w%h%m%r                 
 set tabstop=4   
 set t_Co=256                                " 兼容putty下的vim
