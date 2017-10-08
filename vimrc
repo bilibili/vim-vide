@@ -52,39 +52,35 @@ set autowriteall
 set backup
 set bs+=start
 set smartindent cindent autoindent
-set smarttab
+set shiftwidth=4 tabstop=4 smarttab
 set clipboard+=unnamed
 set complete-=i
 set cursorline
-set encoding=utf-8
 set expandtab  
-set fileencodings=ucs-bom,utf-8,cp936       
-set fileencoding=utf-8
+set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936 fileencoding=utf-8
 set foldmethod=manual
 set hidden hlsearch
 set ignorecase smartcase
 set noautochdir
-set nocompatible               
 set noshowmatch
 set nowrapscan
 set number      
 set pastetoggle=<F5>
 set path+=./model/,./ctrl/,./lib/,*/templates/,*/static/,..,*/src/main/java/
 set printoptions=formfeed:y,header:0,paper:A4,duplex:off,syntax:n
-set scrolloff=1                             " 光标移动到buffer的顶部和底部时保持3行距离
+set scrolloff=1                             
 set shell=/bin/bash
-set shiftwidth=4
+set nocompatible               
 set showcmd                                 " Show cmd in vim-cmdline.
-set tabstop=4   
 set t_Co=256                                " Make vim look better in putty.
 set textwidth=0
-set undodir=$HOME/.vimtmp/undodir 
+set undodir=~/.vimtmp/undodir 
             \ directory=~/.vimtmp/directory 
             \ backupdir=~/.vimtmp/backupdir 
             \ viewdir=~/.vimtmp/view
-set undofile 
+            \ undofile 
 set vb t_vb=                                " Turn off bi-sound of vim.
-set wildignore+=*\\.git\\*,*\\.hg\\*,*\\.svn\\*,*.tgz,*.zip,*.url,*.pyc,*.class
+set wildignore+=*.git\\*,*.tgz,*.zip,*.url,*.pyc,*.class
 syntax on
 
 "
@@ -115,7 +111,6 @@ Plugin 'tpope/vim-commentary'
 Plugin 'ctrlp.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'stephpy/vim-yaml'
 Plugin 'tpope/vim-abolish'
 Plugin 'mrytsr/utime.vim'
 filetype plugin indent on
@@ -188,4 +183,3 @@ let g:ctrlp_mruf_default_order = 1
 let g:timeStampFormat = '170101'
 let g:timeStampString = '%y%m%d'
 let g:timeStampLeader = 'version'
-
