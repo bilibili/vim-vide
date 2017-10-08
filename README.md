@@ -17,9 +17,9 @@ cd .vim && vim +BundleInstall +qa
 Replace airline and powerline.
 Origin vim config is much faster!
 
-(Vide)  README.md[+] /home/tjx/vide [unix:utf-8:MARKDOWN]       18,5      50%
-+----+  +----------+ +------------+ +-------------------+       +--+      +-+
-1       2         3                 4                           5         6
+    (Vide)  README.md[+] /home/tjx/vide [unix:utf-8:MARKDOWN]       18,5      50%
+    +----+  +----------+ +------------+ +-------------------+       +--+      +-+
+    1       2         3                 4                           5         6
 
 1. Logo
 1. relative path
