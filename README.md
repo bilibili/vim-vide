@@ -2,9 +2,7 @@
 
 Vide is short cut for [Vi]m I[DE]. This is a vim config project.
 
-## install
-
-### Manual
+## Install
 
     cd ~
     git clone https://github.com/mrytsr/vide
