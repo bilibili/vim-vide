@@ -18,7 +18,7 @@ Origin vim config is much faster!
     +----+  +----------+ +------------+ +-------------------+       +--+      +-+
     1       2         3                 4                           5         6
 
-1. Logo
+1. logo
 1. relative path
 1. absolute path of directory
 1. format : file-encoding : filetype
