@@ -1,13 +1,59 @@
-"
-"    .___________.   ____    ____     __     .___  ___. 
-"    |           |   \   \  /   /    |  |    |   \/   | 
-"    `---|  |----`    \   \/   /     |  |    |  \  /  | 
-"        |  |          \      /      |  |    |  |\/|  | 
-"        |  |           \    /       |  |    |  |  |  | 
-"        |__|            \__/        |__|    |__|  |__| 
-" 
-" 
+"          _____                    _____                    _____                    _____          
+"         /\    \                  /\    \                  /\    \                  /\    \         
+"        /::\____\                /::\    \                /::\    \                /::\    \        
+"       /:::/    /                \:::\    \              /::::\    \              /::::\    \       
+"      /:::/    /                  \:::\    \            /::::::\    \            /::::::\    \      
+"     /:::/    /                    \:::\    \          /:::/\:::\    \          /:::/\:::\    \     
+"    /:::/____/                      \:::\    \        /:::/  \:::\    \        /:::/__\:::\    \    
+"    |::|    |                       /::::\    \      /:::/    \:::\    \      /::::\   \:::\    \   
+"    |::|    |     _____    ____    /::::::\    \    /:::/    / \:::\    \    /::::::\   \:::\    \  
+"    |::|    |    /\    \  /\   \  /:::/\:::\    \  /:::/    /   \:::\ ___\  /:::/\:::\   \:::\    \ 
+"    |::|    |   /::\____\/::\   \/:::/  \:::\____\/:::/____/     \:::|    |/:::/__\:::\   \:::\____\
+"    |::|    |  /:::/    /\:::\  /:::/    \::/    /\:::\    \     /:::|____|\:::\   \:::\   \::/    /
+"    |::|    | /:::/    /  \:::\/:::/    / \/____/  \:::\    \   /:::/    /  \:::\   \:::\   \/____/ 
+"    |::|____|/:::/    /    \::::::/    /            \:::\    \ /:::/    /    \:::\   \:::\    \     
+"    |:::::::::::/    /      \::::/____/              \:::\    /:::/    /      \:::\   \:::\____\    
+"    \::::::::::/____/        \:::\    \               \:::\  /:::/    /        \:::\   \::/    /    
+"     ~~~~~~~~~~               \:::\    \               \:::\/:::/    /          \:::\   \/____/     
+"                               \:::\    \               \::::::/    /            \:::\    \         
+"                                \:::\____\               \::::/    /              \:::\____\        
+"                                 \::/    /                \::/____/                \::/    /        
+"                                  \/____/                  ~~                       \/____/         
 
+
+" ____    ____  __   _______   _______ 
+" \   \  /   / |  | |       \ |   ____|
+"  \   \/   /  |  | |  .--.  ||  |__   
+"   \      /   |  | |  |  |  ||   __|  
+"    \    /    |  | |  '--'  ||  |____ 
+"     \__/     |__| |_______/ |_______|
+"                                      
+
+
+"        _     _      
+" /\   /(_) __| | ___ 
+" \ \ / | |/ _` |/ _ \
+"  \ V /| | (_| |  __/
+"   \_/ |_|\__,_|\___|
+"                     
+
+
+"      ___                   ___         ___     
+"     /\__\        ___      /\  \       /\  \    
+"    /:/  /       /\  \    /::\  \     /::\  \   
+"   /:/  /        \:\  \  /:/\:\  \   /:/\:\  \  
+"  /:/__/  ___    /::\__\/:/  \:\__\ /::\~\:\  \ 
+"  |:|  | /\__\__/:/\/__/:/__/ \:|__/:/\:\ \:\__\
+"  |:|  |/:/  /\/:/  /  \:\  \ /:/  \:\~\:\ \/__/
+"  |:|__/:/  /\::/__/    \:\  /:/  / \:\ \:\__\  
+"   \::::/__/  \:\__\     \:\/:/  /   \:\ \/__/  
+"    ~~~~       \/__/      \::/__/     \:\__\    
+"                           ~~          \/__/    
+                                                                                                    
+
+"
+" utime.vim
+"
 let g:timeStampFormat = '170101'
 let g:timeStampString = '%y%m%d'
 let g:timeStampLeader = 'version'
@@ -54,15 +100,15 @@ nmap <leader>v :set filetype=vim        <CR>
 nmap <leader>y :set filetype=python     <CR>
 set ambiwidth=double
 set autoindent    
-set autoread                                " 设置当文件被改动时自动载入
+set autoread
 set autowriteall
 set backup
 set backupdir=~/.vimtmp/backupdir
 set bs+=start
 set cindent       
-set clipboard+=unnamed                      " 共享剪贴板
+set clipboard+=unnamed
 set complete-=i
-set cursorline                              " 高亮显示当前行
+set cursorline
 set directory=~/.vimtmp/directory
 set encoding=utf-8
 set expandtab  
@@ -73,7 +119,6 @@ set helplang=cn                             " 中文帮助文档
 set hidden     
 set hlsearch
 set ignorecase smartcase                    " 搜索时忽略大小写，除非在有一个或以上大写字母时
-set laststatus=2                            " status_bar
 set noautochdir
 set nocompatible               
 set noshowmatch
@@ -88,11 +133,6 @@ set shiftwidth=4
 set showcmd                                 " 输入的命令显示出来，看的清楚些
 set smartindent   
 set smarttab     
-set statusline+=%=%-14.(%l,%c%V%)\ %p%%
-set statusline+=\ [%{&ff}:%{&fenc}:%Y]
-set statusline+=\ %{getcwd()}
-set statusline=Vide\ $\ %<%f
-set statusline+=%w%h%m%r                 
 set tabstop=4   
 set t_Co=256                                " 兼容putty下的vim
 set textwidth=0                             " 关闭自动换行
@@ -102,6 +142,17 @@ set vb t_vb=                                " vim彻底关闭报错声
 set viewdir=~/.vimtmp/view
 set wildignore+=*\\.git\\*,*\\.hg\\*,*\\.svn\\*,*.tgz,*.zip,*.url,*.pyc,*.class
 syntax on
+
+"
+" statusline
+"
+set laststatus=2
+set statusline=(Vide)\ \ %<%f
+set statusline+=%w%h%m%r                 
+set statusline+=\ %{getcwd()}
+set statusline+=\ [%{&ff}:%{&fenc}:%Y]
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%
+
 
 "
 " Vundle
