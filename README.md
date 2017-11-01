@@ -7,7 +7,7 @@ Vide is short for [Vi]m I[DE], This is a vim config project.
 * [Install (安装)](#install-安装)
 * [Features (功能列表)](#features-功能列表)
     * [Statusline (状态栏)](#statusline-状态栏)
-    * [Shortcuts](#shortcuts)
+    * [Shortcuts (快捷键)](#shortcuts-快捷键)
     * [Backup (备份路径)](#backup-备份路径)
     * [Template (模板)](#template-模板)
 * [Plugins (插件列表)](#plugins-插件列表)
@@ -41,7 +41,7 @@ Origin vim config statusline, much faster than airline or powerline!
 1. Row-position, col position (行号，列号)
 1. Percent of rows (当前行在总行数中的百分比)
 
-### Shortcuts
+### Shortcuts (快捷键)
 
 - ctrl-L clear search highlight
 - \3 NERDTree-Find
