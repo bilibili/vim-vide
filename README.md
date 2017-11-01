@@ -69,10 +69,10 @@ Origin vim config statusline, much faster than airline or powerline!
 
 ### php-manual
 
-shift-K on php function to lookup in php-manual
+Shift-K on php function to lookup in php-manual
 
 ### utime.vim
 
-let g:timeStampFormat = '170101'
-let g:timeStampString = '%y%m%d'
-let g:timeStampLeader = 'version'
+    let g:timeStampFormat = '170101'
+    let g:timeStampString = '%y%m%d'
+    let g:timeStampLeader = 'version'
