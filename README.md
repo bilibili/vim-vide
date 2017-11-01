@@ -1,17 +1,18 @@
 # Vide
 
-Vide is short for [Vi]m I[DE]. This is a vim config project.
+Vide is short for [Vi]m I[DE], This is a vim config project.
+(Vide是[V]im [I]DE 的缩写，是一个vim配置项目)
 
-## Install
+## Install (安装)
 
     cd ~
     git clone https://github.com/mrytsr/vide
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     cd .vim && vim +BundleInstall +qa
 
-## Features
+## Features (功能列表)
 
-### Statusline
+### Statusline (状态栏)
 
 Replace airline and powerline.
 Origin vim config is much faster!
@@ -20,12 +21,12 @@ Origin vim config is much faster!
     +----+  +----------+ +------------+ +-------------------+       +--+      +-+
     1       2         3                 4                           5         6
 
-1. logo
-1. relative path
-1. absolute path of directory
-1. format : file-encoding : filetype
-1. row-position, col position
-1. percent of rows
+1. Logo
+1. Relative path (相对路径)
+1. Absolute path of directory (绝对路径)
+1. Format : file-encoding : filetype (文件类型)
+1. Row-position, col position (行号，列号)
+1. Percent of rows (当前行在总行数中的百分比)
 
 ### Shortcuts
 
@@ -45,16 +46,16 @@ Origin vim config is much faster!
 - \v :set filetype=vim
 - \y :set filetype=python
 
-### Backup
+### Backup (备份路径)
 - ~/.vimtmp/undodir
 - ~/.vimtmp/backupdir
 - ~/.vimtmp/directory .swp files
 
-### Template
-call system('bash ~/.vim/lua.template > /tmp/lua.template')
-call system('bash ~/.vim/php.template > /tmp/php.template')
+### Template (模板)
+- call system('bash ~/.vim/lua.template > /tmp/lua.template')
+- call system('bash ~/.vim/php.template > /tmp/php.template')
 
-## Plugins
+## Plugins (插件列表)
 
 ### php-manual
 

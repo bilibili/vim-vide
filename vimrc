@@ -112,7 +112,7 @@ Plugin 'ctrlp.vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-abolish'
-Plugin 'mrytsr/utime.vim'
+" Plugin 'mrytsr/utime.vim'
 filetype plugin indent on
 call vundle#end()
 let g:vim_markdown_folding_disabled = 1
