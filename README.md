@@ -14,8 +14,8 @@ Vide is short for [Vi]m I[DE], This is a vim config project.
 
 ### Statusline (状态栏)
 
-Replace airline or powerline, origin vim config is much faster!
-(vim原生实现的状态栏，实现airline或者powerline等效的功能，很快！)
+Origin vim config statusline, much faster than airline or powerline!
+(vim原生实现的状态栏，比airline或者powerline的更快！)
 
     (Vide)  README.md[+] /home/tjx/vide [unix:utf-8:MARKDOWN]       18,5      50%
     +----+  +----------+ +------------+ +-------------------+       +--+      +-+
