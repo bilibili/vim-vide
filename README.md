@@ -3,6 +3,19 @@
 Vide is short for [Vi]m I[DE], This is a vim config project.
 (Vide是[V]im [I]DE 的缩写，是一个vim配置项目)
 
+<!-- vim-markdown-toc GFM -->
+* [Install (安装)](#install-安装)
+* [Features (功能列表)](#features-功能列表)
+    * [Statusline (状态栏)](#statusline-状态栏)
+    * [Shortcuts](#shortcuts)
+    * [Backup (备份路径)](#backup-备份路径)
+    * [Template (模板)](#template-模板)
+* [Plugins (插件列表)](#plugins-插件列表)
+    * [php-manual](#php-manual)
+    * [utime.vim](#utimevim)
+
+<!-- vim-markdown-toc -->
+
 ## Install (安装)
 
     cd ~
