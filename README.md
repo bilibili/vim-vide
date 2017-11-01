@@ -31,18 +31,15 @@ Origin vim config statusline, much faster than airline or powerline!
 ### Shortcuts
 
 - ctrl-L clear search highlight
-- \3 nerdtree-find
+- \3 NERDTree-Find
 - \a :set filetype=awk
 - \c :set filetype=css
-- \d :set filetype=htmldjango 
-- \e :set filetype=sed
 - \h :set filetype=html
 - \j :set filetype=javascript 
 - \l :set filetype=lua
 - \m :set filetype=markdown
 - \p :set filetype=php
 - \s :set filetype=sh
-- \t :set filetype=txt
 - \v :set filetype=vim
 - \y :set filetype=python
 
