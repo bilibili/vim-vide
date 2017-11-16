@@ -93,28 +93,25 @@ set statusline+=\ %{getcwd()}
 set statusline+=\ [%{&ff}:%{&fenc}:%Y]
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 
+"
+" vim-plug
+"
+call plug#begin('~/.vim-plugged')
+Plug 'prettier/vim-prettier' , {'do': 'yarn install', 'for': ['js', 'css', 'json', 'sql'] }
+Plug 'vim-scripts/DrawIt'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'vim-syntastic/syntastic'
+Plug 'alvan/vim-php-manual'
+Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'kien/ctrlp.vim'
+Plug 'tmhedberg/matchit'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-abolish'
+call plug#end()
 
-"
-" Vundle
-"
-set rtp+=~/.vim/bundle/Vundle.vim
-filetype off
-call vundle#begin()
-Plugin 'vim-scripts/DrawIt'
-Plugin 'mzlogin/vim-markdown-toc'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'alvan/vim-php-manual'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'godlygeek/tabular'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'ctrlp.vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-abolish'
-" Plugin 'mrytsr/utime.vim'
-filetype plugin indent on
-call vundle#end()
 let g:vim_markdown_folding_disabled = 1
 let g:gitgutter_max_signs=10000
 
