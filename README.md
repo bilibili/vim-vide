@@ -14,16 +14,14 @@ Vide is short for [Vi]m I[DE], This is a vim config project.
 * [Plugins (插件列表)](#plugins-插件列表)
     * [php-manual](#php-manual)
     * [utime.vim](#utimevim)
-    * [_rm_](#rm)
 
 <!-- vim-markdown-toc -->
 
 ## Install (安装)
 
-    cd ~
-    git clone https://github.com/mrytsr/vide
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    cd .vim && vim +BundleInstall +qa
+    cd ~ && mv .vim .vim_bak
+    git clone https://github.com/mrytsr/vide .vim
+    vim +PlugInstall +qa
 
 ## Features (功能列表)
 
@@ -78,28 +76,4 @@ Shift-K on php function to lookup in php-manual
     let g:timeStampFormat = '170101'
     let g:timeStampString = '%y%m%d'
     let g:timeStampLeader = 'version'
-
-### _rm_
-"
-" Vundle
-"
-set rtp+=~/.vim/bundle/Vundle.vim
-filetype off
-call vundle#begin()
-Plugin 'prettier/vim-prettier'
-Plugin 'vim-scripts/DrawIt'
-Plugin 'mzlogin/vim-markdown-toc'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'alvan/vim-php-manual'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'godlygeek/tabular'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'ctrlp.vim'
-Plugin 'tmhedberg/matchit'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-abolish'
-" Plugin 'mrytsr/utime.vim'
-filetype plugin indent on
-call vundle#end()
 
