@@ -19,9 +19,7 @@ Vide is short for [Vi]m I[DE], This is a vim config project.
 
 ## Install (安装)
 
-    cd ~ && mv .vim .vim_bak
-    git clone https://github.com/mrytsr/vide .vim
-    vim +PlugInstall +qa
+    mv ~/.vim{,_bak}; git clone https://github.com/mrytsr/vide.git ~/.vim && vim +PlugInstall +qa
 
 ## Features (功能列表)
 
