@@ -14,6 +14,7 @@ Vide is short for [Vi]m I[DE], This is a vim config project.
 * [Plugins (插件列表)](#plugins-插件列表)
     * [php-manual](#php-manual)
     * [utime.vim](#utimevim)
+* [Alternatives同类产品](#alternatives同类产品)
 
 <!-- vim-markdown-toc -->
 
@@ -75,3 +76,10 @@ Shift-K on php function to lookup in php-manual
     let g:timeStampString = '%y%m%d'
     let g:timeStampLeader = 'version'
 
+## Alternatives同类产品
+
+spf13/spf13-vim: The ultimate vim distribution
+https://github.com/spf13/spf13-vim
+
+wklken/k-vim: vim配置
+https://github.com/wklken/k-vim
