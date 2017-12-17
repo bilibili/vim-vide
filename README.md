@@ -24,8 +24,13 @@
 
 ## Features (特色功能)
 
-### plugit
+### vim-plug
+
+Base on vim-plug, A minimalist Vim plugin manager.
 新一代的vim配置管理组件，体积最小，plugit用了并行下载，速度较顺序下载的vundle快很多！！！
+
+
+https://github.com/junegunn/vim-plug
 
 ### Statusline (状态栏)
 
