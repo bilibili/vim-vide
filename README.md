@@ -22,12 +22,15 @@ Vide is short for [Vi]m I[DE], This is a vim config project.
 
     mv ~/.vim{,_bak}; git clone https://github.com/mrytsr/vide.git ~/.vim && vim +PlugInstall +qa
 
-## Features (功能列表)
+## Features (特色功能)
+
+### plugit
+新一代的vim配置管理组件，体积最小，plugut用了并行下载，速度较顺序下载的vundle快很多！！！
 
 ### Statusline (状态栏)
 
 Origin vim config statusline, much faster than airline or powerline!
-(vim原生实现的状态栏，比airline或者powerline的更快！)
+(vim原生配置实现的状态栏，信息很全，比airline或者powerline快数倍！！！)
 
     (Vide)  README.md[+] /home/tjx/vide [unix:utf-8:MARKDOWN]       18,5      50%
     +----+  +----------+ +------------+ +-------------------+       +--+      +-+
@@ -56,9 +59,9 @@ Origin vim config statusline, much faster than airline or powerline!
 - \y :set filetype=python
 
 ### Backup (备份路径)
-- ~/.vimtmp/undodir
-- ~/.vimtmp/backupdir
-- ~/.vimtmp/directory .swp files
+- 撤销文件夹 ~/.vimtmp/undodir
+- 备份文件夹 ~/.vimtmp/backupdir
+- 交换文件夹 ~/.vimtmp/directory .swp files
 
 ### Template (模板)
 - call system('bash ~/.vim/lua.template > /tmp/lua.template')
