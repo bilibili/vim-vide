@@ -1,7 +1,7 @@
 # Vide
 
-Vide is short for [Vi]m I[DE], This is a vim config project.
-(Vide是[V]im [I]DE 的缩写，是一个vim配置项目)
+
+
 
 <!-- vim-markdown-toc GFM -->
 
@@ -25,7 +25,7 @@ Vide is short for [Vi]m I[DE], This is a vim config project.
 ## Features (特色功能)
 
 ### plugit
-新一代的vim配置管理组件，体积最小，plugut用了并行下载，速度较顺序下载的vundle快很多！！！
+新一代的vim配置管理组件，体积最小，plugit用了并行下载，速度较顺序下载的vundle快很多！！！
 
 ### Statusline (状态栏)
 
