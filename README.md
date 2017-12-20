@@ -6,7 +6,9 @@
 <!-- vim-markdown-toc GFM -->
 
 * [Install (安装)](#install-安装)
-* [Features (功能列表)](#features-功能列表)
+* [Upgrade Plugins (升级插件)](#upgrade-plugins-升级插件)
+* [Features (特色功能)](#features-特色功能)
+    * [vim-plug](#vim-plug)
     * [Statusline (状态栏)](#statusline-状态栏)
     * [Shortcuts (快捷键)](#shortcuts-快捷键)
     * [Backup (备份路径)](#backup-备份路径)
@@ -20,7 +22,13 @@
 
 ## Install (安装)
 
-    mv ~/.vim{,_bak}; git clone https://github.com/mrytsr/vide.git ~/.vim && vim +PlugInstall +qa
+    mv ~/.vim{,_bak}
+    git clone https://github.com/mrytsr/vim-vide.vim ~/.vim
+    tar xvf ~/.vim/vimplug.tgz -C ~
+
+## Upgrade Plugins (升级插件)
+
+    vim +PlugClean[!] +PlugUpdate +qa
 
 ## Features (特色功能)
 
@@ -28,7 +36,6 @@
 
 Base on vim-plug, A minimalist Vim plugin manager.
 新一代的vim配置管理组件，体积最小，plugit用了并行下载，速度较顺序下载的vundle快很多！！！
-
 
 https://github.com/junegunn/vim-plug
 

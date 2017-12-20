@@ -96,9 +96,7 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 "
 " vim-plug
 "
-call plug#begin('~/.vim-plugged')
-Plug 'prettier/vim-prettier' , {'do': 'yarn install', 'for': ['js', 'css', 'json', 'sql'] }
-Plug 'vim-scripts/DrawIt'
+call plug#begin('~/.vimplug')
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'vim-syntastic/syntastic'
 Plug 'alvan/vim-php-manual'
@@ -109,7 +107,6 @@ Plug 'tpope/vim-commentary'
 Plug 'kien/ctrlp.vim'
 Plug 'tmhedberg/matchit'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-abolish'
 call plug#end()
 
 let g:vim_markdown_folding_disabled = 1
