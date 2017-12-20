@@ -50,7 +50,7 @@
 ## Install (安装)
 
     mv ~/.vim{,_bak}
-    git clone https://github.com/mrytsr/vim-vide.vim ~/.vim
+    git clone https://github.com/mrytsr/vim-vide.git ~/.vim
     tar xvf ~/.vim/vimplug.tgz -C ~
 
 ## Upgrade Plugins (升级插件)
