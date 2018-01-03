@@ -28,7 +28,7 @@ filetype plugin indent on
 filetype plugin on
 let g:is_bash=1
 let &t_EI .= "\<Esc>[?2004l"
-let &t_SI .= "\<Esc>[?2004h"
+" let &t_SI .= \"\<Esc>[?2004h"
 let $VIMFILES=$HOME.'/.vim'
 let @w = 'x~n'
 nmap <c-l> <esc>:noh<cr>
