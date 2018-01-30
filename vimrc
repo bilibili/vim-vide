@@ -114,7 +114,7 @@ let g:gitgutter_max_signs=10000
 " syntastic
 "
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_quiet_messages = { "level": "warnings" }
+let g:syntastic_quiet_messages = { "level": "errors" }
 
 "
 " NERDTree
