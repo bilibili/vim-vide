@@ -19,6 +19,7 @@ autocmd BufWinEnter *.sls set filetype=yaml
 autocmd BufWinEnter *.tp set filetype=html
 autocmd BufWinEnter *.volt set filetype=html
 autocmd GUIEnter * silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
+autocmd FileType php setlocal commentstring=//\ %s
 call system('bash ~/.vim/lua.template > /tmp/lua.template')
 call system('bash ~/.vim/php.template > /tmp/php.template')
 call system('mkdir -p ~/.vimtmp/undodir ~/.vimtmp/backupdir ~/.vimtmp/directory')
