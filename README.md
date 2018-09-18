@@ -49,9 +49,7 @@
 
 ## Install (安装)
 
-    mv ~/.vim{,_bak}
-    git clone https://github.com/mrytsr/vim-vide.git ~/.vim
-    tar xvf ~/.vim/vimplug.tgz -C ~
+    wget http://pble9gz3k.bkt.clouddn.com/vim-vide.tgz && tar xvf ./vim-vim.tgz -C ~
 
 ## Upgrade Plugins (升级插件)
 
