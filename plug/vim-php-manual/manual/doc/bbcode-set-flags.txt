@@ -1,0 +1,85 @@
+bbcode_set_flags
+
+(PECL bbcode >= 0.10.2)
+
+bbcode_set_flags — Set or alter parser options
+
+==============================================================================
+*Description*
+
+    bool bbcode_set_flags ( resource $bbcode_container , int $flags [, int~
+    $mode = BBCODE_SET_FLAGS_SET ] )~
+
+Set or alter parser options
+
+==============================================================================
+*Parameters*
+
+{bbcode_container}
+
+    BBCode_Container resource, returned by |bbcode_create|.
+
+{flags}
+
+    The flag set that must be applied to the bbcode_container options
+
+{mode}
+
+    One of the BBCODE_SET_FLAGS_* constant to set, unset a specific flag set
+    or to replace the flag set by flags.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 bbcode_set_flags() usage example
+
+<?php >
+    /*
+     * Preparing RuleSet
+     */
+    $arrayBBCode=array(
+        'b'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<b>', 'close_tag'=>'</b>'),
+        'u'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<u>', 'close_tag'=>'</u>'),
+        'i'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<i>', 'close_tag'=>'</i>'),
+    );
+    /*
+     * Paired incorrectly nested BBCode 
+     */
+    $text="[i] Parser [b] Auto Correction [/i] at work [/b]\n";
+    $BBHandler=bbcode_create($arrayBBCode);
+    echo bbcode_parse($BBHandler,$text);
+    // Enabling reopening of automatically closed elements
+    bbcode_set_flags($BBHandler,BBCODE_CORRECT_REOPEN_TAGS, 
+                     BBCODE_SET_FLAGS_SET);
+    echo bbcode_parse($BBHandler,$text);
+
+    /*
+     * Unpaired incorrectly nested BBCode 
+     */
+    $text="[i] Parser [b] Auto Correction [/i] at work\n";
+    echo bbcode_parse($BBHandler,$text);
+    // Enabling automatic close of pending tags
+    bbcode_set_flags($BBHandler,
+                     BBCODE_CORRECT_REOPEN_TAGS|BBCODE_AUTO_CORRECT, 
+                     BBCODE_SET_FLAGS_SET);
+    echo bbcode_parse($BBHandler,$text);
+<?>
+
+The above example will output:
+
+<i> Parser <b> Auto Correction </b></i> at work
+<i> Parser <b> Auto Correction </b></i><b> at work </b>
+<i> Parser [b] Auto Correction </i> at work
+<i> Parser <b> Auto Correction </b></i><b> at work
+</b>
+
+
+vim:ft=help:

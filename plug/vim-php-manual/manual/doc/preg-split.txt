@@ -1,0 +1,156 @@
+preg_split
+
+(PHP 4, PHP 5, PHP 7)
+
+preg_split — Split string by a regular expression
+
+==============================================================================
+*Description*
+
+    array preg_split ( string $pattern , string $subject [, int $limit = -1~
+    [, int $flags = 0 ]] )~
+
+Split the given string by a regular expression.
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    The pattern to search for, as a string.
+
+{subject}
+
+    The input string.
+
+{limit}
+
+    If specified, then only substrings up to {limit} are returned with the
+    rest of the string being placed in the last substring. A {limit} of -1, 0
+    or NULL means "no limit" and, as is standard across PHP, you can use NULL
+    to skip to the {flags} parameter.
+
+{flags}
+
+    {flags} can be any combination of the following flags (combined with the |
+    bitwise operator):
+
+    PREG_SPLIT_NO_EMPTY
+        If this flag is set, only non-empty pieces will be returned by 
+        preg_split().
+    PREG_SPLIT_DELIM_CAPTURE
+        If this flag is set, parenthesized expression in the delimiter pattern
+        will be captured and returned as well.
+    PREG_SPLIT_OFFSET_CAPTURE
+
+        If this flag is set, for every occurring match the appendant string
+        offset will also be returned. Note that this changes the return value
+        in an array where every element is an array consisting of the matched
+        string at offset 0 and its string offset into {subject} at offset 1.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array containing substrings of {subject} split along boundaries
+matched by {pattern}, or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 preg_split() example : Get the parts of a search string
+
+<?php >
+    // split the phrase by any number of commas or space characters,
+    // which include " ", \r, \t, \n and \f
+    $keywords = preg_split("/[\s,]+/", "hypertext language, programming");
+    print_r($keywords);
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => hypertext
+    [1] => language
+    [2] => programming
+)
+
+Example #2 Splitting a string into component characters
+
+<?php >
+    $str = 'string';
+    $chars = preg_split('//', $str, -1, PREG_SPLIT_NO_EMPTY);
+    print_r($chars);
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => s
+    [1] => t
+    [2] => r
+    [3] => i
+    [4] => n
+    [5] => g
+)
+
+Example #3 Splitting a string into matches and their offsets
+
+<?php >
+    $str = 'hypertext language programming';
+    $chars = preg_split('/ /', $str, -1, PREG_SPLIT_OFFSET_CAPTURE);
+    print_r($chars);
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => Array
+        (
+            [0] => hypertext
+            [1] => 0
+        )
+
+    [1] => Array
+        (
+            [0] => language
+            [1] => 10
+        )
+
+    [2] => Array
+        (
+            [0] => programming
+            [1] => 19
+        )
+
+)
+
+==============================================================================
+*Notes*
+
+Tip
+
+If you don't need the power of regular expressions, you can choose faster
+(albeit simpler) alternatives like |explode| or |str_split|.
+
+Tip
+
+If matching fails, an array with a single element containing the input string
+will be returned.
+
+==============================================================================
+*See* *Also*
+
+  * PCRE Patterns
+  * |preg_quote| - Quote regular expression characters
+  * |implode| - Join array elements with a string
+  * |preg_match| - Perform a regular expression match
+  * |preg_match_all| - Perform a global regular expression match
+  * |preg_replace| - Perform a regular expression search and replace
+  * |preg_last_error| - Returns the error code of the last PCRE regex
+    execution
+
+
+vim:ft=help:

@@ -1,0 +1,75 @@
+imagepsloadfont
+
+(PHP 4, PHP 5)
+
+imagepsloadfont — Load a PostScript Type 1 font from file
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    resource imagepsloadfont ( string $filename )~
+
+Load a PostScript Type 1 font from the given {filename}.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the Postscript font file.
+
+==============================================================================
+*Return* *Values*
+
+In the case everything went right, a valid font index will be returned and can
+be used for further purposes. Otherwise the function returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 imagepsloadfont() example
+
+<?php >
+    // Create a new image instance
+    $im = imagecreatetruecolor(350, 45);
+
+    // Allocate colors and fill the background
+    $black = imagecolorallocate($im, 0, 0, 0);
+    $white = imagecolorallocate($im, 255, 255, 255);
+    imagefilledrectangle($im, 0, 0, 349, 44, $white);
+
+    // Load a font, write to the image and free the font from memory
+    $font = imagepsloadfont("bchbi.pfb");
+    imagepstext($im, "Testing... It worked!", $font, 32, $white, $black, 32, 32);
+    imagepsfreefont($font);
+
+    // Output the image
+    header('Content-type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                             Description
+7.0.0   T1Lib support was removed from PHP, thus this function was removed.
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available if PHP is compiled using
+    --with-t1lib[=DIR] .
+
+==============================================================================
+*See* *Also*
+
+  * |imagepsfreefont| - Free memory used by a PostScript Type 1 font
+
+
+vim:ft=help:

@@ -1,0 +1,108 @@
+maxdb_data_seek
+
+maxdb_result::data_seek
+
+(PECL maxdb >= 1.0)
+
+maxdb_data_seek -- maxdb_result::data_seek — Adjusts the result pointer to an
+arbitary row in the result
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_data_seek ( resource $result , int $offset )~
+
+Object oriented style
+
+    bool maxdb_result::data_seek ( int $offset )~
+
+The maxdb_data_seek() function seeks to an arbitrary result pointer specified
+by the {offset} in the result set represented by {result}. The {offset}
+parameter must be between zero and the total number of rows minus one (0..
+|maxdb_num_rows| - 1).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    /* Open a connection */
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT name, state FROM hotel.city ORDER BY name";
+    if ($result = $maxdb->query( $query)) {
+
+       /* seek to row no. 10 */
+       $result->data_seek(10);
+
+       /* fetch row */
+       $row = $result->fetch_row();
+
+       printf ("City: %s  State: %s\n", $row[0], $row[1]);
+
+       /* free result set*/
+       $result->close();
+    }
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (!$link) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT name, state FROM hotel.city ORDER BY name";
+
+    if ($result = maxdb_query($link, $query)) {
+
+       /* seek to row no. 400 */
+       maxdb_data_seek($result, 10);
+
+       /* fetch row */
+       $row = maxdb_fetch_row($result);
+
+       printf ("City: %s  State: %s\n", $row[0], $row[1]);
+
+       /* free result set*/
+       maxdb_free_result($result);
+    }
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+City: Irvine  State: CA
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_store_result| - Transfers a result set from the last query
+  * |maxdb_fetch_row| - Get a result row as an enumerated array
+  * |maxdb_num_rows| - Gets the number of rows in a result
+
+
+vim:ft=help:

@@ -1,0 +1,62 @@
+mb_stripos
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+mb_stripos — Finds position of first occurrence of a string within another,
+case insensitive
+
+==============================================================================
+*Description*
+
+    int mb_stripos ( string $haystack , string $needle [, int $offset = 0 [,~
+    string $encoding = mb_internal_encoding() ]] )~
+
+mb_stripos() returns the numeric position of the first occurrence of {needle}
+in the {haystack} string. Unlike |mb_strpos|, mb_stripos() is
+case-insensitive. If {needle} is not found, it returns FALSE.
+
+==============================================================================
+*Parameters*
+
+{haystack}
+
+    The string from which to get the position of the first occurrence of
+    {needle}
+
+{needle}
+
+    The string to find in {haystack}
+
+{offset}
+
+    The position in {haystack} to start searching. A negative offset counts
+    from the end of the string.
+
+{encoding}
+
+    Character encoding name to use. If it is omitted, internal character
+    encoding is used.
+
+==============================================================================
+*Return* *Values*
+
+Return the numeric position of the first occurrence of {needle} in the
+{haystack} string, or FALSE if {needle} is not found.
+
+==============================================================================
+*Changelog*
+
+Version                  Description
+7.1.0   Support for negative {offset}s has been added.
+
+==============================================================================
+*See* *Also*
+
+  * |stripos| - Find the position of the first occurrence of a
+    case-insensitive substring in a string
+  * |strpos| - Find the position of the first occurrence of a substring in a
+    string
+  * |mb_strpos| - Find position of first occurrence of string in a string
+
+
+vim:ft=help:

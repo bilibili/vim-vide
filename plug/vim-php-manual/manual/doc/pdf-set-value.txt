@@ -1,0 +1,16 @@
+PDF_set_value
+
+(PHP 4 >= 4.0.1, PECL pdflib >= 1.0.0)
+
+PDF_set_value — Set numerical parameter
+
+==============================================================================
+*Description*
+
+    bool PDF_set_value ( resource $p , string $key , float $value )~
+
+Sets the value of some PDFlib parameter with numerical type. Returns TRUE on
+success or FALSE on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,304 @@
+maxdb_stmt_bind_param
+
+maxdb_stmt::bind_param
+
+(PECL maxdb >= 1.0)
+
+maxdb_stmt_bind_param -- maxdb_stmt::bind_param — Binds variables to a
+prepared statement as parameters
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_stmt_bind_param ( resource $stmt , string $types , mixed~
+    &$var1 [, mixed &$... ] )~
+
+Object oriented style
+
+    bool maxdb_stmt::bind_param ( string $types , mixed &$var1 [, mixed &$...~
+    ] )~
+
+Procedural style (extended syntax):
+
+    bool maxdb_stmt_bind_param ( resource $stmt , string $types , array &$var~
+)~
+
+Object oriented style (extended syntax):
+
+    bool maxdb_stmt::bind_param ( string $types , array &$var )~
+
+maxdb_stmt_bind_param() is used to bind variables for the parameter markers in
+the SQL statement that was passed to |maxdb_prepare|. The string {types}
+contains one or more characters which specify the types for the corresponding
+bind variables.
+
+The extended syntax of maxdb_stmt_bind_param() allows to give the parameters
+as an array instead of a variable list of PHP variables to the function. If
+the array variable has not been used before calling maxdb_stmt_bind_param(),
+it has to be initialized as an emtpy array. See the examples how to use 
+maxdb_stmt_bind_param() with extended syntax.
+
+Variables for SELECT INTO SQL statements can also be bound using 
+maxdb_stmt_bind_param(). Parameters for database procedures can be bound using
+maxdb_stmt_bind_param(). See the examples how to use maxdb_stmt_bind_param()
+in this cases.
+
+If a variable bound as INTO variable to an SQL statement was used before, the
+content of this variable is overwritten by the data of the SELECT INTO
+statement. A reference to this variable will be invalid after a call to 
+maxdb_stmt_bind_param().
+
+For INOUT parameters of database procedures the content of the bound INOUT
+variable is overwritten by the output value of the database procedure. A
+reference to this variable will be invalid after a call to 
+maxdb_stmt_bind_param().
+
+                       Type specification chars
+Character                          Description
+i         corresponding variable has type integer
+d         corresponding variable has type double
+s         corresponding variable has type string
+b         corresponding variable is a blob and will be sent in packages
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb('localhost', 'MONA', 'RED', 'DEMODB');
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $maxdb->query ("CREATE TABLE temp.mycity LIKE hotel.city");
+    $maxdb->query ("INSERT INTO temp.mycity SELECT * FROM hotel.city");
+
+    $stmt = $maxdb->prepare("INSERT INTO temp.mycity VALUES (?, ?, ?)");
+    $stmt->bind_param('sss', $zip, $name, $state);
+
+    $zip = '11111';
+    $name = 'Georgetown';
+    $state = 'NY';
+
+    /* execute prepared statement */
+    $stmt->execute();
+
+    printf("%d Row inserted.\n", $stmt->affected_rows);
+
+    /* close statement and connection */
+    $stmt->close();
+
+    /* Clean up table CountryLanguage */
+    $maxdb->query("DELETE FROM temp.mycity WHERE name='Georgetown'");
+    printf("%d Row deleted.\n", $maxdb->affected_rows);
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (!$link) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    maxdb_query ($link, "CREATE TABLE temp.mycity LIKE hotel.city");
+    maxdb_query ($link, "INSERT INTO temp.mycity SELECT * FROM hotel.city");
+
+    $stmt = maxdb_prepare($link, "INSERT INTO temp.mycity VALUES (?, ?, ?)");
+    maxdb_stmt_bind_param($stmt, 'sss', $zip, $name, $state);
+
+    $zip = '11111';
+    $name = 'Georgetown';
+    $state = 'NY';
+
+    /* execute prepared statement */
+    maxdb_stmt_execute($stmt);
+
+    printf("%d Row inserted.\n", maxdb_stmt_affected_rows($stmt));
+
+    /* close statement and connection */
+    maxdb_stmt_close($stmt);
+
+    /* Clean up table CountryLanguage */
+    maxdb_query($link, "DELETE FROM temp.mycity WHERE name='Georgetown'");
+    printf("%d Row deleted.\n", maxdb_affected_rows($link));
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+1 Row inserted.
+1 Row deleted.
+
+Example #3 Procedural style (SELECT INTO)
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (!$link) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    /* Performing SQL query */
+    $stmt = maxdb_prepare ($link, "SELECT price INTO ? FROM hotel.room where hno =
+     ? and type = ?");
+    if (!$stmt) {
+      printf ("Prepare failed: %s\n", maxdb_error($link));
+    }
+
+    $hno = "50";
+    $rtype = "suite";
+
+    maxdb_stmt_bind_param($stmt, 'dss', $price, $hno, $rtype);
+    maxdb_stmt_execute($stmt);
+
+    printf ("%f\n", $price);
+
+    maxdb_stmt_close ($stmt);
+<?>
+
+The above example will output something similar to:
+
+21.600000
+
+Example #4 Procedural style (DB procedure)
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (!$link) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    maxdb_report (MAXDB_REPORT_OFF);
+    maxdb_query($link,"DROP DBPROC test_proc");
+    maxdb_report (MAXDB_REPORT_ERROR);
+
+    $query = "create dbproc test_proc (INOUT e_text char(72))
+     AS select * from SYSDBA.DUAL; fetch into :e_text;";
+
+    maxdb_query($link, $query);
+
+    /* Performing SQL query */
+    $stmt = maxdb_prepare ($link, "CALL test_proc (?)");
+    if (!$stmt) {
+      printf ("Prepare failed: %s\n", maxdb_error($link));
+    }
+
+    maxdb_stmt_bind_param($stmt, 's', $result);
+    maxdb_stmt_execute($stmt);
+
+    printf ("%s\n", $result);
+
+    maxdb_stmt_close ($stmt);
+<?>
+
+The above example will output something similar to:
+
+a
+
+Example #5 Object oriented style (extended syntax)
+
+<?php >
+    $maxdb = new maxdb('localhost', 'MONA', 'RED', 'DEMODB');
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $maxdb->query ("CREATE TABLE temp.mycity LIKE hotel.city");
+    $maxdb->query ("INSERT INTO temp.mycity SELECT * FROM hotel.city");
+
+    $stmt = $maxdb->prepare("INSERT INTO temp.mycity VALUES (?, ?, ?)");
+
+    $arr = array();
+
+    $stmt->bind_param('iss', $arr);
+
+    $arr[0] = 11111;
+    $arr[1] = 'Georgetown';
+    $arr[2] = 'NY';
+
+    /* execute prepared statement */
+    $stmt->execute();
+
+    printf("%d Row inserted.\n", maxdb_stmt_affected_rows($stmt));
+
+    $arr[0] = 22222;
+    $arr[1] = 'New Orleans';
+    $arr[2] = 'LA';
+
+    /* execute prepared statement */
+    $stmt->execute();
+
+    printf("%d Row inserted.\n", $stmt->affected_rows);
+
+    /* close statement and connection */
+    $stmt->close();
+
+    $result = $maxdb->query("SELECT * from temp.mycity WHERE zip = '11111' OR zip 
+    = '22222'");
+    if ($result) {
+      while ($row = $result->fetch_row()) {
+        printf ("%s %s %s\n", $row[0], $row[1], $row[2]);
+      }
+    }
+
+    /* Clean up table CountryLanguage */
+    $maxdb->query("DELETE FROM temp.mycity WHERE name='Georgetown'");
+    $maxdb->query("DELETE FROM temp.mycity WHERE name='New Orleans'");
+    printf("%d Rows deleted.\n", $maxdb->affected_rows);
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+The above example will output something similar to:
+
+1 Row inserted.
+1 Row inserted.
+11111 Georgetown NY
+22222 New Orleans LA
+2 Rows deleted.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_stmt_bind_result| - Binds variables to a prepared statement for
+    result storage
+  * |maxdb_stmt_execute| - Executes a prepared Query
+  * |maxdb_stmt_fetch| - Fetch results from a prepared statement into the
+    bound variables
+  * |maxdb_prepare| - Prepare an SQL statement for execution
+  * |maxdb_stmt_send_long_data| - Send data in blocks
+  * |maxdb_stmt_errno| - Returns the error code for the most recent statement
+    call
+  * |maxdb_stmt_error| - Returns a string description for last statement error
+
+
+vim:ft=help:

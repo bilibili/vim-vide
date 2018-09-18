@@ -1,0 +1,69 @@
+gmdate
+
+(PHP 4, PHP 5, PHP 7)
+
+gmdate — Format a GMT/UTC date/time
+
+==============================================================================
+*Description*
+
+    string gmdate ( string $format [, int $timestamp = time() ] )~
+
+Identical to the |date| function except that the time returned is Greenwich
+Mean Time (GMT).
+
+==============================================================================
+*Parameters*
+
+{format}
+
+    The format of the outputted date string. See the formatting options for
+    the |date| function.
+
+{timestamp}
+
+    The optional {timestamp} parameter is an integer Unix timestamp that
+    defaults to the current local time if a {timestamp} is not given. In other
+    words, it defaults to the value of |time|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a formatted date string. If a non-numeric value is used for
+{timestamp}, FALSE is returned and an E_WARNING level error is emitted.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        The valid range of a timestamp is typically from Fri, 13 Dec 1901
+        20:45:54 GMT to Tue, 19 Jan 2038 03:14:07 GMT. (These are the dates
+5.1.0   that correspond to the minimum and maximum values for a 32-bit signed
+        integer). However, before PHP 5.1.0 this range was limited from
+        01-01-1970 to 19-01-2038 on some systems (e.g. Windows).
+5.1.1   There are useful constants of standard date/time formats that can be
+        used to specify the {format} parameter.
+
+==============================================================================
+*Examples*
+
+Example #1 gmdate() example
+
+When run in Finland (GMT +0200), the first line below prints "Jan 01 1998
+00:00:00", while the second prints "Dec 31 1997 22:00:00".
+
+<?php >
+    echo date("M d Y H:i:s", mktime(0, 0, 0, 1, 1, 1998));
+    echo gmdate("M d Y H:i:s", mktime(0, 0, 0, 1, 1, 1998));
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |date| - Format a local time/date
+  * |mktime| - Get Unix timestamp for a date
+  * |gmmktime| - Get Unix timestamp for a GMT date
+  * |strftime| - Format a local time/date according to locale settings
+
+
+vim:ft=help:

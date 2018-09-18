@@ -1,0 +1,70 @@
+imap_mailboxmsginfo
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_mailboxmsginfo — Get information about the current mailbox
+
+==============================================================================
+*Description*
+
+    object imap_mailboxmsginfo ( resource $imap_stream )~
+
+Checks the current mailbox status on the server. It is similar to |imap_status
+|, but will additionally sum up the size of all messages in the mailbox, which
+will take some additional time to execute.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the information in an object with following properties:
+
+              Mailbox properties
+Date    date of last change (current datetime)
+Driver  driver
+Mailbox name of the mailbox
+Nmsgs   number of messages
+Recent  number of recent messages
+Unread  number of unread messages
+Deleted number of deleted messages
+Size    mailbox size
+
+Returns FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_mailboxmsginfo() example
+
+<?php >
+
+    $mbox = imap_open("{imap.example.org}INBOX", "username", "password")
+          or die("can't connect: " . imap_last_error());
+
+    $check = imap_mailboxmsginfo($mbox);
+
+    if ($check) {
+        echo "Date: "     . $check->Date    . "<br />\n" ;
+        echo "Driver: "   . $check->Driver  . "<br />\n" ;
+        echo "Mailbox: "  . $check->Mailbox . "<br />\n" ;
+        echo "Messages: " . $check->Nmsgs   . "<br />\n" ;
+        echo "Recent: "   . $check->Recent  . "<br />\n" ;
+        echo "Unread: "   . $check->Unread  . "<br />\n" ;
+        echo "Deleted: "  . $check->Deleted . "<br />\n" ;
+        echo "Size: "     . $check->Size    . "<br />\n" ;
+    } else {
+        echo "imap_mailboxmsginfo() failed: " . imap_last_error() . "<br />\n";
+    }
+
+    imap_close($mbox);
+
+<?>
+
+
+vim:ft=help:

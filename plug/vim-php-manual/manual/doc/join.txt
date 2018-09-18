@@ -1,0 +1,13 @@
+join
+
+(PHP 4, PHP 5, PHP 7)
+
+join — Alias of |implode|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |implode|.
+
+
+vim:ft=help:

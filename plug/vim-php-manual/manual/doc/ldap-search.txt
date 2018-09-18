@@ -1,0 +1,131 @@
+ldap_search
+
+(PHP 4, PHP 5, PHP 7)
+
+ldap_search — Search LDAP tree
+
+==============================================================================
+*Description*
+
+    resource ldap_search ( resource $link_identifier , string $base_dn ,~
+    string $filter [, array $attributes [, int $attrsonly [, int $sizelimit~
+    [, int $timelimit [, int $deref ]]]]] )~
+
+Performs the search for a specified filter on the directory with the scope of
+LDAP_SCOPE_SUBTREE. This is equivalent to searching the entire directory.
+
+From 4.0.5 on it's also possible to do parallel searches. To do this you use
+an array of link identifiers, rather than a single identifier, as the first
+argument. If you don't want the same base DN and the same filter for all the
+searches, you can also use an array of base DNs and/or an array of filters.
+Those arrays must be of the same size as the link identifier array since the
+first entries of the arrays are used for one search, the second entries are
+used for another, and so on. When doing parallel searches an array of search
+result identifiers is returned, except in case of error, then the entry
+corresponding to the search will be FALSE. This is very much like the value
+normally returned, except that a result identifier is always returned when a
+search was made. There are some rare cases where the normal search returns
+FALSE while the parallel search returns an identifier.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{base_dn}
+
+    The base DN for the directory.
+
+{filter}
+
+    The search filter can be simple or advanced, using boolean operators in
+    the format described in the LDAP documentation (see the >> Netscape
+    Directory SDK or >> RFC4515 for full information on filters).
+
+{attributes}
+
+    An array of the required attributes, e.g. array("mail", "sn", "cn"). Note
+    that the "dn" is always returned irrespective of which attributes types
+    are requested.
+
+    Using this parameter is much more efficient than the default action (which
+    is to return all attributes and their associated values). The use of this
+    parameter should therefore be considered good practice.
+
+{attrsonly}
+
+    Should be set to 1 if only attribute types are wanted. If set to 0 both
+    attributes types and attribute values are fetched which is the default
+    behaviour.
+
+{sizelimit}
+
+    Enables you to limit the count of entries fetched. Setting this to 0 means
+    no limit.
+
+        Note:
+
+        This parameter can NOT override server-side preset sizelimit. You can
+        set it lower though.
+
+        Some directory server hosts will be configured to return no more than
+        a preset number of entries. If this occurs, the server will indicate
+        that it has only returned a partial results set. This also occurs if
+        you use this parameter to limit the count of fetched entries.
+
+{timelimit}
+
+    Sets the number of seconds how long is spend on the search. Setting this
+    to 0 means no limit.
+
+        Note:
+
+        This parameter can NOT override server-side preset timelimit. You can
+        set it lower though.
+
+{deref}
+
+    Specifies how aliases should be handled during the search. It can be one
+    of the following:
+      + LDAP_DEREF_NEVER - (default) aliases are never dereferenced.
+      + LDAP_DEREF_SEARCHING - aliases should be dereferenced during the
+        search but not when locating the base object of the search.
+      + LDAP_DEREF_FINDING - aliases should be dereferenced when locating the
+        base object but not during the search.
+      + LDAP_DEREF_ALWAYS - aliases should be dereferenced always.
+
+==============================================================================
+*Return* *Values*
+
+Returns a search result identifier or FALSE on error.
+
+==============================================================================
+*Examples*
+
+The example below retrieves the organizational unit, surname, given name and
+email address for all people in "My Company" where the surname or given name
+contains the substring $person. This example uses a boolean filter to tell the
+server to look for information in more than one attribute.
+
+Example #1 LDAP search
+
+<?php >
+    // $ds is a valid link identifier for a directory server
+
+    // $person is all or part of a person's name, eg "Jo"
+
+    $dn = "o=My Company, c=US";
+    $filter="(|(sn=$person*)(givenname=$person*))";
+    $justthese = array("ou", "sn", "givenname", "mail");
+
+    $sr=ldap_search($ds, $dn, $filter, $justthese);
+
+    $info = ldap_get_entries($ds, $sr);
+
+    echo $info["count"]." entries returned\n";
+<?>
+
+
+vim:ft=help:

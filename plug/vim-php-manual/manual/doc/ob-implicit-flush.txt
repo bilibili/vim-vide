@@ -1,0 +1,37 @@
+ob_implicit_flush
+
+(PHP 4, PHP 5, PHP 7)
+
+ob_implicit_flush — Turn implicit flush on/off
+
+==============================================================================
+*Description*
+
+    void ob_implicit_flush ([ int $flag = true ] )~
+
+ob_implicit_flush() will turn implicit flushing on or off. Implicit flushing
+will result in a flush operation after every output call, so that explicit
+calls to |flush| will no longer be needed.
+
+==============================================================================
+*Parameters*
+
+{flag}
+
+    TRUE to turn implicit flushing on, FALSE otherwise.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |flush| - Flush system output buffer
+  * |ob_start| - Turn on output buffering
+  * |ob_end_flush| - Flush (send) the output buffer and turn off output
+    buffering
+
+
+vim:ft=help:

@@ -1,0 +1,67 @@
+xmlrpc_set_type
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+xmlrpc_set_type — Sets xmlrpc type, base64 or datetime, for a PHP string value
+
+==============================================================================
+*Description*
+
+    bool xmlrpc_set_type ( string &$value , string $type )~
+
+Sets xmlrpc type, base64 or datetime, for a PHP string value.
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*Parameters*
+
+{value}
+
+    Value to set the type
+
+{type}
+
+    'base64' or 'datetime'
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure. If successful, {value} is
+converted to an object.
+
+==============================================================================
+*Examples*
+
+Example #1 A xmlrpc_set_type() example
+
+<?php >
+
+    $params = date("Ymd\TH:i:s", time());
+    xmlrpc_set_type($params, 'datetime');
+    echo xmlrpc_encode($params);
+
+<?>
+
+The above example will output something similar to:
+
+<?xml version="1.0" encoding="utf-8"?>
+<params>
+<param>
+ <value>
+  <dateTime.iso8601>20090322T23:43:03</dateTime.iso8601>
+ </value>
+</param>
+</params>
+
+==============================================================================
+*Errors/Exceptions*
+
+Issues E_WARNING with type unsupported by XMLRPC.
+
+
+vim:ft=help:

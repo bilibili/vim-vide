@@ -1,0 +1,53 @@
+odbc_fetch_into
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_fetch_into — Fetch one result row into array
+
+==============================================================================
+*Description*
+
+    int odbc_fetch_into ( resource $result_id , array &$result_array [, int~
+    $rownumber ] )~
+
+Fetch one result row into array.
+
+==============================================================================
+*Parameters*
+
+{result_id}
+
+    The result resource.
+
+{result_array}
+
+    The result array that can be of any type since it will be converted to
+    type array. The array will contain the column values starting at array
+    index 0.
+
+{rownumber}
+
+    The row number.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of columns in the result; FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 odbc_fetch_into() examples
+
+<?php >
+    $rc = odbc_fetch_into($res_id, $my_array);
+<?>
+
+or
+
+<?php >
+    $rc = odbc_fetch_into($res_id, $my_array, 2);
+<?>
+
+
+vim:ft=help:

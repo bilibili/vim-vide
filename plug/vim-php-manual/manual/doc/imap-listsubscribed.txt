@@ -1,0 +1,13 @@
+imap_listsubscribed
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_listsubscribed — Alias of |imap_lsub|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |imap_lsub|.
+
+
+vim:ft=help:

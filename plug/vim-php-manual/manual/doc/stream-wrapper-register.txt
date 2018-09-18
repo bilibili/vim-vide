@@ -1,0 +1,99 @@
+stream_wrapper_register
+
+(PHP 4 >= 4.3.2, PHP 5, PHP 7)
+
+stream_wrapper_register — Register a URL wrapper implemented as a PHP class
+
+==============================================================================
+*Description*
+
+    bool stream_wrapper_register ( string $protocol , string $classname [,~
+    int $flags = 0 ] )~
+
+Allows you to implement your own protocol handlers and streams for use with
+all the other filesystem functions (such as |fopen|, |fread| etc.).
+
+==============================================================================
+*Parameters*
+
+{protocol}
+
+    The wrapper name to be registered.
+
+{classname}
+
+    The classname which implements the {protocol}.
+
+{flags}
+
+    Should be set to STREAM_IS_URL if {protocol} is a URL protocol. Default is
+    0, local stream.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+stream_wrapper_register() will return FALSE if the {protocol} already has a
+handler.
+
+==============================================================================
+*Changelog*
+
+Version         Description
+5.2.4   Added the {flags} parameter.
+
+==============================================================================
+*Examples*
+
+Example #1 How to register a stream wrapper
+
+<?php >
+    $existed = in_array("var", stream_get_wrappers());
+    if ($existed) {
+        stream_wrapper_unregister("var");
+    }
+    stream_wrapper_register("var", "VariableStream");
+    $myvar = "";
+
+    $fp = fopen("var://myvar", "r+");
+
+    fwrite($fp, "line1\n");
+    fwrite($fp, "line2\n");
+    fwrite($fp, "line3\n");
+
+    rewind($fp);
+    while (!feof($fp)) {
+        echo fgets($fp);
+    }
+    fclose($fp);
+    var_dump($myvar);
+
+    if ($existed) {
+        stream_wrapper_restore("var");
+    }
+
+<?>
+
+The above example will output:
+
+line1
+line2
+line3
+string(18) "line1
+line2
+line3
+"
+
+==============================================================================
+*See* *Also*
+
+  * The streamWrapper prototype class
+  * Example class registered as stream wrapper
+  * |stream_wrapper_unregister| - Unregister a URL wrapper
+  * |stream_wrapper_restore| - Restores a previously unregistered built-in
+    wrapper
+  * |stream_get_wrappers| - Retrieve list of registered streams
+
+
+vim:ft=help:

@@ -1,0 +1,141 @@
+socket_create_pair
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_create_pair — Creates a pair of indistinguishable sockets and stores
+them in an array
+
+==============================================================================
+*Description*
+
+    bool socket_create_pair ( int $domain , int $type , int $protocol , array~
+    &$fd )~
+
+socket_create_pair() creates two connected and indistinguishable sockets, and
+stores them in {fd}. This function is commonly used in IPC (InterProcess
+Communication).
+
+==============================================================================
+*Parameters*
+
+{domain}
+
+    The {domain} parameter specifies the protocol family to be used by the
+    socket. See |socket_create| for the full list.
+
+{type}
+
+    The {type} parameter selects the type of communication to be used by the
+    socket. See |socket_create| for the full list.
+
+{protocol}
+
+    The {protocol} parameter sets the specific protocol within the specified
+    {domain} to be used when communicating on the returned socket. The proper
+    value can be retrieved by name by using |getprotobyname|. If the desired
+    protocol is TCP, or UDP the corresponding constants SOL_TCP, and SOL_UDP
+    can also be used.
+
+    See |socket_create| for the full list of supported protocols.
+
+{fd}
+
+    Reference to an array in which the two socket resources will be inserted.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   This function is now re-enabled on Windows platforms.
+4.3.0   This function was due to a bug made unavailable on Windows platforms.
+
+==============================================================================
+*Examples*
+
+Example #1 socket_create_pair() example
+
+<?php >
+    $sockets = array();
+
+    /* On Windows we need to use AF_INET */
+    $domain = (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? AF_INET : AF_UNIX);
+
+    /* Setup socket pair */
+    if (socket_create_pair($domain, SOCK_STREAM, 0, $sockets) === false) {
+        echo "socket_create_pair failed. Reason: ".socket_strerror(
+    socket_last_error());
+    }
+    /* Send and Recieve Data */
+    if (socket_write($sockets[0], "ABCdef123\n", strlen("ABCdef123\n")) === false)
+     {
+        echo "socket_write() failed. Reason: ".socket_strerror(socket_last_error(
+    $sockets[0]));
+    }
+    if (($data = socket_read($sockets[1], strlen("ABCdef123\n"), PHP_BINARY_READ))
+     === false) {
+        echo "socket_read() failed. Reason: ".socket_strerror(socket_last_error(
+    $sockets[1]));
+    }
+    var_dump($data);
+
+    /* Close sockets */
+    socket_close($sockets[0]);
+    socket_close($sockets[1]);
+<?>
+
+Example #2 socket_create_pair() IPC example
+
+<?php >
+    $ary = array();
+    $strone = 'Message From Parent.';
+    $strtwo = 'Message From Child.';
+
+    if (socket_create_pair(AF_UNIX, SOCK_STREAM, 0, $ary) === false) {
+        echo "socket_create_pair() failed. Reason: ".socket_strerror(
+    socket_last_error());
+    }
+    $pid = pcntl_fork();
+    if ($pid == -1) {
+        echo 'Could not fork Process.';
+    } elseif ($pid) {
+        /*parent*/
+        socket_close($ary[0]);
+        if (socket_write($ary[1], $strone, strlen($strone)) === false) {
+            echo "socket_write() failed. Reason: ".socket_strerror(
+    socket_last_error($ary[1]));
+        }
+        if (socket_read($ary[1], strlen($strtwo), PHP_BINARY_READ) == $strtwo) {
+            echo "Recieved $strtwo\n";
+        }
+        socket_close($ary[1]);
+    } else {
+        /*child*/
+        socket_close($ary[1]);
+        if (socket_write($ary[0], $strtwo, strlen($strtwo)) === false) {
+            echo "socket_write() failed. Reason: ".socket_strerror(
+    socket_last_error($ary[0]));
+        }
+        if (socket_read($ary[0], strlen($strone), PHP_BINARY_READ) == $strone) {
+            echo "Recieved $strone\n";
+        }
+        socket_close($ary[0]);
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |socket_create| - Create a socket (endpoint for communication)
+  * |socket_create_listen| - Opens a socket on port to accept connections
+  * |socket_bind| - Binds a name to a socket
+  * |socket_listen| - Listens for a connection on a socket
+  * |socket_last_error| - Returns the last error on the socket
+  * |socket_strerror| - Return a string describing a socket error
+
+
+vim:ft=help:

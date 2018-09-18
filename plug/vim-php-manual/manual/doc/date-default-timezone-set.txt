@@ -1,0 +1,72 @@
+date_default_timezone_set
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+date_default_timezone_set — Sets the default timezone used by all date/time
+functions in a script
+
+==============================================================================
+*Description*
+
+    bool date_default_timezone_set ( string $timezone_identifier )~
+
+date_default_timezone_set() sets the default timezone used by all date/time
+functions.
+
+    Note:
+
+    Since PHP 5.1.0 (when the date/time functions were rewritten), every call
+    to a date/time function will generate a E_NOTICE if the timezone isn't
+    valid, and/or a E_WARNING message if using the system settings or the TZ
+    environment variable.
+
+Instead of using this function to set the default timezone in your script, you
+can also use the INI setting date.timezone to set the default timezone.
+
+==============================================================================
+*Parameters*
+
+{timezone_identifier}
+
+    The timezone identifier, like UTC or Europe/Lisbon. The list of valid
+    identifiers is available in the List of Supported Timezones.
+
+==============================================================================
+*Return* *Values*
+
+This function returns FALSE if the {timezone_identifier} isn't valid, or TRUE
+otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 Getting the default timezone
+
+<?php >
+    date_default_timezone_set('America/Los_Angeles');
+
+    $script_tz = date_default_timezone_get();
+
+    if (strcmp($script_tz, ini_get('date.timezone'))){
+        echo 'Script timezone differs from ini-set timezone.';
+    } else {
+        echo 'Script timezone and ini-set timezone match.';
+    }
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   Now throws E_WARNING rather than E_STRICT.
+5.1.2   The function started to validate the {timezone_identifier} parameter.
+
+==============================================================================
+*See* *Also*
+
+  * |date_default_timezone_get| - Gets the default timezone used by all date/
+    time functions in a script
+  * List of Supported Timezones
+
+
+vim:ft=help:

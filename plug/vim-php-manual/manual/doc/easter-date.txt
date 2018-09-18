@@ -1,0 +1,103 @@
+easter_date
+
+(PHP 4, PHP 5, PHP 7)
+
+easter_date — Get Unix timestamp for midnight on Easter of a given year
+
+==============================================================================
+*Description*
+
+    int easter_date ([ int $year = date("Y") ] )~
+
+Returns the Unix timestamp corresponding to midnight on Easter of the given
+year.
+
+Warning
+
+This function will generate a warning if the year is outside of the range for
+Unix timestamps (i.e. before 1970 or after 2037).
+
+The date of Easter Day was defined by the Council of Nicaea in AD325 as the
+Sunday after the first full moon which falls on or after the Spring Equinox.
+The Equinox is assumed to always fall on 21st March, so the calculation
+reduces to determining the date of the full moon and the date of the following
+Sunday. The algorithm used here was introduced around the year 532 by
+Dionysius Exiguus. Under the Julian Calendar (for years before 1753) a simple
+19-year cycle is used to track the phases of the Moon. Under the Gregorian
+Calendar (for years after 1753 - devised by Clavius and Lilius, and introduced
+by Pope Gregory XIII in October 1582, and into Britain and its then colonies
+in September 1752) two correction factors are added to make the cycle more
+accurate.
+
+==============================================================================
+*Parameters*
+
+{year}
+
+    The year as a number between 1970 an 2037. If omitted, defaults to the
+    current year according to the local time.
+
+==============================================================================
+*Return* *Values*
+
+The easter date as a unix timestamp.
+
+==============================================================================
+*Examples*
+
+Example #1 easter_date() example
+
+<?php >
+
+    echo date("M-d-Y", easter_date(1999));        // Apr-04-1999
+    echo date("M-d-Y", easter_date(2000));        // Apr-23-2000
+    echo date("M-d-Y", easter_date(2001));        // Apr-15-2001
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    easter_date() relies on your system's C library time functions, rather
+    than using PHP's internal date and time functions. As a consequence, 
+    easter_date() uses the TZ environment variable to determine the time zone
+    it should operate in, rather than using PHP's default time zone, which may
+    result in unexpected behaviour when using this function in conjunction
+    with other date functions in PHP.
+
+    As a workaround, you can use the |easter_days| with DateTime and
+    DateInterval to calculate the start of Easter in your PHP time zone as
+    follows:
+
+    <?php >
+    function get_easter_datetime($year) {
+        $base = new DateTime("$year-03-21");
+        $days = easter_days($year);
+
+        return $base->add(new DateInterval("P{$days}D"));
+    }
+
+    foreach (range(2012, 2015) as $year) {
+        printf("Easter in %d is on %s\n",
+               $year,
+               get_easter_datetime($year)->format('F j'));
+    }
+<    ?>
+
+    The above example will output:
+
+    Easter in 2012 is on April 8
+    Easter in 2013 is on March 31
+    Easter in 2014 is on April 20
+    Easter in 2015 is on April 5
+
+==============================================================================
+*See* *Also*
+
+  * |easter_days| - Get number of days after March 21 on which Easter falls
+    for a given year for calculating Easter before 1970 or after 2037
+
+
+vim:ft=help:

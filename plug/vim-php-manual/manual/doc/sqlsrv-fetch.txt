@@ -1,0 +1,97 @@
+sqlsrv_fetch
+
+(No version information available, might only be in Git)
+
+sqlsrv_fetch — Makes the next row in a result set available for reading
+
+==============================================================================
+*Description*
+
+    mixed sqlsrv_fetch ( resource $stmt [, int $row [, int $offset ]] )~
+
+Makes the next row in a result set available for reading. Use 
+|sqlsrv_get_field| to read the fields of the row.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A statement resource created by executing |sqlsrv_query| or 
+    |sqlsrv_execute|.
+
+{row}
+
+    The row to be accessed. This parameter can only be used if the specified
+    statement was prepared with a scrollable cursor. In that case, this
+    parameter can take on one of the following values:
+      + SQLSRV_SCROLL_NEXT
+      + SQLSRV_SCROLL_PRIOR
+      + SQLSRV_SCROLL_FIRST
+      + SQLSRV_SCROLL_LAST
+      + SQLSRV_SCROLL_ABSOLUTE
+      + SQLSRV_SCROLL_RELATIVE
+
+{offset}
+
+    Specifies the row to be accessed if the row parameter is set to
+    SQLSRV_SCROLL_ABSOLUTE or SQLSRV_SCROLL_RELATIVE. Note that the first row
+    in a result set has index 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the next row of a result set was successfully retrieved, FALSE
+if an error occurs, and NULL if there are no more rows in the result set.
+
+==============================================================================
+*Examples*
+
+Example #1 sqlsrv_fetch() example
+
+The following example demonstrates how to retrieve a row with sqlsrv_fetch()
+and get the row fields with |sqlsrv_get_field|.
+
+<?php >
+    $serverName = "serverName\sqlexpress";
+    $connectionInfo = array( "Database"=>"dbName", "UID"=>"username", "PWD"=>
+    "password");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+    if( $conn === false ) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    $sql = "SELECT Name, Comment 
+            FROM Table_1
+            WHERE ReviewID=1";
+    $stmt = sqlsrv_query( $conn, $sql);
+    if( $stmt === false ) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    // Make the first (and in this case, only)
+     row of the result set available for reading.
+    if( sqlsrv_fetch( $stmt ) === false) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    //
+     Get the row fields. Field indeces start at 0 and must be retrieved in order.
+    // Retrieving row fields by name is not supported by sqlsrv_get_field.
+    $name = sqlsrv_get_field( $stmt, 0);
+    echo "$name: ";
+
+    $comment = sqlsrv_get_field( $stmt, 1);
+    echo $comment;
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |sqlsrv_get_field| - Gets field data from the currently selected row
+  * |sqlsrv_fetch_array| - Returns a row as an array
+  * |sqlsrv_fetch_object| - Retrieves the next row of data in a result set as
+    an object
+
+
+vim:ft=help:

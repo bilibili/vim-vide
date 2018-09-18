@@ -1,0 +1,94 @@
+system
+
+(PHP 4, PHP 5, PHP 7)
+
+system — Execute an external program and display the output
+
+==============================================================================
+*Description*
+
+    string system ( string $command [, int &$return_var ] )~
+
+system() is just like the C version of the function in that it executes the
+given {command} and outputs the result.
+
+The system() call also tries to automatically flush the web server's output
+buffer after each line of output if PHP is running as a server module.
+
+If you need to execute a command and have all the data from the command passed
+directly back without any interference, use the |passthru| function.
+
+==============================================================================
+*Parameters*
+
+{command}
+
+    The command that will be executed.
+
+{return_var}
+
+    If the {return_var} argument is present, then the return status of the
+    executed command will be written to this variable.
+
+==============================================================================
+*Return* *Values*
+
+Returns the last line of the command output on success, and FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 system() example
+
+<?php >
+    echo '<pre>';
+
+    // Outputs all the result of shellcommand "ls", and returns
+    // the last output line into $last_line. Stores the return value
+    // of the shell command in $retval.
+    $last_line = system('ls', $retval);
+
+    // Printing additional info
+    echo '
+    </pre>
+    <hr />Last line of the output: ' . $last_line . '
+    <hr />Return value: ' . $retval;
+<?>
+
+==============================================================================
+*Notes*
+
+Warning
+
+When allowing user-supplied data to be passed to this function, use 
+|escapeshellarg| or |escapeshellcmd| to ensure that users cannot trick the
+system into executing arbitrary commands.
+
+    Note:
+
+    If a program is started with this function, in order for it to continue
+    running in the background, the output of the program must be redirected to
+    a file or another output stream. Failing to do so will cause PHP to hang
+    until the execution of the program ends.
+
+    Note: When safe mode is enabled, you can only execute files within the
+    safe_mode_exec_dir. For practical reasons, it is currently not allowed to
+    have .. components in the path to the executable.
+
+Warning
+
+With safe mode enabled, the command string is escaped with |escapeshellcmd|.
+Thus, echo y | echo x becomes echo y \| echo x.
+
+==============================================================================
+*See* *Also*
+
+  * |exec| - Execute an external program
+  * |passthru| - Execute an external program and display raw output
+  * |popen| - Opens process file pointer
+  * |escapeshellcmd| - Escape shell metacharacters
+  * |pcntl_exec| - Executes specified program in current process space
+  * backtick operator
+
+
+vim:ft=help:

@@ -1,0 +1,27 @@
+newt_listbox_clear_selection
+
+(PECL newt >= 0.1)
+
+newt_listbox_clear_selection —
+
+==============================================================================
+*Description*
+
+    void newt_listbox_clear_selection ( resource $listbox )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{listbox}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

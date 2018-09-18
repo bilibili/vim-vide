@@ -1,0 +1,94 @@
+pg_send_prepare
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+pg_send_prepare — Sends a request to create a prepared statement with the
+given parameters, without waiting for completion.
+
+==============================================================================
+*Description*
+
+    bool pg_send_prepare ( resource $connection , string $stmtname , string~
+    $query )~
+
+Sends a request to create a prepared statement with the given parameters,
+without waiting for completion.
+
+This is an asynchronous version of |pg_prepare|: it returns TRUE if it was
+able to dispatch the request, and FALSE if not. After a successful call, call 
+|pg_get_result| to determine whether the server successfully created the
+prepared statement. The function's parameters are handled identically to 
+|pg_prepare|. Like |pg_prepare|, it will not work on pre-7.4 versions of
+PostgreSQL.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource. When {connection} is not present,
+    the default connection is used. The default connection is the last
+    connection made by |pg_connect| or |pg_pconnect|.
+
+{stmtname}
+
+    The name to give the prepared statement. Must be unique per-connection. If
+    "" is specified, then an unnamed statement is created, overwriting any
+    previously defined unnamed statement.
+
+{query}
+
+    The parameterized SQL statement. Must contain only a single statement.
+    (multiple statements separated by semi-colons are not allowed.) If any
+    parameters are used, they are referred to as $1, $2, etc.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, FALSE on failure. Use |pg_get_result| to determine
+the query result.
+
+==============================================================================
+*Examples*
+
+Example #1 Using pg_send_prepare()
+
+<?php >
+      $dbconn = pg_connect("dbname=publisher") or die("Could not connect");
+
+      // Prepare a query for execution
+      if (!pg_connection_busy($dbconn)) {
+        pg_send_prepare($dbconn, "my_query", 'SELECT * FROM shops WHERE name = $1'
+    );
+        $res1 = pg_get_result($dbconn);
+      }
+
+      // Execute the prepared query.  Note that it is not necessary to escape
+      // the string "Joe's Widgets" in any way
+      if (!pg_connection_busy($dbconn)) {
+        pg_send_execute($dbconn, "my_query", array("Joe's Widgets"));
+        $res2 = pg_get_result($dbconn);
+      }
+      
+      // Execute the same prepared query, this time with a different parameter
+      if (!pg_connection_busy($dbconn)) {
+        pg_send_execute($dbconn, "my_query", array("Clothes Clothes Clothes"));
+        $res3 = pg_get_result($dbconn);
+      }
+      
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_connect| - Open a PostgreSQL connection
+  * |pg_pconnect| - Open a persistent PostgreSQL connection
+  * |pg_execute| - Sends a request to execute a prepared statement with given
+    parameters, and waits for the result.
+  * |pg_send_execute| - Sends a request to execute a prepared statement with
+    given parameters, without waiting for the result(s).
+  * |pg_send_query_params| - Submits a command and separate parameters to the
+    server without waiting for the result(s).
+
+
+vim:ft=help:

@@ -1,0 +1,55 @@
+jdtojewish
+
+(PHP 4, PHP 5, PHP 7)
+
+jdtojewish — Converts a Julian day count to a Jewish calendar date
+
+==============================================================================
+*Description*
+
+    string jdtojewish ( int $juliandaycount [, bool $hebrew = false [, int~
+    $fl = 0 ]] )~
+
+Converts a Julian Day Count to the Jewish Calendar.
+
+==============================================================================
+*Parameters*
+
+{julianday}
+
+    A julian day number as integer
+
+{hebrew}
+
+    If the {hebrew} parameter is set to TRUE, the {fl} parameter is used for
+    Hebrew, string based, output format.
+
+{fl}
+
+    The available formats are: CAL_JEWISH_ADD_ALAFIM_GERESH,
+    CAL_JEWISH_ADD_ALAFIM, CAL_JEWISH_ADD_GERESHAYIM.
+
+==============================================================================
+*Return* *Values*
+
+The jewish date as a string in the form "month/day/year"
+
+==============================================================================
+*Examples*
+
+Example #1 jdtojewish() Example
+
+<?php >
+    echo jdtojewish(gregoriantojd(10, 8, 2002), true,
+           CAL_JEWISH_ADD_GERESHAYIM + CAL_JEWISH_ADD_ALAFIM + 
+    CAL_JEWISH_ADD_ALAFIM_GERESH); 
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |jewishtojd| - Converts a date in the Jewish Calendar to Julian Day Count
+  * |cal_from_jd| - Converts from Julian Day Count to a supported calendar
+
+
+vim:ft=help:

@@ -1,0 +1,61 @@
+gzopen
+
+(PHP 4, PHP 5, PHP 7)
+
+gzopen — Open gz-file
+
+==============================================================================
+*Description*
+
+    resource gzopen ( string $filename , string $mode [, int~
+    $use_include_path = 0 ] )~
+
+Opens a gzip (.gz) file for reading or writing.
+
+gzopen() can be used to read a file which is not in gzip format; in this case 
+|gzread| will directly read from the file without decompression.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The file name.
+
+{mode}
+
+    As in |fopen| (rb or wb) but can also include a compression level (wb9) or
+    a strategy: f for filtered data as in wb6f, h for Huffman only compression
+    as in wb1h. (See the description of deflateInit2 in zlib.h for more
+    information about the strategy parameter.)
+
+{use_include_path}
+
+    You can set this optional parameter to 1, if you want to search for the
+    file in the include_path too.
+
+==============================================================================
+*Return* *Values*
+
+Returns a file pointer to the file opened, after that, everything you read
+from this file descriptor will be transparently decompressed and what you
+write gets compressed.
+
+If the open fails, the function returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 gzopen() Example
+
+<?php >
+    $fp = gzopen("/tmp/file.gz", "r");
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |gzclose| - Close an open gz-file pointer
+
+
+vim:ft=help:

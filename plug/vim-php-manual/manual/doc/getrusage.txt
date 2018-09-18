@@ -1,0 +1,80 @@
+getrusage
+
+(PHP 4, PHP 5, PHP 7)
+
+getrusage — Gets the current resource usages
+
+==============================================================================
+*Description*
+
+    array getrusage ([ int $who = 0 ] )~
+
+This is an interface to `getrusage(2)`. It gets data returned from the system
+call.
+
+==============================================================================
+*Parameters*
+
+{who}
+
+    If {who} is 1, getrusage will be called with RUSAGE_CHILDREN.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array containing the data returned from the system
+call. All entries are accessible by using their documented field names.
+
+==============================================================================
+*Examples*
+
+Example #1 getrusage() example
+
+<?php >
+    $dat = getrusage();
+    echo $dat["ru_nswap"];         // number of swaps
+    echo $dat["ru_majflt"];        // number of page faults
+    echo $dat["ru_utime.tv_sec"];  // user time used (seconds)
+    echo $dat["ru_utime.tv_usec"]; // user time used (microseconds)
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                Description
+7.0.0   This function is now supported on Windows.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    On Windows getrusage() will only return the following members:
+
+      + "ru_stime.tv_sec"
+      + "ru_stime.tv_usec"
+      + "ru_utime.tv_sec"
+      + "ru_utime.tv_usec"
+      + "ru_majflt" (only if {who} is RUSAGE_SELF)
+      + "ru_maxrss" (only if {who} is RUSAGE_SELF)
+
+    If getrusage() is called with {who} set to 1 (RUSAGE_CHILDREN), then
+    resource usage for threads are collected (meaning that internally the
+    function is called with RUSAGE_THREAD).
+
+    Note:
+
+    on BeOS 2000, only the following members are returned:
+
+      + "ru_stime.tv_sec"
+      + "ru_stime.tv_usec"
+      + "ru_utime.tv_sec"
+      + "ru_utime.tv_usec"
+
+==============================================================================
+*See* *Also*
+
+  * Your system's man page on `getrusage(2)`
+
+
+vim:ft=help:

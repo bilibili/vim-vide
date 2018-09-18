@@ -1,0 +1,16 @@
+PDF_create_bookmark
+
+(PECL pdflib >= 2.0.0)
+
+PDF_create_bookmark — Create bookmark
+
+==============================================================================
+*Description*
+
+    int PDF_create_bookmark ( resource $pdfdoc , string $text , string~
+    $optlist )~
+
+Creates a bookmark subject to various options.
+
+
+vim:ft=help:

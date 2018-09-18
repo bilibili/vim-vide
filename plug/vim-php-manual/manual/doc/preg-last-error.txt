@@ -1,0 +1,44 @@
+preg_last_error
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+preg_last_error — Returns the error code of the last PCRE regex execution
+
+==============================================================================
+*Description*
+
+    int preg_last_error ( void )~
+
+Returns the error code of the last PCRE regex execution.
+
+Example #1 preg_last_error() example
+
+<?php >
+
+    preg_match('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
+
+    if (preg_last_error() == PREG_BACKTRACK_LIMIT_ERROR) {
+        print 'Backtrack limit was exhausted!';
+    }
+
+<?>
+
+The above example will output:
+
+Backtrack limit was exhausted!
+
+==============================================================================
+*Return* *Values*
+
+Returns one of the following constants (explained on their own page):
+
+  * PREG_NO_ERROR
+  * PREG_INTERNAL_ERROR
+  * PREG_BACKTRACK_LIMIT_ERROR (see also pcre.backtrack_limit)
+  * PREG_RECURSION_LIMIT_ERROR (see also pcre.recursion_limit)
+  * PREG_BAD_UTF8_ERROR
+  * PREG_BAD_UTF8_OFFSET_ERROR (since PHP 5.3.0)
+  * PREG_JIT_STACKLIMIT_ERROR (since PHP 7.0.0)
+
+
+vim:ft=help:

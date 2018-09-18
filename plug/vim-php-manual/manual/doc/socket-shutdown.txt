@@ -1,0 +1,41 @@
+socket_shutdown
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_shutdown — Shuts down a socket for receiving, sending, or both
+
+==============================================================================
+*Description*
+
+    bool socket_shutdown ( resource $socket [, int $how = 2 ] )~
+
+The socket_shutdown() function allows you to stop incoming, outgoing or all
+data (the default) from being sent through the {socket}
+
+    Note:
+
+    The associated buffer, or buffers, may or may not be emptied.
+
+==============================================================================
+*Parameters*
+
+{socket}
+
+    A valid socket resource created with |socket_create|.
+
+{how}
+
+    The value of {how} can be one of the following:
+
+        possible values for {how}
+    0 Shutdown socket reading
+    1 Shutdown socket writing
+    2 Shutdown socket reading and writing
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

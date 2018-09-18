@@ -1,0 +1,17 @@
+iis_start_service
+
+(PECL iisfunc SVN)
+
+iis_start_service — Starts the service defined by ServiceId
+
+==============================================================================
+*Description*
+
+    int iis_start_service ( string $service_id )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

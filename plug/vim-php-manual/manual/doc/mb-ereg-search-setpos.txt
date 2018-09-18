@@ -1,0 +1,51 @@
+mb_ereg_search_setpos
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+mb_ereg_search_setpos — Set start point of next regular expression match
+
+==============================================================================
+*Description*
+
+    bool mb_ereg_search_setpos ( int $position )~
+
+mb_ereg_search_setpos() sets the starting point of a match for |mb_ereg_search
+|.
+
+==============================================================================
+*Parameters*
+
+{position}
+
+    The position to set. If it is negative, it counts from the end of the
+    string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                   Description
+7.1.0   Support for negative {position}s has been added.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The internal encoding or the character encoding specified by 
+    |mb_regex_encoding| will be used as the character encoding for this
+    function.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_regex_encoding| - Set/Get character encoding for multibyte regex
+  * |mb_ereg_search_init| - Setup string and regular expression for a
+    multibyte regular expression match
+
+
+vim:ft=help:

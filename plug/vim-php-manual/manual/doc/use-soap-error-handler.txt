@@ -1,0 +1,37 @@
+use_soap_error_handler
+
+(Unknown)
+
+use_soap_error_handler — Set whether to use the SOAP error handler
+
+==============================================================================
+*Description*
+
+    bool use_soap_error_handler ([ bool $handler = true ] )~
+
+This function sets whether or not to use the SOAP error handler in the SOAP
+server. It will return the previous value. If set to TRUE, details of errors
+in a SoapServer application will be sent to the client as a SOAP fault
+message. If FALSE, the standard PHP error handler is used. The default is to
+send error to the client as SOAP fault message.
+
+==============================================================================
+*Parameters*
+
+{handler}
+
+    Set to TRUE to send error details to clients.
+
+==============================================================================
+*Return* *Values*
+
+Returns the original value.
+
+==============================================================================
+*See* *Also*
+
+  * |set_error_handler| - Sets a user-defined error handler function
+  * |set_exception_handler| - Sets a user-defined exception handler function
+
+
+vim:ft=help:

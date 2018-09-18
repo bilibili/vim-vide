@@ -1,0 +1,72 @@
+mb_strimwidth
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+mb_strimwidth — Get truncated string with specified width
+
+==============================================================================
+*Description*
+
+    string mb_strimwidth ( string $str , int $start , int $width [, string~
+    $trimmarker = "" [, string $encoding = mb_internal_encoding()~
+    ]] )~
+
+Truncates string {str} to specified {width}.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The string being decoded.
+
+{start}
+
+    The start position offset. Number of characters from the beginning of
+    string (first character is 0), or if start is negative, number of
+    characters from the end of the string.
+
+{width}
+
+    The width of the desired trim. Negative widths count from the end of the
+    string.
+
+{trimmarker}
+
+    A string that is added to the end of string when string is truncated.
+
+{encoding}
+
+    The {encoding} parameter is the character encoding. If it is omitted, the
+    internal character encoding value will be used.
+
+==============================================================================
+*Return* *Values*
+
+The truncated string. If {trimmarker} is set, {trimmarker} replaces the last
+chars to match the {width}.
+
+==============================================================================
+*Changelog*
+
+Version                        Description
+7.1.0   Support for negative {start}s and {width}s has been added.
+
+==============================================================================
+*Examples*
+
+Example #1 mb_strimwidth() example
+
+<?php >
+    echo mb_strimwidth("Hello World", 0, 10, "...");
+    // output: "Hello W..."
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mb_strwidth| - Return width of string
+  * |mb_internal_encoding| - Set/Get internal character encoding
+
+
+vim:ft=help:

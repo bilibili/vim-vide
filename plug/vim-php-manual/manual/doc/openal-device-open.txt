@@ -1,0 +1,33 @@
+openal_device_open
+
+(PECL openal >= 0.1.0)
+
+openal_device_open — Initialize the OpenAL audio layer
+
+==============================================================================
+*Description*
+
+    resource openal_device_open ([ string $device_desc ] )~
+
+==============================================================================
+*Parameters*
+
+{device_desc}
+
+    Open an audio device optionally specified by {device_desc}. If
+    {device_desc} is not specified the first available audio device will be
+    used.
+
+==============================================================================
+*Return* *Values*
+
+Returns an Open AL(Device) resource on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_device_close| - Close an OpenAL device
+  * |openal_context_create| - Create an audio processing context
+
+
+vim:ft=help:

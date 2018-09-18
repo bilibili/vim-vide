@@ -1,0 +1,46 @@
+dbplus_rcrtlike
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_rcrtlike — Creates an empty copy of a relation with default indices
+
+==============================================================================
+*Description*
+
+    mixed dbplus_rcrtlike ( string $name , resource $relation [, int~
+    $overwrite ] )~
+
+|dbplus_rcrtexact| will create an empty copy of the given {relation} under a
+new {name}, but with default indices.
+
+==============================================================================
+*Parameters*
+
+{name}
+
+{relation}
+
+    The copied relation, opened by |dbplus_open|.
+
+{overwrite}
+
+    An existing relation by the same {name} will only be overwritten if this
+    parameter is set to TRUE and no other process is currently using the
+    relation.
+
+==============================================================================
+*Return* *Values*
+
+Returns resource on success or DBPLUS_ERR_UNKNOWN on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

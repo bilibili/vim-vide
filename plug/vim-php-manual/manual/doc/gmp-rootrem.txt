@@ -1,0 +1,36 @@
+gmp_rootrem
+
+(PHP 5 >= 5.6.0, PHP 7)
+
+gmp_rootrem — Take the integer part and remainder of nth root
+
+==============================================================================
+*Description*
+
+    array gmp_rootrem ( GMP $a , int $nth )~
+
+Takes the {nth} root of {a} and returns the integer component and remainder of
+the result.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{nth}
+
+    The positive root to take of {a}.
+
+==============================================================================
+*Return* *Values*
+
+A two element array, where the first element is the integer component of the
+root, and the second element is the remainder, both represented as GMP
+numbers.
+
+
+vim:ft=help:

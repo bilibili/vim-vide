@@ -1,0 +1,36 @@
+fann_get_rprop_delta_max
+
+(PECL fann >= 1.0.0)
+
+fann_get_rprop_delta_max — Returns the maximum step-size
+
+==============================================================================
+*Description*
+
+    float fann_get_rprop_delta_max ( resource $ann )~
+
+The maximum step-size is a positive number determining how large the maximum
+step-size may be.
+
+The default delta max is 50.0.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+The maximum step-size, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_set_rprop_delta_max| - Sets the maximum step-size
+  * |fann_get_rprop_delta_min| - Returns the minimum step-size
+
+
+vim:ft=help:

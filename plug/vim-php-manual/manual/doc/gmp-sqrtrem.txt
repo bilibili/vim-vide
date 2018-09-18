@@ -1,0 +1,54 @@
+gmp_sqrtrem
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_sqrtrem — Square root with remainder
+
+==============================================================================
+*Description*
+
+    array gmp_sqrtrem ( GMP $a )~
+
+Calculate the square root of a number, with remainder.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    The number being square rooted.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+Returns array where first element is the integer square root of {a} and the
+second is the remainder (i.e., the difference between {a} and the first
+element squared).
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_sqrtrem() example
+
+<?php >
+    list($sqrt1, $sqrt1rem) = gmp_sqrtrem("9");
+    list($sqrt2, $sqrt2rem) = gmp_sqrtrem("7");
+    list($sqrt3, $sqrt3rem) = gmp_sqrtrem("1048576");
+
+    echo gmp_strval($sqrt1) . ", " . gmp_strval($sqrt1rem) . "\n";
+    echo gmp_strval($sqrt2) . ", " . gmp_strval($sqrt2rem) . "\n";
+    echo gmp_strval($sqrt3) . ", " . gmp_strval($sqrt3rem) . "\n";
+<?>
+
+The above example will output:
+
+3, 0
+2, 3
+1024, 0
+
+
+vim:ft=help:

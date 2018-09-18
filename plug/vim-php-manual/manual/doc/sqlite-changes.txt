@@ -1,0 +1,72 @@
+sqlite_changes
+
+SQLiteDatabase::changes
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.0)
+
+sqlite_changes -- SQLiteDatabase::changes — Returns the number of rows that
+were changed by the most recent SQL statement
+
+==============================================================================
+*Description*
+
+    int sqlite_changes ( resource $dbhandle )~
+
+Object oriented style (method):
+
+    public int SQLiteDatabase::changes ( void )~
+
+Returns the numbers of rows that were changed by the most recent SQL statement
+executed against the {dbhandle} database handle.
+
+==============================================================================
+*Parameters*
+
+{dbhandle}
+
+    The SQLite Database resource; returned from |sqlite_open| when used
+    procedurally. This parameter is not required when using the
+    object-oriented method.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of changed rows.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural style
+
+<?php >
+    $dbhandle = sqlite_open('mysqlitedb');
+    $query = sqlite_query($dbhandle, "UPDATE users SET email=
+    'jDoe@example.com' WHERE username='jDoe'");
+    if (!$query) {
+        exit('Error in query.');
+    } else {
+        echo 'Number of rows modified: ', sqlite_changes($dbhandle);
+    }
+<?>
+
+Example #2 Object oriented style
+
+<?php >
+    $dbhandle = new SQLiteDatabase('mysqlitedb');
+    $query = $dbhandle->query("UPDATE users SET email=
+    'jDoe@example.com' WHERE username='jDoe'");
+    if (!$query) {
+        exit('Error in query.');
+    } else {
+        echo 'Number of rows modified: ', $dbhandle->changes();
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_open| - Opens an SQLite database and create the database if it
+    does not exist
+
+
+vim:ft=help:

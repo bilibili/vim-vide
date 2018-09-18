@@ -1,0 +1,32 @@
+bcompiler_write_included_filename
+
+(PECL bcompiler >= 0.5)
+
+bcompiler_write_included_filename — Writes an included file as bytecodes
+
+==============================================================================
+*Description*
+
+    bool bcompiler_write_included_filename ( resource $filehandle , string~
+    $filename )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

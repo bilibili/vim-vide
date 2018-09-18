@@ -1,0 +1,47 @@
+db2_stmt_error
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_stmt_error — Returns a string containing the SQLSTATE returned by an SQL
+statement
+
+==============================================================================
+*Description*
+
+    string db2_stmt_error ([ resource $stmt ] )~
+
+Returns a string containing the SQLSTATE value returned by an SQL statement.
+
+If you do not pass a statement resource as an argument to db2_stmt_error(),
+the driver returns the SQLSTATE value associated with the last attempt to
+return a statement resource, for example, from |db2_prepare| or |db2_exec|.
+
+To learn what the SQLSTATE value means, you can issue the following command at
+a DB2 Command Line Processor prompt: db2 '? {sqlstate-value}'. You can also
+call |db2_stmt_errormsg| to retrieve an explicit error message and the
+associated SQLCODE value.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A valid statement resource.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string containing an SQLSTATE value.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_conn_error| - Returns a string containing the SQLSTATE returned by
+    the last connection attempt
+  * |db2_conn_errormsg| - Returns the last connection error message and
+    SQLCODE value
+  * |db2_stmt_errormsg| - Returns a string containing the last SQL statement
+    error message
+
+
+vim:ft=help:

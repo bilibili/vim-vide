@@ -1,0 +1,82 @@
+pg_set_client_encoding
+
+(PHP 4 >= 4.0.3, PHP 5, PHP 7)
+
+pg_set_client_encoding — Set the client encoding
+
+==============================================================================
+*Description*
+
+    int pg_set_client_encoding ([ resource $connection ], string $encoding )~
+
+pg_set_client_encoding() sets the client encoding and returns 0 if success or
+-1 if error.
+
+PostgreSQL will automatically convert data in the backend database encoding
+into the frontend encoding.
+
+    Note:
+
+    The function used to be called pg_setclientencoding().
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource. When {connection} is not present,
+    the default connection is used. The default connection is the last
+    connection made by |pg_connect| or |pg_pconnect|.
+
+{encoding}
+
+    The required client encoding. One of SQL_ASCII, EUC_JP, EUC_CN, EUC_KR,
+    EUC_TW, UNICODE, MULE_INTERNAL, LATINX (X=1...9), KOI8, WIN, ALT, SJIS,
+    BIG5 or WIN1250.
+
+    The exact list of available encodings depends on your PostgreSQL version,
+    so check your PostgreSQL manual for a more specific list.
+
+==============================================================================
+*Return* *Values*
+
+Returns 0 on success or -1 on error.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_set_client_encoding() example
+
+<?php >
+
+    $conn = pg_pconnect("dbname=publisher");
+    if (!$conn) {
+      echo "An error occurred.\n";
+      exit;
+    }
+
+    // Set the client encoding to UNICODE.  Data will be automatically
+    // converted from the backend encoding to the frontend.
+    pg_set_client_encoding($conn, "UNICODE");
+
+    $result = pg_query($conn, "SELECT author, email FROM authors");
+    if (!$result) {
+      echo "An error occurred.\n";
+      exit;
+    }
+
+    // Write out UTF-8 data
+    while ($row = pg_fetch_row($result)) {
+      echo "Author: $row[0]  E-mail: $row[1]";
+      echo "<br />\n";
+    }
+     
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_client_encoding| - Gets the client encoding
+
+
+vim:ft=help:

@@ -1,0 +1,53 @@
+gupnp_context_get_port
+
+(PECL gupnp >= 0.1.0)
+
+gupnp_context_get_port — Get the port
+
+==============================================================================
+*Description*
+
+    int gupnp_context_get_port ( resource $context )~
+
+Get the port that the SOAP server is running on.
+
+==============================================================================
+*Parameters*
+
+{context}
+
+    A context identifier, returned by |gupnp_context_new|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the port number for the current context and FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 Create new UPnP context and get port number
+
+<?php >
+
+    /* Create the UPnP context */
+    $context = gupnp_context_new();
+
+    if (!$context) {
+     die("Error creating the GUPnP context\n");
+    }
+
+    /* Get the port number for the UPnP context */
+    $port = gupnp_context_get_port($context);
+    echo $port;
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |gupnp_context_new| - Create a new context
+  * |gupnp_context_get_host_ip| - Get the IP address
+
+
+vim:ft=help:

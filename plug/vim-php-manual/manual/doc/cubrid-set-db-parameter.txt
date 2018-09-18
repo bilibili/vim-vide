@@ -1,0 +1,96 @@
+cubrid_set_db_parameter
+
+(PECL CUBRID >= 8.4.0)
+
+cubrid_set_db_parameter — Sets the CUBRID database parameters
+
+==============================================================================
+*Description*
+
+    bool cubrid_set_db_parameter ( resource $conn_identifier , int~
+    $param_type , int $param_value )~
+
+The cubrid_set_db_parameter() function is used to set the CUBRID database
+parameters. It can set the following CUBRID database parameters:
+
+  * PARAM_ISOLATION_LEVEL
+  * PARAM_LOCK_TIMEOUT
+
+    Note:
+
+    The auto-commit mode can be set by using |cubrid_set_autocommit|.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    The CUBRID connection. If the connection identifier is not specified, the
+    last link opened by |cubrid_connect| is assumed.
+
+{param_type}
+
+    Database parameter type.
+
+{param_value}
+
+    Isolation level value (1-6) or lock timeout (in seconds) value.
+
+==============================================================================
+*Return* *Values*
+
+TRUE on success.
+
+FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 |cubrid_get_db_parameter| example
+
+<?php >
+    $conn = cubrid_connect("localhost", 33000, "demodb", "dba");
+
+    $params = cubrid_get_db_parameter($conn);
+    var_dump($params);
+
+    cubrid_set_autocommit($conn, CUBRID_AUTOCOMMIT_TRUE);
+    cubrid_set_db_parameter($conn, CUBRID_PARAM_ISOLATION_LEVEL, 2);
+
+    $params_new = cubrid_get_db_parameter($conn);
+    var_dump($params_new);
+
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+array(4) {
+  ["PARAM_ISOLATION_LEVEL"]=>
+  int(3)
+  ["PARAM_LOCK_TIMEOUT"]=>
+  int(-1)
+  ["PARAM_MAX_STRING_LENGTH"]=>
+  int(1073741823)
+  ["PARAM_AUTO_COMMIT"]=>
+  int(0)
+}
+array(4) {
+  ["PARAM_ISOLATION_LEVEL"]=>
+  int(2)
+  ["PARAM_LOCK_TIMEOUT"]=>
+  int(-1)
+  ["PARAM_MAX_STRING_LENGTH"]=>
+  int(1073741823)
+  ["PARAM_AUTO_COMMIT"]=>
+  int(1)
+}
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_get_db_parameter| - Returns the CUBRID database parameters
+  * |cubrid_set_autocommit| - Set autocommit mode of the connection
+
+
+vim:ft=help:

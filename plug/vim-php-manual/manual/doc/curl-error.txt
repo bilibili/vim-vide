@@ -1,0 +1,56 @@
+curl_error
+
+(PHP 4 >= 4.0.3, PHP 5, PHP 7)
+
+curl_error — Return a string containing the last error for the current session
+
+==============================================================================
+*Description*
+
+    string curl_error ( resource $ch )~
+
+Returns a clear text error message for the last cURL operation.
+
+==============================================================================
+*Parameters*
+
+{ch}
+
+    A cURL handle returned by |curl_init|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the error message or '' (the empty string) if no error occurred.
+
+==============================================================================
+*Examples*
+
+Example #1 curl_error() example
+
+<?php >
+    // Create a curl handle to a non-existing location
+    $ch = curl_init('http://404.php.net/');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    if(curl_exec($ch) === false)
+    {
+        echo 'Curl error: ' . curl_error($ch);
+    }
+    else
+    {
+        echo 'Operation completed without any errors';
+    }
+
+    // Close handle
+    curl_close($ch);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |curl_errno| - Return the last error number
+  * >> Curl error codes
+
+
+vim:ft=help:

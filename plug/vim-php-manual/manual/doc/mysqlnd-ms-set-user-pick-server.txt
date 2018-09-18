@@ -1,0 +1,178 @@
+mysqlnd_ms_set_user_pick_server
+
+(PECL mysqlnd_ms < 1.1.0)
+
+mysqlnd_ms_set_user_pick_server — Sets a callback for user-defined read/write
+splitting
+
+==============================================================================
+*Description*
+
+    bool mysqlnd_ms_set_user_pick_server ( string $function )~
+
+Sets a callback for user-defined read/write splitting. The plugin will call
+the callback only if pick[]=user is the default rule for server picking in the
+relevant section of the plugins configuration file.
+
+The plugins built-in read/write query split mechanism decisions can be
+overwritten in two ways. The easiest way is to prepend the query string with
+the SQL hints MYSQLND_MS_MASTER_SWITCH, MYSQLND_MS_SLAVE_SWITCH or
+MYSQLND_MS_LAST_USED_SWITCH. Using SQL hints one can control, for example,
+whether a query shall be send to the MySQL replication master server or one of
+the slave servers. By help of SQL hints it is not possible to pick a certain
+slave server for query execution.
+
+Full control on server selection can be gained using a callback function. Use
+of a callback is recommended to expert users only because the callback has to
+cover all cases otherwise handled by the plugin.
+
+The plugin will invoke the callback function for selecting a server from the
+lists of configured master and slave servers. The callback function inspects
+the query to run and picks a server for query execution by returning the hosts
+URI, as found in the master and slave list.
+
+If the lazy connections are enabled and the callback chooses a slave server
+for which no connection has been established so far and establishing the
+connection to the slave fails, the plugin will return an error upon the next
+action on the failed connection, for example, when running a query. It is the
+responsibility of the application developer to handle the error. For example,
+the application can re-run the query to trigger a new server selection and
+callback invocation. If so, the callback must make sure to select a different
+slave, or check slave availability, before returning to the plugin to prevent
+an endless loop.
+
+==============================================================================
+*Parameters*
+
+{function}
+
+    The function to be called. Class methods may also be invoked statically
+    using this function by passing array($classname, $methodname) to this
+    parameter. Additionally class methods of an object instance may be called
+    by passing array($objectinstance, $methodname) to this parameter.
+
+==============================================================================
+*Return* *Values*
+
+Host to run the query on. The host URI is to be taken from the master and
+slave connection lists passed to the callback function. If callback returns a
+value neither found in the master nor in the slave connection lists the plugin
+will fallback to the second pick method configured via the pick[] setting in
+the plugin configuration file. If not second pick method is given, the plugin
+falls back to the build-in default pick method for server selection.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    mysqlnd_ms_set_user_pick_server() is available with PECL mysqlnd_ms <
+    1.1.0. It has been replaced by the user filter. Please, check the Change
+    History for upgrade notes.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_ms_set_user_pick_server() example
+
+[myapp]
+master[] = localhost
+slave[] = 192.168.2.27:3306
+slave[] = 192.168.78.136:3306
+pick[] = user
+
+<?php >
+
+    function pick_server($connected, $query, $master, $slaves, $last_used)
+    {
+     static $slave_idx = 0;
+     static $num_slaves = NULL;
+     if (is_null($num_slaves))
+      $num_slaves = count($slaves);
+
+     /* default: fallback to the plugins build-in logic */
+     $ret = NULL;
+
+     printf("User has connected to '%s'...\n", $connected);
+     printf("... deciding where to run '%s'\n", $query);
+
+     $where = mysqlnd_ms_query_is_select($query);
+     switch ($where)
+     {
+      case MYSQLND_MS_QUERY_USE_MASTER:
+       printf("... using master\n");
+       $ret = $master[0];
+       break;
+      case MYSQLND_MS_QUERY_USE_SLAVE:
+       /* SELECT or SQL hint for using slave */
+       if (stristr($query, "FROM table_on_slave_a_only"))
+       {
+        /* a table which is only on the first configured slave  */
+        printf("... access to table available only on slave A detected\n");
+        $ret = $slaves[0];
+       }
+       else
+       {
+        /* round robin */
+        printf("... some read-only query for a slave\n");
+        $ret = $slaves[$slave_idx++ % $num_slaves];
+       }
+       break;
+      case MYSQLND_MS_QUERY_LAST_USED:
+       printf("... using last used server\n");
+       $ret = $last_used;
+       break;
+     }
+
+     printf("... ret = '%s'\n", $ret);
+     return $ret;
+    }
+
+    mysqlnd_ms_set_user_pick_server("pick_server");
+
+    $mysqli = new mysqli("myapp", "root", "root", "test");
+
+    if (!($res = $mysqli->query("SELECT 1 FROM DUAL")))
+     printf("[%d] %s\n", $mysqli->errno, $mysqli->error);
+    else
+     $res->close();
+
+    if (!($res = $mysqli->query("SELECT 2 FROM DUAL")))
+     printf("[%d] %s\n", $mysqli->errno, $mysqli->error);
+    else
+     $res->close();
+
+
+    if (!($res = $mysqli->query("SELECT * FROM table_on_slave_a_only")))
+     printf("[%d] %s\n", $mysqli->errno, $mysqli->error);
+    else
+     $res->close();
+
+    $mysqli->close();
+<?>
+
+The above example will output:
+
+User has connected to 'myapp'...
+... deciding where to run 'SELECT 1 FROM DUAL'
+... some read-only query for a slave
+... ret = 'tcp://192.168.2.27:3306'
+User has connected to 'myapp'...
+... deciding where to run 'SELECT 2 FROM DUAL'
+... some read-only query for a slave
+... ret = 'tcp://192.168.78.136:3306'
+User has connected to 'myapp'...
+... deciding where to run 'SELECT * FROM table_on_slave_a_only'
+... access to table available only on slave A detected
+... ret = 'tcp://192.168.2.27:3306'
+
+==============================================================================
+*See* *Also*
+
+  * |mysqlnd_ms_query_is_select| - Find whether to send the query to the
+    master, the slave or the last used MySQL server
+  * Filter concept
+  * user filter
+
+
+vim:ft=help:

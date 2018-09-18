@@ -1,0 +1,26 @@
+win32_ps_list_procs
+
+(PECL win32ps >= 1.0.1)
+
+win32_ps_list_procs — List running processes
+
+==============================================================================
+*Description*
+
+    array win32_ps_list_procs ( void )~
+
+Retrieves statistics about all running processes.
+
+==============================================================================
+*Return* *Values*
+
+Returns FALSE on failure, or an array consisting of process statistics like 
+|win32_ps_stat_proc| returns for all running processes on success.
+
+==============================================================================
+*See* *Also*
+
+  * |win32_ps_stat_proc| - Stat process
+
+
+vim:ft=help:

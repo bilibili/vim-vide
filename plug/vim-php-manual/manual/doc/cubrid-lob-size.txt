@@ -1,0 +1,55 @@
+cubrid_lob_size
+
+(PECL CUBRID >= 8.3.1)
+
+cubrid_lob_size — Get BLOB/CLOB data size
+
+==============================================================================
+*Description*
+
+    string cubrid_lob_size ( resource $lob_identifier )~
+
+cubrid_lob_size() is used to get BLOB/CLOB data size.
+
+==============================================================================
+*Parameters*
+
+{lob_identifier}
+
+    LOB identifier.
+
+==============================================================================
+*Return* *Values*
+
+A string representing LOB data size, when process is successful.
+
+FALSE, when process is unsuccessful.
+
+==============================================================================
+*Changelog*
+
+Version                 Description
+8.4.0   Change return value type from int to string.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_lob_size() example
+
+<?php >
+    $lobs = cubrid_lob_get($con, "SELECT doc_content FROM doc WHERE doc_id=5");
+    echo "Doc size:".cubrid_lob_size($lobs[0]);
+    cubrid_lob_export($conn, $lobs[0], "doc_5.txt");
+    cubrid_lob_close($lobs);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_lob_get| - Get BLOB/CLOB data
+  * |cubrid_lob_close| - Close BLOB/CLOB data
+  * |cubrid_lob_export| - Export BLOB/CLOB data to file
+  * |cubrid_lob_send| - Read BLOB/CLOB data and send straight to browser
+
+
+vim:ft=help:

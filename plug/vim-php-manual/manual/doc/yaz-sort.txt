@@ -1,0 +1,74 @@
+yaz_sort
+
+(PHP 4 >= 4.0.7, PECL yaz >= 0.9.0)
+
+yaz_sort — Sets sorting criteria
+
+==============================================================================
+*Description*
+
+    void yaz_sort ( resource $id , string $criteria )~
+
+This function sets sorting criteria and enables Z39.50 Sort.
+
+Call this function before |yaz_search|. Using this function alone does not
+have any effect. When used in conjunction with |yaz_search|, a Z39.50 Sort
+will be sent after a search response has been received and before any records
+are retrieved with Z39.50 Present (|yaz_present|.
+
+==============================================================================
+*Parameters*
+
+{id}
+
+    The connection resource returned by |yaz_connect|.
+
+{criteria}
+
+    A string that takes the form field1 flags1 field2 flags2 where field1
+    specifies the primary attributes for sort, field2 seconds, etc..
+
+    The field specifies either a numerical attribute combinations consisting
+    of type=value pairs separated by comma (e.g. 1=4,2=1) ; or the field may
+    specify a plain string criteria (e.g. title. The flags is a sequence of
+    the following characters which may not be separated by any white space.
+
+    Sort Flags
+    a
+
+        Sort ascending
+
+    d
+
+        Sort descending
+
+    i
+
+        Case insensitive sorting
+
+    s
+
+        Case sensitive sorting
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 Sort Criterias
+
+To sort on Bib1 attribute title, case insensitive, and ascending you would use
+the following sort criteria:
+
+1=4 ia
+
+If the secondary sorting criteria should be author, case sensitive and
+ascending you would use:
+
+1=4 ia 1=1003 sa
+
+
+vim:ft=help:

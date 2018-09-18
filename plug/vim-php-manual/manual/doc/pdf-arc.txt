@@ -1,0 +1,16 @@
+PDF_arc
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_arc — Draw a counterclockwise circular arc segment
+
+==============================================================================
+*Description*
+
+    bool PDF_arc ( resource $p , float $x , float $y , float $r , float~
+    $alpha , float $beta )~
+
+Adds a counterclockwise circular arc.
+
+
+vim:ft=help:

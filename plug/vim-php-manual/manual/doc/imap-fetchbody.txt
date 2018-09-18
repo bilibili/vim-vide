@@ -1,0 +1,53 @@
+imap_fetchbody
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_fetchbody — Fetch a particular section of the body of the message
+
+==============================================================================
+*Description*
+
+    string imap_fetchbody ( resource $imap_stream , int $msg_number , string~
+    $section [, int $options = 0 ] )~
+
+Fetch of a particular section of the body of the specified messages. Body
+parts are not decoded by this function.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{msg_number}
+
+    The message number
+
+{section}
+
+    The part number. It is a string of integers delimited by period which
+    index into a body part list as per the IMAP4 specification
+
+{options}
+
+    A bitmask with one or more of the following:
+      + FT_UID - The {msg_number} is a UID
+      + FT_PEEK - Do not set the \Seen flag if not already set
+      + FT_INTERNAL - The return string is in internal format, will not
+        canonicalize to CRLF.
+
+==============================================================================
+*Return* *Values*
+
+Returns a particular section of the body of the specified messages as a text
+string.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_savebody| - Save a specific body section to a file
+  * |imap_fetchstructure| - Read the structure of a particular message
+
+
+vim:ft=help:

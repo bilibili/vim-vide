@@ -1,0 +1,80 @@
+lstat
+
+(PHP 4, PHP 5, PHP 7)
+
+lstat — Gives information about a file or symbolic link
+
+==============================================================================
+*Description*
+
+    array lstat ( string $filename )~
+
+Gathers the statistics of the file or symbolic link named by {filename}.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to a file or a symbolic link.
+
+==============================================================================
+*Return* *Values*
+
+See the manual page for |stat| for information on the structure of the array
+that lstat() returns. This function is identical to the |stat| function except
+that if the {filename} parameter is a symbolic link, the status of the
+symbolic link is returned, not the status of the file pointed to by the
+symbolic link.
+
+==============================================================================
+*Examples*
+
+Example #1 Comparison of |stat| and lstat()
+
+<?php >
+    symlink('uploads.php', 'uploads');
+
+    // Contrast information for uploads.php and uploads
+    array_diff(stat('uploads'), lstat('uploads'));
+<?>
+
+The above example will output something similar to:
+
+Information that differs between the two files.
+
+Array
+(
+    [ino] => 97236376
+    [mode] => 33188
+    [size] => 34
+    [atime] => 1223580003
+    [mtime] => 1223581848
+    [ctime] => 1223581848
+    [blocks] => 8
+)
+
+==============================================================================
+*Errors/Exceptions*
+
+Upon failure, an E_WARNING is emitted.
+
+==============================================================================
+*Notes*
+
+    Note: The results of this function are cached. See |clearstatcache| for
+    more details.
+
+Tip
+
+As of PHP 5.0.0, this function can also be used with some URL wrappers. Refer
+to Supported Protocols and Wrappers to determine which wrappers support |stat|
+family of functionality.
+
+==============================================================================
+*See* *Also*
+
+  * |stat| - Gives information about a file
+
+
+vim:ft=help:

@@ -1,0 +1,84 @@
+mysqlnd_qc_get_available_handlers
+
+(PECL mysqlnd_qc >= 1.0.0)
+
+mysqlnd_qc_get_available_handlers — Returns a list of available storage
+handler
+
+==============================================================================
+*Description*
+
+    array mysqlnd_qc_get_available_handlers ( void )~
+
+Which storage are available depends on the compile time configuration of the
+query cache plugin. The default storage handler is always available. All other
+storage handler must be enabled explicitly when building the extension.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of available built-in storage handler. For each storage
+handler the version number and version string is given.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_qc_get_available_handlers() example
+
+<?php >
+    var_dump(mysqlnd_qc_get_available_handlers());
+<?>
+
+The above examples will output:
+
+array(5) {
+  ["default"]=>
+  array(2) {
+    ["version"]=>
+    string(5) "1.0.0"
+    ["version_number"]=>
+    int(100000)
+  }
+  ["user"]=>
+  array(2) {
+    ["version"]=>
+    string(5) "1.0.0"
+    ["version_number"]=>
+    int(100000)
+  }
+  ["APC"]=>
+  array(2) {
+    ["version"]=>
+    string(5) "1.0.0"
+    ["version_number"]=>
+    int(100000)
+  }
+  ["MEMCACHE"]=>
+  array(2) {
+    ["version"]=>
+    string(5) "1.0.0"
+    ["version_number"]=>
+    int(100000)
+  }
+  ["sqlite"]=>
+  array(2) {
+    ["version"]=>
+    string(5) "1.0.0"
+    ["version_number"]=>
+    int(100000)
+  }
+}
+
+==============================================================================
+*See* *Also*
+
+  * Installation
+  * |mysqlnd_qc_set_storage_handler| - Change current storage handler
+
+
+vim:ft=help:

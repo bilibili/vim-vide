@@ -1,0 +1,26 @@
+filepro_fieldcount
+
+(PHP 4, PHP 5 <= 5.1.6, PHP 7)
+
+filepro_fieldcount — Find out how many fields are in a filePro database
+
+==============================================================================
+*Description*
+
+    int filepro_fieldcount ( void )~
+
+Returns the number of fields (columns) in the opened filePro database.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of fields in the opened filePro database, or FALSE on
+errors.
+
+==============================================================================
+*See* *Also*
+
+  * |filepro| - Read and verify the map file
+
+
+vim:ft=help:

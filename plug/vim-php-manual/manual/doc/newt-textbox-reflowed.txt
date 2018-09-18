@@ -1,0 +1,38 @@
+newt_textbox_reflowed
+
+(PECL newt >= 0.1)
+
+newt_textbox_reflowed —
+
+==============================================================================
+*Description*
+
+    resource newt_textbox_reflowed ( int $left , int $top , char $*text , int~
+    $width , int $flex_down , int $flex_up [, int $flags ] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+{top}
+
+{*text}
+
+{width}
+
+{flex_down}
+
+{flex_up}
+
+{flags}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

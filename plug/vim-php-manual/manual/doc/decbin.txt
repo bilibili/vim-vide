@@ -1,0 +1,86 @@
+decbin
+
+(PHP 4, PHP 5, PHP 7)
+
+decbin — Decimal to binary
+
+==============================================================================
+*Description*
+
+    string decbin ( int $number )~
+
+Returns a string containing a binary representation of the given {number}
+argument.
+
+==============================================================================
+*Parameters*
+
+{number}
+
+    Decimal value to convert
+
+                      Range of inputs on 32-bit machines
+         positive {number}        negative              return value
+                                  {number}
+    0                                         0
+    1                                         1
+    2                                         10
+    ... normal progression ...
+    2147483646                                1111111111111111111111111111110
+    2147483647 (largest signed                1111111111111111111111111111111
+    integer)                                  (31 1's)
+    2147483648                  -2147483648   10000000000000000000000000000000
+    ... normal progression ...
+    4294967294                  -2            11111111111111111111111111111110
+    4294967295 (largest         -1            11111111111111111111111111111111
+    unsigned integer)                         (32 1's)
+
+                                     Range of inputs on 64-bit machines
+     positive {number}   negative {number}                             return value
+    0                                        0
+    1                                        1
+    2                                        10
+    ... normal progression ...
+    9223372036854775806                      111111111111111111111111111111111111111111111111111111111111110
+    9223372036854775807                      111111111111111111111111111111111111111111111111111111111111111
+    (largest signed                          (63 1's)
+    integer)
+                        -9223372036854775808 1000000000000000000000000000000000000000000000000000000000000000
+    ... normal progression ...
+                        -2                   1111111111111111111111111111111111111111111111111111111111111110
+                        -1                   1111111111111111111111111111111111111111111111111111111111111111
+                                             (64 1's)
+
+==============================================================================
+*Return* *Values*
+
+Binary string representation of {number}
+
+==============================================================================
+*Examples*
+
+Example #1 decbin() example
+
+<?php >
+    echo decbin(12) . "\n";
+    echo decbin(26);
+<?>
+
+The above example will output:
+
+1100
+11010
+
+==============================================================================
+*See* *Also*
+
+  * |bindec| - Binary to decimal
+  * |decoct| - Decimal to octal
+  * |dechex| - Decimal to hexadecimal
+  * |base_convert| - Convert a number between arbitrary bases
+  * |printf| - Output a formatted string, using %b, %032b or %064b as the
+    format
+  * |sprintf|, using %b, %032b or %064b as the format
+
+
+vim:ft=help:

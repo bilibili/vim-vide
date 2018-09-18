@@ -1,0 +1,40 @@
+maxdb_real_query
+
+maxdb::real_query
+
+(PECL maxdb >= 1.0)
+
+maxdb_real_query -- maxdb::real_query — Execute an SQL query
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_real_query ( resource $link , string $query )~
+
+Object oriented style
+
+    bool maxdb::real_query ( string $query )~
+
+The maxdb_real_query() is functionally identical with the |maxdb_query|.
+
+    Note:
+
+    In order to determine if a given query should return a result set or not,
+    see |maxdb_field_count|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_query| - Performs a query on the database
+  * |maxdb_store_result| - Transfers a result set from the last query
+  * |maxdb_use_result| - Initiate a result set retrieval
+
+
+vim:ft=help:

@@ -1,0 +1,13 @@
+ldap_close
+
+(PHP 4, PHP 5, PHP 7)
+
+ldap_close — Alias of |ldap_unbind|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |ldap_unbind|.
+
+
+vim:ft=help:

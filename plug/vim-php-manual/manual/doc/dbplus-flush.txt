@@ -1,0 +1,41 @@
+dbplus_flush
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_flush — Flush all changes made on a relation
+
+==============================================================================
+*Description*
+
+    int dbplus_flush ( resource $relation )~
+
+Writes all changes applied to {relation} since the last flush to disk.
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+==============================================================================
+*Return* *Values*
+
+Returns DBPLUS_ERR_NOERR on success or a db++ error code on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*See* *Also*
+
+  * |dbplus_errcode| - Get error string for given errorcode or last error
+
+
+vim:ft=help:

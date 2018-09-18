@@ -1,0 +1,93 @@
+id3_get_tag
+
+(PECL id3 >= 0.1)
+
+id3_get_tag — Get all information stored in an ID3 tag
+
+==============================================================================
+*Description*
+
+    array id3_get_tag ( string $filename [, int $version = ID3_BEST ] )~
+
+id3_get_tag() is used to get all information stored in the id3 tag of the
+specified file.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The path to the MP3 file
+
+    Instead of a filename you may also pass a valid stream resource
+
+{version}
+
+    Allows you to specify the version of the tag as MP3 files may contain
+    both, version 1.x and version 2.x tags
+
+    Since version 0.2 id3_get_tag() also supports ID3 tags of version 2.2, 2.3
+    and 2.4. To extract information from these tags, pass one of the constants
+    ID3_V2_2, ID3_V2_3 or ID3_V2_4 as the second parameter. ID3 v2.x tags can
+    contain a lot more information about the MP3 file than ID3 v1.x tags.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array with various keys like: title, artist, ..
+
+The key genre will contain an integer between 0 and 147. You may use 
+|id3_get_genre_name| to convert it to a human readable string.
+
+==============================================================================
+*Examples*
+
+Example #1 id3_get_tag() example
+
+<?php >
+    $tag = id3_get_tag( "path/to/example.mp3" );
+    print_r($tag);
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [title] => DN-38416
+    [artist] => Re:\Legion
+    [album] => Reflections
+    [year] => 2004
+    [genre] => 19
+)
+
+Example #2 id3_get_tag() example
+
+<?php >
+    $tag = id3_get_tag( "path/to/example2.mp3", ID3_V2_3 );
+    print_r($tag);
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [copyright] => Dirty Mac
+    [originalArtist] => Dirty Mac
+    [composer] => Marcus Götze
+    [artist] => Dirty Mac
+    [title] => Little Big Man
+    [album] => Demo-Tape
+    [track] => 5/12
+    [genre] => (17)Rock
+    [year] => 2001
+)
+
+==============================================================================
+*See* *Also*
+
+  * |id3_set_tag| - Update information stored in an ID3 tag
+  * |id3_remove_tag| - Remove an existing ID3 tag
+  * |id3_get_version| - Get version of an ID3 tag
+
+
+vim:ft=help:

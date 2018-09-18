@@ -1,0 +1,82 @@
+array_diff
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7)
+
+array_diff — Computes the difference of arrays
+
+==============================================================================
+*Description*
+
+    array array_diff ( array $array1 , array $array2 [, array $... ] )~
+
+Compares {array1} against one or more other arrays and returns the values in
+{array1} that are not present in any of the other arrays.
+
+==============================================================================
+*Parameters*
+
+{array1}
+
+    The array to compare from
+
+{array2}
+
+    An array to compare against
+
+{...}
+
+    More arrays to compare against
+
+==============================================================================
+*Return* *Values*
+
+Returns an array containing all the entries from {array1} that are not present
+in any of the other arrays.
+
+==============================================================================
+*Examples*
+
+Example #1 array_diff() example
+
+<?php >
+    $array1 = array("a" => "green", "red", "blue", "red");
+    $array2 = array("b" => "green", "yellow", "red");
+    $result = array_diff($array1, $array2);
+
+    print_r($result);
+<?>
+
+Multiple occurrences in $array1 are all treated the same way. This will output
+:
+
+Array
+(
+    [1] => blue
+)
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Two elements are considered equal if and only if (string) $elem1 ===
+    (string) $elem2. In other words: when the string representation is the
+    same.
+
+    Note:
+
+    This function only checks one dimension of a n-dimensional array. Of
+    course you can check deeper dimensions by using array_diff($array1[0],
+    $array2[0]);.
+
+==============================================================================
+*See* *Also*
+
+  * |array_diff_assoc| - Computes the difference of arrays with additional
+    index check
+  * |array_intersect| - Computes the intersection of arrays
+  * |array_intersect_assoc| - Computes the intersection of arrays with
+    additional index check
+
+
+vim:ft=help:

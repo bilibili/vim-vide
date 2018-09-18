@@ -1,0 +1,30 @@
+http_get_request_headers
+
+(PECL pecl_http >= 0.10.0)
+
+http_get_request_headers — Get request headers as array
+
+==============================================================================
+*Description*
+
+    array http_get_request_headers ( void )~
+
+Get a list of incoming HTTP headers.
+
+==============================================================================
+*Parameters*
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array of incoming request headers.
+
+==============================================================================
+*See* *Also*
+
+  * |http_get_request_body| - Get request body as string
+  * |http_get_request_body_stream| - Get request body as stream
+  * the  HttpResponse class if you are using PHP 5.1.0 and above
+
+
+vim:ft=help:

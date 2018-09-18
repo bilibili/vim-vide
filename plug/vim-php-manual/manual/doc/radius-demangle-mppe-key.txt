@@ -1,0 +1,23 @@
+radius_demangle_mppe_key
+
+(PECL radius >= 1.2.0)
+
+radius_demangle_mppe_key — Derives mppe-keys from mangled data
+
+==============================================================================
+*Description*
+
+    string radius_demangle_mppe_key ( resource $radius_handle , string~
+    $mangled )~
+
+When using MPPE with MS-CHAPv2, the send- and recv-keys are mangled (see >>
+ RFC 2548), however this function is useless, because I don't think that there
+is or will be a PPTP-MPPE implementation in PHP.
+
+==============================================================================
+*Return* *Values*
+
+Returns the demangled string, or FALSE on error.
+
+
+vim:ft=help:

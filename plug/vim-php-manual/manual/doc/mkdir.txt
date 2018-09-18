@@ -1,0 +1,97 @@
+mkdir
+
+(PHP 4, PHP 5, PHP 7)
+
+mkdir — Makes directory
+
+==============================================================================
+*Description*
+
+    bool mkdir ( string $pathname [, int $mode = 0777 [, bool $recursive =~
+    false [, resource $context ]]] )~
+
+Attempts to create the directory specified by pathname.
+
+==============================================================================
+*Parameters*
+
+{pathname}
+
+    The directory path.
+
+{mode}
+
+    The mode is 0777 by default, which means the widest possible access. For
+    more information on modes, read the details on the |chmod| page.
+
+        Note:
+
+        {mode} is ignored on Windows.
+
+    Note that you probably want to specify the mode as an octal number, which
+    means it should have a leading zero. The mode is also modified by the
+    current umask, which you can change using |umask|.
+
+{recursive}
+
+    Allows the creation of nested directories specified in the {pathname}.
+
+{context}
+
+
+        Note: Context support was added with PHP 5.0.0. For a description of
+        contexts, refer to Streams.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mkdir() example
+
+<?php >
+    mkdir("/path/to/my/dir", 0700);
+<?>
+
+Example #2 mkdir() using the {recursive} parameter
+
+<?php >
+    // Desired folder structure
+    $structure = './depth1/depth2/depth3/';
+
+    // To create the nested structure, the $recursive parameter 
+    // to mkdir() must be specified.
+
+    if (!mkdir($structure, 0777, true)) {
+        die('Failed to create folders...');
+    }
+
+    // ...
+<?>
+
+==============================================================================
+*Errors/Exceptions*
+
+Emits an E_WARNING level error if the directory already exists.
+
+Emits an E_WARNING level error if the relevant permissions prevent creating
+the directory.
+
+==============================================================================
+*Notes*
+
+    Note: When safe mode is enabled, PHP checks whether the directory in which
+    the script is operating has the same UID (owner) as the script that is
+    being executed.
+
+==============================================================================
+*See* *Also*
+
+  * |is_dir| - Tells whether the filename is a directory
+  * |rmdir| - Removes directory
+
+
+vim:ft=help:

@@ -1,0 +1,49 @@
+sybase_fetch_assoc
+
+(PHP 4 >= 4.3.0, PHP 5)
+
+sybase_fetch_assoc — Fetch a result row as an associative array
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    array sybase_fetch_assoc ( resource $result )~
+
+sybase_fetch_assoc() is a version of |sybase_fetch_row| that uses column names
+instead of integers for indices in the result array. Columns from different
+tables with the same names are returned as name, name1, name2, ..., nameN.
+
+An important thing to note is that using sybase_fetch_assoc() is NOT
+significantly slower than using |sybase_fetch_row|, while it provides a
+significant added value.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+==============================================================================
+*Return* *Values*
+
+Returns an array that corresponds to the fetched row, or FALSE if there are no
+more rows.
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available when using the CT library interface
+    to Sybase, and not with the DB library.
+
+==============================================================================
+*See* *Also*
+
+  * |sybase_fetch_row| - Get a result row as an enumerated array
+  * |sybase_fetch_array| - Fetch row as array
+  * |sybase_fetch_object| - Fetch a row as an object
+
+
+vim:ft=help:

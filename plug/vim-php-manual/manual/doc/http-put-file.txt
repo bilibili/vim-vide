@@ -1,0 +1,42 @@
+http_put_file
+
+(PECL pecl_http >= 0.10.0)
+
+http_put_file — Perform PUT request with file
+
+==============================================================================
+*Description*
+
+    string http_put_file ( string $url , string $file [, array $options [,~
+    array &$info ]] )~
+
+Performs an HTTP PUT request on the supplied url.
+
+See the full list of request options.
+
+==============================================================================
+*Parameters*
+
+{url}
+
+    URL
+
+{file}
+
+    The file to put
+
+{options}
+
+    request options
+
+{info}
+
+    Request/response information
+
+==============================================================================
+*Return* *Values*
+
+Returns the HTTP response(s) as string on success, or FALSE on failure.
+
+
+vim:ft=help:

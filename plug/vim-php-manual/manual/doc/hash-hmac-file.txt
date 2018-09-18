@@ -1,0 +1,67 @@
+hash_hmac_file
+
+(PHP 5 >= 5.1.2, PHP 7, PECL hash >= 1.1)
+
+hash_hmac_file — Generate a keyed hash value using the HMAC method and the
+contents of a given file
+
+==============================================================================
+*Description*
+
+    string hash_hmac_file ( string $algo , string $filename , string $key [,~
+    bool $raw_output = false ] )~
+
+==============================================================================
+*Parameters*
+
+{algo}
+
+    Name of selected hashing algorithm (i.e. "md5", "sha256", "haval160,4",
+    etc..) See |hash_algos| for a list of supported algorithms.
+
+{filename}
+
+    URL describing location of file to be hashed; Supports fopen wrappers.
+
+{key}
+
+    Shared secret key used for generating the HMAC variant of the message
+    digest.
+
+{raw_output}
+
+    When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string containing the calculated message digest as lowercase hexits
+unless {raw_output} is set to true in which case the raw binary representation
+of the message digest is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 hash_hmac_file() example
+
+<?php >
+    /* Create a file to calculate hash of */
+    file_put_contents('example.txt', 
+    'The quick brown fox jumped over the lazy dog.');
+
+    echo hash_hmac_file('md5', 'example.txt', 'secret');
+<?>
+
+The above example will output:
+
+7eb2b5c37443418fc77c136dd20e859c
+
+==============================================================================
+*See* *Also*
+
+  * |hash_algos| - Return a list of registered hashing algorithms
+  * |hash_hmac| - Generate a keyed hash value using the HMAC method
+  * |hash_file| - Generate a hash value using the contents of a given file
+
+
+vim:ft=help:

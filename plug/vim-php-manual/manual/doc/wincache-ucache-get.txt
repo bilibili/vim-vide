@@ -1,0 +1,94 @@
+wincache_ucache_get
+
+(PECL wincache >= 1.1.0)
+
+wincache_ucache_get — Gets a variable stored in the user cache
+
+==============================================================================
+*Description*
+
+    mixed wincache_ucache_get ( mixed $key [, bool &$success ] )~
+
+Gets a variable stored in the user cache.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    The {key} that was used to store the variable in the cache. {key} is case
+    sensitive. {key} can be an array of keys. In this case the return value
+    will be an array of values of each element in the {key} array. If an
+    object, or an array containing objects, is returned, then the objects will
+    be unserialized. See __wakeup() for details on unserializing objects.
+
+{success}
+
+    Will be set to TRUE on success and FALSE on failure.
+
+==============================================================================
+*Return* *Values*
+
+If {key} is a string, the function returns the value of the variable stored
+with that key. The {success} is set to TRUE on success and to FALSE on
+failure.
+
+The {key} is an array, the parameter {success} is always set to TRUE. The
+returned array (name => value pairs) will contain only those name => value
+pairs for which the get operation in user cache was successful. If none of the
+keys in the key array finds a match in the user cache an empty array will be
+returned.
+
+==============================================================================
+*Examples*
+
+Example #1 wincache_ucache_get() with {key} as a string
+
+<?php >
+    wincache_ucache_add('color', 'blue');
+    var_dump(wincache_ucache_get('color', $success));
+    var_dump($success);
+<?>
+
+The above example will output:
+
+string(4) "blue"
+bool(true)
+
+Example #2 wincache_ucache_get() with {key} as an array
+
+<?php >
+    $array1 = array('green' => '5', 'Blue' => '6', 'yellow' => '7', 'cyan' => '8'
+    );
+    wincache_ucache_set($array1);
+    $array2 = array('green', 'Blue', 'yellow', 'cyan');
+    var_dump(wincache_ucache_get($array2, $success));
+    var_dump($success);
+<?>
+
+The above example will output:
+
+array(4) { ["green"]=> string(1) "5"
+           ["Blue"]=> string(1) "6"
+           ["yellow"]=> string(1) "7"
+           ["cyan"]=> string(1) "8" }
+bool(true)
+
+==============================================================================
+*See* *Also*
+
+  * |wincache_ucache_add| - Adds a variable in user cache only if variable
+    does not already exist in the cache
+  * |wincache_ucache_set| - Adds a variable in user cache and overwrites a
+    variable if it already exists in the cache
+  * |wincache_ucache_delete| - Deletes variables from the user cache
+  * |wincache_ucache_clear| - Deletes entire content of the user cache
+  * |wincache_ucache_exists| - Checks if a variable exists in the user cache
+  * |wincache_ucache_meminfo| - Retrieves information about user cache memory
+    usage
+  * |wincache_ucache_info| - Retrieves information about data stored in the
+    user cache
+  * __wakeup()
+
+
+vim:ft=help:

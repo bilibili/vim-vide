@@ -1,0 +1,16 @@
+PDF_pcos_get_string
+
+(PECL pdflib >= 2.1.0)
+
+PDF_pcos_get_string — Get value of pCOS path with type name, string, or
+boolean
+
+==============================================================================
+*Description*
+
+    string PDF_pcos_get_string ( resource $p , int $doc , string $path )~
+
+Gets the value of a pCOS path with type name, string, or boolean.
+
+
+vim:ft=help:

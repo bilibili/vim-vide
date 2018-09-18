@@ -1,0 +1,66 @@
+strval
+
+(PHP 4, PHP 5, PHP 7)
+
+strval — Get string value of a variable
+
+==============================================================================
+*Description*
+
+    string strval ( mixed $var )~
+
+Get the string value of a variable. See the documentation on string for more
+information on converting to string.
+
+This function performs no formatting on the returned value. If you are looking
+for a way to format a numeric value as a string, please see |sprintf| or 
+|number_format|.
+
+==============================================================================
+*Parameters*
+
+{var}
+
+    The variable that is being converted to a string.
+
+    {var} may be any scalar type or an object that implements the __toString()
+    method. You cannot use strval() on arrays or on objects that do not
+    implement the __toString() method.
+
+==============================================================================
+*Return* *Values*
+
+The string value of {var}.
+
+==============================================================================
+*Examples*
+
+Example #1 strval() example using PHP 5's magic __toString() method.
+
+<?php >
+    class StrValTest
+    {
+        public function __toString()
+        {
+            return __CLASS__;
+        }
+    }
+
+    // Prints 'StrValTest'
+    echo strval(new StrValTest);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |boolval| - Get the boolean value of a variable
+  * |floatval| - Get float value of a variable
+  * |intval| - Get the integer value of a variable
+  * |settype| - Set the type of a variable
+  * |sprintf| - Return a formatted string
+  * |number_format| - Format a number with grouped thousands
+  * Type juggling
+  * __toString()
+
+
+vim:ft=help:

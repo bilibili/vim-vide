@@ -1,0 +1,33 @@
+http_build_cookie
+
+(PECL pecl_http >= 1.2.0)
+
+http_build_cookie — Build cookie string
+
+==============================================================================
+*Description*
+
+    string http_build_cookie ( array $cookie )~
+
+Build a cookie string from an array/object like returned by |http_parse_cookie
+|.
+
+==============================================================================
+*Parameters*
+
+{cookie}
+
+    a cookie list like returned from |http_parse_cookie|
+
+==============================================================================
+*Return* *Values*
+
+Returns the cookie(s) as string.
+
+==============================================================================
+*See* *Also*
+
+  * |http_parse_cookie| - Parse HTTP cookie
+
+
+vim:ft=help:

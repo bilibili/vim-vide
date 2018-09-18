@@ -1,0 +1,27 @@
+eio_set_max_poll_time
+
+(PECL eio >= 0.0.1dev)
+
+eio_set_max_poll_time — Set maximum poll time
+
+==============================================================================
+*Description*
+
+    void eio_set_max_poll_time ( float $nseconds )~
+
+Polling stops, if poll took longer than {nseconds} seconds.
+
+==============================================================================
+*Parameters*
+
+{nseconds}
+
+    Number of seconds
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

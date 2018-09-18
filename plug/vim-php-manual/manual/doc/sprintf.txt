@@ -1,0 +1,288 @@
+sprintf
+
+(PHP 4, PHP 5, PHP 7)
+
+sprintf — Return a formatted string
+
+==============================================================================
+*Description*
+
+    string sprintf ( string $format [, mixed $args [, mixed $... ]] )~
+
+Returns a string produced according to the formatting string {format}.
+
+==============================================================================
+*Parameters*
+
+{format}
+
+    The format string is composed of zero or more directives: ordinary
+    characters (excluding %) that are copied directly to the result, and
+    conversion specifications, each of which results in fetching its own
+    parameter. This applies to both sprintf() and |printf|.
+
+    Each conversion specification consists of a percent sign (%), followed by
+    one or more of these elements, in order:
+     1. An optional sign specifier that forces a sign (- or +) to be used on a
+        number. By default, only the - sign is used on a number if it's
+        negative. This specifier forces positive numbers to have the + sign
+        attached as well.
+     2. An optional padding specifier that says what character will be used
+        for padding the results to the right string size. This may be a space
+        character or a 0 (zero character). The default is to pad with spaces.
+        An alternate padding character can be specified by prefixing it with a
+        single quote ('). See the examples below.
+     3. An optional alignment specifier that says if the result should be
+        left-justified or right-justified. The default is right-justified; a -
+        character here will make it left-justified.
+     4. An optional number, a width specifier that says how many characters
+        (minimum) this conversion should result in.
+     5. An optional precision specifier in the form of a period (.) followed
+        by an optional decimal digit string that says how many decimal digits
+        should be displayed for floating-point numbers. When using this
+        specifier on a string, it acts as a cutoff point, setting a maximum
+        character limit to the string. Additionally, the character to use when
+        padding a number may optionally be specified between the period and
+        the digit.
+     6. A type specifier that says what type the argument data should be
+        treated as. Possible types:
+          o % - a literal percent character. No argument is required.
+          o b - the argument is treated as an integer, and presented as a
+            binary number.
+          o c - the argument is treated as an integer, and presented as the
+            character with that ASCII value.
+          o d - the argument is treated as an integer, and presented as a
+            (signed) decimal number.
+          o e - the argument is treated as scientific notation (e.g. 1.2e+2).
+            The precision specifier stands for the number of digits after the
+            decimal point since PHP 5.2.1. In earlier versions, it was taken
+            as number of significant digits (one less).
+          o E - like %e but uses uppercase letter (e.g. 1.2E+2).
+          o f - the argument is treated as a float, and presented as a
+            floating-point number (locale aware).
+          o F - the argument is treated as a float, and presented as a
+            floating-point number (non-locale aware). Available since PHP
+            5.0.3.
+          o g - shorter of %e and %f.
+          o G - shorter of %E and %f.
+          o o - the argument is treated as an integer, and presented as an
+            octal number.
+          o s - the argument is treated as and presented as a string.
+          o u - the argument is treated as an integer, and presented as an
+            unsigned decimal number.
+          o x - the argument is treated as an integer and presented as a
+            hexadecimal number (with lowercase letters).
+          o X - the argument is treated as an integer and presented as a
+            hexadecimal number (with uppercase letters).
+
+    Variables will be co-erced to a suitable type for the specifier:
+
+         Type Handling
+     Type        Specifiers
+    string  s
+    integer d, u, c, o, x, X, b
+    double  g, G, e, E, f, F
+
+    Warning
+
+    Attempting to use a combination of the string and width specifiers with
+    character sets that require more than one byte per character may result in
+    unexpected results
+
+    The format string supports argument numbering/swapping. Here is an
+    example:
+   
+    Example #1 Argument swapping
+
+    <?php >
+    $num = 5;
+    $location = 'tree';
+
+    $format = 'There are %d monkeys in the %s';
+    echo sprintf($format, $num, $location);
+<    ?>
+    This will output "There are 5 monkeys in the tree". But imagine we are
+    creating a format string in a separate file, commonly because we would
+    like to internationalize it and we rewrite it as:
+   
+    Example #2 Argument swapping
+
+    <?php >
+    $format = 'The %s contains %d monkeys';
+    echo sprintf($format, $num, $location);
+<    ?>
+    We now have a problem. The order of the placeholders in the format string
+    does not match the order of the arguments in the code. We would like to
+    leave the code as is and simply indicate in the format string which
+    arguments the placeholders refer to. We would write the format string like
+    this instead:
+   
+    Example #3 Argument swapping
+
+    <?php >
+    $format = 'The %2$s contains %1$d monkeys';
+    echo sprintf($format, $num, $location);
+<    ?>
+    An added benefit here is that you can repeat the placeholders without
+    adding more arguments in the code. For example:
+   
+    Example #4 Argument swapping
+
+    <?php >
+    $format = 'The %2$s contains %1$d monkeys.
+               That\'s a nice %2$s full of %1$d monkeys.';
+    echo sprintf($format, $num, $location);
+<    ?>
+    When using argument swapping, the n$ position specifier must come
+    immediately after the percent sign (%), before any other specifiers, as
+    shown in the example below.
+   
+    Example #5 Specifying padding character
+
+    <?php >
+    echo sprintf("%'.9d\n", 123);
+    echo sprintf("%'.09d\n", 123);
+<    ?>
+
+    The above example will output:
+
+    ......123
+    000000123
+
+    Example #6 Position specifier with other specifiers
+
+    <?php >
+    $format = 'The %2$s contains %1$04d monkeys';
+    echo sprintf($format, $num, $location);
+<    ?>
+
+    The above example will output:
+
+    The tree contains 0005 monkeys
+
+        Note:
+
+        Attempting to use a position specifier greater than PHP_INT_MAX will
+        result in sprintf() generating warnings.
+
+    Warning
+
+    The c type specifier ignores padding and width
+
+{args}
+
+{...}
+
+==============================================================================
+*Return* *Values*
+
+Returns a string produced according to the formatting string {format}, or
+FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #7 |printf|: various examples
+
+<?php >
+    $n =  43951789;
+    $u = -43951789;
+    $c = 65; // ASCII 65 is 'A'
+
+    // notice the double %%, this prints a literal '%' character
+    printf("%%b = '%b'\n", $n); // binary representation
+    printf("%%c = '%c'\n", $c); // print the ascii character, same as chr()
+     function
+    printf("%%d = '%d'\n", $n); // standard integer representation
+    printf("%%e = '%e'\n", $n); // scientific notation
+    printf("%%u = '%u'\n", $n); //
+     unsigned integer representation of a positive integer
+    printf("%%u = '%u'\n", $u); //
+     unsigned integer representation of a negative integer
+    printf("%%f = '%f'\n", $n); // floating point representation
+    printf("%%o = '%o'\n", $n); // octal representation
+    printf("%%s = '%s'\n", $n); // string representation
+    printf("%%x = '%x'\n", $n); // hexadecimal representation (lower-case)
+    printf("%%X = '%X'\n", $n); // hexadecimal representation (upper-case)
+
+    printf("%%+d = '%+d'\n", $n); // sign specifier on a positive integer
+    printf("%%+d = '%+d'\n", $u); // sign specifier on a negative integer
+<?>
+
+The above example will output:
+
+%b = '10100111101010011010101101'
+%c = 'A'
+%d = '43951789'
+%e = '4.39518e+7'
+%u = '43951789'
+%u = '4251015507'
+%f = '43951789.000000'
+%o = '247523255'
+%s = '43951789'
+%x = '29ea6ad'
+%X = '29EA6AD'
+%+d = '+43951789'
+%+d = '-43951789'
+
+Example #8 |printf|: string specifiers
+
+<?php >
+    $s = 'monkey';
+    $t = 'many monkeys';
+
+    printf("[%s]\n",      $s); // standard string output
+    printf("[%10s]\n",    $s); // right-justification with spaces
+    printf("[%-10s]\n",   $s); // left-justification with spaces
+    printf("[%010s]\n",   $s); // zero-padding works on strings too
+    printf("[%'#10s]\n",  $s); // use the custom padding character '#'
+    printf("[%10.10s]\n", $t); //
+     left-justification but with a cutoff of 10 characters
+<?>
+
+The above example will output:
+
+[monkey]
+[    monkey]
+[monkey    ]
+[0000monkey]
+[####monkey]
+[many monke]
+
+Example #9 sprintf(): zero-padded integers
+
+<?php >
+    $isodate = sprintf("%04d-%02d-%02d", $year, $month, $day);
+<?>
+
+Example #10 sprintf(): formatting currency
+
+<?php >
+    $money1 = 68.75;
+    $money2 = 54.35;
+    $money = $money1 + $money2;
+    // echo $money will output "123.1";
+    $formatted = sprintf("%01.2f", $money);
+    // echo $formatted will output "123.10"
+<?>
+
+Example #11 sprintf(): scientific notation
+
+<?php >
+    $number = 362525200;
+
+    echo sprintf("%.3e", $number); // outputs 3.625e+8
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |printf| - Output a formatted string
+  * |sscanf| - Parses input from a string according to a format
+  * |fscanf| - Parses input from a file according to a format
+  * |vsprintf| - Return a formatted string
+  * |number_format| - Format a number with grouped thousands
+  * |date| - Format a local time/date
+
+
+vim:ft=help:

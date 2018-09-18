@@ -1,0 +1,113 @@
+strtr
+
+(PHP 4, PHP 5, PHP 7)
+
+strtr — Translate characters or replace substrings
+
+==============================================================================
+*Description*
+
+    string strtr ( string $str , string $from , string $to )~
+    string strtr ( string $str , array $replace_pairs )~
+
+If given three arguments, this function returns a copy of {str} where all
+occurrences of each (single-byte) character in {from} have been translated to
+the corresponding character in {to}, i.e., every occurrence of $from[$n] has
+been replaced with $to[$n], where $n is a valid offset in both arguments.
+
+If {from} and {to} have different lengths, the extra characters in the longer
+of the two are ignored. The length of {str} will be the same as the return
+value's.
+
+If given two arguments, the second should be an array in the form array('from'
+=> 'to', ...). The return value is a string where all the occurrences of the
+array keys have been replaced by the corresponding values. The longest keys
+will be tried first. Once a substring has been replaced, its new value will
+not be searched again.
+
+In this case, the keys and the values may have any length, provided that there
+is no empty key; additionally, the length of the return value may differ from
+that of {str}. However, this function will be the most efficient when all the
+keys have the same size.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The string being translated.
+
+{from}
+
+    The string being translated to {to}.
+
+{to}
+
+    The string replacing {from}.
+
+{replace_pairs}
+
+    The {replace_pairs} parameter may be used instead of {to} and {from}, in
+    which case it's an array in the form array('from' => 'to', ...).
+
+==============================================================================
+*Return* *Values*
+
+Returns the translated string.
+
+If {replace_pairs} contains a key which is an empty string (""), FALSE will be
+returned. If the {str} is not a scalar then it is not typecasted into a
+string, instead a warning is raised and NULL is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 strtr() example
+
+<?php >
+    //In this form, strtr() does byte-by-byte translation
+    //Therefore, we are assuming a single-byte encoding here:
+    $addr = strtr($addr, "äåö", "aao");
+<?>
+
+The next example shows the behavior of strtr() when called with only two
+arguments. Note the preference of the replacements ("h" is not picked because
+there are longer matches) and how replaced text was not searched again.
+
+Example #2 strtr() example with two arguments
+
+<?php >
+    $trans = array("h" => "-", "hello" => "hi", "hi" => "hello");
+    echo strtr("hi all, I said hello", $trans);
+<?>
+
+The above example will output:
+
+hello all, I said hi
+
+The two modes of behavior are substantially different. With three arguments, 
+strtr() will replace bytes; with two, it may replace longer substrings.
+
+Example #3 strtr() behavior comparison
+
+<?php >
+    echo strtr("baab", "ab", "01"),"\n";
+
+    $trans = array("ab" => "01");
+    echo strtr("baab", $trans);
+<?>
+
+The above example will output:
+
+1001
+ba01
+
+==============================================================================
+*See* *Also*
+
+  * |str_replace| - Replace all occurrences of the search string with the
+    replacement string
+  * |preg_replace| - Perform a regular expression search and replace
+
+
+vim:ft=help:

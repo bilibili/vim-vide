@@ -1,0 +1,33 @@
+hypot
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+hypot — Calculate the length of the hypotenuse of a right-angle triangle
+
+==============================================================================
+*Description*
+
+    float hypot ( float $x , float $y )~
+
+hypot() returns the length of the hypotenuse of a right-angle triangle with
+sides of length {x} and {y}, or the distance of the point ({x}, {y}) from the
+origin. This is equivalent to sqrt(x*x + y*y).
+
+==============================================================================
+*Parameters*
+
+{x}
+
+    Length of first side
+
+{y}
+
+    Length of second side
+
+==============================================================================
+*Return* *Values*
+
+Calculated length of the hypotenuse
+
+
+vim:ft=help:

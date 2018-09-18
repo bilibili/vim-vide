@@ -1,0 +1,15 @@
+PDF_get_buffer
+
+(PHP 4 >= 4.0.5, PECL pdflib >= 1.0.0)
+
+PDF_get_buffer — Get PDF output buffer
+
+==============================================================================
+*Description*
+
+    string PDF_get_buffer ( resource $p )~
+
+Fetches the buffer containing the generated PDF data.
+
+
+vim:ft=help:

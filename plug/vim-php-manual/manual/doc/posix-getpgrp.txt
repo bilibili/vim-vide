@@ -1,0 +1,26 @@
+posix_getpgrp
+
+(PHP 4, PHP 5, PHP 7)
+
+posix_getpgrp — Return the current process group identifier
+
+==============================================================================
+*Description*
+
+    int posix_getpgrp ( void )~
+
+Return the process group identifier of the current process.
+
+==============================================================================
+*Return* *Values*
+
+Returns the identifier, as an integer.
+
+==============================================================================
+*See* *Also*
+
+  * POSIX.1 and the getpgrp(2) manual page on the POSIX system for more
+    information on process groups.
+
+
+vim:ft=help:

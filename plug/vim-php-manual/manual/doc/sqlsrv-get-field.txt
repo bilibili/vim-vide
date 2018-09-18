@@ -1,0 +1,91 @@
+sqlsrv_get_field
+
+(No version information available, might only be in Git)
+
+sqlsrv_get_field — Gets field data from the currently selected row
+
+==============================================================================
+*Description*
+
+    mixed sqlsrv_get_field ( resource $stmt , int $fieldIndex [, int~
+    $getAsType ] )~
+
+Gets field data from the currently selected row. Fields must be accessed in
+order. Field indices start at 0.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A statement resource returned by |sqlsrv_query| or |sqlsrv_execute|.
+
+{fieldIndex}
+
+    The index of the field to be retrieved. Field indices start at 0. Fields
+    must be accessed in order. i.e. If you access field index 1, then field
+    index 0 will not be available.
+
+{getAsType}
+
+    The PHP data type for the returned field data. If this parameter is not
+    set, the field data will be returned as its default PHP data type. For
+    information about default PHP data types, see >> Default PHP Data Types in
+    the Microsoft SQLSRV documentation.
+
+==============================================================================
+*Return* *Values*
+
+Returns data from the specified field on success. Returns FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 sqlsrv_get_field() example
+
+The following example demonstrates how to retrieve a row with |sqlsrv_fetch|
+and get the row fields with sqlsrv_get_field().
+
+<?php >
+    $serverName = "serverName\sqlexpress";
+    $connectionInfo = array( "Database"=>"dbName", "UID"=>"username", "PWD"=>
+    "password");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+    if( $conn === false ) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    $sql = "SELECT Name, Comment 
+            FROM Table_1
+            WHERE ReviewID=1";
+    $stmt = sqlsrv_query( $conn, $sql);
+    if( $stmt === false ) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    // Make the first (and in this case, only)
+     row of the result set available for reading.
+    if( sqlsrv_fetch( $stmt ) === false) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    //
+     Get the row fields. Field indeces start at 0 and must be retrieved in order.
+    // Retrieving row fields by name is not supported by sqlsrv_get_field.
+    $name = sqlsrv_get_field( $stmt, 0);
+    echo "$name: ";
+
+    $comment = sqlsrv_get_field( $stmt, 1);
+    echo $comment;
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |sqlsrv_fetch| - Makes the next row in a result set available for reading
+  * |sqlsrv_fetch_array| - Returns a row as an array
+  * |sqlsrv_fetch_object| - Retrieves the next row of data in a result set as
+    an object
+
+
+vim:ft=help:

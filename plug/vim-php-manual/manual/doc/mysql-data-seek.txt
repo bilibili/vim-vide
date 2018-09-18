@@ -1,0 +1,105 @@
+mysql_data_seek
+
+(PHP 4, PHP 5)
+
+mysql_data_seek — Move internal result pointer
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_data_seek()
+  * PDO::FETCH_ORI_ABS
+
+==============================================================================
+*Description*
+
+    bool mysql_data_seek ( resource $result , int $row_number )~
+
+mysql_data_seek() moves the internal row pointer of the MySQL result
+associated with the specified result identifier to point to the specified row
+number. The next call to a MySQL fetch function, such as |mysql_fetch_assoc|,
+would return that row.
+
+{row_number} starts at 0. The {row_number} should be a value in the range from
+0 to |mysql_num_rows| - 1. However if the result set is empty (|mysql_num_rows
+| == 0), a seek to 0 will fail with a E_WARNING and mysql_data_seek() will
+return FALSE.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mysql_query|.
+
+{row_number}
+
+    The desired row number of the new result pointer.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mysql_data_seek() example
+
+<?php >
+    $link = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+    if (!$link) {
+        die('Could not connect: ' . mysql_error());
+    }
+    $db_selected = mysql_select_db('sample_db');
+    if (!$db_selected) {
+        die('Could not select database: ' . mysql_error());
+    }
+    $query = 'SELECT last_name, first_name FROM friends';
+    $result = mysql_query($query);
+    if (!$result) {
+        die('Query failed: ' . mysql_error());
+    }
+    /* fetch rows in reverse order */
+    for ($i = mysql_num_rows($result) - 1; $i >= 0; $i--) {
+        if (!mysql_data_seek($result, $i)) {
+            echo "Cannot seek to row $i: " . mysql_error() . "\n";
+            continue;
+        }
+
+        if (!($row = mysql_fetch_assoc($result))) {
+            continue;
+        }
+
+        echo $row['last_name'] . ' ' . $row['first_name'] . "<br />\n";
+    }
+
+    mysql_free_result($result);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The function mysql_data_seek() can be used in conjunction only with 
+    |mysql_query|, not with |mysql_unbuffered_query|.
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_query| - Send a MySQL query
+  * |mysql_num_rows| - Get number of rows in result
+  * |mysql_fetch_row| - Get a result row as an enumerated array
+  * |mysql_fetch_assoc| - Fetch a result row as an associative array
+  * |mysql_fetch_array| - Fetch a result row as an associative array, a
+    numeric array, or both
+  * |mysql_fetch_object| - Fetch a result row as an object
+
+
+vim:ft=help:

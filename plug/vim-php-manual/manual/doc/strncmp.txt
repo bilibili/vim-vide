@@ -1,0 +1,52 @@
+strncmp
+
+(PHP 4, PHP 5, PHP 7)
+
+strncmp — Binary safe string comparison of the first n characters
+
+==============================================================================
+*Description*
+
+    int strncmp ( string $str1 , string $str2 , int $len )~
+
+This function is similar to |strcmp|, with the difference that you can specify
+the (upper limit of the) number of characters from each string to be used in
+the comparison.
+
+Note that this comparison is case sensitive.
+
+==============================================================================
+*Parameters*
+
+{str1}
+
+    The first string.
+
+{str2}
+
+    The second string.
+
+{len}
+
+    Number of characters to use in the comparison.
+
+==============================================================================
+*Return* *Values*
+
+Returns < 0 if {str1} is less than {str2}; > 0 if {str1} is greater than
+{str2}, and 0 if they are equal.
+
+==============================================================================
+*See* *Also*
+
+  * |strncasecmp| - Binary safe case-insensitive string comparison of the
+    first n characters
+  * |preg_match| - Perform a regular expression match
+  * |substr_compare| - Binary safe comparison of two strings from an offset,
+    up to length characters
+  * |strcmp| - Binary safe string comparison
+  * |strstr| - Find the first occurrence of a string
+  * |substr| - Return part of a string
+
+
+vim:ft=help:

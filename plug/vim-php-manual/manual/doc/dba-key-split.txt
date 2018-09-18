@@ -1,0 +1,37 @@
+dba_key_split
+
+(PHP 5, PHP 7)
+
+dba_key_split — Splits a key in string representation into array
+representation
+
+==============================================================================
+*Description*
+
+    mixed dba_key_split ( mixed $key )~
+
+dba_key_split() splits a key (string representation) into an array
+representation.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    The key in string representation.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of the form array(0 => group, 1 => value_name). This function
+will return FALSE if {key} is NULL or FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |dba_firstkey| - Fetch first key
+  * |dba_nextkey| - Fetch next key
+  * |dba_fetch| - Fetch data specified by key
+
+
+vim:ft=help:

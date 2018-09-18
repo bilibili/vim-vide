@@ -1,0 +1,76 @@
+msql_fetch_row
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_fetch_row — Get row as enumerated array
+
+==============================================================================
+*Description*
+
+    array msql_fetch_row ( resource $result )~
+
+msql_fetch_row() fetches one row of data from the result associated with the
+specified query identifier. The row is returned as an array. Each result
+column is stored in an array offset, starting at offset 0.
+
+Subsequent call to msql_fetch_row() would return the next row in the result
+set, or FALSE if there are no more rows.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |msql_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array that corresponds to the fetched row, or FALSE if there are no
+more rows.
+
+==============================================================================
+*Examples*
+
+Example #1 msql_fetch_row() example
+
+<?php >
+    $con = msql_connect();
+    if (!$con) {
+        die('Server connection problem: ' . msql_error());
+    }
+
+    if (!msql_select_db('test', $con)) {
+        die('Database connection problem: ' . msql_error());
+    }
+
+    $result = msql_query('SELECT id, name FROM people', $con);
+    if (!$result) {
+        die('Query execution problem: ' . msql_error());
+    }
+
+    while ($row = msql_fetch_row($result)) {
+        echo $row[0] . ': ' . $row[1] . "\n";
+    }
+
+    msql_free_result($result);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.0.4   A bug was fixed when retrieving data from columns containing NULL
+        values. Such columns were not placed into the resulting array.
+
+==============================================================================
+*See* *Also*
+
+  * |msql_fetch_array| - Fetch row as array
+  * |msql_fetch_object| - Fetch row as object
+  * |msql_data_seek| - Move internal row pointer
+  * |msql_result| - Get result data
+
+
+vim:ft=help:

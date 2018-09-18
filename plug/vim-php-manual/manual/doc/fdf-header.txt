@@ -1,0 +1,21 @@
+fdf_header
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+fdf_header — Sets FDF-specific output headers
+
+==============================================================================
+*Description*
+
+    void fdf_header ( void )~
+
+This is a convenience function to set appropriate HTTP headers for FDF output.
+It sets the Content-type: to application/vnd.fdf.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

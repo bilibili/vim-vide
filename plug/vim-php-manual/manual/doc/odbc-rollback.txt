@@ -1,0 +1,27 @@
+odbc_rollback
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_rollback — Rollback a transaction
+
+==============================================================================
+*Description*
+
+    bool odbc_rollback ( resource $connection_id )~
+
+Rolls back all pending statements on the connection.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

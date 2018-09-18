@@ -1,0 +1,82 @@
+eio_get_event_stream
+
+(PECL eio >= 0.3.1b)
+
+eio_get_event_stream — Get stream representing a variable used in internal
+communications with libeio.
+
+==============================================================================
+*Description*
+
+    mixed eio_get_event_stream ( void )~
+
+eio_get_event_stream() acquires stream representing a variable used in
+internal communications with libeio. Could be used to bind with some event
+loop provided by other PECL extension, for example libevent.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+eio_get_event_stream() returns stream on success; otherwise, NULL
+
+==============================================================================
+*Examples*
+
+Example #1 Using eio with libevent
+
+<?php >
+    function my_eio_poll($fd, $events, $arg) {
+        /* Some libevent regulation might go here .. */
+        if (eio_nreqs()) {
+            eio_poll();
+        }
+        /* .. and here */
+    }
+
+    function my_res_cb($d, $r) {
+        var_dump($r); var_dump($d);
+    }
+
+    $base = event_base_new();
+    $event = event_new();
+
+    $fd = eio_get_event_stream();
+    var_dump($fd);
+
+    eio_nop(EIO_PRI_DEFAULT, "my_res_cb", "nop data");
+    eio_mkdir("/tmp/abc-eio-temp", 0750, EIO_PRI_DEFAULT, "my_res_cb", 
+    "mkdir data");
+    /* some other eio_* calls here ... */
+
+
+    // set event flags
+    event_set($event, $fd, EV_READ /*| EV_PERSIST*/, "my_eio_poll", array($event, 
+    $base));
+
+    // set event base 
+    event_base_set($event, $base);
+
+    // enable event
+    event_add($event);
+
+    // start event loop
+    event_base_loop($base);
+
+    /* The same will be available via buffered libevent interface */
+<?>
+
+The above example will output something similar to:
+
+int(3)
+int(0)
+string(8) "nop data"
+int(0)
+string(10) "mkdir data"
+
+
+vim:ft=help:

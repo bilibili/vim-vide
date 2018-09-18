@@ -1,0 +1,77 @@
+class_exists
+
+(PHP 4, PHP 5, PHP 7)
+
+class_exists — Checks if the class has been defined
+
+==============================================================================
+*Description*
+
+    bool class_exists ( string $class_name [, bool $autoload = true ] )~
+
+This function checks whether or not the given class has been defined.
+
+==============================================================================
+*Parameters*
+
+{class_name}
+
+    The class name. The name is matched in a case-insensitive manner.
+
+{autoload}
+
+    Whether or not to call __autoload by default.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {class_name} is a defined class, FALSE otherwise.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.0.2   No longer returns TRUE for defined interfaces. Use |interface_exists|.
+
+==============================================================================
+*Examples*
+
+Example #1 class_exists() example
+
+<?php >
+    // Check that the class exists before trying to use it
+    if (class_exists('MyClass')) {
+        $myclass = new MyClass();
+    }
+
+<?>
+
+Example #2 {autoload} parameter example
+
+<?php >
+    function __autoload($class)
+    {
+        include($class . '.php');
+
+        // Check to see whether the include declared the class
+        if (!class_exists($class, false)) {
+            trigger_error("Unable to load class: $class", E_USER_WARNING);
+        }
+    }
+
+    if (class_exists('MyClass')) {
+        $myclass = new MyClass();
+    }
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |function_exists| - Return TRUE if the given function has been defined
+  * |interface_exists| - Checks if the interface has been defined
+  * |get_declared_classes| - Returns an array with the name of the defined
+    classes
+
+
+vim:ft=help:

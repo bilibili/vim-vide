@@ -1,0 +1,70 @@
+gmp_random_seed
+
+(PHP 7)
+
+gmp_random_seed — Sets the RNG seed
+
+==============================================================================
+*Description*
+
+    mixed gmp_random_seed ( mixed $seed )~
+
+==============================================================================
+*Parameters*
+
+{seed}
+
+    The seed to be set for the |gmp_random|, |gmp_random_bits|, and 
+    |gmp_random_range| functions.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+Returns NULL on success.
+
+==============================================================================
+*Errors/Exceptions*
+
+Issues an E_WARNING and returns FALSE if {seed} is not valid.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_random_seed() example
+
+<?php >
+// set the seed
+gmp_random_seed(100);
+
+var_dump(gmp_strval(gmp_random(1)));
+
+// set the seed to something else
+gmp_random_seed(gmp_init(-100));
+
+var_dump(gmp_strval(gmp_random_bits(10)));
+
+// set the seed to something invalid
+var_dump(gmp_random_seed('not a number'));
+
+The above example will output:
+
+string(20) "15370156633245019617"
+string(3) "683"
+
+Warning: gmp_random_seed(): Unable to convert variable to GMP - string is not an integer in %s on line %d
+bool(false)
+
+==============================================================================
+*See* *Also*
+
+  * |gmp_init| - Create GMP number
+  * |gmp_random| - Random number
+  * |gmp_random_bits| - Random number
+  * |gmp_random_range| - Random number
+
+
+vim:ft=help:

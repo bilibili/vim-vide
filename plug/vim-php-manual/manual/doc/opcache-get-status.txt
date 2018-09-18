@@ -1,0 +1,40 @@
+opcache_get_status
+
+(PHP 5 >= 5.5.5, PHP 7, PECL ZendOpcache > 7.0.2)
+
+opcache_get_status — Get status information about the cache
+
+==============================================================================
+*Description*
+
+    array opcache_get_status ([ boolean $get_scripts = TRUE ] )~
+
+This function returns state information about the cache instance
+
+==============================================================================
+*Parameters*
+
+{get_scripts}
+
+    Include script specific state information
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of information, optionally containing script specific state
+information
+
+==============================================================================
+*Errors/Exceptions*
+
+If opcache.restrict_api is in use and the current path is in violation of the
+rule, an E_WARNING will be raised; no status information will be returned.
+
+==============================================================================
+*See* *Also*
+
+  * |opcache_get_configuration| - Get configuration information about the
+    cache
+
+
+vim:ft=help:

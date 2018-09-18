@@ -1,0 +1,42 @@
+XMLWriter::fullEndElement
+
+xmlwriter_full_end_element
+
+(PHP 5 >= 5.2.0, PHP 7, PECL xmlwriter >= 2.0.4)
+
+XMLWriter::fullEndElement -- xmlwriter_full_end_element — End current element
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::fullEndElement ( void )~
+
+Procedural style
+
+    bool xmlwriter_full_end_element ( resource $xmlwriter )~
+
+End the current xml element. Writes an end tag even if the element is empty.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::endElement| - End current element
+
+
+vim:ft=help:

@@ -1,0 +1,126 @@
+array
+
+(PHP 4, PHP 5, PHP 7)
+
+array — Create an array
+
+==============================================================================
+*Description*
+
+    array array ([ mixed $... ] )~
+
+Creates an array. Read the section on the array type for more information on
+what an array is.
+
+==============================================================================
+*Parameters*
+
+{...}
+
+    Syntax "index => values", separated by commas, define index and values.
+    index may be of type string or integer. When index is omitted, an integer
+    index is automatically generated, starting at 0. If index is an integer,
+    next generated index will be the biggest integer index + 1. Note that when
+    two identical index are defined, the last overwrite the first.
+
+    Having a trailing comma after the last defined array entry, while unusual,
+    is a valid syntax.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of the parameters. The parameters can be given an index with
+the => operator. Read the section on the array type for more information on
+what an array is.
+
+==============================================================================
+*Examples*
+
+The following example demonstrates how to create a two-dimensional array, how
+to specify keys for associative arrays, and how to skip-and-continue numeric
+indices in normal arrays.
+
+Example #1 array() example
+
+<?php >
+    $fruits = array (
+        "fruits"  => array("a" => "orange", "b" => "banana", "c" => "apple"),
+        "numbers" => array(1, 2, 3, 4, 5, 6),
+        "holes"   => array("first", 5 => "second", "third")
+    );
+<?>
+
+Example #2 Automatic index with array()
+
+<?php >
+    $array = array(1, 1, 1, 1,  1, 8 => 1,  4 => 1, 19, 3 => 13);
+    print_r($array);
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => 1
+    [1] => 1
+    [2] => 1
+    [3] => 13
+    [4] => 1
+    [8] => 1
+    [9] => 19
+)
+
+Note that index '3' is defined twice, and keep its final value of 13. Index 4
+is defined after index 8, and next generated index (value 19) is 9, since
+biggest index was 8.
+
+This example creates a 1-based array.
+
+Example #3 1-based index with array()
+
+<?php >
+    $firstquarter = array(1 => 'January', 'February', 'March');
+    print_r($firstquarter);
+<?>
+
+The above example will output:
+
+Array
+(
+    [1] => January
+    [2] => February
+    [3] => March
+)
+
+As in Perl, you can access a value from the array inside double quotes.
+However, with PHP you'll need to enclose your array between curly braces.
+
+Example #4 Accessing an array inside double quotes
+
+<?php >
+
+    $foo = array('bar' => 'baz');
+    echo "Hello {$foo['bar']}!"; // Hello baz!
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    array() is a language construct used to represent literal arrays, and not
+    a regular function.
+
+==============================================================================
+*See* *Also*
+
+  * |array_pad| - Pad array to the specified length with a value
+  * |list| - Assign variables as if they were an array
+  * |count| - Count all elements in an array, or something in an object
+  * |range| - Create an array containing a range of elements
+  * foreach
+  * The array type
+
+
+vim:ft=help:

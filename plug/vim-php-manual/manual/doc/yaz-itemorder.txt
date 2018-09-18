@@ -1,0 +1,131 @@
+yaz_itemorder
+
+(PHP 4 >= 4.0.5, PECL yaz >= 0.9.0)
+
+yaz_itemorder — Prepares for Z39.50 Item Order with an ILL-Request package
+
+==============================================================================
+*Description*
+
+    void yaz_itemorder ( resource $id , array $args )~
+
+This function prepares for an Extended Services request using the Profile for
+the Use of Z39.50 Item Order Extended Service to Transport ILL (Profile/1).
+See >> this and the >> specification.
+
+==============================================================================
+*Parameters*
+
+{id}
+
+    The connection resource returned by |yaz_connect|.
+
+{args}
+
+    Must be an associative array with information about the Item Order request
+    to be sent. The key of the hash is the name of the corresponding ASN.1 tag
+    path. For example, the ISBN below the Item-ID has the key item-id,ISBN.
+
+    The ILL-Request parameters are:
+
+    protocol-version-num
+    transaction-id,initial-requester-id,person-or-institution-symbol,person
+    transaction-id,initial-requester-id,person-or-institution-symbol,institution
+    transaction-id,initial-requester-id,name-of-person-or-institution,name-of-person
+    transaction-id,initial-requester-id,name-of-person-or-institution,name-of-institution
+    transaction-id,transaction-group-qualifier
+    transaction-id,transaction-qualifier
+    transaction-id,sub-transaction-qualifier
+    service-date-time,this,date
+    service-date-time,this,time
+    service-date-time,original,date
+    service-date-time,original,time
+    requester-id,person-or-institution-symbol,person
+    requester-id,person-or-institution-symbol,institution
+    requester-id,name-of-person-or-institution,name-of-person
+    requester-id,name-of-person-or-institution,name-of-institution
+    responder-id,person-or-institution-symbol,person
+    responder-id,person-or-institution-symbol,institution
+    responder-id,name-of-person-or-institution,name-of-person
+    responder-id,name-of-person-or-institution,name-of-institution
+    transaction-type
+    delivery-address,postal-address,name-of-person-or-institution,name-of-person
+    delivery-address,postal-address,name-of-person-or-institution,name-of-institution
+    delivery-address,postal-address,extended-postal-delivery-address
+    delivery-address,postal-address,street-and-number
+    delivery-address,postal-address,post-office-box
+    delivery-address,postal-address,city
+    delivery-address,postal-address,region
+    delivery-address,postal-address,country
+    delivery-address,postal-address,postal-code
+    delivery-address,electronic-address,telecom-service-identifier
+    delivery-address,electronic-address,telecom-service-addreess
+    billing-address,postal-address,name-of-person-or-institution,name-of-person
+    billing-address,postal-address,name-of-person-or-institution,name-of-institution
+    billing-address,postal-address,extended-postal-delivery-address
+    billing-address,postal-address,street-and-number
+    billing-address,postal-address,post-office-box
+    billing-address,postal-address,city
+    billing-address,postal-address,region
+    billing-address,postal-address,country
+    billing-address,postal-address,postal-code
+    billing-address,electronic-address,telecom-service-identifier
+    billing-address,electronic-address,telecom-service-addreess
+    ill-service-type
+    requester-optional-messages,can-send-RECEIVED
+    requester-optional-messages,can-send-RETURNED
+    requester-optional-messages,requester-SHIPPED
+    requester-optional-messages,requester-CHECKED-IN
+    search-type,level-of-service
+    search-type,need-before-date
+    search-type,expiry-date
+    search-type,expiry-flag
+    place-on-hold
+    client-id,client-name
+    client-id,client-status
+    client-id,client-identifier
+    item-id,item-type
+    item-id,call-number
+    item-id,author
+    item-id,title
+    item-id,sub-title
+    item-id,sponsoring-body
+    item-id,place-of-publication
+    item-id,publisher
+    item-id,series-title-number
+    item-id,volume-issue
+    item-id,edition
+    item-id,publication-date
+    item-id,publication-date-of-component
+    item-id,author-of-article
+    item-id,title-of-article
+    item-id,pagination
+    item-id,ISBN
+    item-id,ISSN
+    item-id,additional-no-letters
+    item-id,verification-reference-source
+    copyright-complicance
+    retry-flag
+    forward-flag
+    requester-note
+    forward-note
+
+
+    There are also a few parameters that are part of the Extended Services
+    Request package and the ItemOrder package:
+
+    package-name
+    user-id
+    contact-name
+    contact-phone
+    contact-email
+    itemorder-item
+
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

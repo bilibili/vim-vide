@@ -1,0 +1,143 @@
+maxdb_affected_rows
+
+maxdb::affected_rows
+
+(PECL maxdb >= 1.0)
+
+maxdb_affected_rows -- maxdb::affected_rows — Gets the number of affected rows
+in a previous MaxDB operation
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    int maxdb_affected_rows ( resource $link )~
+
+Object oriented style
+
+int $maxdb->affected_rows;
+
+maxdb_affected_rows() returns the number of rows affected by the last INSERT,
+UPDATE, or DELETE query associated with the provided {link} parameter. If this
+number cannot be determined, this function will return -1.
+
+    Note:
+
+    For SELECT statements maxdb_affected_rows() works like |maxdb_num_rows|.
+
+The maxdb_affected_rows() function only works with queries which modify a
+table. In order to return the number of rows from a SELECT query, use the 
+|maxdb_num_rows| function instead.
+
+==============================================================================
+*Return* *Values*
+
+An integer greater than zero indicates the number of rows affected or
+retrieved. Zero indicates that no records where updated for an UPDATE
+statement, no rows matched the WHERE clause in the query or that no query has
+yet been executed. -1 indicates that the number of rows affected can not be
+determined.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    maxdb_report (MAXDB_REPORT_OFF);
+    $maxdb->query("DROP TABLE mycustomer");
+    maxdb_report (MAXDB_REPORT_ERROR);
+
+    /* Insert rows */
+    $maxdb->query("CREATE TABLE mycustomer AS SELECT * from hotel.customer");
+    printf("Affected rows (INSERT): %d\n", $maxdb->affected_rows);
+
+    $maxdb->query("ALTER TABLE mycustomer ADD Status int default 0");
+
+    /* update rows */
+    $maxdb->query("UPDATE mycustomer SET Status=1 WHERE cno > 50");
+    printf("Affected rows (UPDATE): %d\n", $maxdb->affected_rows);
+
+    /* delete rows */
+    $maxdb->query("DELETE FROM mycustomer WHERE cno < 50");
+    printf("Affected rows (DELETE): %d\n", $maxdb->affected_rows);
+
+    /* select all rows */
+    $result = $maxdb->query("SELECT title FROM mycustomer");
+    printf("Affected rows (SELECT): %d\n", $maxdb->affected_rows);
+
+    $result->close();
+
+    /* Delete table Language */
+    $maxdb->query("DROP TABLE mycustomer");
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    if (!$link) {
+       printf("Can't connect to localhost. Error: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    maxdb_report (MAXDB_REPORT_OFF);
+    maxdb_query($link,"DROP TABLE mycustomer");
+    maxdb_report (MAXDB_REPORT_ERROR);
+
+    /* Insert rows */
+    maxdb_query($link, "CREATE TABLE mycustomer AS SELECT * from hotel.customer");
+    printf("Affected rows (INSERT): %d\n", maxdb_affected_rows($link));
+
+    maxdb_query($link, "ALTER TABLE mycustomer ADD Status int default 0");
+
+    /* update rows */
+    maxdb_query($link, "UPDATE mycustomer SET Status=1 WHERE cno > 50");
+    printf("Affected rows (UPDATE): %d\n", maxdb_affected_rows($link));
+
+    /* delete rows */
+    maxdb_query($link, "DELETE FROM mycustomer WHERE cno < 50");
+    printf("Affected rows (DELETE): %d\n", maxdb_affected_rows($link));
+
+    /* select all rows */
+    $result = maxdb_query($link, "SELECT title FROM mycustomer");
+    printf("Affected rows (SELECT): %d\n", maxdb_affected_rows($link));
+
+    maxdb_free_result($result);
+
+    /* Delete table Language */
+    maxdb_query($link, "DROP TABLE mycustomer");
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Affected rows (INSERT): 15
+Affected rows (UPDATE): 15
+Affected rows (DELETE): 0
+Affected rows (SELECT): 15
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_num_rows| - Gets the number of rows in a result
+  * |maxdb_info| - Retrieves information about the most recently executed
+    query
+
+
+vim:ft=help:

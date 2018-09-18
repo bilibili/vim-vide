@@ -1,0 +1,42 @@
+acosh
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+acosh — Inverse hyperbolic cosine
+
+==============================================================================
+*Description*
+
+    float acosh ( float $arg )~
+
+Returns the inverse hyperbolic cosine of {arg}, i.e. the value whose
+hyperbolic cosine is {arg}.
+
+==============================================================================
+*Parameters*
+
+{arg}
+
+    The value to process
+
+==============================================================================
+*Return* *Values*
+
+The inverse hyperbolic cosine of {arg}
+
+==============================================================================
+*Changelog*
+
+Version                   Description
+5.3.0   This function is now available on all platforms
+
+==============================================================================
+*See* *Also*
+
+  * |cosh| - Hyperbolic cosine
+  * |acos| - Arc cosine
+  * |asinh| - Inverse hyperbolic sine
+  * |atanh| - Inverse hyperbolic tangent
+
+
+vim:ft=help:

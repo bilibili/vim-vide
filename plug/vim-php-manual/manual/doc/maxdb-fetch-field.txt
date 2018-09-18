@@ -1,0 +1,128 @@
+maxdb_fetch_field
+
+maxdb_result::fetch_field
+
+(PECL maxdb >= 1.0)
+
+maxdb_fetch_field -- maxdb_result::fetch_field — Returns the next field in the
+result set
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    mixed maxdb_fetch_field ( resource $result )~
+
+Object oriented style
+
+    mixed maxdb_result::fetch_field ( void )~
+
+The maxdb_fetch_field() returns the definition of one column of a result set
+as an resource. Call this function repeatedly to retrieve information about
+all columns in the result set. maxdb_fetch_field() returns FALSE when no more
+fields are left.
+
+==============================================================================
+*Return* *Values*
+
+Returns an resource which contains field definition information or FALSE if no
+field information is available.
+
+                      Object properties
+ Property                     Description
+name       The name of the column
+max_length The maximum width of the field for the result set.
+type       The data type used for this field
+decimals   The number of decimals used (for integer fields)
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT name, cno from hotel.customer ORDER BY cno";
+
+    if ($result = $maxdb->query($query)) {
+
+       /* Get field information for all columns */
+       while ($finfo = $result->fetch_field()) {
+
+           printf("Name:     %s\n", $finfo->name);
+           printf("Table:    %s\n", $finfo->table);
+           printf("max. Len: %d\n", $finfo->max_length);
+           printf("Flags:    %d\n", $finfo->flags);
+           printf("Type:     %d\n\n", $finfo->type);
+       }
+       $result->close();
+    }
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT name, cno from hotel.customer ORDER BY cno";
+
+    if ($result = maxdb_query($link, $query)) {
+
+       /* Get field information for all fields */
+       while ($finfo = maxdb_fetch_field($result)) {
+
+           printf("Name:     %s\n", $finfo->name);
+           printf("Table:    %s\n", $finfo->table);
+           printf("max. Len: %d\n", $finfo->max_length);
+           printf("Flags:    %d\n", $finfo->flags);
+           printf("Type:     %d\n\n", $finfo->type);
+       }
+       maxdb_free_result($result);
+    }
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Name:     NAME
+Table:
+max. Len: 10
+Flags:    -1
+Type:     2
+
+Name:     CNO
+Table:
+max. Len: 4
+Flags:    -1
+Type:     0
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_num_fields| - Get the number of fields in a result
+  * |maxdb_fetch_field_direct| - Fetch meta-data for a single field
+  * |maxdb_fetch_fields| - Returns an array of resources representing the
+    fields in a result set
+  * |maxdb_field_seek| - Set result pointer to a specified field offset
+
+
+vim:ft=help:

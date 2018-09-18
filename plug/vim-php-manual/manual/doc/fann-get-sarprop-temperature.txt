@@ -1,0 +1,34 @@
+fann_get_sarprop_temperature
+
+(PECL fann >= 1.0.0)
+
+fann_get_sarprop_temperature — Returns the sarprop temperature
+
+==============================================================================
+*Description*
+
+    float fann_get_sarprop_temperature ( resource $ann )~
+
+Returns the sarprop temperature.
+
+The default temperature is 0.015.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+The sarprop temperature, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_set_sarprop_temperature| - Sets the sarprop temperature
+
+
+vim:ft=help:

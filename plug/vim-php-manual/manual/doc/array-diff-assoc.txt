@@ -1,0 +1,110 @@
+array_diff_assoc
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+array_diff_assoc — Computes the difference of arrays with additional index
+check
+
+==============================================================================
+*Description*
+
+    array array_diff_assoc ( array $array1 , array $array2 [, array $... ] )~
+
+Compares {array1} against {array2} and returns the difference. Unlike 
+|array_diff| the array keys are also used in the comparison.
+
+==============================================================================
+*Parameters*
+
+{array1}
+
+    The array to compare from
+
+{array2}
+
+    An array to compare against
+
+{...}
+
+    More arrays to compare against
+
+==============================================================================
+*Return* *Values*
+
+Returns an array containing all the values from {array1} that are not present
+in any of the other arrays.
+
+==============================================================================
+*Examples*
+
+Example #1 array_diff_assoc() example
+
+In this example you see the "a" => "green" pair is present in both arrays and
+thus it is not in the output from the function. Unlike this, the pair 0 =>
+"red" is in the output because in the second argument "red" has key which is 1
+.
+
+<?php >
+    $array1 = array("a" => "green", "b" => "brown", "c" => "blue", "red");
+    $array2 = array("a" => "green", "yellow", "red");
+    $result = array_diff_assoc($array1, $array2);
+    print_r($result);
+<?>
+
+The above example will output:
+
+Array
+(
+    [b] => brown
+    [c] => blue
+    [0] => red
+)
+
+Example #2 array_diff_assoc() example
+
+Two values from key => value pairs are considered equal only if (string)
+$elem1 === (string) $elem2 . In other words a strict check takes place so the
+string representations must be the same.
+
+<?php >
+    $array1 = array(0, 1, 2);
+    $array2 = array("00", "01", "2");
+    $result = array_diff_assoc($array1, $array2);
+    print_r($result);
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => 0
+    [1] => 1
+    )
+
+==============================================================================
+*Notes*
+
+    Note: This function only checks one dimension of a n-dimensional array. Of
+    course you can check deeper dimensions by using, for example,
+    array_diff_assoc($array1[0], $array2[0]);.
+
+    Note: Ensure you pass arguments in the correct order when comparing
+    similar arrays with more keys. The new array should be the first in the
+    list.
+
+==============================================================================
+*See* *Also*
+
+  * |array_diff| - Computes the difference of arrays
+  * |array_diff_uassoc| - Computes the difference of arrays with additional
+    index check which is performed by a user supplied callback function
+  * |array_udiff_assoc| - Computes the difference of arrays with additional
+    index check, compares data by a callback function
+  * |array_udiff_uassoc| - Computes the difference of arrays with additional
+    index check, compares data and indexes by a callback function
+  * |array_intersect| - Computes the intersection of arrays
+  * |array_intersect_assoc| - Computes the intersection of arrays with
+    additional index check
+
+
+vim:ft=help:

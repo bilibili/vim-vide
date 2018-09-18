@@ -1,0 +1,76 @@
+date_parse_from_format
+
+(PHP 5 >= 5.3.0, PHP 7)
+
+date_parse_from_format — Get info about given date formatted according to the
+specified format
+
+==============================================================================
+*Description*
+
+    array date_parse_from_format ( string $format , string $date )~
+
+Returns associative array with detailed info about given date.
+
+==============================================================================
+*Parameters*
+
+{format}
+
+    Format accepted by DateTime::createFromFormat().
+
+{date}
+
+    String representing the date.
+
+==============================================================================
+*Return* *Values*
+
+Returns associative array with detailed info about given date.
+
+==============================================================================
+*Examples*
+
+Example #1 date_parse_from_format() example
+
+<?php >
+    $date = "6.1.2009 13:00+01:00";
+    print_r(date_parse_from_format("j.n.Y H:iP", $date));
+<?>
+
+The above example will output:
+
+Array
+(
+    [year] => 2009
+    [month] => 1
+    [day] => 6
+    [hour] => 13
+    [minute] => 0
+    [second] => 0
+    [fraction] =>
+    [warning_count] => 0
+    [warnings] => Array
+        (
+        )
+
+    [error_count] => 0
+    [errors] => Array
+        (
+        )
+
+    [is_localtime] => 1
+    [zone_type] => 1
+    [zone] => -60
+    [is_dst] =>
+)
+
+==============================================================================
+*See* *Also*
+
+  * DateTime::createFromFormat() - Parses a time string according to a
+    specified format
+  * |checkdate| - Validate a Gregorian date
+
+
+vim:ft=help:

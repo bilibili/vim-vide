@@ -1,0 +1,64 @@
+wincache_ucache_cas
+
+(PECL wincache >= 1.1.0)
+
+wincache_ucache_cas — Compares the variable with old value and assigns new
+value to it
+
+==============================================================================
+*Description*
+
+    bool wincache_ucache_cas ( string $key , int $old_value , int $new_value~
+)~
+
+Compares the variable associated with the {key} with {old_value} and if it
+matches then assigns the {new_value} to it.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    The {key} that is used to store the variable in the cache. {key} is case
+    sensitive.
+
+{old_value}
+
+    Old value of the variable pointed by {key} in the user cache. The value
+    should be of type long, otherwise the function returns FALSE.
+
+{new_value}
+
+    New value which will get assigned to variable pointer by {key} if a match
+    is found. The value should be of type long, otherwise the function returns
+    FALSE.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Using wincache_ucache_cas()
+
+<?php >
+    wincache_ucache_set('counter', 2922);
+    var_dump(wincache_ucache_cas('counter', 2922, 1));
+    var_dump(wincache_ucache_get('counter'));
+<?>
+
+The above example will output:
+
+bool(true)
+int(1)
+
+==============================================================================
+*See* *Also*
+
+  * |wincache_ucache_inc| - Increments the value associated with the key
+  * |wincache_ucache_dec| - Decrements the value associated with the key
+
+
+vim:ft=help:

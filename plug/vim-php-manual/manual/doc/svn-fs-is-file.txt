@@ -1,0 +1,28 @@
+svn_fs_is_file
+
+(PECL svn >= 0.2.0)
+
+svn_fs_is_file — Return true if the path points to a file, false otherwise
+
+==============================================================================
+*Description*
+
+    bool svn_fs_is_file ( resource $root , string $path )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+Return true if the path points to a file, false otherwise
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

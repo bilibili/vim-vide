@@ -1,0 +1,79 @@
+fprintf
+
+(PHP 5, PHP 7)
+
+fprintf — Write a formatted string to a stream
+
+==============================================================================
+*Description*
+
+    int fprintf ( resource $handle , string $format [, mixed $args [, mixed~
+    $... ]] )~
+
+Write a string produced according to {format} to the stream resource specified
+by {handle}.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    A file system pointer resource that is typically created using |fopen|.
+
+{format}
+
+    See |sprintf| for a description of {format}.
+
+{args}
+
+{...}
+
+==============================================================================
+*Return* *Values*
+
+Returns the length of the string written.
+
+==============================================================================
+*Examples*
+
+Example #1 fprintf(): zero-padded integers
+
+<?php >
+    if (!($fp = fopen('date.txt', 'w'))) {
+        return;
+    }
+
+    fprintf($fp, "%04d-%02d-%02d", $year, $month, $day);
+    // will write the formatted ISO date to date.txt
+<?>
+
+Example #2 fprintf(): formatting currency
+
+<?php >
+    if (!($fp = fopen('currency.txt', 'w'))) {
+        return;
+    }
+
+    $money1 = 68.75;
+    $money2 = 54.35;
+    $money = $money1 + $money2;
+    // echo $money will output "123.1";
+    $len = fprintf($fp, '%01.2f', $money);
+    // will write "123.10" to currency.txt
+
+    echo "wrote $len bytes to currency.txt";
+    // use the return value of fprintf to determine how many bytes we wrote
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |printf| - Output a formatted string
+  * |sprintf| - Return a formatted string
+  * |sscanf| - Parses input from a string according to a format
+  * |fscanf| - Parses input from a file according to a format
+  * |vsprintf| - Return a formatted string
+  * |number_format| - Format a number with grouped thousands
+
+
+vim:ft=help:

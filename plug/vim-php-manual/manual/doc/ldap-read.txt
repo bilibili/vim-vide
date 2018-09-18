@@ -1,0 +1,99 @@
+ldap_read
+
+(PHP 4, PHP 5, PHP 7)
+
+ldap_read — Read an entry
+
+==============================================================================
+*Description*
+
+    resource ldap_read ( resource $link_identifier , string $base_dn , string~
+    $filter [, array $attributes [, int $attrsonly [, int $sizelimit [, int~
+    $timelimit [, int $deref ]]]]] )~
+
+Performs the search for a specified {filter} on the directory with the scope
+LDAP_SCOPE_BASE. So it is equivalent to reading an entry from the directory.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{base_dn}
+
+    The base DN for the directory.
+
+{filter}
+
+    An empty filter is not allowed. If you want to retrieve absolutely all
+    information for this entry, use a filter of objectClass=*. If you know
+    which entry types are used on the directory server, you might use an
+    appropriate filter such as objectClass=inetOrgPerson.
+
+{attributes}
+
+    An array of the required attributes, e.g. array("mail", "sn", "cn"). Note
+    that the "dn" is always returned irrespective of which attributes types
+    are requested.
+
+    Using this parameter is much more efficient than the default action (which
+    is to return all attributes and their associated values). The use of this
+    parameter should therefore be considered good practice.
+
+{attrsonly}
+
+    Should be set to 1 if only attribute types are wanted. If set to 0 both
+    attributes types and attribute values are fetched which is the default
+    behaviour.
+
+{sizelimit}
+
+    Enables you to limit the count of entries fetched. Setting this to 0 means
+    no limit.
+
+        Note:
+
+        This parameter can NOT override server-side preset sizelimit. You can
+        set it lower though.
+
+        Some directory server hosts will be configured to return no more than
+        a preset number of entries. If this occurs, the server will indicate
+        that it has only returned a partial results set. This also occurs if
+        you use this parameter to limit the count of fetched entries.
+
+{timelimit}
+
+    Sets the number of seconds how long is spend on the search. Setting this
+    to 0 means no limit.
+
+        Note:
+
+        This parameter can NOT override server-side preset timelimit. You can
+        set it lower though.
+
+{deref}
+
+    Specifies how aliases should be handled during the search. It can be one
+    of the following:
+      + LDAP_DEREF_NEVER - (default) aliases are never dereferenced.
+      + LDAP_DEREF_SEARCHING - aliases should be dereferenced during the
+        search but not when locating the base object of the search.
+      + LDAP_DEREF_FINDING - aliases should be dereferenced when locating the
+        base object but not during the search.
+      + LDAP_DEREF_ALWAYS - aliases should be dereferenced always.
+
+==============================================================================
+*Return* *Values*
+
+Returns a search result identifier or FALSE on error.
+
+==============================================================================
+*Changelog*
+
+Version                             Description
+4.0.5   Parallel searches support was added. See |ldap_search| for details.
+
+
+vim:ft=help:

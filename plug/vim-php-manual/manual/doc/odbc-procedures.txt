@@ -1,0 +1,55 @@
+odbc_procedures
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_procedures — Get the list of procedures stored in a specific data source
+
+==============================================================================
+*Description*
+
+    resource odbc_procedures ( resource $connection_id )~
+    resource odbc_procedures ( resource $connection_id , string $qualifier ,~
+    string $owner , string $name )~
+
+Lists all procedures in the requested range.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+{qualifier}
+
+    The qualifier.
+
+{owner}
+
+    The owner. This parameter accepts the following search patterns: "%" to
+    match zero or more characters, and "_" to match a single character.
+
+{name}
+
+    The name. This parameter accepts the following search patterns: "%" to
+    match zero or more characters, and "_" to match a single character.
+
+==============================================================================
+*Return* *Values*
+
+Returns an ODBC result identifier containing the information or FALSE on
+failure.
+
+The result set has the following columns:
+
+  * PROCEDURE_QUALIFIER
+  * PROCEDURE_OWNER
+  * PROCEDURE_NAME
+  * NUM_INPUT_PARAMS
+  * NUM_OUTPUT_PARAMS
+  * NUM_RESULT_SETS
+  * REMARKS
+  * PROCEDURE_TYPE
+
+
+vim:ft=help:

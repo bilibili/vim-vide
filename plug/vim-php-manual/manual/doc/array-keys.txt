@@ -1,0 +1,85 @@
+array_keys
+
+(PHP 4, PHP 5, PHP 7)
+
+array_keys — Return all the keys or a subset of the keys of an array
+
+==============================================================================
+*Description*
+
+    array array_keys ( array $array [, mixed $search_value = null [, bool~
+    $strict = false ]] )~
+
+array_keys() returns the keys, numeric and string, from the {array}.
+
+If the optional {search_value} is specified, then only the keys for that value
+are returned. Otherwise, all the keys from the {array} are returned.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    An array containing keys to return.
+
+{search_value}
+
+    If specified, then only keys containing these values are returned.
+
+{strict}
+
+    Determines if strict comparison (===) should be used during the search.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of all the keys in {array}.
+
+==============================================================================
+*Examples*
+
+Example #1 array_keys() example
+
+<?php >
+    $array = array(0 => 100, "color" => "red");
+    print_r(array_keys($array));
+
+    $array = array("blue", "red", "green", "blue", "blue");
+    print_r(array_keys($array, "blue"));
+
+    $array = array("color" => array("blue", "red", "green"),
+                   "size"  => array("small", "medium", "large"));
+    print_r(array_keys($array));
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => 0
+    [1] => color
+)
+Array
+(
+    [0] => 0
+    [1] => 3
+    [2] => 4
+)
+Array
+(
+    [0] => color
+    [1] => size
+)
+
+==============================================================================
+*See* *Also*
+
+  * |array_values| - Return all the values of an array
+  * |array_combine| - Creates an array by using one array for keys and another
+    for its values
+  * |array_key_exists| - Checks if the given key or index exists in the array
+  * |array_search| - Searches the array for a given value and returns the
+    first corresponding key if successful
+
+
+vim:ft=help:

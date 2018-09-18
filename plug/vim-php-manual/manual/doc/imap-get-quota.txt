@@ -1,0 +1,104 @@
+imap_get_quota
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+imap_get_quota — Retrieve the quota level settings, and usage statics per
+mailbox
+
+==============================================================================
+*Description*
+
+    array imap_get_quota ( resource $imap_stream , string $quota_root )~
+
+Retrieve the quota level settings, and usage statics per mailbox.
+
+For a non-admin user version of this function, please see the 
+|imap_get_quotaroot| function of PHP.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{quota_root}
+
+    {quota_root} should normally be in the form of user.name where name is the
+    mailbox you wish to retrieve information about.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with integer values limit and usage for the given mailbox.
+The value of limit represents the total amount of space allowed for this
+mailbox. The usage value represents the mailboxes current level of capacity.
+Will return FALSE in the case of failure.
+
+As of PHP 4.3, the function more properly reflects the functionality as
+dictated by the >> RFC2087. The array return value has changed to support an
+unlimited number of returned resources (i.e. messages, or sub-folders) with
+each named resource receiving an individual array key. Each key value then
+contains an another array with the usage and limit values within it.
+
+For backwards compatibility reasons, the original access methods are still
+available for use, although it is suggested to update.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_get_quota() example
+
+<?php >
+    $mbox = imap_open("{imap.example.org}", "mailadmin", "password", OP_HALFOPEN)
+          or die("can't connect: " . imap_last_error());
+
+    $quota_value = imap_get_quota($mbox, "user.kalowsky");
+    if (is_array($quota_value)) {
+        echo "Usage level is: " . $quota_value['usage'];
+        echo "Limit level is: " . $quota_value['limit'];
+    }
+
+    imap_close($mbox);
+<?>
+
+Example #2 imap_get_quota() 4.3 or greater example
+
+<?php >
+    $mbox = imap_open("{imap.example.org}", "mailadmin", "password", OP_HALFOPEN)
+          or die("can't connect: " . imap_last_error());
+
+    $quota_values = imap_get_quota($mbox, "user.kalowsky");
+    if (is_array($quota_values)) {
+       $storage = $quota_values['STORAGE'];
+       echo "STORAGE usage level is: " .  $storage['usage'];
+       echo "STORAGE limit level is: " .  $storage['limit'];
+
+       $message = $quota_values['MESSAGE'];
+       echo "MESSAGE usage level is: " .  $message['usage'];
+       echo "MESSAGE limit is: " .  $message['limit'];
+
+       /* ...  */
+    }
+
+    imap_close($mbox);
+<?>
+
+==============================================================================
+*Notes*
+
+This function is currently only available to users of the c-client2000 or
+greater library.
+
+The given {imap_stream} must be opened as the mail administrator, otherwise
+this function will fail.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_open| - Open an IMAP stream to a mailbox
+  * |imap_set_quota| - Sets a quota for a given mailbox
+  * |imap_get_quotaroot| - Retrieve the quota settings per user
+
+
+vim:ft=help:

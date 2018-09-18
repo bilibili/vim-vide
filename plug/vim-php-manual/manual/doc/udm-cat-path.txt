@@ -1,0 +1,65 @@
+udm_cat_path
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5, PECL mnogosearch >= 1.0.0)
+
+udm_cat_path — Get the path to the current category
+
+==============================================================================
+*Description*
+
+    array udm_cat_path ( resource $agent , string $category )~
+
+Returns an array describing the path in the categories tree from the tree root
+to the current one, specified by {category}.
+
+==============================================================================
+*Parameters*
+
+{agent}
+
+    A link to Agent, received after call to |udm_alloc_agent|.
+
+{category}
+
+==============================================================================
+*Return* *Values*
+
+The returned array consists of pairs. Elements with even index numbers contain
+the category paths, odd elements contain the corresponding category names.
+
+For example, the call $array=udm_cat_path($agent, '02031D'); may return the
+following array:
+
+ $array[0] will contain ''
+ $array[1] will contain 'Root'
+ $array[2] will contain '02'
+ $array[3] will contain 'Sport'
+ $array[4] will contain '0203'
+ $array[5] will contain 'Auto'
+ $array[4] will contain '02031D'
+ $array[5] will contain 'Ferrari'
+
+==============================================================================
+*Examples*
+
+Example #1 Specifying path to the current category in the following format: '>
+Root > Sport > Auto > Ferrari'
+
+<?php >
+      $cat_path_arr = udm_cat_path($udm_agent, $cat);
+      $cat_path = '';
+      for ($i=0; $i<count($cat_path_arr); $i+=2) {
+        $path = $cat_path_arr[$i];
+        $name = $cat_path_arr[$i+1];
+        $cat_path .= " > <a href=\"$_SERVER[PHP_SELF]?cat=$path\">$name</a> ";
+      }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |udm_cat_list| - Get all the categories on the same level with the current
+    one
+
+
+vim:ft=help:

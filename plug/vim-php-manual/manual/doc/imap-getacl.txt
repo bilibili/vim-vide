@@ -1,0 +1,61 @@
+imap_getacl
+
+(PHP 5, PHP 7)
+
+imap_getacl — Gets the ACL for a given mailbox
+
+==============================================================================
+*Description*
+
+    array imap_getacl ( resource $imap_stream , string $mailbox )~
+
+Gets the ACL for a given mailbox.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{mailbox}
+
+    The mailbox name, see |imap_open| for more information
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array of "folder" => "acl" pairs.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_getacl() example
+
+<?php >
+
+    print_r(imap_getacl($conn_id, 'user.joecool'));
+
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [asubfolder] => lrswipcda
+    [anothersubfolder] => lrswipcda
+)
+
+==============================================================================
+*Notes*
+
+This function is currently only available to users of the c-client2000 or
+greater library.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_setacl| - Sets the ACL for a given mailbox
+
+
+vim:ft=help:

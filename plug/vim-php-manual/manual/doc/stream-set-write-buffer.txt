@@ -1,0 +1,59 @@
+stream_set_write_buffer
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+stream_set_write_buffer — Sets write file buffering on the given stream
+
+==============================================================================
+*Description*
+
+    int stream_set_write_buffer ( resource $stream , int $buffer )~
+
+Sets the buffering for write operations on the given {stream} to {buffer}
+bytes.
+
+==============================================================================
+*Parameters*
+
+{stream}
+
+    The file pointer.
+
+{buffer}
+
+    The number of bytes to buffer. If {buffer} is 0 then write operations are
+    unbuffered. This ensures that all writes with |fwrite| are completed
+    before other processes are allowed to write to that output stream.
+
+==============================================================================
+*Return* *Values*
+
+Returns 0 on success, or another value if the request cannot be honored.
+
+==============================================================================
+*Examples*
+
+Example #1 stream_set_write_buffer() example
+
+The following example demonstrates how to use stream_set_write_buffer() to
+create an unbuffered stream.
+
+<?php >
+    $fp = fopen($file, "w");
+    if ($fp) {
+      if (stream_set_write_buffer($fp, 0) !== 0) {
+          // changing the buffering failed
+      }
+      fwrite($fp, $output);
+      fclose($fp);
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fopen| - Opens file or URL
+  * |fwrite| - Binary-safe file write
+
+
+vim:ft=help:

@@ -1,0 +1,36 @@
+yp_get_default_domain
+
+(PHP 4, PHP 5 <= 5.0.5)
+
+yp_get_default_domain — Fetches the machine's default NIS domain
+
+==============================================================================
+*Description*
+
+    string yp_get_default_domain ( void )~
+
+Returns the default domain of the node. Can be used as the domain parameter
+for successive NIS calls.
+
+A NIS domain can be described a group of NIS maps. Every host that needs to
+look up information binds itself to a certain domain. Refer to the documents
+mentioned at the beginning for more detailed information.
+
+==============================================================================
+*Return* *Values*
+
+Returns the default domain of the node or FALSE. Can be used as the domain
+parameter for successive NIS calls.
+
+==============================================================================
+*Examples*
+
+Example #1 Example for the default domain
+
+<?php >
+    $domain = yp_get_default_domain();
+    echo "Default NIS domain is: " . $domain;
+<?>
+
+
+vim:ft=help:

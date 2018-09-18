@@ -1,0 +1,55 @@
+udm_get_res_field
+
+(PHP 4 >= 4.0.5, PHP 5 <= 5.0.5, PECL mnogosearch >= 1.0.0)
+
+udm_get_res_field — Fetch a result field
+
+==============================================================================
+*Description*
+
+    string udm_get_res_field ( resource $res , int $row , int $field )~
+
+Fetch a mnoGoSearch result field.
+
+==============================================================================
+*Parameters*
+
+{res}
+
+    {res} - a link to result identifier, received after call to |udm_find|.
+
+{row}
+
+    {row} - the number of the link on the current page. May have values from 0
+    to {UDM_PARAM_NUM_ROWS-1}.
+
+{field}
+
+    {field} - field identifier, may have the following values:
+      + UDM_FIELD_URL - document URL field
+      + UDM_FIELD_CONTENT - document Content-type field (for example, text/
+        html).
+      + UDM_FIELD_CATEGORY - document category field. Use |udm_cat_path| to
+        get full path to current category from the categories tree root. (This
+        parameter is available only in PHP 4.0.6 or later).
+      + UDM_FIELD_TITLE - document title field.
+      + UDM_FIELD_KEYWORDS - document keywords field (from META KEYWORDS tag).
+      + UDM_FIELD_DESC - document description field (from META DESCRIPTION
+        tag).
+      + UDM_FIELD_TEXT - document body text (the first couple of lines to give
+        an idea of what the document is about).
+      + UDM_FIELD_SIZE - document size.
+      + UDM_FIELD_URLID - unique URL ID of the link.
+      + UDM_FIELD_RATING - page rating (as calculated by mnoGoSearch).
+      + UDM_FIELD_MODIFIED - last-modified field in unixtime format.
+      + UDM_FIELD_ORDER - the number of the current document in set of found
+        documents.
+      + UDM_FIELD_CRC - document CRC.
+
+==============================================================================
+*Return* *Values*
+
+udm_get_res_field() returns result field value on success, FALSE on error.
+
+
+vim:ft=help:

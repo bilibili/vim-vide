@@ -1,0 +1,34 @@
+ncurses_init
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_init — Initialize ncurses
+
+==============================================================================
+*Description*
+
+    void ncurses_init ( void )~
+
+Initializes the ncurses interface. This function must be used before any other
+ncurses function call.
+
+Note that |ncurses_end| must be called before exiting from the program, or the
+terminal will not be restored to its proper non-visual mode.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |ncurses_end| - Stop using ncurses, clean up the screen
+
+
+vim:ft=help:

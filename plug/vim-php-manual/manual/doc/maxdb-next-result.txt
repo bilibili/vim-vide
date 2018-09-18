@@ -1,0 +1,32 @@
+maxdb_next_result
+
+maxdb::next_result
+
+(PECL maxdb >= 1.0)
+
+maxdb_next_result -- maxdb::next_result — Prepare next result from multi_query
+
+==============================================================================
+*Description*
+
+    bool maxdb_next_result ( resource $link )~
+
+Since multiple queries are not yet supported, maxdb_next_result() returns
+always FALSE.
+
+==============================================================================
+*Return* *Values*
+
+Returns FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_multi_query| - Performs a query on the database
+  * |maxdb_more_results| - Check if there any more query results from a multi
+    query
+  * |maxdb_store_result| - Transfers a result set from the last query
+  * |maxdb_use_result| - Initiate a result set retrieval
+
+
+vim:ft=help:

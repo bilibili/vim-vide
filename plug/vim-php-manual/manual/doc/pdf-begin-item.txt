@@ -1,0 +1,16 @@
+PDF_begin_item
+
+(PECL pdflib >= 2.0.0)
+
+PDF_begin_item — Open structure element or other content item
+
+==============================================================================
+*Description*
+
+    int PDF_begin_item ( resource $pdfdoc , string $tag , string $optlist )~
+
+Opens a structure element or other content item with attributes supplied as
+options.
+
+
+vim:ft=help:

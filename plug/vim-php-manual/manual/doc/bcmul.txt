@@ -1,0 +1,54 @@
+bcmul
+
+(PHP 4, PHP 5, PHP 7)
+
+bcmul — Multiply two arbitrary precision numbers
+
+==============================================================================
+*Description*
+
+    string bcmul ( string $left_operand , string $right_operand [, int $scale~
+    = 0 ] )~
+
+Multiply the {left_operand} by the {right_operand}.
+
+==============================================================================
+*Parameters*
+
+{left_operand}
+
+    The left operand, as a string.
+
+{right_operand}
+
+    The right operand, as a string.
+
+{ scale}
+
+    This optional parameter is used to set the number of digits after the
+    decimal place in the result. If omitted, it will default to the scale set
+    globally with the |bcscale| function, or fallback to 0 if this has not
+    been set.
+
+==============================================================================
+*Return* *Values*
+
+Returns the result as a string.
+
+==============================================================================
+*Examples*
+
+Example #1 bcmul() example
+
+<?php >
+    echo bcmul('1.34747474747', '35', 3); // 47.161
+    echo bcmul('2', '4'); // 8
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |bcdiv| - Divide two arbitrary precision numbers
+
+
+vim:ft=help:

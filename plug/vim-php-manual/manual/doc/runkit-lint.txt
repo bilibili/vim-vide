@@ -1,0 +1,39 @@
+runkit_lint
+
+(PECL runkit >= 0.7.0)
+
+runkit_lint — Check the PHP syntax of the specified php code
+
+==============================================================================
+*Description*
+
+    bool runkit_lint ( string $code )~
+
+The runkit_lint() function performs a syntax (lint) check on the specified php
+code testing for scripting errors. This is similar to using php -l from the
+command line except runkit_lint() accepts actual code rather than a filename.
+
+    Note: Sandbox support (required for runkit_lint(), |runkit_lint_file|, and
+    the Runkit_Sandbox class) is only available as of PHP 5.1.0 or specially
+    patched versions of PHP 5.0, and requires that thread safety be enabled.
+    See the README file included in the runkit package for more information.
+
+==============================================================================
+*Parameters*
+
+{code}
+
+    PHP Code to be lint checked
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |runkit_lint_file| - Check the PHP syntax of the specified file
+
+
+vim:ft=help:

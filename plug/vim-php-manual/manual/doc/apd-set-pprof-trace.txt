@@ -1,0 +1,46 @@
+apd_set_pprof_trace
+
+(PECL apd >= 0.2)
+
+apd_set_pprof_trace — Starts the session debugging
+
+==============================================================================
+*Description*
+
+    string apd_set_pprof_trace ([ string $dump_directory =~
+    ini_get("apd.dumpdir") [, string $fragment = "pprof"~
+    ]] )~
+
+Starts debugging to pprof_{process_id} in the dump directory.
+
+==============================================================================
+*Parameters*
+
+{dump_directory}
+
+    The directory in which the profile dump file is written. If not set, the
+    apd.dumpdir setting from the php.ini file is used.
+
+{fragment}
+
+==============================================================================
+*Return* *Values*
+
+Returns path of the destination file.
+
+==============================================================================
+*Examples*
+
+Example #1 apd_set_pprof_trace() example
+
+<?php >
+    apd_set_pprof_trace();
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |apd_set_session_trace| - Starts the session debugging
+
+
+vim:ft=help:

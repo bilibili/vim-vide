@@ -1,0 +1,269 @@
+mysqlnd_qc_get_core_stats
+
+(PECL mysqlnd_qc >= 1.0.0)
+
+mysqlnd_qc_get_core_stats — Statistics collected by the core of the query
+cache
+
+==============================================================================
+*Description*
+
+    array mysqlnd_qc_get_core_stats ( void )~
+
+Returns an array of statistics collected by the core of the cache plugin. The
+same data fields will be reported for any storage handler because the data is
+collected by the core.
+
+The PHP configuration setting mysqlnd_qc.collect_statistics controls the
+collection of statistics. The collection of statistics is disabled by default
+for performance reasons. Disabling the collection of statistics will also
+disable the collection of time related statistics.
+
+The PHP configuration setting mysqlnd_qc.collect_time_statistics controls the
+collection of time related statistics.
+
+The scope of the core statistics is the PHP process. Depending on your
+deployment model a PHP process may handle one or multiple requests.
+
+Statistics are aggregated for all cache entries and all storage handler. It is
+not possible to tell how much queries originating from mysqli, PDO_MySQL or
+mysql API calls have contributed to the aggregated data values.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Array of core statistics
+
+           Statistic                         Description               Version
+                                Statement is considered cacheable and
+                                cached data has been reused. Statement
+                                is considered cacheable and a cache    Since
+cache_hit                       miss happened but the statement got    1.0.0.
+                                cached by someone else while we
+                                process it and thus we can fetch the
+                                result from the refreshed cache.
+                                Statement is considered cacheable...
+
+                                  * ... and has been added to the
+                                    cache
+
+                                  * ... but the PHP configuration
+                                    directive setting of
+cache_miss                          mysqlnd_qc.cache_no_table = 1 has  Since
+                                    prevented caching.                 1.0.0.
+
+                                  * ... but an unbuffered result set
+                                    is requested.
+
+                                  * ... but a buffered result set was
+                                    empty.
+
+                                Statement is considered cacheable and
+                                has been added to the cache. Take care
+                                when calculating derived statistics.
+                                Storage handler with a storage life
+                                time beyond process scope may report   Since
+cache_put                       cache_put = 0 together with cache_hit  1.0.0.
+                                > 0, if another process has filled the
+                                cache. You may want to use num_entries
+                                from |mysqlnd_qc_get_cache_info| if
+                                the handler supports it ( default, APC
+                                ).
+                                Statement is considered cacheable
+query_should_cache              based on query string analysis. The    Since
+                                statement may or may not be added to   1.0.0.
+                                the cache. See also cache_put.
+query_should_not_cache          Statement is considered not cacheable  Since
+                                based on query string analysis.        1.0.0.
+                                Statement is considered not cacheable
+query_not_cached                or it is considered cachable but the   Since
+                                storage handler has not returned a     1.0.0.
+                                hash key for it.
+                                Statement is considered cacheable...
+
+                                  * ... and statement has been run
+                                    without errors
+                                                                       Since
+query_could_cache                 * ... and meta data shows at least   1.0.0.
+                                    one column in the result set
+
+                                The statement may or may not be in the
+                                cache already. It may or may not be
+                                added to the cache later on.
+                                Statement is considered cacheable and
+                                we have found it in the cache but we
+                                have not replayed the cached data yet
+query_found_in_cache            and we have not send the result set to Since
+                                the client yet. This is not considered 1.0.0.
+                                a cache hit because the client might
+                                not fetch the result or the cached
+                                data may be faulty.
+                                Statement is considered cacheable and
+                                it may or may not be in the cache
+query_uncached_other            already but either replaying cached
+                                data has failed, no result set is
+                                available or some other error has
+                                happened.
+                                Statement has not been cached because
+                                the result set has at least one column
+                                which has no table name in its meta
+                                data. An example of such a query is
+                                SELECT SLEEP(1). To cache those        Since
+query_uncached_no_table         statements you have to change default  1.0.0.
+                                value of the PHP configuration
+                                directive mysqlnd_qc.cache_no_table
+                                and set mysqlnd_qc.cache_no_table = 1.
+                                Often, it is not desired to cache such
+                                statements.
+                                Statement would have been cached if a
+                                buffered result set had been used. The Since
+query_uncached_use_result       situation is also considered as a      1.0.0.
+                                cache miss and cache_miss will be
+                                incremented as well.
+                                Aggregated run time (ms) of all cached Since
+query_aggr_run_time_cache_hit   queries. Cached queries are those      1.0.0.
+                                which have incremented cache_hit.
+                                Aggregated run time (ms) of all        Since
+query_aggr_run_time_cache_put   uncached queries that have been put    1.0.0.
+                                into the cache. See also cache_put.
+                                Aggregated run time (ms) of all
+query_aggr_run_time_total       uncached and cached queries that have  Since
+                                been inspected and executed by the     1.0.0.
+                                query cache.
+                                Aggregated store time (ms) of all
+query_aggr_store_time_cache_hit cached queries. Cached queries are     Since
+                                those which have incremented cache_hit 1.0.0.
+                                .
+                                Aggregated store time ( ms) of all     Since
+query_aggr_store_time_cache_put uncached queries that have been put    1.0.0.
+                                into the cache. See also cache_put.
+                                Aggregated store time (ms) of all
+query_aggr_store_time_total     uncached and cached queries that have  Since
+                                been inspected and executed by the     1.0.0.
+                                query cache.
+                                Recorded incoming network traffic (
+                                bytes) send from MySQL to PHP. The
+receive_bytes_recorded          traffic may or may not have been added Since
+                                to the cache. The traffic is the total 1.0.0.
+                                for all queries regardless if cached
+                                or not.
+                                Network traffic replayed during cache.
+receive_bytes_replayed          This is the total amount of incoming   Since
+                                traffic saved because of the usage of  1.0.0.
+                                the query cache plugin.
+                                Recorded outgoing network traffic (
+                                bytes) send from MySQL to PHP. The
+send_bytes_recorded             traffic may or may not have been added Since
+                                to the cache. The traffic is the total 1.0.0.
+                                for all queries regardless if cached
+                                or not.
+                                Network traffic replayed during cache.
+send_bytes_replayed             This is the total amount of outgoing   Since
+                                traffic saved because of the usage of  1.0.0.
+                                the query cache plugin.
+                                Number of cache misses which triggered
+slam_stale_refresh              serving stale data until the client    Since
+                                causing the cache miss has refreshed   1.0.0.
+                                the cache entry.
+slam_stale_hit                  Number of cache hits while a stale     Since
+                                cache entry gets refreshed.            1.0.0.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_qc_get_core_stats() example
+
+<?php >
+    /* Enable collection of statistics - default: disabled */
+    ini_set("mysqlnd_qc.collect_statistics", 1);
+
+    /* Enable collection of all timing related statistics -
+    default: enabled but overruled by mysqlnd_qc.collect_statistics = 0 */
+    ini_set("mysqlnd_qc.collect_time_statistics", 1);
+
+    /* Populate the cache, e.g. using mysqli */
+    $mysqli = new mysqli('host', 'user', 'password', 'schema');
+
+    /* Cache miss and cache put */
+    $mysqli->query("/*qc=on*/SELECT id FROM test");
+    /* Cache hit */
+    $mysqli->query("/*qc=on*/SELECT id FROM test");
+
+    /* Display core statistics */
+    var_dump(mysqlnd_qc_get_core_stats());
+<?>
+
+The above examples will output:
+
+array(26) {
+  ["cache_hit"]=>
+  string(1) "1"
+  ["cache_miss"]=>
+  string(1) "1"
+  ["cache_put"]=>
+  string(1) "1"
+  ["query_should_cache"]=>
+  string(1) "2"
+  ["query_should_not_cache"]=>
+  string(1) "0"
+  ["query_not_cached"]=>
+  string(1) "0"
+  ["query_could_cache"]=>
+  string(1) "2"
+  ["query_found_in_cache"]=>
+  string(1) "1"
+  ["query_uncached_other"]=>
+  string(1) "0"
+  ["query_uncached_no_table"]=>
+  string(1) "0"
+  ["query_uncached_no_result"]=>
+  string(1) "0"
+  ["query_uncached_use_result"]=>
+  string(1) "0"
+  ["query_aggr_run_time_cache_hit"]=>
+  string(1) "4"
+  ["query_aggr_run_time_cache_put"]=>
+  string(3) "395"
+  ["query_aggr_run_time_total"]=>
+  string(3) "399"
+  ["query_aggr_store_time_cache_hit"]=>
+  string(1) "2"
+  ["query_aggr_store_time_cache_put"]=>
+  string(1) "8"
+  ["query_aggr_store_time_total"]=>
+  string(2) "10"
+  ["receive_bytes_recorded"]=>
+  string(2) "65"
+  ["receive_bytes_replayed"]=>
+  string(2) "65"
+  ["send_bytes_recorded"]=>
+  string(2) "29"
+  ["send_bytes_replayed"]=>
+  string(2) "29"
+  ["slam_stale_refresh"]=>
+  string(1) "0"
+  ["slam_stale_hit"]=>
+  string(1) "0"
+  ["request_counter"]=>
+  int(1)
+  ["process_hash"]=>
+  int(3547549858)
+}
+
+
+==============================================================================
+*See* *Also*
+
+  * Runtime configuration
+  * mysqlnd_qc.collect_statistics
+  * mysqlnd_qc.time_statistics
+  * |mysqlnd_qc_get_cache_info| - Returns information on the current handler,
+    the number of cache entries and cache entries, if available
+
+
+vim:ft=help:

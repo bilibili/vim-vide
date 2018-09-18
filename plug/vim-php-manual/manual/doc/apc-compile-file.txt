@@ -1,0 +1,36 @@
+apc_compile_file
+
+(PECL apc >= 3.0.13)
+
+apc_compile_file — Stores a file in the bytecode cache, bypassing all filters.
+
+==============================================================================
+*Description*
+
+    mixed apc_compile_file ( string $filename [, bool $atomic = true ] )~
+
+Stores a file in the bytecode cache, bypassing all filters.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Full or relative path to a PHP file that will be compiled and stored in
+    the bytecode cache.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |apc_bin_dumpfile| - Output a binary dump of cached files and user
+    variables to a file
+  * |apc_bin_loadfile| - Load a binary dump from a file into the APC file/user
+    cache
+
+
+vim:ft=help:

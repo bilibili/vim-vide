@@ -1,0 +1,51 @@
+px_update_record
+
+(PECL paradox >= 1.4.0)
+
+px_update_record — Updates record in paradox database
+
+==============================================================================
+*Description*
+
+    bool px_update_record ( resource $pxdoc , array $data , int $num )~
+
+Updates an exiting record in the database. The record starts at 0.
+
+The record data is passed as an array of field values. The elements in the
+array must correspond to the fields in the database. If the array has less
+elements than fields in the database, the remaining fields will be set to
+null.
+
+    Note:
+
+    This function is only available if pxlib >= 0.6.0 is used.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+{data}
+
+    Associated array containing the field values as returned by 
+    |px_retrieve_record|.
+
+{num}
+
+    The record number is an artificial number counting records in the order as
+    they are stored in the database. The first record has number 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+|px_insert_record| - Inserts record into paradox database
+
+
+vim:ft=help:

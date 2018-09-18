@@ -1,0 +1,81 @@
+dio_open
+
+(PHP 4 >= 4.2.0, PHP 5 <= 5.0.5, PHP 7)
+
+dio_open — Opens a file (creating it if necessary) at a lower level than the C
+library input/ouput stream functions allow.
+
+==============================================================================
+*Description*
+
+    resource dio_open ( string $filename , int $flags [, int $mode = 0 ] )~
+
+dio_open() opens a file and returns a new file descriptor for it.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The pathname of the file to open.
+
+{flags}
+
+    The {flags} parameter is a bitwise-ORed value comprising flags from the
+    following list. This value must include one of O_RDONLY, O_WRONLY, or
+    O_RDWR. Additionally, it may include any combination of the other flags
+    from this list.
+      + O_RDONLY - opens the file for read access.
+
+      + O_WRONLY - opens the file for write access.
+
+      + O_RDWR - opens the file for both reading and writing.
+
+      + O_CREAT - creates the file, if it doesn't already exist.
+
+      + O_EXCL - if both O_CREAT and O_EXCL are set and the file already
+        exists, dio_open() will fail.
+
+      + O_TRUNC - if the file exists and is opened for write access, the file
+        will be truncated to zero length.
+
+      + O_APPEND - write operations write data at the end of the file.
+
+      + O_NONBLOCK - sets non blocking mode.
+
+      + O_NOCTTY - prevent the OS from assigning the opened file as the
+        process's controlling terminal when opening a TTY device file.
+
+{mode}
+
+    If {flags} contains O_CREAT, {mode} will set the permissions of the file
+    (creation permissions). {mode} is required for correct operation when
+    O_CREAT is specified in {flags} and is ignored otherwise.
+
+    The actual permissions assigned to the created file will be affected by
+    the process's umask setting as per usual.
+
+==============================================================================
+*Return* *Values*
+
+A file descriptor or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 Opening a file descriptor
+
+<?php >
+
+    $fd = dio_open('/dev/ttyS0', O_RDWR | O_NOCTTY | O_NONBLOCK);
+
+    dio_close($fd);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |dio_close| - Closes the file descriptor given by fd
+
+
+vim:ft=help:

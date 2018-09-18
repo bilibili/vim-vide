@@ -1,0 +1,18 @@
+fdf_enum_values
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+fdf_enum_values — Call a user defined function for each document value
+
+==============================================================================
+*Description*
+
+    bool fdf_enum_values ( resource $fdf_document , callable $function [,~
+    mixed $userdata ] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

@@ -1,0 +1,25 @@
+mysqli_execute
+
+(PHP 5, PHP 7)
+
+mysqli_execute — Alias for mysqli_stmt_execute()
+
+==============================================================================
+*Description*
+
+This function is an alias of mysqli_stmt_execute().
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    mysqli_execute() is deprecated and will be removed.
+
+==============================================================================
+*See* *Also*
+
+  * mysqli_stmt_execute() - Executes a prepared Query
+
+
+vim:ft=help:

@@ -1,0 +1,30 @@
+variant_set
+
+(PHP 5, PHP 7)
+
+variant_set — Assigns a new value for a variant object
+
+==============================================================================
+*Description*
+
+    void variant_set ( variant $variant , mixed $value )~
+
+Converts {value} to a variant and assigns it to the {variant} object; no new
+variant object is created, and the old value of {variant} is freed/released.
+
+==============================================================================
+*Parameters*
+
+{variant}
+
+    The variant.
+
+{value}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

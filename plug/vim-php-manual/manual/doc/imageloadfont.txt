@@ -1,0 +1,73 @@
+imageloadfont
+
+(PHP 4, PHP 5, PHP 7)
+
+imageloadfont — Load a new font
+
+==============================================================================
+*Description*
+
+    int imageloadfont ( string $file )~
+
+imageloadfont() loads a user-defined bitmap and returns its identifier.
+
+==============================================================================
+*Parameters*
+
+{file}
+
+    The font file format is currently binary and architecture dependent. This
+    means you should generate the font files on the same type of CPU as the
+    machine you are running PHP on.
+
+                               Font file format
+      byte   C data                        description
+    position  type
+    byte 0-3 int    number of characters in the font
+    byte 4-7 int    value of first character in the font (often 32 for space)
+    byte     int    pixel width of each character
+    8-11
+    byte     int    pixel height of each character
+    12-15
+    byte 16- char   array with character data, one byte per pixel in each
+                    character, for a total of (nchars*width*height) bytes.
+
+==============================================================================
+*Return* *Values*
+
+The font identifier which is always bigger than 5 to avoid conflicts with
+built-in fonts or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 imageloadfont() usage example
+
+<?php >
+    // Create a new image instance
+    $im = imagecreatetruecolor(50, 20);
+    $black = imagecolorallocate($im, 0, 0, 0);
+    $white = imagecolorallocate($im, 255, 255, 255);
+
+    // Make the background white
+    imagefilledrectangle($im, 0, 0, 49, 19, $white);
+
+    // Load the gd font and write 'Hello'
+    $font = imageloadfont('./04b.gdf');
+    imagestring($im, $font, 0, 0, 'Hello', $black);
+
+    // Output to browser
+    header('Content-type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imagefontwidth| - Get font width
+  * |imagefontheight| - Get font height
+
+
+vim:ft=help:

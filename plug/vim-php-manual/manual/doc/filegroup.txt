@@ -1,0 +1,64 @@
+filegroup
+
+(PHP 4, PHP 5, PHP 7)
+
+filegroup — Gets file group
+
+==============================================================================
+*Description*
+
+    int filegroup ( string $filename )~
+
+Gets the file group. The group ID is returned in numerical format, use 
+|posix_getgrgid| to resolve it to a group name.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the file.
+
+==============================================================================
+*Return* *Values*
+
+Returns the group ID of the file, or FALSE if an error occurs. The group ID is
+returned in numerical format, use |posix_getgrgid| to resolve it to a group
+name. Upon failure, FALSE is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 Finding the group of a file
+
+<?php >
+    $filename = 'index.php';
+    print_r(posix_getgrgid(filegroup($filename)));
+<?>
+
+==============================================================================
+*Errors/Exceptions*
+
+Upon failure, an E_WARNING is emitted.
+
+==============================================================================
+*Notes*
+
+    Note: The results of this function are cached. See |clearstatcache| for
+    more details.
+
+Tip
+
+As of PHP 5.0.0, this function can also be used with some URL wrappers. Refer
+to Supported Protocols and Wrappers to determine which wrappers support |stat|
+family of functionality.
+
+==============================================================================
+*See* *Also*
+
+  * |fileowner| - Gets file owner
+  * |posix_getgrgid| - Return info about a group by group id
+  * safe_mode_gid
+
+
+vim:ft=help:

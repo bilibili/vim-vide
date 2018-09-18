@@ -1,0 +1,65 @@
+imagepsslantfont
+
+(PHP 4, PHP 5)
+
+imagepsslantfont — Slant a font
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    bool imagepsslantfont ( resource $font_index , float $slant )~
+
+Slant a given font.
+
+==============================================================================
+*Parameters*
+
+{font_index}
+
+    A font resource, returned by |imagepsloadfont|.
+
+{slant}
+
+    Slant level.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imagepsslantfont() example
+
+<?php >
+    // Load a .pfb font file
+    $font = imagepsloadfont('./px3l.pfb');
+
+    // Slant the font by 22.5
+    imagepsslantfont($font, 22.5);
+
+    // Do any operations with the font here
+
+    // Free the font from memory
+    imagepsfreefont($font);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                             Description
+7.0.0   T1Lib support was removed from PHP, thus this function was removed.
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available if PHP is compiled using
+    --with-t1lib[=DIR] .
+
+
+vim:ft=help:

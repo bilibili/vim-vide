@@ -1,0 +1,65 @@
+ingres_prepare
+
+(PECL ingres >= 1.1.0)
+
+ingres_prepare — Prepare a query for later execution
+
+==============================================================================
+*Description*
+
+    mixed ingres_prepare ( resource $link , string $query )~
+
+Prepares a query for execution by |ingres_execute|.
+
+The query becomes part of the currently open transaction. If there is no open
+transaction, |ingres_query| opens a new transaction. To close the transaction,
+you can call either |ingres_commit| to commit the changes made to the database
+or |ingres_rollback| to cancel these changes. When the script ends, any open
+transaction is rolled back (by calling |ingres_rollback|). You can also use 
+|ingres_autocommit| before opening a new transaction to have every SQL query
+immediately committed.
+
+    Note: Related Configurations
+
+    See also the ingres.describe, ingres.scrollable and ingres.utf8 directives
+    in Runtime Configuration.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    The connection link identifier
+
+{query}
+
+    A valid SQL query (see the Ingres SQL reference guide) in the Ingres
+    documentation. See the query parameter in |ingres_query| for a list of SQL
+    statements which cannot be executed using ingres_prepare()
+
+==============================================================================
+*Return* *Values*
+
+ingres_prepare() returns a query result identifier that is used with 
+|ingres_execute| to execute the query. To see if an error occurred, use 
+|ingres_errno|, |ingres_error|, or |ingres_errsqlstate|.
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_unbuffered_query| - Send an unbuffered SQL query to Ingres
+  * |ingres_fetch_array| - Fetch a row of result into an array
+  * |ingres_fetch_assoc| - Fetch a row of result into an associative array
+  * |ingres_fetch_object| - Fetch a row of result into an object
+  * |ingres_fetch_row| - Fetch a row of result into an enumerated array
+  * |ingres_commit| - Commit a transaction
+  * |ingres_rollback| - Roll back a transaction
+  * |ingres_autocommit| - Switch autocommit on or off
+  * |ingres_set_environment| - Set environment features controlling output
+    options
+  * |ingres_errno| - Get the last Ingres error number generated
+  * |ingres_error| - Get a meaningful error message for the last error
+    generated
+
+
+vim:ft=help:

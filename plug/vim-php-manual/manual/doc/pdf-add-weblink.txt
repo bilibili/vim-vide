@@ -1,0 +1,20 @@
+PDF_add_weblink
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_add_weblink — Add weblink for current page [deprecated]
+
+==============================================================================
+*Description*
+
+    bool PDF_add_weblink ( resource $pdfdoc , float $lowerleftx , float~
+    $lowerlefty , float $upperrightx , float $upperrighty , string $url )~
+
+Adds a weblink annotation to a target {url} on the Web. Returns TRUE on
+success or FALSE on failure.
+
+This function is deprecated since PDFlib version 6, use |PDF_create_action|
+with {type=URI} and |PDF_create_annotation| with {type=Link} instead.
+
+
+vim:ft=help:

@@ -1,0 +1,37 @@
+posix_setpgid
+
+(PHP 4, PHP 5, PHP 7)
+
+posix_setpgid — Set process group id for job control
+
+==============================================================================
+*Description*
+
+    bool posix_setpgid ( int $pid , int $pgid )~
+
+Let the process {pid} join the process group {pgid}.
+
+==============================================================================
+*Parameters*
+
+{pid}
+
+    The process id.
+
+{pgid}
+
+    The process group id.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * See POSIX.1 and the setsid(2) manual page on the POSIX system for more
+    informations on process groups and job control.
+
+
+vim:ft=help:

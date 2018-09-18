@@ -1,0 +1,35 @@
+event_base_priority_init
+
+(PECL libevent >= 0.0.2)
+
+event_base_priority_init — Set the number of event priority levels
+
+==============================================================================
+*Description*
+
+    bool event_base_priority_init ( resource $event_base , int $npriorities )~
+
+Sets the number of different event priority levels.
+
+By default all events are scheduled with the same priority ({npriorities}/2).
+Using event_base_priority_init() you can change the number of event priority
+levels and then set a desired priority for each event.
+
+==============================================================================
+*Parameters*
+
+{event_base}
+
+    Valid event base resource.
+
+{npriorities}
+
+    The number of event priority levels.
+
+==============================================================================
+*Return* *Values*
+
+event_base_priority_init() returns TRUE on success or FALSE on error.
+
+
+vim:ft=help:

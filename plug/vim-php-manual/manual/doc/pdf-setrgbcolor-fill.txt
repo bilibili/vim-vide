@@ -1,0 +1,20 @@
+PDF_setrgbcolor_fill
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_setrgbcolor_fill — Set fill rgb color values [deprecated]
+
+==============================================================================
+*Description*
+
+    bool PDF_setrgbcolor_fill ( resource $p , float $red , float $green ,~
+    float $blue )~
+
+Sets the current fill color to the supplied RGB values. Returns TRUE on
+success or FALSE on failure.
+
+This function is deprecated since PDFlib version 4, use |PDF_setcolor|
+instead.
+
+
+vim:ft=help:

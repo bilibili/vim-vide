@@ -1,0 +1,51 @@
+gnupg_addsignkey
+
+(PECL gnupg >= 0.5)
+
+gnupg_addsignkey — Add a key for signing
+
+==============================================================================
+*Description*
+
+    bool gnupg_addsignkey ( resource $identifier , string $fingerprint [,~
+    string $passphrase ] )~
+
+==============================================================================
+*Parameters*
+
+{identifier}
+
+    The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+{fingerprint}
+
+    The fingerprint key.
+
+{passphrase}
+
+    The pass phrase.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural gnupg_addsignkey() example
+
+<?php >
+    $res = gnupg_init();
+    gnupg_addsignkey($res,"8660281B6051D071D94B5B230549F9DC851566DC","test");
+<?>
+
+Example #2 OO gnupg_addsignkey() example
+
+<?php >
+    $gpg = new gnupg();
+    $gpg -> addsignkey("8660281B6051D071D94B5B230549F9DC851566DC","test");
+<?>
+
+
+vim:ft=help:

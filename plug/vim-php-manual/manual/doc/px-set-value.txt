@@ -1,0 +1,43 @@
+px_set_value
+
+(PECL paradox >= 1.1.0)
+
+px_set_value — Sets a value
+
+==============================================================================
+*Description*
+
+    bool px_set_value ( resource $pxdoc , string $name , float $value )~
+
+Sets various values.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+{name}
+
+    {name} can be one of the following.
+
+    numprimkeys
+
+        The number of primary keys. Paradox databases always use the first
+        numprimkeys fields for the primary index.
+
+{value}
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+|px_set_parameter| - Sets a parameter
+
+
+vim:ft=help:

@@ -1,0 +1,66 @@
+imagepsextendfont
+
+(PHP 4, PHP 5)
+
+imagepsextendfont — Extend or condense a font
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    bool imagepsextendfont ( resource $font_index , float $extend )~
+
+Extend or condense a font ({font_index}), if the value of the {extend}
+parameter is less than one you will be condensing the font.
+
+==============================================================================
+*Parameters*
+
+{font_index}
+
+    A font resource, returned by |imagepsloadfont|.
+
+{extend}
+
+    Extension value, must be greater than 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imagepsextendfont() example
+
+<?php >
+    // Load a .pfb font file
+    $font = imagepsloadfont('./px3l.pfb');
+
+    // Extend the font by 2.5
+    imagepsextendfont($font, 2.5);
+
+    // Do any operations with the font here
+
+    // Free the font from memory
+    imagepsfreefont($font);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                             Description
+7.0.0   T1Lib support was removed from PHP, thus this function was removed.
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available if PHP is compiled using
+    --with-t1lib[=DIR] .
+
+
+vim:ft=help:

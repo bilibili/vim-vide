@@ -1,0 +1,45 @@
+newt_win_menu
+
+(PECL newt >= 0.1)
+
+newt_win_menu —
+
+==============================================================================
+*Description*
+
+    int newt_win_menu ( string $title , string $text , int $suggestedWidth ,~
+    int $flexDown , int $flexUp , int $maxListHeight , array $items , int~
+    &$listItem [, string $button1 [, string $... ]] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{title}
+
+{text}
+
+{suggestedWidth}
+
+{flexDown}
+
+{flexUp}
+
+{maxListHeight}
+
+{items}
+
+{listItem}
+
+{button1}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

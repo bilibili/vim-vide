@@ -1,0 +1,25 @@
+newt_entry_get_value
+
+(PECL newt >= 0.1)
+
+newt_entry_get_value —
+
+==============================================================================
+*Description*
+
+    string newt_entry_get_value ( resource $entry )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{entry}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

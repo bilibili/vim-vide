@@ -1,0 +1,252 @@
+assert
+
+(PHP 4, PHP 5, PHP 7)
+
+assert — Checks if assertion is FALSE
+
+==============================================================================
+*Description*
+
+PHP 5 and 7
+
+    bool assert ( mixed $assertion [, string $description ] )~
+
+PHP 7
+
+    bool assert ( mixed $assertion [, Throwable $exception ] )~
+
+assert() will check the given {assertion} and take appropriate action if its
+result is FALSE.
+
+Traditional assertions (PHP 5 and 7)
+
+If the {assertion} is given as a string it will be evaluated as PHP code by 
+assert(). The advantages of a string {assertion} are less overhead when
+assertion checking is off and messages containing the {assertion} expression
+when an assertion fails. This means that if you pass a boolean condition as
+{assertion} this condition will not show up as parameter to the assertion
+function which you may have defined with the |assert_options| function, the
+condition is converted to a string before calling that handler function, and
+the boolean FALSE is converted as the empty string.
+
+Assertions should be used as a debugging feature only. You may use them for
+sanity-checks that test for conditions that should always be TRUE and that
+indicate some programming errors if not or to check for the presence of
+certain features like extension functions or certain system limits and
+features.
+
+Assertions should not be used for normal runtime operations like input
+parameter checks. As a rule of thumb your code should always be able to work
+correctly if assertion checking is not activated.
+
+The behavior of assert() may be configured by |assert_options| or by
+.ini-settings described in that functions manual page.
+
+The |assert_options| function and/or ASSERT_CALLBACK configuration directive
+allow a callback function to be set to handle failed assertions.
+
+assert() callbacks are particularly useful for building automated test suites
+because they allow you to easily capture the code passed to the assertion,
+along with information on where the assertion was made. While this information
+can be captured via other methods, using assertions makes it much faster and
+easier!
+
+The callback function should accept three arguments. The first argument will
+contain the file the assertion failed in. The second argument will contain the
+line the assertion failed on and the third argument will contain the
+expression that failed (if any — literal values such as 1 or "two" will not be
+passed via this argument). Users of PHP 5.4.8 and later may also provide a
+fourth optional argument, which will contain the {description} given to assert
+(), if it was set.
+
+Expectations (PHP 7 only)
+
+assert() is a language construct in PHP 7, allowing for the definition of
+expectations: assertions that take effect in development and testing
+environments, but are optimised away to have zero cost in production.
+
+While |assert_options| can still be used to control behaviour as described
+above for backward compatibility reasons, PHP 7 only code should use the two
+new configuration directives to control the behaviour of assert() and not call
+|assert_options|.
+
+                 PHP 7 configuration directives for assert()
+   Directive     Default                    Possible values
+                  value
+                           * 1: generate and execute code (development mode)
+zend.assertions  1         * 0: generate code but jump around it at runtime
+                           * -1: do not generate code (production mode)
+
+                           * 1: throw when the assertion fails, either by
+                             throwing the object provided as the {exception}
+                             or by throwing a new AssertionError object if
+assert.exception 0           {exception} wasn't provided
+                           * 0: use or generate a Throwable as described
+                             above, but only generate a warning based on that
+                             object rather than throwing it (compatible with
+                             PHP 5 behaviour)
+
+==============================================================================
+*Parameters*
+
+{assertion}
+
+    The assertion. In PHP 5, this must be either a string to be evaluated or a
+    boolean to be tested. In PHP 7, this may also be any expression that
+    returns a value, which will be executed and the result used to indicate
+    whether the assertion succeeded or failed.
+
+{description}
+
+    An optional description that will be included in the failure message if
+    the {assertion} fails.
+
+{exception}
+
+    In PHP 7, the second parameter can be a Throwable object instead of a
+    descriptive string, in which case this is the object that will be thrown
+    if the assertion fails and the assert.exception configuration directive is
+    enabled.
+
+==============================================================================
+*Return* *Values*
+
+FALSE if the assertion is false, TRUE otherwise.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        assert() is now a language construct and not a function. assertion()
+7.0.0   can now be an expression. The second parameter is now interpreted
+        either as an {exception} (if a Throwable object is given), or as the
+        {description} supported from PHP 5.4.8 onwards.
+        The {description} parameter was added. The {description} is also now
+5.4.8   provided to a callback function in ASSERT_CALLBACK mode as the fourth
+        argument.
+
+==============================================================================
+*Examples*
+
+Traditional assertions (PHP 5 and 7)
+
+Example #1 Handle a failed assertion with a custom handler
+
+<?php >
+    // Active assert and make it quiet
+    assert_options(ASSERT_ACTIVE, 1);
+    assert_options(ASSERT_WARNING, 0);
+    assert_options(ASSERT_QUIET_EVAL, 1);
+
+    // Create a handler function
+    function my_assert_handler($file, $line, $code)
+    {
+        echo "<hr>Assertion Failed:
+            File '$file'<br />
+            Line '$line'<br />
+            Code '$code'<br /><hr />";
+    }
+
+    // Set up the callback
+    assert_options(ASSERT_CALLBACK, 'my_assert_handler');
+
+    // Make an assertion that should fail
+    assert('mysql_query("")');
+<?>
+
+Example #2 Using a custom handler to print a description
+
+<?php >
+    // Active assert and make it quiet
+    assert_options(ASSERT_ACTIVE, 1);
+    assert_options(ASSERT_WARNING, 0);
+    assert_options(ASSERT_QUIET_EVAL, 1);
+
+    // Create a handler function
+    function my_assert_handler($file, $line, $code, $desc = null)
+    {
+        echo "Assertion failed at $file:$line: $code";
+        if ($desc) {
+            echo ": $desc";
+        }
+        echo "\n";
+    }
+
+    // Set up the callback
+    assert_options(ASSERT_CALLBACK, 'my_assert_handler');
+
+    // Make an assertion that should fail
+    assert('2 < 1');
+    assert('2 < 1', 'Two is less than one');
+<?>
+
+The above example will output:
+
+ Assertion failed at test.php:21: 2 < 1
+ Assertion failed at test.php:22: 2 < 1: Two is less than one
+
+
+Expectations (PHP 7 only)
+
+Example #3 Expectations without a custom exception
+
+<?php >
+    assert(true == false);
+    echo 'Hi!';
+<?>
+
+With zend.assertions set to 0, the above example will output:
+
+Hi!
+
+With zend.assertions set to 1 and assert.exception set to 0, the above example
+will output:
+
+Warning: assert(): assert(true == false) failed in - on line 2
+Hi!
+
+With zend.assertions set to 1 and assert.exception set to 1, the above example
+will output:
+
+Fatal error: Uncaught AssertionError: assert(true == false) in -:2
+Stack trace:
+#0 -(2): assert(false, 'assert(true == ...')
+#1 {main}
+  thrown in - on line 2
+
+Example #4 Expectations with a custom exception
+
+<?php >
+    class CustomError extends AssertionError {}
+
+    assert(true == false, new CustomError('True is not false!'));
+    echo 'Hi!';
+<?>
+
+With zend.assertions set to 0, the above example will output:
+
+Hi!
+
+With zend.assertions set to 1 and assert.exception set to 0, the above example
+will output:
+
+Warning: assert(): CustomError: True is not false! in -:4
+Stack trace:
+#0 {main} failed in - on line 4
+Hi!
+
+With zend.assertions set to 1 and assert.exception set to 1, the above example
+will output:
+
+Fatal error: Uncaught CustomError: True is not false! in -:4
+Stack trace:
+#0 {main}
+  thrown in - on line 4
+
+==============================================================================
+*See* *Also*
+
+  * |assert_options| - Set/get the various assert flags
+
+
+vim:ft=help:

@@ -1,0 +1,13 @@
+gmp_div
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_div — Alias of |gmp_div_q|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |gmp_div_q|.
+
+
+vim:ft=help:

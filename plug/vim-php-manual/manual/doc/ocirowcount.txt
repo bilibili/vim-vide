@@ -1,0 +1,18 @@
+ocirowcount
+
+(PHP 4, PHP 5, PHP 7, PECL OCI8 >= 1.0.0)
+
+ocirowcount — Alias of |oci_num_rows|
+
+==============================================================================
+*Description*
+
+Alias of |oci_num_rows|
+
+Warning
+
+This alias has been DEPRECATED as of PHP 5.4.0. Relying on this alias is
+highly discouraged.
+
+
+vim:ft=help:

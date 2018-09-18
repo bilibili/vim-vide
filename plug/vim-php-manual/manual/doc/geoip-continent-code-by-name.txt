@@ -1,0 +1,62 @@
+geoip_continent_code_by_name
+
+(PECL geoip >= 1.0.3)
+
+geoip_continent_code_by_name — Get the two letter continent code
+
+==============================================================================
+*Description*
+
+    string geoip_continent_code_by_name ( string $hostname )~
+
+The geoip_continent_code_by_name() function will return the two letter
+continent code corresponding to a hostname or an IP address.
+
+==============================================================================
+*Parameters*
+
+{hostname}
+
+    The hostname or IP address whose location is to be looked-up.
+
+==============================================================================
+*Return* *Values*
+
+Returns the two letter continent code on success, or FALSE if the address
+cannot be found in the database.
+
+  Continent codes
+Code Continent name
+AF   Africa
+AN   Antarctica
+AS   Asia
+EU   Europe
+NA   North america
+OC   Oceania
+SA   South america
+
+==============================================================================
+*Examples*
+
+Example #1 A geoip_continent_code_by_name() example
+
+This will print where the host example.com is located.
+
+<?php >
+    $continent = geoip_continent_code_by_name('www.example.com');
+    if ($continent) {
+        echo 'This host is located in: ' . $continent;
+    }
+<?>
+
+The above example will output:
+
+ This host is located in: NA
+
+==============================================================================
+*See* *Also*
+
+  * |geoip_country_code_by_name| - Get the two letter country code
+
+
+vim:ft=help:

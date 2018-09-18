@@ -1,0 +1,95 @@
+hash_algos
+
+(PHP 5 >= 5.1.2, PHP 7, PECL hash >= 1.1)
+
+hash_algos — Return a list of registered hashing algorithms
+
+==============================================================================
+*Description*
+
+    array hash_algos ( void )~
+
+==============================================================================
+*Return* *Values*
+
+Returns a numerically indexed array containing the list of supported hashing
+algorithms.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Support for gost-crypto was added. This implements the GOST hash
+5.6.0   function using the CryptoPro S-box tables as specified by >> RFC 4357,
+        section 11.2.
+5.4.0   Support for joaat, fnv132 and fnv164 was added. Support for Salsa10
+        and Salsa20 was removed.
+5.3.0   Support for md2, ripemd256, ripemd320, salsa10, salsa20, snefru256 and
+        sha224 was added
+
+==============================================================================
+*Examples*
+
+Example #1 hash_algos() example
+
+As of PHP 5.6.0, hash_algos() will return the following list of algorithm
+names.
+
+<?php >
+    print_r(hash_algos());
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => md2
+    [1] => md4
+    [2] => md5
+    [3] => sha1
+    [4] => sha224
+    [5] => sha256
+    [6] => sha384
+    [7] => sha512
+    [8] => ripemd128
+    [9] => ripemd160
+    [10] => ripemd256
+    [11] => ripemd320
+    [12] => whirlpool
+    [13] => tiger128,3
+    [14] => tiger160,3
+    [15] => tiger192,3
+    [16] => tiger128,4
+    [17] => tiger160,4
+    [18] => tiger192,4
+    [19] => snefru
+    [20] => snefru256
+    [21] => gost
+    [22] => gost-crypto
+    [23] => adler32
+    [24] => crc32
+    [25] => crc32b
+    [26] => fnv132
+    [27] => fnv1a32
+    [28] => fnv164
+    [29] => fnv1a64
+    [30] => joaat
+    [31] => haval128,3
+    [32] => haval160,3
+    [33] => haval192,3
+    [34] => haval224,3
+    [35] => haval256,3
+    [36] => haval128,4
+    [37] => haval160,4
+    [38] => haval192,4
+    [39] => haval224,4
+    [40] => haval256,4
+    [41] => haval128,5
+    [42] => haval160,5
+    [43] => haval192,5
+    [44] => haval224,5
+    [45] => haval256,5
+)
+
+
+vim:ft=help:

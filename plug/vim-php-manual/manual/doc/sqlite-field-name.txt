@@ -1,0 +1,47 @@
+sqlite_field_name
+
+SQLiteResult::fieldName
+
+SQLiteUnbuffered::fieldName
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.0)
+
+sqlite_field_name -- SQLiteResult::fieldName -- SQLiteUnbuffered::fieldName — 
+Returns the name of a particular field
+
+==============================================================================
+*Description*
+
+    string sqlite_field_name ( resource $result , int $field_index )~
+
+Object oriented style (method):
+
+    string SQLiteResult::fieldName ( int $field_index )~
+    string SQLiteUnbuffered::fieldName ( int $field_index )~
+
+Given the ordinal column number, {field_index}, sqlite_field_name() returns
+the name of that field in the result set {result}.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The SQLite result resource. This parameter is not required when using the
+    object-oriented method.
+
+{field_index}
+
+    The ordinal column number in the result set.
+
+==============================================================================
+*Return* *Values*
+
+Returns the name of a field in an SQLite result set, given the ordinal column
+number; FALSE on error.
+
+The column names returned by SQLITE_ASSOC and SQLITE_BOTH will be case-folded
+according to the value of the sqlite.assoc_case configuration option.
+
+
+vim:ft=help:

@@ -1,0 +1,23 @@
+newt_refresh
+
+(PECL newt >= 0.1)
+
+newt_refresh — Updates modified portions of the screen
+
+==============================================================================
+*Description*
+
+    void newt_refresh ( void )~
+
+To increase performance, newt only updates the display when it needs to, not
+when the program tells it to write to the terminal. Applications can force
+newt to immediately update modified portions of the screen by calling this
+function.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

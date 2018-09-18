@@ -1,0 +1,58 @@
+fbsql_field_name
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_field_name — Get the name of the specified field in a result
+
+==============================================================================
+*Description*
+
+    string fbsql_field_name ( resource $result [, int $field_index ] )~
+
+Returns the name of the specified field index.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    A result pointer returned by |fbsql_list_fields|.
+
+{field_index}
+
+    The numerical offset of the field. The field index starts at 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns the name as a string, or FALSE if the field doesn't exist.
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_field_name() example
+
+<?php >
+    // The users table consists of three fields:
+    //   user_id
+    //   username
+    //   password.
+
+    $res = fbsql_db_query("users", "select * from users", $link);
+
+    echo fbsql_field_name($res, 0) . "\n";
+    echo fbsql_field_name($res, 2);
+<?>
+
+The above example will output:
+
+user_id
+password
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_field_type| - Get the type of the specified field in a result
+
+
+vim:ft=help:

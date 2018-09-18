@@ -1,0 +1,38 @@
+hash_update
+
+(PHP 5 >= 5.1.2, PHP 7, PECL hash >= 1.1)
+
+hash_update — Pump data into an active hashing context
+
+==============================================================================
+*Description*
+
+    bool hash_update ( resource $context , string $data )~
+
+==============================================================================
+*Parameters*
+
+{context}
+
+    Hashing context returned by |hash_init|.
+
+{data}
+
+    Message to be included in the hash digest.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE.
+
+==============================================================================
+*See* *Also*
+
+  * |hash_init| - Initialize an incremental hashing context
+  * |hash_update_file| - Pump data into an active hashing context from a file
+  * |hash_update_stream| - Pump data into an active hashing context from an
+    open stream
+  * |hash_final| - Finalize an incremental hash and return resulting digest
+
+
+vim:ft=help:

@@ -1,0 +1,59 @@
+checkdate
+
+(PHP 4, PHP 5, PHP 7)
+
+checkdate — Validate a Gregorian date
+
+==============================================================================
+*Description*
+
+    bool checkdate ( int $month , int $day , int $year )~
+
+Checks the validity of the date formed by the arguments. A date is considered
+valid if each parameter is properly defined.
+
+==============================================================================
+*Parameters*
+
+{month}
+
+    The month is between 1 and 12 inclusive.
+
+{day}
+
+    The day is within the allowed number of days for the given {month}. Leap
+    {year}s are taken into consideration.
+
+{year}
+
+    The year is between 1 and 32767 inclusive.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the date given is valid; otherwise returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 checkdate() example
+
+<?php >
+    var_dump(checkdate(12, 31, 2000));
+    var_dump(checkdate(2, 29, 2001));
+<?>
+
+The above example will output:
+
+bool(true)
+bool(false)
+
+==============================================================================
+*See* *Also*
+
+  * |mktime| - Get Unix timestamp for a date
+  * |strtotime| - Parse about any English textual datetime description into a
+    Unix timestamp
+
+
+vim:ft=help:

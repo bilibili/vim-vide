@@ -1,0 +1,96 @@
+array_fill
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+array_fill — Fill an array with values
+
+==============================================================================
+*Description*
+
+    array array_fill ( int $start_index , int $num , mixed $value )~
+
+Fills an array with {num} entries of the value of the {value} parameter, keys
+starting at the {start_index} parameter.
+
+==============================================================================
+*Parameters*
+
+{start_index}
+
+    The first index of the returned array.
+
+    If {start_index} is negative, the first index of the returned array will
+    be {start_index} and the following indices will start from zero (see
+    example).
+
+{num}
+
+    Number of elements to insert. Must be greater than or equal to zero.
+
+{value}
+
+    Value to use for filling
+
+==============================================================================
+*Return* *Values*
+
+Returns the filled array
+
+==============================================================================
+*Errors/Exceptions*
+
+Throws a E_WARNING if {num} is less than zero.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.6.0   {num} may now be zero. Previously, {num} was required to be greater
+        than zero.
+
+==============================================================================
+*Examples*
+
+Example #1 array_fill() example
+
+<?php >
+    $a = array_fill(5, 6, 'banana');
+    $b = array_fill(-2, 4, 'pear');
+    print_r($a);
+    print_r($b);
+<?>
+
+The above example will output:
+
+Array
+(
+    [5]  => banana
+    [6]  => banana
+    [7]  => banana
+    [8]  => banana
+    [9]  => banana
+    [10] => banana
+)
+Array
+(
+    [-2] => pear
+    [0] => pear
+    [1] => pear
+    [2] => pear
+)
+
+==============================================================================
+*Notes*
+
+See also the Arrays section of manual for a detailed explanation of negative
+keys.
+
+==============================================================================
+*See* *Also*
+
+  * |array_fill_keys| - Fill an array with values, specifying keys
+  * |str_repeat| - Repeat a string
+  * |range| - Create an array containing a range of elements
+
+
+vim:ft=help:

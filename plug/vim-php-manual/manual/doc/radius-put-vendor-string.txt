@@ -1,0 +1,69 @@
+radius_put_vendor_string
+
+(PECL radius >= 1.1.0)
+
+radius_put_vendor_string — Attaches a vendor specific string attribute
+
+==============================================================================
+*Description*
+
+    bool radius_put_vendor_string ( resource $radius_handle , int $vendor ,~
+    int $type , string $value [, int $options = 0 [, int $tag ]] )~
+
+Attaches a vendor specific string attribute to the current RADIUS request. In
+general, |radius_put_vendor_attr| is a more useful function for attaching
+string attributes, as it is binary safe.
+
+    Note:
+
+    A request must be created via |radius_create_request| before this function
+    can be called.
+
+==============================================================================
+*Parameters*
+
+{radius_handle}
+
+    The RADIUS resource.
+
+{vendor}
+
+    The vendor ID.
+
+{type}
+
+    The attribute type.
+
+{value}
+
+    The attribute value. This value is expected by the underlying library to
+    be null terminated, therefore this parameter is not binary safe.
+
+{options}
+
+    A bitmask of the attribute options. The available options include
+    RADIUS_OPTION_TAGGED and RADIUS_OPTION_SALT.
+
+{tag}
+
+    The attribute tag. This parameter is ignored unless the
+    RADIUS_OPTION_TAGGED option is set.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+     Version                       Description
+PECL radius 1.3.0 The {options} and {tag} parameters were added.
+
+==============================================================================
+*See* *Also*
+
+  * |radius_put_vendor_int| - Attaches a vendor specific integer attribute
+
+
+vim:ft=help:

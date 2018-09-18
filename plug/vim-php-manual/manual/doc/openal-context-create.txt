@@ -1,0 +1,31 @@
+openal_context_create
+
+(PECL openal >= 0.1.0)
+
+openal_context_create — Create an audio processing context
+
+==============================================================================
+*Description*
+
+    resource openal_context_create ( resource $device )~
+
+==============================================================================
+*Parameters*
+
+{device}
+
+    An Open AL(Device) resource (previously created by |openal_device_open|).
+
+==============================================================================
+*Return* *Values*
+
+Returns an Open AL(Context) resource on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_device_open| - Initialize the OpenAL audio layer
+  * |openal_context_destroy| - Destroys a context
+
+
+vim:ft=help:

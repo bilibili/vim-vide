@@ -1,0 +1,60 @@
+unlink
+
+(PHP 4, PHP 5, PHP 7)
+
+unlink — Deletes a file
+
+==============================================================================
+*Description*
+
+    bool unlink ( string $filename [, resource $context ] )~
+
+Deletes {filename}. Similar to the Unix C unlink() function. An E_WARNING
+level error will be generated on failure.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the file.
+
+{context}
+
+
+        Note: Context support was added with PHP 5.0.0. For a description of
+        contexts, refer to Streams.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        As of PHP 5.0.0 unlink() can also be used with some URL wrappers.
+5.0.0   Refer to Supported Protocols and Wrappers for a listing of which
+        wrappers support unlink().
+
+==============================================================================
+*Examples*
+
+Example #1 Basic unlink() usage
+
+<?php >
+    $fh = fopen('test.html', 'a');
+    fwrite($fh, '<h1>Hello world!</h1>');
+    fclose($fh);
+
+    unlink('test.html');
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |rmdir| - Removes directory
+
+
+vim:ft=help:

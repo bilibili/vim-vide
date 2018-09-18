@@ -1,0 +1,48 @@
+geoip_db_avail
+
+(PECL geoip >= 1.0.1)
+
+geoip_db_avail — Determine if GeoIP Database is available
+
+==============================================================================
+*Description*
+
+    bool geoip_db_avail ( int $database )~
+
+The geoip_db_avail() function returns if the corresponding GeoIP Database is
+available and can be opened on disk.
+
+It does not indicate if the file is a proper database, only if it is readable.
+
+==============================================================================
+*Parameters*
+
+{database}
+
+    The database type as an integer. You can use the various constants defined
+    with this extension (ie: GEOIP_*_EDITION).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE is database exists, FALSE if not found, or NULL on error.
+
+==============================================================================
+*Examples*
+
+Example #1 A geoip_db_avail() example
+
+This will output the current database version string.
+
+<?php >
+
+    if (geoip_db_avail(GEOIP_COUNTRY_EDITION))
+        print geoip_database_info(GEOIP_COUNTRY_EDITION);
+<?>
+
+The above example will output:
+
+GEO-106FREE 20080801 Build 1 Copyright (c) 2006 MaxMind LLC All Rights Reserved
+
+
+vim:ft=help:

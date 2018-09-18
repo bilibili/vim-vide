@@ -1,0 +1,139 @@
+sqlsrv_prepare
+
+(No version information available, might only be in Git)
+
+sqlsrv_prepare — Prepares a query for execution
+
+==============================================================================
+*Description*
+
+    mixed sqlsrv_prepare ( resource $conn , string $sql [, array $params [,~
+    array $options ]] )~
+
+Prepares a query for execution. This function is ideal for preparing a query
+that will be executed multiple times with different parameter values.
+
+==============================================================================
+*Parameters*
+
+{conn}
+
+    A connection resource returned by |sqlsrv_connect|.
+
+{sql}
+
+    The string that defines the query to be prepared and executed.
+
+{params}
+
+    An array specifying parameter information when executing a parameterized
+    query. Array elements can be any of the following:
+      + A literal value
+      + A PHP variable
+      + An array with this structure: array($value [, $direction [, $phpType
+        [, $sqlType]]])
+    The following table describes the elements in the array structure above:
+
+                               Array structure
+     Element                             Description
+    $value     A literal value, a PHP variable, or a PHP by-reference
+               variable.
+    $direction One of the following SQLSRV constants used to indicate the
+    (optional) parameter direction: SQLSRV_PARAM_IN, SQLSRV_PARAM_OUT,
+               SQLSRV_PARAM_INOUT. The default value is SQLSRV_PARAM_IN.
+    $phpType   A SQLSRV_PHPTYPE_* constant that specifies PHP data type of the
+    (optional) returned value.
+    $sqlType   A SQLSRV_SQLTYPE_* constant that specifies the SQL Server data
+    (optional) type of the input value.
+
+{options}
+
+    An array specifing query property options. The supported keys are
+    described in the following table:
+
+                                Query Options
+             Key                   Values                 Description
+                                                  Sets the query timeout in
+    QueryTimeout           A positive integer     seconds. By default, the
+                           value.                 driver will wait
+                                                  indefinitely for results.
+                                                  Configures the driver to
+                                                  send all stream data at
+                                                  execution (TRUE), or to send
+    SendStreamParamsAtExec TRUE or FALSE (the     stream data in chunks (FALSE
+                           default is TRUE)       ). By default, the value is
+                                                  set to TRUE. For more
+                                                  information, see 
+                                                  |sqlsrv_send_stream_data|.
+                           SQLSRV_CURSOR_FORWARD, See >> Specifying a Cursor
+                           SQLSRV_CURSOR_STATIC,  Type and Selecting Rows in
+    Scrollable             SQLSRV_CURSOR_DYNAMIC, the Microsoft SQLSRV
+                           or                     documentation.
+                           SQLSRV_CURSOR_KEYSET
+
+==============================================================================
+*Return* *Values*
+
+Returns a statement resource on success and FALSE if an error occurred.
+
+==============================================================================
+*Examples*
+
+Example #1 sqlsrv_prepare() example
+
+This example demonstrates how to prepare a statement with sqlsrv_prepare() and
+re-execute it multiple times (with different parameter values) using 
+|sqlsrv_execute|.
+
+<?php >
+    $serverName = "serverName\sqlexpress";
+    $connectionInfo = array( "Database"=>"dbName", "UID"=>"username", "PWD"=>
+    "password");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+    if( $conn === false) {
+        die( print_r( sqlsrv_errors(), true));
+    }
+
+    $sql = "UPDATE Table_1
+            SET OrderQty = ?
+            WHERE SalesOrderID = ?";
+
+    // Initialize parameters and prepare the statement. 
+    // Variables $qty and $id are bound to the statement, $stmt.
+    $qty = 0; $id = 0;
+    $stmt = sqlsrv_prepare( $conn, $sql, array( &$qty, &$id));
+    if( !$stmt ) {
+        die( print_r( sqlsrv_errors(), true));
+    }
+
+    // Set up the SalesOrderDetailID and OrderQty information. 
+    // This array maps the order ID to order quantity in key=>value pairs.
+    $orders = array( 1=>10, 2=>20, 3=>30);
+
+    // Execute the statement for each order.
+    foreach( $orders as $id => $qty) {
+        // Because $id and $qty are bound to $stmt1, their updated
+        // values are used with each execution of the statement. 
+        if( sqlsrv_execute( $stmt ) === false ) {
+              die( print_r( sqlsrv_errors(), true));
+        }
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+When you prepare a statement that uses variables as parameters, the variables
+are bound to the statement. This means that if you update the values of the
+variables, the next time you execute the statement it will run with updated
+parameter values. For statements that you plan to execute only once, use 
+|sqlsrv_query|.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlsrv_execute| - Executes a statement prepared with sqlsrv_prepare
+  * |sqlsrv_query| - Prepares and executes a query.
+
+
+vim:ft=help:

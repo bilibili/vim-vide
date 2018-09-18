@@ -1,0 +1,108 @@
+filter_var
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+filter_var — Filters a variable with a specified filter
+
+==============================================================================
+*Description*
+
+    mixed filter_var ( mixed $variable [, int $filter = FILTER_DEFAULT [,~
+    mixed $options ]] )~
+
+==============================================================================
+*Parameters*
+
+{variable}
+
+    Value to filter. Note that scalar values are converted to string
+    internally before they are filtered.
+
+{filter}
+
+    The ID of the filter to apply. The Types of filters manual page lists the
+    available filters.
+
+    If omitted, FILTER_DEFAULT will be used, which is equivalent to
+    FILTER_UNSAFE_RAW. This will result in no filtering taking place by
+    default.
+
+{options}
+
+    Associative array of options or bitwise disjunction of flags. If filter
+    accepts options, flags can be provided in "flags" field of array. For the
+    "callback" filter, callable type should be passed. The callback must
+    accept one argument, the value to be filtered, and return the value after
+    filtering/sanitizing it.
+
+    <?php >
+    // for filters that accept options, use this format
+    $options = array(
+        'options' => array(
+            'default' => 3, // value to return if the filter fails
+            // other options here
+            'min_range' => 0
+        ),
+        'flags' => FILTER_FLAG_ALLOW_OCTAL,
+    );
+    $var = filter_var('0755', FILTER_VALIDATE_INT, $options);
+
+    // for filter that only accept flags, you can pass them directly
+    $var = filter_var('oops', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE
+    );
+
+    // for filter that only accept flags, you can also pass as an array
+    $var = filter_var('oops', FILTER_VALIDATE_BOOLEAN,
+                      array('flags' => FILTER_NULL_ON_FAILURE));
+
+    // callback validate filter
+    function foo($value)
+    {
+        // Expected format: Surname, GivenNames
+        if (strpos($value, ", ") === false) return false;
+        list($surname, $givennames) = explode(", ", $value, 2);
+        $empty = (empty($surname) || empty($givennames));
+        $notstrings = (!is_string($surname) || !is_string($givennames));
+        if ($empty || $notstrings) {
+            return false;
+        } else {
+            return $value;
+        }
+    }
+    $var = filter_var('Doe, Jane Sue', FILTER_CALLBACK, array('options' => 
+    'foo'));
+<    ?>
+
+==============================================================================
+*Return* *Values*
+
+Returns the filtered data, or FALSE if the filter fails.
+
+==============================================================================
+*Examples*
+
+Example #1 A filter_var() example
+
+<?php >
+    var_dump(filter_var('bob@example.com', FILTER_VALIDATE_EMAIL));
+    var_dump(filter_var('http://example.com', FILTER_VALIDATE_URL, 
+    FILTER_FLAG_PATH_REQUIRED));
+<?>
+
+The above example will output:
+
+string(15) "bob@example.com"
+bool(false)
+
+==============================================================================
+*See* *Also*
+
+  * |filter_var_array| - Gets multiple variables and optionally filters them
+  * |filter_input| - Gets a specific external variable by name and optionally
+    filters it
+  * |filter_input_array| - Gets external variables and optionally filters them
+  * Types of filters
+  * information about the callback type
+
+
+vim:ft=help:

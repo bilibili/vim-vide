@@ -1,0 +1,55 @@
+gmstrftime
+
+(PHP 4, PHP 5, PHP 7)
+
+gmstrftime — Format a GMT/UTC time/date according to locale settings
+
+==============================================================================
+*Description*
+
+    string gmstrftime ( string $format [, int $timestamp = time() ] )~
+
+Behaves the same as |strftime| except that the time returned is Greenwich Mean
+Time (GMT). For example, when run in Eastern Standard Time (GMT -0500), the
+first line below prints "Dec 31 1998 20:00:00", while the second prints "Jan
+01 1999 01:00:00".
+
+==============================================================================
+*Parameters*
+
+{format}
+
+    See description in |strftime|.
+
+{timestamp}
+
+    The optional {timestamp} parameter is an integer Unix timestamp that
+    defaults to the current local time if a {timestamp} is not given. In other
+    words, it defaults to the value of |time|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string formatted according to the given format string using the
+given {timestamp} or the current local time if no timestamp is given. Month
+and weekday names and other language dependent strings respect the current
+locale set with |setlocale|.
+
+==============================================================================
+*Examples*
+
+Example #1 gmstrftime() example
+
+<?php >
+    setlocale(LC_TIME, 'en_US');
+    echo strftime("%b %d %Y %H:%M:%S", mktime(20, 0, 0, 12, 31, 98)) . "\n";
+    echo gmstrftime("%b %d %Y %H:%M:%S", mktime(20, 0, 0, 12, 31, 98)) . "\n";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |strftime| - Format a local time/date according to locale settings
+
+
+vim:ft=help:

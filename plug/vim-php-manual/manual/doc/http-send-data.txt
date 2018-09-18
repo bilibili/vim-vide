@@ -1,0 +1,37 @@
+http_send_data
+
+(PECL pecl_http >= 0.1.0)
+
+http_send_data — Send arbitrary data
+
+==============================================================================
+*Description*
+
+    bool http_send_data ( string $data )~
+
+Sends raw data with support for (multiple) range requests.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    data to send
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |http_send_file| - Send file
+  * |http_send_stream| - Send stream
+  * |http_throttle| - HTTP throttling
+  * |http_send_content_type| - Send Content-Type
+  * |http_send_content_disposition| - Send Content-Disposition
+  * the  HttpResponse class if you are using PHP 5.1.0 and above
+
+
+vim:ft=help:

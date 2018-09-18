@@ -1,0 +1,64 @@
+sha1_file
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+sha1_file — Calculate the sha1 hash of a file
+
+==============================================================================
+*Description*
+
+    string sha1_file ( string $filename [, bool $raw_output = false ] )~
+
+Calculates the sha1 hash of the file specified by {filename} using the >> US
+Secure Hash Algorithm 1, and returns that hash. The hash is a 40-character
+hexadecimal number.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The filename of the file to hash.
+
+{raw_output}
+
+    When TRUE, returns the digest in raw binary format with a length of 20.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string on success, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 sha1_file() example
+
+<?php >
+    foreach(glob('/home/Kalle/myproject/*.php') as $ent)
+    {
+        if(is_dir($ent))
+        {
+            continue;
+        }
+
+        echo $ent . ' (SHA1: ' . sha1_file($ent) . ')', PHP_EOL;
+    }
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.1.0   Changed the function to use the streams API. It means that you can use
+        it with wrappers, like sha1_file('http://example.com/..')
+
+==============================================================================
+*See* *Also*
+
+  * |sha1| - Calculate the sha1 hash of a string
+  * |md5_file| - Calculates the md5 hash of a given file
+  * |crc32| - Calculates the crc32 polynomial of a string
+
+
+vim:ft=help:

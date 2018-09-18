@@ -1,0 +1,28 @@
+trader_atan
+
+(PECL trader >= 0.2.0)
+
+trader_atan — Vector Trigonometric ATan
+
+==============================================================================
+*Description*
+
+    array trader_atan ( array $real )~
+
+Calculates the arc tangent for each value in {real} and returns the resulting
+array.
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

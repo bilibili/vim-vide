@@ -1,0 +1,62 @@
+gnupg_decryptverify
+
+(PECL gnupg >= 0.2)
+
+gnupg_decryptverify — Decrypts and verifies a given text
+
+==============================================================================
+*Description*
+
+    array gnupg_decryptverify ( resource $identifier , string $text , string~
+    &$plaintext )~
+
+Decrypts and verifies a given text and returns information about the
+signature.
+
+==============================================================================
+*Parameters*
+
+{identifier}
+
+    The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+{text}
+
+    The text being decrypted.
+
+{plaintext}
+
+    The parameter {plaintext} gets filled with the decrypted text.
+
+==============================================================================
+*Return* *Values*
+
+On success, this function returns information about the signature and fills
+the {plaintext} parameter with the decrypted text. On failure, this function
+returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural gnupg_decryptverify() example
+
+<?php >
+    $plaintext = "";
+    $res = gnupg_init();
+    gnupg_adddecryptkey($res,"8660281B6051D071D94B5B230549F9DC851566DC","test");
+    $info = gnupg_decryptverify($res,$text,$plaintext);
+    print_r($info);
+<?>
+
+Example #2 OO gnupg_decryptverify() example
+
+<?php >
+    $plaintext = "";
+    $gpg = new gnupg();
+    $gpg -> adddecryptkey("8660281B6051D071D94B5B230549F9DC851566DC","test");
+    $info = $gpg -> decryptverify($text,$plaintext);
+    print_r($info);
+<?>
+
+
+vim:ft=help:

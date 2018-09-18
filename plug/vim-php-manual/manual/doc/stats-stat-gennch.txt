@@ -1,0 +1,25 @@
+stats_stat_gennch
+
+(PECL stats >= 1.0.0)
+
+stats_stat_gennch — Not documented
+
+==============================================================================
+*Description*
+
+    float stats_stat_gennch ( int $n )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{n}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

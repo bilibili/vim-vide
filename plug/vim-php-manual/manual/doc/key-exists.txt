@@ -1,0 +1,13 @@
+key_exists
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+key_exists — Alias of |array_key_exists|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |array_key_exists|.
+
+
+vim:ft=help:

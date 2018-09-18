@@ -1,0 +1,63 @@
+ftp_rmdir
+
+(PHP 4, PHP 5, PHP 7)
+
+ftp_rmdir — Removes a directory
+
+==============================================================================
+*Description*
+
+    bool ftp_rmdir ( resource $ftp_stream , string $directory )~
+
+Removes the specified {directory} on the FTP server.
+
+==============================================================================
+*Parameters*
+
+{ftp_stream}
+
+    The link identifier of the FTP connection.
+
+{directory}
+
+    The directory to delete. This must be either an absolute or relative path
+    to an empty directory.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 ftp_rmdir() example
+
+<?php >
+
+    $dir = 'www/';
+
+    // set up basic connection
+    $conn_id = ftp_connect($ftp_server);
+
+    // login with username and password
+    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+
+    // try to delete the directory $dir
+    if (ftp_rmdir($conn_id, $dir)) {
+        echo "Successfully deleted $dir\n";
+    } else {
+        echo "There was a problem while deleting $dir\n";
+    }
+
+    ftp_close($conn_id);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ftp_mkdir| - Creates a directory
+
+
+vim:ft=help:

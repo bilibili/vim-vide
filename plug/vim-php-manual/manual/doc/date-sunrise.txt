@@ -1,0 +1,101 @@
+date_sunrise
+
+(PHP 5, PHP 7)
+
+date_sunrise — Returns time of sunrise for a given day and location
+
+==============================================================================
+*Description*
+
+    mixed date_sunrise ( int $timestamp [, int $format = SUNFUNCS_RET_STRING~
+    [, float $latitude = ini_get("date.default_latitude") [, float~
+    $longitude = ini_get("date.default_longitude") [, float $zenith~
+    = ini_get("date.sunrise_zenith") [, float $gmt_offset = 0 ]]]]]~
+)~
+
+date_sunrise() returns the sunrise time for a given day (specified as a
+{timestamp}) and location.
+
+==============================================================================
+*Parameters*
+
+{timestamp}
+
+    The {timestamp} of the day from which the sunrise time is taken.
+
+{format}
+
+                              {format} constants
+           constant                      description                 example
+    SUNFUNCS_RET_STRING    returns the result as string            16:46
+    SUNFUNCS_RET_DOUBLE    returns the result as float             16.78243132
+    SUNFUNCS_RET_TIMESTAMP returns the result as integer           1095034606
+                           (timestamp)
+
+{latitude}
+
+    Defaults to North, pass in a negative value for South. See also:
+    date.default_latitude
+
+{longitude}
+
+    Defaults to East, pass in a negative value for West. See also:
+    date.default_longitude
+
+{zenith}
+
+    Default: date.sunrise_zenith
+
+{gmtoffset}
+
+    Specified in hours.
+
+==============================================================================
+*Return* *Values*
+
+Returns the sunrise time in a specified {format} on success or FALSE on
+failure.
+
+==============================================================================
+*Errors/Exceptions*
+
+Every call to a date/time function will generate a E_NOTICE if the time zone
+is not valid, and/or a E_STRICT or E_WARNING message if using the system
+settings or the TZ environment variable. See also |date_default_timezone_set|
+
+==============================================================================
+*Changelog*
+
+Version                      Description
+5.1.0   Now issues the E_STRICT and E_NOTICE time zone errors.
+
+==============================================================================
+*Examples*
+
+Example #1 date_sunrise() example
+
+<?php >
+
+    /* calculate the sunrise time for Lisbon, Portugal
+    Latitude: 38.4 North
+    Longitude: 9 West
+    Zenith ~= 90
+    offset: +1 GMT
+    */
+
+    echo date("D M d Y"). ', sunrise time : ' .date_sunrise(time(), 
+    SUNFUNCS_RET_STRING, 38.4, -9, 90, 1);
+
+<?>
+
+The above example will output something similar to:
+
+Mon Dec 20 2004, sunrise time : 08:54
+
+==============================================================================
+*See* *Also*
+
+  * |date_sunset| - Returns time of sunset for a given day and location
+
+
+vim:ft=help:

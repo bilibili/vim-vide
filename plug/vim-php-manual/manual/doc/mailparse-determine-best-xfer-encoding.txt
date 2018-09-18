@@ -1,0 +1,44 @@
+mailparse_determine_best_xfer_encoding
+
+(PECL mailparse >= 0.9.0)
+
+mailparse_determine_best_xfer_encoding — Gets the best way of encoding
+
+==============================================================================
+*Description*
+
+    string mailparse_determine_best_xfer_encoding ( resource $fp )~
+
+Figures out the best way of encoding the content read from the given file
+pointer.
+
+==============================================================================
+*Parameters*
+
+{fp}
+
+    A valid file pointer, which must be seek-able.
+
+==============================================================================
+*Return* *Values*
+
+Returns one of the character encodings supported by the mbstring module.
+
+==============================================================================
+*Examples*
+
+Example #1 mailparse_determine_best_xfer_encoding() example
+
+<?php >
+
+    $fp = fopen('somemail.eml', 'r');
+    echo 'Best encoding: ' . mailparse_determine_best_xfer_encoding($fp);
+
+<?>
+
+The above example will output something similar to:
+
+Best encoding: 7bit
+
+
+vim:ft=help:

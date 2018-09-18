@@ -1,0 +1,27 @@
+event_base_new
+
+(PECL libevent >= 0.0.1)
+
+event_base_new — Create and initialize new event base
+
+==============================================================================
+*Description*
+
+    resource event_base_new ( void )~
+
+Returns new event base, which can be used later in |event_base_set|, 
+|event_base_loop| and other functions.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+event_base_new() returns valid event base resource on success or FALSE on
+error.
+
+
+vim:ft=help:

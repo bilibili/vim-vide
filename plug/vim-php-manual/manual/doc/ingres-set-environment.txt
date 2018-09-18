@@ -1,0 +1,132 @@
+ingres_set_environment
+
+(PECL ingres >= 1.2.0)
+
+ingres_set_environment — Set environment features controlling output options
+
+==============================================================================
+*Description*
+
+    bool ingres_set_environment ( resource $link , array $options )~
+
+ingres_set_environment() is called to set environmental options that affect
+the output of certain values from Ingres, such as the timezone, date format,
+decimal character separator, and float precision.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    The connection link identifier
+
+{options}
+
+    An enumerated array of option name/value pairs. The following table lists
+    the option name and the expected type
+
+         Option name      Option           Description                 Example
+                           type
+                                  The threshold by which a
+                                  2-digit year is determined to
+    date_century_boundary integer be in the current century or   50
+                                  in the next century.
+                                  Equivalent to
+                                  II_DATE_CENTURY_BOUNDARY
+                                  Controls the timezone of the
+                                  session. If not set, it will
+                                  default the value defined by
+    timezone              string  II_TIMEZONE_NAME. If           UNITED-KINGDOM
+                                  II_TIMEZONE_NAME is not
+                                  defined, NA-PACIFIC (GMT-8
+                                  with Daylight Savings) is
+                                  used.
+                                  Sets the allowable input and
+                                  output format for Ingres
+                                  dates. Defaults to the value
+                                  defined by II_DATE_FORMAT. If
+                                  II_DATE_FORMAT is not set, the
+                                  default date format is US, for
+                                  example mm/dd/yy. Valid values
+                                  for date_format are:
+
+    date_format           integer   * INGRES_DATE_DMY            INGRES_DATE_ISO4
+                                    * INGRES_DATE_FINISH
+                                    * INGRES_DATE_GERMAN
+                                    * INGRES_DATE_ISO
+                                    * INGRES_DATE_ISO4
+                                    * INGRES_DATE_MDY
+                                    * INGRES_DATE_MULTINATIONAL
+                                    * INGRES_DATE_MULTINATIONAL4
+                                    * INGRES_DATE_YMD
+                                    * INGRES_DATE_US
+
+    decimal_separator     string  The character identifier for   ","
+                                  decimal data
+                                  Leading or trailing currency
+                                  sign. Valid values for
+                                  money_lort are:
+    money_lort            integer                                INGRES_MONEY_LEADING
+                                    * INGRES_MONEY_LEADING
+                                    * INGRES_MONEY_TRAILING
+
+    money_sign            string  The currency symbol to be used €
+                                  with the MONEY datatype
+    money_precision       integer The precision of the MONEY     2
+                                  datatype
+    float4_precision      integer Precision of the FLOAT4        10
+                                  datatype
+    float8_precision      integer Precision of the FLOAT8 data   10
+                                  The amount of data in bytes to
+                                  fetch at a time when
+    blob_segment_length   integer retrieving BLOB or CLOB data.  8192
+                                  Defaults to 4096 bytes when
+                                  not set explicitly
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Set date_format to ISO4
+
+<?php >
+    $options = array( "date_format" => INGRES_DATE_ISO4 );
+
+    if (ingres_set_environment($link, $options))
+    {
+        $result=ingres_query($link,"select date('now') as date");
+
+        while ( $object = ingres_fetch_object ($result) ) {
+            echo $object->date."\n";
+        }
+    }
+<?>
+
+Example #2 Set timezone to HONG-KONG
+
+<?php >
+
+    $options = array( "timezone" => "HONG-KONG");
+
+    if (ingres_set_environment($link, $options))
+    {
+        $result=ingres_query($link,"select date('now') as date");
+
+        while ( $object = ingres_fetch_object ($result) ) {
+            echo $object->date."\n";
+        }
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_connect| - Open a connection to an Ingres database
+  * |ingres_query| - Send an SQL query to Ingres
+
+
+vim:ft=help:

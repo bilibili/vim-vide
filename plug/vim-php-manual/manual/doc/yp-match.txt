@@ -1,0 +1,54 @@
+yp_match
+
+(PHP 4, PHP 5 <= 5.0.5)
+
+yp_match — Returns the matched line
+
+==============================================================================
+*Description*
+
+    string yp_match ( string $domain , string $map , string $key )~
+
+Returns the value associated with the passed {key} out of the specified {map}.
+
+==============================================================================
+*Parameters*
+
+{domain}
+
+    The NIS domain name.
+
+{map}
+
+    The NIS map.
+
+{key}
+
+    This key must be exact.
+
+==============================================================================
+*Return* *Values*
+
+Returns the value, or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 Example for NIS match
+
+<?php >
+    $entry = yp_match($domain, "passwd.byname", "joe");
+    echo "Matched entry is: " . $entry;
+<?>
+
+The above example will output something similar to:
+
+joe:##joe:11111:100:Joe User:/home/j/joe:/usr/local/bin/bash
+
+==============================================================================
+*See* *Also*
+
+  * |yp_get_default_domain| - Fetches the machine's default NIS domain
+
+
+vim:ft=help:

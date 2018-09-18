@@ -1,0 +1,47 @@
+similar_text
+
+(PHP 4, PHP 5, PHP 7)
+
+similar_text — Calculate the similarity between two strings
+
+==============================================================================
+*Description*
+
+    int similar_text ( string $first , string $second [, float &$percent ] )~
+
+This calculates the similarity between two strings as described in Programming
+Classics: Implementing the World's Best Algorithms by Oliver (ISBN
+0-131-00413-1). Note that this implementation does not use a stack as in
+Oliver's pseudo code, but recursive calls which may or may not speed up the
+whole process. Note also that the complexity of this algorithm is O(N**3)
+where N is the length of the longest string.
+
+==============================================================================
+*Parameters*
+
+{first}
+
+    The first string.
+
+{second}
+
+    The second string.
+
+{percent}
+
+    By passing a reference as third argument, similar_text() will calculate
+    the similarity in percent for you.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of matching chars in both strings.
+
+==============================================================================
+*See* *Also*
+
+  * |levenshtein| - Calculate Levenshtein distance between two strings
+  * |soundex| - Calculate the soundex key of a string
+
+
+vim:ft=help:

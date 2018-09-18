@@ -1,0 +1,28 @@
+fann_length_train_data
+
+(PECL fann >= 1.0.0)
+
+fann_length_train_data — Returns the number of training patterns in the train
+data
+
+==============================================================================
+*Description*
+
+    int fann_length_train_data ( resource $data )~
+
+Returns the number of training patterns in the train data resource.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    Neural network training data resource.
+
+==============================================================================
+*Return* *Values*
+
+Number of elements in the train data resource, or FALSE on error.
+
+
+vim:ft=help:

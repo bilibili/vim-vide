@@ -1,0 +1,49 @@
+ifx_do
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_do — Execute a previously prepared SQL-statement
+
+==============================================================================
+*Description*
+
+    bool ifx_do ( resource $result_id )~
+
+Executes a previously prepared query or opens a cursor for it.
+
+Does NOT free {result_id} on error.
+
+Also sets the real number of |ifx_affected_rows| for non-select statements for
+retrieval by |ifx_affected_rows|.
+
+==============================================================================
+*Parameters*
+
+{result_id}
+
+    {result_id} is a valid resultid returned by |ifx_query| or |ifx_prepare|
+    (select type queries only!).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+Example #1 ifx_do() Example
+
+<?php >
+    $conn = fx_connect( "db", "user", "password" );
+    $result = ifx_prepare("SELECT customer_num, company FROM customer", $conn);
+    ifx_do($result);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ifx_prepare| - Prepare an SQL-statement for execution
+
+
+vim:ft=help:

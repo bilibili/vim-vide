@@ -1,0 +1,60 @@
+apcu_fetch
+
+(PECL apcu >= 4.0.0)
+
+apcu_fetch — Fetch a stored variable from the cache
+
+==============================================================================
+*Description*
+
+    mixed apcu_fetch ( mixed $key [, bool &$success ] )~
+
+Fetchs an entry from the cache.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    The {key} used to store the value (with |apcu_store|). If an array is
+    passed then each element is fetched and returned.
+
+{success}
+
+    Set to TRUE in success and FALSE in failure.
+
+==============================================================================
+*Return* *Values*
+
+The stored variable or array of variables on success; FALSE on failure
+
+==============================================================================
+*Examples*
+
+Example #1 A apcu_fetch() example
+
+<?php >
+    $bar = 'BAR';
+    apcu_store('foo', $bar);
+    var_dump(apcu_fetch('foo'));
+<?>
+
+The above example will output:
+
+string(3) "BAR"
+
+==============================================================================
+*Changelog*
+
+Version            Description
+3.0.17  The {success} parameter was added.
+
+==============================================================================
+*See* *Also*
+
+  * |apcu_store| - Cache a variable in the data store
+  * |apcu_delete| - Removes a stored variable from the cache
+  * APCUIterator
+
+
+vim:ft=help:

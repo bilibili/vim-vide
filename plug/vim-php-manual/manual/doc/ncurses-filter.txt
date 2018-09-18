@@ -1,0 +1,23 @@
+ncurses_filter
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_filter — Set LINES for iniscr() and newterm() to 1
+
+==============================================================================
+*Description*
+
+    void ncurses_filter ( void )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

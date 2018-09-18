@@ -1,0 +1,49 @@
+session_id
+
+(PHP 4, PHP 5, PHP 7)
+
+session_id — Get and/or set the current session id
+
+==============================================================================
+*Description*
+
+    string session_id ([ string $id ] )~
+
+session_id() is used to get or set the session id for the current session.
+
+The constant SID can also be used to retrieve the current name and session id
+as a string suitable for adding to URLs. See also Session handling.
+
+==============================================================================
+*Parameters*
+
+{id}
+
+    If {id} is specified, it will replace the current session id. session_id()
+    needs to be called before |session_start| for that purpose. Depending on
+    the session handler, not all characters are allowed within the session id.
+    For example, the file session handler only allows characters in the range
+    a-z A-Z 0-9 , (comma) and - (minus)!
+
+        Note: When using session cookies, specifying an {id} for session_id()
+        will always send a new cookie when |session_start| is called,
+        regardless if the current session id is identical to the one being
+        set.
+
+==============================================================================
+*Return* *Values*
+
+session_id() returns the session id for the current session or the empty
+string ("") if there is no current session (no current session id exists).
+
+==============================================================================
+*See* *Also*
+
+  * |session_regenerate_id| - Update the current session id with a newly
+    generated one
+  * |session_start| - Start new or resume existing session
+  * |session_set_save_handler| - Sets user-level session storage functions
+  * session.save_handler
+
+
+vim:ft=help:

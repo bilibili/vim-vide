@@ -1,0 +1,78 @@
+array_merge_recursive
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7)
+
+array_merge_recursive — Merge two or more arrays recursively
+
+==============================================================================
+*Description*
+
+    array array_merge_recursive ( array $array1 [, array $... ] )~
+
+array_merge_recursive() merges the elements of one or more arrays together so
+that the values of one are appended to the end of the previous one. It returns
+the resulting array.
+
+If the input arrays have the same string keys, then the values for these keys
+are merged together into an array, and this is done recursively, so that if
+one of the values is an array itself, the function will merge it with a
+corresponding entry in another array too. If, however, the arrays have the
+same numeric key, the later value will not overwrite the original value, but
+will be appended.
+
+==============================================================================
+*Parameters*
+
+{array1}
+
+    Initial array to merge.
+
+{...}
+
+    Variable list of arrays to recursively merge.
+
+==============================================================================
+*Return* *Values*
+
+An array of values resulted from merging the arguments together.
+
+==============================================================================
+*Examples*
+
+Example #1 array_merge_recursive() example
+
+<?php >
+    $ar1 = array("color" => array("favorite" => "red"), 5);
+    $ar2 = array(10, "color" => array("favorite" => "green", "blue"));
+    $result = array_merge_recursive($ar1, $ar2);
+    print_r($result);
+<?>
+
+The above example will output:
+
+Array
+(
+    [color] => Array
+        (
+            [favorite] => Array
+                (
+                    [0] => red
+                    [1] => green
+                )
+
+            [0] => blue
+        )
+
+    [0] => 5
+    [1] => 10
+)
+
+==============================================================================
+*See* *Also*
+
+  * |array_merge| - Merge one or more arrays
+  * |array_replace_recursive| - Replaces elements from passed arrays into the
+    first array recursively
+
+
+vim:ft=help:

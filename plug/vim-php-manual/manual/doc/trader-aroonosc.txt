@@ -1,0 +1,34 @@
+trader_aroonosc
+
+(PECL trader >= 0.2.0)
+
+trader_aroonosc — Aroon Oscillator
+
+==============================================================================
+*Description*
+
+    array trader_aroonosc ( array $high , array $low [, integer $timePeriod ]~
+)~
+
+==============================================================================
+*Parameters*
+
+{high}
+
+    High price, array of real values.
+
+{low}
+
+    Low price, array of real values.
+
+{timePeriod}
+
+    Number of period. Valid range from 2 to 100000.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,94 @@
+imagecolorallocate
+
+(PHP 4, PHP 5, PHP 7)
+
+imagecolorallocate — Allocate a color for an image
+
+==============================================================================
+*Description*
+
+    int imagecolorallocate ( resource $image , int $red , int $green , int~
+    $blue )~
+
+Returns a color identifier representing the color composed of the given RGB
+components.
+
+imagecolorallocate() must be called to create each color that is to be used in
+the image represented by {image}.
+
+    Note:
+
+    The first call to imagecolorallocate() fills the background color in
+    palette-based images - images created using |imagecreate|.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{red}
+
+    Value of red component.
+
+{green}
+
+    Value of green component.
+
+{blue}
+
+    Value of blue component.
+
+These parameters are integers between 0 and 255 or hexadecimals between 0x00
+and 0xFF.
+
+==============================================================================
+*Return* *Values*
+
+A color identifier or FALSE if the allocation failed.
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*Changelog*
+
+Version                             Description
+5.1.3   Returns FALSE if the allocation failed. Previously -1 was returned.
+
+==============================================================================
+*Examples*
+
+Example #1 imagecolorallocate() example
+
+<?php >
+
+    $im = imagecreate(100, 100);
+
+    // sets background to red
+    $background = imagecolorallocate($im, 255, 0, 0);
+
+    // sets some colors
+    $white = imagecolorallocate($im, 255, 255, 255);
+    $black = imagecolorallocate($im, 0, 0, 0);
+
+    // hexadecimal way
+    $white = imagecolorallocate($im, 0xFF, 0xFF, 0xFF);
+    $black = imagecolorallocate($im, 0x00, 0x00, 0x00);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imagecolorallocatealpha| - Allocate a color for an image
+  * |imagecolordeallocate| - De-allocate a color for an image
+
+
+vim:ft=help:

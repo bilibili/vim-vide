@@ -1,0 +1,164 @@
+ldap_modify_batch
+
+(PHP 5.4 >= 5.4.26, PHP 5.5 >= 5.5.10, PHP 5.6 >= 5.6.0, PHP 7)
+
+ldap_modify_batch — Batch and execute modifications on an LDAP entry
+
+==============================================================================
+*Description*
+
+    bool ldap_modify_batch ( resource $link_identifier , string $dn , array~
+    $entry )~
+
+Modifies an existing entry in the LDAP directory. Allows detailed
+specification of the modifications to perform.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{dn}
+
+    The distinguished name of an LDAP entity.
+
+{entry}
+
+    An array that specifies the modifications to make. Each entry in this
+    array is an associative array with two or three keys: attrib maps to the
+    name of the attribute to modify, modtype maps to the type of modification
+    to perform, and (depending on the type of modification) values maps to an
+    array of attribute values relevant to the modification.
+
+    Possible values for modtype include:
+
+    LDAP_MODIFY_BATCH_ADD
+
+        Each value specified through values is added (as an additional value)
+        to the attribute named by attrib.
+
+    LDAP_MODIFY_BATCH_REMOVE
+
+        Each value specified through values is removed from the attribute
+        named by attrib. Any value of the attribute not contained in the
+        values array will remain untouched.
+
+    LDAP_MODIFY_BATCH_REMOVE_ALL
+
+        All values are removed from the attribute named by attrib. A values
+        entry must not be provided.
+
+    LDAP_MODIFY_BATCH_REPLACE
+
+        All current values of the attribute named by attrib are replaced with
+        the values specified through values.
+
+    Note that any value for attrib must be a string, any value for values must
+    be an array of strings, and any value for modtype must be one of the
+    LDAP_MODIFY_BATCH_* constants listed above.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Add a telephone number to a contact
+
+<?php >
+    $dn = "cn=John Smith,ou=Wizards,dc=example,dc=com";
+    $modifs = [
+        [
+            "attrib"  => "telephoneNumber",
+            "modtype" => LDAP_MODIFY_BATCH_ADD,
+            "values"  => ["+1 555 555 1717"],
+        ],
+    ];
+    ldap_modify_batch($connection, $dn, $modifs);
+<?>
+
+Example #2 Rename a user
+
+<?php >
+    $dn = "cn=John Smith,ou=Wizards,dc=example,dc=com";
+    $modifs = [
+        [
+            "attrib"  => "sn",
+            "modtype" => LDAP_MODIFY_BATCH_REPLACE,
+            "values"  => ["Smith-Jones"],
+        ],
+        [
+            "attrib"  => "givenName",
+            "modtype" => LDAP_MODIFY_BATCH_REPLACE,
+            "values"  => ["Jack"],
+        ],
+    ];
+    ldap_modify_batch($connection, $dn, $modifs);
+    ldap_rename($connection, $dn, "cn=Jack Smith-Jones", NULL, TRUE);
+<?>
+
+Example #3 Add two e-mail addresses to a user
+
+<?php >
+    $dn = "cn=Jack Smith-Jones,ou=Wizards,dc=example,dc=com";
+    $modifs = [
+        [
+            "attrib"  => "mail",
+            "modtype" => LDAP_MODIFY_BATCH_ADD,
+            "values"  => [
+                "jack.smith@example.com",
+                "jack.smith-jones@example.com",
+            ],
+        ],
+    ];
+    ldap_modify_batch($connection, $dn, $modifs);
+<?>
+
+Example #4 Change a user's password
+
+<?php >
+    $dn = "cn=Jack Smith-Jones,ou=Wizards,dc=example,dc=com";
+    $modifs = [
+        [
+            "attrib"  => "userPassword",
+            "modtype" => LDAP_MODIFY_BATCH_REMOVE,
+            "values"  => ["Tr0ub4dor&3"],
+        ],
+        [
+            "attrib"  => "userPassword",
+            "modtype" => LDAP_MODIFY_BATCH_ADD,
+            "values"  => ["correct horse battery staple"],
+        ],
+    ];
+    ldap_modify_batch($connection, $dn, $modifs);
+<?>
+
+Example #5 Change a user's password (Active Directory)
+
+<?php >
+function adifyPw($pw)
+{
+    return iconv("UTF-8", "UTF-16LE", '"' . $pw . '"');
+}
+
+$dn = "cn=Jack Smith-Jones,ou=Wizards,dc=ad,dc=example,dc=com";
+$modifs = [
+    [
+        "attrib"  => "unicodePwd",
+        "modtype" => LDAP_MODIFY_BATCH_REMOVE,
+        "values"  => [adifyPw("Tr0ub4dor&3")],
+    ],
+    [
+        "attrib"  => "unicodePwd",
+        "modtype" => LDAP_MODIFY_BATCH_ADD,
+        "values"  => [adifyPw("correct horse battery staple")],
+    ],
+];
+ldap_modify_batch($connection, $dn, $modifs);
+
+
+vim:ft=help:

@@ -1,0 +1,65 @@
+bcompiler_write_function
+
+(PECL bcompiler >= 0.5)
+
+bcompiler_write_function — Writes a defined function as bytecodes
+
+==============================================================================
+*Description*
+
+    bool bcompiler_write_function ( resource $filehandle , string~
+    $functionName )~
+
+Reads the bytecodes from PHP for an existing function, and writes them to the
+open file handle. Order is not important, (eg. if function b uses function a,
+and you compile it like the example below, it will work perfectly OK).
+
+==============================================================================
+*Parameters*
+
+{filehandle}
+
+    A file handle as returned by |fopen|.
+
+{functionName}
+
+    The function name, as a string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 bcompiler_write_function() example
+
+<?php >
+    $fh = fopen("/tmp/example","w");
+    bcompiler_write_header($fh);
+    bcompiler_write_function($fh,"my_function_a");
+    bcompiler_write_function($fh,"my_function_b");
+    bcompiler_write_footer($fh);
+    fclose($fh);
+
+<?>
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*See* *Also*
+
+  * |bcompiler_write_header| - Writes the bcompiler header
+  * |bcompiler_write_footer| - Writes the single character \x00 to indicate
+    End of compiled data
+
+
+vim:ft=help:

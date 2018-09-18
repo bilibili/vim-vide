@@ -1,0 +1,91 @@
+pg_convert
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+pg_convert — Convert associative array values into suitable for SQL statement
+
+==============================================================================
+*Description*
+
+    array pg_convert ( resource $connection , string $table_name , array~
+    $assoc_array [, int $options = 0 ] )~
+
+pg_convert() checks and converts the values in {assoc_array} into suitable
+values for use in an SQL statement. Precondition for pg_convert() is the
+existence of a table {table_name} which has at least as many columns as
+{assoc_array} has elements. The fieldnames in {table_name} must match the
+indices in {assoc_array} and the corresponding datatypes must be compatible.
+Returns an array with the converted values on success, FALSE otherwise.
+
+    Note:
+
+    Since PHP 5.6.0, it accepts boolean values. It converted to PostgreSQL
+    boolean. String representations of boolean value is also supported. NULL
+    is converted to PostgreSQL NULL.
+
+    Prior to PHP 5.6.0, if there are boolean fields in {table_name} don't use
+    the constant TRUE in {assoc_array}. It will be converted to the string
+    'TRUE' which is no valid entry for boolean fields in PostgreSQL. Use one
+    of t, true, 1, y, yes instead.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource.
+
+{table_name}
+
+    Name of the table against which to convert types.
+
+{assoc_array}
+
+    Data to be converted.
+
+{options}
+
+    Any number of PGSQL_CONV_IGNORE_DEFAULT, PGSQL_CONV_FORCE_NULL or
+    PGSQL_CONV_IGNORE_NOT_NULL, combined.
+
+==============================================================================
+*Return* *Values*
+
+An array of converted values, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_convert() example
+
+<?php  >
+      $dbconn = pg_connect('dbname=foo');
+      
+      $tmp = array(
+          'author' => 'Joe Thackery',
+          'year' => 2005,
+          'title' => 'My Life, by Joe Thackery'
+      );
+      
+      $vals = pg_convert($dbconn, 'authors', $tmp);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        No longer experimental. Boolean/NULL data types are supported. Unknown
+5.6.0   /unsupported data types are escaped without validation. pg_convert()
+        could be used with any data types.
+
+==============================================================================
+*See* *Also*
+
+  * |pg_meta_data| - Get meta data for table
+  * |pg_insert| - Insert array into table
+  * |pg_select| - Select records
+  * |pg_update| - Update table
+  * |pg_delete| - Deletes records
+
+
+vim:ft=help:

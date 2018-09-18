@@ -1,0 +1,32 @@
+event_base_loopexit
+
+(PECL libevent >= 0.0.1)
+
+event_base_loopexit — Exit loop after a time
+
+==============================================================================
+*Description*
+
+    bool event_base_loopexit ( resource $event_base [, int $timeout = -1 ] )~
+
+The next event loop iteration after the given timer expires will complete
+normally, then exit without blocking for events again.
+
+==============================================================================
+*Parameters*
+
+{event_base}
+
+    Valid event base resource.
+
+{timeout}
+
+    Optional timeout parameter (in microseconds).
+
+==============================================================================
+*Return* *Values*
+
+event_base_loopexit() returns TRUE on success or FALSE on error.
+
+
+vim:ft=help:

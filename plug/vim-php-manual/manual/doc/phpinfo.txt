@@ -1,0 +1,109 @@
+phpinfo
+
+(PHP 4, PHP 5, PHP 7)
+
+phpinfo — Outputs information about PHP's configuration
+
+==============================================================================
+*Description*
+
+    bool phpinfo ([ int $what = INFO_ALL ] )~
+
+Outputs a large amount of information about the current state of PHP. This
+includes information about PHP compilation options and extensions, the PHP
+version, server information and environment (if compiled as a module), the PHP
+environment, OS version information, paths, master and local values of
+configuration options, HTTP headers, and the PHP License.
+
+Because every system is setup differently, phpinfo() is commonly used to check
+configuration settings and for available predefined variables on a given
+system.
+
+phpinfo() is also a valuable debugging tool as it contains all EGPCS
+(Environment, GET, POST, Cookie, Server) data.
+
+==============================================================================
+*Parameters*
+
+{what}
+
+    The output may be customized by passing one or more of the following
+    constants bitwise values summed together in the optional {what} parameter.
+    One can also combine the respective constants or bitwise values together
+    with the or operator.
+
+                              phpinfo() options
+     Name (constant)   Value                    Description
+    INFO_GENERAL       1     The configuration line, php.ini location, build
+                             date, Web Server, System and more.
+    INFO_CREDITS       2     PHP Credits. See also |phpcredits|.
+    INFO_CONFIGURATION 4     Current Local and Master values for PHP
+                             directives. See also |ini_get|.
+    INFO_MODULES       8     Loaded modules and their respective settings. See
+                             also |get_loaded_extensions|.
+    INFO_ENVIRONMENT   16    Environment Variable information that's also
+                             available in $_ENV.
+    INFO_VARIABLES     32    Shows all predefined variables from EGPCS
+                             (Environment, GET, POST, Cookie, Server).
+    INFO_LICENSE       64    PHP License information. See also the >> license
+                             FAQ.
+    INFO_ALL           -1    Shows all of the above.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Logo GUIDs were replaced with data URIs, and so turning off expose_php
+5.5.0   now has no effect on the result of phpinfo(). Credits are also now
+        embedded within the output itself instead of linked.
+5.2.2   The "Loaded Configuration File" information was added, when before
+        only "Configuration File (php.ini) Path" existed.
+
+==============================================================================
+*Examples*
+
+Example #1 phpinfo() Example
+
+<?php >
+
+    // Show all information, defaults to INFO_ALL
+    phpinfo();
+
+    // Show just the module information.
+    // phpinfo(8) yields identical results.
+    phpinfo(INFO_MODULES);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    In versions of PHP before 5.5, parts of the information displayed are
+    disabled when the expose_php configuration setting is set to off. This
+    includes the PHP and Zend logos, and the credits.
+
+    Note:
+
+    phpinfo() outputs plain text instead of HTML when using the CLI mode.
+
+==============================================================================
+*See* *Also*
+
+  * |phpversion| - Gets the current PHP version
+  * |phpcredits| - Prints out the credits for PHP
+  * |php_logo_guid| - Gets the logo guid
+  * |ini_get| - Gets the value of a configuration option
+  * |ini_set| - Sets the value of a configuration option
+  * |get_loaded_extensions| - Returns an array with the names of all modules
+    compiled and loaded
+  * Predefined Variables
+
+
+vim:ft=help:

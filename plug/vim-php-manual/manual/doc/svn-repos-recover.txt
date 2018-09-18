@@ -1,0 +1,28 @@
+svn_repos_recover
+
+(PECL svn >= 0.1.0)
+
+svn_repos_recover — Run recovery procedures on the repository located at path.
+
+==============================================================================
+*Description*
+
+    bool svn_repos_recover ( string $path )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+Run recovery procedures on the repository located at path.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

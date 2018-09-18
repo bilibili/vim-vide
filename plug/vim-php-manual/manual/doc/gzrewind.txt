@@ -1,0 +1,35 @@
+gzrewind
+
+(PHP 4, PHP 5, PHP 7)
+
+gzrewind — Rewind the position of a gz-file pointer
+
+==============================================================================
+*Description*
+
+    bool gzrewind ( resource $zp )~
+
+Sets the file position indicator of the given gz-file pointer to the beginning
+of the file stream.
+
+==============================================================================
+*Parameters*
+
+{zp}
+
+    The gz-file pointer. It must be valid, and must point to a file
+    successfully opened by |gzopen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |gzseek| - Seek on a gz-file pointer
+  * |gztell| - Tell gz-file pointer read/write position
+
+
+vim:ft=help:

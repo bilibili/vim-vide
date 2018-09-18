@@ -1,0 +1,77 @@
+mysql_fetch_row
+
+(PHP 4, PHP 5)
+
+mysql_fetch_row — Get a result row as an enumerated array
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_fetch_row()
+  * PDOStatement::fetch(PDO::FETCH_NUM)
+
+==============================================================================
+*Description*
+
+    array mysql_fetch_row ( resource $result )~
+
+Returns a numerical array that corresponds to the fetched row and moves the
+internal data pointer ahead.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mysql_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns an numerical array of strings that corresponds to the fetched row, or
+FALSE if there are no more rows.
+
+mysql_fetch_row() fetches one row of data from the result associated with the
+specified result identifier. The row is returned as an array. Each result
+column is stored in an array offset, starting at offset 0.
+
+==============================================================================
+*Examples*
+
+Example #1 Fetching one row with mysql_fetch_row()
+
+<?php >
+    $result = mysql_query("SELECT id,email FROM people WHERE id = '42'");
+    if (!$result) {
+        echo 'Could not run query: ' . mysql_error();
+        exit;
+    }
+    $row = mysql_fetch_row($result);
+
+    echo $row[0]; // 42
+    echo $row[1]; // the email value
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function sets NULL fields to the PHP NULL value.
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_fetch_array| - Fetch a result row as an associative array, a
+    numeric array, or both
+  * |mysql_fetch_assoc| - Fetch a result row as an associative array
+  * |mysql_fetch_object| - Fetch a result row as an object
+  * |mysql_data_seek| - Move internal result pointer
+  * |mysql_fetch_lengths| - Get the length of each output in a result
+  * |mysql_result| - Get result data
+
+
+vim:ft=help:

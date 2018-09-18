@@ -1,0 +1,43 @@
+fann_test_data
+
+(PECL fann >= 1.0.0)
+
+fann_test_data — Test a set of training data and calculates the MSE for the
+training data
+
+==============================================================================
+*Description*
+
+    float fann_test_data ( resource $ann , resource $data )~
+
+Test a set of training data and calculates the MSE for the training data.
+
+This function updates the MSE and the bit fail values.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{data}
+
+    Neural network training data resource.
+
+==============================================================================
+*Return* *Values*
+
+The updated MSE, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_train_on_data| - Trains on an entire dataset for a period of time
+  * |fann_train_epoch| - Train one epoch with a set of training data
+  * |fann_get_bit_fail| - The number of fail bits
+  * |fann_get_MSE| - Reads the mean square error from the network
+  * |fann_set_training_algorithm| - Sets the training algorithm
+
+
+vim:ft=help:

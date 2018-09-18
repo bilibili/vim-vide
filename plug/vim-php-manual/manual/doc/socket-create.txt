@@ -1,0 +1,113 @@
+socket_create
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_create — Create a socket (endpoint for communication)
+
+==============================================================================
+*Description*
+
+    resource socket_create ( int $domain , int $type , int $protocol )~
+
+Creates and returns a socket resource, also referred to as an endpoint of
+communication. A typical network connection is made up of 2 sockets, one
+performing the role of the client, and another performing the role of the
+server.
+
+==============================================================================
+*Parameters*
+
+{domain}
+
+    The {domain} parameter specifies the protocol family to be used by the
+    socket.
+
+                     Available address/protocol families
+     Domain                             Description
+    AF_INET  IPv4 Internet based protocols. TCP and UDP are common protocols
+             of this protocol family.
+    AF_INET6 IPv6 Internet based protocols. TCP and UDP are common protocols
+             of this protocol family.
+             Local communication protocol family. High efficiency and low
+    AF_UNIX  overhead make it a great form of IPC (Interprocess
+             Communication).
+
+{type}
+
+    The {type} parameter selects the type of communication to be used by the
+    socket.
+
+                            Available socket types
+         Type                              Description
+                   Provides sequenced, reliable, full-duplex, connection-based
+    SOCK_STREAM    byte streams. An out-of-band data transmission mechanism
+                   may be supported. The TCP protocol is based on this socket
+                   type.
+                   Supports datagrams (connectionless, unreliable messages of
+    SOCK_DGRAM     a fixed maximum length). The UDP protocol is based on this
+                   socket type.
+                   Provides a sequenced, reliable, two-way connection-based
+    SOCK_SEQPACKET data transmission path for datagrams of fixed maximum
+                   length; a consumer is required to read an entire packet
+                   with each read call.
+                   Provides raw network protocol access. This special type of
+    SOCK_RAW       socket can be used to manually construct any type of
+                   protocol. A common use for this socket type is to perform
+                   ICMP requests (like ping).
+                   Provides a reliable datagram layer that does not guarantee
+    SOCK_RDM       ordering. This is most likely not implemented on your
+                   operating system.
+
+{protocol}
+
+    The {protocol} parameter sets the specific protocol within the specified
+    {domain} to be used when communicating on the returned socket. The proper
+    value can be retrieved by name by using |getprotobyname|. If the desired
+    protocol is TCP, or UDP the corresponding constants SOL_TCP, and SOL_UDP
+    can also be used.
+
+                               Common protocols
+    Name                              Description
+         The Internet Control Message Protocol is used primarily by gateways
+    icmp and hosts to report errors in datagram communication. The "ping"
+         command (present in most modern operating systems) is an example
+         application of ICMP.
+         The User Datagram Protocol is a connectionless, unreliable, protocol
+    udp  with fixed record lengths. Due to these aspects, UDP requires a
+         minimum amount of protocol overhead.
+         The Transmission Control Protocol is a reliable, connection based,
+         stream oriented, full duplex protocol. TCP guarantees that all data
+         packets will be received in the order in which they were sent. If any
+         packet is somehow lost during communication, TCP will automatically
+    tcp  retransmit the packet until the destination host acknowledges that
+         packet. For reliability and performance reasons, the TCP
+         implementation itself decides the appropriate octet boundaries of the
+         underlying datagram communication layer. Therefore, TCP applications
+         must allow for the possibility of partial record transmission.
+
+==============================================================================
+*Return* *Values*
+
+socket_create() returns a socket resource on success, or FALSE on error. The
+actual error code can be retrieved by calling |socket_last_error|. This error
+code may be passed to |socket_strerror| to get a textual explanation of the
+error.
+
+==============================================================================
+*Errors/Exceptions*
+
+If an invalid {domain} or {type} is given, socket_create() defaults to AF_INET
+and SOCK_STREAM respectively and additionally emits an E_WARNING message.
+
+==============================================================================
+*See* *Also*
+
+  * |socket_accept| - Accepts a connection on a socket
+  * |socket_bind| - Binds a name to a socket
+  * |socket_connect| - Initiates a connection on a socket
+  * |socket_listen| - Listens for a connection on a socket
+  * |socket_last_error| - Returns the last error on the socket
+  * |socket_strerror| - Return a string describing a socket error
+
+
+vim:ft=help:

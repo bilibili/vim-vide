@@ -1,0 +1,238 @@
+eio_readdir
+
+(PECL eio >= 0.0.1dev)
+
+eio_readdir — Reads through a whole directory
+
+==============================================================================
+*Description*
+
+    resource eio_readdir ( string $path , int $flags , int $pri , callable~
+    $callback [, string $data = NULL ] )~
+
+Reads through a whole directory(via the opendir, readdir and closedir system
+calls) and returns either the names or an array in {result} argument of
+{callback} function, depending on the {flags} argument.
+
+==============================================================================
+*Parameters*
+
+{path}
+
+    Directory path.
+
+{flags}
+
+    Combination of EIO_READDIR_* constants.
+
+{pri}
+
+    The request priority: EIO_PRI_DEFAULT, EIO_PRI_MIN, EIO_PRI_MAX, or NULL.
+    If NULL passed, {pri} internally is set to EIO_PRI_DEFAULT.
+
+{callback}
+
+    {callback} function is called when the request is done. It should match
+    the following prototype:
+    void callback(mixed $data, int $result[, resource $req]);
+
+    {data}
+
+        is custom data passed to the request.
+
+    {result}
+
+        request-specific result value; basically, the value returned by
+        corresponding system call.
+
+    {req}
+
+        is optional request resource which can be used with functions like 
+        |eio_get_last_error|
+
+{data}
+
+    Arbitrary variable passed to {callback}.
+
+==============================================================================
+*Return* *Values*
+
+eio_readdir() returns request resource on success, or FALSE on error. Sets
+{result} argument of {callback} function according to {flags}:
+
+EIO_READDIR_DENTS (integer)
+    eio_readdir() flag. If specified, the result argument of the callback
+    becomes an array with the following keys: 'names' - array of directory
+    names 'dents' - array of struct eio_dirent-like arrays having the
+    following keys each: 'name' - the directory name; 'type' - one of EIO_DT_*
+    constants; 'inode' - the inode number, if available, otherwise
+    unspecified;
+EIO_READDIR_DIRS_FIRST (integer)
+    When this flag is specified, the names will be returned in an order where
+    likely directories come first, in optimal stat order.
+EIO_READDIR_STAT_ORDER (integer)
+    When this flag is specified, then the names will be returned in an order
+    suitable for stat'ing each one. When planning to |stat| all files in the
+    given directory, the returned order will likely be fastest.
+EIO_READDIR_FOUND_UNKNOWN (integer)
+
+Node types:
+
+EIO_DT_UNKNOWN (integer)
+    Unknown node type(very common). Further |stat| needed.
+EIO_DT_FIFO (integer)
+    FIFO node type
+EIO_DT_CHR (integer)
+    Node type
+EIO_DT_MPC (integer)
+    Multiplexed char device (v7+coherent) node type
+EIO_DT_DIR (integer)
+    Directory node type
+EIO_DT_NAM (integer)
+    Xenix special named file node type
+EIO_DT_BLK (integer)
+    Node type
+EIO_DT_MPB (integer)
+    Multiplexed block device (v7+coherent)
+EIO_DT_REG (integer)
+    Node type
+EIO_DT_NWK (integer)
+EIO_DT_CMP (integer)
+    HP-UX network special node type
+EIO_DT_LNK (integer)
+    Link node type
+EIO_DT_SOCK (integer)
+    Socket node type
+EIO_DT_DOOR (integer)
+    Solaris door node type
+EIO_DT_WHT (integer)
+    Node type
+EIO_DT_MAX (integer)
+    Highest node type value
+
+==============================================================================
+*Examples*
+
+Example #1 eio_readdir() example
+
+<?php >
+    /* Is called when eio_readdir() finishes */
+    function my_readdir_callback($data, $result) {
+        echo __FUNCTION__, " called\n";
+        echo "data: "; var_dump($data);
+        echo "result: "; var_dump($result);
+        echo "\n";
+    }
+
+    eio_readdir("/var/spool/news", EIO_READDIR_STAT_ORDER | EIO_READDIR_DIRS_FIRST
+    ,
+      EIO_PRI_DEFAULT, "my_readdir_callback");
+    eio_event_loop();
+<?>
+
+The above example will output something similar to:
+
+my_readdir_callback called
+data: NULL
+result: array(2) {
+ ["names"]=>
+  array(7) {
+   [0]=>
+    string(7) "archive"
+    [1]=>
+    string(8) "articles"
+    [2]=>
+    string(8) "incoming"
+    [3]=>
+    string(7) "innfeed"
+    [4]=>
+    string(8) "outgoing"
+    [5]=>
+    string(8) "overview"
+    [6]=>
+    string(3) "tmp"
+  }
+ ["dents"]=>
+  array(7) {
+   [0]=>
+    array(3)
+    {
+     ["name"]=>
+      string(7)
+      "archive"
+      ["type"]=>
+      int(4)
+      ["inode"]=>
+      int(393265)
+    }
+   [1]=>
+    array(3)
+    {
+     ["name"]=>
+      string(8)
+      "articles"
+      ["type"]=>
+      int(4)
+      ["inode"]=>
+      int(393266)
+    }
+   [2]=>
+    array(3)
+    {
+     ["name"]=>
+      string(8)
+      "incoming"
+      ["type"]=>
+      int(4)
+      ["inode"]=>
+      int(393267)
+    }
+   [3]=>
+    array(3)
+    {
+     ["name"]=>
+      string(7)
+      "innfeed"
+      ["type"]=>
+      int(4)
+      ["inode"]=>
+      int(393269)
+    }
+   [4]=>
+    array(3)
+    {
+     ["name"]=>
+      string(8)
+      "outgoing"
+      ["type"]=>
+      int(4)
+      ["inode"]=>
+      int(393270)
+    }
+   [5]=>
+    array(3)
+    {
+     ["name"]=>
+      string(8)
+      "overview"
+      ["type"]=>
+      int(4)
+      ["inode"]=>
+      int(393271)
+    }
+   [6]=>
+    array(3)
+    {
+     ["name"]=>
+      string(3)
+      "tmp"
+      ["type"]=>
+      int(4)
+      ["inode"]=>
+      int(393272)
+    }
+  }
+}
+
+
+vim:ft=help:

@@ -1,0 +1,18 @@
+PDF_create_3dview
+
+(PECL pdflib >= 2.1.0)
+
+PDF_create_3dview — Create 3D view
+
+==============================================================================
+*Description*
+
+    int PDF_create_3dview ( resource $pdfdoc , string $username , string~
+    $optlist )~
+
+Creates a 3D view.
+
+This function requires PDF 1.6.
+
+
+vim:ft=help:

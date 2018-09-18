@@ -1,0 +1,35 @@
+trader_ma
+
+(PECL trader >= 0.2.0)
+
+trader_ma — Moving average
+
+==============================================================================
+*Description*
+
+    array trader_ma ( array $real [, integer $timePeriod [, integer $mAType~
+    ]] )~
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+{timePeriod}
+
+    Number of period. Valid range from 2 to 100000.
+
+{mAType}
+
+    Type of Moving Average. TRADER_MA_TYPE_* series of constants should be
+    used.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

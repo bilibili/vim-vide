@@ -1,0 +1,65 @@
+pspell_store_replacement
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+pspell_store_replacement — Store a replacement pair for a word
+
+==============================================================================
+*Description*
+
+    bool pspell_store_replacement ( int $dictionary_link , string $misspelled~
+    , string $correct )~
+
+pspell_store_replacement() stores a replacement pair for a word, so that
+replacement can be returned by |pspell_suggest| later. In order to be able to
+take advantage of this function, you have to use |pspell_new_personal| to open
+the dictionary. In order to permanently save the replacement pair, you have to
+use |pspell_config_personal| and |pspell_config_repl| to set the path where to
+save your custom wordlists, and then use |pspell_save_wordlist| for the
+changes to be written to disk.
+
+==============================================================================
+*Parameters*
+
+{dictionary_link}
+
+    A dictionary link identifier, opened with |pspell_new_personal|
+
+{misspelled}
+
+    The misspelled word.
+
+{correct}
+
+    The fixed spelling for the {misspelled} word.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 pspell_store_replacement()
+
+<?php >
+    $pspell_config = pspell_config_create("en");
+    pspell_config_personal($pspell_config, "/var/dictionaries/custom.pws");
+    pspell_config_repl($pspell_config, "/var/dictionaries/custom.repl");
+    $pspell_link = pspell_new_config($pspell_config);
+
+    pspell_store_replacement($pspell_link, $misspelled, $correct);
+    pspell_save_wordlist($pspell_link);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function will not work unless you have pspell .11.2 and aspell .32.5
+    or later.
+
+
+vim:ft=help:

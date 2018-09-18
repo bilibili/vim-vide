@@ -1,0 +1,88 @@
+is_numeric
+
+(PHP 4, PHP 5, PHP 7)
+
+is_numeric — Finds whether a variable is a number or a numeric string
+
+==============================================================================
+*Description*
+
+    bool is_numeric ( mixed $var )~
+
+Finds whether the given variable is numeric. Numeric strings consist of
+optional sign, any number of digits, optional decimal part and optional
+exponential part. Thus +0123.45e6 is a valid numeric value. Hexadecimal (e.g.
+0xf4c3b00c) and binary (e.g. 0b10100111001) notation is not allowed.
+
+==============================================================================
+*Parameters*
+
+{var}
+
+    The variable being evaluated.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {var} is a number or a numeric string, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 is_numeric() examples
+
+<?php >
+    $tests = array(
+        "42",
+        1337,
+        0x539,
+        02471,
+        0b10100111001,
+        1337e0,
+        "not numeric",
+        array(),
+        9.1
+    );
+
+    foreach ($tests as $element) {
+        if (is_numeric($element)) {
+            echo "'{$element}' is numeric", PHP_EOL;
+        } else {
+            echo "'{$element}' is NOT numeric", PHP_EOL;
+        }
+    }
+<?>
+
+The above example will output:
+
+'42' is numeric
+'1337' is numeric
+'1337' is numeric
+'1337' is numeric
+'1337' is numeric
+'1337' is numeric
+'not numeric' is NOT numeric
+'Array' is NOT numeric
+'9.1' is numeric
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+7.0.0   Strings in hexadecimal (e.g. 0xf4c3b00c) notation are no longer
+        regarded as numeric strings, i.e. is_numeric() returns FALSE now.
+
+==============================================================================
+*See* *Also*
+
+  * |ctype_digit| - Check for numeric character(s)
+  * |is_bool| - Finds out whether a variable is a boolean
+  * |is_null| - Finds whether a variable is NULL
+  * |is_float| - Finds whether the type of a variable is float
+  * |is_int| - Find whether the type of a variable is integer
+  * |is_string| - Find whether the type of a variable is string
+  * |is_object| - Finds whether a variable is an object
+  * |is_array| - Finds whether a variable is an array
+
+
+vim:ft=help:

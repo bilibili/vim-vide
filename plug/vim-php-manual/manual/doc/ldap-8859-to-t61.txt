@@ -1,0 +1,34 @@
+ldap_8859_to_t61
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+ldap_8859_to_t61 — Translate 8859 characters to t61 characters
+
+==============================================================================
+*Description*
+
+    string ldap_8859_to_t61 ( string $value )~
+
+Translate ISO-8859 characters to t61 characters.
+
+This function is useful if you have to talk to a legacy LDAPv2 server.
+
+==============================================================================
+*Parameters*
+
+{value}
+
+    The text to be translated.
+
+==============================================================================
+*Return* *Values*
+
+Return the t61 translation of {value}.
+
+==============================================================================
+*See* *Also*
+
+  * |ldap_t61_to_8859| - Translate t61 characters to 8859 characters
+
+
+vim:ft=help:

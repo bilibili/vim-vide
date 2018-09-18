@@ -1,0 +1,55 @@
+dbx_escape_string
+
+(PHP 4 >= 4.3.0, PHP 5 <= 5.0.5, PECL dbx >= 1.1.0)
+
+dbx_escape_string — Escape a string so it can safely be used in an
+sql-statement
+
+==============================================================================
+*Description*
+
+    string dbx_escape_string ( object $link_identifier , string $text )~
+
+Escape the given string so that it can safely be used in an sql-statement.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    The DBX link object returned by |dbx_connect|
+
+{text}
+
+    The string to escape.
+
+==============================================================================
+*Return* *Values*
+
+Returns the text, escaped where necessary (such as quotes, backslashes etc).
+On error, NULL is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 dbx_escape_string() example
+
+<?php >
+    $link   = dbx_connect(DBX_MYSQL, "localhost", "db", "username", "password")
+        or die("Could not connect");
+
+    $text = dbx_escape_string($link, "It\'s quoted and backslashed (\\).");
+    $result = dbx_query($link, "insert into tbl (txt) values ('" . $text . "')");
+    if ($result == 0) {
+        echo dbx_error($link);
+    }
+    dbx_close($link);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |dbx_query| - Send a query and fetch all results (if any)
+
+
+vim:ft=help:

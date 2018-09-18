@@ -1,0 +1,27 @@
+enchant_broker_get_error
+
+(PHP 5 >= 5.3.0, PHP 7, PECL enchant >= 0.1.0 )
+
+enchant_broker_get_error — Returns the last error of the broker
+
+==============================================================================
+*Description*
+
+    string enchant_broker_get_error ( resource $broker )~
+
+Returns the last error which occurred in this broker.
+
+==============================================================================
+*Parameters*
+
+{broker}
+
+    Broker resource.
+
+==============================================================================
+*Return* *Values*
+
+Return the msg string if an error was found or FALSE
+
+
+vim:ft=help:

@@ -1,0 +1,18 @@
+PDF_begin_layer
+
+(PECL pdflib >= 2.0.0)
+
+PDF_begin_layer — Start layer
+
+==============================================================================
+*Description*
+
+    bool PDF_begin_layer ( resource $pdfdoc , int $layer )~
+
+Starts a layer for subsequent output on the page. Returns TRUE on success or
+FALSE on failure.
+
+This function requires PDF 1.5.
+
+
+vim:ft=help:

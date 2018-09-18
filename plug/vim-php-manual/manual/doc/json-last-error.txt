@@ -1,0 +1,125 @@
+json_last_error
+
+(PHP 5 >= 5.3.0, PHP 7)
+
+json_last_error — Returns the last error occurred
+
+==============================================================================
+*Description*
+
+    int json_last_error ( void )~
+
+Returns the last error (if any) occurred during the last JSON encoding/
+decoding.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns an integer, the value can be one of the following constants:
+
+                               JSON error codes
+            Constant                         Meaning              Availability
+JSON_ERROR_NONE                  No error has occurred             
+JSON_ERROR_DEPTH                 The maximum stack depth has been  
+                                 exceeded
+JSON_ERROR_STATE_MISMATCH        Invalid or malformed JSON         
+JSON_ERROR_CTRL_CHAR             Control character error,          
+                                 possibly incorrectly encoded
+JSON_ERROR_SYNTAX                Syntax error                      
+JSON_ERROR_UTF8                  Malformed UTF-8 characters,      PHP 5.3.3
+                                 possibly incorrectly encoded
+JSON_ERROR_RECURSION             One or more recursive references PHP 5.5.0
+                                 in the value to be encoded
+JSON_ERROR_INF_OR_NAN            One or more NAN or |INF| values  PHP 5.5.0
+                                 in the value to be encoded
+JSON_ERROR_UNSUPPORTED_TYPE      A value of a type that cannot be PHP 5.5.0
+                                 encoded was given
+JSON_ERROR_INVALID_PROPERTY_NAME A property name that cannot be   PHP 7.0.0
+                                 encoded was given
+JSON_ERROR_UTF16                 Malformed UTF-16 characters,     PHP 7.0.0
+                                 possibly incorrectly encoded
+
+==============================================================================
+*Examples*
+
+Example #1 json_last_error() example
+
+<?php >
+    // A valid json string
+    $json[] = '{"Organization": "PHP Documentation Team"}';
+
+    // An invalid json string which will cause an syntax 
+    // error, in this case we used ' instead of " for quotation
+    $json[] = "{'Organization': 'PHP Documentation Team'}";
+
+
+    foreach ($json as $string) {
+        echo 'Decoding: ' . $string;
+        json_decode($string);
+
+        switch (json_last_error()) {
+            case JSON_ERROR_NONE:
+                echo ' - No errors';
+            break;
+            case JSON_ERROR_DEPTH:
+                echo ' - Maximum stack depth exceeded';
+            break;
+            case JSON_ERROR_STATE_MISMATCH:
+                echo ' - Underflow or the modes mismatch';
+            break;
+            case JSON_ERROR_CTRL_CHAR:
+                echo ' - Unexpected control character found';
+            break;
+            case JSON_ERROR_SYNTAX:
+                echo ' - Syntax error, malformed JSON';
+            break;
+            case JSON_ERROR_UTF8:
+                echo ' - Malformed UTF-8 characters, possibly incorrectly encoded'
+    ;
+            break;
+            default:
+                echo ' - Unknown error';
+            break;
+        }
+
+        echo PHP_EOL;
+    }
+<?>
+
+The above example will output:
+
+Decoding: {"Organization": "PHP Documentation Team"} - No errors
+Decoding: {'Organization': 'PHP Documentation Team'} - Syntax error, malformed JSON
+
+Example #2 json_last_error() with |json_encode|
+
+<?php >
+    // An invalid UTF8 sequence
+    $text = "\xB1\x31";
+
+    $json  = json_encode($text);
+    $error = json_last_error();
+
+    var_dump($json, $error === JSON_ERROR_UTF8);
+<?>
+
+The above example will output:
+
+string(4) "null"
+bool(true)
+
+==============================================================================
+*See* *Also*
+
+  * |json_last_error_msg| - Returns the error string of the last json_encode()
+    or json_decode() call
+  * |json_decode| - Decodes a JSON string
+  * |json_encode| - Returns the JSON representation of a value
+
+
+vim:ft=help:

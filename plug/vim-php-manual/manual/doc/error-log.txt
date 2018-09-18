@@ -1,0 +1,95 @@
+error_log
+
+(PHP 4, PHP 5, PHP 7)
+
+error_log — Send an error message to the defined error handling routines
+
+==============================================================================
+*Description*
+
+    bool error_log ( string $message [, int $message_type = 0 [, string~
+    $destination [, string $extra_headers ]]] )~
+
+Sends an error message to the web server's error log or to a file.
+
+==============================================================================
+*Parameters*
+
+{message}
+
+    The error message that should be logged.
+
+{message_type}
+
+    Says where the error should go. The possible message types are as follows:
+
+                            error_log() log types
+      {message} is sent to PHP's system logger, using the Operating System's
+    0 system logging mechanism or a file, depending on what the error_log
+      configuration directive is set to. This is the default option.
+      {message} is sent by email to the address in the {destination}
+    1 parameter. This is the only message type where the fourth parameter,
+      {extra_headers} is used.
+    2 No longer an option.
+    3 {message} is appended to the file {destination}. A newline is not
+      automatically added to the end of the {message} string.
+    4 {message} is sent directly to the SAPI logging handler.
+
+{destination}
+
+    The destination. Its meaning depends on the {message_type} parameter as
+    described above.
+
+{extra_headers}
+
+    The extra headers. It's used when the {message_type} parameter is set to 1
+    . This message type uses the same internal function as |mail| does.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+error_log() is not binary safe. {message} will be truncated by null character.
+
+Tip
+
+{message} should not contain null character. Note that {message} may be sent
+to file, mail, syslog, etc. Use appropriate conversion/escape function, 
+|base64_encode|, |rawurlencode| or |addslashes| before calling error_log().
+
+==============================================================================
+*Examples*
+
+Example #1 error_log() examples
+
+<?php >
+    // Send notification through the server log if we can not
+    // connect to the database.
+    if (!Ora_Logon($username, $password)) {
+        error_log("Oracle database not available!", 0);
+    }
+
+    // Notify administrator by email if we run out of FOO
+    if (!($foo = allocate_new_foo())) {
+        error_log("Big trouble, we're all out of FOOs!", 1,
+                   "operator@example.com");
+    }
+
+    // another way to call error_log():
+    error_log("You messed up!", 3, "/var/tmp/my-errors.log");
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                     Description
+5.2.7   The possible value of 4 was added to {message_type}.
+
+
+vim:ft=help:

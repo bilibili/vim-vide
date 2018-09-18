@@ -1,0 +1,51 @@
+bccomp
+
+(PHP 4, PHP 5, PHP 7)
+
+bccomp — Compare two arbitrary precision numbers
+
+==============================================================================
+*Description*
+
+    int bccomp ( string $left_operand , string $right_operand [, int $scale =~
+    0 ] )~
+
+Compares the {left_operand} to the {right_operand} and returns the result as
+an integer.
+
+==============================================================================
+*Parameters*
+
+{left_operand}
+
+    The left operand, as a string.
+
+{right_operand}
+
+    The right operand, as a string.
+
+{scale}
+
+    The optional {scale} parameter is used to set the number of digits after
+    the decimal place which will be used in the comparison.
+
+==============================================================================
+*Return* *Values*
+
+Returns 0 if the two operands are equal, 1 if the {left_operand} is larger
+than the {right_operand}, -1 otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 bccomp() example
+
+<?php >
+
+    echo bccomp('1', '2') . "\n";   // -1
+    echo bccomp('1.00001', '1', 3); // 0
+    echo bccomp('1.00001', '1', 5); // 1
+
+<?>
+
+vim:ft=help:

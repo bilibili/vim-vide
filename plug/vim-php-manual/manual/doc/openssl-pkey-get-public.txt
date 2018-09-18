@@ -1,0 +1,34 @@
+openssl_pkey_get_public
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+openssl_pkey_get_public — Extract public key from certificate and prepare it
+for use
+
+==============================================================================
+*Description*
+
+    resource openssl_pkey_get_public ( mixed $certificate )~
+
+|openssl_get_publickey| extracts the public key from {certificate} and
+prepares it for use by other functions.
+
+==============================================================================
+*Parameters*
+
+{certificate}
+
+    {certificate} can be one of the following:
+     1. an X.509 certificate resource
+     2. a string having the format file://path/to/file.pem. The named file
+        must contain a PEM encoded certificate/public key (it may contain
+        both).
+     3. A PEM formatted public key.
+
+==============================================================================
+*Return* *Values*
+
+Returns a positive key resource identifier on success, or FALSE on error.
+
+
+vim:ft=help:

@@ -1,0 +1,81 @@
+apc_inc
+
+(PECL apc >= 3.1.1)
+
+apc_inc — Increase a stored number
+
+==============================================================================
+*Description*
+
+    int apc_inc ( string $key [, int $step = 1 [, bool &$success ]] )~
+
+Increases a stored number.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    The key of the value being increased.
+
+{step}
+
+    The step, or value to increase.
+
+{success}
+
+    Optionally pass the success or fail boolean value to this referenced
+    variable.
+
+==============================================================================
+*Return* *Values*
+
+Returns the current value of {key}'s value on success, or FALSE on failure
+
+==============================================================================
+*Examples*
+
+Example #1 apc_inc() example
+
+<?php >
+    echo "Let's do something with success", PHP_EOL;
+
+    apc_store('anumber', 42);
+
+    echo apc_fetch('anumber'), PHP_EOL;
+
+    echo apc_inc('anumber'), PHP_EOL;
+    echo apc_inc('anumber', 10), PHP_EOL;
+    echo apc_inc('anumber', 10, $success), PHP_EOL;
+
+    var_dump($success);
+
+    echo "Now, let's fail", PHP_EOL, PHP_EOL;
+
+    apc_store('astring', 'foo');
+
+    $ret = apc_inc('astring', 1, $fail);
+
+    var_dump($ret);
+    var_dump($fail);
+<?>
+
+The above example will output something similar to:
+
+42
+43
+53
+63
+bool(true)
+Now, let's fail
+
+bool(false)
+bool(false)
+
+==============================================================================
+*See* *Also*
+
+  * |apc_dec| - Decrease a stored number
+
+
+vim:ft=help:

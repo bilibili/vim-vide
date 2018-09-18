@@ -1,0 +1,140 @@
+maxdb_fetch_assoc
+
+maxdb_result::fetch_assoc
+
+(PECL maxdb >= 1.0)
+
+maxdb_fetch_assoc -- maxdb_result::fetch_assoc — Fetch a result row as an
+associative array
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    array maxdb_fetch_assoc ( resource $result )~
+
+Object oriented style
+
+    array maxdb_result::fetch_assoc ( void )~
+
+Returns an associative array that corresponds to the fetched row or NULL if
+there are no more rows.
+
+The maxdb_fetch_assoc() function is used to return an associative array
+representing the next row in the result set for the result represented by the
+{result} parameter, where each key in the array represents the name of one of
+the result set's columns.
+
+If two or more columns of the result have the same field names, the last
+column will take precedence. To access the other column(s) of the same name,
+you either need to access the result with numeric indices by using 
+|maxdb_fetch_row| or add alias names.
+
+    Note: Field names returned by this function are case-sensitive.
+
+    Note: This function sets NULL fields to the PHP NULL value.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array that corresponds to the fetched row or NULL if there are no
+more rows in resultset.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT name, state FROM hotel.city ORDER by zip";
+
+    if ($result = $maxdb->query($query)) {
+
+       /* fetch associative array */
+       while ($row = $result->fetch_assoc()) {
+           printf ("%s (%s)\n", $row["NAME"], $row["STATE"]);
+       }
+
+       /* free result set */
+       $result->close();
+    }
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT name, state FROM hotel.city ORDER by zip";
+
+    if ($result = maxdb_query($link, $query)) {
+
+       /* fetch associative array */
+       while ($row = maxdb_fetch_assoc($result)) {
+           printf ("%s (%s)\n", $row["NAME"], $row["STATE"]);
+       }
+
+       /* free result set */
+       maxdb_free_result($result);
+    }
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+New York (NY)
+New York (NY)
+Long Island (NY)
+Albany (NY)
+Washington (DC)
+Washington (DC)
+Washington (DC)
+Silver Spring (MD)
+Daytona Beach (FL)
+Deerfield Beach (FL)
+Clearwater (FL)
+Cincinnati (OH)
+Detroit (MI)
+Rosemont (IL)
+Chicago (IL)
+Chicago (IL)
+New Orleans (LA)
+Dallas (TX)
+Los Angeles (CA)
+Hollywood (CA)
+Long Beach (CA)
+Palm Springs (CA)
+Irvine (CA)
+Santa Clara (CA)
+Portland (OR)
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_fetch_array| - Fetch a result row as an associative, a numeric
+    array, or both
+  * |maxdb_fetch_row| - Get a result row as an enumerated array
+  * maxdb_fetch_resource()
+
+
+vim:ft=help:

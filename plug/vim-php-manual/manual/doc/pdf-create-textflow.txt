@@ -1,0 +1,16 @@
+PDF_create_textflow
+
+(PECL pdflib >= 2.0.0)
+
+PDF_create_textflow — Create textflow object
+
+==============================================================================
+*Description*
+
+    int PDF_create_textflow ( resource $pdfdoc , string $text , string~
+    $optlist )~
+
+Preprocesses text for later formatting and creates a textflow object.
+
+
+vim:ft=help:

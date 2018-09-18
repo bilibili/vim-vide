@@ -1,0 +1,64 @@
+imagesetthickness
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+imagesetthickness — Set the thickness for line drawing
+
+==============================================================================
+*Description*
+
+    bool imagesetthickness ( resource $image , int $thickness )~
+
+imagesetthickness() sets the thickness of the lines drawn when drawing
+rectangles, polygons, arcs etc. to {thickness} pixels.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{thickness}
+
+    Thickness, in pixels.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imagesetthickness() example
+
+<?php >
+    // Create a 200x100 image
+    $im = imagecreatetruecolor(200, 100);
+    $white = imagecolorallocate($im, 0xFF, 0xFF, 0xFF);
+    $black = imagecolorallocate($im, 0x00, 0x00, 0x00);
+
+    // Set the background to be white
+    imagefilledrectangle($im, 0, 0, 299, 99, $white);
+
+    // Set the line thickness to 5
+    imagesetthickness($im, 5);
+
+    // Draw the rectangle
+    imagerectangle($im, 14, 14, 185, 85, $black);
+
+    // Output image to the browser
+    header('Content-Type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagesetthickness()
+
+
+vim:ft=help:

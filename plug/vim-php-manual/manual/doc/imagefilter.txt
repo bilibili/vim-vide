@@ -1,0 +1,233 @@
+imagefilter
+
+(PHP 5, PHP 7)
+
+imagefilter — Applies a filter to an image
+
+==============================================================================
+*Description*
+
+    bool imagefilter ( resource $image , int $filtertype [, int $arg1 [, int~
+    $arg2 [, int $arg3 [, int $arg4 ]]]] )~
+
+imagefilter() applies the given filter {filtertype} on the {image}.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{filtertype}
+
+    {filtertype} can be one of the following:
+      + IMG_FILTER_NEGATE: Reverses all colors of the image.
+      + IMG_FILTER_GRAYSCALE: Converts the image into grayscale.
+      + IMG_FILTER_BRIGHTNESS: Changes the brightness of the image. Use {arg1}
+        to set the level of brightness. The range for the brightness is -255
+        to 255.
+      + IMG_FILTER_CONTRAST: Changes the contrast of the image. Use {arg1} to
+        set the level of contrast.
+      + IMG_FILTER_COLORIZE: Like IMG_FILTER_GRAYSCALE, except you can specify
+        the color. Use {arg1}, {arg2} and {arg3} in the form of {red},
+        {green}, {blue} and {arg4} for the {alpha} channel. The range for each
+        color is 0 to 255.
+      + IMG_FILTER_EDGEDETECT: Uses edge detection to highlight the edges in
+        the image.
+      + IMG_FILTER_EMBOSS: Embosses the image.
+      + IMG_FILTER_GAUSSIAN_BLUR: Blurs the image using the Gaussian method.
+      + IMG_FILTER_SELECTIVE_BLUR: Blurs the image.
+      + IMG_FILTER_MEAN_REMOVAL: Uses mean removal to achieve a "sketchy"
+        effect.
+      + IMG_FILTER_SMOOTH: Makes the image smoother. Use {arg1} to set the
+        level of smoothness.
+      + IMG_FILTER_PIXELATE: Applies pixelation effect to the image, use
+        {arg1} to set the block size and {arg2} to set the pixelation effect
+        mode.
+
+{arg1}
+
+      + IMG_FILTER_BRIGHTNESS: Brightness level.
+      + IMG_FILTER_CONTRAST: Contrast level.
+      + IMG_FILTER_COLORIZE: Value of red component.
+      + IMG_FILTER_SMOOTH: Smoothness level.
+      + IMG_FILTER_PIXELATE: Block size in pixels.
+
+{arg2}
+
+      + IMG_FILTER_COLORIZE: Value of green component.
+      + IMG_FILTER_PIXELATE: Whether to use advanced pixelation effect or not
+        (defaults to FALSE).
+
+{arg3}
+
+      + IMG_FILTER_COLORIZE: Value of blue component.
+
+{arg4}
+
+      + IMG_FILTER_COLORIZE: Alpha channel, A value between 0 and 127. 0
+        indicates completely opaque while 127 indicates completely
+        transparent.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                     Description
+5.3.0   Pixelation support (IMG_FILTER_PIXELATE) was added.
+5.2.5   Alpha support for IMG_FILTER_COLORIZE was added.
+
+==============================================================================
+*Examples*
+
+Example #1 imagefilter() grayscale example
+
+<?php >
+    $im = imagecreatefrompng('dave.png');
+
+    if($im && imagefilter($im, IMG_FILTER_GRAYSCALE))
+    {
+        echo 'Image converted to grayscale.';
+
+        imagepng($im, 'dave.png');
+    }
+    else
+    {
+        echo 'Conversion to grayscale failed.';
+    }
+
+    imagedestroy($im);
+<?>
+
+Example #2 imagefilter() brightness example
+
+<?php >
+    $im = imagecreatefrompng('sean.png');
+
+    if($im && imagefilter($im, IMG_FILTER_BRIGHTNESS, 20))
+    {
+        echo 'Image brightness changed.';
+
+        imagepng($im, 'sean.png');
+        imagedestroy($im);
+    }
+    else
+    {
+        echo 'Image brightness change failed.';
+    }
+<?>
+
+Example #3 imagefilter() colorize example
+
+<?php >
+    $im = imagecreatefrompng('philip.png');
+
+    /* R, G, B, so 0, 255, 0 is green */
+    if($im && imagefilter($im, IMG_FILTER_COLORIZE, 0, 255, 0))
+    {
+        echo 'Image successfully shaded green.';
+
+        imagepng($im, 'philip.png');
+        imagedestroy($im);
+    }
+    else
+    {
+        echo 'Green shading failed.';
+    }
+<?>
+
+Example #4 imagefilter() negate example
+
+<?php >
+    // Define our negate function so its portable for 
+    // php versions without imagefilter()
+    function negate($im)
+    {
+        if(function_exists('imagefilter'))
+        {
+            return imagefilter($im, IMG_FILTER_NEGATE);
+        }
+
+        for($x = 0; $x < imagesx($im); ++$x)
+        {
+            for($y = 0; $y < imagesy($im); ++$y)
+            {
+                $index = imagecolorat($im, $x, $y);
+                $rgb = imagecolorsforindex($index);
+                $color = imagecolorallocate($im, 255 - $rgb['red'], 255 - $rgb[
+    'green'], 255 - $rgb['blue']);
+
+                imagesetpixel($im, $x, $y, $color);
+            }
+        }
+
+        return(true);
+    }
+
+    $im = imagecreatefromjpeg('kalle.jpg');
+
+    if($im && negate($im))
+    {
+        echo 'Image successfully converted to negative colors.';
+
+        imagejpeg($im, 'kalle.jpg', 100);
+        imagedestroy($im);
+    }
+    else
+    {
+        echo 'Converting to negative colors failed.';
+    }
+<?>
+
+Example #5 imagefilter() pixelate example
+
+<?php >
+    // Load the PHP logo, we need to create two instances 
+    // to show the differences
+    $logo1 = imagecreatefrompng('./php.png');
+    $logo2 = imagecreatefrompng('./php.png');
+
+    // Create the image instance we want to show the 
+    // differences on
+    $output = imagecreatetruecolor(imagesx($logo1) * 2, imagesy($logo1));
+
+    // Apply pixelation to each instance, with a block 
+    // size of 3
+    imagefilter($logo1, IMG_FILTER_PIXELATE, 3);
+    imagefilter($logo2, IMG_FILTER_PIXELATE, 3, true);
+
+    // Merge the differences onto the output image
+    imagecopy($output, $logo1, 0, 0, 0, 0, imagesx($logo1) - 1, imagesy($logo1) - 
+    1);
+    imagecopy($output, $logo2, imagesx($logo2), 0, 0, 0, imagesx($logo2) - 1, 
+    imagesy($logo2) - 1);
+    imagedestroy($logo1);
+    imagedestroy($logo2);
+
+    // Output the differences
+    header('Content-Type: image/png');
+    imagepng($output);
+    imagedestroy($output);
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagefilter() pixelate
+
+==============================================================================
+*Notes*
+
+==============================================================================
+*See* *Also*
+
+  * |imageconvolution| - Apply a 3x3 convolution matrix, using coefficient and
+    offset
+
+
+vim:ft=help:

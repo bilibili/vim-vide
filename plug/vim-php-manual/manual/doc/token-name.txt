@@ -1,0 +1,45 @@
+token_name
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+token_name — Get the symbolic name of a given PHP token
+
+==============================================================================
+*Description*
+
+    string token_name ( int $token )~
+
+token_name() gets the symbolic name for a PHP {token} value.
+
+==============================================================================
+*Parameters*
+
+{token}
+
+    The token value.
+
+==============================================================================
+*Return* *Values*
+
+The symbolic name of the given {token}.
+
+==============================================================================
+*Examples*
+
+Example #1 token_name() example
+
+<?php >
+    // 260 is the token value for the T_EVAL token
+    echo token_name(260);        // -> "T_EVAL"
+
+    // a token constant maps to its own name
+    echo token_name(T_FUNCTION); // -> "T_FUNCTION"
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * List of Parser Tokens
+
+
+vim:ft=help:

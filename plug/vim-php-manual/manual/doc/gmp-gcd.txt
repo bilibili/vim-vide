@@ -1,0 +1,50 @@
+gmp_gcd
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_gcd — Calculate GCD
+
+==============================================================================
+*Description*
+
+    GMP gmp_gcd ( GMP $a , GMP $b )~
+
+Calculate greatest common divisor of {a} and {b}. The result is always
+positive even if either of, or both, input operands are negative.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{b}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+A positive GMP number that divides into both {a} and {b}.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_gcd() example
+
+<?php >
+    $gcd = gmp_gcd("12", "21");
+    echo gmp_strval($gcd) . "\n";
+<?>
+
+The above example will output:
+
+3
+
+
+vim:ft=help:

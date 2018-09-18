@@ -1,0 +1,29 @@
+px_numrecords
+
+(PECL paradox >= 1.0.0)
+
+px_numrecords — Returns number of records in a database
+
+==============================================================================
+*Description*
+
+    int px_numrecords ( resource $pxdoc )~
+
+Get the number of records in a database file.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of records in a database file. The return value of this
+function is identical to the element numrecords in the array returned by 
+|px_get_info|.
+
+
+vim:ft=help:

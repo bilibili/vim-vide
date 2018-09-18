@@ -1,0 +1,58 @@
+socket_create_listen
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_create_listen — Opens a socket on port to accept connections
+
+==============================================================================
+*Description*
+
+    resource socket_create_listen ( int $port [, int $backlog = 128 ] )~
+
+socket_create_listen() creates a new socket resource of type AF_INET listening
+on all local interfaces on the given port waiting for new connections.
+
+This function is meant to ease the task of creating a new socket which only
+listens to accept new connections.
+
+==============================================================================
+*Parameters*
+
+{port}
+
+    The port on which to listen on all interfaces.
+
+{backlog}
+
+    The {backlog} parameter defines the maximum length the queue of pending
+    connections may grow to. SOMAXCONN may be passed as {backlog} parameter,
+    see |socket_listen| for more information.
+
+==============================================================================
+*Return* *Values*
+
+socket_create_listen() returns a new socket resource on success or FALSE on
+error. The error code can be retrieved with |socket_last_error|. This code may
+be passed to |socket_strerror| to get a textual explanation of the error.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    If you want to create a socket which only listens on a certain interface
+    you need to use |socket_create|, |socket_bind| and |socket_listen|.
+
+==============================================================================
+*See* *Also*
+
+  * |socket_create| - Create a socket (endpoint for communication)
+  * |socket_create_pair| - Creates a pair of indistinguishable sockets and
+    stores them in an array
+  * |socket_bind| - Binds a name to a socket
+  * |socket_listen| - Listens for a connection on a socket
+  * |socket_last_error| - Returns the last error on the socket
+  * |socket_strerror| - Return a string describing a socket error
+
+
+vim:ft=help:

@@ -1,0 +1,71 @@
+mb_strtolower
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+mb_strtolower — Make a string lowercase
+
+==============================================================================
+*Description*
+
+    string mb_strtolower ( string $str [, string $encoding =~
+    mb_internal_encoding() ] )~
+
+Returns {str} with all alphabetic characters converted to lowercase.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The string being lowercased.
+
+{encoding}
+
+    The {encoding} parameter is the character encoding. If it is omitted, the
+    internal character encoding value will be used.
+
+==============================================================================
+*Return* *Values*
+
+{str} with all alphabetic characters converted to lowercase.
+
+==============================================================================
+*Unicode*
+
+For more information about the Unicode properties, please see >> http://
+www.unicode.org/unicode/reports/tr21/.
+
+By contrast to |strtolower|, 'alphabetic' is determined by the Unicode
+character properties. Thus the behaviour of this function is not affected by
+locale settings and it can convert any characters that have 'alphabetic'
+property, such as A-umlaut (Ä).
+
+==============================================================================
+*Examples*
+
+Example #1 mb_strtolower() example
+
+<?php >
+    $str = "Mary Had A Little Lamb and She LOVED It So";
+    $str = mb_strtolower($str);
+    echo $str; // Prints mary had a little lamb and she loved it so
+<?>
+
+Example #2 mb_strtolower() example with non-Latin UTF-8 text
+
+<?php >
+    $str = "Τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός";
+    $str = mb_strtolower($str, 'UTF-8');
+    echo $str; //
+     Prints τάχιστη αλώπηξ βαφής ψημένη γη, δρασκελίζει υπέρ νωθρού κυνός
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mb_strtoupper| - Make a string uppercase
+  * |mb_convert_case| - Perform case folding on a string
+  * |strtolower| - Make a string lowercase
+
+
+vim:ft=help:

@@ -1,0 +1,92 @@
+glob
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+glob — Find pathnames matching a pattern
+
+==============================================================================
+*Description*
+
+    array glob ( string $pattern [, int $flags = 0 ] )~
+
+The glob() function searches for all the pathnames matching {pattern}
+according to the rules used by the libc glob() function, which is similar to
+the rules used by common shells.
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    The pattern. No tilde expansion or parameter substitution is done.
+
+{flags}
+
+    Valid flags:
+      + GLOB_MARK - Adds a slash to each directory returned
+      + GLOB_NOSORT - Return files as they appear in the directory (no
+        sorting). When this flag is not used, the pathnames are sorted
+        alphabetically
+      + GLOB_NOCHECK - Return the search pattern if no files matching it were
+        found
+      + GLOB_NOESCAPE - Backslashes do not quote metacharacters
+      + GLOB_BRACE - Expands {a,b,c} to match 'a', 'b', or 'c'
+      + GLOB_ONLYDIR - Return only directory entries which match the pattern
+      + GLOB_ERR - Stop on read errors (like unreadable directories), by
+        default errors are ignored.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array containing the matched files/directories, an empty array if
+no file matched or FALSE on error.
+
+    Note:
+
+    On some systems it is impossible to distinguish between empty match and an
+    error.
+
+==============================================================================
+*Changelog*
+
+Version     Description
+5.1.0   GLOB_ERR was added
+
+==============================================================================
+*Examples*
+
+Example #1 Convenient way how glob() can replace |opendir| and friends.
+
+<?php >
+    foreach (glob("*.txt") as $filename) {
+        echo "$filename size " . filesize($filename) . "\n";
+    }
+<?>
+
+The above example will output something similar to:
+
+funclist.txt size 44686
+funcsummary.txt size 267625
+quickref.txt size 137820
+
+==============================================================================
+*Notes*
+
+    Note: This function will not work on remote files as the file to be
+    examined must be accessible via the server's filesystem.
+
+    Note: This function isn't available on some systems (e.g. old Sun OS).
+
+    Note: The GLOB_BRACE flag is not available on some non GNU systems, like
+    Solaris.
+
+==============================================================================
+*See* *Also*
+
+  * |opendir| - Open directory handle
+  * |readdir| - Read entry from directory handle
+  * |closedir| - Close directory handle
+  * |fnmatch| - Match filename against a pattern
+
+
+vim:ft=help:

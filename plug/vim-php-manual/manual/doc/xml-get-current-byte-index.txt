@@ -1,0 +1,44 @@
+xml_get_current_byte_index
+
+(PHP 4, PHP 5, PHP 7)
+
+xml_get_current_byte_index — Get current byte index for an XML parser
+
+==============================================================================
+*Description*
+
+    int xml_get_current_byte_index ( resource $parser )~
+
+Gets the current byte index of the given XML parser.
+
+==============================================================================
+*Parameters*
+
+{parser}
+
+    A reference to the XML parser to get byte index from.
+
+==============================================================================
+*Return* *Values*
+
+This function returns FALSE if {parser} does not refer to a valid parser, or
+else it returns which byte index the parser is currently at in its data buffer
+(starting at 0).
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function returns byte index according to UTF-8 encoded text disregarding
+if input is in another encoding.
+
+==============================================================================
+*See* *Also*
+
+  * |xml_get_current_column_number| - Get current column number for an XML
+    parser
+  * |xml_get_current_line_number| - Get current line number for an XML parser
+
+
+vim:ft=help:

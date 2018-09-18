@@ -1,0 +1,16 @@
+PDF_set_parameter
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_set_parameter — Set string parameter
+
+==============================================================================
+*Description*
+
+    bool PDF_set_parameter ( resource $p , string $key , string $value )~
+
+Sets some PDFlib parameter with string type. Returns TRUE on success or FALSE
+on failure.
+
+
+vim:ft=help:

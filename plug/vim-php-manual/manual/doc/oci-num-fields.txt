@@ -1,0 +1,71 @@
+oci_num_fields
+
+(PHP 5, PHP 7, PECL OCI8 >= 1.1.0)
+
+oci_num_fields — Returns the number of result columns in a statement
+
+==============================================================================
+*Description*
+
+    int oci_num_fields ( resource $statement )~
+
+Gets the number of columns in the given {statement}.
+
+==============================================================================
+*Parameters*
+
+{statement}
+
+    A valid OCI statement identifier.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of columns as an integer, or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 oci_num_fields() example
+
+<?php >
+
+    // Create the table with:
+    //   CREATE TABLE mytab (id NUMBER, quantity NUMBER);
+
+    $conn = oci_connect("hr", "hrpwd", "localhost/XE");
+    if (!$conn) {
+        $m = oci_error();
+        trigger_error(htmlentities($m['message']), E_USER_ERROR);
+    }
+
+    $stid = oci_parse($conn, "SELECT * FROM mytab");
+    oci_execute($stid, OCI_DESCRIBE_ONLY); //
+     Use OCI_DESCRIBE_ONLY if not fetching rows
+
+    $ncols = oci_num_fields($stid);
+    for ($i = 1; $i <= $ncols; $i++) {
+        echo oci_field_name($stid, $i) . " " . oci_field_type($stid, $i) . "<br>\
+    n";
+    }
+
+    // Outputs:
+    //    ID NUMBER
+    //    QUANTITY NUMBER
+
+    oci_free_statement($stid);
+    oci_close($conn);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    In PHP versions before 5.0.0 you must use |ocinumcols| instead. This name
+    still can be used, it was left as alias of oci_num_fields() for downwards
+    compatability. This, however, is deprecated and not recommended.
+
+
+vim:ft=help:

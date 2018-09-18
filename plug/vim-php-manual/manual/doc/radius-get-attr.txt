@@ -1,0 +1,52 @@
+radius_get_attr
+
+(PECL radius >= 1.1.0)
+
+radius_get_attr — Extracts an attribute
+
+==============================================================================
+*Description*
+
+    mixed radius_get_attr ( resource $radius_handle )~
+
+Like Radius requests, each response may contain zero or more attributes. After
+a response has been received successfully by |radius_send_request|, its
+attributes can be extracted one by one using radius_get_attr(). Each time 
+radius_get_attr() is called, it gets the next attribute from the current
+response.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array containing the attribute-type and the data, or
+error number <= 0.
+
+==============================================================================
+*Examples*
+
+Example #1 radius_get_attr() example
+
+<?php >
+    while ($resa = radius_get_attr($res)) {
+
+        if (!is_array($resa)) {
+            printf("Error getting attribute: %s\n",  radius_strerror($res));
+            exit;
+        }
+
+        $attr = $resa['attr'];
+        $data = $resa['data'];
+        printf("Got Attr:%d %d Bytes %s\n", $attr, strlen($data), bin2hex($data));
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |radius_put_attr| - Attaches a binary attribute
+  * |radius_get_vendor_attr| - Extracts a vendor specific attribute
+  * |radius_put_vendor_attr| - Attaches a vendor specific binary attribute
+  * |radius_send_request| - Sends the request and waites for a reply
+
+
+vim:ft=help:

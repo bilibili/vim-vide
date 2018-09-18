@@ -1,0 +1,54 @@
+ldap_get_entries
+
+(PHP 4, PHP 5, PHP 7)
+
+ldap_get_entries — Get all result entries
+
+==============================================================================
+*Description*
+
+    array ldap_get_entries ( resource $link_identifier , resource~
+    $result_identifier )~
+
+Reads multiple entries from the given result, and then reading the attributes
+and multiple values.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{result_identifier}
+
+==============================================================================
+*Return* *Values*
+
+Returns a complete result information in a multi-dimensional array on success
+and FALSE on error.
+
+The structure of the array is as follows. The attribute index is converted to
+lowercase. (Attributes are case-insensitive for directory servers, but not
+when used as array indices.)
+
+return_value["count"] = number of entries in the result
+return_value[0] : refers to the details of first entry
+
+return_value[i]["dn"] =  DN of the ith entry in the result
+
+return_value[i]["count"] = number of attributes in ith entry
+return_value[i][j] = NAME of the jth attribute in the ith entry in the result
+
+return_value[i]["attribute"]["count"] = number of values for
+                                        attribute in ith entry
+return_value[i]["attribute"][j] = jth value of attribute in ith entry
+
+==============================================================================
+*See* *Also*
+
+  * |ldap_first_entry| - Return first result id
+  * |ldap_next_entry| - Get next result entry
+
+
+vim:ft=help:

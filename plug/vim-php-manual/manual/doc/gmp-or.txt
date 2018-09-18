@@ -1,0 +1,53 @@
+gmp_or
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_or — Bitwise OR
+
+==============================================================================
+*Description*
+
+    GMP gmp_or ( GMP $a , GMP $b )~
+
+Calculates bitwise inclusive OR of two GMP numbers.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{b}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+A GMP number resource in PHP 5.5 and earlier, or a GMP object in PHP 5.6 and
+later.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_or() example
+
+<?php >
+    $or1 = gmp_or("0xfffffff2", "4");
+    echo gmp_strval($or1, 16) . "\n";
+    $or2 = gmp_or("0xfffffff2", "2");
+    echo gmp_strval($or2, 16) . "\n";
+<?>
+
+The above example will output:
+
+fffffff6
+fffffff2
+
+
+vim:ft=help:

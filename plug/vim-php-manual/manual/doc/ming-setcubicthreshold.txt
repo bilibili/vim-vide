@@ -1,0 +1,27 @@
+ming_setcubicthreshold
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7, PECL ming SVN)
+
+ming_setcubicthreshold — Set cubic threshold
+
+==============================================================================
+*Description*
+
+    void ming_setcubicthreshold ( int $threshold )~
+
+Sets the threshold error for drawing cubic beziers.
+
+==============================================================================
+*Parameters*
+
+{threshold}
+
+    The Threshold. Lower is more accurate, hence larger file size.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

@@ -1,0 +1,34 @@
+imap_num_msg
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_num_msg — Gets the number of messages in the current mailbox
+
+==============================================================================
+*Description*
+
+    int imap_num_msg ( resource $imap_stream )~
+
+Gets the number of messages in the current mailbox.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+==============================================================================
+*Return* *Values*
+
+Return the number of messages in the current mailbox, as an integer, or FALSE
+on error.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_num_recent| - Gets the number of recent messages in current mailbox
+  * |imap_status| - Returns status information on a mailbox
+
+
+vim:ft=help:

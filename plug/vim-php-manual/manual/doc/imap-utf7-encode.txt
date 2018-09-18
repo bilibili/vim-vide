@@ -1,0 +1,36 @@
+imap_utf7_encode
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_utf7_encode — Converts ISO-8859-1 string to modified UTF-7 text
+
+==============================================================================
+*Description*
+
+    string imap_utf7_encode ( string $data )~
+
+Converts {data} to modified UTF-7 text.
+
+This is needed to encode mailbox names that contain certain characters which
+are not in range of printable ASCII characters.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    An ISO-8859-1 string.
+
+==============================================================================
+*Return* *Values*
+
+Returns {data} encoded with the modified UTF-7 encoding as defined in >> RFC
+2060, section 5.1.3 (original UTF-7 was defined in >> RFC1642).
+
+==============================================================================
+*See* *Also*
+
+  * |imap_utf7_decode| - Decodes a modified UTF-7 encoded string
+
+
+vim:ft=help:

@@ -1,0 +1,97 @@
+ldap_bind
+
+(PHP 4, PHP 5, PHP 7)
+
+ldap_bind — Bind to LDAP directory
+
+==============================================================================
+*Description*
+
+    bool ldap_bind ( resource $link_identifier [, string $bind_rdn = NULL [,~
+    string $bind_password = NULL ]] )~
+
+Binds to the LDAP directory with specified RDN and password.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{bind_rdn}
+
+{bind_password}
+
+If {bind_password} is not specified or is empty, an anonymous bind is
+attempted. The {bind_dn} can also be left empty for an anonymous bind. This is
+defined in https://tools.ietf.org/html/rfc2251#section-4.2.2
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Using LDAP Bind
+
+<?php >
+
+    // using ldap bind
+    $ldaprdn  = 'uname';     // ldap rdn or dn
+    $ldappass = 'password';  // associated password
+
+    // connect to ldap server
+    $ldapconn = ldap_connect("ldap.example.com")
+        or die("Could not connect to LDAP server.");
+
+    if ($ldapconn) {
+
+        // binding to ldap server
+        $ldapbind = ldap_bind($ldapconn, $ldaprdn, $ldappass);
+
+        // verify binding
+        if ($ldapbind) {
+            echo "LDAP bind successful...";
+        } else {
+            echo "LDAP bind failed...";
+        }
+
+    }
+
+<?>
+
+Example #2 Using LDAP Bind Anonymously
+
+<?php >
+
+    //using ldap bind anonymously
+
+    // connect to ldap server
+    $ldapconn = ldap_connect("ldap.example.com")
+        or die("Could not connect to LDAP server.");
+
+    if ($ldapconn) {
+
+        // binding anonymously
+        $ldapbind = ldap_bind($ldapconn);
+
+        if ($ldapbind) {
+            echo "LDAP bind anonymous successful...";
+        } else {
+            echo "LDAP bind anonymous failed...";
+        }
+
+    }
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ldap_unbind| - Unbind from LDAP directory
+
+
+vim:ft=help:

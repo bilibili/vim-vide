@@ -1,0 +1,41 @@
+dbplus_open
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_open — Open relation file
+
+==============================================================================
+*Description*
+
+    resource dbplus_open ( string $name )~
+
+Opens the given relation file.
+
+==============================================================================
+*Parameters*
+
+{name}
+
+    Can be either a file name or a relative or absolute path name. This will
+    be mapped in any case to an absolute relation file path on a specific host
+    machine and server.
+
+==============================================================================
+*Return* *Values*
+
+On success a relation file resource (cursor) is returned which must be used in
+any subsequent commands referencing the relation. Failure leads to a zero
+return value, the actual error code may be asked for by calling |dbplus_errno|
+.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

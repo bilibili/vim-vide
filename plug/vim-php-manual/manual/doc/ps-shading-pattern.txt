@@ -1,0 +1,43 @@
+ps_shading_pattern
+
+(PECL ps >= 1.3.0)
+
+ps_shading_pattern — Creates a pattern based on a shading
+
+==============================================================================
+*Description*
+
+    int ps_shading_pattern ( resource $psdoc , int $shadingid , string~
+    $optlist )~
+
+Creates a pattern based on a shading, which has to be created before with 
+|ps_shading|. Shading patterns can be used like regular patterns.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{shadingid}
+
+    The identifier of a shading previously created with |ps_shading|.
+
+{optlist}
+
+    This argument is not currently used.
+
+==============================================================================
+*Return* *Values*
+
+The identifier of the pattern or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_shading| - Creates a shading for later use
+  * |ps_shfill| - Fills an area with a shading
+
+
+vim:ft=help:

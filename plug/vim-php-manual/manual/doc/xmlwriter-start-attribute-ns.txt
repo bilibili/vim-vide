@@ -1,0 +1,60 @@
+XMLWriter::startAttributeNS
+
+xmlwriter_start_attribute_ns
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::startAttributeNS -- xmlwriter_start_attribute_ns — Create start
+namespaced attribute
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::startAttributeNS ( string $prefix , string $name , string~
+    $uri )~
+
+Procedural style
+
+    bool xmlwriter_start_attribute_ns ( resource $xmlwriter , string $prefix~
+    , string $name , string $uri )~
+
+Starts a namespaced attribute.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{prefix}
+
+    The namespace prefix.
+
+{name}
+
+    The attribute name.
+
+{uri}
+
+    The namespace URI.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::startAttribute| - Create start attribute
+  * |XMLWriter::endAttribute| - End attribute
+  * |XMLWriter::writeAttribute| - Write full attribute
+  * |XMLWriter::writeAttributeNS| - Write full namespaced attribute
+
+
+vim:ft=help:

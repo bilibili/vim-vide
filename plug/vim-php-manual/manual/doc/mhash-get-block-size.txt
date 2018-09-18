@@ -1,0 +1,38 @@
+mhash_get_block_size
+
+(PHP 4, PHP 5, PHP 7)
+
+mhash_get_block_size — Gets the block size of the specified hash
+
+==============================================================================
+*Description*
+
+    int mhash_get_block_size ( int $hash )~
+
+Gets the size of a block of the specified {hash}.
+
+==============================================================================
+*Parameters*
+
+{hash}
+
+    The hash ID. One of the MHASH_hashname constants.
+
+==============================================================================
+*Return* *Values*
+
+Returns the size in bytes or FALSE, if the {hash} does not exist.
+
+==============================================================================
+*Examples*
+
+Example #1 mhash_get_block_size() Example
+
+<?php >
+
+    echo mhash_get_block_size(MHASH_MD5); // 16
+
+<?>
+
+
+vim:ft=help:

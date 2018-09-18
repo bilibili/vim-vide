@@ -1,0 +1,43 @@
+ps_moveto
+
+(PECL ps >= 1.1.0)
+
+ps_moveto — Sets current point
+
+==============================================================================
+*Description*
+
+    bool ps_moveto ( resource $psdoc , float $x , float $y )~
+
+Sets the current point to new coordinates. If this is the first call of 
+ps_moveto() after a previous path has been ended then it will start a new
+path. If this function is called in the middle of a path it will just set the
+current point and start a subpath.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{x}
+
+    x-coordinate of the point to move to.
+
+{y}
+
+    y-coordinate of the point to move to.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_lineto| - Draws a line
+
+
+vim:ft=help:

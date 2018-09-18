@@ -1,0 +1,28 @@
+http_request_method_name
+
+(PECL pecl_http >= 0.10.0)
+
+http_request_method_name — Get request method name
+
+==============================================================================
+*Description*
+
+    string http_request_method_name ( int $method )~
+
+Get the literal string representation of a standard or registered request
+method.
+
+==============================================================================
+*Parameters*
+
+{method}
+
+    request method ID
+
+==============================================================================
+*Return* *Values*
+
+Returns the request method name as string on success or FALSE on failure.
+
+
+vim:ft=help:

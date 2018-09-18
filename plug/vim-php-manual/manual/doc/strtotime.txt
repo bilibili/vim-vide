@@ -1,0 +1,151 @@
+strtotime
+
+(PHP 4, PHP 5, PHP 7)
+
+strtotime — Parse about any English textual datetime description into a Unix
+timestamp
+
+==============================================================================
+*Description*
+
+    int strtotime ( string $time [, int $now = time() ] )~
+
+The function expects to be given a string containing an English date format
+and will try to parse that format into a Unix timestamp (the number of seconds
+since January 1 1970 00:00:00 UTC), relative to the timestamp given in {now},
+or the current time if {now} is not supplied.
+
+Each parameter of this function uses the default time zone unless a time zone
+is specified in that parameter. Be careful not to use different time zones in
+each parameter unless that is intended. See |date_default_timezone_get| on the
+various ways to define the default time zone.
+
+==============================================================================
+*Parameters*
+
+{time}
+
+    A date/time string. Valid formats are explained in Date and Time Formats.
+
+{now}
+
+    The timestamp which is used as a base for the calculation of relative
+    dates.
+
+==============================================================================
+*Return* *Values*
+
+Returns a timestamp on success, FALSE otherwise. Previous to PHP 5.1.0, this
+function would return -1 on failure.
+
+==============================================================================
+*Errors/Exceptions*
+
+Every call to a date/time function will generate a E_NOTICE if the time zone
+is not valid, and/or a E_STRICT or E_WARNING message if using the system
+settings or the TZ environment variable. See also |date_default_timezone_set|
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Prior to PHP 5.3.0, relative time formats supplied to the {time}
+5.3.0   argument of strtotime() such as this week, previous week, last week,
+        and next week were interpreted to mean a 7 day period relative to the
+        current date/time, rather than a week period of Monday through Sunday.
+5.3.0   Prior to PHP 5.3.0, 24:00 was not a valid format and strtotime()
+        returned FALSE.
+        In PHP 5 prior to 5.2.7, requesting a given occurrence of a given
+5.2.7   weekday in a month where that weekday was the first day of the month
+        would incorrectly add one week to the returned timestamp. This has
+        been corrected in 5.2.7 and later versions.
+5.1.0   Now returns FALSE on failure, instead of -1.
+5.1.0   Now issues the E_STRICT and E_NOTICE time zone errors.
+
+        In PHP 5 up to 5.0.2, "now" and other relative times are wrongly
+5.0.2   computed from today's midnight. This differs from other versions where
+        it is correctly computed from current time.
+5.0.0   Microseconds began to be allowed, but they are ignored.
+
+==============================================================================
+*Examples*
+
+Example #1 A strtotime() example
+
+<?php >
+    echo strtotime("now"), "\n";
+    echo strtotime("10 September 2000"), "\n";
+    echo strtotime("+1 day"), "\n";
+    echo strtotime("+1 week"), "\n";
+    echo strtotime("+1 week 2 days 4 hours 2 seconds"), "\n";
+    echo strtotime("next Thursday"), "\n";
+    echo strtotime("last Monday"), "\n";
+<?>
+
+Example #2 Checking for failure
+
+<?php >
+    $str = 'Not Good';
+
+    // previous to PHP 5.1.0 you would compare with -1, instead of false
+    if (($timestamp = strtotime($str)) === false) {
+        echo "The string ($str) is bogus";
+    } else {
+        echo "$str == " . date('l dS \o\f F Y h:i:s A', $timestamp);
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    If the number of the year is specified in a two digit format, the values
+    between 00-69 are mapped to 2000-2069 and 70-99 to 1970-1999. See the
+    notes below for possible differences on 32bit systems (possible dates
+    might end on 2038-01-19 03:14:07).
+
+    Note:
+
+    The valid range of a timestamp is typically from Fri, 13 Dec 1901 20:45:54
+    UTC to Tue, 19 Jan 2038 03:14:07 UTC. (These are the dates that correspond
+    to the minimum and maximum values for a 32-bit signed integer.)
+
+    Prior to PHP 5.1.0, not all platforms support negative timestamps,
+    therefore your date range may be limited to no earlier than the Unix
+    epoch. This means that e.g. dates prior to Jan 1, 1970 will not work on
+    Windows, some Linux distributions, and a few other operating systems.
+
+    For 64-bit versions of PHP, the valid range of a timestamp is effectively
+    infinite, as 64 bits can represent approximately 293 billion years in
+    either direction.
+
+    Note:
+
+    Dates in the m/d/y or d-m-y formats are disambiguated by looking at the
+    separator between the various components: if the separator is a slash (/),
+    then the American m/d/y is assumed; whereas if the separator is a dash (-)
+    or a dot (.), then the European d-m-y format is assumed. If, however, the
+    year is given in a two digit format and the separator is a dash (-, the
+    date string is parsed as y-m-d.
+
+    To avoid potential ambiguity, it's best to use ISO 8601 (YYYY-MM-DD) dates
+    or DateTime::createFromFormat() when possible.
+
+    Note:
+
+    Using this function for mathematical operations is not advisable. It is
+    better to use DateTime::add() and DateTime::sub() in PHP 5.3 and later, or
+    DateTime::modify() in PHP 5.2.
+
+==============================================================================
+*See* *Also*
+
+  * Date and Time Formats
+  * DateTime::createFromFormat() - Parses a time string according to a
+    specified format
+  * |checkdate| - Validate a Gregorian date
+  * |strptime| - Parse a time/date generated with strftime
+
+
+vim:ft=help:

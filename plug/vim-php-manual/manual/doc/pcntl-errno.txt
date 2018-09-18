@@ -1,0 +1,13 @@
+pcntl_errno
+
+(PHP 5 >= 5.3.4, PHP 7)
+
+pcntl_errno — Alias of |pcntl_get_last_error|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |pcntl_get_last_error|
+
+
+vim:ft=help:

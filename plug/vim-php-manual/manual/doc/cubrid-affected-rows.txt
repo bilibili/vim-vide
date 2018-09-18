@@ -1,0 +1,79 @@
+cubrid_affected_rows
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_affected_rows — Return the number of rows affected by the last SQL
+statement
+
+==============================================================================
+*Description*
+
+    int cubrid_affected_rows ([ resource $conn_identifier ] )~
+    int cubrid_affected_rows ([ resource $req_identifier ] )~
+
+The cubrid_affected_rows() function is used to get the number of rows affected
+by the SQL statement (INSERT, DELETE, UPDATE).
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    The CUBRID connection. If the connection identifier is not specified, the
+    last link opend by |cubrid_connect| is assumed.
+
+{req_identifier}
+
+    Request Identifier, could be returned from either |cubrid_prepare| or 
+    |cubrid_execute|. If the request identifier is not specified, the last
+    identifier requested by |cubrid_prepare| or |cubrid_execute| is assumed.
+
+==============================================================================
+*Return* *Values*
+
+Number of rows affected by the SQL statement, when process is successful.
+
+-1, when SQL statement is not INSERT, DELETE or UPDATE.
+
+FALSE, when the request identifier is not specified, and there is no last
+request.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_affected_rows() example
+
+<?php >
+    $conn = cubrid_connect('localhost', 33000, 'demodb', 'dba', '');
+    cubrid_execute($conn, "DROP TABLE IF EXISTS cubrid_test");
+    cubrid_execute($conn, "CREATE TABLE cubrid_test (d varchar)");
+    $sql_stmt = "INSERT INTO cubrid_test(d) VALUES('php-test')";
+    $req = cubrid_prepare($conn, $sql_stmt);
+
+    for ($i = 0; $i < 10; $i++) {
+        cubrid_execute($req);
+    }
+    cubrid_commit($conn);
+
+    $req = cubrid_execute($conn, "DELETE FROM cubrid_test WHERE d='php-test'", 
+    CUBRID_ASYNC);
+    var_dump(cubrid_affected_rows());
+    var_dump(cubrid_affected_rows($conn));
+    var_dump(cubrid_affected_rows($req));
+
+    cubrid_disconnect($conn);
+
+    print "done!";
+<?>
+
+The above example will output:
+
+Rows deleted: 5
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_execute| - Execute a prepared SQL statement
+
+
+vim:ft=help:

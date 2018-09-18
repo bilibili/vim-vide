@@ -1,0 +1,129 @@
+array_udiff_assoc
+
+(PHP 5, PHP 7)
+
+array_udiff_assoc — Computes the difference of arrays with additional index
+check, compares data by a callback function
+
+==============================================================================
+*Description*
+
+    array array_udiff_assoc ( array $array1 , array $array2 [, array $... ],~
+    callable $value_compare_func )~
+
+Computes the difference of arrays with additional index check, compares data
+by a callback function.
+
+    Note: Please note that this function only checks one dimension of a
+    n-dimensional array. Of course you can check deeper dimensions by using,
+    for example, array_udiff_assoc($array1[0], $array2[0],
+    "some_comparison_func");.
+
+==============================================================================
+*Parameters*
+
+{array1}
+
+    The first array.
+
+{array2}
+
+    The second array.
+
+{value_compare_func}
+
+    The comparison function must return an integer less than, equal to, or
+    greater than zero if the first argument is considered to be respectively
+    less than, equal to, or greater than the second. Note that before PHP
+    7.0.0 this integer had to be in the range from -2147483648 to 2147483647.
+
+
+    int callback ( mixed $a, mixed $b )~
+
+==============================================================================
+*Return* *Values*
+
+array_udiff_assoc() returns an array containing all the values from {array1}
+that are not present in any of the other arguments. Note that the keys are
+used in the comparison unlike |array_diff| and |array_udiff|. The comparison
+of arrays' data is performed by using an user-supplied callback. In this
+aspect the behaviour is opposite to the behaviour of |array_diff_assoc| which
+uses internal function for comparison.
+
+==============================================================================
+*Examples*
+
+Example #1 array_udiff_assoc() example
+
+<?php >
+    class cr {
+        private $priv_member;
+        function cr($val)
+        {
+            $this->priv_member = $val;
+        }
+
+        static function comp_func_cr($a, $b)
+        {
+            if ($a->priv_member === $b->priv_member) return 0;
+            return ($a->priv_member > $b->priv_member)? 1:-1;
+        }
+    }
+
+    $a = array("0.1" => new cr(9), "0.5" => new cr(12), 0 => new cr(23), 1=> new 
+    cr(4), 2 => new cr(-15),);
+    $b = array("0.2" => new cr(9), "0.5" => new cr(22), 0 => new cr(3), 1=> new cr
+    (4), 2 => new cr(-15),);
+
+    $result = array_udiff_assoc($a, $b, array("cr", "comp_func_cr"));
+    print_r($result);
+<?>
+
+The above example will output:
+
+Array
+(
+    [0.1] => cr Object
+        (
+            [priv_member:private] => 9
+        )
+
+    [0.5] => cr Object
+        (
+            [priv_member:private] => 12
+        )
+
+    [0] => cr Object
+        (
+            [priv_member:private] => 23
+        )
+)
+
+In our example above you see the "1" => new cr(4) pair is present in both
+arrays and thus it is not in the output from the function.
+
+==============================================================================
+*See* *Also*
+
+  * |array_diff| - Computes the difference of arrays
+  * |array_diff_assoc| - Computes the difference of arrays with additional
+    index check
+  * |array_diff_uassoc| - Computes the difference of arrays with additional
+    index check which is performed by a user supplied callback function
+  * |array_udiff| - Computes the difference of arrays by using a callback
+    function for data comparison
+  * |array_udiff_uassoc| - Computes the difference of arrays with additional
+    index check, compares data and indexes by a callback function
+  * |array_intersect| - Computes the intersection of arrays
+  * |array_intersect_assoc| - Computes the intersection of arrays with
+    additional index check
+  * |array_uintersect| - Computes the intersection of arrays, compares data by
+    a callback function
+  * |array_uintersect_assoc| - Computes the intersection of arrays with
+    additional index check, compares data by a callback function
+  * |array_uintersect_uassoc| - Computes the intersection of arrays with
+    additional index check, compares data and indexes by separate callback
+    functions
+
+
+vim:ft=help:

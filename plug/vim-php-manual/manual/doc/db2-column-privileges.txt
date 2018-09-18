@@ -1,0 +1,86 @@
+db2_column_privileges
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_column_privileges — Returns a result set listing the columns and
+associated privileges for a table
+
+==============================================================================
+*Description*
+
+    resource db2_column_privileges ( resource $connection [, string~
+    $qualifier [, string $schema [, string $table-name [, string $column-name~
+    ]]]] )~
+
+Returns a result set listing the columns and associated privileges for a
+table.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    A valid connection to an IBM DB2, Cloudscape, or Apache Derby database.
+
+{qualifier}
+
+    A qualifier for DB2 databases running on OS/390 or z/OS servers. For other
+    databases, pass NULL or an empty string.
+
+{schema}
+
+    The schema which contains the tables. To match all schemas, pass NULL or
+    an empty string.
+
+{table-name}
+
+    The name of the table or view. To match all tables in the database, pass
+    NULL or an empty string.
+
+{column-name}
+
+    The name of the column. To match all columns in the table, pass NULL or an
+    empty string.
+
+==============================================================================
+*Return* *Values*
+
+Returns a statement resource with a result set containing rows describing the
+column privileges for columns matching the specified parameters. The rows are
+composed of the following columns:
+
+Column name                             Description
+TABLE_CAT    Name of the catalog. The value is NULL if this table does not
+             have catalogs.
+TABLE_SCHEM  Name of the schema.
+TABLE_NAME   Name of the table or view.
+COLUMN_NAME  Name of the column.
+GRANTOR      Authorization ID of the user who granted the privilege.
+GRANTEE      Authorization ID of the user to whom the privilege was granted.
+PRIVILEGE    The privilege for the column.
+IS_GRANTABLE Whether the GRANTEE is permitted to grant this privilege to other
+             users.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_columns| - Returns a result set listing the columns and associated
+    metadata for a table
+  * |db2_foreign_keys| - Returns a result set listing the foreign keys for a
+    table
+  * |db2_primary_keys| - Returns a result set listing primary keys for a table
+  * |db2_procedure_columns| - Returns a result set listing stored procedure
+    parameters
+  * |db2_procedures| - Returns a result set listing the stored procedures
+    registered in a database
+  * |db2_special_columns| - Returns a result set listing the unique row
+    identifier columns for a table
+  * |db2_statistics| - Returns a result set listing the index and statistics
+    for a table
+  * |db2_table_privileges| - Returns a result set listing the tables and
+    associated privileges in a database
+  * |db2_tables| - Returns a result set listing the tables and associated
+    metadata in a database
+
+
+vim:ft=help:

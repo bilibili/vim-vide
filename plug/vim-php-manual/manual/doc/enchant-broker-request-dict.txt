@@ -1,0 +1,56 @@
+enchant_broker_request_dict
+
+(PHP 5 >= 5.3.0, PHP 7, PECL enchant >= 0.1.0 )
+
+enchant_broker_request_dict — create a new dictionary using a tag
+
+==============================================================================
+*Description*
+
+    resource enchant_broker_request_dict ( resource $broker , string $tag )~
+
+create a new dictionary using tag, the non-empty language tag you wish to
+request a dictionary for ("en_US", "de_DE", ...)
+
+==============================================================================
+*Parameters*
+
+{broker}
+
+    Broker resource
+
+{tag}
+
+    A tag describing the locale, for example en_US, de_DE
+
+==============================================================================
+*Return* *Values*
+
+Returns a dictionary resource on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A enchant_broker_request_dict() example
+
+Check if a dictionary exists using |enchant_broker_dict_exists| and request
+it.
+
+<?php >
+    $tag = 'en_US';
+    $broker = enchant_broker_init();
+    if (enchant_broker_dict_exists($broker,$tag)) {
+        $dict = enchant_broker_request_dict($r, $tag);
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |enchant_dict_describe| - Describes an individual dictionary
+  * |enchant_broker_dict_exists| - Whether a dictionary exists or not. Using
+    non-empty tag
+  * |enchant_broker_free_dict| - Free a dictionary resource
+
+
+vim:ft=help:

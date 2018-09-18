@@ -1,0 +1,79 @@
+socket_sendto
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_sendto — Sends a message to a socket, whether it is connected or not
+
+==============================================================================
+*Description*
+
+    int socket_sendto ( resource $socket , string $buf , int $len , int~
+    $flags , string $addr [, int $port = 0 ] )~
+
+The function socket_sendto() sends {len} bytes from {buf} through the socket
+{socket} to the {port} at the address {addr}.
+
+==============================================================================
+*Parameters*
+
+{socket}
+
+    A valid socket resource created using |socket_create|.
+
+{buf}
+
+    The sent data will be taken from buffer {buf}.
+
+{len}
+
+    {len} bytes from {buf} will be sent.
+
+{flags}
+
+    The value of {flags} can be any combination of the following flags, joined
+    with the binary OR (|) operator.
+
+                         Possible values for {flags}
+    MSG_OOB       Send OOB (out-of-band) data.
+    MSG_EOR       Indicate a record mark. The sent data completes the record.
+                  Close the sender side of the socket and include an
+    MSG_EOF       appropriate notification of this at the end of the sent
+                  data. The sent data completes the transaction.
+    MSG_DONTROUTE Bypass routing, use direct interface.
+
+{addr}
+
+    IP address of the remote host.
+
+{port}
+
+    {port} is the remote port number at which the data will be sent.
+
+==============================================================================
+*Return* *Values*
+
+socket_sendto() returns the number of bytes sent to the remote host, or FALSE
+if an error occurred.
+
+==============================================================================
+*Examples*
+
+Example #1 socket_sendto() Example
+
+<?php >
+        $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+
+        $msg = "Ping !";
+        $len = strlen($msg);
+
+        socket_sendto($sock, $msg, $len, 0, '127.0.0.1', 1223);
+        socket_close($sock);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |socket_send| - Sends data to a connected socket
+
+
+vim:ft=help:

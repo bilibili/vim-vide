@@ -1,0 +1,33 @@
+openal_context_suspend
+
+(PECL openal >= 0.1.0)
+
+openal_context_suspend — Suspend the specified context
+
+==============================================================================
+*Description*
+
+    bool openal_context_suspend ( resource $context )~
+
+==============================================================================
+*Parameters*
+
+{context}
+
+    An Open AL(Context) resource (previously created by |openal_context_create
+    |).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_context_create| - Create an audio processing context
+  * |openal_context_current| - Make the specified context current
+  * |openal_context_process| - Process the specified context
+
+
+vim:ft=help:

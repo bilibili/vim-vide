@@ -1,0 +1,18 @@
+fdf_add_template
+
+(PHP 4, PHP 5, PHP 7)
+
+fdf_add_template — Adds a template into the FDF document
+
+==============================================================================
+*Description*
+
+    bool fdf_add_template ( resource $fdf_document , int $newpage , string~
+    $filename , string $template , int $rename )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

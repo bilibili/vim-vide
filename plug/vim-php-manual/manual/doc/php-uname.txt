@@ -1,0 +1,94 @@
+php_uname
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+php_uname — Returns information about the operating system PHP is running on
+
+==============================================================================
+*Description*
+
+    string php_uname ([ string $mode = "a" ] )~
+
+php_uname() returns a description of the operating system PHP is running on.
+This is the same string you see at the very top of the |phpinfo| output. For
+the name of just the operating system, consider using the PHP_OS constant, but
+keep in mind this constant will contain the operating system PHP was built on.
+
+On some older UNIX platforms, it may not be able to determine the current OS
+information in which case it will revert to displaying the OS PHP was built
+on. This will only happen if your uname() library call either doesn't exist or
+doesn't work.
+
+==============================================================================
+*Parameters*
+
+{mode}
+
+    {mode} is a single character that defines what information is returned:
+      + 'a': This is the default. Contains all modes in the sequence "s n r v
+        m".
+      + 's': Operating system name. eg. FreeBSD.
+      + 'n': Host name. eg. localhost.example.com.
+      + 'r': Release name. eg. 5.1.2-RELEASE.
+      + 'v': Version information. Varies a lot between operating systems.
+      + 'm': Machine type. eg. i386.
+
+==============================================================================
+*Return* *Values*
+
+Returns the description, as a string.
+
+==============================================================================
+*Examples*
+
+Example #1 Some php_uname() examples
+
+<?php >
+    echo php_uname();
+    echo PHP_OS;
+
+    /* Some possible outputs:
+    Linux localhost 2.4.21-0.13mdk #1 Fri Mar 14 15:08:06 EST 2003 i686
+    Linux
+
+    FreeBSD localhost 3.2-RELEASE #15: Mon Dec 17 08:46:02 GMT 2001
+    FreeBSD
+
+    Windows NT XN1 5.1 build 2600
+    WINNT
+    */
+
+    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        echo 'This is a server using Windows!';
+    } else {
+        echo 'This is a server not using Windows!';
+    }
+
+<?>
+
+There are also some related Predefined PHP constants that may come in handy,
+for example:
+
+Example #2 A few OS related constant examples
+
+<?php >
+    // *nix
+    echo DIRECTORY_SEPARATOR; // /
+    echo PHP_SHLIB_SUFFIX;    // so
+    echo PATH_SEPARATOR;      // :
+
+    // Win*
+    echo DIRECTORY_SEPARATOR; // \
+    echo PHP_SHLIB_SUFFIX;    // dll
+    echo PATH_SEPARATOR;      // ;
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |phpversion| - Gets the current PHP version
+  * |php_sapi_name| - Returns the type of interface between web server and PHP
+  * |phpinfo| - Outputs information about PHP's configuration
+
+
+vim:ft=help:

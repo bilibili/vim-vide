@@ -1,0 +1,27 @@
+getrandmax
+
+(PHP 4, PHP 5, PHP 7)
+
+getrandmax — Show largest possible random value
+
+==============================================================================
+*Description*
+
+    int getrandmax ( void )~
+
+Returns the maximum value that can be returned by a call to |rand|.
+
+==============================================================================
+*Return* *Values*
+
+The largest possible random value returned by |rand|
+
+==============================================================================
+*See* *Also*
+
+  * |rand| - Generate a random integer
+  * |srand| - Seed the random number generator
+  * |mt_getrandmax| - Show largest possible random value
+
+
+vim:ft=help:

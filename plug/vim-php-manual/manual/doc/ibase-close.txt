@@ -1,0 +1,36 @@
+ibase_close
+
+(PHP 5, PHP 7)
+
+ibase_close — Close a connection to an InterBase database
+
+==============================================================================
+*Description*
+
+    bool ibase_close ([ resource $connection_id = NULL ] )~
+
+Closes the link to an InterBase database that's associated with a connection
+id returned from |ibase_connect|. Default transaction on link is committed,
+other transactions are rolled back.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    An InterBase link identifier returned from |ibase_connect|. If omitted,
+    the last opened link is assumed.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ibase_connect| - Open a connection to a database
+  * |ibase_pconnect| - Open a persistent connection to an InterBase database
+
+
+vim:ft=help:

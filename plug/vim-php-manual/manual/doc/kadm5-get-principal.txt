@@ -1,0 +1,60 @@
+kadm5_get_principal
+
+(PECL kadm5 >= 0.2.3)
+
+kadm5_get_principal — Gets the principal's entries from the Kerberos database
+
+==============================================================================
+*Description*
+
+    array kadm5_get_principal ( resource $handle , string $principal )~
+
+Gets the principal's entries from the Kerberos database.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    A KADM5 handle.
+
+{principal}
+
+    The principal.
+
+==============================================================================
+*Return* *Values*
+
+Returns array of options containing the following keys: KADM5_PRINCIPAL,
+KADM5_PRINC_EXPIRE_TIME, KADM5_PW_EXPIRATION, KADM5_ATTRIBUTES,
+KADM5_MAX_LIFE, KADM5_MOD_NAME, KADM5_MOD_TIME, KADM5_KVNO, KADM5_POLICY,
+KADM5_MAX_RLIFE, KADM5_LAST_SUCCESS, KADM5_LAST_FAILED, KADM5_FAIL_AUTH_COUNT
+on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 kadm5_get_principal() example
+
+<?php >
+    $handle = kadm5_init_with_password("afs-1", "GONICUS.LOCAL", "admin/admin", 
+    "password");
+
+    print "<h1>get_principal burbach@GONICUS.LOCAL</h1>\n";
+
+    $options = kadm5_get_principal($handle, "burbach@GONICUS.LOCAL" );
+
+    foreach ($options as $key => $value) {
+        echo "$key: $value<br />\n";
+    }
+
+    kadm5_destroy($handle);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |kadm5_get_principals| - Gets all principals from the Kerberos database
+
+
+vim:ft=help:

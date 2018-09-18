@@ -1,0 +1,91 @@
+snmp_set_valueretrieval
+
+(PHP 4 >= 4.3.3, PHP 5, PHP 7)
+
+snmp_set_valueretrieval — Specify the method how the SNMP values will be
+returned
+
+==============================================================================
+*Description*
+
+    bool snmp_set_valueretrieval ( int $method = SNMP_VALUE_LIBRARY )~
+
+==============================================================================
+*Parameters*
+
+{method}
+
+                                    types
+    SNMP_VALUE_LIBRARY The return values will be as returned by the Net-SNMP
+                       library.
+    SNMP_VALUE_PLAIN   The return values will be the plain value without the
+                       SNMP type hint.
+                       The return values will be objects with the properties
+                       "value" and "type", where the latter is one of the
+    SNMP_VALUE_OBJECT  SNMP_OCTET_STR, SNMP_COUNTER etc. constants. The way
+                       "value" is returned is based on which one of constants
+                       SNMP_VALUE_LIBRARY, SNMP_VALUE_PLAIN is set.
+
+==============================================================================
+*Examples*
+
+Example #1 Using snmp_set_valueretrieval()
+
+<?php >
+     snmp_set_valueretrieval(SNMP_VALUE_LIBRARY);
+     $ret = snmpget('localhost', 'public', 'IF-MIB::ifName.1');
+     // $ret = "STRING: lo"
+
+     snmp_set_valueretrieval(SNMP_VALUE_PLAIN);
+     $ret = snmpget('localhost', 'public', 'IF-MIB::ifName.1');
+     // $ret = "lo";
+
+     snmp_set_valueretrieval(SNMP_VALUE_OBJECT);
+     $ret = snmpget('localhost', 'public', 'IF-MIB::ifName.1');
+     // stdClass Object
+     // (
+     //   [type] => 4        <-- SNMP_OCTET_STR, see constants
+     //   [value] => lo
+     // )
+
+     // PHP 5.4+ examples
+     snmp_set_valueretrieval(SNMP_VALUE_OBJECT | SNMP_VALUE_PLAIN);
+     $ret = snmpget('localhost', 'public', 'IF-MIB::ifName.1');
+     // stdClass Object
+     // (
+     //   [type] => 4        <-- SNMP_OCTET_STR, see constants
+     //   [value] => lo
+     // )
+
+     snmp_set_valueretrieval(SNMP_VALUE_OBJECT | SNMP_VALUE_LIBRARY);
+     $ret = snmpget('localhost', 'public', 'IF-MIB::ifName.1');
+     // stdClass Object
+     // (
+     //   [type] => 4        <-- SNMP_OCTET_STR, see constants
+     //   [value] => STRING: lo
+     // )
+
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Constants SNMP_VALUE_PLAIN or SNMP_VALUE_LIBRARY may be combined with
+        SNMP_VALUE_OBJECT resulting different way of representing contents of
+        {value} array element in return value of GET-function. If no
+5.4.0   SNMP_VALUE_{PLAIN,LIBRARY} constant is accompanying SNMP_VALUE_OBJECT,
+        SNMP_VALUE_LIBRARY is used.
+
+        Prior to 5.4.0 SNMP_VALUE_OBJECT effecively meant SNMP_VALUE_OBJECT|
+        SNMP_VALUE_PLAIN.
+
+==============================================================================
+*See* *Also*
+
+  * |snmp_get_valueretrieval| - Return the method how the SNMP values will be
+    returned
+  * Predefined Constants
+
+
+vim:ft=help:

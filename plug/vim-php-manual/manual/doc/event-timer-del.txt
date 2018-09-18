@@ -1,0 +1,13 @@
+event_timer_del
+
+(PECL libevent >= 0.0.2)
+
+event_timer_del — Alias of event_del()
+
+==============================================================================
+*Description*
+
+This function is an alias of: event_del().
+
+
+vim:ft=help:

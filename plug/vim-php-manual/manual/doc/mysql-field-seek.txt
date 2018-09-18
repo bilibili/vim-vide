@@ -1,0 +1,52 @@
+mysql_field_seek
+
+(PHP 4, PHP 5)
+
+mysql_field_seek — Set result pointer to a specified field offset
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_field_seek()
+  * PDOStatement::fetch() using the {cursor_orientation} and {offset}
+    parameters
+
+==============================================================================
+*Description*
+
+    bool mysql_field_seek ( resource $result , int $field_offset )~
+
+Seeks to the specified field offset. If the next call to |mysql_fetch_field|
+doesn't include a field offset, the field offset specified in mysql_field_seek
+() will be returned.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mysql_query|.
+
+{ field_offset}
+
+    The numerical field offset. The {field_offset} starts at 0. If
+    {field_offset} does not exist, an error of level E_WARNING is also issued.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_fetch_field| - Get column information from a result and return as
+    an object
+
+
+vim:ft=help:

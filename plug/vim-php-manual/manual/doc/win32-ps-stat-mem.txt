@@ -1,0 +1,55 @@
+win32_ps_stat_mem
+
+(PECL win32ps >= 1.0.1)
+
+win32_ps_stat_mem — Stat memory utilization
+
+==============================================================================
+*Description*
+
+    array win32_ps_stat_mem ( void )~
+
+Retrieves statistics about the global memory utilization.
+
+==============================================================================
+*Return* *Values*
+
+Returns FALSE on failure, or an array consisting of the following information
+on success:
+
+{load}
+
+    The current memory load in percent of physical memory.
+
+{unit}
+
+    This is always 1024, and indicates that the following values are the count
+    of 1024 bytes.
+
+{total_phys}
+
+    The amount of total physical memory.
+
+{avail_phys}
+
+    The amount of still available physical memory.
+
+{total_pagefile}
+
+    The amount of total pageable memory (physical memory + paging file).
+
+{avail_pagefile}
+
+    The amount of still available pageable memory (physical memory + paging
+    file).
+
+{total_virtual}
+
+    The amount of total virtual memory for a process.
+
+{avail_virtual}
+
+    The amount of still available virtual memory for a process.
+
+
+vim:ft=help:

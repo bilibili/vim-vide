@@ -1,0 +1,21 @@
+readline_list_history
+
+(PHP 4, PHP 5, PHP 7)
+
+readline_list_history — Lists the history
+
+==============================================================================
+*Description*
+
+    array readline_list_history ( void )~
+
+Gets the entire command line history.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of the entire command line history. The elements are indexed
+by integers starting at zero.
+
+
+vim:ft=help:

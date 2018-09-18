@@ -1,0 +1,38 @@
+mb_http_input
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+mb_http_input — Detect HTTP input character encoding
+
+==============================================================================
+*Description*
+
+    mixed mb_http_input ([ string $type = "" ] )~
+
+Detects the HTTP input character encoding.
+
+==============================================================================
+*Parameters*
+
+{type}
+
+    Input string specifies the input type. "G" for GET, "P" for POST, "C" for
+    COOKIE, "S" for string, "L" for list, and "I" for the whole list (will
+    return array). If type is omitted, it returns the last input type
+    processed.
+
+==============================================================================
+*Return* *Values*
+
+The character encoding name, as per the {type}. If mb_http_input() does not
+process specified HTTP input, it returns FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_internal_encoding| - Set/Get internal character encoding
+  * |mb_http_output| - Set/Get HTTP output character encoding
+  * |mb_detect_order| - Set/Get character encoding detection order
+
+
+vim:ft=help:

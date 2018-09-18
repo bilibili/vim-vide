@@ -1,0 +1,68 @@
+session_cache_expire
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+session_cache_expire — Return current cache expire
+
+==============================================================================
+*Description*
+
+    int session_cache_expire ([ string $new_cache_expire ] )~
+
+session_cache_expire() returns the current setting of session.cache_expire.
+
+The cache expire is reset to the default value of 180 stored in
+session.cache_expire at request startup time. Thus, you need to call 
+session_cache_expire() for every request (and before |session_start| is
+called).
+
+==============================================================================
+*Parameters*
+
+{new_cache_expire}
+
+    If {new_cache_expire} is given, the current cache expire is replaced with
+    {new_cache_expire}.
+
+        Note: Setting {new_cache_expire} is of value only, if
+        session.cache_limiter is set to a value different from nocache.
+
+==============================================================================
+*Return* *Values*
+
+Returns the current setting of session.cache_expire. The value returned should
+be read in minutes, defaults to 180.
+
+==============================================================================
+*Examples*
+
+Example #1 session_cache_expire() example
+
+<?php >
+
+    /* set the cache limiter to 'private' */
+
+    session_cache_limiter('private');
+    $cache_limiter = session_cache_limiter();
+
+    /* set the cache expire to 30 minutes */
+    session_cache_expire(30);
+    $cache_expire = session_cache_expire();
+
+    /* start the session */
+
+    session_start();
+
+    echo "The cache limiter is now set to $cache_limiter<br />";
+    echo "The cached session pages expire after $cache_expire minutes";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * session.cache_expire
+  * session.cache_limiter
+  * |session_cache_limiter| - Get and/or set the current cache limiter
+
+
+vim:ft=help:

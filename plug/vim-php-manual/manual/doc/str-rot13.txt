@@ -1,0 +1,44 @@
+str_rot13
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+str_rot13 — Perform the rot13 transform on a string
+
+==============================================================================
+*Description*
+
+    string str_rot13 ( string $str )~
+
+Performs the ROT13 encoding on the {str} argument and returns the resulting
+string.
+
+The ROT13 encoding simply shifts every letter by 13 places in the alphabet
+while leaving non-alpha characters untouched. Encoding and decoding are done
+by the same function, passing an encoded string as argument will return the
+original version.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The input string.
+
+==============================================================================
+*Return* *Values*
+
+Returns the ROT13 version of the given string.
+
+==============================================================================
+*Examples*
+
+Example #1 str_rot13() example
+
+<?php >
+
+    echo str_rot13('PHP 4.3.0'); // CUC 4.3.0
+
+<?>
+
+
+vim:ft=help:

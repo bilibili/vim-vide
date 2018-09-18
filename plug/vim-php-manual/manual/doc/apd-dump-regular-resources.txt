@@ -1,0 +1,35 @@
+apd_dump_regular_resources
+
+(PECL apd 0.2-0.4)
+
+apd_dump_regular_resources — Return all current regular resources as an array
+
+==============================================================================
+*Description*
+
+    array apd_dump_regular_resources ( void )~
+
+Return all current regular resources as an array.
+
+==============================================================================
+*Return* *Values*
+
+An array containing the current regular resources.
+
+==============================================================================
+*Examples*
+
+Example #1 apd_dump_regular_resources() example
+
+<?php >
+    print_r(apd_dump_regular_resources());
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |apd_dump_persistent_resources| - Return all persistent resources as an
+    array
+
+
+vim:ft=help:

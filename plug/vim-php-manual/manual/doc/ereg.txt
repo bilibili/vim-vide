@@ -1,0 +1,92 @@
+ereg
+
+(PHP 4, PHP 5)
+
+ereg — Regular expression match
+
+Warning
+
+This function was DEPRECATED in PHP 5.3.0, and REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * |preg_match|
+
+==============================================================================
+*Description*
+
+    int ereg ( string $pattern , string $string [, array &$regs ] )~
+
+Searches a {string} for matches to the regular expression given in {pattern}
+in a case-sensitive way.
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    Case sensitive regular expression.
+
+{string}
+
+    The input string.
+
+{regs}
+
+    If matches are found for parenthesized substrings of {pattern} and the
+    function is called with the third argument {regs}, the matches will be
+    stored in the elements of the array {regs}.
+
+    $regs[1] will contain the substring which starts at the first left
+    parenthesis; $regs[2] will contain the substring starting at the second,
+    and so on. $regs[0] will contain a copy of the complete string matched.
+
+==============================================================================
+*Return* *Values*
+
+Returns the length of the matched string if a match for {pattern} was found in
+{string}, or FALSE if no matches were found or an error occurred.
+
+If the optional parameter {regs} was not passed or the length of the matched
+string is 0, this function returns 1.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Up to (and including) PHP 4.1.0 $regs will be filled with exactly ten
+        elements, even though more or fewer than ten parenthesized substrings
+4.1.0   may actually have matched. This has no effect on ereg()'s ability to
+        match more substrings. If no matches are found, $regs will not be
+        altered by ereg().
+
+==============================================================================
+*Examples*
+
+Example #1 ereg() example
+
+The following code snippet takes a date in ISO format (YYYY-MM-DD) and prints
+it in DD.MM.YYYY format:
+
+<?php >
+    if (ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $date, $regs)) {
+        echo "$regs[3].$regs[2].$regs[1]";
+    } else {
+        echo "Invalid date format: $date";
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |eregi| - Case insensitive regular expression match
+  * |ereg_replace| - Replace regular expression
+  * |eregi_replace| - Replace regular expression case insensitive
+  * |preg_match| - Perform a regular expression match
+  * |strpos| - Find the position of the first occurrence of a substring in a
+    string
+  * |strstr| - Find the first occurrence of a string
+  * |quotemeta| - Quote meta characters
+
+
+vim:ft=help:

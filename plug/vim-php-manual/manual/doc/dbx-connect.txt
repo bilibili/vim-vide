@@ -1,0 +1,117 @@
+dbx_connect
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5, PECL dbx >= 1.1.0)
+
+dbx_connect — Open a connection/database
+
+==============================================================================
+*Description*
+
+    object dbx_connect ( mixed $module , string $host , string $database ,~
+    string $username , string $password [, int $persistent ] )~
+
+Opens a connection to a database.
+
+==============================================================================
+*Parameters*
+
+{module}
+
+    The {module} parameter can be either a string or a constant, though the
+    latter form is preferred. The possible values are given below, but keep in
+    mind that they only work if the module is actually loaded.
+
+      + DBX_MYSQL or "mysql"
+      + DBX_ODBC or "odbc"
+      + DBX_PGSQL or "pgsql"
+      + DBX_MSSQL or "mssql"
+      + DBX_FBSQL or "fbsql"
+      + DBX_SYBASECT or "sybase_ct"
+      + DBX_OCI8 or "oci8"
+      + DBX_SQLITE or "sqlite"
+
+{host}
+
+    The SQL server host
+
+{database}
+
+    The database name
+
+{username}
+
+    The username
+
+{password}
+
+    The password
+
+{persistent}
+
+    The {persistent} parameter can be set to DBX_PERSISTENT, if so, a
+    persistent connection will be created.
+
+The {host}, {database}, {username} and {password} parameters are expected, but
+not always used depending on the connect functions for the abstracted module.
+
+==============================================================================
+*Return* *Values*
+
+Returns an object on success, FALSE on error. If a connection has been made
+but the database could not be selected, the connection is closed and FALSE is
+returned.
+
+The returned object has three properties:
+
+database
+    It is the name of the currently selected database.
+handle
+
+    It is a valid handle for the connected database, and as such it can be
+    used in module-specific functions (if required).
+    <?php >
+    $link = dbx_connect(DBX_MYSQL, "localhost", "db", "username", "password");
+    mysql_close($link->handle); // dbx_close($link) would be better here
+<    ?>
+
+module
+    It is used internally by dbx only, and is actually the module number
+    mentioned above.
+
+==============================================================================
+*Changelog*
+
+Version       Description
+5.0.0   Introduced DBX_SQLITE.
+4.3.0   Introduced DBX_OCI8.
+4.2.0   Introduced DBX_SYBASECT.
+4.1.0   Introduced DBX_FBSQL.
+
+==============================================================================
+*Examples*
+
+Example #1 dbx_connect() example
+
+<?php >
+    $link = dbx_connect(DBX_ODBC, "", "db", "username", "password", DBX_PERSISTENT
+    )
+        or die("Could not connect");
+
+    echo "Connected successfully";
+    dbx_close($link);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Always refer to the module-specific documentation as well.
+
+==============================================================================
+*See* *Also*
+
+  * |dbx_close| - Close an open connection/database
+
+
+vim:ft=help:

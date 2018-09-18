@@ -1,0 +1,43 @@
+odbc_exec
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_exec — Prepare and execute an SQL statement
+
+==============================================================================
+*Description*
+
+    resource odbc_exec ( resource $connection_id , string $query_string [,~
+    int $flags ] )~
+
+Sends an SQL statement to the database server.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+{query_string}
+
+    The SQL statement.
+
+{flags}
+
+    This parameter is currently not used.
+
+==============================================================================
+*Return* *Values*
+
+Returns an ODBC result identifier if the SQL command was executed
+successfully, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |odbc_prepare| - Prepares a statement for execution
+  * |odbc_execute| - Execute a prepared statement
+
+
+vim:ft=help:

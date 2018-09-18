@@ -1,0 +1,58 @@
+md5_file
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+md5_file — Calculates the md5 hash of a given file
+
+==============================================================================
+*Description*
+
+    string md5_file ( string $filename [, bool $raw_output = false ] )~
+
+Calculates the MD5 hash of the file specified by the {filename} parameter
+using the >> RSA Data Security, Inc. MD5 Message-Digest Algorithm, and returns
+that hash. The hash is a 32-character hexadecimal number.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The filename
+
+{raw_output}
+
+    When TRUE, returns the digest in raw binary format with a length of 16.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string on success, FALSE otherwise.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.1.0   Changed the function to use the streams API. It means that you can use
+        it with wrappers, like md5_file('http://example.com/..')
+
+==============================================================================
+*Examples*
+
+Example #1 Usage example of md5_file()
+
+<?php >
+    $file = 'php-5.3.0alpha2-Win32-VC9-x64.zip';
+
+    echo 'MD5 file hash of ' . $file . ': ' . md5_file($file);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |md5| - Calculate the md5 hash of a string
+  * |sha1_file| - Calculate the sha1 hash of a file
+  * |crc32| - Calculates the crc32 polynomial of a string
+
+
+vim:ft=help:

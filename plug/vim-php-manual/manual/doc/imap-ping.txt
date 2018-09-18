@@ -1,0 +1,45 @@
+imap_ping
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_ping — Check if the IMAP stream is still active
+
+==============================================================================
+*Description*
+
+    bool imap_ping ( resource $imap_stream )~
+
+imap_ping() pings the stream to see if it's still active. It may discover new
+mail; this is the preferred method for a periodic "new mail check" as well as
+a "keep alive" for servers which have inactivity timeout.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the stream is still alive, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_ping() Example
+
+<?php >
+
+    $imap = imap_open("{imap.example.org}", "mailadmin", "password");
+
+    // after some sleeping
+    if (!imap_ping($imap)) {
+        // do some stuff to reconnect
+    }
+
+<?>
+
+
+vim:ft=help:

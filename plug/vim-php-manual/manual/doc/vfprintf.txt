@@ -1,0 +1,58 @@
+vfprintf
+
+(PHP 5, PHP 7)
+
+vfprintf — Write a formatted string to a stream
+
+==============================================================================
+*Description*
+
+    int vfprintf ( resource $handle , string $format , array $args )~
+
+Write a string produced according to {format} to the stream resource specified
+by {handle}.
+
+Operates as |fprintf| but accepts an array of arguments, rather than a
+variable number of arguments.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+{format}
+
+    See |sprintf| for a description of {format}.
+
+{args}
+
+==============================================================================
+*Return* *Values*
+
+Returns the length of the outputted string.
+
+==============================================================================
+*Examples*
+
+Example #1 vfprintf(): zero-padded integers
+
+<?php >
+    if (!($fp = fopen('date.txt', 'w')))
+        return;
+
+    vfprintf($fp, "%04d-%02d-%02d", array($year, $month, $day));
+    // will write the formatted ISO date to date.txt
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |printf| - Output a formatted string
+  * |sprintf| - Return a formatted string
+  * |sscanf| - Parses input from a string according to a format
+  * |fscanf| - Parses input from a file according to a format
+  * |vsprintf| - Return a formatted string
+  * |number_format| - Format a number with grouped thousands
+
+
+vim:ft=help:

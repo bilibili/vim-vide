@@ -1,0 +1,43 @@
+gnupg_getprotocol
+
+(PECL gnupg >= 0.1)
+
+gnupg_getprotocol — Returns the currently active protocol for all operations
+
+==============================================================================
+*Description*
+
+    int gnupg_getprotocol ( resource $identifier )~
+
+==============================================================================
+*Parameters*
+
+{identifier}
+
+    The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+==============================================================================
+*Return* *Values*
+
+Returns the currently active protocol, which can be one of
+GNUPG_PROTOCOL_OpenPGP or GNUPG_PROTOCOL_CMS.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural gnupg_getprotocol() example
+
+<?php >
+    $res = gnupg_init();
+    echo gnupg_getprotocol($res);
+<?>
+
+Example #2 OO gnupg_getprotocol() example
+
+<?php >
+    $gpg = new gnupg();
+    echo $gpg -> getprotocol();
+<?>
+
+
+vim:ft=help:

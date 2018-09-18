@@ -1,0 +1,50 @@
+fdf_get_value
+
+(PHP 4, PHP 5, PHP 7)
+
+fdf_get_value — Get the value of a field
+
+==============================================================================
+*Description*
+
+    mixed fdf_get_value ( resource $fdf_document , string $fieldname [, int~
+    $which = -1 ] )~
+
+Gets the value for the requested field.
+
+==============================================================================
+*Parameters*
+
+{fdf_document}
+
+    The FDF document handle, returned by |fdf_create|, |fdf_open| or 
+    |fdf_open_string|.
+
+{fieldname}
+
+    Name of the FDF field, as a string.
+
+{which}
+
+    Elements of an array field can be retrieved by passing this optional
+    parameter, starting at zero. For non-array fields, this parameter will be
+    ignored.
+
+==============================================================================
+*Return* *Values*
+
+Returns the field value.
+
+==============================================================================
+*Changelog*
+
+Version                       Description
+4.3.0   Support for arrays and the {which} parameter were added.
+
+==============================================================================
+*See* *Also*
+
+  * |fdf_set_value| - Set the value of a field
+
+
+vim:ft=help:

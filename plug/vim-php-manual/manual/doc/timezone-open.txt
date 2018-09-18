@@ -1,0 +1,13 @@
+timezone_open
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+timezone_open — Alias of DateTimeZone::__construct()
+
+==============================================================================
+*Description*
+
+This function is an alias of: DateTimeZone::__construct()
+
+
+vim:ft=help:

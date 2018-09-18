@@ -1,0 +1,79 @@
+uksort
+
+(PHP 4, PHP 5, PHP 7)
+
+uksort — Sort an array by keys using a user-defined comparison function
+
+==============================================================================
+*Description*
+
+    bool uksort ( array &$array , callable $key_compare_func )~
+
+uksort() will sort the keys of an array using a user-supplied comparison
+function. If the array you wish to sort needs to be sorted by some non-trivial
+criteria, you should use this function.
+
+    Note:
+
+    If two members compare as equal, their relative order in the sorted array
+    is undefined.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    The input array.
+
+{key_compare_func}
+
+    The comparison function must return an integer less than, equal to, or
+    greater than zero if the first argument is considered to be respectively
+    less than, equal to, or greater than the second. Note that before PHP
+    7.0.0 this integer had to be in the range from -2147483648 to 2147483647.
+
+
+    int callback ( mixed $a, mixed $b )~
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 uksort() example
+
+<?php >
+    function cmp($a, $b)
+    {
+        $a = preg_replace('@^(a|an|the) @', '', $a);
+        $b = preg_replace('@^(a|an|the) @', '', $b);
+        return strcasecmp($a, $b);
+    }
+
+    $a = array("John" => 1, "the Earth" => 2, "an apple" => 3, "a banana" => 4);
+
+    uksort($a, "cmp");
+
+    foreach ($a as $key => $value) {
+        echo "$key: $value\n";
+    }
+<?>
+
+The above example will output:
+
+an apple: 3
+a banana: 4
+the Earth: 2
+John: 1
+
+==============================================================================
+*See* *Also*
+
+  * |usort| - Sort an array by values using a user-defined comparison function
+  * The comparison of array sorting functions
+
+
+vim:ft=help:

@@ -1,0 +1,107 @@
+mysql_pconnect
+
+(PHP 4, PHP 5)
+
+mysql_pconnect — Open a persistent connection to a MySQL server
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * |mysqli_connect| with p: host prefix
+  * PDO::__construct() with PDO::ATTR_PERSISTENT as a driver option
+
+==============================================================================
+*Description*
+
+    resource mysql_pconnect ([ string $server =~
+    ini_get("mysql.default_host") [, string $username =~
+    ini_get("mysql.default_user") [, string $password =~
+    ini_get("mysql.default_password") [, int $client_flags = 0 ]]]]~
+)~
+
+Establishes a persistent connection to a MySQL server.
+
+mysql_pconnect() acts very much like |mysql_connect| with two major
+differences.
+
+First, when connecting, the function would first try to find a (persistent)
+link that's already open with the same host, username and password. If one is
+found, an identifier for it will be returned instead of opening a new
+connection.
+
+Second, the connection to the SQL server will not be closed when the execution
+of the script ends. Instead, the link will remain open for future use (
+|mysql_close| will not close links established by mysql_pconnect()).
+
+This type of link is therefore called 'persistent'.
+
+==============================================================================
+*Parameters*
+
+{server}
+
+    The MySQL server. It can also include a port number. e.g. "hostname:port"
+    or a path to a local socket e.g. ":/path/to/socket" for the localhost.
+
+    If the PHP directive mysql.default_host is undefined (default), then the
+    default value is 'localhost:3306'
+
+{username}
+
+    The username. Default value is the name of the user that owns the server
+    process.
+
+{password}
+
+    The password. Default value is an empty password.
+
+{client_flags}
+
+    The {client_flags} parameter can be a combination of the following
+    constants: 128 (enable LOAD DATA LOCAL handling), MYSQL_CLIENT_SSL,
+    MYSQL_CLIENT_COMPRESS, MYSQL_CLIENT_IGNORE_SPACE or
+    MYSQL_CLIENT_INTERACTIVE.
+
+==============================================================================
+*Return* *Values*
+
+Returns a MySQL persistent link identifier on success, or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                    Description
+5.5.0   This function will generate an E_DEPRECATED error.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Note, that these kind of links only work if you are using a module version
+    of PHP. See the Persistent Database Connections section for more
+    information.
+
+Warning
+
+Using persistent connections can require a bit of tuning of your Apache and
+MySQL configurations to ensure that you do not exceed the number of
+connections allowed by MySQL.
+
+    Note:
+
+    You can suppress the error message on failure by prepending a @ to the
+    function name.
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_connect| - Open a connection to a MySQL Server
+  * Persistent Database Connections
+
+
+vim:ft=help:

@@ -1,0 +1,18 @@
+ocifreestatement
+
+(PHP 4, PHP 5, PHP 7, PECL OCI8 >= 1.0.0)
+
+ocifreestatement — Alias of |oci_free_statement|
+
+==============================================================================
+*Description*
+
+Alias of |oci_free_statement|
+
+Warning
+
+This alias has been DEPRECATED as of PHP 5.4.0. Relying on this alias is
+highly discouraged.
+
+
+vim:ft=help:

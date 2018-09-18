@@ -1,0 +1,81 @@
+fann_create_train_from_callback
+
+(PECL fann >= 1.0.0)
+
+fann_create_train_from_callback — Creates the training data struct from a user
+supplied function
+
+==============================================================================
+*Description*
+
+    resource fann_create_train_from_callback ( int $num_data , int $num_input~
+    , int $num_output , callable $user_function )~
+
+Creates the training data struct from a user supplied function. As the
+training data are numerable (data 1, data 2...), the user must write a
+function that receives the number of the training data set (input, output) and
+returns the set.
+
+==============================================================================
+*Parameters*
+
+{num_data}
+
+    The number of training data
+
+{num_input}
+
+    The number of inputs per training data
+
+{num_output}
+
+    The number of ouputs per training data
+
+{user_function}
+
+    The user supplied function with following parameters:
+      + num - The number of the training data set
+      + num_input - The number of inputs per training data
+      + num_output - The number of ouputs per training data
+
+    The function should return an associative array with keys input and output
+    and two array values of input and output.
+
+==============================================================================
+*Return* *Values*
+
+Returns a train data resource on success, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 fann_create_train_from_callback() example
+
+<?php >
+    function create_train_callback($num_data, $num_input, $num_output) {
+        return array(
+            "input" => array_fill(0, $num_input, 1),
+            "output" => array_fill(0, $num_output, 1),
+        );
+    }
+
+    $num_data = 3;
+    $num_input = 2;
+    $num_output = 1;
+    $train_data = fann_create_train_from_callback($num_data, $num_input, 
+    $num_output, "create_train_callback");
+    if ($train_data) {
+        // Do something with $train_data
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fann_read_train_from_file| - Reads a file that stores training data
+  * |fann_train_on_data| - Trains on an entire dataset for a period of time
+  * |fann_destroy_train| - Destructs the training data
+  * |fann_save_train| - Save the training structure to a file
+
+
+vim:ft=help:

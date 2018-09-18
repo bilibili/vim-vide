@@ -1,0 +1,95 @@
+mysqlnd_ms_query_is_select
+
+(PECL mysqlnd_ms >= 1.0.0)
+
+mysqlnd_ms_query_is_select — Find whether to send the query to the master, the
+slave or the last used MySQL server
+
+==============================================================================
+*Description*
+
+    int mysqlnd_ms_query_is_select ( string $query )~
+
+Finds whether to send the query to the master, the slave or the last used
+MySQL server.
+
+The plugins built-in read/write split mechanism will be used to analyze the
+query string to make a recommendation where to send the query. The built-in
+read/write split mechanism is very basic and simple. The plugin will recommend
+sending all queries to the MySQL replication master server but those which
+begin with SELECT, or begin with a SQL hint which enforces sending the query
+to a slave server. Due to the basic but fast algorithm the plugin may propose
+to run some read-only statements such as SHOW TABLES on the replication
+master.
+
+==============================================================================
+*Parameters*
+
+{query}
+
+    Query string to test.
+
+==============================================================================
+*Return* *Values*
+
+A return value of MYSQLND_MS_QUERY_USE_MASTER indicates that the query should
+be send to the MySQL replication master server. The function returns a value
+of MYSQLND_MS_QUERY_USE_SLAVE if the query can be run on a slave because it is
+considered read-only. A value of MYSQLND_MS_QUERY_USE_LAST_USED is returned to
+recommend running the query on the last used server. This can either be a
+MySQL replication master server or a MySQL replication slave server.
+
+If read write splitting has been disabled by setting
+mysqlnd_ms.disable_rw_split, the function will always return
+MYSQLND_MS_QUERY_USE_MASTER or MYSQLND_MS_QUERY_USE_LAST_USED.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_ms_query_is_select() example
+
+<?php >
+    function is_select($query)
+    {
+     switch (mysqlnd_ms_query_is_select($query))
+     {
+      case MYSQLND_MS_QUERY_USE_MASTER:
+       printf("'%s' should be run on the master.\n", $query);
+       break;
+      case MYSQLND_MS_QUERY_USE_SLAVE:
+       printf("'%s' should be run on a slave.\n", $query);
+       break;
+      case MYSQLND_MS_QUERY_USE_LAST_USED:
+       printf("'%s' should be run on the server that has run the previous query\n"
+    , $query);
+       break;
+      default:
+       printf("No suggestion where to run the '%s', fallback to master recommended
+    \n", $query);
+       break;
+     }
+    }
+
+    is_select("INSERT INTO test(id) VALUES (1)");
+    is_select("SELECT 1 FROM DUAL");
+    is_select("/*" . MYSQLND_MS_LAST_USED_SWITCH . "*/SELECT 2 FROM DUAL");
+<?>
+
+The above example will output:
+
+INSERT INTO test(id) VALUES (1) should be run on the master.
+SELECT 1 FROM DUAL should be run on a slave.
+/*ms=last_used*/SELECT 2 FROM DUAL should be run on the server that has run the previous query
+
+==============================================================================
+*See* *Also*
+
+  * Predefined Constants
+  * user filter
+
+  * Runtime configuration
+  * mysqlnd_ms.disable_rw_split
+  * mysqlnd_ms.enable
+
+
+vim:ft=help:

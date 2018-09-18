@@ -1,0 +1,28 @@
+gupnp_service_info_get
+
+(PECL gupnp >= 0.1.0)
+
+gupnp_service_info_get — Get full info of service
+
+==============================================================================
+*Description*
+
+    array gupnp_service_info_get ( resource $proxy )~
+
+Get full info of service.
+
+==============================================================================
+*Parameters*
+
+{proxy}
+
+    A service proxy identifier.
+
+==============================================================================
+*Return* *Values*
+
+Return array wich contains the information of the service (like location, url,
+udn and etc).
+
+
+vim:ft=help:

@@ -1,0 +1,101 @@
+cubrid_lob2_write
+
+(PECL CUBRID >= 8.4.1)
+
+cubrid_lob2_write — Write to a lob object.
+
+==============================================================================
+*Description*
+
+    bool cubrid_lob2_write ( resource $lob_identifier , string $buf )~
+
+The cubrid_lob2_write() function reads as much as data from {buf} and stores
+it to the LOB object. Note that this function can only append characters now.
+
+==============================================================================
+*Parameters*
+
+{lob_identifier}
+
+    Lob identifier as a result of |cubrid_lob2_new| or get from the result
+    set.
+
+{buf}
+
+    Data that need to be written to the lob object.
+
+==============================================================================
+*Return* *Values*
+
+TRUE if the process is successful and FALSE for failure.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_lob2_write() example 1
+
+<?php >
+    // test_lob (id INT, contents CLOB)
+
+    $conn = cubrid_connect("localhost", 33000, "demodb", "dba", "");
+
+    cubrid_execute($conn,"DROP TABLE if exists test_lob");
+    cubrid_execute($conn,"CREATE TABLE test_lob (id INT, contents CLOB)");
+
+    $req = cubrid_prepare($conn, "INSERT INTO test_lob VALUES(2, ?)");
+
+    $lob = cubrid_lob2_new($conn, 'CLOB');
+    $len = cubrid_lob2_write($lob, "Hello world");
+
+    cubrid_lob2_bind($req, 1, $lob);
+    cubrid_execute($req);
+
+    cubrid_disconnect($conn);
+<?>
+
+Example #2 cubrid_lob2_write() example 2
+
+<?php >
+    // test_lob (id INT, contents CLOB)
+
+    $conn = cubrid_connect("localhost", 33000, "demodb", "dba", "");
+
+    cubrid_execute($conn,"DROP TABLE if exists test_lob");
+    cubrid_execute($conn,"CREATE TABLE test_lob (id INT, contents CLOB)");
+
+    $req = cubrid_prepare($conn, "INSERT INTO test_lob VALUES(1, ?)");
+    $lob1 = cubrid_lob2_new($conn, 'CLOB');
+    $len = cubrid_lob2_write($lob1, "cubrid php driver");
+    cubrid_lob2_bind($req, 1, $lob1);
+    cubrid_execute($req);
+
+    $req = cubrid_execute($conn, "select * from test_lob");
+
+    $row = cubrid_fetch_row($req, CUBRID_LOB);
+    $lob2 = $row[1];
+    cubrid_lob2_seek($lob2, 0, CUBRID_CURSOR_LAST);
+
+    $pos = cubrid_lob2_tell($lob2);
+    print "pos before write: $pos\n";
+
+    cubrid_lob2_write($lob2, "Hello world");
+
+    $pos = cubrid_lob2_tell($lob2);
+    print "pos after write: $pos\n";
+
+    cubrid_disconnect($conn);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_lob2_read| - Read from BLOB/CLOB data.
+  * |cubrid_lob2_seek| - Move the cursor of a lob object.
+  * |cubrid_lob2_seek64| - Move the cursor of a lob object.
+  * |cubrid_lob2_tell| - Tell the cursor position of the LOB object.
+  * |cubrid_lob2_tell64| - Tell the cursor position of the LOB object.
+  * |cubrid_lob2_size| - Get a lob object's size.
+  * |cubrid_lob2_size64| - Get a lob object's size.
+
+
+vim:ft=help:

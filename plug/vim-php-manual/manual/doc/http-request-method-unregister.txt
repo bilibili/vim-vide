@@ -1,0 +1,27 @@
+http_request_method_unregister
+
+(PECL pecl_http >= 0.10.0)
+
+http_request_method_unregister — Unregister request method
+
+==============================================================================
+*Description*
+
+    bool http_request_method_unregister ( mixed $method )~
+
+Unregister a previously registered custom request method.
+
+==============================================================================
+*Parameters*
+
+{method}
+
+    The request method name or ID
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

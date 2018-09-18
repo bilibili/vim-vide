@@ -1,0 +1,78 @@
+cubrid_new_glo
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_new_glo — Create a glo instance
+
+==============================================================================
+*Description*
+
+    string cubrid_new_glo ( resource $conn_identifier , string $class_name ,~
+    string $file_name )~
+
+The cubrid_new_glo() function is used to create a glo instance in the
+requested class (glo class). The glo created is a LO type, and is stored in
+the {file_name} file.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    Connection identifier.
+
+{class_name}
+
+    Name of the class that you want to create a glo in.
+
+{file_name}
+
+    The file name that you want to save in the newly created glo.
+
+==============================================================================
+*Return* *Values*
+
+Oid of the instance created, when process is successful.
+
+FALSE, when process is unsuccessful.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_new_glo() example
+
+<?php >
+    $oid = cubrid_new_glo ($con, "glo", "input.jpg");
+    if ($oid){
+       // the type of column "image" is "object"
+       $req = cubrid_execute ($con, "insert into person(image) values($oid)");
+       if ($req) {
+          echo "image inserted successfully";
+          cubrid_close_request ($req);
+          cubrid_commit($con);
+       }
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    For backward compatibility, the following deprecated alias may be used: 
+    cubrid_new_glo()
+
+    Note:
+
+    This function is removed from CUBRID 3.1.
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_save_to_glo| - Save requested file in a GLO instance
+  * |cubrid_load_from_glo| - Read data from a GLO instance and save it in a
+    file
+  * |cubrid_send_glo| - Read data from glo and send it to std output
+
+
+vim:ft=help:

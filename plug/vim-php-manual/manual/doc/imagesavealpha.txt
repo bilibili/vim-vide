@@ -1,0 +1,67 @@
+imagesavealpha
+
+(PHP 4 >= 4.3.2, PHP 5, PHP 7)
+
+imagesavealpha — Set the flag to save full alpha channel information (as
+opposed to single-color transparency) when saving PNG images
+
+==============================================================================
+*Description*
+
+    bool imagesavealpha ( resource $image , bool $saveflag )~
+
+imagesavealpha() sets the flag to attempt to save full alpha channel
+information (as opposed to single-color transparency) when saving PNG images.
+
+You have to unset alphablending (imagealphablending($im, false)), to use it.
+
+Alpha channel is not supported by all browsers, if you have problem with your
+browser, try to load your script with an alpha channel compliant browser, e.g.
+latest Mozilla.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{saveflag}
+
+    Whether to save the alpha channel or not. Default to FALSE.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imagesavealpha() example
+
+<?php >
+    // Load a png image with alpha channels
+    $png = imagecreatefrompng('./alphachannel_example.png');
+
+    // Do required operations
+
+    // Turn off alpha blending and set alpha flag
+    imagealphablending($png, false);
+    imagesavealpha($png, true);
+
+    // Output image to browser
+    header('Content-Type: image/png');
+
+    imagepng($png);
+    imagedestroy($png);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imagealphablending| - Set the blending mode for an image
+
+
+vim:ft=help:

@@ -1,0 +1,16 @@
+PDF_setdashpattern
+
+(PECL pdflib >= 2.0.0)
+
+PDF_setdashpattern — Set dash pattern
+
+==============================================================================
+*Description*
+
+    bool PDF_setdashpattern ( resource $pdfdoc , string $optlist )~
+
+Sets a dash pattern defined by an option list. Returns TRUE on success or
+FALSE on failure.
+
+
+vim:ft=help:

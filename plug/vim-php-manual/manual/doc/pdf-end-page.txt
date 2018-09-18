@@ -1,0 +1,15 @@
+PDF_end_page
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_end_page — Finish page
+
+==============================================================================
+*Description*
+
+    bool PDF_end_page ( resource $p )~
+
+Finishes the page. Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

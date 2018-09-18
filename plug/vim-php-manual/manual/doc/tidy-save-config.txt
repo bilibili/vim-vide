@@ -1,0 +1,44 @@
+tidy_save_config
+
+(PECL tidy >= 0.5.2)
+
+tidy_save_config — Save current settings to named file
+
+==============================================================================
+*Description*
+
+    bool tidy_save_config ( string $filename )~
+
+Saves current settings to the specified file. Only non-default values are
+written.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the config file.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available in Tidy 1.0. It became obsolete in
+    Tidy 2.0, and thus has been removed.
+
+==============================================================================
+*See* *Also*
+
+  * tidy_get_config() - Get current Tidy configuration
+  * tidy_getopt() - Returns the value of the specified configuration option
+    for the tidy document
+  * |tidy_reset_config| - Restore Tidy configuration to default values
+  * |tidy_setopt| - Updates the configuration settings for the specified tidy
+    document
+
+
+vim:ft=help:

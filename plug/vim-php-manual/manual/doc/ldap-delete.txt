@@ -1,0 +1,36 @@
+ldap_delete
+
+(PHP 4, PHP 5, PHP 7)
+
+ldap_delete — Delete an entry from a directory
+
+==============================================================================
+*Description*
+
+    bool ldap_delete ( resource $link_identifier , string $dn )~
+
+Deletes a particular entry in LDAP directory.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{dn}
+
+    The distinguished name of an LDAP entity.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ldap_add| - Add entries to LDAP directory
+
+
+vim:ft=help:

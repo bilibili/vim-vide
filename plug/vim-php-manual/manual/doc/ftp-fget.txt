@@ -1,0 +1,86 @@
+ftp_fget
+
+(PHP 4, PHP 5, PHP 7)
+
+ftp_fget — Downloads a file from the FTP server and saves to an open file
+
+==============================================================================
+*Description*
+
+    bool ftp_fget ( resource $ftp_stream , resource $handle , string~
+    $remote_file , int $mode [, int $resumepos = 0 ] )~
+
+ftp_fget() retrieves {remote_file} from the FTP server, and writes it to the
+given file pointer.
+
+==============================================================================
+*Parameters*
+
+{ftp_stream}
+
+    The link identifier of the FTP connection.
+
+{handle}
+
+    An open file pointer in which we store the data.
+
+{remote_file}
+
+    The remote file path.
+
+{mode}
+
+    The transfer mode. Must be either FTP_ASCII or FTP_BINARY.
+
+{resumepos}
+
+    The position in the remote file to start downloading from.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 ftp_fget() example
+
+<?php >
+
+    // path to remote file
+    $remote_file = 'somefile.txt';
+    $local_file = 'localfile.txt';
+
+    // open some file to write to
+    $handle = fopen($local_file, 'w');
+
+    // set up basic connection
+    $conn_id = ftp_connect($ftp_server);
+
+    // login with username and password
+    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+
+    // try to download $remote_file and save it to $handle
+    if (ftp_fget($conn_id, $handle, $remote_file, FTP_ASCII, 0)) {
+     echo "successfully written to $local_file\n";
+    } else {
+     echo "There was a problem while downloading $remote_file to $local_file\n";
+    }
+
+    // close the connection and the file handler
+    ftp_close($conn_id);
+    fclose($handle);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ftp_get| - Downloads a file from the FTP server
+  * |ftp_nb_get| - Retrieves a file from the FTP server and writes it to a
+    local file (non-blocking)
+  * |ftp_nb_fget| - Retrieves a file from the FTP server and writes it to an
+    open file (non-blocking)
+
+
+vim:ft=help:

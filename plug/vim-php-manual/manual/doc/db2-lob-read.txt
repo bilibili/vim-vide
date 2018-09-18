@@ -1,0 +1,134 @@
+db2_lob_read
+
+(PECL ibm_db2 >= 1.6.0)
+
+db2_lob_read — Gets a user defined size of LOB files with each invocation
+
+==============================================================================
+*Description*
+
+    string db2_lob_read ( resource $stmt , int $colnum , int $length )~
+
+Use db2_lob_read() to iterate through a specified column of a result set and
+retrieve a user defined size of LOB data.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A valid stmt resource containing LOB data.
+
+{colnum}
+
+    A valid column number in the result set of the stmt resource.
+
+{length}
+
+    The size of the LOB data to be retrieved from the stmt resource.
+
+==============================================================================
+*Return* *Values*
+
+Returns the amount of data the user specifies. Returns FALSE if the data
+cannot be retrieved.
+
+==============================================================================
+*Examples*
+
+Example #1 Iterating through different types of data
+
+<?php >
+
+    /* Database Connection Parameters */
+    $db = 'SAMPLE';
+    $username = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($db,$username,$password);
+
+    if ($conn) {
+        $drop = 'DROP TABLE clob_stream';
+        $result = @db2_exec( $conn, $drop );
+
+        $create = 'CREATE TABLE clob_stream (id INTEGER, my_clob CLOB)';
+        $result = db2_exec( $conn, $create );
+
+        $variable = "";
+        $stmt = db2_prepare($conn, "INSERT INTO clob_stream (id,my_clob) VALUES 
+    (1, ?)");
+        $variable = "THIS IS A CLOB TEST. THIS IS A CLOB TEST.";
+        db2_bind_param($stmt, 1, "variable", DB2_PARAM_IN);
+        db2_execute($stmt);
+
+        $sql = "SELECT id,my_clob FROM clob_stream";
+        $result = db2_prepare($conn, $sql);
+        db2_execute($result);
+        db2_fetch_row($result);
+        $i = 0;
+        /* Read LOB data */
+        while ($data = db2_lob_read($result, 2, 6)) {
+            echo "Loop $i: $data\n";
+            $i = $i + 1;
+        }
+
+        $drop = 'DROP TABLE blob_stream';
+        $result = @db2_exec( $conn, $drop );
+
+        $create = 'CREATE TABLE blob_stream (id INTEGER, my_blob CLOB)';
+        $result = db2_exec( $conn, $create );
+
+        $variable = "";
+        $stmt = db2_prepare($conn, "INSERT INTO blob_stream (id,my_blob) VALUES 
+    (1, ?)");
+        $variable = "THIS IS A BLOB TEST. THIS IS A BLOB TEST.";
+        db2_bind_param($stmt, 1, "variable", DB2_PARAM_IN);
+        db2_execute($stmt);
+
+        $sql = "SELECT id,my_blob FROM blob_stream";
+        $result = db2_prepare($conn, $sql);
+        db2_execute($result);
+        db2_fetch_row($result);
+        $i = 0;
+        /* Read LOB data */
+        while ($data = db2_lob_read($result, 2, 6)) {
+            echo "Loop $i: $data\n";
+            $i = $i + 1;
+        }
+    } else {
+        echo 'no connection: ' . db2_conn_errormsg();
+    }
+
+<?>
+
+The above example will output:
+
+Loop 0: THIS I
+Loop 1: S A CL
+Loop 2: OB TES
+Loop 3: T. THI
+Loop 4: S IS A
+Loop 5:  CLOB
+Loop 6: TEST.
+Loop 0: THIS I
+Loop 1: S A BL
+Loop 2: OB TES
+Loop 3: T. THI
+Loop 4: S IS A
+Loop 5:  BLOB
+Loop 6: TEST.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_bind_param| - Binds a PHP variable to an SQL statement parameter
+  * |db2_exec| - Executes an SQL statement directly
+  * |db2_execute| - Executes a prepared SQL statement
+  * |db2_fetch_row| - Sets the result set pointer to the next row or requested
+    row
+  * |db2_prepare| - Prepares an SQL statement to be executed
+  * |db2_result| - Returns a single column from a row in the result set
+
+
+vim:ft=help:

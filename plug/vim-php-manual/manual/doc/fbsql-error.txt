@@ -1,0 +1,59 @@
+fbsql_error
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_error — Returns the error message from previous operation
+
+==============================================================================
+*Description*
+
+    string fbsql_error ([ resource $link_identifier ] )~
+
+Returns the error message from previous FrontBase operation.
+
+Errors coming back from the fbsql database backend don't issue warnings.
+Instead, use fbsql_error() to retrieve the error text. Note that this function
+only returns the error code from the most recently executed fbsql function
+(not including fbsql_error() and |fbsql_errno|), so if you want to use it,
+make sure you check the value before calling another fbsql function.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+==============================================================================
+*Return* *Values*
+
+Returns the error text from the last fbsql function, or '' (the empty string)
+if no error occurred.
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_error() Example
+
+<?php >
+    fbsql_connect("marliesle");
+    echo fbsql_errno() . ": " . fbsql_error() . "<br />";
+    fbsql_select_db("nonexistentdb");
+    echo fbsql_errno() . ": " . fbsql_error() . "<br />";
+    $conn = fbsql_query("SELECT * FROM nonexistenttable;");
+    echo fbsql_errno() . ": " . fbsql_error() . "<br />";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_errno| - Returns the error number from previous operation
+  * |fbsql_warnings| - Enable or disable FrontBase warnings
+
+
+vim:ft=help:

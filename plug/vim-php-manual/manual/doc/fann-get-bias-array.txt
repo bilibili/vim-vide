@@ -1,0 +1,27 @@
+fann_get_bias_array
+
+(PECL fann >= 1.0.0)
+
+fann_get_bias_array — Get the number of bias in each layer in the network
+
+==============================================================================
+*Description*
+
+    array fann_get_bias_array ( resource $ann )~
+
+Get the number of bias in each layer in the network.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+An array of numbers of bias in each layer
+
+
+vim:ft=help:

@@ -1,0 +1,23 @@
+stats_rand_gen_int
+
+(PECL stats >= 1.0.0)
+
+stats_rand_gen_int — Generates random integer between 1 and 2147483562
+
+==============================================================================
+*Description*
+
+    int stats_rand_gen_int ( void )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

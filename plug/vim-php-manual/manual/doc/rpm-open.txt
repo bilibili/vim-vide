@@ -1,0 +1,48 @@
+rpm_open
+
+(PECL rpmreader >= 0.1.0)
+
+rpm_open — Opens an RPM file
+
+==============================================================================
+*Description*
+
+    resource rpm_open ( string $filename )~
+
+rpm_open() will open an RPM file and will determine if the file is a valid RPM
+file.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The filename of the RPM file you wish to open.
+
+==============================================================================
+*Return* *Values*
+
+If the open succeeds, then rpm_open() will return a file pointer resource to
+the newly opened file. On error, the function will return FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 rpm_open() example
+
+<?php >
+
+    $file = "/path/to/file.rpm";
+    $rpmr = rpm_open($file);
+
+    rpm_close($rpmr);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |rpm_close| - Closes an RPM file
+
+
+vim:ft=help:

@@ -1,0 +1,92 @@
+stristr
+
+(PHP 4, PHP 5, PHP 7)
+
+stristr — Case-insensitive |strstr|
+
+==============================================================================
+*Description*
+
+    string stristr ( string $haystack , mixed $needle [, bool $before_needle~
+    = false ] )~
+
+Returns all of {haystack} starting from and including the first occurrence of
+{needle} to the end.
+
+==============================================================================
+*Parameters*
+
+{haystack}
+
+    The string to search in
+
+{needle}
+
+    If {needle} is not a string, it is converted to an integer and applied as
+    the ordinal value of a character.
+
+{before_needle}
+
+    If TRUE, stristr() returns the part of the {haystack} before the first
+    occurrence of the {needle} (excluding needle).
+
+{needle} and {haystack} are examined in a case-insensitive manner.
+
+==============================================================================
+*Return* *Values*
+
+Returns the matched substring. If {needle} is not found, returns FALSE.
+
+==============================================================================
+*Changelog*
+
+Version                  Description
+5.3.0   Added the optional parameter {before_needle}.
+4.3.0   stristr() was made binary safe.
+
+==============================================================================
+*Examples*
+
+Example #1 stristr() example
+
+<?php >
+      $email = 'USER@EXAMPLE.com';
+      echo stristr($email, 'e'); // outputs ER@EXAMPLE.com
+      echo stristr($email, 'e', true); // As of PHP 5.3.0, outputs US
+<?>
+
+Example #2 Testing if a string is found or not
+
+<?php >
+      $string = 'Hello World!';
+      if(stristr($string, 'earth') === FALSE) {
+        echo '"earth" not found in string';
+      }
+    // outputs: "earth" not found in string
+<?>
+
+Example #3 Using a non "string" needle
+
+<?php >
+      $string = 'APPLE';
+      echo stristr($string, 97); // 97 = lowercase a
+    // outputs: APPLE
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function is binary-safe.
+
+==============================================================================
+*See* *Also*
+
+  * |strstr| - Find the first occurrence of a string
+  * |strrchr| - Find the last occurrence of a character in a string
+  * |stripos| - Find the position of the first occurrence of a
+    case-insensitive substring in a string
+  * |strpbrk| - Search a string for any of a set of characters
+  * |preg_match| - Perform a regular expression match
+
+
+vim:ft=help:

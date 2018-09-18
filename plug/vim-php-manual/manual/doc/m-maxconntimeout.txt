@@ -1,0 +1,30 @@
+m_maxconntimeout
+
+(PHP 4 >= 4.3.9, PHP 5 <= 5.0.5, PECL mcve >= 1.0.0)
+
+m_maxconntimeout — The maximum amount of time the API will attempt a
+connection to MCVE
+
+==============================================================================
+*Description*
+
+    bool m_maxconntimeout ( resource $conn , int $secs )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{ conn}
+
+    An MCVE_CONN resource returned by |m_initengine|.
+
+{secs}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

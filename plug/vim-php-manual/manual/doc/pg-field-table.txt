@@ -1,0 +1,77 @@
+pg_field_table
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+pg_field_table — Returns the name or oid of the tables field
+
+==============================================================================
+*Description*
+
+    mixed pg_field_table ( resource $result , int $field_number [, bool~
+    $oid_only = false ] )~
+
+pg_field_table() returns the name of the table that field belongs to, or the
+table's oid if {oid_only} is TRUE.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    PostgreSQL query result resource, returned by |pg_query|, |pg_query_params
+    | or |pg_execute| (among others).
+
+{field_number}
+
+    Field number, starting from 0.
+
+{oid_only}
+
+    By default the tables name that field belongs to is returned but if
+    {oid_only} is set to TRUE, then the oid will instead be returned.
+
+==============================================================================
+*Return* *Values*
+
+On success either the fields table name or oid. Or, FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Getting table information about a field
+
+<?php >
+    $dbconn = pg_connect("dbname=publisher") or die("Could not connect");
+
+    $res = pg_query($dbconn, "SELECT bar FROM foo");
+
+    echo pg_field_table($res, 0);
+    echo pg_field_table($res, 0, true);
+
+    $res = pg_query($dbconn, "SELECT version()");
+    var_dump(pg_field_table($res, 0));
+<?>
+
+The above example will output something similar to:
+
+foo
+14379580
+
+bool(false)
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Returning the oid is much faster than returning the table name because
+    fetching the table name requires a query to the database system table.
+
+==============================================================================
+*See* *Also*
+
+  * |pg_field_name| - Returns the name of a field
+  * |pg_field_type| - Returns the type name for the corresponding field number
+
+
+vim:ft=help:

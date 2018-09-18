@@ -1,0 +1,53 @@
+fann_set_activation_function_layer
+
+(PECL fann >= 1.0.0)
+
+fann_set_activation_function_layer — Sets the activation function for all the
+neurons in the supplied layer.
+
+==============================================================================
+*Description*
+
+    bool fann_set_activation_function_layer ( resource $ann , int~
+    $activation_function , int $layer )~
+
+Set the activation function for all the neurons in the layer number layer,
+counting the input layer as layer 0.
+
+It is not possible to set activation functions for the neurons in the input
+layer.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{activation_function}
+
+    The activation functions constant.
+
+{layer}
+
+    Layer number.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_set_activation_function| - Sets the activation function for supplied
+    neuron and layer
+  * |fann_set_activation_function_hidden| - Sets the activation function for
+    all of the hidden layers
+  * |fann_set_activation_function_output| - Sets the activation function for
+    the output layer
+  * |fann_set_activation_steepness| - Sets the activation steepness for
+    supplied neuron and layer number
+
+
+vim:ft=help:

@@ -1,0 +1,37 @@
+dbplus_lockrel
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_lockrel — Request write lock on relation
+
+==============================================================================
+*Description*
+
+    int dbplus_lockrel ( resource $relation )~
+
+Requests a write lock on the given {relation}.
+
+Other clients may still query the relation, but can't alter it while it is
+locked.
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

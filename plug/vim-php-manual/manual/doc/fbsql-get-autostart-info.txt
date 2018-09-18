@@ -1,0 +1,29 @@
+fbsql_get_autostart_info
+
+(PHP 4 >= 4.0.7, PHP 5, PHP 7)
+
+fbsql_get_autostart_info —
+
+==============================================================================
+*Description*
+
+    array fbsql_get_autostart_info ([ resource $link_identifier ] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+
+vim:ft=help:

@@ -1,0 +1,44 @@
+fbsql_set_transaction
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+fbsql_set_transaction — Set the transaction locking and isolation
+
+==============================================================================
+*Description*
+
+    void fbsql_set_transaction ( resource $link_identifier , int $locking ,~
+    int $isolation )~
+
+Sets the transaction {locking} and {isolation}.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+{locking}
+
+    The type of locking to be set. It can be one of the following constants:
+    FBSQL_LOCK_DEFERRED, FBSQL_LOCK_OPTIMISTIC, or FBSQL_LOCK_PESSIMISTIC.
+
+{isolation}
+
+    The type of isolation to be set. It can be one of the following constants:
+    FBSQL_ISO_READ_UNCOMMITTED, FBSQL_ISO_READ_COMMITTED,
+    FBSQL_ISO_REPEATABLE_READ, FBSQL_ISO_SERIALIZABLE, or FBSQL_ISO_VERSIONED.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

@@ -1,0 +1,92 @@
+mb_send_mail
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+mb_send_mail — Send encoded mail
+
+==============================================================================
+*Description*
+
+    bool mb_send_mail ( string $to , string $subject , string $message [,~
+    string $additional_headers = NULL [, string $additional_parameter = NULL~
+    ]] )~
+
+Sends email. Headers and messages are converted and encoded according to the 
+|mb_language| setting. It's a wrapper function for |mail|, so see also |mail|
+for details.
+
+==============================================================================
+*Parameters*
+
+{to}
+
+    The mail addresses being sent to. Multiple recipients may be specified by
+    putting a comma between each address in {to}. This parameter is not
+    automatically encoded.
+
+{subject}
+
+    The subject of the mail.
+
+{message}
+
+    The message of the mail.
+
+{additional_headers} (optional)
+
+    String to be inserted at the end of the email header.
+
+    This is typically used to add extra headers (From, Cc, and Bcc). Multiple
+    extra headers should be separated with a CRLF (\r\n). Validate parameter
+    not to be injected unwanted headers by attackers.
+
+        Note:
+
+        When sending mail, the mail must contain a From header. This can be
+        set with the {additional_headers} parameter, or a default can be set
+        in php.ini.
+
+        Failing to do this will result in an error message similar to Warning:
+        mail(): "sendmail_from" not set in php.ini or custom "From:" header
+        missing. The From header sets also Return-Path under Windows.
+
+        Note:
+
+        If messages are not received, try using a LF (\n) only. Some Unix mail
+        transfer agents (most notably >> qmail) replace LF by CRLF
+        automatically (which leads to doubling CR if CRLF is used). This
+        should be a last resort, as it does not comply with >> RFC 2822.
+
+{additional_parameter}
+
+    {additional_parameter} is a MTA command line parameter. It is useful when
+    setting the correct Return-Path header when using sendmail.
+
+    This parameter is escaped by |escapeshellcmd| internally to prevent
+    command execution. |escapeshellcmd| prevents command execution, but allows
+    to add addtional parameters. For security reason, this parameter should be
+    validated.
+
+    Since |escapeshellcmd| is applied automatically, some characters that are
+    allowed as email addresses by internet RFCs cannot be used. Programs that
+    are required to use these characters |mail| cannot be used.
+
+    The user that the webserver runs as should be added as a trusted user to
+    the sendmail configuration to prevent a 'X-Warning' header from being
+    added to the message when the envelope sender (-f) is set using this
+    method. For sendmail users, this file is /etc/mail/trusted-users.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |mail| - Send mail
+  * |mb_encode_mimeheader| - Encode string for MIME header
+  * |mb_language| - Set/Get current language
+
+
+vim:ft=help:

@@ -1,0 +1,30 @@
+json_last_error_msg
+
+(PHP 5 >= 5.5.0, PHP 7)
+
+json_last_error_msg — Returns the error string of the last json_encode() or
+json_decode() call
+
+==============================================================================
+*Description*
+
+    string json_last_error_msg ( void )~
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns the error message on success, "No Error" if no error has occurred, or
+FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |json_last_error| - Returns the last error occurred
+
+
+vim:ft=help:

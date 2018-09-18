@@ -1,0 +1,48 @@
+zend_logo_guid
+
+(PHP 4, PHP < 5.5)
+
+zend_logo_guid — Gets the Zend guid
+
+==============================================================================
+*Description*
+
+    string zend_logo_guid ( void )~
+
+This function returns the ID which can be used to display the Zend logo using
+the built-in image.
+
+Warning
+
+This function has been DEPRECATED and REMOVED as of PHP 5.5.0.
+
+==============================================================================
+*Return* *Values*
+
+Returns PHPE9568F35-D428-11d2-A769-00AA001ACF42.
+
+==============================================================================
+*Changelog*
+
+Version                 Description
+5.5.0   zend_logo_guid() has been removed from PHP.
+
+==============================================================================
+*Examples*
+
+Example #1 zend_logo_guid() example
+
+<?php >
+
+    echo '<img src="' . $_SERVER['PHP_SELF'] .
+         '?=' . zend_logo_guid() . '" alt="Zend Logo !" />';
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |php_logo_guid| - Gets the logo guid
+
+
+vim:ft=help:

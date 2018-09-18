@@ -1,0 +1,47 @@
+geoip_database_info
+
+(PECL geoip >= 0.2.0)
+
+geoip_database_info — Get GeoIP Database information
+
+==============================================================================
+*Description*
+
+    string geoip_database_info ([ int $database = GEOIP_COUNTRY_EDITION ] )~
+
+The geoip_database_info() function returns the corresponding GeoIP Database
+version as it is defined inside the binary file.
+
+If this function is called without arguments, it returns the version of the
+GeoIP Free Country Edition.
+
+==============================================================================
+*Parameters*
+
+{database}
+
+    The database type as an integer. You can use the various constants defined
+    with this extension (ie: GEOIP_*_EDITION).
+
+==============================================================================
+*Return* *Values*
+
+Returns the corresponding database version, or NULL on error.
+
+==============================================================================
+*Examples*
+
+Example #1 A geoip_database_info() example
+
+This will output information regarding the database.
+
+<?php >
+    print geoip_database_info(GEOIP_COUNTRY_EDITION);
+<?>
+
+The above example will output:
+
+GEO-106FREE 20060801 Build 1 Copyright (c) 2006 MaxMind LLC All Rights Reserved
+
+
+vim:ft=help:

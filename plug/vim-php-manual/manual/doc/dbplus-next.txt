@@ -1,0 +1,47 @@
+dbplus_next
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_next — Get next tuple from relation
+
+==============================================================================
+*Description*
+
+    int dbplus_next ( resource $relation , array &$tuple )~
+
+Reads the data for the next tuple for the given {relation}, makes it the
+current tuple and will pass it back as an associative array in {tuple}.
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+{tuple}
+
+==============================================================================
+*Return* *Values*
+
+Returns DBPLUS_ERR_NOERR on success or a db++ error code on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*See* *Also*
+
+  * |dbplus_first| - Get first tuple from relation
+  * |dbplus_curr| - Get current tuple from relation
+  * |dbplus_prev| - Get previous tuple from relation
+  * |dbplus_last| - Get last tuple from relation
+
+
+vim:ft=help:

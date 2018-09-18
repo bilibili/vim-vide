@@ -1,0 +1,33 @@
+openssl_x509_check_private_key
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+openssl_x509_check_private_key — Checks if a private key corresponds to a
+certificate
+
+==============================================================================
+*Description*
+
+    bool openssl_x509_check_private_key ( mixed $cert , mixed $key )~
+
+Checks whether the given {key} is the private key that corresponds to {cert}.
+
+==============================================================================
+*Parameters*
+
+{cert}
+
+    The certificate.
+
+{key}
+
+    The private key.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {key} is the private key that corresponds to {cert}, or FALSE
+otherwise.
+
+
+vim:ft=help:

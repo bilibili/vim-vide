@@ -1,0 +1,43 @@
+log_killcursor
+
+(PECL mongo >= 1.5.0)
+
+log_killcursor — Callback When Executing KILLCURSOR operations
+
+==============================================================================
+*Description*
+
+    log_killcursor ( array $server , array $info )~
+
+A callable function, used by the log_killcursor context option, when reading a
+killcursor from MongoDB.
+
+    Note:
+
+    This is not a real function, only a prototype of how the function should
+    be.
+
+==============================================================================
+*Parameters*
+
+{server}
+
+    An array containing the basic information about the server that was
+    picked.
+
+          key                                  value
+    hash             server hash, example: localhost:27017;-;X;56052
+    type             Node type (primary/secondary/mongos/arbiter): 2
+    max_bson_size    The maximum BSON Size over the wire this node accepts:
+                     16777216
+    max_message_size The maximum Message Size over the wire this node accepts:
+                     48000000
+    request_id       The request identifier for this message: 42
+
+{info}
+
+       key                    value
+    cursor_id integer, the cursor identifier to kill
+
+
+vim:ft=help:

@@ -1,0 +1,15 @@
+PDF_get_value
+
+(PHP 4 >= 4.0.1, PECL pdflib >= 1.0.0)
+
+PDF_get_value — Get numerical parameter
+
+==============================================================================
+*Description*
+
+    float PDF_get_value ( resource $p , string $key , float $modifier )~
+
+Gets the value of some PDFlib parameter with numerical type.
+
+
+vim:ft=help:

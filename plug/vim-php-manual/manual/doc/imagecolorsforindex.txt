@@ -1,0 +1,72 @@
+imagecolorsforindex
+
+(PHP 4, PHP 5, PHP 7)
+
+imagecolorsforindex — Get the colors for an index
+
+==============================================================================
+*Description*
+
+    array imagecolorsforindex ( resource $image , int $index )~
+
+Gets the color for a specified index.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{index}
+
+    The color index.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array with red, green, blue and alpha keys that contain
+the appropriate values for the specified color index.
+
+==============================================================================
+*Examples*
+
+Example #1 imagecolorsforindex() example
+
+<?php >
+
+    // open an image
+    $im = imagecreatefrompng('nexen.png');
+
+    // get a color
+    $start_x = 40;
+    $start_y = 50;
+    $color_index = imagecolorat($im, $start_x, $start_y);
+
+    // make it human readable
+    $color_tran = imagecolorsforindex($im, $color_index);
+
+    // what is it ?
+    print_r($color_tran);
+
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+   [red] => 226
+   [green] => 222
+   [blue] => 252
+   [alpha] => 0
+)
+
+==============================================================================
+*See* *Also*
+
+  * |imagecolorat| - Get the index of the color of a pixel
+  * |imagecolorexact| - Get the index of the specified color
+
+
+vim:ft=help:

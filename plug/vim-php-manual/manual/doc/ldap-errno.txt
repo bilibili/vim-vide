@@ -1,0 +1,59 @@
+ldap_errno
+
+(PHP 4, PHP 5, PHP 7)
+
+ldap_errno — Return the LDAP error number of the last LDAP command
+
+==============================================================================
+*Description*
+
+    int ldap_errno ( resource $link_identifier )~
+
+Returns the standardized error number returned by the last LDAP command. This
+number can be converted into a textual error message using |ldap_err2str|.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+==============================================================================
+*Return* *Values*
+
+Return the LDAP error number of the last LDAP command for this link.
+
+==============================================================================
+*Examples*
+
+Unless you lower your warning level in your php.ini sufficiently or prefix
+your LDAP commands with @ (at) characters to suppress warning output, the
+errors generated will also show up in your HTML output.
+
+Example #1 Generating and catching an error
+
+<?php >
+    // This example contains an error, which we will catch.
+    $ld = ldap_connect("localhost");
+    $bind = ldap_bind($ld);
+    // syntax error in filter expression (errno 87),
+    // must be "objectclass=*" to work.
+    $res =  @ldap_search($ld, "o=Myorg, c=DE", "objectclass");
+    if (!$res) {
+        echo "LDAP-Errno: " . ldap_errno($ld) . "<br />\n";
+        echo "LDAP-Error: " . ldap_error($ld) . "<br />\n";
+        die("Argh!<br />\n");
+    }
+    $info = ldap_get_entries($ld, $res);
+    echo $info["count"] . " matching entries.<br />\n";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ldap_err2str| - Convert LDAP error number into string error message
+  * |ldap_error| - Return the LDAP error message of the last LDAP command
+
+
+vim:ft=help:

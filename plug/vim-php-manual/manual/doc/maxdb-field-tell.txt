@@ -1,0 +1,125 @@
+maxdb_field_tell
+
+maxdb_result::current_field
+
+(PECL maxdb >= 1.0)
+
+maxdb_field_tell -- maxdb_result::current_field — Get current field offset of
+a result pointer
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    int maxdb_field_tell ( resource $result )~
+
+Object oriented style
+
+int $maxdb_result->current_field;
+
+Returns the position of the field cursor used for the last |maxdb_fetch_field|
+call. This value can be used as an argument to |maxdb_field_seek|.
+
+==============================================================================
+*Return* *Values*
+
+Returns current offset of field cursor.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT name, cno from hotel.customer ORDER BY cno";
+
+    if ($result = $maxdb->query($query)) {
+
+       /* Get field information for all columns */
+       while ($finfo = $result->fetch_field()) {
+
+           /* get fieldpointer offset */
+           $currentfield = $result->current_field;
+
+           printf("Column    %d:\n", $currentfield);
+           printf("Name:     %s\n", $finfo->name);
+           printf("Table:    %s\n", $finfo->table);
+           printf("max. Len: %d\n", $finfo->max_length);
+           printf("Flags:    %d\n", $finfo->flags);
+           printf("Type:     %d\n\n", $finfo->type);
+       }
+       $result->close();
+    }
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT name, cno from hotel.customer ORDER BY cno";
+
+    if ($result = maxdb_query($link, $query)) {
+
+       /* Get field information for all fields */
+       while ($finfo = maxdb_fetch_field($result)) {
+
+           /* get fieldpointer offset */
+           $currentfield = maxdb_field_tell($result);
+
+           printf("Column    %d:\n", $currentfield);
+           printf("Name:     %s\n", $finfo->name);
+           printf("Table:    %s\n", $finfo->table);
+           printf("max. Len: %d\n", $finfo->max_length);
+           printf("Flags:    %d\n", $finfo->flags);
+           printf("Type:     %d\n\n", $finfo->type);
+       }
+       maxdb_free_result($result);
+    }
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Column    1:
+Name:     NAME
+Table:
+max. Len: 10
+Flags:    -1
+Type:     2
+
+Column    2:
+Name:     CNO
+Table:
+max. Len: 4
+Flags:    -1
+Type:     0
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_fetch_field| - Returns the next field in the result set
+  * |maxdb_field_seek| - Set result pointer to a specified field offset
+
+
+vim:ft=help:

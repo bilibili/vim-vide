@@ -1,0 +1,52 @@
+gnupg_import
+
+(PECL gnupg >= 0.3)
+
+gnupg_import — Imports a key
+
+==============================================================================
+*Description*
+
+    array gnupg_import ( resource $identifier , string $keydata )~
+
+Imports the key {keydata} and returns an array with information about the
+importprocess.
+
+==============================================================================
+*Parameters*
+
+{identifier}
+
+    The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+{keydata}
+
+    The data key that is being imported.
+
+==============================================================================
+*Return* *Values*
+
+On success, this function returns and info-array about the importprocess. On
+failure, this function returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural gnupg_import() example
+
+<?php >
+    $res = gnupg_init();
+    $info = gnupg_import($res,$keydata);
+    print_r($info);
+<?>
+
+Example #2 OO gnupg_import() example
+
+<?php >
+    $gpg = new gnupg();
+    $info = $gpg -> import($keydata);
+    print_r($info);
+<?>
+
+
+vim:ft=help:

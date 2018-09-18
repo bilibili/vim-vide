@@ -1,0 +1,48 @@
+frenchtojd
+
+(PHP 4, PHP 5, PHP 7)
+
+frenchtojd — Converts a date from the French Republican Calendar to a Julian
+Day Count
+
+==============================================================================
+*Description*
+
+    int frenchtojd ( int $month , int $day , int $year )~
+
+Converts a date from the French Republican Calendar to a Julian Day Count.
+
+These routines only convert dates in years 1 through 14 (Gregorian dates 22
+September 1792 through 22 September 1806). This more than covers the period
+when the calendar was in use.
+
+==============================================================================
+*Parameters*
+
+{month}
+
+    The month as a number from 1 (for Vendémiaire) to 13 (for the period of
+    5-6 days at the end of each year)
+
+{day}
+
+    The day as a number from 1 to 30
+
+{year}
+
+    The year as a number between 1 and 14
+
+==============================================================================
+*Return* *Values*
+
+The julian day for the given french revolution date as an integer.
+
+==============================================================================
+*See* *Also*
+
+  * |jdtofrench| - Converts a Julian Day Count to the French Republican
+    Calendar
+  * |cal_to_jd| - Converts from a supported calendar to Julian Day Count
+
+
+vim:ft=help:

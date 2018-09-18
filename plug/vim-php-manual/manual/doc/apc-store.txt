@@ -1,0 +1,73 @@
+apc_store
+
+(PECL apc >= 3.0.0)
+
+apc_store — Cache a variable in the data store
+
+==============================================================================
+*Description*
+
+    bool apc_store ( string $key , mixed $var [, int $ttl = 0 ] )~
+    array apc_store ( array $values [, mixed $unused = NULL [, int $ttl = 0~
+    ]] )~
+
+Cache a variable in the data store.
+
+    Note: Unlike many other mechanisms in PHP, variables stored using 
+    apc_store() will persist between requests (until the value is removed from
+    the cache).
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    Store the variable using this name. {key}s are cache-unique, so storing a
+    second value with the same {key} will overwrite the original value.
+
+{var}
+
+    The variable to store
+
+{ttl}
+
+    Time To Live; store {var} in the cache for {ttl} seconds. After the {ttl}
+    has passed, the stored variable will be expunged from the cache (on the
+    next request). If no {ttl} is supplied (or if the {ttl} is 0), the value
+    will persist until it is removed from the cache manually, or otherwise
+    fails to exist in the cache (clear, restart, etc.).
+
+{values}
+
+    Names in key, variables in value.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure. Second syntax returns array with
+error keys.
+
+==============================================================================
+*Examples*
+
+Example #1 A apc_store() example
+
+<?php >
+    $bar = 'BAR';
+    apc_store('foo', $bar);
+    var_dump(apc_fetch('foo'));
+<?>
+
+The above example will output:
+
+string(3) "BAR"
+
+==============================================================================
+*See* *Also*
+
+  * |apc_add| - Cache a new variable in the data store
+  * |apc_fetch| - Fetch a stored variable from the cache
+  * |apc_delete| - Removes a stored variable from the cache
+
+
+vim:ft=help:

@@ -1,0 +1,63 @@
+gmp_div_qr
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_div_qr — Divide numbers and get quotient and remainder
+
+==============================================================================
+*Description*
+
+    array gmp_div_qr ( GMP $n , GMP $d [, int $round = GMP_ROUND_ZERO ] )~
+
+The function divides {n} by {d}.
+
+==============================================================================
+*Parameters*
+
+{n}
+
+    The number being divided.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{d}
+
+    The number that {n} is being divided by.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{round}
+
+    See the |gmp_div_q| function for description of the {round} argument.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array, with the first element being [n/d] (the integer result of
+the division) and the second being (n - [n/d] * d) (the remainder of the
+division).
+
+==============================================================================
+*Examples*
+
+Example #1 Division of GMP numbers
+
+<?php >
+    $a = gmp_init("0x41682179fbf5");
+    $res = gmp_div_qr($a, "0xDEFE75");
+    printf("Result is: q - %s, r - %s",
+           gmp_strval($res[0]), gmp_strval($res[1]));
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |gmp_div_q| - Divide numbers
+  * |gmp_div_r| - Remainder of the division of numbers
+
+
+vim:ft=help:

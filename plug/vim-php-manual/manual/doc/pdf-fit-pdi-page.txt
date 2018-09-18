@@ -1,0 +1,17 @@
+PDF_fit_pdi_page
+
+(PECL pdflib >= 2.0.0)
+
+PDF_fit_pdi_page — Place imported PDF page
+
+==============================================================================
+*Description*
+
+    bool PDF_fit_pdi_page ( resource $pdfdoc , int $page , float $x , float~
+    $y , string $optlist )~
+
+Places an imported PDF page on the page, subject to various options. Returns
+TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

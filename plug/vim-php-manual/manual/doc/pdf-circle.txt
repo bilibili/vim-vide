@@ -1,0 +1,15 @@
+PDF_circle
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_circle — Draw a circle
+
+==============================================================================
+*Description*
+
+    bool PDF_circle ( resource $pdfdoc , float $x , float $y , float $r )~
+
+Adds a circle. Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

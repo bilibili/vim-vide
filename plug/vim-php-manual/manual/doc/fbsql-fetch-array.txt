@@ -1,0 +1,73 @@
+fbsql_fetch_array
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_fetch_array — Fetch a result row as an associative array, a numeric
+array, or both
+
+==============================================================================
+*Description*
+
+    array fbsql_fetch_array ( resource $result [, int $result_type ] )~
+
+fbsql_fetch_array() is a combination of |fbsql_fetch_row| and 
+|fbsql_fetch_assoc|.
+
+An important thing to note is that using fbsql_fetch_array() is NOT
+significantly slower than using |fbsql_fetch_row|, while it provides a
+significant added value.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    A result identifier returned by |fbsql_query| or |fbsql_db_query|.
+
+{result_type}
+
+    A constant and can take the following values: FBSQL_ASSOC, FBSQL_NUM, or
+    FBSQL_BOTH.
+
+    When using FBSQL_BOTH, in addition to storing the data in the numeric
+    indices of the result array, it also stores the data in associative
+    indices, using the field names as keys.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array that corresponds to the fetched row, or FALSE if there are no
+more rows.
+
+If two or more columns of the result have the same field names, the last
+column will take precedence. To access the other column(s) of the same name,
+you must the numeric index of the column or make an alias for the column.
+
+select t1.f1 as foo t2.f1 as bar from t1, t2
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_fetch_array() example
+
+<?php >
+    fbsql_connect($host, $user, $password);
+    $result = fbsql_db_query("database", "select user_id, fullname from table");
+    while ($row = fbsql_fetch_array($result)) {
+        echo "user_id: " . $row["user_id"] . "<br />\n";
+        echo "user_id: " . $row[0] . "<br />\n";
+        echo "fullname: " . $row["fullname"] . "<br />\n";
+        echo "fullname: " . $row[1] . "<br />\n";
+    }
+    fbsql_free_result($result);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_fetch_row| - Get a result row as an enumerated array
+  * |fbsql_fetch_assoc| - Fetch a result row as an associative array
+  * |fbsql_fetch_object| - Fetch a result row as an object
+
+
+vim:ft=help:

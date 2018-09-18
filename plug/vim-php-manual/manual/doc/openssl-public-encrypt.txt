@@ -1,0 +1,51 @@
+openssl_public_encrypt
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+openssl_public_encrypt — Encrypts data with public key
+
+==============================================================================
+*Description*
+
+    bool openssl_public_encrypt ( string $data , string &$crypted , mixed~
+    $key [, int $padding = OPENSSL_PKCS1_PADDING ] )~
+
+openssl_public_encrypt() encrypts {data} with public {key} and stores the
+result into {crypted}. Encrypted data can be decrypted via 
+|openssl_private_decrypt|.
+
+This function can be used e.g. to encrypt message which can be then read only
+by owner of the private key. It can be also used to store secure data in
+database.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+{crypted}
+
+    This will hold the result of the encryption.
+
+{key}
+
+    The public key.
+
+{padding}
+
+    {padding} can be one of OPENSSL_PKCS1_PADDING, OPENSSL_SSLV23_PADDING,
+    OPENSSL_PKCS1_OAEP_PADDING, OPENSSL_NO_PADDING.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openssl_private_encrypt| - Encrypts data with private key
+  * |openssl_private_decrypt| - Decrypts data with private key
+
+
+vim:ft=help:

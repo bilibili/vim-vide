@@ -1,0 +1,71 @@
+simplexml_import_dom
+
+(PHP 5, PHP 7)
+
+simplexml_import_dom — Get a SimpleXMLElement object from a DOM node.
+
+==============================================================================
+*Description*
+
+    SimpleXMLElement simplexml_import_dom ( DOMNode $node [, string~
+    $class_name = "SimpleXMLElement" ] )~
+
+This function takes a node of a DOM document and makes it into a SimpleXML
+node. This new object can then be used as a native SimpleXML element.
+
+==============================================================================
+*Parameters*
+
+{node}
+
+    A DOM Element node
+
+{class_name}
+
+    You may use this optional parameter so that simplexml_import_dom() will
+    return an object of the specified class. That class should extend the 
+    SimpleXMLElement class.
+
+==============================================================================
+*Return* *Values*
+
+Returns a SimpleXMLElement or FALSE on failure.
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*Examples*
+
+Example #1 Importing DOM
+
+<?php >
+    $dom = new DOMDocument;
+    $dom->loadXML('<books><book><title>blah</title></book></books>');
+    if (!$dom) {
+        echo 'Error while parsing the document';
+        exit;
+    }
+
+    $s = simplexml_import_dom($dom);
+
+    echo $s->book[0]->title;
+<?>
+
+The above example will output:
+
+blah
+
+==============================================================================
+*See* *Also*
+
+  * |dom_import_simplexml| - Gets a DOMElement object from a SimpleXMLElement
+    object
+  * Basic SimpleXML usage
+
+
+vim:ft=help:

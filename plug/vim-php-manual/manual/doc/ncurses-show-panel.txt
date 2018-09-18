@@ -1,0 +1,23 @@
+ncurses_show_panel
+
+(PHP 4 >= 4.3.0, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_show_panel — Places an invisible panel on top of the stack, making it
+visible
+
+==============================================================================
+*Description*
+
+    int ncurses_show_panel ( resource $panel )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{panel}
+
+
+vim:ft=help:

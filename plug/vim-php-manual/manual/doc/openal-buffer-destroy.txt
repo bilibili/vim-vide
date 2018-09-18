@@ -1,0 +1,31 @@
+openal_buffer_destroy
+
+(PECL openal >= 0.1.0)
+
+openal_buffer_destroy — Destroys an OpenAL buffer
+
+==============================================================================
+*Description*
+
+    bool openal_buffer_destroy ( resource $buffer )~
+
+==============================================================================
+*Parameters*
+
+{buffer}
+
+    An Open AL(Buffer) resource (previously created by |openal_buffer_create|
+    ).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_buffer_create| - Generate OpenAL buffer
+
+
+vim:ft=help:

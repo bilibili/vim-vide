@@ -1,0 +1,58 @@
+sqlite_escape_string
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.0)
+
+sqlite_escape_string — Escapes a string for use as a query parameter
+
+==============================================================================
+*Description*
+
+    string sqlite_escape_string ( string $item )~
+
+sqlite_escape_string() will correctly quote the string specified by {item} for
+use in an SQLite SQL statement. This includes doubling up single-quote
+characters (') and checking for binary-unsafe characters in the query string.
+
+Although the encoding makes it safe to insert the data, it will render simple
+text comparisons and LIKE clauses in your queries unusable for the columns
+that contain the binary data. In practice, this shouldn't be a problem, as
+your schema should be such that you don't use such things on binary columns
+(in fact, it might be better to store binary data using other means, such as
+in files).
+
+==============================================================================
+*Parameters*
+
+{item}
+
+    The string being quoted.
+
+    If the {item} contains a NUL character, or if it begins with a character
+    whose ordinal value is 0x01, PHP will apply a binary encoding scheme so
+    that you can safely store and retrieve binary data.
+
+==============================================================================
+*Return* *Values*
+
+Returns an escaped string for use in an SQLite SQL statement.
+
+==============================================================================
+*Notes*
+
+    Note: Do not use this function to encode the return values from UDF's
+    created using |sqlite_create_function| or |sqlite_create_aggregate| - use 
+    |sqlite_udf_encode_binary| instead.
+
+Warning
+
+|addslashes| should NOT be used to quote your strings for SQLite queries; it
+will lead to strange results when retrieving your data.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_udf_encode_binary| - Encode binary data before returning it from
+    an UDF
+
+
+vim:ft=help:

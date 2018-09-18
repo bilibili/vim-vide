@@ -1,0 +1,13 @@
+msql_fieldtype
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_fieldtype — Alias of |msql_field_type|
+
+==============================================================================
+*Description*
+
+This function is an alias of |msql_field_type|.
+
+
+vim:ft=help:

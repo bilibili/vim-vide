@@ -1,0 +1,34 @@
+is_finite
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+is_finite — Finds whether a value is a legal finite number
+
+==============================================================================
+*Description*
+
+    bool is_finite ( float $val )~
+
+Checks whether {val} is a legal finite on this platform.
+
+==============================================================================
+*Parameters*
+
+{val}
+
+    The value to check
+
+==============================================================================
+*Return* *Values*
+
+TRUE if {val} is a legal finite number within the allowed range for a PHP
+float on this platform, else FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |is_infinite| - Finds whether a value is infinite
+  * |is_nan| - Finds whether a value is not a number
+
+
+vim:ft=help:

@@ -1,0 +1,46 @@
+ingres_autocommit
+
+(PHP 4 >= 4.0.2, PHP 5 <= 5.0.5, PECL ingres >= 1.0.0)
+
+ingres_autocommit — Switch autocommit on or off
+
+==============================================================================
+*Description*
+
+    bool ingres_autocommit ( resource $link )~
+
+ingres_autocommit() is called before opening a transaction (before the first
+call to |ingres_query| or just after a call to |ingres_rollback| or 
+|ingres_commit|) to switch the autocommit mode of the server on or off (when
+the script begins the autocommit mode is off).
+
+When autocommit mode is on, every query is automatically committed by the
+server, as if |ingres_commit| was called after every call to |ingres_query|.
+To see if autocommit is enabled use, |ingres_autocommit_state|.
+
+By default Ingres will rollback any uncommitted transactions at the end of a
+request. Use this function or |ingres_commit| to ensure your data is committed
+to the database.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    The connection link identifier
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_autocommit_state| - Test if the connection is using autocommit
+  * |ingres_query| - Send an SQL query to Ingres
+  * |ingres_rollback| - Roll back a transaction
+  * |ingres_commit| - Commit a transaction
+
+
+vim:ft=help:

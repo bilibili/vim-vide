@@ -1,0 +1,32 @@
+gupnp_service_action_return
+
+(PECL gupnp >= 0.1.0)
+
+gupnp_service_action_return — Return successfully
+
+==============================================================================
+*Description*
+
+    bool gupnp_service_action_return ( resource $action )~
+
+Return successfully.
+
+==============================================================================
+*Parameters*
+
+{action}
+
+    A service action identifier.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |gupnp_service_action_return_error| - Return error code
+
+
+vim:ft=help:

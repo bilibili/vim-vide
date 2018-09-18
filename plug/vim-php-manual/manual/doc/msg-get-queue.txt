@@ -1,0 +1,47 @@
+msg_get_queue
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+msg_get_queue — Create or attach to a message queue
+
+==============================================================================
+*Description*
+
+    resource msg_get_queue ( int $key [, int $perms = 0666 ] )~
+
+msg_get_queue() returns an id that can be used to access the System V message
+queue with the given {key}. The first call creates the message queue with the
+optional {perms}. A second call to msg_get_queue() for the same {key} will
+return a different message queue identifier, but both identifiers access the
+same underlying message queue.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    Message queue numeric ID
+
+{perms}
+
+    Queue permissions. Default to 0666. If the message queue already exists,
+    the {perms} will be ignored.
+
+==============================================================================
+*Return* *Values*
+
+Returns a resource handle that can be used to access the System V message
+queue.
+
+==============================================================================
+*See* *Also*
+
+  * |msg_remove_queue| - Destroy a message queue
+  * |msg_receive| - Receive a message from a message queue
+  * |msg_send| - Send a message to a message queue
+  * |msg_stat_queue| - Returns information from the message queue data
+    structure
+  * |msg_set_queue| - Set information in the message queue data structure
+
+
+vim:ft=help:

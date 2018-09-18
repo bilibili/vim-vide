@@ -1,0 +1,16 @@
+PDF_set_info
+
+(PHP 4 >= 4.0.1, PECL pdflib >= 1.0.0)
+
+PDF_set_info — Fill document info field
+
+==============================================================================
+*Description*
+
+    bool PDF_set_info ( resource $p , string $key , string $value )~
+
+Fill document information field {key} with {value}. Returns TRUE on success or
+FALSE on failure.
+
+
+vim:ft=help:

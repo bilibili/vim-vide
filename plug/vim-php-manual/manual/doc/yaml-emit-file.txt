@@ -1,0 +1,60 @@
+yaml_emit_file
+
+(PECL yaml >= 0.5.0)
+
+yaml_emit_file — Send the YAML representation of a value to a file
+
+==============================================================================
+*Description*
+
+    bool yaml_emit_file ( string $filename , mixed $data [, int $encoding =~
+    YAML_ANY_ENCODING [, int $linebreak = YAML_ANY_BREAK [, array $callbacks~
+    = null ]]] )~
+
+Generate a YAML representation of the provided {data} in the {filename}.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the file.
+
+{data}
+
+    The {data} being encoded. Can be any type except a resource.
+
+{encoding}
+
+    Output character encoding chosen from YAML_ANY_ENCODING,
+    YAML_UTF8_ENCODING, YAML_UTF16LE_ENCODING, YAML_UTF16BE_ENCODING.
+
+{linebreak}
+
+    Output linebreak style chosen from YAML_ANY_BREAK, YAML_CR_BREAK,
+    YAML_LN_BREAK, YAML_CRLN_BREAK.
+
+{callbacks}
+
+    Content handlers for emitting YAML nodes. Associative array of classname
+    => callable mappings. See emit callbacks for more details.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success.
+
+==============================================================================
+*Changelog*
+
+Version             Description
+1.1.0   The {callbacks} parameter was added.
+
+==============================================================================
+*See* *Also*
+
+  * |yaml_emit| - Returns the YAML representation of a value
+  * |yaml_parse| - Parse a YAML stream
+
+
+vim:ft=help:

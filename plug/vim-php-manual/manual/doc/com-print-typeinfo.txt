@@ -1,0 +1,49 @@
+com_print_typeinfo
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+com_print_typeinfo — Print out a PHP class definition for a dispatchable
+interface
+
+==============================================================================
+*Description*
+
+    bool com_print_typeinfo ( object $comobject [, string $dispinterface [,~
+    bool $wantsink = false ]] )~
+
+The purpose of this function is to help generate a skeleton class for use as
+an event sink. You may also use it to generate a dump of any COM object,
+provided that it supports enough of the introspection interfaces, and that you
+know the name of the interface you want to display.
+
+==============================================================================
+*Parameters*
+
+{comobject}
+
+    {comobject} should be either an instance of a COM object, or be the name
+    of a typelibrary (which will be resolved according to the rules set out in
+    |com_load_typelib|).
+
+{dispinterface}
+
+    The name of an IDispatch descendant interface that you want to display.
+
+{wantsink}
+
+    If set to TRUE, the corresponding sink interface will be displayed
+    instead.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |com_event_sink| - Connect events from a COM object to a PHP object
+  * |com_load_typelib| - Loads a Typelib
+
+
+vim:ft=help:

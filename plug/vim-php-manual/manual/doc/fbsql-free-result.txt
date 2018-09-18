@@ -1,0 +1,32 @@
+fbsql_free_result
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_free_result — Free result memory
+
+==============================================================================
+*Description*
+
+    bool fbsql_free_result ( resource $result )~
+
+Frees all memory associated with the given {result} identifier.
+
+fbsql_free_result() only needs to be called if you are concerned about how
+much memory is being used for queries that return large result sets. All
+associated result memory is automatically freed at the end of the script's
+execution.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    A result identifier returned by |fbsql_query| or |fbsql_db_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

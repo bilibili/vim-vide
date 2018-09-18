@@ -1,0 +1,139 @@
+mysql_query
+
+(PHP 4, PHP 5)
+
+mysql_query — Send a MySQL query
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_query()
+  * PDO::query()
+
+==============================================================================
+*Description*
+
+    mixed mysql_query ( string $query [, resource $link_identifier = NULL ] )~
+
+mysql_query() sends a unique query (multiple queries are not supported) to the
+currently active database on the server that's associated with the specified
+{link_identifier}.
+
+==============================================================================
+*Parameters*
+
+{query}
+
+    An SQL query
+
+    The query string should not end with a semicolon. Data inside the query
+    should be |properly escaped|.
+
+{ link_identifier}
+
+    The MySQL connection. If the link identifier is not specified, the last
+    link opened by |mysql_connect| is assumed. If no such link is found, it
+    will try to create one as if |mysql_connect| had been called with no
+    arguments. If no connection is found or established, an E_WARNING level
+    error is generated.
+
+==============================================================================
+*Return* *Values*
+
+For SELECT, SHOW, DESCRIBE, EXPLAIN and other statements returning resultset, 
+mysql_query() returns a resource on success, or FALSE on error.
+
+For other type of SQL statements, INSERT, UPDATE, DELETE, DROP, etc, 
+mysql_query() returns TRUE on success or FALSE on error.
+
+The returned result resource should be passed to |mysql_fetch_array|, and
+other functions for dealing with result tables, to access the returned data.
+
+Use |mysql_num_rows| to find out how many rows were returned for a SELECT
+statement or |mysql_affected_rows| to find out how many rows were affected by
+a DELETE, INSERT, REPLACE, or UPDATE statement.
+
+mysql_query() will also fail and return FALSE if the user does not have
+permission to access the table(s) referenced by the query.
+
+==============================================================================
+*Examples*
+
+Example #1 Invalid Query
+
+The following query is syntactically invalid, so mysql_query() fails and
+returns FALSE.
+
+<?php >
+    $result = mysql_query('SELECT * WHERE 1=1');
+    if (!$result) {
+        die('Invalid query: ' . mysql_error());
+    }
+
+<?>
+
+Example #2 Valid Query
+
+The following query is valid, so mysql_query() returns a resource.
+
+<?php >
+    // This could be supplied by a user, for example
+    $firstname = 'fred';
+    $lastname  = 'fox';
+
+    // Formulate Query
+    // This is the best way to perform an SQL query
+    // For more examples, see mysql_real_escape_string()
+    $query = sprintf("SELECT firstname, lastname, address, age FROM friends 
+        WHERE firstname='%s' AND lastname='%s'",
+        mysql_real_escape_string($firstname),
+        mysql_real_escape_string($lastname));
+
+    // Perform Query
+    $result = mysql_query($query);
+
+    // Check result
+    //
+     This shows the actual query sent to MySQL, and the error. Useful for debugging.
+    if (!$result) {
+        $message  = 'Invalid query: ' . mysql_error() . "\n";
+        $message .= 'Whole query: ' . $query;
+        die($message);
+    }
+
+    // Use result
+    //
+     Attempting to print $result won't allow access to information in the resource
+    // One of the mysql result functions must be used
+    // See also mysql_result(), mysql_fetch_array(), mysql_fetch_row(), etc.
+    while ($row = mysql_fetch_assoc($result)) {
+        echo $row['firstname'];
+        echo $row['lastname'];
+        echo $row['address'];
+        echo $row['age'];
+    }
+
+    // Free the resources associated with the result set
+    // This is done automatically at the end of the script
+    mysql_free_result($result);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_connect| - Open a connection to a MySQL Server
+  * |mysql_error| - Returns the text of the error message from previous MySQL
+    operation
+  * |mysql_real_escape_string| - Escapes special characters in a string for
+    use in an SQL statement
+  * |mysql_result| - Get result data
+  * |mysql_fetch_assoc| - Fetch a result row as an associative array
+  * |mysql_unbuffered_query| - Send an SQL query to MySQL without fetching and
+    buffering the result rows.
+
+
+vim:ft=help:

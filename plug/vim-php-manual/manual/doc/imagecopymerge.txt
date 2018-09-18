@@ -1,0 +1,87 @@
+imagecopymerge
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7)
+
+imagecopymerge — Copy and merge part of an image
+
+==============================================================================
+*Description*
+
+    bool imagecopymerge ( resource $dst_im , resource $src_im , int $dst_x ,~
+    int $dst_y , int $src_x , int $src_y , int $src_w , int $src_h , int $pct~
+)~
+
+Copy a part of {src_im} onto {dst_im} starting at the x,y coordinates {src_x},
+{src_y } with a width of {src_w} and a height of {src_h}. The portion defined
+will be copied onto the x,y coordinates, {dst_x} and {dst_y}.
+
+==============================================================================
+*Parameters*
+
+{dst_im}
+
+    Destination image link resource.
+
+{src_im}
+
+    Source image link resource.
+
+{dst_x}
+
+    x-coordinate of destination point.
+
+{dst_y}
+
+    y-coordinate of destination point.
+
+{src_x}
+
+    x-coordinate of source point.
+
+{src_y}
+
+    y-coordinate of source point.
+
+{src_w}
+
+    Source width.
+
+{src_h}
+
+    Source height.
+
+{pct}
+
+    The two images will be merged according to {pct} which can range from 0 to
+    100. When {pct} = 0, no action is taken, when 100 this function behaves
+    identically to |imagecopy| for pallete images, except for ignoring alpha
+    components, while it implements alpha transparency for true colour images.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Merging two copies of the PHP.net logo with 75% transparency
+
+<?php >
+    // Create image instances
+    $dest = imagecreatefromgif('php.gif');
+    $src = imagecreatefromgif('php.gif');
+
+    // Copy and merge
+    imagecopymerge($dest, $src, 10, 10, 0, 0, 100, 47, 75);
+
+    // Output and free from memory
+    header('Content-Type: image/gif');
+    imagegif($dest);
+
+    imagedestroy($dest);
+    imagedestroy($src);
+<?>
+
+
+vim:ft=help:

@@ -1,0 +1,27 @@
+libxml_get_last_error
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+libxml_get_last_error — Retrieve last error from libxml
+
+==============================================================================
+*Description*
+
+    LibXMLError libxml_get_last_error ( void )~
+
+Retrieve last error from libxml.
+
+==============================================================================
+*Return* *Values*
+
+Returns a LibXMLError object if there is any error in the buffer, FALSE
+otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |libxml_get_errors| - Retrieve array of errors
+  * |libxml_clear_errors| - Clear libxml error buffer
+
+
+vim:ft=help:

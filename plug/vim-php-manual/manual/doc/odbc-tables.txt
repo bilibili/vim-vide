@@ -1,0 +1,85 @@
+odbc_tables
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_tables — Get the list of table names stored in a specific data source
+
+==============================================================================
+*Description*
+
+    resource odbc_tables ( resource $connection_id [, string $qualifier [,~
+    string $owner [, string $name [, string $types ]]]] )~
+
+Lists all tables in the requested range.
+
+To support enumeration of qualifiers, owners, and table types, the following
+special semantics for the {qualifier}, {owner}, {name}, and {table_type} are
+available:
+
+  * If {qualifier} is a single percent character (%) and {owner} and {name}
+    are empty strings, then the result set contains a list of valid qualifiers
+    for the data source. (All columns except the TABLE_QUALIFIER column
+    contain NULLs.)
+  * If {owner} is a single percent character (%) and {qualifier} and {name}
+    are empty strings, then the result set contains a list of valid owners for
+    the data source. (All columns except the TABLE_OWNER column contain
+    NULLs.)
+  * If {table_type} is a single percent character (%) and {qualifier}, {owner}
+    and {name} are empty strings, then the result set contains a list of valid
+    table types for the data source. (All columns except the TABLE_TYPE column
+    contain NULLs.)
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+{qualifier}
+
+    The qualifier.
+
+{owner}
+
+    The owner. Accepts search patterns ('%' to match zero or more characters
+    and '_' to match a single character).
+
+{name}
+
+    The name. Accepts search patterns ('%' to match zero or more characters
+    and '_' to match a single character).
+
+{types}
+
+    If {table_type} is not an empty string, it must contain a list of
+    comma-separated values for the types of interest; each value may be
+    enclosed in single quotes (') or unquoted. For example, "'TABLE','VIEW'"
+    or "TABLE, VIEW". If the data source does not support a specified table
+    type, odbc_tables() does not return any results for that type.
+
+==============================================================================
+*Return* *Values*
+
+Returns an ODBC result identifier containing the information or FALSE on
+failure.
+
+The result set has the following columns:
+
+  * TABLE_QUALIFIER
+  * TABLE_OWNER
+  * TABLE_NAME
+  * TABLE_TYPE
+  * REMARKS
+
+The result set is ordered by TABLE_TYPE, TABLE_QUALIFIER, TABLE_OWNER and
+TABLE_NAME.
+
+==============================================================================
+*See* *Also*
+
+  * |odbc_tableprivileges| - Lists tables and the privileges associated with
+    each table
+
+
+vim:ft=help:

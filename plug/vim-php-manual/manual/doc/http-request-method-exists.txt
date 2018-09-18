@@ -1,0 +1,27 @@
+http_request_method_exists
+
+(PECL pecl_http >= 0.10.0)
+
+http_request_method_exists — Check whether request method exists
+
+==============================================================================
+*Description*
+
+    int http_request_method_exists ( mixed $method )~
+
+Check if a request method is registered (or available by default).
+
+==============================================================================
+*Parameters*
+
+{method}
+
+    request method name or ID
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the request method is known, else FALSE.
+
+
+vim:ft=help:

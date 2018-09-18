@@ -1,0 +1,309 @@
+preg_match_all
+
+(PHP 4, PHP 5, PHP 7)
+
+preg_match_all — Perform a global regular expression match
+
+==============================================================================
+*Description*
+
+    int preg_match_all ( string $pattern , string $subject [, array &$matches~
+    [, int $flags = PREG_PATTERN_ORDER [, int $offset = 0 ]]] )~
+
+Searches {subject} for all matches to the regular expression given in
+{pattern} and puts them in {matches} in the order specified by {flags}.
+
+After the first match is found, the subsequent searches are continued on from
+end of the last match.
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    The pattern to search for, as a string.
+
+{subject}
+
+    The input string.
+
+{matches}
+
+    Array of all matches in multi-dimensional array ordered according to
+    {flags}.
+
+{flags}
+
+    Can be a combination of the following flags (note that it doesn't make
+    sense to use PREG_PATTERN_ORDER together with PREG_SET_ORDER):
+
+    PREG_PATTERN_ORDER
+
+        Orders results so that $matches[0] is an array of full pattern
+        matches, $matches[1] is an array of strings matched by the first
+        parenthesized subpattern, and so on.
+
+        <?php >
+        preg_match_all("|<[^>]+>(.*)</[^>]+>|U",
+            "<b>example: </b><div align=left>this is a test</div>",
+            $out, PREG_PATTERN_ORDER);
+        echo $out[0][0] . ", " . $out[0][1] . "\n";
+        echo $out[1][0] . ", " . $out[1][1] . "\n";
+<        ?>
+
+        The above example will output:
+
+        <b>example: </b>, <div align=left>this is a test</div>
+        example: , this is a test
+
+        So, $out[0] contains array of strings that matched full pattern, and
+        $out[1] contains array of strings enclosed by tags.
+
+        If the pattern contains named subpatterns, $matches additionally
+        contains entries for keys with the subpattern name.
+
+        If the pattern contains duplicate named subpatterns, only the
+        rightmost subpattern is stored in $matches[NAME].
+        <?php >
+        preg_match_all(
+            '/(?J)(?<match>foo)|(?<match>bar)/',
+            'foo bar',
+            $matches,
+            PREG_PATTERN_ORDER
+        );
+        print_r($matches['match']);
+<        ?>
+
+        The above example will output:
+
+        Array
+        (
+            [0] =>
+            [1] => bar
+        )
+
+    PREG_SET_ORDER
+
+        Orders results so that $matches[0] is an array of first set of
+        matches, $matches[1] is an array of second set of matches, and so on.
+        <?php >
+        preg_match_all("|<[^>]+>(.*)</[^>]+>|U",
+            "<b>example: </b><div align=\"left\">this is a test</div>",
+            $out, PREG_SET_ORDER);
+        echo $out[0][0] . ", " . $out[0][1] . "\n";
+        echo $out[1][0] . ", " . $out[1][1] . "\n";
+<        ?>
+
+        The above example will output:
+
+        <b>example: </b>, example:
+        <div align="left">this is a test</div>, this is a test
+
+    PREG_OFFSET_CAPTURE
+
+        If this flag is passed, for every occurring match the appendant string
+        offset will also be returned. Note that this changes the value of
+        {matches} into an array of arrays where every element is an array
+        consisting of the matched string at offset 0 and its string offset
+        into {subject} at offset 1.
+        <?php >
+        preg_match_all('/(foo)(bar)(baz)/', 'foobarbaz', $matches, 
+        PREG_OFFSET_CAPTURE);
+        print_r($matches);
+<        ?>
+
+        The above example will output:
+
+        Array
+        (
+            [0] => Array
+                (
+                    [0] => Array
+                        (
+                            [0] => foobarbaz
+                            [1] => 0
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [0] => Array
+                        (
+                            [0] => foo
+                            [1] => 0
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [0] => Array
+                        (
+                            [0] => bar
+                            [1] => 3
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [0] => Array
+                        (
+                            [0] => baz
+                            [1] => 6
+                        )
+
+                )
+
+        )
+
+    If no order flag is given, PREG_PATTERN_ORDER is assumed.
+
+{offset}
+
+    Normally, the search starts from the beginning of the subject string. The
+    optional parameter {offset} can be used to specify the alternate place
+    from which to start the search (in bytes).
+
+        Note:
+
+        Using {offset} is not equivalent to passing substr($subject, $offset)
+        to preg_match_all() in place of the subject string, because {pattern}
+        can contain assertions such as ^, $ or (?<=x). See |preg_match| for
+        examples.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of full pattern matches (which might be zero), or FALSE if
+an error occurred.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.4.0   The {matches} parameter became optional.
+5.3.6   Returns FALSE if {offset} is higher than {subject} length.
+5.2.2   Named subpatterns now accept the syntax (?<name>) and (?'name') as
+        well as (?P<name>). Previous versions accepted only (?P<name>).
+
+==============================================================================
+*Examples*
+
+Example #1 Getting all phone numbers out of some text.
+
+<?php >
+    preg_match_all("/\(?  (\d{3})?  \)?  (?(1)  [\-\s] ) \d{3}-\d{4}/x",
+                    "Call 555-1212 or 1-800-555-1212", $phones);
+<?>
+
+Example #2 Find matching HTML tags (greedy)
+
+<?php >
+    // The \\2 is an example of backreferencing. This tells pcre that
+    // it must match the second set of parentheses in the regular expression
+    // itself, which would be the ([\w]+) in this case. The extra backslash is
+    // required because the string is in double quotes.
+    $html = "<b>bold text</b><a href=howdy.html>click me</a>";
+
+    preg_match_all("/(<([\w]+)[^>]*>)(.*?)(<\/\\2>)/", $html, $matches, 
+    PREG_SET_ORDER);
+
+    foreach ($matches as $val) {
+        echo "matched: " . $val[0] . "\n";
+        echo "part 1: " . $val[1] . "\n";
+        echo "part 2: " . $val[2] . "\n";
+        echo "part 3: " . $val[3] . "\n";
+        echo "part 4: " . $val[4] . "\n\n";
+    }
+<?>
+
+The above example will output:
+
+matched: <b>bold text</b>
+part 1: <b>
+part 2: b
+part 3: bold text
+part 4: </b>
+
+matched: <a href=howdy.html>click me</a>
+part 1: <a href=howdy.html>
+part 2: a
+part 3: click me
+part 4: </a>
+
+Example #3 Using named subpattern
+
+<?php >
+
+    $str = <<<FOO
+    a: 1
+    b: 2
+    c: 3
+    FOO;
+
+    preg_match_all('/(?P<name>\w+): (?P<digit>\d+)/', $str, $matches);
+
+    /* This also works in PHP 5.2.2 (PCRE 7.0) and later, however 
+     * the above form is recommended for backwards compatibility */
+    // preg_match_all('/(?<name>\w+): (?<digit>\d+)/', $str, $matches);
+
+    print_r($matches);
+
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => Array
+        (
+            [0] => a: 1
+            [1] => b: 2
+            [2] => c: 3
+        )
+
+    [name] => Array
+        (
+            [0] => a
+            [1] => b
+            [2] => c
+        )
+
+    [1] => Array
+        (
+            [0] => a
+            [1] => b
+            [2] => c
+        )
+
+    [digit] => Array
+        (
+            [0] => 1
+            [1] => 2
+            [2] => 3
+        )
+
+    [2] => Array
+        (
+            [0] => 1
+            [1] => 2
+            [2] => 3
+        )
+
+)
+
+==============================================================================
+*See* *Also*
+
+  * PCRE Patterns
+  * |preg_quote| - Quote regular expression characters
+  * |preg_match| - Perform a regular expression match
+  * |preg_replace| - Perform a regular expression search and replace
+  * |preg_split| - Split string by a regular expression
+  * |preg_last_error| - Returns the error code of the last PCRE regex
+    execution
+
+
+vim:ft=help:

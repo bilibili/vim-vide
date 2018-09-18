@@ -1,0 +1,31 @@
+signeurlpaiement
+
+(PECL spplus >= 1.0.0)
+
+signeurlpaiement — Obtain the payment url (needs 2 arguments)
+
+==============================================================================
+*Description*
+
+    string nthmac ( string $clent , string $data )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

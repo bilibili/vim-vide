@@ -1,0 +1,76 @@
+fstat
+
+(PHP 4, PHP 5, PHP 7)
+
+fstat — Gets information about a file using an open file pointer
+
+==============================================================================
+*Description*
+
+    array fstat ( resource $handle )~
+
+Gathers the statistics of the file opened by the file pointer {handle}. This
+function is similar to the |stat| function except that it operates on an open
+file pointer instead of a filename.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    A file system pointer resource that is typically created using |fopen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with the statistics of the file; the format of the array is
+described in detail on the |stat| manual page.
+
+==============================================================================
+*Examples*
+
+Example #1 fstat() example
+
+<?php >
+
+    // open a file
+    $fp = fopen("/etc/passwd", "r");
+
+    // gather statistics
+    $fstat = fstat($fp);
+
+    // close the file
+    fclose($fp);
+
+    // print only the associative part
+    print_r(array_slice($fstat, 13));
+
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [dev] => 771
+    [ino] => 488704
+    [mode] => 33188
+    [nlink] => 1
+    [uid] => 0
+    [gid] => 0
+    [rdev] => 0
+    [size] => 1114
+    [atime] => 1061067181
+    [mtime] => 1056136526
+    [ctime] => 1056136526
+    [blksize] => 4096
+    [blocks] => 8
+)
+
+==============================================================================
+*Notes*
+
+    Note: This function will not work on remote files as the file to be
+    examined must be accessible via the server's filesystem.
+
+
+vim:ft=help:

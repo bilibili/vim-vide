@@ -1,0 +1,74 @@
+ps_add_pdflink
+
+(PECL ps >= 1.1.0)
+
+ps_add_pdflink — Adds link to a page in a second pdf document
+
+==============================================================================
+*Description*
+
+    bool ps_add_pdflink ( resource $psdoc , float $llx , float $lly , float~
+    $urx , float $ury , string $filename , int $page , string $dest )~
+
+Places a hyperlink at the given position pointing to a second pdf document.
+Clicking on the link will branch to the document at the given page. The first
+page in a document has number 1.
+
+The hyperlink's source position is a rectangle with its lower left corner at
+({llx}, {lly}) and its upper right corner at ({urx}, {ury}). The rectangle has
+by default a thin blue border.
+
+The note will not be visible if the document is printed or viewed but it will
+show up if the document is converted to pdf by either Acrobat Distiller™ or
+Ghostview.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{llx}
+
+    The x-coordinate of the lower left corner.
+
+{lly}
+
+    The y-coordinate of the lower left corner.
+
+{urx}
+
+    The x-coordinate of the upper right corner.
+
+{ury}
+
+    The y-coordinate of the upper right corner.
+
+{filename}
+
+    The name of the pdf document to be opened when clicking on this link.
+
+{page}
+
+    The page number of the destination pdf document
+
+{dest}
+
+    The parameter {dest} determines how the document is being viewed. It can
+    be fitpage, fitwidth, fitheight, or fitbbox.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_add_launchlink| - Adds link which launches file
+  * |ps_add_locallink| - Adds link to a page in the same document
+  * |ps_add_weblink| - Adds link to a web location
+
+
+vim:ft=help:

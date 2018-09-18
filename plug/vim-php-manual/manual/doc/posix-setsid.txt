@@ -1,0 +1,26 @@
+posix_setsid
+
+(PHP 4, PHP 5, PHP 7)
+
+posix_setsid — Make the current process a session leader
+
+==============================================================================
+*Description*
+
+    int posix_setsid ( void )~
+
+Make the current process a session leader.
+
+==============================================================================
+*Return* *Values*
+
+Returns the session id, or -1 on errors.
+
+==============================================================================
+*See* *Also*
+
+  * The POSIX.1 and the setsid(2) manual page on the POSIX system for more
+    information on process groups and job control.
+
+
+vim:ft=help:

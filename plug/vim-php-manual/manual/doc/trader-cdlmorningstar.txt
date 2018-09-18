@@ -1,0 +1,42 @@
+trader_cdlmorningstar
+
+(PECL trader >= 0.2.0)
+
+trader_cdlmorningstar — Morning Star
+
+==============================================================================
+*Description*
+
+    array trader_cdlmorningstar ( array $open , array $high , array $low ,~
+    array $close [, float $penetration ] )~
+
+==============================================================================
+*Parameters*
+
+{open}
+
+    Opening price, array of real values.
+
+{high}
+
+    High price, array of real values.
+
+{low}
+
+    Low price, array of real values.
+
+{close}
+
+    Closing price, array of real values.
+
+{penetration}
+
+    Percentage of penetration of a candle within another candle.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

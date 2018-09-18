@@ -1,0 +1,33 @@
+http_date
+
+(PECL pecl_http >= 0.1.0)
+
+http_date — Compose HTTP RFC compliant date
+
+==============================================================================
+*Description*
+
+    string http_date ([ int $timestamp ] )~
+
+Compose a valid HTTP date regarding RFC 1123 looking like: Wed, 22 Dec 2004
+11:34:47 GMT.
+
+==============================================================================
+*Parameters*
+
+{timestamp}
+
+    Unix timestamp; current time if omitted
+
+==============================================================================
+*Return* *Values*
+
+Returns the HTTP date as string.
+
+==============================================================================
+*See* *Also*
+
+  * |date| - Format a local time/date
+
+
+vim:ft=help:

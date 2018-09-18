@@ -1,0 +1,50 @@
+xml_set_default_handler
+
+(PHP 4, PHP 5, PHP 7)
+
+xml_set_default_handler — Set up default handler
+
+==============================================================================
+*Description*
+
+    bool xml_set_default_handler ( resource $parser , callable $handler )~
+
+Sets the default handler function for the XML parser {parser}.
+
+==============================================================================
+*Parameters*
+
+{parser}
+
+    A reference to the XML parser to set up default handler function.
+
+{handler}
+
+    {handler} is a string containing the name of a function that must exist
+    when |xml_parse| is called for {parser}.
+
+    The function named by {handler} must accept two parameters:
+
+    handler ( resource $parser , string $data )~
+
+    {parser}
+        The first parameter, parser, is a reference to the XML parser calling
+        the handler.
+    {data}
+        The second parameter, {data}, contains the character data.This may be
+        the XML declaration, document type declaration, entities or other data
+        for which no other handler exists.
+
+    If a handler function is set to an empty string, or FALSE, the handler in
+    question is disabled.
+
+        Note: Instead of a function name, an array containing an object
+        reference and a method name can also be supplied.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

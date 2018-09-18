@@ -1,0 +1,32 @@
+session_pgsql_set_field
+
+(PECL session_pgsql SVN)
+
+session_pgsql_set_field — Set custom field value
+
+==============================================================================
+*Description*
+
+    bool session_pgsql_set_field ( string $value )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{value}
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |session_pgsql_get_field| - Get custom field value
+
+
+vim:ft=help:

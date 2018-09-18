@@ -1,0 +1,58 @@
+pcntl_signal_dispatch
+
+(PHP 5 >= 5.3.0, PHP 7)
+
+pcntl_signal_dispatch — Calls signal handlers for pending signals
+
+==============================================================================
+*Description*
+
+    bool pcntl_signal_dispatch ( void )~
+
+The pcntl_signal_dispatch() function calls the signal handlers installed by 
+|pcntl_signal| for each pending signal.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 pcntl_signal_dispatch() example
+
+<?php >
+    echo "Installing signal handler...\n";
+    pcntl_signal(SIGHUP,  function($signo) {
+         echo "signal handler called\n";
+    });
+
+    echo "Generating signal SIGHUP to self...\n";
+    posix_kill(posix_getpid(), SIGHUP);
+
+    echo "Dispatching...\n";
+    pcntl_signal_dispatch();
+
+    echo "Done\n";
+
+<?>
+
+The above example will output something similar to:
+
+Installing signal handler...
+Generating signal SIGHUP to self...
+Dispatching...
+signal handler called
+Done
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_signal| - Installs a signal handler
+  * |pcntl_sigprocmask| - Sets and retrieves blocked signals
+  * |pcntl_sigwaitinfo| - Waits for signals
+  * |pcntl_sigtimedwait| - Waits for signals, with a timeout
+
+
+vim:ft=help:

@@ -1,0 +1,46 @@
+apc_bin_loadfile
+
+(PECL apc >= 3.1.4)
+
+apc_bin_loadfile — Load a binary dump from a file into the APC file/user cache
+
+==============================================================================
+*Description*
+
+    bool apc_bin_loadfile ( string $filename [, resource $context = NULL [,~
+    int $flags = 0 ]] )~
+
+Loads a binary dump from a file into the APC file/user cache.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The file name containing the dump, likely from |apc_bin_dumpfile|.
+
+{context}
+
+    The files context.
+
+{flags}
+
+    Either APC_BIN_VERIFY_CRC32, APC_BIN_VERIFY_MD5, or both.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, otherwise FALSE Reasons it may return FALSE include
+APC is not enabled, {filename} is an invalid file name or empty, {filename}
+can't be opened, the file dump can't be completed, or if the {data} is not a
+valid APC binary dump (e.g., unexpected size).
+
+==============================================================================
+*See* *Also*
+
+  * |apc_bin_dumpfile| - Output a binary dump of cached files and user
+    variables to a file
+  * |apc_bin_load| - Load a binary dump into the APC file/user cache
+
+
+vim:ft=help:

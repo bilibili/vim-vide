@@ -1,0 +1,45 @@
+array_sum
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+array_sum — Calculate the sum of values in an array
+
+==============================================================================
+*Description*
+
+    number array_sum ( array $array )~
+
+array_sum() returns the sum of values in an array.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    The input array.
+
+==============================================================================
+*Return* *Values*
+
+Returns the sum of values as an integer or float; 0 if the {array} is empty.
+
+==============================================================================
+*Examples*
+
+Example #1 array_sum() examples
+
+<?php >
+    $a = array(2, 4, 6, 8);
+    echo "sum(a) = " . array_sum($a) . "\n";
+
+    $b = array("a" => 1.2, "b" => 2.3, "c" => 3.4);
+    echo "sum(b) = " . array_sum($b) . "\n";
+<?>
+
+The above example will output:
+
+sum(a) = 20
+sum(b) = 6.9
+
+
+vim:ft=help:

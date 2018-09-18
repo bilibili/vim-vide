@@ -1,0 +1,108 @@
+maxdb_real_connect
+
+maxdb::real_connect
+
+(PECL maxdb >= 1.0)
+
+maxdb_real_connect -- maxdb::real_connect — Opens a connection to a MaxDB
+server
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_real_connect ( resource $link [, string $hostname [, string~
+    $username [, string $passwd [, string $dbname [, int $port = 0 [, string~
+    $socket ]]]]]] )~
+
+Object oriented style
+
+    bool maxdb::real_connect ([ string $hostname [, string $username [,~
+    string $passwd [, string $dbname [, int $port = 0 [, string $socket~
+    ]]]]]] )~
+
+maxdb_real_connect() attempts to establish a connection to a MaxDB database
+engine running on {hostname}.
+
+This function differs from |maxdb_connect|:
+
+  * maxdb_real_connect() needs a valid resource which has to be created by
+    function |maxdb_init|
+
+  * With function |maxdb_options| you can set various options for connection.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+
+    /* create a connection object which is not connected */
+    $maxdb = maxdb_init();
+
+    /* set connection options */
+    $maxdb->options(MAXDB_UNICODE, "FALSE");
+    $maxdb->options(MAXDB_TIMEOUT, 5);
+
+    /* connect to server */
+    $maxdb->real_connect('localhost', 'MONA', 'RED', 'DEMODB');
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    printf ("Connection: %s\n.", $maxdb->host_info);
+
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+
+    /* create a connection object which is not connected */
+    $link = maxdb_init();
+
+    /* set connection options */
+    maxdb_options($link, MAXDB_UNICODE, "FALSE");
+    maxdb_options($link, MAXDB_TIMEOUT, 5);
+
+    /* connect to server */
+    maxdb_real_connect($link, 'localhost', 'MONA', 'RED', 'DEMODB');
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    printf ("Connection: %s\n.", maxdb_get_host_info($link));
+
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Connection: localhost <...>
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_connect| - Open a new connection to the MaxDB server
+  * |maxdb_init| - Initializes MaxDB and returns an resource for use with
+    maxdb_real_connect
+  * |maxdb_options| - Set options
+  * |maxdb_ssl_set| - Used for establishing secure connections using SSL
+  * |maxdb_close| - Closes a previously opened database connection
+
+
+vim:ft=help:

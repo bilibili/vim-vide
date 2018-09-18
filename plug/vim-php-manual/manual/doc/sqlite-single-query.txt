@@ -1,0 +1,26 @@
+sqlite_single_query
+
+SQLiteDatabase::singleQuery
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.1)
+
+sqlite_single_query -- SQLiteDatabase::singleQuery — Executes a query and
+returns either an array for one single column or the value of the first row
+
+==============================================================================
+*Description*
+
+    array sqlite_single_query ( resource $db , string $query [, bool~
+    $first_row_only [, bool $decode_binary ]] )~
+
+Object oriented style (method):
+
+    public array SQLiteDatabase::singleQuery ( string $query [, bool~
+    $first_row_only [, bool $decode_binary ]] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

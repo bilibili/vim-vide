@@ -1,0 +1,55 @@
+ssh2_scp_recv
+
+(PECL ssh2 >= 0.9.0)
+
+ssh2_scp_recv — Request a file via SCP
+
+==============================================================================
+*Description*
+
+    bool ssh2_scp_recv ( resource $session , string $remote_file , string~
+    $local_file )~
+
+Copy a file from the remote server to the local filesystem using the SCP
+protocol.
+
+==============================================================================
+*Parameters*
+
+{session}
+
+    An SSH connection link identifier, obtained from a call to |ssh2_connect|.
+
+{remote_file}
+
+    Path to the remote file.
+
+{local_file}
+
+    Path to the local file.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Downloading a file via SCP
+
+<?php >
+    $connection = ssh2_connect('shell.example.com', 22);
+    ssh2_auth_password($connection, 'username', 'password');
+
+    ssh2_scp_recv($connection, '/remote/filename', '/local/filename');
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ssh2_scp_send| - Send a file via SCP
+  * |copy| - Copies file
+
+
+vim:ft=help:

@@ -1,0 +1,30 @@
+m_validateidentifier
+
+(PHP 5 >= 5.0.5, PHP 7, PECL mcve >= 1.0.0)
+
+m_validateidentifier — Whether or not to validate the passed identifier on any
+transaction it is passed to
+
+==============================================================================
+*Description*
+
+    int m_validateidentifier ( resource $conn , int $tf )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{ conn}
+
+    An MCVE_CONN resource returned by |m_initengine|.
+
+{tf}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

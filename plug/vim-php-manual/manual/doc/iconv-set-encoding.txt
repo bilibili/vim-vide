@@ -1,0 +1,52 @@
+iconv_set_encoding
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+iconv_set_encoding — Set current setting for character encoding conversion
+
+==============================================================================
+*Description*
+
+    bool iconv_set_encoding ( string $type , string $charset )~
+
+Changes the value of the internal configuration variable specified by {type}
+to {charset}.
+
+==============================================================================
+*Parameters*
+
+{type}
+
+    The value of {type} can be any one of these:
+      + input_encoding
+      + output_encoding
+      + internal_encoding
+
+{charset}
+
+    The character set.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 iconv_set_encoding() example
+
+<?php >
+    iconv_set_encoding("internal_encoding", "UTF-8");
+    iconv_set_encoding("output_encoding", "ISO-8859-1");
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |iconv_get_encoding| - Retrieve internal configuration variables of iconv
+    extension
+  * |ob_iconv_handler| - Convert character encoding as output buffer handler
+
+
+vim:ft=help:

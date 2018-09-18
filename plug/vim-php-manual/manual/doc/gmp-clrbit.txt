@@ -1,0 +1,65 @@
+gmp_clrbit
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_clrbit — Clear bit
+
+==============================================================================
+*Description*
+
+    void gmp_clrbit ( GMP $a , int $index )~
+
+Clears (sets to 0) bit {index} in {a}. The index starts at 0.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{index}
+
+    The index of the bit to clear. Index 0 represents the least significant
+    bit.
+
+==============================================================================
+*Return* *Values*
+
+A GMP number resource in PHP 5.5 and earlier, or a GMP object in PHP 5.6 and
+later.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_clrbit() example
+
+<?php >
+    $a = gmp_init("0xff");
+    gmp_clrbit($a, 0); // index starts at 0, least significant bit
+    echo gmp_strval($a) . "\n";
+<?>
+
+The above example will output:
+
+254
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Unlike most of the other GMP functions, gmp_clrbit() must be called with a
+    GMP resource that already exists (using |gmp_init| for example). One will
+    not be automatically created.
+
+==============================================================================
+*See* *Also*
+
+  * |gmp_setbit| - Set bit
+  * |gmp_testbit| - Tests if a bit is set
+
+
+vim:ft=help:

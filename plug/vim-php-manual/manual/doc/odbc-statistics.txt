@@ -1,0 +1,67 @@
+odbc_statistics
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_statistics — Retrieve statistics about a table
+
+==============================================================================
+*Description*
+
+    resource odbc_statistics ( resource $connection_id , string $qualifier ,~
+    string $owner , string $table_name , int $unique , int $accuracy )~
+
+Get statistics about a table and its indexes.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+{qualifier}
+
+    The qualifier.
+
+{owner}
+
+    The owner.
+
+{table_name}
+
+    The table name.
+
+{unique}
+
+    The unique attribute.
+
+{accuracy}
+
+    The accuracy.
+
+==============================================================================
+*Return* *Values*
+
+Returns an ODBC result identifier or FALSE on failure.
+
+The result set has the following columns:
+
+  * TABLE_QUALIFIER
+  * TABLE_OWNER
+  * TABLE_NAME
+  * NON_UNIQUE
+  * INDEX_QUALIFIER
+  * INDEX_NAME
+  * TYPE
+  * SEQ_IN_INDEX
+  * COLUMN_NAME
+  * COLLATION
+  * CARDINALITY
+  * PAGES
+  * FILTER_CONDITION
+
+The result set is ordered by NON_UNIQUE, TYPE, INDEX_QUALIFIER, INDEX_NAME and
+SEQ_IN_INDEX.
+
+
+vim:ft=help:

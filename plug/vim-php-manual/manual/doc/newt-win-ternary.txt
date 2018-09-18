@@ -1,0 +1,52 @@
+newt_win_ternary
+
+(PECL newt >= 0.1)
+
+newt_win_ternary —
+
+==============================================================================
+*Description*
+
+    int newt_win_ternary ( string $title , string $button1_text , string~
+    $button2_text , string $button3_text , string $format [, mixed $args [,~
+    mixed $... ]] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{title}
+
+    Its description
+
+{button1_text}
+
+    Its description
+
+{button2_text}
+
+    Its description
+
+{button3_text}
+
+    Its description
+
+{format}
+
+    Its description
+
+{args}
+
+    Its description
+
+==============================================================================
+*Return* *Values*
+
+What the function returns, first on success, then on failure. See also the &
+return.success; entity
+
+
+vim:ft=help:

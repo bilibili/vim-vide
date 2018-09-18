@@ -1,0 +1,92 @@
+syslog
+
+(PHP 4, PHP 5, PHP 7)
+
+syslog — Generate a system log message
+
+==============================================================================
+*Description*
+
+    bool syslog ( int $priority , string $message )~
+
+syslog() generates a log message that will be distributed by the system
+logger.
+
+For information on setting up a user defined log handler, see the syslog.conf 
+(5) Unix manual page. More information on the syslog facilities and option can
+be found in the man pages for syslog (3) on Unix machines.
+
+==============================================================================
+*Parameters*
+
+{priority}
+
+    {priority} is a combination of the facility and the level. Possible values
+    are:
+
+    syslog() Priorities (in descending order)
+     Constant              Description
+    LOG_EMERG   system is unusable
+    LOG_ALERT   action must be taken immediately
+    LOG_CRIT    critical conditions
+    LOG_ERR     error conditions
+    LOG_WARNING warning conditions
+    LOG_NOTICE  normal, but significant, condition
+    LOG_INFO    informational message
+    LOG_DEBUG   debug-level message
+
+{message}
+
+    The message to send, except that the two characters %m will be replaced by
+    the error message string (strerror) corresponding to the present value of 
+    errno.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Using syslog()
+
+<?php >
+    // open syslog, include the process ID and also send
+    // the log to standard error, and use a user defined
+    // logging mechanism
+    openlog("myScriptLog", LOG_PID | LOG_PERROR, LOG_LOCAL0);
+
+    // some code
+
+    if (authorized_client()) {
+        // do something
+    } else {
+        // unauthorized client!
+        // log the attempt
+        $access = date("Y/m/d H:i:s");
+        syslog(LOG_WARNING, "Unauthorized client: $access {$_SERVER['REMOTE_ADDR'
+    ]} ({$_SERVER['HTTP_USER_AGENT']})");
+    }
+
+    closelog();
+<?>
+
+==============================================================================
+*Notes*
+
+On Windows NT, the syslog service is emulated using the Event Log.
+
+    Note:
+
+    Use of LOG_LOCAL0 through LOG_LOCAL7 for the {facility} parameter of 
+    |openlog| is not available in Windows.
+
+==============================================================================
+*See* *Also*
+
+  * |openlog| - Open connection to system logger
+  * |closelog| - Close connection to system logger
+
+
+vim:ft=help:

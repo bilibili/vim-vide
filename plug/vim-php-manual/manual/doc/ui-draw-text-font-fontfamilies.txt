@@ -1,0 +1,20 @@
+UI\Draw\Text\Font\fontFamilies
+
+(PHP 7, UI 0.9.9)
+
+UI\Draw\Text\Font\fontFamilies — Retrieve Font Families
+
+==============================================================================
+*Description*
+
+    array UI\Draw\Text\Font\fontFamilies ( void )~
+
+Returns an array of valid font families for the current system
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+
+vim:ft=help:

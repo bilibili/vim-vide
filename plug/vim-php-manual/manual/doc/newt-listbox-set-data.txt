@@ -1,0 +1,31 @@
+newt_listbox_set_data
+
+(PECL newt >= 0.1)
+
+newt_listbox_set_data —
+
+==============================================================================
+*Description*
+
+    void newt_listbox_set_data ( resource $listbox , int $num , mixed $data )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{listbox}
+
+{num}
+
+{data}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

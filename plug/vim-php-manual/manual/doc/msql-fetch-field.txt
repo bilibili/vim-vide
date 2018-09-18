@@ -1,0 +1,50 @@
+msql_fetch_field
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_fetch_field — Get field information
+
+==============================================================================
+*Description*
+
+    object msql_fetch_field ( resource $result [, int $field_offset = 0 ] )~
+
+msql_fetch_field() can be used in order to obtain information about fields in
+a certain query result.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |msql_query|.
+
+{field_offset}
+
+    The field offset. If not specified, the next field that wasn't yet
+    retrieved by msql_fetch_field() is retrieved.
+
+==============================================================================
+*Return* *Values*
+
+Returns an object containing field information. The properties of the object
+are:
+
+  * name - column name
+
+  * table - name of the table the column belongs to
+
+  * not_null - 1 if the column cannot be NULL
+
+  * unique - 1 if the column is a unique key
+
+  * type - the type of the column
+
+==============================================================================
+*See* *Also*
+
+  * |msql_field_seek| - Set field offset
+
+
+vim:ft=help:

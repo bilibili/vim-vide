@@ -1,0 +1,87 @@
+nl2br
+
+(PHP 4, PHP 5, PHP 7)
+
+nl2br — Inserts HTML line breaks before all newlines in a string
+
+==============================================================================
+*Description*
+
+    string nl2br ( string $string [, bool $is_xhtml = true ] )~
+
+Returns {string} with <br /> or <br> inserted before all newlines (\r\n, \n\r,
+\n and \r).
+
+==============================================================================
+*Parameters*
+
+{string}
+
+    The input string.
+
+{is_xhtml}
+
+    Whether to use XHTML compatible line breaks or not.
+
+==============================================================================
+*Return* *Values*
+
+Returns the altered string.
+
+==============================================================================
+*Examples*
+
+Example #1 Using nl2br()
+
+<?php >
+    echo nl2br("foo isn't\n bar");
+<?>
+
+The above example will output:
+
+foo isn't<br />
+ bar
+
+Example #2 Generating valid HTML markup using the {is_xhtml} parameter
+
+<?php >
+    echo nl2br("Welcome\r\nThis is my HTML document", false);
+<?>
+
+The above example will output:
+
+Welcome<br>
+This is my HTML document
+
+Example #3 Various newline separators
+
+<?php >
+    $string = "This\r\nis\n\ra\nstring\r";
+    echo nl2br($string);
+<?>
+
+The above example will output:
+
+This<br />
+is<br />
+a<br />
+string<br />
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   Added the optional {is_xhtml} parameter. Before this version '<br />'
+        was always inserted.
+
+==============================================================================
+*See* *Also*
+
+  * |htmlspecialchars| - Convert special characters to HTML entities
+  * |htmlentities| - Convert all applicable characters to HTML entities
+  * |wordwrap| - Wraps a string to a given number of characters
+  * |str_replace| - Replace all occurrences of the search string with the
+    replacement string
+
+
+vim:ft=help:

@@ -1,0 +1,51 @@
+mcrypt_list_algorithms
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+mcrypt_list_algorithms — Gets an array of all supported ciphers
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    array mcrypt_list_algorithms ([ string $lib_dir =~
+    ini_get("mcrypt.algorithms_dir") ] )~
+
+Gets the list of all supported algorithms in the {lib_dir} parameter.
+
+==============================================================================
+*Parameters*
+
+{lib_dir}
+
+    Specifies the directory where all algorithms are located. If not
+    specified, the value of the mcrypt.algorithms_dir php.ini directive is
+    used.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with all the supported algorithms.
+
+==============================================================================
+*Examples*
+
+Example #1 mcrypt_list_algorithms() Example
+
+<?php >
+        $algorithms = mcrypt_list_algorithms("/usr/local/lib/libmcrypt");
+
+        foreach ($algorithms as $cipher) {
+            echo "$cipher<br />\n";
+        }
+<?>
+
+The example above will produce a list with all supported algorithms in the "/
+usr/local/lib/libmcrypt" directory.
+
+
+vim:ft=help:

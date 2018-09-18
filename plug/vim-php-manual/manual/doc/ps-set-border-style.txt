@@ -1,0 +1,46 @@
+ps_set_border_style
+
+(PECL ps >= 1.1.0)
+
+ps_set_border_style — Sets border style of annotations
+
+==============================================================================
+*Description*
+
+    bool ps_set_border_style ( resource $psdoc , string $style , float $width~
+)~
+
+Links added with one of the functions |ps_add_weblink|, |ps_add_pdflink|, etc.
+will be displayed with a surounded rectangle when the postscript document is
+converted to pdf and viewed in a pdf viewer. This rectangle is not visible in
+the postscript document. This function sets the appearance and width of the
+border line.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{style}
+
+    {style} can be solid or dashed.
+
+{width}
+
+    The line width of the border.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_set_border_color| - Sets color of border for annotations
+  * |ps_set_border_dash| - Sets length of dashes for border of annotations
+
+
+vim:ft=help:

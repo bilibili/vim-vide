@@ -1,0 +1,42 @@
+variant_neg
+
+(PHP 5, PHP 7)
+
+variant_neg — Performs logical negation on a variant
+
+==============================================================================
+*Description*
+
+    mixed variant_neg ( mixed $variant )~
+
+Performs logical negation of {variant}.
+
+==============================================================================
+*Parameters*
+
+{variant}
+
+    The variant.
+
+    Note:
+
+    As with all the variant arithmetic functions, the parameters for this
+    function can be either a PHP native type (integer, string, floating point,
+    boolean or NULL), or an instance of a COM, VARIANT or DOTNET class. PHP
+    native types will be converted to variants using the same rules as found
+    in the constructor for the VARIANT class. COM and DOTNET objects will have
+    the value of their default property taken and used as the variant value.
+
+    The variant arithmetic functions are wrappers around the similarly named
+    functions in the COM library; for more information on these functions,
+    consult the MSDN library. The PHP functions are named slightly
+    differently; for example |variant_add| in PHP corresponds to VarAdd() in
+    the MSDN documentation.
+
+==============================================================================
+*Return* *Values*
+
+Returns the result of the logical negation.
+
+
+vim:ft=help:

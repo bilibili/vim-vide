@@ -1,0 +1,61 @@
+session_name
+
+(PHP 4, PHP 5, PHP 7)
+
+session_name — Get and/or set the current session name
+
+==============================================================================
+*Description*
+
+    string session_name ([ string $name ] )~
+
+session_name() returns the name of the current session. If {name} is given, 
+session_name() will update the session name and return the old session name.
+
+The session name is reset to the default value stored in session.name at
+request startup time. Thus, you need to call session_name() for every request
+(and before |session_start| or |session_register| are called).
+
+==============================================================================
+*Parameters*
+
+{name}
+
+    The session name references the name of the session, which is used in
+    cookies and URLs (e.g. PHPSESSID). It should contain only alphanumeric
+    characters; it should be short and descriptive (i.e. for users with
+    enabled cookie warnings). If {name} is specified, the name of the current
+    session is changed to its value.
+
+    Warning
+
+    The session name can't consist of digits only, at least one letter must be
+    present. Otherwise a new session id is generated every time.
+
+==============================================================================
+*Return* *Values*
+
+Returns the name of the current session. If {name} is given and function
+updates the session name, name of the old session is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 session_name() example
+
+<?php >
+
+    /* set the session name to WebsiteID */
+
+    $previous_name = session_name("WebsiteID");
+
+    echo "The previous session name was $previous_name<br />";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * The session.name configuration directive
+
+
+vim:ft=help:

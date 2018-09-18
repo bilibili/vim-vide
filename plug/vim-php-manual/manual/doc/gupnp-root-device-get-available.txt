@@ -1,0 +1,33 @@
+gupnp_root_device_get_available
+
+(PECL gupnp >= 0.1.0)
+
+gupnp_root_device_get_available — Check whether root device is available
+
+==============================================================================
+*Description*
+
+    bool gupnp_root_device_get_available ( resource $root_device )~
+
+Get whether or not {root_device} is available (announcing its presence).
+
+==============================================================================
+*Parameters*
+
+{root_device}
+
+    A root device identifier, returned by |gupnp_root_device_new|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |gupnp_root_device_set_available| - Set whether or not root_device is
+    available
+
+
+vim:ft=help:

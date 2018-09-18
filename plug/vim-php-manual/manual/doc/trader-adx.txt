@@ -1,0 +1,38 @@
+trader_adx
+
+(PECL trader >= 0.2.0)
+
+trader_adx — Average Directional Movement Index
+
+==============================================================================
+*Description*
+
+    array trader_adx ( array $high , array $low , array $close [, integer~
+    $timePeriod ] )~
+
+==============================================================================
+*Parameters*
+
+{high}
+
+    High price, array of real values.
+
+{low}
+
+    Low price, array of real values.
+
+{close}
+
+    Closing price, array of real values.
+
+{timePeriod}
+
+    Number of period. Valid range from 2 to 100000.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

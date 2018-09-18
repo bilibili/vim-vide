@@ -1,0 +1,53 @@
+flush
+
+(PHP 4, PHP 5, PHP 7)
+
+flush — Flush system output buffer
+
+==============================================================================
+*Description*
+
+    void flush ( void )~
+
+Flushes the system write buffers of PHP and whatever backend PHP is using
+(CGI, a web server, etc). This attempts to push current output all the way to
+the browser with a few caveats.
+
+flush() may not be able to override the buffering scheme of your web server
+and it has no effect on any client-side buffering in the browser. It also
+doesn't affect PHP's userspace output buffering mechanism. This means you will
+have to call both |ob_flush| and flush() to flush the ob output buffers if you
+are using those.
+
+Several servers, especially on Win32, will still buffer the output from your
+script until it terminates before transmitting the results to the browser.
+
+Server modules for Apache like mod_gzip may do buffering of their own that
+will cause flush() to not result in data being sent immediately to the client.
+
+Even the browser may buffer its input before displaying it. Netscape, for
+example, buffers text until it receives an end-of-line or the beginning of a
+tag, and it won't render tables until the </table> tag of the outermost table
+is seen.
+
+Some versions of Microsoft Internet Explorer will only start to display the
+page after they have received 256 bytes of output, so you may need to send
+extra whitespace before flushing to get those browsers to display the page.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |ob_flush| - Flush (send) the output buffer
+  * |ob_clean| - Clean (erase) the output buffer
+  * |ob_end_flush| - Flush (send) the output buffer and turn off output
+    buffering
+  * |ob_end_clean| - Clean (erase) the output buffer and turn off output
+    buffering
+
+
+vim:ft=help:

@@ -1,0 +1,39 @@
+fann_set_training_algorithm
+
+(PECL fann >= 1.0.0)
+
+fann_set_training_algorithm — Sets the training algorithm
+
+==============================================================================
+*Description*
+
+    bool fann_set_training_algorithm ( resource $ann , int~
+    $training_algorithm )~
+
+Sets the training algorithm.
+
+More info available in |fann_get_training_algorithm|.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{training_algorithm}
+
+    Training algorithm constant
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_training_algorithm| - Returns the training algorithm
+
+
+vim:ft=help:

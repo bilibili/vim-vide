@@ -1,0 +1,32 @@
+msql_field_table
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_field_table — Get table name for field
+
+==============================================================================
+*Description*
+
+    int msql_field_table ( resource $result , int $field_offset )~
+
+Returns the name of the table that the specified field is in.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |msql_query|.
+
+{ field_offset}
+
+    The numerical field offset. The {field_offset} starts at 1.
+
+==============================================================================
+*Return* *Values*
+
+The name of the table on success or FALSE on failure.
+
+
+vim:ft=help:

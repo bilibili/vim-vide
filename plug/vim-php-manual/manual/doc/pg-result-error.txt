@@ -1,0 +1,63 @@
+pg_result_error
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+pg_result_error — Get error message associated with result
+
+==============================================================================
+*Description*
+
+    string pg_result_error ( resource $result )~
+
+pg_result_error() returns any error message associated with the {result}
+resource. Therefore, the user has a better chance of getting the correct error
+message than with |pg_last_error|.
+
+The function |pg_result_error_field| can give much greater detail on result
+errors than pg_result_error().
+
+Because |pg_query| returns FALSE if the query fails, you must use 
+|pg_send_query| and |pg_get_result| to get the result handle.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    PostgreSQL query result resource, returned by |pg_query|, |pg_query_params
+    | or |pg_execute| (among others).
+
+==============================================================================
+*Return* *Values*
+
+Returns a string. Returns empty string if there is no error. If there is an
+error associated with the {result} parameter, returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_result_error() example
+
+<?php >
+      $dbconn = pg_connect("dbname=publisher") or die("Could not connect");
+
+      if (!pg_connection_busy($dbconn)) {
+          pg_send_query($dbconn, "select * from doesnotexist;");
+      }
+      
+      $res1 = pg_get_result($dbconn);
+      echo pg_result_error($res1);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_result_error_field| - Returns an individual field of an error report.
+  * |pg_query| - Execute a query
+  * |pg_send_query| - Sends asynchronous query
+  * |pg_get_result| - Get asynchronous query result
+  * |pg_last_error| - Get the last error message string of a connection
+  * |pg_last_notice| - Returns the last notice message from PostgreSQL server
+
+
+vim:ft=help:

@@ -1,0 +1,67 @@
+apache_request_headers
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+apache_request_headers — Fetch all HTTP request headers
+
+==============================================================================
+*Description*
+
+    array apache_request_headers ( void )~
+
+Fetches all HTTP request headers from the current request.
+
+==============================================================================
+*Return* *Values*
+
+An associative array of all the HTTP headers in the current request, or FALSE
+on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.5.7   This function became available in the CLI server.
+        This function became available under FastCGI. Previously, it was
+5.4.0   supported when PHP was installed as an Apache module or by the NSAPI
+        server module in Netscape/iPlanet/SunONE webservers.
+
+==============================================================================
+*Examples*
+
+Example #1 apache_request_headers() example
+
+<?php >
+    $headers = apache_request_headers();
+
+    foreach ($headers as $header => $value) {
+        echo "$header: $value <br />\n";
+    }
+<?>
+
+The above example will output something similar to:
+
+Accept: */*
+Accept-Language: en-us
+Accept-Encoding: gzip, deflate
+User-Agent: Mozilla/4.0
+Host: www.example.com
+Connection: Keep-Alive
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    You can also get at the value of the common CGI variables by reading them
+    from the environment, which works whether or not you are using PHP as an 
+    Apache module. Use |phpinfo| to see a list of all of the available
+    environment variables.
+
+==============================================================================
+*See* *Also*
+
+  * |apache_response_headers| - Fetch all HTTP response headers
+
+
+vim:ft=help:

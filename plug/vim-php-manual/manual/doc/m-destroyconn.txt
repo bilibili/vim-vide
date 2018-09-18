@@ -1,0 +1,34 @@
+m_destroyconn
+
+(PHP 4 >= 4.3.9, PHP 5 <= 5.0.5, PECL mcve >= 1.0.0)
+
+m_destroyconn — Destroy the connection and MCVE_CONN structure
+
+==============================================================================
+*Description*
+
+    bool m_destroyconn ( resource $conn )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{ conn}
+
+    An MCVE_CONN resource returned by |m_initengine|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE.
+
+==============================================================================
+*See* *Also*
+
+  * |m_initconn| - Create and initialize an MCVE_CONN structure
+
+
+vim:ft=help:

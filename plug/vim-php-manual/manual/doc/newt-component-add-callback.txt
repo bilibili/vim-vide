@@ -1,0 +1,32 @@
+newt_component_add_callback
+
+(PECL newt >= 0.1)
+
+newt_component_add_callback —
+
+==============================================================================
+*Description*
+
+    void newt_component_add_callback ( resource $component , mixed $func_name~
+    , mixed $data )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{component}
+
+{func_name}
+
+{data}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

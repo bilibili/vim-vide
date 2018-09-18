@@ -1,0 +1,27 @@
+oauth_urlencode
+
+(PECL OAuth >=0.99.2)
+
+oauth_urlencode — Encode a URI to RFC 3986
+
+==============================================================================
+*Description*
+
+    string oauth_urlencode ( string $uri )~
+
+Encodes a URI to >> RFC 3986.
+
+==============================================================================
+*Parameters*
+
+{uri}
+
+    URI to encode.
+
+==============================================================================
+*Return* *Values*
+
+Returns an >> RFC 3986 encoded string.
+
+
+vim:ft=help:

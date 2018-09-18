@@ -1,0 +1,17 @@
+cairo_matrix_create_translate
+
+(PECL cairo >= 0.1.0)
+
+cairo_matrix_create_translate — Alias of CairoMatrix::initTranslate()
+
+==============================================================================
+*Description*
+
+This function is an alias of: CairoMatrix::initTranslate().
+
+This function alias is deprecated and only exists for backwards compatibility
+reasons. The use of this function is not recommended, as it may be removed
+from PHP in the future.
+
+
+vim:ft=help:

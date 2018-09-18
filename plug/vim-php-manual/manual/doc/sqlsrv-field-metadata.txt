@@ -1,0 +1,76 @@
+sqlsrv_field_metadata
+
+(No version information available, might only be in Git)
+
+sqlsrv_field_metadata — Retrieves metadata for the fields of a statement
+prepared by |sqlsrv_prepare| or |sqlsrv_query|
+
+==============================================================================
+*Description*
+
+    mixed sqlsrv_field_metadata ( resource $stmt )~
+
+Retrieves metadata for the fields of a statement prepared by |sqlsrv_prepare|
+or |sqlsrv_query|. sqlsrv_field_metadata() can be called on a statement before
+or after statement execution.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    The statment resource for which metadata is returned.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of arrays is returned on success. Otherwise, FALSE is
+returned. Each returned array is described by the following table:
+
+                   Array returned by sqlsrv_field_metadata
+   Key                                Description
+Name      The name of the field.
+Type      The numeric value for the SQL type.
+Size      The number of characters for fields of character type, the number of
+          bytes for fields of binary type, or NULL for other types.
+Precision The precision for types of variable precision, NULL for other types.
+Scale     The scale for types of variable scale, NULL for other types.
+Nullable  An enumeration indicating whether the column is nullable, not
+          nullable, or if it is not known.
+
+For more information, see >> sqlsrv_field_metadata in the Microsoft SQLSRV
+documentation.
+
+==============================================================================
+*Examples*
+
+Example #1 sqlsrv_field_metadata() example
+
+<?php >
+    $serverName = "serverName\sqlexpress";
+    $connectionInfo = array( "Database"=>"AdventureWorks", "UID"=>"username", 
+    "PWD"=>"password");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+    if( $conn === false ) {
+       die( print_r( sqlsrv_errors(), true));
+    }
+
+    $sql = "SELECT * FROM Table_1";
+    $stmt = sqlsrv_prepare( $conn, $sql );
+
+    foreach( sqlsrv_field_metadata( $stmt ) as $fieldMetadata ) {
+        foreach( $fieldMetadata as $name => $value) {
+           echo "$name: $value<br />";
+        }
+          echo "<br />";
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |sqlsrv_client_info| - Returns information about the client and specified
+    connection
+
+
+vim:ft=help:

@@ -1,0 +1,110 @@
+split
+
+(PHP 4, PHP 5)
+
+split — Split string into array by regular expression
+
+Warning
+
+This function was DEPRECATED in PHP 5.3.0, and REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * |preg_split|
+  * |explode|
+  * |str_split|
+
+==============================================================================
+*Description*
+
+    array split ( string $pattern , string $string [, int $limit = -1 ] )~
+
+Splits a {string} into array by regular expression.
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    Case sensitive regular expression.
+
+    If you want to split on any of the characters which are considered special
+    by regular expressions, you'll need to escape them first. If you think 
+    split() (or any other regex function, for that matter) is doing something
+    weird, please read the file regex.7, included in the regex/ subdirectory
+    of the PHP distribution. It's in manpage format, so you'll want to do
+    something along the lines of `man` `/usr/local/src/regex/regex.7` in order
+    to read it.
+
+{string}
+
+    The input string.
+
+{limit}
+
+    If {limit} is set, the returned array will contain a maximum of {limit}
+    elements with the last element containing the whole rest of {string}.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of strings, each of which is a substring of {string} formed
+by splitting it on boundaries formed by the case-sensitive regular expression
+{pattern}.
+
+If there are n occurrences of {pattern}, the returned array will contain n+1
+items. For example, if there is no occurrence of {pattern}, an array with only
+one element will be returned. Of course, this is also true if {string} is
+empty. If an error occurs, split() returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 split() example
+
+To split off the first four fields from a line from /etc/passwd:
+
+<?php >
+    list($user, $pass, $uid, $gid, $extra) =
+        split(":", $passwd_line, 5);
+<?>
+
+Example #2 split() example
+
+To parse a date which may be delimited with slashes, dots, or hyphens:
+
+<?php >
+    // Delimiters may be slash, dot, or hyphen
+    $date = "04/30/1973";
+    list($month, $day, $year) = split('[/.-]', $date);
+    echo "Month: $month; Day: $day; Year: $year<br />\n";
+<?>
+
+==============================================================================
+*Notes*
+
+Tip
+
+split() is deprecated as of PHP 5.3.0. |preg_split| is the suggested
+alternative to this function. If you don't require the power of regular
+expressions, it is faster to use |explode|, which doesn't incur the overhead
+of the regular expression engine.
+
+Tip
+
+For users looking for a way to emulate Perl's @chars = split('', $str)
+behaviour, please see the examples for |preg_split| or |str_split|.
+
+==============================================================================
+*See* *Also*
+
+  * |preg_split| - Split string by a regular expression
+  * |spliti| - Split string into array by regular expression case insensitive
+  * |str_split| - Convert a string to an array
+  * |explode| - Split a string by string
+  * |implode| - Join array elements with a string
+  * |chunk_split| - Split a string into smaller chunks
+  * |wordwrap| - Wraps a string to a given number of characters
+
+
+vim:ft=help:

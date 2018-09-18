@@ -1,0 +1,53 @@
+error_get_last
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+error_get_last — Get the last occurred error
+
+==============================================================================
+*Description*
+
+    array error_get_last ( void )~
+
+Gets information about the last error that occurred.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array describing the last error with keys "type",
+"message", "file" and "line". If the error has been caused by a PHP internal
+function then the "message" begins with its name. Returns NULL if there hasn't
+been an error yet.
+
+==============================================================================
+*Examples*
+
+Example #1 An error_get_last() example
+
+<?php >
+    echo $a;
+    print_r(error_get_last());
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [type] => 8
+    [message] => Undefined variable: a
+    [file] => C:\WWW\index.php
+    [line] => 2
+)
+
+==============================================================================
+*See* *Also*
+
+  * Error constants
+  * Variable $php_errormsg
+  * |error_clear_last| - Clear the most recent error
+  * Directive {display_errors}
+  * Directive {html_errors}
+  * Directive {xmlrpc_errors}
+
+
+vim:ft=help:

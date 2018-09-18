@@ -1,0 +1,52 @@
+msql_result
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_result — Get result data
+
+==============================================================================
+*Description*
+
+    string msql_result ( resource $result , int $row [, mixed $field ] )~
+
+msql_result() returns the contents of one cell from a mSQL result set.
+
+When working on large result sets, you should consider using one of the
+functions that fetch an entire row (specified below). As these functions
+return the contents of multiple cells in one function call, they are often
+much quicker than msql_result().
+
+Recommended high-performance alternatives: |msql_fetch_row|, |msql_fetch_array
+|, and |msql_fetch_object|.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |msql_query|.
+
+{row}
+
+    The row offset.
+
+{field}
+
+    Can be the field's offset, or the field's name, or the field's table dot
+    field's name (tablename.fieldname.). If the column name has been aliased
+    ('select foo as bar from ...'), use the alias instead of the column name.
+
+        Note:
+
+        Specifying a numeric field offset is much quicker than specifying a
+        fieldname or tablename.fieldname.
+
+==============================================================================
+*Return* *Values*
+
+Returns the contents of the cell at the row and offset in the specified mSQL
+result set.
+
+
+vim:ft=help:

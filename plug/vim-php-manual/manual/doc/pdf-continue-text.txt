@@ -1,0 +1,15 @@
+PDF_continue_text
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_continue_text — Output text in next line
+
+==============================================================================
+*Description*
+
+    bool PDF_continue_text ( resource $p , string $text )~
+
+Prints {text} at the next line. Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

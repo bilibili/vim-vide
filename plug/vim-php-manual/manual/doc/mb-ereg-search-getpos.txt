@@ -1,0 +1,42 @@
+mb_ereg_search_getpos
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+mb_ereg_search_getpos — Returns start point for next regular expression match
+
+==============================================================================
+*Description*
+
+    int mb_ereg_search_getpos ( void )~
+
+Returns the start point for the next regular expression match.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+mb_ereg_search_getpos() returns the point to start regular expression match
+for |mb_ereg_search|, |mb_ereg_search_pos|, |mb_ereg_search_regs|. The
+position is represented by bytes from the head of string.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The internal encoding or the character encoding specified by 
+    |mb_regex_encoding| will be used as the character encoding for this
+    function.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_regex_encoding| - Set/Get character encoding for multibyte regex
+  * |mb_ereg_search_setpos| - Set start point of next regular expression match
+
+
+vim:ft=help:

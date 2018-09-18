@@ -1,0 +1,46 @@
+sqlite_prev
+
+SQLiteResult::prev
+
+(PHP 5 < 5.4.0)
+
+sqlite_prev -- SQLiteResult::prev — Seek to the previous row number of a
+result set
+
+==============================================================================
+*Description*
+
+    bool sqlite_prev ( resource $result )~
+
+Object oriented style (method):
+
+    bool SQLiteResult::prev ( void )~
+
+sqlite_prev() seeks back the {result} handle to the previous row.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The SQLite result resource. This parameter is not required when using the
+    object-oriented method.
+
+        Note:
+
+        This function cannot be used with unbuffered result handles.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE if there are no more previous rows.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_has_prev| - Returns whether or not a previous row is available
+  * |sqlite_rewind| - Seek to the first row number
+  * |sqlite_next| - Seek to the next row number
+
+
+vim:ft=help:

@@ -1,0 +1,40 @@
+hebrevc
+
+(PHP 4, PHP 5, PHP 7)
+
+hebrevc — Convert logical Hebrew text to visual text with newline conversion
+
+==============================================================================
+*Description*
+
+    string hebrevc ( string $hebrew_text [, int $max_chars_per_line = 0 ] )~
+
+This function is similar to |hebrev| with the difference that it converts
+newlines (\n) to "<br>\n".
+
+The function tries to avoid breaking words.
+
+==============================================================================
+*Parameters*
+
+{hebrew_text}
+
+    A Hebrew input string.
+
+{max_chars_per_line}
+
+    This optional parameter indicates maximum number of characters per line
+    that will be returned.
+
+==============================================================================
+*Return* *Values*
+
+Returns the visual string.
+
+==============================================================================
+*See* *Also*
+
+  * |hebrev| - Convert logical Hebrew text to visual text
+
+
+vim:ft=help:

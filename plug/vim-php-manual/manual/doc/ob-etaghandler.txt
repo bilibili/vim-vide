@@ -1,0 +1,26 @@
+ob_etaghandler
+
+(PECL pecl_http >= 0.10.0)
+
+ob_etaghandler — ETag output handler
+
+==============================================================================
+*Description*
+
+    string ob_etaghandler ( string $data , int $mode )~
+
+For use with |ob_start|.
+
+Output buffer handler generating an ETag with the hash algorithm specified
+with the INI setting http.etag.mode.
+
+This output handler is used by |http_cache_etag|.
+
+==============================================================================
+*See* *Also*
+
+  * |http_cache_etag| - Caching by ETag
+  * |http_match_etag| - Match ETag
+
+
+vim:ft=help:

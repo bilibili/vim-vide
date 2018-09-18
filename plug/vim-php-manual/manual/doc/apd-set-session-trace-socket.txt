@@ -1,0 +1,57 @@
+apd_set_session_trace_socket
+
+(PECL apd >= 0.2)
+
+apd_set_session_trace_socket — Starts the remote session debugging
+
+==============================================================================
+*Description*
+
+    bool apd_set_session_trace_socket ( string $tcp_server , int $socket_type~
+    , int $port , int $debug_level )~
+
+Connects to the specified {tcp_server} (eg. tcplisten) and sends debugging
+data to the socket.
+
+==============================================================================
+*Parameters*
+
+{tcp_server}
+
+    IP or Unix Domain socket (like a file) of the TCP server.
+
+{socket_type}
+
+    Can be AF_UNIX for file based sockets or APD_AF_INET for standard tcp/ip.
+
+{port}
+
+    You can use any port, but higher numbers are better as most of the lower
+    numbers may be used by other system services.
+
+{ debug_level}
+
+    An integer which is formed by adding together the XXX_TRACE constants.
+
+    It is not recommended to use MEMORY_TRACE. It is very slow and does not
+    appear to be accurate. ASSIGNMENT_TRACE is not implemented yet.
+
+    To turn on all functional traces (TIMING, FUNCTIONS, ARGS SUMMARY (like
+    strace -c)) use the value 99
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 apd_set_session_trace_socket() example
+
+<?php >
+      apd_set_session_trace_socket("127.0.0.1",APD_AF_INET,7112,0);
+<?>
+
+
+vim:ft=help:

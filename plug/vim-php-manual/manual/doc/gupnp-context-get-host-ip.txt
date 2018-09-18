@@ -1,0 +1,53 @@
+gupnp_context_get_host_ip
+
+(PECL gupnp >= 0.1.0)
+
+gupnp_context_get_host_ip — Get the IP address
+
+==============================================================================
+*Description*
+
+    string gupnp_context_get_host_ip ( resource $context )~
+
+Get the IP address we advertise ourselves as using.
+
+==============================================================================
+*Parameters*
+
+{context}
+
+    A context identifier, returned by |gupnp_context_new|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the IP address for the current context and FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 Create new UPnP context and get IP address of the host
+
+<?php >
+
+    /* Create the UPnP context */
+    $context = gupnp_context_new();
+
+    if (!$context) {
+     die("Error creating the GUPnP context\n");
+    }
+
+    /* Get IP address for the UPnP context */
+    $ip = gupnp_context_get_host_ip($context);
+    echo $ip;
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |gupnp_context_new| - Create a new context
+  * |gupnp_context_get_port| - Get the port
+
+
+vim:ft=help:

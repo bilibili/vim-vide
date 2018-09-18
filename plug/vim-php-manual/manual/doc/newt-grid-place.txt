@@ -1,0 +1,31 @@
+newt_grid_place
+
+(PECL newt >= 0.1)
+
+newt_grid_place —
+
+==============================================================================
+*Description*
+
+    void newt_grid_place ( resource $grid , int $left , int $top )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{grid}
+
+{left}
+
+{top}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

@@ -1,0 +1,181 @@
+func_get_args
+
+(PHP 4, PHP 5, PHP 7)
+
+func_get_args — Returns an array comprising a function's argument list
+
+==============================================================================
+*Description*
+
+    array func_get_args ( void )~
+
+Gets an array of the function's argument list.
+
+This function may be used in conjunction with |func_get_arg| and 
+|func_num_args| to allow user-defined functions to accept variable-length
+argument lists.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array in which each element is a copy of the corresponding member
+of the current user-defined function's argument list.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   This function can now be used in parameter lists.
+        If this function is called from the outermost scope of a file which
+5.3.0   has been included by calling |include| or |require| from within a
+        function in the calling file, it now generates a warning and returns
+        FALSE.
+
+==============================================================================
+*Errors/Exceptions*
+
+Generates a warning if called from outside of a user-defined function.
+
+==============================================================================
+*Examples*
+
+Example #1 func_get_args() example
+
+<?php >
+    function foo()
+    {
+        $numargs = func_num_args();
+        echo "Number of arguments: $numargs \n";
+        if ($numargs >= 2) {
+            echo "Second argument is: " . func_get_arg(1) . "\n";
+        }
+        $arg_list = func_get_args();
+        for ($i = 0; $i < $numargs; $i++) {
+            echo "Argument $i is: " . $arg_list[$i] . "\n";
+        }
+    }
+
+    foo(1, 2, 3);
+<?>
+
+The above example will output:
+
+Number of arguments: 3
+Second argument is: 2
+Argument 0 is: 1
+Argument 1 is: 2
+Argument 2 is: 3
+
+Example #2 func_get_args() example before and after PHP 5.3
+
+test.php
+<?php >
+    function foo() {
+        include './fga.inc';
+    }
+
+    foo('First arg', 'Second arg');
+<?>
+
+fga.inc
+<?php >
+
+    $args = func_get_args();
+    var_export($args);
+
+<?>
+
+Output previous to PHP 5.3:
+
+array (
+  0 => 'First arg',
+  1 => 'Second arg',
+)
+
+Output in PHP 5.3 and later:
+
+Warning: func_get_args():  Called from the global scope - no function
+context in /home/torben/Desktop/code/ml/fga.inc on line 3
+false
+
+Example #3 func_get_args() example of byref and byval arguments
+
+<?php >
+    function byVal($arg) {
+        echo 'As passed     : ', var_export(func_get_args()), PHP_EOL;
+        $arg = 'baz';
+        echo 'After change  : ', var_export(func_get_args()), PHP_EOL;
+    }
+
+    function byRef(&$arg) {
+        echo 'As passed     : ', var_export(func_get_args()), PHP_EOL;
+        $arg = 'baz';
+        echo 'After change  : ', var_export(func_get_args()), PHP_EOL;
+    }
+
+    $arg = 'bar';
+    byVal($arg);
+    byRef($arg);
+<?>
+
+Output of the above example in PHP 7:
+
+
+As passed : array (
+0 => 'bar',
+)
+After change : array (
+0 => 'baz',
+)
+As passed : array (
+0 => 'bar',
+)
+After change : array (
+0 => 'baz',
+)
+
+Output of the above example in PHP 5:
+
+
+As passed : array (
+0 => 'bar',
+)
+After change : array (
+0 => 'bar',
+)
+As passed : array (
+0 => 'bar',
+)
+After change : array (
+0 => 'baz',
+)
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Because this function depends on the current scope to determine parameter
+    details, it cannot be used as a function parameter in versions prior to
+    5.3.0. If this value must be passed, the results should be assigned to a
+    variable, and that variable should be passed.
+
+    Note:
+
+    If the arguments are passed by reference, any changes to the arguments
+    will be reflected in the values returned by this function. As of PHP 7 the
+    current values will also be returned if the arguments are passed by value.
+
+    Note: This function returns a copy of the passed arguments only, and does
+    not account for default (non-passed) arguments.
+
+==============================================================================
+*See* *Also*
+
+  * ... syntax in PHP 5.6+
+  * |func_get_arg|
+  * |func_num_args|
+  * ReflectionFunctionAbstract::getParameters()
+
+
+vim:ft=help:

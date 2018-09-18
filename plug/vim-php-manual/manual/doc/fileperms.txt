@@ -1,0 +1,136 @@
+fileperms
+
+(PHP 4, PHP 5, PHP 7)
+
+fileperms — Gets file permissions
+
+==============================================================================
+*Description*
+
+    int fileperms ( string $filename )~
+
+Gets permissions for the given file.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the file.
+
+==============================================================================
+*Return* *Values*
+
+Returns the file's permissions as a numeric mode. Lower bits of this mode are
+the same as the permissions expected by |chmod|, however on most platforms the
+return value will also include information on the type of file given as
+{filename}. The examples below demonstrate how to test the return value for
+specific permissions and file types on POSIX systems, including Linux and Mac
+OS X.
+
+For local files, the specific return value is that of the st_mode member of
+the structure returned by the C library's |stat| function. Exactly which bits
+are set can vary from platform to platform, and looking up your specific
+platform's documentation is recommended if parsing the non-permission bits of
+the return value is required.
+
+==============================================================================
+*Examples*
+
+Example #1 Display permissions as an octal value
+
+<?php >
+    echo substr(sprintf('%o', fileperms('/tmp')), -4);
+    echo substr(sprintf('%o', fileperms('/etc/passwd')), -4);
+<?>
+
+The above example will output:
+
+1777
+0644
+
+Example #2 Display full permissions
+
+<?php >
+    $perms = fileperms('/etc/passwd');
+
+    switch ($perms & 0xF000) {
+        case 0xC000: // socket
+            $info = 's';
+            break;
+        case 0xA000: // symbolic link
+            $info = 'l';
+            break;
+        case 0x8000: // regular
+            $info = 'r';
+            break;
+        case 0x6000: // block special
+            $info = 'b';
+            break;
+        case 0x4000: // directory
+            $info = 'd';
+            break;
+        case 0x2000: // character special
+            $info = 'c';
+            break;
+        case 0x1000: // FIFO pipe
+            $info = 'p';
+            break;
+        default: // unknown
+            $info = 'u';
+    }
+
+    // Owner
+    $info .= (($perms & 0x0100) ? 'r' : '-');
+    $info .= (($perms & 0x0080) ? 'w' : '-');
+    $info .= (($perms & 0x0040) ?
+                (($perms & 0x0800) ? 's' : 'x' ) :
+                (($perms & 0x0800) ? 'S' : '-'));
+
+    // Group
+    $info .= (($perms & 0x0020) ? 'r' : '-');
+    $info .= (($perms & 0x0010) ? 'w' : '-');
+    $info .= (($perms & 0x0008) ?
+                (($perms & 0x0400) ? 's' : 'x' ) :
+                (($perms & 0x0400) ? 'S' : '-'));
+
+    // World
+    $info .= (($perms & 0x0004) ? 'r' : '-');
+    $info .= (($perms & 0x0002) ? 'w' : '-');
+    $info .= (($perms & 0x0001) ?
+                (($perms & 0x0200) ? 't' : 'x' ) :
+                (($perms & 0x0200) ? 'T' : '-'));
+
+    echo $info;
+<?>
+
+The above example will output:
+
+-rw-r--r--
+
+==============================================================================
+*Errors/Exceptions*
+
+Upon failure, an E_WARNING is emitted.
+
+==============================================================================
+*Notes*
+
+    Note: The results of this function are cached. See |clearstatcache| for
+    more details.
+
+Tip
+
+As of PHP 5.0.0, this function can also be used with some URL wrappers. Refer
+to Supported Protocols and Wrappers to determine which wrappers support |stat|
+family of functionality.
+
+==============================================================================
+*See* *Also*
+
+  * |chmod| - Changes file mode
+  * |is_readable| - Tells whether a file exists and is readable
+  * |stat| - Gives information about a file
+
+
+vim:ft=help:

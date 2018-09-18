@@ -1,0 +1,127 @@
+filter_var_array
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+filter_var_array — Gets multiple variables and optionally filters them
+
+==============================================================================
+*Description*
+
+    mixed filter_var_array ( array $data [, mixed $definition [, bool~
+    $add_empty = true ]] )~
+
+This function is useful for retrieving many values without repetitively
+calling |filter_var|.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    An array with string keys containing the data to filter.
+
+{definition}
+
+    An array defining the arguments. A valid key is a string containing a
+    variable name and a valid value is either a filter type, or an array
+    optionally specifying the filter, flags and options. If the value is an
+    array, valid keys are filter which specifies the filter type, flags which
+    specifies any flags that apply to the filter, and options which specifies
+    any options that apply to the filter. See the example below for a better
+    understanding.
+
+    This parameter can be also an integer holding a filter constant. Then all
+    values in the input array are filtered by this filter.
+
+{add_empty}
+
+    Add missing keys as NULL to the return value.
+
+==============================================================================
+*Return* *Values*
+
+An array containing the values of the requested variables on success, or FALSE
+on failure. An array value will be FALSE if the filter fails, or NULL if the
+variable is not set.
+
+==============================================================================
+*Examples*
+
+Example #1 A filter_var_array() example
+
+<?php >
+    error_reporting(E_ALL | E_STRICT);
+    $data = array(
+        'product_id'    => 'libgd<script>',
+        'component'     => '10',
+        'versions'      => '2.0.33',
+        'testscalar'    => array('2', '23', '10', '12'),
+        'testarray'     => '2',
+    );
+
+    $args = array(
+        'product_id'   => FILTER_SANITIZE_ENCODED,
+        'component'    => array('filter'    => FILTER_VALIDATE_INT,
+                                'flags'     => FILTER_FORCE_ARRAY, 
+                                'options'   => array('min_range' => 1, 
+    'max_range' => 10)
+                               ),
+        'versions'     => FILTER_SANITIZE_ENCODED,
+        'doesnotexist' => FILTER_VALIDATE_INT,
+        'testscalar'   => array(
+                                'filter' => FILTER_VALIDATE_INT,
+                                'flags'  => FILTER_REQUIRE_SCALAR,
+                               ),
+        'testarray'    => array(
+                                'filter' => FILTER_VALIDATE_INT,
+                                'flags'  => FILTER_FORCE_ARRAY,
+                               )
+
+    );
+
+    $myinputs = filter_var_array($data, $args);
+
+    var_dump($myinputs);
+    echo "\n";
+<?>
+
+The above example will output:
+
+array(6) {
+  ["product_id"]=>
+  string(17) "libgd%3Cscript%3E"
+  ["component"]=>
+  array(1) {
+    [0]=>
+    int(10)
+  }
+  ["versions"]=>
+  string(6) "2.0.33"
+  ["doesnotexist"]=>
+  NULL
+  ["testscalar"]=>
+  bool(false)
+  ["testarray"]=>
+  array(1) {
+    [0]=>
+    int(2)
+  }
+}
+
+==============================================================================
+*Changelog*
+
+Version         Description
+5.4.0   Added {add_empty} parameter.
+
+==============================================================================
+*See* *Also*
+
+  * |filter_input_array| - Gets external variables and optionally filters them
+  * |filter_var| - Filters a variable with a specified filter
+  * |filter_input| - Gets a specific external variable by name and optionally
+    filters it
+  * Types of filters
+
+
+vim:ft=help:

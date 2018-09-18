@@ -1,0 +1,51 @@
+strnatcasecmp
+
+(PHP 4, PHP 5, PHP 7)
+
+strnatcasecmp — Case insensitive string comparisons using a "natural order"
+algorithm
+
+==============================================================================
+*Description*
+
+    int strnatcasecmp ( string $str1 , string $str2 )~
+
+This function implements a comparison algorithm that orders alphanumeric
+strings in the way a human being would. The behaviour of this function is
+similar to |strnatcmp|, except that the comparison is not case sensitive. For
+more information see: Martin Pool's >> Natural Order String Comparison page.
+
+==============================================================================
+*Parameters*
+
+{str1}
+
+    The first string.
+
+{str2}
+
+    The second string.
+
+==============================================================================
+*Return* *Values*
+
+Similar to other string comparison functions, this one returns < 0 if {str1}
+is less than {str2} > 0 if {str1} is greater than {str2}, and 0 if they are
+equal.
+
+==============================================================================
+*See* *Also*
+
+  * |preg_match| - Perform a regular expression match
+  * |strcmp| - Binary safe string comparison
+  * |strcasecmp| - Binary safe case-insensitive string comparison
+  * |substr| - Return part of a string
+  * |stristr| - Case-insensitive strstr
+  * |strncasecmp| - Binary safe case-insensitive string comparison of the
+    first n characters
+  * |strncmp| - Binary safe string comparison of the first n characters
+  * |strstr| - Find the first occurrence of a string
+  * |setlocale| - Set locale information
+
+
+vim:ft=help:

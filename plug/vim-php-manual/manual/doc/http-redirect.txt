@@ -1,0 +1,78 @@
+http_redirect
+
+(PECL pecl_http >= 0.1.0)
+
+http_redirect — Issue HTTP redirect
+
+==============================================================================
+*Description*
+
+    bool http_redirect ([ string $url [, array $params [, bool $session =~
+    false [, int $status = 0 ]]]] )~
+
+Redirect to the given url.
+
+The supplied {url} will be expanded with |http_build_url|, the {params} array
+will be treated with |http_build_str| and the session identification will be
+appended if {session} is true. The HTTP response code will be set according to
+{status}. You can use one of the redirect constants for convenience. Please
+see >> RFC 2616 for which redirect response code to use in which situation. By
+default PHP will decide which response status fits best.
+
+To be RFC compliant, "Redirecting to <a>URL</a>." will be displayed, if the
+client doesn't redirect immediately, and the request method was another one
+than HEAD.
+
+A log entry will be written to the redirect log, if the INI setting
+http.log.redirect is set and the redirect attempt was successful.
+
+==============================================================================
+*Parameters*
+
+{url}
+
+    the URL to redirect to
+
+{params}
+
+    associative array of query parameters
+
+{session}
+
+    whether to append session information
+
+{status}
+
+    custom response status code
+
+==============================================================================
+*Return* *Values*
+
+Returns FALSE or exits on success with the specified redirection status code.
+See the INI setting http.force_exit for what "exits" means.
+
+==============================================================================
+*Examples*
+
+Example #1 A http_redirect() example
+
+<?php >
+    http_redirect("relpath", array("name" => "value"), true, HTTP_REDIRECT_PERM);
+<?>
+
+The above example will output:
+
+HTTP/1.1 301 Moved Permanently
+X-Powered-By: PHP/5.2.2
+Content-Type: text/html
+Location: http://www.example.com/curdir/relpath?name=value&PHPSESSID=abc
+
+Redirecting to <a href="http://www.example.com/curdir/relpath?name=value&PHPSESSID=abc">http://www.example.com/curdir/relpath?name=value&PHPSESSID=abc</a>.
+
+==============================================================================
+*See* *Also*
+
+  * the  HttpResponse class if you are using PHP 5.1.0 and above
+
+
+vim:ft=help:

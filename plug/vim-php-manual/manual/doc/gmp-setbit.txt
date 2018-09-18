@@ -1,0 +1,101 @@
+gmp_setbit
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_setbit — Set bit
+
+==============================================================================
+*Description*
+
+    void gmp_setbit ( GMP &$a , int $index [, bool $bit_on = true ] )~
+
+Sets bit {index} in {a}.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    The value to modify.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{index}
+
+    The index of the bit to set. Index 0 represents the least significant bit.
+
+{bit_on}
+
+    True to set the bit (set it to 1/on); false to clear the bit (set it to 0/
+    off).
+
+==============================================================================
+*Return* *Values*
+
+A GMP number resource in PHP 5.5 and earlier, or a GMP object in PHP 5.6 and
+later.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_setbit() example - 0 index
+
+<?php >
+    $a = gmp_init("2"); //
+    echo gmp_strval($a), ' -> 0b', gmp_strval($a, 2), "\n";
+    gmp_setbit($a, 0); // 0b10 now becomes 0b11
+    echo gmp_strval($a), ' -> 0b', gmp_strval($a, 2), "\n";
+<?>
+
+The above example will output:
+
+2 -> 0b10
+3 -> 0b11
+
+Example #2 gmp_setbit() example - 1 index
+
+<?php >
+    $a = gmp_init("0xfd");
+    echo gmp_strval($a), ' -> 0b', gmp_strval($a, 2), "\n";
+    gmp_setbit($a, 1); // index starts at 0
+    echo gmp_strval($a), ' -> 0b', gmp_strval($a, 2), "\n";
+<?>
+
+The above example will output:
+
+253 -> 0b11111101
+255 -> 0b11111111
+
+Example #3 gmp_setbit() example - clearing a bit
+
+<?php >
+    $a = gmp_init("0xff");
+    echo gmp_strval($a), ' -> 0b', gmp_strval($a, 2), "\n";
+    gmp_setbit($a, 0, false); // clear bit at index 0
+    echo gmp_strval($a), ' -> 0b', gmp_strval($a, 2), "\n";
+<?>
+
+The above example will output:
+
+255 -> 0b11111111
+254 -> 0b11111110
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Unlike most of the other GMP functions, gmp_setbit() must be called with a
+    GMP resource that already exists (using |gmp_init| for example). One will
+    not be automatically created.
+
+==============================================================================
+*See* *Also*
+
+  * |gmp_clrbit| - Clear bit
+  * |gmp_testbit| - Tests if a bit is set
+
+
+vim:ft=help:

@@ -1,0 +1,68 @@
+virtual
+
+(PHP 4, PHP 5, PHP 7)
+
+virtual — Perform an Apache sub-request
+
+==============================================================================
+*Description*
+
+    bool virtual ( string $filename )~
+
+virtual() is an Apache-specific function which is similar to <!--#include
+virtual...--> in mod_include. It performs an Apache sub-request. It is useful
+for including CGI scripts or .shtml files, or anything else that you would
+parse through Apache. Note that for a CGI script, the script must generate
+valid CGI headers. At the minimum that means it must generate a Content-Type
+header.
+
+To run the sub-request, all buffers are terminated and flushed to the browser,
+pending headers are sent too.
+
+This function is supported when PHP is installed as an Apache module or by the
+NSAPI server module in Netscape/iPlanet/SunONE webservers.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The file that the virtual command will be performed on.
+
+==============================================================================
+*Return* *Values*
+
+Performs the virtual command on success, or returns FALSE on failure.
+
+==============================================================================
+*Examples*
+
+See |apache_note| for an example.
+
+==============================================================================
+*Notes*
+
+Warning
+
+The query string can be passed to the included file but $_GET is copied from
+the parent script and only $_SERVER['QUERY_STRING'] is filled with the passed
+query string. The query string may only be passed when using Apache 2. The
+requested file will not be listed in the Apache access log.
+
+    Note:
+
+    Environment variables set in the requested file are not visible to the
+    calling script.
+
+    Note:
+
+    This function may be used on PHP files. However, it is typically better to
+    use |include| or |require| for PHP files.
+
+==============================================================================
+*See* *Also*
+
+  * |apache_note| - Get and set apache request notes
+
+
+vim:ft=help:

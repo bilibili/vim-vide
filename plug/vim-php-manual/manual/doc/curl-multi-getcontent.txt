@@ -1,0 +1,35 @@
+curl_multi_getcontent
+
+(PHP 5, PHP 7)
+
+curl_multi_getcontent — Return the content of a cURL handle if
+CURLOPT_RETURNTRANSFER is set
+
+==============================================================================
+*Description*
+
+    string curl_multi_getcontent ( resource $ch )~
+
+If CURLOPT_RETURNTRANSFER is an option that is set for a specific handle, then
+this function will return the content of that cURL handle in the form of a
+string.
+
+==============================================================================
+*Parameters*
+
+{ch}
+
+    A cURL handle returned by |curl_init|.
+
+==============================================================================
+*Return* *Values*
+
+Return the content of a cURL handle if CURLOPT_RETURNTRANSFER is set.
+
+==============================================================================
+*See* *Also*
+
+  * |curl_multi_init| - Returns a new cURL multi handle
+
+
+vim:ft=help:

@@ -1,0 +1,56 @@
+pg_lo_read_all
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+pg_lo_read_all — Reads an entire large object and send straight to browser
+
+==============================================================================
+*Description*
+
+    int pg_lo_read_all ( resource $large_object )~
+
+pg_lo_read_all() reads a large object and passes it straight through to the
+browser after sending all pending headers. Mainly intended for sending binary
+data like images or sound.
+
+To use the large object interface, it is necessary to enclose it within a
+transaction block.
+
+    Note:
+
+    This function used to be called pg_loreadall().
+
+==============================================================================
+*Parameters*
+
+{large_object}
+
+    PostgreSQL large object (LOB) resource, returned by |pg_lo_open|.
+
+==============================================================================
+*Return* *Values*
+
+Number of bytes read or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_lo_read_all() example
+
+<?php >
+       header('Content-type: image/jpeg');
+       $image_oid = 189762345;
+       $database = pg_connect("dbname=jacarta");
+       pg_query($database, "begin");
+       $handle = pg_lo_open($database, $image_oid, "r");
+       pg_lo_read_all($handle);
+       pg_query($database, "commit");
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_lo_read| - Read a large object
+
+
+vim:ft=help:

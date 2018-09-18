@@ -1,0 +1,27 @@
+rrd_last
+
+(PECL rrd >= 0.9.0)
+
+rrd_last — Gets unix timestamp of the last sample.
+
+==============================================================================
+*Description*
+
+    int rrd_last ( string $filename )~
+
+Returns the UNIX timestamp of the most recent update of the RRD database.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    RRD database file name.
+
+==============================================================================
+*Return* *Values*
+
+Integer as unix timestamp of the most recent data from the RRD database.
+
+
+vim:ft=help:

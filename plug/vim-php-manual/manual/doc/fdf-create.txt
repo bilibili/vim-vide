@@ -1,0 +1,48 @@
+fdf_create
+
+(PHP 4, PHP 5, PHP 7)
+
+fdf_create — Create a new FDF document
+
+==============================================================================
+*Description*
+
+    resource fdf_create ( void )~
+
+Creates a new FDF document.
+
+This function is needed if one would like to populate input fields in a PDF
+document with data.
+
+==============================================================================
+*Return* *Values*
+
+Returns a FDF document handle, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 Populating a PDF document
+
+<?php >
+    $outfdf = fdf_create();
+    fdf_set_value($outfdf, "volume", $volume, 0);
+
+    fdf_set_file($outfdf, "http:/testfdf/resultlabel.pdf");
+    fdf_save($outfdf, "outtest.fdf");
+    fdf_close($outfdf);
+    Header("Content-type: application/vnd.fdf");
+    $fp = fopen("outtest.fdf", "r");
+    fpassthru($fp);
+    unlink("outtest.fdf");
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fdf_close| - Close an FDF document
+  * |fdf_save| - Save a FDF document
+  * |fdf_open| - Open a FDF document
+
+
+vim:ft=help:

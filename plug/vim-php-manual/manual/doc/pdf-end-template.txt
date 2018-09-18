@@ -1,0 +1,15 @@
+PDF_end_template
+
+(PHP 4 >= 4.0.5, PECL pdflib >= 1.0.0)
+
+PDF_end_template — Finish template
+
+==============================================================================
+*Description*
+
+    bool PDF_end_template ( resource $p )~
+
+Finishes a template definition. Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

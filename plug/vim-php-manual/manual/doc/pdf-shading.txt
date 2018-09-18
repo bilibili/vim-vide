@@ -1,0 +1,19 @@
+PDF_shading
+
+(PECL pdflib >= 2.0.0)
+
+PDF_shading — Define blend
+
+==============================================================================
+*Description*
+
+    int PDF_shading ( resource $pdfdoc , string $shtype , float $x0 , float~
+    $y0 , float $x1 , float $y1 , float $c1 , float $c2 , float $c3 , float~
+    $c4 , string $optlist )~
+
+Defines a blend from the current fill color to another color.
+
+This function requires PDF 1.4 or above.
+
+
+vim:ft=help:

@@ -1,0 +1,33 @@
+fam_open
+
+(PHP 5 <= 5.0.5)
+
+fam_open — Open connection to FAM daemon
+
+==============================================================================
+*Description*
+
+    resource fam_open ([ string $appname ] )~
+
+Opens a connection to the FAM service daemon.
+
+==============================================================================
+*Parameters*
+
+{appname}
+
+    A string identifying the application for logging reasons
+
+==============================================================================
+*Return* *Values*
+
+Returns a resource representing a connection to the FAM service on success or
+FALSE on errors.
+
+==============================================================================
+*See* *Also*
+
+  * |fam_close| - Close FAM connection
+
+
+vim:ft=help:

@@ -1,0 +1,23 @@
+mysqli_param_count
+
+(PHP 5 < 5.4.0)
+
+mysqli_param_count — Alias for mysqli_stmt_param_count()
+
+==============================================================================
+*Description*
+
+This function is an alias of mysqli_stmt_param_count().
+
+Warning
+
+This function has been DEPRECATED as of PHP 5.3.0 and REMOVED as of PHP 5.4.0.
+
+==============================================================================
+*See* *Also*
+
+  * mysqli_stmt_param_count() - Returns the number of parameter for the given
+    statement
+
+
+vim:ft=help:

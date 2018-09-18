@@ -1,0 +1,81 @@
+opendir
+
+(PHP 4, PHP 5, PHP 7)
+
+opendir — Open directory handle
+
+==============================================================================
+*Description*
+
+    resource opendir ( string $path [, resource $context ] )~
+
+Opens up a directory handle to be used in subsequent |closedir|, |readdir|,
+and |rewinddir| calls.
+
+==============================================================================
+*Parameters*
+
+{path}
+
+    The directory path that is to be opened
+
+{context}
+
+    For a description of the {context} parameter, refer to the streams section
+    of the manual.
+
+==============================================================================
+*Return* *Values*
+
+Returns a directory handle resource on success, or FALSE on failure.
+
+If {path} is not a valid directory or the directory can not be opened due to
+permission restrictions or filesystem errors, opendir() returns FALSE and
+generates a PHP error of level E_WARNING. You can suppress the error output of
+opendir() by prepending '@' to the front of the function name.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.0.0   {path} supports the ftp:// URL wrapper.
+4.3.0   {path} can also be any URL which supports directory listing, however
+        only the file:// URL wrapper supports this in PHP 4
+
+==============================================================================
+*Examples*
+
+Example #1 opendir() example
+
+<?php >
+    $dir = "/etc/php5/";
+
+    // Open a known directory, and proceed to read its contents
+    if (is_dir($dir)) {
+        if ($dh = opendir($dir)) {
+            while (($file = readdir($dh)) !== false) {
+                echo "filename: $file : filetype: " . filetype($dir . $file) . "\
+    n";
+            }
+            closedir($dh);
+        }
+    }
+<?>
+
+The above example will output something similar to:
+
+filename: . : filetype: dir
+filename: .. : filetype: dir
+filename: apache : filetype: dir
+filename: cgi : filetype: dir
+filename: cli : filetype: dir
+
+==============================================================================
+*See* *Also*
+
+  * |is_dir| - Tells whether the filename is a directory
+  * |readdir| - Read entry from directory handle
+  * |dir| - Return an instance of the Directory class
+
+
+vim:ft=help:

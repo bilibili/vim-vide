@@ -1,0 +1,198 @@
+header
+
+(PHP 4, PHP 5, PHP 7)
+
+header — Send a raw HTTP header
+
+==============================================================================
+*Description*
+
+    void header ( string $string [, bool $replace = true [, int~
+    $http_response_code ]] )~
+
+header() is used to send a raw HTTP header. See the >> HTTP/1.1 specification
+for more information on HTTP headers.
+
+Remember that header() must be called before any actual output is sent, either
+by normal HTML tags, blank lines in a file, or from PHP. It is a very common
+error to read code with |include|, or |require|, functions, or another file
+access function, and have spaces or empty lines that are output before header
+() is called. The same problem exists when using a single PHP/HTML file.
+<html>
+<?php >
+    /* This will give an error. Note the output
+     * above, which is before the header() call */
+    header('Location: http://www.example.com/');
+    exit;
+<?>
+
+==============================================================================
+*Parameters*
+
+{string}
+
+    The header string.
+
+    There are two special-case header calls. The first is a header that starts
+    with the string "HTTP/" (case is not significant), which will be used to
+    figure out the HTTP status code to send. For example, if you have
+    configured Apache to use a PHP script to handle requests for missing files
+    (using the ErrorDocument directive), you may want to make sure that your
+    script generates the proper status code.
+
+    <?php >
+    header("HTTP/1.0 404 Not Found");
+<    ?>
+
+    The second special case is the "Location:" header. Not only does it send
+    this header back to the browser, but it also returns a REDIRECT (302)
+    status code to the browser unless the 201 or a 3xx status code has already
+    been set.
+
+    <?php >
+    header("Location: http://www.example.com/"); /* Redirect browser */
+
+    /* Make sure that code below does not get executed when we redirect. */
+    exit;
+<    ?>
+
+{replace}
+
+    The optional {replace} parameter indicates whether the header should
+    replace a previous similar header, or add a second header of the same
+    type. By default it will replace, but if you pass in FALSE as the second
+    argument you can force multiple headers of the same type. For example:
+
+    <?php >
+    header('WWW-Authenticate: Negotiate');
+    header('WWW-Authenticate: NTLM', false);
+<    ?>
+
+{http_response_code}
+
+    Forces the HTTP response code to the specified value. Note that this
+    parameter only has an effect if the {string} is not empty.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.1.2   This function now prevents more than one header to be sent at once as
+        a protection against header injection attacks.
+
+==============================================================================
+*Examples*
+
+Example #1 Download dialog
+
+If you want the user to be prompted to save the data you are sending, such as
+a generated PDF file, you can use the >> Content-Disposition header to supply
+a recommended filename and force the browser to display the save dialog.
+
+<?php >
+    // We'll be outputting a PDF
+    header('Content-Type: application/pdf');
+
+    // It will be called downloaded.pdf
+    header('Content-Disposition: attachment; filename="downloaded.pdf"');
+
+    // The PDF source is in original.pdf
+    readfile('original.pdf');
+<?>
+
+Example #2 Caching directives
+
+PHP scripts often generate dynamic content that must not be cached by the
+client browser or any proxy caches between the server and the client browser.
+Many proxies and clients can be forced to disable caching with:
+
+<?php >
+    header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+    header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+<?>
+
+    Note:
+
+    You may find that your pages aren't cached even if you don't output all of
+    the headers above. There are a number of options that users may be able to
+    set for their browser that change its default caching behavior. By sending
+    the headers above, you should override any settings that may otherwise
+    cause the output of your script to be cached.
+
+    Additionally, |session_cache_limiter| and the session.cache_limiter
+    configuration setting can be used to automatically generate the correct
+    caching-related headers when sessions are being used.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Headers will only be accessible and output when a SAPI that supports them
+    is in use.
+
+    Note:
+
+    You can use output buffering to get around this problem, with the overhead
+    of all of your output to the browser being buffered in the server until
+    you send it. You can do this by calling |ob_start| and |ob_end_flush| in
+    your script, or setting the output_buffering configuration directive on in
+    your php.ini or server configuration files.
+
+    Note:
+
+    The HTTP status header line will always be the first sent to the client,
+    regardless of the actual header() call being the first or not. The status
+    may be overridden by calling header() with a new status line at any time
+    unless the HTTP headers have already been sent.
+
+    Note:
+
+    There is a bug in Microsoft Internet Explorer 4.01 that prevents this from
+    working. There is no workaround. There is also a bug in Microsoft Internet
+    Explorer 5.5 that interferes with this, which can be resolved by upgrading
+    to Service Pack 2 or later.
+
+    Note: If safe mode is enabled the uid of the script is added to the realm
+    part of the WWW-Authenticate header if you set this header (used for HTTP
+    Authentication).
+
+    Note:
+
+    Most contemporary clients accept relative URIs as argument to >> Location:
+    , but some older clients require an absolute URI including the scheme,
+    hostname and absolute path. You can usually use $_SERVER['HTTP_HOST'],
+    $_SERVER['PHP_SELF'] and |dirname| to make an absolute URI from a relative
+    one yourself:
+    <?php >
+    /
+    * Redirect to a different page in the current directory that was requested *
+    /
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'mypage.php';
+    header("Location: http://$host$uri/$extra");
+    exit;
+<    ?>
+
+    Note:
+
+    Session ID is not passed with Location header even if
+    session.use_trans_sid is enabled. It must by passed manually using SID
+    constant.
+
+==============================================================================
+*See* *Also*
+
+  * |headers_sent| - Checks if or where headers have been sent
+  * |setcookie| - Send a cookie
+  * |http_response_code| - Get or Set the HTTP response code
+  * The section on HTTP authentication
+
+
+vim:ft=help:

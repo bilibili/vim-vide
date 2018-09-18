@@ -1,0 +1,157 @@
+ps_get_value
+
+(PECL ps >= 1.1.0)
+
+ps_get_value — Gets certain values
+
+==============================================================================
+*Description*
+
+    float ps_get_value ( resource $psdoc , string $name [, float $modifier ]~
+)~
+
+Gets several values which were set by |ps_set_value|. Values are by definition
+float values.
+
+The parameter {name} can have the following values.
+
+fontsize
+
+    The size of the currently active font or the font whose identifier is
+    passed in parameter {modifier}.
+
+font
+
+    The currently active font itself.
+
+imagewidth
+
+    The width of the image whose id is passed in the parameter {modifier}.
+
+imageheight
+
+    The height of the image whose id is passed in the parameter {modifier}.
+
+capheight
+
+    The height of a capital M in the currently active font or the font whose
+    identifier is passed in parameter {modifier}.
+
+ascender
+
+    The ascender of the currently active font or the font whose identifier is
+    passed in parameter {modifier}.
+
+descender
+
+    The descender of the currently active font or the font whose identifier is
+    passed in parameter {modifier}.
+
+italicangle
+
+    The italicangle of the currently active font or the font whose identifier
+    is passed in parameter {modifier}.
+
+underlineposition
+
+    The underlineposition of the currently active font or the font whose
+    identifier is passed in parameter {modifier}.
+
+underlinethickness
+
+    The underlinethickness of the currently active font or the font whose
+    identifier is passed in parameter {modifier}.
+
+textx
+
+    The current x-position for text output.
+
+texty
+
+    The current y-position for text output.
+
+textrendering
+
+    The current mode for text rendering.
+
+textrise
+
+    The space by which text is risen above the base line.
+
+leading
+
+    The distance between text lines in points.
+
+wordspacing
+
+    The space between words as a multiple of the width of a space char.
+
+charspacing
+
+    The space between chars. If charspacing is != 0.0 ligatures will always be
+    dissolved.
+
+hyphenminchars
+
+    Minimum number of chars hyphenated at the end of a word.
+
+parindent
+
+    Indention of the first n line in a paragraph.
+
+numindentlines
+
+    Number of line in a paragraph to indent if parindent != 0.0.
+
+parskip
+
+    Distance between paragraphs.
+
+linenumberspace
+
+    Overall space in front of each line for the line number.
+
+linenumbersep
+
+    Space between the line and the line number.
+
+major
+
+    The major version number of pslib.
+
+minor
+
+    The minor version number of pslib.
+
+subminor, revision
+
+    The subminor version number of pslib.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{name}
+
+    Name of the value.
+
+{modifier}
+
+    The parameter {modifier} specifies the resource for which the value is to
+    be retrieved. This can be the id of a font or an image.
+
+==============================================================================
+*Return* *Values*
+
+Returns the value of the parameter or FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_set_value| - Sets certain values
+
+
+vim:ft=help:

@@ -1,0 +1,73 @@
+ibase_execute
+
+(PHP 5, PHP 7)
+
+ibase_execute — Execute a previously prepared query
+
+==============================================================================
+*Description*
+
+    resource ibase_execute ( resource $query [, mixed $bind_arg [, mixed $...~
+    ]] )~
+
+Execute a query prepared by |ibase_prepare|.
+
+This is a lot more effective than using |ibase_query| if you are repeating a
+same kind of query several times with only some parameters changing.
+
+==============================================================================
+*Parameters*
+
+{query}
+
+    An InterBase query prepared by |ibase_prepare|.
+
+{bind_arg}
+
+{...}
+
+==============================================================================
+*Return* *Values*
+
+If the query raises an error, returns FALSE. If it is successful and there is
+a (possibly empty) result set (such as with a SELECT query), returns a result
+identifier. If the query was successful and there were no results, returns
+TRUE.
+
+    Note:
+
+    This function returns the number of rows affected by the query (if > 0 and
+    applicable to the statement type). A query that succeeded, but did not
+    affect any rows (e.g. an UPDATE of a non-existent record) will return TRUE
+    .
+
+==============================================================================
+*Examples*
+
+Example #1 ibase_execute() example
+
+<?php >
+
+    $dbh = ibase_connect($host, $username, $password);
+
+    $updates = array(
+        1 => 'Eric',
+        5 => 'Filip',
+        7 => 'Larry'
+    );
+
+    $query = ibase_prepare($dbh, "UPDATE FOO SET BAR = ? WHERE BAZ = ?");
+
+    foreach ($updates as $baz => $bar) {
+        ibase_execute($query, $bar, $baz);
+    }
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ibase_query| - Execute a query on an InterBase database
+
+
+vim:ft=help:

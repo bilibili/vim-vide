@@ -1,0 +1,35 @@
+m_completeauthorizations
+
+(PHP 4 >= 4.3.9, PHP 5 <= 5.0.5, PECL mcve >= 1.0.0)
+
+m_completeauthorizations — Number of complete authorizations in queue,
+returning an array of their identifiers
+
+==============================================================================
+*Description*
+
+    int m_completeauthorizations ( resource $conn , int &$array )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{ conn}
+
+    An MCVE_CONN resource returned by |m_initengine|.
+
+{array}
+
+    Its description
+
+==============================================================================
+*Return* *Values*
+
+What the function returns, first on success, then on failure. See also the &
+return.success; entity
+
+
+vim:ft=help:

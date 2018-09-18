@@ -1,0 +1,66 @@
+xml_set_start_namespace_decl_handler
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+xml_set_start_namespace_decl_handler — Set up start namespace declaration
+handler
+
+==============================================================================
+*Description*
+
+    bool xml_set_start_namespace_decl_handler ( resource $parser , callable~
+    $handler )~
+
+Set a handler to be called when a namespace is declared. Namespace
+declarations occur inside start tags. But the namespace declaration start
+handler is called before the start tag handler for each namespace declared in
+that start tag.
+
+==============================================================================
+*Parameters*
+
+{parser}
+
+    A reference to the XML parser.
+
+{handler}
+
+    {handler} is a string containing the name of a function that must exist
+    when |xml_parse| is called for {parser}.
+
+    The function named by {handler} must accept three parameters, and should
+    return an integer value. If the value returned from the handler is FALSE
+    (which it will be if no value is returned), the XML parser will stop
+    parsing and |xml_get_error_code| will return
+    XML_ERROR_EXTERNAL_ENTITY_HANDLING.
+
+    handler ( resource $parser , string $prefix , string $uri )~
+
+    {parser}
+        The first parameter, parser, is a reference to the XML parser calling
+        the handler.
+    {prefix}
+        The prefix is a string used to reference the namespace within an XML
+        object.
+    {uri}
+        Uniform Resource Identifier (URI) of namespace.
+
+    If a handler function is set to an empty string, or FALSE, the handler in
+    question is disabled.
+
+        Note: Instead of a function name, an array containing an object
+        reference and a method name can also be supplied.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |xml_set_end_namespace_decl_handler| - Set up end namespace declaration
+    handler
+
+
+vim:ft=help:

@@ -1,0 +1,56 @@
+imap_savebody
+
+(PHP 5 >= 5.1.3, PHP 7)
+
+imap_savebody — Save a specific body section to a file
+
+==============================================================================
+*Description*
+
+    bool imap_savebody ( resource $imap_stream , mixed $file , int~
+    $msg_number [, string $part_number = "" [, int $options = 0 ]]~
+)~
+
+Saves a part or the whole body of the specified message.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{file}
+
+    The path to the saved file as a string, or a valid file descriptor
+    returned by |fopen|.
+
+{msg_number}
+
+    The message number
+
+{part_number}
+
+    The part number. It is a string of integers delimited by period which
+    index into a body part list as per the IMAP4 specification
+
+{options}
+
+    A bitmask with one or more of the following:
+      + FT_UID - The {msg_number} is a UID
+      + FT_PEEK - Do not set the \Seen flag if not already set
+      + FT_INTERNAL - The return string is in internal format, will not
+        canonicalize to CRLF.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_fetchbody| - Fetch a particular section of the body of the message
+
+
+vim:ft=help:

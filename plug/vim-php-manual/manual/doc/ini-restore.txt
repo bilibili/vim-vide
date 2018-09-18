@@ -1,0 +1,57 @@
+ini_restore
+
+(PHP 4, PHP 5, PHP 7)
+
+ini_restore — Restores the value of a configuration option
+
+==============================================================================
+*Description*
+
+    void ini_restore ( string $varname )~
+
+Restores a given configuration option to its original value.
+
+==============================================================================
+*Parameters*
+
+{varname}
+
+    The configuration option name.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 ini_restore() example
+
+<?php >
+    $setting = 'y2k_compliance';
+
+    echo 'Current value for \'' . $setting . '\': ' . ini_get($setting), PHP_EOL;
+
+    ini_set($setting, ini_get($setting) ? 0 : 1);
+    echo 'New value for \'' . $setting . '\': ' . ini_get($setting), PHP_EOL;
+
+    ini_restore($setting);
+    echo 'Original value for \'' . $setting . '\': ' . ini_get($setting), PHP_EOL;
+<?>
+
+The above example will output:
+
+Current value for 'y2k_compliance': 1
+New value for 'y2k_compliance': 0
+Original value for 'y2k_compliance': 1
+
+==============================================================================
+*See* *Also*
+
+  * |ini_get| - Gets the value of a configuration option
+  * |ini_get_all| - Gets all configuration options
+  * |ini_set| - Sets the value of a configuration option
+
+
+vim:ft=help:

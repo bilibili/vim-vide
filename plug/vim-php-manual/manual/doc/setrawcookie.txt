@@ -1,0 +1,41 @@
+setrawcookie
+
+(PHP 5, PHP 7)
+
+setrawcookie — Send a cookie without urlencoding the cookie value
+
+==============================================================================
+*Description*
+
+    bool setrawcookie ( string $name [, string $value [, int $expire = 0 [,~
+    string $path [, string $domain [, bool $secure = false [, bool $httponly~
+    = false ]]]]]] )~
+
+setrawcookie() is exactly the same as |setcookie| except that the cookie value
+will not be automatically urlencoded when sent to the browser.
+
+==============================================================================
+*Parameters*
+
+For parameter information, see the |setcookie| documentation.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.5.0   A Max-Age attribute is now included in the Set-Cookie header sent to
+        the client.
+5.2.0   The {httponly} parameter was added.
+
+==============================================================================
+*See* *Also*
+
+  * |setcookie| - Send a cookie
+
+
+vim:ft=help:

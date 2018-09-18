@@ -1,0 +1,106 @@
+stripos
+
+(PHP 5, PHP 7)
+
+stripos — Find the position of the first occurrence of a case-insensitive
+substring in a string
+
+==============================================================================
+*Description*
+
+    mixed stripos ( string $haystack , string $needle [, int $offset = 0 ] )~
+
+Find the numeric position of the first occurrence of {needle} in the
+{haystack} string.
+
+Unlike the |strpos|, stripos() is case-insensitive.
+
+==============================================================================
+*Parameters*
+
+{haystack}
+
+    The string to search in.
+
+{needle}
+
+    Note that the {needle} may be a string of one or more characters.
+
+    If {needle} is not a string, it is converted to an integer and applied as
+    the ordinal value of a character.
+
+{offset}
+
+    If specified, search will start this number of characters counted from the
+    beginning of the string. If the offset is negative, the search will start
+    this number of characters counted from the end of the string.
+
+==============================================================================
+*Return* *Values*
+
+Returns the position of where the needle exists relative to the beginnning of
+the {haystack} string (independent of offset). Also note that string positions
+start at 0, and not 1.
+
+Returns FALSE if the needle was not found.
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*Changelog*
+
+Version                  Description
+7.1.0   Support for negative {offset}s has been added.
+
+==============================================================================
+*Examples*
+
+Example #1 stripos() examples
+
+<?php >
+    $findme    = 'a';
+    $mystring1 = 'xyz';
+    $mystring2 = 'ABC';
+
+    $pos1 = stripos($mystring1, $findme);
+    $pos2 = stripos($mystring2, $findme);
+
+    // Nope, 'a' is certainly not in 'xyz'
+    if ($pos1 === false) {
+        echo "The string '$findme' was not found in the string '$mystring1'";
+    }
+
+    // Note our use of ===.  Simply == would not work as expected
+    // because the position of 'a' is the 0th (first) character.
+    if ($pos2 !== false) {
+        echo "We found '$findme' in '$mystring2' at position $pos2";
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function is binary-safe.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_stripos| - Finds position of first occurrence of a string within
+    another, case insensitive
+  * |strpos| - Find the position of the first occurrence of a substring in a
+    string
+  * |strrpos| - Find the position of the last occurrence of a substring in a
+    string
+  * |strripos| - Find the position of the last occurrence of a
+    case-insensitive substring in a string
+  * |stristr| - Case-insensitive strstr
+  * |substr| - Return part of a string
+  * |str_ireplace| - Case-insensitive version of str_replace.
+
+
+vim:ft=help:

@@ -1,0 +1,59 @@
+XMLWriter::writeElement
+
+xmlwriter_write_element
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::writeElement -- xmlwriter_write_element — Write full element tag
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::writeElement ( string $name [, string $content ] )~
+
+Procedural style
+
+    bool xmlwriter_write_element ( resource $xmlwriter , string $name [,~
+    string $content ] )~
+
+Writes a full element tag.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{name}
+
+    The element name.
+
+{content}
+
+    The element contents.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version               Description
+5.2.3   The {content} parameter became optional.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::startElement| - Create start element tag
+  * |XMLWriter::endElement| - End current element
+  * |XMLWriter::writeElementNS| - Write full namespaced element tag
+
+
+vim:ft=help:

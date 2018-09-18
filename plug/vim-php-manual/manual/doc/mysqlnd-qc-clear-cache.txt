@@ -1,0 +1,35 @@
+mysqlnd_qc_clear_cache
+
+(PECL mysqlnd_qc >= 1.0.0)
+
+mysqlnd_qc_clear_cache — Flush all cache contents
+
+==============================================================================
+*Description*
+
+    bool mysqlnd_qc_clear_cache ( void )~
+
+Flush all cache contents.
+
+Flushing the cache is a storage handler responsibility. All built-in storage
+handler but the memcache storage handler support flushing the cache. The
+memcache storage handler cannot flush its cache contents.
+
+User-defined storage handler may or may not support the operation.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+A return value of FALSE indicates that flushing all cache contents has failed
+or the operation is not supported by the active storage handler. Applications
+must not expect that calling the function will always flush the cache.
+
+
+vim:ft=help:

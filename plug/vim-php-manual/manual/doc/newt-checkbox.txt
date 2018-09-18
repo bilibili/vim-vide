@@ -1,0 +1,34 @@
+newt_checkbox
+
+(PECL newt >= 0.1)
+
+newt_checkbox —
+
+==============================================================================
+*Description*
+
+    resource newt_checkbox ( int $left , int $top , string $text , string~
+    $def_value [, string $seq ] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+{top}
+
+{text}
+
+{def_value}
+
+{seq}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

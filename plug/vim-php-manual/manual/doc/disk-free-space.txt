@@ -1,0 +1,60 @@
+disk_free_space
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+disk_free_space — Returns available space on filesystem or disk partition
+
+==============================================================================
+*Description*
+
+    float disk_free_space ( string $directory )~
+
+Given a string containing a directory, this function will return the number of
+bytes available on the corresponding filesystem or disk partition.
+
+==============================================================================
+*Parameters*
+
+{directory}
+
+    A directory of the filesystem or disk partition.
+
+        Note:
+
+        Given a file name instead of a directory, the behaviour of the
+        function is unspecified and may differ between operating systems and
+        PHP versions.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of available bytes as a float or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 disk_free_space() example
+
+<?php >
+    // $df contains the number of bytes available on "/"
+    $df = disk_free_space("/");
+
+    // On Windows:
+    $df_c = disk_free_space("C:");
+    $df_d = disk_free_space("D:");
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function will not work on remote files as the file to be
+    examined must be accessible via the server's filesystem.
+
+==============================================================================
+*See* *Also*
+
+  * |disk_total_space| - Returns the total size of a filesystem or disk
+    partition
+
+
+vim:ft=help:

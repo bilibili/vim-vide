@@ -1,0 +1,48 @@
+readline
+
+(PHP 4, PHP 5, PHP 7)
+
+readline — Reads a line
+
+==============================================================================
+*Description*
+
+    string readline ([ string $prompt ] )~
+
+Reads a single line from the user. You must add this line to the history
+yourself using |readline_add_history|.
+
+==============================================================================
+*Parameters*
+
+{prompt}
+
+    You may specify a string with which to prompt the user.
+
+==============================================================================
+*Return* *Values*
+
+Returns a single string from the user. The line returned has the ending
+newline removed.
+
+==============================================================================
+*Examples*
+
+Example #1 readline() Example
+
+<?php >
+    //get 3 commands from user
+    for ($i=0; $i < 3; $i++) {
+            $line = readline("Command: ");
+            readline_add_history($line);
+    }
+
+    //dump history
+    print_r(readline_list_history());
+
+    //dump variables
+    print_r(readline_info());
+<?>
+
+
+vim:ft=help:

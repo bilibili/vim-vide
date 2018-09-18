@@ -1,0 +1,108 @@
+ifx_query
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_query — Send Informix query
+
+==============================================================================
+*Description*
+
+    resource ifx_query ( string $query , resource $link_identifier [, int~
+    $cursor_type [, mixed $blobidarray ]] )~
+
+Sends a {query} to the currently active database on the server that's
+associated with the specified link identifier.
+
+For "select-type" queries a cursor is declared and opened. Non-select queries
+are "execute immediate".
+
+For either query type the number of (estimated or real) affected rows is saved
+for retrieval by |ifx_affected_rows|.
+
+If the contents of the TEXT (or BYTE) column allow it, you can also use
+ifx_textasvarchar(1) and ifx_byteasvarchar(1). This allows you to treat TEXT
+(or BYTE) columns just as if they were ordinary (but long) VARCHAR columns for
+select queries, and you don't need to bother with blob id's.
+
+With ifx_textasvarchar(0) or ifx_byteasvarchar(0) (the default situation),
+select queries will return BLOB columns as blob id's (integer value). You can
+get the value of the blob as a string or file with the blob functions (see
+below).
+
+==============================================================================
+*Parameters*
+
+{query}
+
+    The query string.
+
+{link_identifier}
+
+    The link identifier.
+
+{cursor_def}
+
+    This optional parameter allows you to make this a scroll and/or hold
+    cursor. It's a bitmask and can be either IFX_SCROLL, IFX_HOLD, or both
+    or'ed together. I you omit this parameter the cursor is a normal
+    sequential cursor.
+
+{blobidarray}
+
+    If you have BLOB (BYTE or TEXT) columns in the query, you can add a
+    {blobidarray} parameter containing the corresponding "blob ids", and you
+    should replace those columns with a "?" in the query text.
+
+==============================================================================
+*Return* *Values*
+
+Returns valid Informix result identifier on success, or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 Show all rows of the "orders" table as a HTML table
+
+<?php >
+    ifx_textasvarchar(1);      // use "text mode" for blobs
+    $res_id = ifx_query("select * from orders", $conn_id);
+    if (! $res_id) {
+        printf("Can't select orders : %s\n<br />%s<br />\n", ifx_error(), 
+    ifx_errormsg());
+        die;
+    }
+    ifx_htmltbl_result($res_id, "border=\"1\"");
+    ifx_free_result($res_id);
+<?>
+
+Example #2 Insert some values into the "catalog" table
+
+<?php >
+
+    // create blob id's for a byte and text column
+    $textid = ifx_create_blob(0, 0, "Text column in memory");
+    $byteid = ifx_create_blob(1, 0, "Byte column in memory");
+
+    // store blob id's in a blobid array
+    $blobidarray[] = $textid;
+    $blobidarray[] = $byteid;
+
+    // launch query
+    $query = "insert into catalog (stock_num, manu_code, " .
+             "cat_descr,cat_picture) values(1,'HRO',?,?)";
+    $res_id = ifx_query($query, $conn_id, $blobidarray);
+    if (! $res_id) {
+        /* ... error ... */
+    }
+
+    // free result id
+    ifx_free_result($res_id);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ifx_connect| - Open Informix server connection
+
+
+vim:ft=help:

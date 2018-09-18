@@ -1,0 +1,53 @@
+array_values
+
+(PHP 4, PHP 5, PHP 7)
+
+array_values — Return all the values of an array
+
+==============================================================================
+*Description*
+
+    array array_values ( array $array )~
+
+array_values() returns all the values from the {array} and indexes the array
+numerically.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    The array.
+
+==============================================================================
+*Return* *Values*
+
+Returns an indexed array of values.
+
+==============================================================================
+*Examples*
+
+Example #1 array_values() example
+
+<?php >
+    $array = array("size" => "XL", "color" => "gold");
+    print_r(array_values($array));
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => XL
+    [1] => gold
+)
+
+==============================================================================
+*See* *Also*
+
+  * |array_keys| - Return all the keys or a subset of the keys of an array
+  * |array_combine| - Creates an array by using one array for keys and another
+    for its values
+
+
+vim:ft=help:

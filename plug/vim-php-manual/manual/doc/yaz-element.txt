@@ -1,0 +1,39 @@
+yaz_element
+
+(PHP 4 >= 4.0.1, PECL yaz >= 0.9.0)
+
+yaz_element — Specifies Element-Set Name for retrieval
+
+==============================================================================
+*Description*
+
+    bool yaz_element ( resource $id , string $elementset )~
+
+This function sets the element set name for retrieval.
+
+Call this function before |yaz_search| or |yaz_present| to specify the element
+set name for records to be retrieved.
+
+    Note:
+
+    If this function appears to have no effect, see the description of the
+    piggybacking option in |yaz_connect|.
+
+==============================================================================
+*Parameters*
+
+{id}
+
+    The connection resource returned by |yaz_connect|.
+
+{elementset}
+
+    Most servers support F (for full records) and B (for brief records).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

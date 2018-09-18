@@ -1,0 +1,87 @@
+imagexbm
+
+(PHP 5, PHP 7)
+
+imagexbm — Output an XBM image to browser or file
+
+==============================================================================
+*Description*
+
+    bool imagexbm ( resource $image , string $filename [, int $foreground ] )~
+
+Outputs or save an XBM version of the given {image}.
+
+    Note: imagexbm() doesn't apply any padding, so the image width has to be a
+    multiple of 8. This restriction does no longer apply as of PHP 5.6.24 and
+    7.0.9, respectively.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{filename}
+
+    The path to save the file to. If not set or NULL, the raw image stream
+    will be outputted directly.
+
+    The {filename} (without the .xbm extension) is also used for the C
+    identifiers of the XBM, whereby non alphanumeric characters of the current
+    locale are substituted by underscores. If {filename} is set to NULL, image
+    is used to build the C identifiers.
+
+{foreground}
+
+    You can set the foreground color with this parameter by setting an
+    identifier obtained from |imagecolorallocate|. The default foreground
+    color is black. All other colors are treated as background.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Saving an XBM file
+
+<?php >
+    // Create a blank image and add some text
+    $im = imagecreatetruecolor(120, 20);
+    $text_color = imagecolorallocate($im, 233, 14, 91);
+    imagestring($im, 1, 5, 5,  'A Simple Text String', $text_color);
+
+    // Save the image
+    imagexbm($im, 'simpletext.xbm');
+
+    // Free up memory
+    imagedestroy($im);
+<?>
+
+Example #2 Saving an XBM file with a different foreground color
+
+<?php >
+    // Create a blank image and add some text
+    $im = imagecreatetruecolor(120, 20);
+    $text_color = imagecolorallocate($im, 233, 14, 91);
+    imagestring($im, 1, 5, 5,  'A Simple Text String', $text_color);
+
+    // Set a replacement foreground color
+    $foreground_color = imagecolorallocate($im, 255, 0, 0);
+
+    // Save the image
+    imagexbm($im, NULL, $foreground_color);
+
+    // Free up memory
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*Notes*
+
+
+vim:ft=help:

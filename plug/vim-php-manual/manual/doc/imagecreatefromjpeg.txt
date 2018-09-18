@@ -1,0 +1,75 @@
+imagecreatefromjpeg
+
+(PHP 4, PHP 5, PHP 7)
+
+imagecreatefromjpeg — Create a new image from file or URL
+
+==============================================================================
+*Description*
+
+    resource imagecreatefromjpeg ( string $filename )~
+
+imagecreatefromjpeg() returns an image identifier representing the image
+obtained from the given filename.
+
+Tip
+
+A URL can be used as a filename with this function if the fopen wrappers have
+been enabled. See |fopen| for more details on how to specify the filename. See
+the Supported Protocols and Wrappers for links to information about what
+abilities the various wrappers have, notes on their usage, and information on
+any predefined variables they may provide.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the JPEG image.
+
+==============================================================================
+*Return* *Values*
+
+Returns an image resource identifier on success, FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 Example to handle an error during loading of a JPEG
+
+<?php >
+    function LoadJpeg($imgname)
+    {
+        /* Attempt to open */
+        $im = @imagecreatefromjpeg($imgname);
+
+        /* See if it failed */
+        if(!$im)
+        {
+            /* Create a black image */
+            $im  = imagecreatetruecolor(150, 30);
+            $bgc = imagecolorallocate($im, 255, 255, 255);
+            $tc  = imagecolorallocate($im, 0, 0, 0);
+
+            imagefilledrectangle($im, 0, 0, 150, 30, $bgc);
+
+            /* Output an error message */
+            imagestring($im, 1, 5, 5, 'Error loading ' . $imgname, $tc);
+        }
+
+        return $im;
+    }
+
+    header('Content-Type: image/jpeg');
+
+    $img = LoadJpeg('bogus.image');
+
+    imagejpeg($img);
+    imagedestroy($img);
+<?>
+
+The above example will output something similar to:
+
+Output of example : Example to handle an error during loading of a JPEG
+
+vim:ft=help:

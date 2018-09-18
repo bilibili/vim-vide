@@ -1,0 +1,79 @@
+imagerectangle
+
+(PHP 4, PHP 5, PHP 7)
+
+imagerectangle — Draw a rectangle
+
+==============================================================================
+*Description*
+
+    bool imagerectangle ( resource $image , int $x1 , int $y1 , int $x2 , int~
+    $y2 , int $color )~
+
+imagerectangle() creates a rectangle starting at the specified coordinates.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{x1}
+
+    Upper left x coordinate.
+
+{y1}
+
+    Upper left y coordinate 0, 0 is the top left corner of the image.
+
+{x2}
+
+    Bottom right x coordinate.
+
+{y2}
+
+    Bottom right y coordinate.
+
+{color}
+
+    A color identifier created with |imagecolorallocate|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Simple imagerectangle() example
+
+<?php >
+    // Create a 200 x 200 image
+    $canvas = imagecreatetruecolor(200, 200);
+
+    // Allocate colors
+    $pink = imagecolorallocate($canvas, 255, 105, 180);
+    $white = imagecolorallocate($canvas, 255, 255, 255);
+    $green = imagecolorallocate($canvas, 132, 135, 28);
+
+    // Draw three rectangles each with its own color
+    imagerectangle($canvas, 50, 50, 150, 150, $pink);
+    imagerectangle($canvas, 45, 60, 120, 100, $white);
+    imagerectangle($canvas, 100, 120, 75, 160, $green);
+
+    // Output and free from memory
+    header('Content-Type: image/jpeg');
+
+    imagejpeg($canvas);
+    imagedestroy($canvas);
+<?>
+
+The above example will output something similar to:
+
+Output of example : Simple imagerectangle() example
+
+
+vim:ft=help:

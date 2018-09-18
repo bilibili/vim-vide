@@ -1,0 +1,32 @@
+newt_listbox
+
+(PECL newt >= 0.1)
+
+newt_listbox —
+
+==============================================================================
+*Description*
+
+    resource newt_listbox ( int $left , int $top , int $height [, int $flags~
+    ] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+{top}
+
+{height}
+
+{flags}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

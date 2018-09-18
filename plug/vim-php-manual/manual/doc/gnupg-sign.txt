@@ -1,0 +1,55 @@
+gnupg_sign
+
+(PECL gnupg >= 0.1)
+
+gnupg_sign — Signs a given text
+
+==============================================================================
+*Description*
+
+    string gnupg_sign ( resource $identifier , string $plaintext )~
+
+Signs the given {plaintext} with the keys, which were set with 
+|gnupg_addsignkey| before and returns the signed text or the signature,
+depending on what was set with |gnupg_setsignmode|.
+
+==============================================================================
+*Parameters*
+
+{identifier}
+
+    The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+{plaintext}
+
+    The plain text being signed.
+
+==============================================================================
+*Return* *Values*
+
+On success, this function returns the signed text or the signature. On
+failure, this function returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural gnupg_sign() example
+
+<?php >
+    $res = gnupg_init();
+    gnupg_addsignkey($res,"8660281B6051D071D94B5B230549F9DC851566DC","test");
+    $signed = gnupg_sign($res, "just a test");
+    echo $signed;
+<?>
+
+Example #2 OO gnupg_sign() example
+
+<?php >
+    $gpg = new gnupg();
+    $gpg->addsignkey("8660281B6051D071D94B5B230549F9DC851566DC","test");
+    $signed = $gpg->sign("just a test");
+    echo $signed;
+<?>
+
+
+vim:ft=help:

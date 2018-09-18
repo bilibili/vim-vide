@@ -1,0 +1,49 @@
+dbplus_add
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_add — Add a tuple to a relation
+
+==============================================================================
+*Description*
+
+    int dbplus_add ( resource $relation , array $tuple )~
+
+Adds a tuple to a {relation}.
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+{tuple}
+
+    An array of attribute/value pairs to be inserted into the given
+    {relation}.
+
+    After successful execution this array will contain the complete data of
+    the newly created tuple, including all implicitly set domain fields like
+    sequences.
+
+==============================================================================
+*Return* *Values*
+
+The function will return DBPLUS_ERR_NOERR on success or a db++ error code on
+failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*See* *Also*
+
+  * |dbplus_errcode| - Get error string for given errorcode or last error
+
+
+vim:ft=help:

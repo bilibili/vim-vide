@@ -1,0 +1,72 @@
+gzcompress
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7)
+
+gzcompress — Compress a string
+
+==============================================================================
+*Description*
+
+    string gzcompress ( string $data [, int $level = -1 [, int $encoding =~
+    ZLIB_ENCODING_DEFLATE ]] )~
+
+This function compresses the given string using the ZLIB data format.
+
+For details on the ZLIB compression algorithm see the document ">> ZLIB
+Compressed Data Format Specification version 3.3" (RFC 1950).
+
+    Note:
+
+    This is not the same as gzip compression, which includes some header data.
+    See |gzencode| for gzip compression.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    The data to compress.
+
+{level}
+
+    The level of compression. Can be given as 0 for no compression up to 9 for
+    maximum compression.
+
+    If -1 is used, the default compression of the zlib library is used which
+    is 6.
+
+{encoding}
+
+    One of ZLIB_ENCODING_* constants.
+
+==============================================================================
+*Return* *Values*
+
+The compressed string or FALSE if an error occurred.
+
+==============================================================================
+*Examples*
+
+Example #1 gzcompress() example
+
+<?php >
+    $compressed = gzcompress('Compress me', 9);
+    echo $compressed;
+<?>
+
+==============================================================================
+*Changelog*
+
+Version         Description
+5.4.0   Added {encoding} parameter.
+
+==============================================================================
+*See* *Also*
+
+  * |gzdeflate| - Deflate a string
+  * |gzinflate| - Inflate a deflated string
+  * |gzuncompress| - Uncompress a compressed string
+  * |gzencode| - Create a gzip compressed string
+
+
+vim:ft=help:

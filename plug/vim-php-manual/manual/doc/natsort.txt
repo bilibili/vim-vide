@@ -1,0 +1,153 @@
+natsort
+
+(PHP 4, PHP 5, PHP 7)
+
+natsort — Sort an array using a "natural order" algorithm
+
+==============================================================================
+*Description*
+
+    bool natsort ( array &$array )~
+
+This function implements a sort algorithm that orders alphanumeric strings in
+the way a human being would while maintaining key/value associations. This is
+described as a "natural ordering". An example of the difference between this
+algorithm and the regular computer string sorting algorithms (used in |sort|)
+can be seen in the example below.
+
+    Note:
+
+    If two members compare as equal, their relative order in the sorted array
+    is undefined.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    The input array.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.2.10  Zero padded numeric strings (e.g., '00005') now essentially ignore the
+        0 padding.
+
+==============================================================================
+*Examples*
+
+Example #1 natsort() examples demonstrating basic usage
+
+<?php >
+    $array1 = $array2 = array("img12.png", "img10.png", "img2.png", "img1.png");
+
+    asort($array1);
+    echo "Standard sorting\n";
+    print_r($array1);
+
+    natsort($array2);
+    echo "\nNatural order sorting\n";
+    print_r($array2);
+<?>
+
+The above example will output:
+
+Standard sorting
+Array
+(
+    [3] => img1.png
+    [1] => img10.png
+    [0] => img12.png
+    [2] => img2.png
+)
+
+Natural order sorting
+Array
+(
+    [3] => img1.png
+    [2] => img2.png
+    [1] => img10.png
+    [0] => img12.png
+)
+
+For more information see: Martin Pool's >> Natural Order String Comparison
+page.
+
+Example #2 natsort() examples demonstrating potential gotchas
+
+<?php >
+    echo "Negative numbers\n";
+    $negative = array('-5','3','-2','0','-1000','9','1');
+    print_r($negative);
+    natsort($negative);
+    print_r($negative);
+
+    echo "Zero padding\n";
+    $zeros = array('09', '8', '10', '009', '011', '0'); 
+    print_r($zeros);
+    natsort($zeros);
+    print_r($zeros);
+<?>
+
+The above example will output:
+
+Negative numbers
+Array
+(
+    [0] => -5
+    [1] => 3
+    [2] => -2
+    [3] => 0
+    [4] => -1000
+    [5] => 9
+    [6] => 1
+)
+Array
+(
+    [2] => -2
+    [0] => -5
+    [4] => -1000
+    [3] => 0
+    [6] => 1
+    [1] => 3
+    [5] => 9
+)
+
+Zero padding
+Array
+(
+    [0] => 09
+    [1] => 8
+    [2] => 10
+    [3] => 009
+    [4] => 011
+    [5] => 0
+)
+Array
+(
+    [5] => 0
+    [1] => 8
+    [3] => 009
+    [0] => 09
+    [2] => 10
+    [4] => 011
+)
+
+==============================================================================
+*See* *Also*
+
+  * |natcasesort| - Sort an array using a case insensitive "natural order"
+    algorithm
+  * The comparison of array sorting functions
+  * |strnatcmp| - String comparisons using a "natural order" algorithm
+  * |strnatcasecmp| - Case insensitive string comparisons using a "natural
+    order" algorithm
+
+
+vim:ft=help:

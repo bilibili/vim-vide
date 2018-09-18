@@ -1,0 +1,13 @@
+PDF_add_outline
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_add_outline — Add bookmark for current page [deprecated]
+
+==============================================================================
+*Description*
+
+This function is deprecated, use |PDF_create_bookmark| instead.
+
+
+vim:ft=help:

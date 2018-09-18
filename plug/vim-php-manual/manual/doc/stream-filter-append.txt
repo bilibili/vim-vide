@@ -1,0 +1,120 @@
+stream_filter_append
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+stream_filter_append — Attach a filter to a stream
+
+==============================================================================
+*Description*
+
+    resource stream_filter_append ( resource $stream , string $filtername [,~
+    int $read_write [, mixed $params ]] )~
+
+Adds {filtername} to the list of filters attached to {stream}.
+
+==============================================================================
+*Parameters*
+
+{stream}
+
+    The target stream.
+
+{filtername}
+
+    The filter name.
+
+{read_write}
+
+    By default, stream_filter_append() will attach the filter to the read
+    filter chain if the file was opened for reading (i.e. File Mode: r, and/or
+    +). The filter will also be attached to the write filter chain if the file
+    was opened for writing (i.e. File Mode: w, a, and/or +).
+    STREAM_FILTER_READ, STREAM_FILTER_WRITE, and/or STREAM_FILTER_ALL can also
+    be passed to the {read_write} parameter to override this behavior.
+
+{params}
+
+    This filter will be added with the specified {params} to the end of the
+    list and will therefore be called last during stream operations. To add a
+    filter to the beginning of the list, use |stream_filter_prepend|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a resource on success or FALSE on failure. The resource can be used to
+refer to this filter instance during a call to |stream_filter_remove|.
+
+FALSE is returned if {stream} is not a resource or if {filtername} cannot be
+located.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.1.0   Prior to PHP 5.1.0, this function returns TRUE on success or FALSE on
+        failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Controlling where filters are applied
+
+<?php >
+    /* Open a test file for reading and writing */
+    $fp = fopen('test.txt', 'w+');
+
+    /* Apply the ROT13 filter to the
+     * write filter chain, but not the
+     * read filter chain */
+    stream_filter_append($fp, "string.rot13", STREAM_FILTER_WRITE);
+
+    /* Write a simple string to the file
+     * it will be ROT13 transformed on the
+     * way out */
+    fwrite($fp, "This is a test\n");
+
+    /* Back up to the beginning of the file */
+    rewind($fp);
+
+    /* Read the contents of the file back out.
+     * Had the filter been applied to the
+     * read filter chain as well, we would see
+     * the text ROT13ed back to its original state */
+    fpassthru($fp);
+
+    fclose($fp);
+
+    /* Expected Output
+       ---------------
+
+    Guvf vf n grfg
+
+     */
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: When using custom (user) filters
+    |stream_filter_register| must be called first in order to register the
+    desired user filter to {filtername}.
+
+    Note: Stream data is read from resources (both local and remote) in
+    chunks, with any unconsumed data kept in internal buffers. When a new
+    filter is appended to a stream, data in the internal buffers is processed
+    through the new filter at that time. This differs from the behavior of 
+    |stream_filter_prepend|.
+
+    Note: When a filter is added for read and write, two instances of the
+    filter are created. stream_filter_append() must be called twice with
+    STREAM_FILTER_READ and STREAM_FILTER_WRITE to get both filter resources.
+
+==============================================================================
+*See* *Also*
+
+  * |stream_filter_register| - Register a user defined stream filter
+  * |stream_filter_prepend| - Attach a filter to a stream
+  * |stream_get_filters| - Retrieve list of registered filters
+
+
+vim:ft=help:

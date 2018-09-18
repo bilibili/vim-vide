@@ -1,0 +1,79 @@
+xdiff_string_diff
+
+(PECL xdiff >= 0.2.0)
+
+xdiff_string_diff — Make unified diff of two strings
+
+==============================================================================
+*Description*
+
+    string xdiff_string_diff ( string $old_data , string $new_data [, int~
+    $context = 3 [, bool $minimal = false ]] )~
+
+Makes an unified diff containing differences between {old_data} string and
+{new_data} string and returns it. The resulting diff is human-readable. An
+optional {context} parameter specifies how many lines of context should be
+added around each change. Setting {minimal} parameter to true will result in
+outputting the shortest patch file possible (can take a long time).
+
+==============================================================================
+*Parameters*
+
+{old_data}
+
+    First string with data. It acts as "old" data.
+
+{new_data}
+
+    Second string with data. It acts as "new" data.
+
+{context}
+
+    Indicates how many lines of context you want to include in the diff
+    result.
+
+{minimal}
+
+    Set this parameter to TRUE if you want to minimalize the size of the
+    result (can take a long time).
+
+==============================================================================
+*Return* *Values*
+
+Returns string with resulting diff or FALSE if an internal error happened.
+
+==============================================================================
+*Examples*
+
+Example #1 xdiff_string_diff() example
+
+The following code makes unified diff of two articles.
+
+<?php >
+    $old_article = file_get_contents('./old_article.txt');
+    $new_article = $_REQUEST['article']; /
+    * Let's say that someone pasted a new article to html form */
+
+    $diff = xdiff_string_diff($old_article, $new_article, 1);
+    if (is_string($diff)) {
+        echo "Differences between two articles:\n";
+        echo $diff;
+    }
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function doesn't work well with binary strings. To make diff of
+    binary strings use |xdiff_string_bdiff|/|xdiff_string_rabdiff|.
+
+==============================================================================
+*See* *Also*
+
+  * |xdiff_string_patch| - Patch a string with an unified diff
+
+
+vim:ft=help:

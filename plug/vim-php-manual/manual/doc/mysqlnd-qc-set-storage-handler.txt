@@ -1,0 +1,69 @@
+mysqlnd_qc_set_storage_handler
+
+(PECL mysqlnd_qc >= 1.0.0)
+
+mysqlnd_qc_set_storage_handler — Change current storage handler
+
+==============================================================================
+*Description*
+
+    bool mysqlnd_qc_set_storage_handler ( string $handler )~
+
+Sets the storage handler used by the query cache. A list of available storage
+handler can be obtained from |mysqlnd_qc_get_available_handlers|. Which
+storage are available depends on the compile time configuration of the query
+cache plugin. The default storage handler is always available. All other
+storage handler must be enabled explicitly when building the extension.
+
+==============================================================================
+*Parameters*
+
+{handler}
+
+    Handler can be of type string representing the name of a built-in storage
+    handler or an object of type mysqlnd_qc_handler_default. The names of the
+    built-in storage handler are default, APC, MEMCACHE, sqlite.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+If changing the storage handler fails a catchable fatal error will be thrown.
+The query cache cannot operate if the previous storage handler has been
+shutdown but no new storage handler has been installed.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_qc_set_storage_handler() example
+
+The example shows the output from the built-in default storage handler. Other
+storage handler may report different data.
+
+<?php >
+    var_dump(mysqlnd_qc_set_storage_handler("memcache"));
+
+    if (true === mysqlnd_qc_set_storage_handler("default"))
+      printf("Default storage handler activated");
+
+    /* Catchable fatal error */
+    var_dump(mysqlnd_qc_set_storage_handler("unknown"));
+<?>
+
+The above examples will output:
+
+bool(true)
+Default storage handler activated
+Catchable fatal error: mysqlnd_qc_set_storage_handler(): Unknown handler 'unknown' in (file) on line (line)
+
+
+==============================================================================
+*See* *Also*
+
+  * Installation
+  * |mysqlnd_qc_get_available_handlers| - Returns a list of available storage
+    handler
+
+
+vim:ft=help:

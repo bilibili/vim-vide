@@ -1,0 +1,55 @@
+gmp_nextprime
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+gmp_nextprime — Find next prime number
+
+==============================================================================
+*Description*
+
+    GMP gmp_nextprime ( int $a )~
+
+Find next prime number
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+Return the next prime number greater than {a}, as a GMP number.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_nextprime() example
+
+<?php >
+    $prime1 = gmp_nextprime(10); // next prime number greater than 10
+    $prime2 = gmp_nextprime(-1000); // next prime number greater than -1000
+
+    echo gmp_strval($prime1) . "\n";
+    echo gmp_strval($prime2) . "\n";
+<?>
+
+The above example will output:
+
+11
+-997
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function uses a probabilistic algorithm to identify primes and
+    chances to get a composite number are extremely small.
+
+
+vim:ft=help:

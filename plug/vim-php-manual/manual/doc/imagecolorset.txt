@@ -1,0 +1,87 @@
+imagecolorset
+
+(PHP 4, PHP 5, PHP 7)
+
+imagecolorset — Set the color for the specified palette index
+
+==============================================================================
+*Description*
+
+    void imagecolorset ( resource $image , int $index , int $red , int $green~
+    , int $blue [, int $alpha = 0 ] )~
+
+This sets the specified index in the palette to the specified color. This is
+useful for creating flood-fill-like effects in palleted images without the
+overhead of performing the actual flood-fill.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{index}
+
+    An index in the palette.
+
+{red}
+
+    Value of red component.
+
+{green}
+
+    Value of green component.
+
+{blue}
+
+    Value of blue component.
+
+{alpha}
+
+    Value of alpha component.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Changelog*
+
+Version           Description
+5.4.0   The {alpha} parameter was added.
+
+==============================================================================
+*Examples*
+
+Example #1 imagecolorset() example
+
+<?php >
+    // Create a 300x100 image
+    $im = imagecreate(300, 100);
+
+    // Set the background to be red
+    imagecolorallocate($im, 255, 0, 0);
+
+    // Get the color index for the background
+    $bg = imagecolorat($im, 0, 0);
+
+    // Set the backgrund to be blue
+    imagecolorset($im, $bg, 0, 0, 255);
+
+    // Output the image to the browser
+    header('Content-Type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imagecolorat| - Get the index of the color of a pixel
+
+
+vim:ft=help:

@@ -1,0 +1,119 @@
+imagepsbbox
+
+(PHP 4, PHP 5)
+
+imagepsbbox — Give the bounding box of a text rectangle using PostScript Type1
+fonts
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    array imagepsbbox ( string $text , resource $font , int $size )~
+    array imagepsbbox ( string $text , resource $font , int $size , int~
+    $space , int $tightness , float $angle )~
+
+Gives the bounding box of a text rectangle using PostScript Type1 fonts.
+
+The bounding box is calculated using information available from character
+metrics, and unfortunately tends to differ slightly from the results achieved
+by actually rasterizing the text. If the angle is 0 degrees, you can expect
+the text to need 1 pixel more to every direction.
+
+==============================================================================
+*Parameters*
+
+{text}
+
+    The text to be written.
+
+{font_index}
+
+    A font resource, returned by |imagepsloadfont|.
+
+{size}
+
+    {size} is expressed in pixels.
+
+{space}
+
+    Allows you to change the default value of a space in a font. This amount
+    is added to the normal value and can also be negative. Expressed in
+    character space units, where 1 unit is 1/1000th of an em-square.
+
+{tightness}
+
+    {tightness} allows you to control the amount of white space between
+    characters. This amount is added to the normal character width and can
+    also be negative. Expressed in character space units, where 1 unit is 1/
+    1000th of an em-square.
+
+{angle}
+
+    {angle} is in degrees.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array containing the following elements:
+
+0 left x-coordinate
+1 upper y-coordinate
+2 right x-coordinate
+3 lower y-coordinate
+
+==============================================================================
+*Examples*
+
+Example #1 imagepsbbox() usage
+
+<?php >
+    // Create image handle
+    $im = imagecreatetruecolor(200, 200);
+
+    // Allocate colors
+    $black = imagecolorallocate($im, 0, 0, 0);
+    $white = imagecolorallocate($im, 255, 255, 255);
+
+    // Load the PostScript Font
+    $font = imagepsloadfont('font.pfm');
+
+    // Make a bounding box for the font
+    $bbox = imagepsbbox('Sample text is simple', $font, 12);
+
+    // Define our X and Y cordinates
+    $x = ($bbox[2] / 2) - 10;
+    $y = ($bbox[3] / 2) - 10;
+
+    // Write the font to the image
+    imagepstext($im, 'Sample text is simple', $font, 12, $black, $white, $x, $y);
+
+    // Output and free memory
+    header('Content-type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                             Description
+7.0.0   T1Lib support was removed from PHP, thus this function was removed.
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available if PHP is compiled using
+    --with-t1lib[=DIR] .
+
+==============================================================================
+*See* *Also*
+
+  * |imagepstext| - Draws a text over an image using PostScript Type1 fonts
+
+
+vim:ft=help:

@@ -1,0 +1,78 @@
+openssl_spki_verify
+
+(PHP 5 >= 5.6.0, PHP 7)
+
+openssl_spki_verify — Verifies a signed public key and challenge
+
+==============================================================================
+*Description*
+
+    string openssl_spki_verify ( string &$spkac )~
+
+Validates the supplied signed public key and challenge
+
+==============================================================================
+*Parameters*
+
+{spkac}
+
+    Expects a valid signed public key and challenge
+
+==============================================================================
+*Return* *Values*
+
+Returns a boolean on success or failure.
+
+==============================================================================
+*Errors/Exceptions*
+
+Emits an E_WARNING level error if an invalid argument is passed via the
+{spkac} parameter.
+
+==============================================================================
+*Examples*
+
+Example #1 openssl_spki_verify() example
+
+Validates an existing signed public key and challenge
+
+<?php >
+    $pkey = openssl_pkey_new('secret password');
+    $spkac = openssl_spki_new($pkey, 'challenge string');
+
+    if (openssl_spki_verify(preg_replace('/SPKAC=/', '', $spkac))) {
+        echo $spkac;
+    } else {
+        echo "SPKAC validation failed";
+    }
+<?>
+
+Example #2 openssl_spki_verify() example from <keygen>
+
+Validates an existing signed public key and challenge issued from the <keygen>
+element
+
+<?php >
+    if (openssl_spki_verify(preg_replace('/SPKAC=/', '', $_POST['spkac']))) {
+        echo $spkac;
+    } else {
+        echo "SPKAC validation failed";
+    }
+<?>
+<keygen name="spkac" challenge="challenge string" keytype="RSA">
+
+==============================================================================
+*See* *Also*
+
+  * |openssl_spki_new| - Generate a new signed public key and challenge
+  * |openssl_spki_export_challenge| - Exports the challenge assoicated with a
+    signed public key and challenge
+  * |openssl_spki_export| - Exports a valid PEM formatted public key signed
+    public key and challenge
+  * openssl_md_method()
+  * |openssl_csr_new| - Generates a CSR
+  * |openssl_csr_sign| - Sign a CSR with another certificate (or itself) and
+    generate a certificate
+
+
+vim:ft=help:

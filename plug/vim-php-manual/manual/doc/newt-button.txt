@@ -1,0 +1,56 @@
+newt_button
+
+(PECL newt >= 0.1)
+
+newt_button — Create a new button
+
+==============================================================================
+*Description*
+
+    resource newt_button ( int $left , int $top , string $text )~
+
+Creates a new button.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+    X-coordinate of the button.
+
+{top}
+
+    Y-coordinate of the button.
+
+{text}
+
+    The text which should be displayed in the button.
+
+==============================================================================
+*Return* *Values*
+
+Returns a resource link to the created button component, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 A newt_button() example
+
+<?php >
+
+    $form = newt_form();
+
+    $ok_button = newt_button(5, 12, "Run Tool");
+        
+    newt_form_add_component($form, $ok_button);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |newt_button_bar| - This function returns a grid containing the buttons
+    created.
+
+
+vim:ft=help:

@@ -1,0 +1,67 @@
+imageaffinematrixget
+
+(PHP 5 >= 5.5.0, PHP 7)
+
+imageaffinematrixget — Get an affine transformation matrix
+
+==============================================================================
+*Description*
+
+    array imageaffinematrixget ( int $type , mixed $options )~
+
+Returns an affine transformation matrix.
+
+==============================================================================
+*Parameters*
+
+{type}
+
+    One of the IMG_AFFINE_* constants.
+
+{options}
+
+    If {type} is IMG_AFFINE_TRANSLATE or IMG_AFFINE_SCALE, {options} has to be
+    an array with keys x and y, both having float values.
+
+    If {type} is IMG_AFFINE_ROTATE, IMG_AFFINE_SHEAR_HORIZONTAL or
+    IMG_AFFINE_SHEAR_VERTICAL, {options} has to be a float specifying the
+    angle.
+
+==============================================================================
+*Return* *Values*
+
+An affine transformation matrix (an array with keys 0 to 5 and float values)
+or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imageaffinematrixget() example
+
+<?php >
+    $matrix = imageaffinematrixget(IMG_AFFINE_TRANSLATE, array('x' = 2, 'y' => 3
+    ));
+    print_r($matrix);
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => 1
+    [1] => 0
+    [2] => 0
+    [3] => 1
+    [4] => 2
+    [5] => 3
+)
+
+==============================================================================
+*See* *Also*
+
+  * |imageaffine| - Return an image containing the affine transformed src
+    image, using an optional clipping area
+  * |imageaffinematrixconcat| - Concatenate two affine transformation matrices
+
+
+vim:ft=help:

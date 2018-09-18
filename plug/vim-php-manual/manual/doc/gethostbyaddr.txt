@@ -1,0 +1,47 @@
+gethostbyaddr
+
+(PHP 4, PHP 5, PHP 7)
+
+gethostbyaddr — Get the Internet host name corresponding to a given IP address
+
+==============================================================================
+*Description*
+
+    string gethostbyaddr ( string $ip_address )~
+
+Returns the host name of the Internet host specified by {ip_address}.
+
+==============================================================================
+*Parameters*
+
+{ip_address}
+
+    The host IP address.
+
+==============================================================================
+*Return* *Values*
+
+Returns the host name on success, the unmodified {ip_address} on failure, or
+FALSE on malformed input.
+
+==============================================================================
+*Examples*
+
+Example #1 A simple gethostbyaddr() example
+
+<?php >
+    $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+
+    echo $hostname;
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |gethostbyname| - Get the IPv4 address corresponding to a given Internet
+    host name
+  * |gethostbynamel| - Get a list of IPv4 addresses corresponding to a given
+    Internet host name
+
+
+vim:ft=help:

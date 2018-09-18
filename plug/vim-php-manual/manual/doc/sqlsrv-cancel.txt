@@ -1,0 +1,88 @@
+sqlsrv_cancel
+
+(No version information available, might only be in Git)
+
+sqlsrv_cancel — Cancels a statement
+
+==============================================================================
+*Description*
+
+    bool sqlsrv_cancel ( resource $stmt )~
+
+Cancels a statement. Any results associated with the statement that have not
+been consumed are deleted. After sqlsrv_cancel() has been called, the
+specified statement can be re-executed if it was created with |sqlsrv_prepare|
+. Calling sqlsrv_cancel() is not necessary if all the results associated with
+the statement have been consumed.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    The statement resource to be cancelled.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 sqlsrv_cancel() example
+
+<?php >
+    $serverName = "serverName\sqlexpress";
+    $connectionInfo = array( "Database"=>"dbName", "UID"=>"username", "PWD"=>
+    "password");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+    if( $conn === false ) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    $sql = "SELECT Sales FROM Table_1";
+
+    $stmt = sqlsrv_prepare( $conn, $sql);
+
+    if( $stmt === false ) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    if( sqlsrv_execute( $stmt ) === false) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    $salesTotal = 0;
+    $count = 0;
+
+    while( ($row = sqlsrv_fetch_array( $stmt)) && $salesTotal <=100000)
+    {
+         $qty = $row[0];
+         $price = $row[1];
+         $salesTotal += ( $price * $qty);
+         $count++;
+    }
+
+    echo "$count sales accounted for the first $$salesTotal in revenue.<br />";
+
+    // Cancel the pending results. The statement can be reused.
+    sqlsrv_cancel( $stmt);
+<?>
+
+==============================================================================
+*Notes*
+
+The main difference between sqlsrv_cancel() and |sqlsrv_free_stmt| is that a
+statement resource cancelled with sqlsrv_cancel() can be re-executed if it was
+created with |sqlsrv_prepare|. A statement resource cancelled with 
+sqlsrv_free_statement() cannot be re-executed.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlsrv_free_stmt| - Frees all resources for the specified statement
+  * |sqlsrv_prepare| - Prepares a query for execution
+
+
+vim:ft=help:

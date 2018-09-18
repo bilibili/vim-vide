@@ -1,0 +1,86 @@
+define
+
+(PHP 4, PHP 5, PHP 7)
+
+define — Defines a named constant
+
+==============================================================================
+*Description*
+
+    bool define ( string $name , mixed $value [, bool $case_insensitive =~
+    false ] )~
+
+Defines a named constant at runtime.
+
+==============================================================================
+*Parameters*
+
+{name}
+
+    The name of the constant.
+
+{value}
+
+    The value of the constant. In PHP 5, {value} must be a scalar value (
+    integer, float, string, boolean, or NULL). In PHP 7, array values are also
+    accepted.
+
+    Warning
+
+    While it is possible to define resource constants, it is not recommended
+    and may cause unpredictable behavior.
+
+{case_insensitive}
+
+    If set to TRUE, the constant will be defined case-insensitive. The default
+    behavior is case-sensitive; i.e. CONSTANT and Constant represent different
+    values.
+
+        Note:
+
+        Case-insensitive constants are stored as lower-case.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version        Description
+7.0.0   array values are allowed.
+
+==============================================================================
+*Examples*
+
+Example #1 Defining Constants
+
+<?php >
+    define("CONSTANT", "Hello world.");
+    echo CONSTANT; // outputs "Hello world."
+    echo Constant; // outputs "Constant" and issues a notice.
+
+    define("GREETING", "Hello you.", true);
+    echo GREETING; // outputs "Hello you."
+    echo Greeting; // outputs "Hello you."
+
+    // Works as of PHP 7
+    define('ANIMALS', array(
+        'dog',
+        'cat',
+        'bird'
+    ));
+    echo ANIMALS[1]; // outputs "cat"
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |defined| - Checks whether a given named constant exists
+  * |constant| - Returns the value of a constant
+  * The section on Constants
+
+
+vim:ft=help:

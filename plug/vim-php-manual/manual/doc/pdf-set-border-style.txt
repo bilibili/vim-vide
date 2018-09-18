@@ -1,0 +1,20 @@
+PDF_set_border_style
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_set_border_style — Set border style of annotations [deprecated]
+
+==============================================================================
+*Description*
+
+    bool PDF_set_border_style ( resource $pdfdoc , string $style , float~
+    $width )~
+
+Sets the border style for all kinds of annotations. Returns TRUE on success or
+FALSE on failure.
+
+This function is deprecated since PDFlib version 6, use the options
+{borderstyle} and {linewidth} in |PDF_create_annotation| instead.
+
+
+vim:ft=help:

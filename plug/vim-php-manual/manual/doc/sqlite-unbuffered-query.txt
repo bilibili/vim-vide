@@ -1,0 +1,92 @@
+sqlite_unbuffered_query
+
+SQLiteDatabase::unbufferedQuery
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.0)
+
+sqlite_unbuffered_query -- SQLiteDatabase::unbufferedQuery — Execute a query
+that does not prefetch and buffer all data
+
+==============================================================================
+*Description*
+
+    resource sqlite_unbuffered_query ( resource $dbhandle , string $query [,~
+    int $result_type = SQLITE_BOTH [, string &$error_msg ]] )~
+    resource sqlite_unbuffered_query ( string $query , resource $dbhandle [,~
+    int $result_type = SQLITE_BOTH [, string &$error_msg ]] )~
+
+Object oriented style (method):
+
+    public SQLiteUnbuffered SQLiteDatabase::unbufferedQuery ( string $query~
+    [, int $result_type = SQLITE_BOTH [, string &$error_msg ]] )~
+
+sqlite_unbuffered_query() is identical to |sqlite_query| except that the
+result that is returned is a sequential forward-only result set that can only
+be used to read each row, one after the other.
+
+This function is ideal for generating things such as HTML tables where you
+only need to process one row at a time and don't need to randomly access the
+row data.
+
+    Note:
+
+    Functions such as |sqlite_seek|, |sqlite_rewind|, |sqlite_next|, 
+    |sqlite_current|, and |sqlite_num_rows| do not work on result handles
+    returned from sqlite_unbuffered_query().
+
+==============================================================================
+*Parameters*
+
+{dbhandle}
+
+    The SQLite Database resource; returned from |sqlite_open| when used
+    procedurally. This parameter is not required when using the
+    object-oriented method.
+
+{query}
+
+    The query to be executed.
+
+    Data inside the query should be |properly escaped|.
+
+{result_type}
+
+    The optional {result_type} parameter accepts a constant and determines how
+    the returned array will be indexed. Using SQLITE_ASSOC will return only
+    associative indices (named fields) while SQLITE_NUM will return only
+    numerical indices (ordinal field numbers). SQLITE_BOTH will return both
+    associative and numerical indices. SQLITE_BOTH is the default for this
+    function.
+
+{error_msg}
+
+    The specified variable will be filled if an error occurs. This is
+    specially important because SQL syntax errors can't be fetched using the 
+    |sqlite_last_error| function.
+
+    Note: Two alternative syntaxes are supported for compatibility with other
+    database extensions (such as MySQL). The preferred form is the first,
+    where the {dbhandle} parameter is the first parameter to the function.
+
+==============================================================================
+*Return* *Values*
+
+Returns a result handle or FALSE on failure.
+
+sqlite_unbuffered_query() returns a sequential forward-only result set that
+can only be used to read each row, one after the other.
+
+==============================================================================
+*Changelog*
+
+Version           Description
+5.1.0   Added the {error_msg} parameter
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_query| - Executes a query against a given database and returns a
+    result handle
+
+
+vim:ft=help:

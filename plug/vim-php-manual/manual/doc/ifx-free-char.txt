@@ -1,0 +1,32 @@
+ifx_free_char
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_free_char — Deletes the char object
+
+==============================================================================
+*Description*
+
+    bool ifx_free_char ( int $bid )~
+
+Deletes the charobject for the given char object-id.
+
+==============================================================================
+*Parameters*
+
+{bid}
+
+    The char object id.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ifx_create_char| - Creates an char object
+
+
+vim:ft=help:

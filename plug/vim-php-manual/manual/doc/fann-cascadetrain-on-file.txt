@@ -1,0 +1,56 @@
+fann_cascadetrain_on_file
+
+(PECL fann >= 1.0.0)
+
+fann_cascadetrain_on_file — Trains on an entire dataset read from file, for a
+period of time using the Cascade2 training algorithm.
+
+==============================================================================
+*Description*
+
+    bool fann_cascadetrain_on_file ( resource $ann , string $filename , int~
+    $max_neurons , int $neurons_between_reports , float $desired_error )~
+
+Does the same as |fann_cascadetrain_on_data|, but reads the training data
+directly from a file.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{filename}
+
+    The maximum number of neurons to be added to neural network
+
+{max_neurons}
+
+    The number of neurons between printing a status report to stdout. A value
+    of zero means no reports should be printed.
+
+{neurons_between_reports}
+
+    The number of neurons between printing a status report. A value of zero
+    means no reports should be printed.
+
+{desired_error}
+
+    The desired |fann_get_MSE| or |fann_get_bit_fail|, depending on which stop
+    function is chosen by |fann_set_train_stop_function|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_train_on_data| - Trains on an entire dataset for a period of time
+  * |fann_cascadetrain_on_data| - Trains on an entire dataset, for a period of
+    time using the Cascade2 training algorithm
+
+
+vim:ft=help:

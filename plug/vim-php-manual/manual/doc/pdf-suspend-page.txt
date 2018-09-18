@@ -1,0 +1,16 @@
+PDF_suspend_page
+
+(PECL pdflib >= 2.0.0)
+
+PDF_suspend_page — Suspend page
+
+==============================================================================
+*Description*
+
+    bool PDF_suspend_page ( resource $pdfdoc , string $optlist )~
+
+Suspends the current page so that it can later be resumed with 
+|PDF_resume_page|.
+
+
+vim:ft=help:

@@ -1,0 +1,96 @@
+mssql_field_seek
+
+(PHP 4, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_field_seek — Seeks to the specified field offset
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    bool mssql_field_seek ( resource $result , int $field_offset )~
+
+Seeks to the specified field offset. If the next call to |mssql_fetch_field|
+won't include a field offset, this field would be returned.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mssql_query|.
+
+{field_offset}
+
+    The field offset, starts at 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Using mssql_field_seek() on the example for |mssql_fetch_field|
+
+<?php >
+    // Connect to MSSQL and select the database
+    mssql_connect('MANGO\SQLEXPRESS', 'sa', 'phpfi');
+    mssql_select_db('php');
+
+    // Send a select query to MSSQL
+    $query = mssql_query('SELECT * FROM [php].[dbo].[persons]');
+
+    // Construct table
+    echo '<h3>Table structure for \'persons\'</h3>';
+    echo '<table border="1">';
+
+    // Table header
+    echo '<thead>';
+    echo '<tr>';
+    echo '<td>Field name</td>';
+    echo '<td>Data type</td>';
+    echo '<td>Max length</td>';
+    echo '</tr>';
+    echo '</thead>';
+
+    // Dump all fields
+    echo '<tbody>';
+
+    for ($i = 0; $i < mssql_num_fields($query); ++$i) {
+        // Fetch the field information, notice the 
+        // field_offset parameter is not set. See 
+        // the mssql_field_seek call below
+        $field = mssql_fetch_field($query);
+
+        // Print the row
+        echo '<tr>';
+        echo '<td>' . $field->name . '</td>';
+        echo '<td>' . strtoupper($field->type) . '</td>';
+        echo '<td>' . $field->max_length . '</td>';
+        echo '</tr>';
+
+        // Move the internal seek pointer to the next
+        // row in the result set
+        mssql_field_seek($query, $i + 1);
+    }
+
+    echo '</tbody>';
+    echo '</table>';
+
+    // Free the query result
+    mssql_free_result($query);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mssql_fetch_field| - Get field information
+
+
+vim:ft=help:

@@ -1,0 +1,31 @@
+eio_set_max_idle
+
+(PECL eio >= 0.0.1dev)
+
+eio_set_max_idle — Set maximum number of idle threads.
+
+==============================================================================
+*Description*
+
+    void eio_set_max_idle ( int $nthreads )~
+
+==============================================================================
+*Parameters*
+
+{nthreads}
+
+    Number of idle threads.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * eio_set_min_parallel
+  * eio_set_max_parallel
+
+
+vim:ft=help:

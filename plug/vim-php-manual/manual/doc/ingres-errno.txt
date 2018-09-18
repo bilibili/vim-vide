@@ -1,0 +1,62 @@
+ingres_errno
+
+(PECL ingres >= 1.1.0)
+
+ingres_errno — Get the last Ingres error number generated
+
+==============================================================================
+*Description*
+
+    int ingres_errno ([ resource $link ] )~
+
+Returns an integer containing the last error number. If no error was reported
+0 is returned.
+
+If a {link} resource is passed to ingres_errno() it returns the last error
+recorded for the link. If no link is passed, then ingres_errno() returns the
+last error reported using the default link.
+
+The function, ingres_errno(), should always be called after executing a
+database query. Calling another function before ingres_errno() is called will
+reset or change any error code from the last Ingres function call.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    The connection link identifier
+
+==============================================================================
+*Return* *Values*
+
+Returns an integer containing the last error number. If no error was reported,
+0 is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 Get the last Ingres error number generated
+
+<?php >
+    $link = ingres_connect($database, $user, $password);
+
+    $result = ingres_query($link, "select * from table");
+
+    $error_code = ingres_errno($link);
+
+    if ( $error_code != 0 ) {
+       echo "An error occurred - " . $error_code;
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_error| - Get a meaningful error message for the last error
+    generated
+  * |ingres_errsqlstate| - Get the last SQLSTATE error code generated
+  * |ingres_next_error| - Get the next Ingres error
+
+
+vim:ft=help:

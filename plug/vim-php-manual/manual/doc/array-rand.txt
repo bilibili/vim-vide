@@ -1,0 +1,63 @@
+array_rand
+
+(PHP 4, PHP 5, PHP 7)
+
+array_rand — Pick one or more random entries out of an array
+
+==============================================================================
+*Description*
+
+    mixed array_rand ( array $array [, int $num = 1 ] )~
+
+Picks one or more random entries out of an array, and returns the key (or
+keys) of the random entries. It uses a pseudo random number generator that is
+not suitable for cryptographic purposes.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    The input array.
+
+{num}
+
+    Specifies how many entries should be picked.
+
+==============================================================================
+*Return* *Values*
+
+When picking only one entry, array_rand() returns the key for a random entry.
+Otherwise, an array of keys for the random entries is returned. This is done
+so that random keys can be picked from the array as well as random values.
+Trying to pick more elements than there are in the array will result in an
+E_WARNING level error, and NULL will be returned.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        The internal randomization algorithm has been changed to use the >>
+7.1.0    Mersenne Twister Random Number Generator instead of the libc rand
+        function.
+5.2.10  The resulting array of keys is no longer shuffled.
+
+==============================================================================
+*Examples*
+
+Example #1 array_rand() example
+
+<?php >
+    $input = array("Neo", "Morpheus", "Trinity", "Cypher", "Tank");
+    $rand_keys = array_rand($input, 2);
+    echo $input[$rand_keys[0]] . "\n";
+    echo $input[$rand_keys[1]] . "\n";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |shuffle| - Shuffle an array
+
+
+vim:ft=help:

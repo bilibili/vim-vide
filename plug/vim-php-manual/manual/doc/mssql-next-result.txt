@@ -1,0 +1,68 @@
+mssql_next_result
+
+(PHP 4 >= 4.0.5, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_next_result — Move the internal result pointer to the next result
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * PDOStatement::nextRowset()
+  * |sqlsrv_next_result|
+  * |odbc_next_result|
+
+==============================================================================
+*Description*
+
+    bool mssql_next_result ( resource $result_id )~
+
+When sending more than one SQL statement to the server or executing a stored
+procedure with multiple results, it will cause the server to return multiple
+result sets. This function will test for additional results available form the
+server. If an additional result set exists it will free the existing result
+set and prepare to fetch the rows from the new result set.
+
+==============================================================================
+*Parameters*
+
+{result_id}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mssql_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if an additional result set was available or FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 mssql_next_result() example
+
+<?php >
+    // Connect to MSSQL and select the database
+    $link = mssql_connect('MANGO\SQLEXPRESS', 'sa', 'phpfi');
+    mssql_select_db('php', $link);
+
+    // Send a query to MSSQL
+    $sql = 'SELECT [name], [age] FROM [php].[dbo].[persons]';
+    $query = mssql_query($sql, $link);
+
+    // Iterate through returned records
+    do {
+        while ($row = mssql_fetch_row($query)) {
+            // Handle record ...
+        }
+    } while (mssql_next_result($query));
+
+    // Clean up
+    mssql_free_result($query);
+    mssql_close($link);
+<?>
+
+
+vim:ft=help:

@@ -1,0 +1,68 @@
+imap_setflag_full
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_setflag_full — Sets flags on messages
+
+==============================================================================
+*Description*
+
+    bool imap_setflag_full ( resource $imap_stream , string $sequence ,~
+    string $flag [, int $options = NIL ] )~
+
+Causes a store to add the specified {flag} to the flags set for the messages
+in the specified {sequence}.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{sequence}
+
+    A sequence of message numbers. You can enumerate desired messages with the
+    X,Y syntax, or retrieve all messages within an interval with the X:Y
+    syntax
+
+{flag}
+
+    The flags which you can set are \Seen, \Answered, \Flagged, \Deleted, and
+    \Draft as defined by >> RFC2060.
+
+{options}
+
+    A bit mask that may contain the single option:
+      + ST_UID - The sequence argument contains UIDs instead of sequence
+        numbers
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_setflag_full() example
+
+<?php >
+    $mbox = imap_open("{imap.example.org:143}", "username", "password")
+         or die("can't connect: " . imap_last_error());
+
+    $status = imap_setflag_full($mbox, "2,5", "\\Seen \\Flagged");
+
+    echo gettype($status) . "\n";
+    echo $status . "\n";
+
+    imap_close($mbox);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imap_clearflag_full| - Clears flags on messages
+
+
+vim:ft=help:

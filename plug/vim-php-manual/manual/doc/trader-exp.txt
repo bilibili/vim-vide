@@ -1,0 +1,28 @@
+trader_exp
+
+(PECL trader >= 0.2.0)
+
+trader_exp — Vector Arithmetic Exp
+
+==============================================================================
+*Description*
+
+    array trader_exp ( array $real )~
+
+Calculates e raised to the power of each value in {real}. Returns an array
+with the calculated data.
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,29 @@
+ob_deflatehandler
+
+(PECL pecl_http >= 0.21.0)
+
+ob_deflatehandler — Deflate output handler
+
+==============================================================================
+*Description*
+
+    string ob_deflatehandler ( string $data , int $mode )~
+
+For use with |ob_start|.
+
+    Note: This output handler can only be used once.
+
+The deflate output buffer handler can only be used once.
+
+It conflicts with |ob_gzhandler| and zlib.output_compression as well and
+should not be used after mbstring extension's |mb_output_handler| and session
+extension's URL-Rewriter (AKA session.use_trans_sid).
+
+==============================================================================
+*See* *Also*
+
+  * |ob_inflatehandler| - Inflate output handler
+  * |ob_start| - Turn on output buffering
+
+
+vim:ft=help:

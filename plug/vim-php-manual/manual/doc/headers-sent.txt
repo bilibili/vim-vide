@@ -1,0 +1,88 @@
+headers_sent
+
+(PHP 4, PHP 5, PHP 7)
+
+headers_sent — Checks if or where headers have been sent
+
+==============================================================================
+*Description*
+
+    bool headers_sent ([ string &$file [, int &$line ]] )~
+
+Checks if or where headers have been sent.
+
+You can't add any more header lines using the |header| function once the
+header block has already been sent. Using this function you can at least
+prevent getting HTTP header related error messages. Another option is to use
+Output Buffering.
+
+==============================================================================
+*Parameters*
+
+{file}
+
+    If the optional {file} and {line} parameters are set, headers_sent() will
+    put the PHP source file name and line number where output started in the
+    {file} and {line} variables.
+
+{line}
+
+    The line number where the output started.
+
+==============================================================================
+*Return* *Values*
+
+headers_sent() will return FALSE if no HTTP headers have already been sent or
+TRUE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 Examples using headers_sent()
+
+<?php >
+
+    // If no headers are sent, send one
+    if (!headers_sent()) {
+        header('Location: http://www.example.com/');
+        exit;
+    }
+
+    // An example using the optional file and line parameters
+    // Note that $filename and $linenum are passed in for later use.
+    // Do not assign them values beforehand.
+    if (!headers_sent($filename, $linenum)) {
+        header('Location: http://www.example.com/');
+        exit;
+
+    // You would most likely trigger an error here.
+    } else {
+
+        echo "Headers already sent in $filename on line $linenum\n" .
+              "Cannot redirect, for now please click this <a " .
+              "href=\"http://www.example.com\">link</a> instead\n";
+        exit;
+    }
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Headers will only be accessible and output when a SAPI that supports them
+    is in use.
+
+==============================================================================
+*See* *Also*
+
+  * |ob_start| - Turn on output buffering
+  * |trigger_error| - Generates a user-level error/warning/notice message
+  * |headers_list| - Returns a list of response headers sent (or ready to
+    send)
+  * |header| - Send a raw HTTP header for a more detailed discussion of the
+    matters involved.
+
+
+vim:ft=help:

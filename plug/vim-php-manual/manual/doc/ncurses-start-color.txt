@@ -1,0 +1,59 @@
+ncurses_start_color
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_start_color — Initializes color functionality
+
+==============================================================================
+*Description*
+
+    int ncurses_start_color ( void )~
+
+Initializes color functionality in ncurses. This function must be called
+before any color manipulation functions are called and after |ncurses_init| is
+called. It is good practice to call this function right after |ncurses_init|.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns 0 on success, or -1 if the color table could not be allocated or
+ncurses was not initialized.
+
+==============================================================================
+*Examples*
+
+Example #1 Writing a string with a specified color to the screen
+
+<?php >
+    ncurses_init();
+
+    // If the terminal supports colors, initialize and set active color
+    if (ncurses_has_colors()) {
+        ncurses_start_color();
+        ncurses_init_pair(1, NCURSES_COLOR_YELLOW, NCURSES_COLOR_BLUE);
+        ncurses_color_set(1);
+    }
+
+    // Write a string at specified location
+    ncurses_mvaddstr(10, 10, "Hello world! Yellow on blue text!");
+
+    // Flush output to screen
+    ncurses_refresh();
+
+    ncurses_end();
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ncurses_can_change_color| - Checks if terminal color definitions can be
+    changed
+  * |ncurses_has_colors| - Checks if terminal has color capabilities
+
+
+vim:ft=help:

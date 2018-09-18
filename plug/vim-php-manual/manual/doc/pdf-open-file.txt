@@ -1,0 +1,19 @@
+PDF_open_file
+
+(PHP 4 >= 4.0.5, PECL pdflib >= 1.0.0)
+
+PDF_open_file — Create PDF file [deprecated]
+
+==============================================================================
+*Description*
+
+    bool PDF_open_file ( resource $p , string $filename )~
+
+Creates a new PDF file using the supplied file name. Returns TRUE on success
+or FALSE on failure.
+
+This function is deprecated since PDFlib version 6, use |PDF_begin_document|
+instead.
+
+
+vim:ft=help:

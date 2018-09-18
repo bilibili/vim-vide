@@ -1,0 +1,57 @@
+gzread
+
+(PHP 4, PHP 5, PHP 7)
+
+gzread — Binary-safe gz-file read
+
+==============================================================================
+*Description*
+
+    string gzread ( resource $zp , int $length )~
+
+gzread() reads up to {length} bytes from the given gz-file pointer. Reading
+stops when {length} (uncompressed) bytes have been read or EOF is reached,
+whichever comes first.
+
+==============================================================================
+*Parameters*
+
+{zp}
+
+    The gz-file pointer. It must be valid, and must point to a file
+    successfully opened by |gzopen|.
+
+{length}
+
+    The number of bytes to read.
+
+==============================================================================
+*Return* *Values*
+
+The data that have been read.
+
+==============================================================================
+*Examples*
+
+Example #1 gzread() example
+
+<?php >
+    // get contents of a gz-file into a string
+    $filename = "/usr/local/something.txt.gz";
+    $zd = gzopen($filename, "r");
+    $contents = gzread($zd, 10000);
+    gzclose($zd);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |gzwrite| - Binary-safe gz-file write
+  * |gzopen| - Open gz-file
+  * |gzgets| - Get line from file pointer
+  * |gzgetss| - Get line from gz-file pointer and strip HTML tags
+  * |gzfile| - Read entire gz-file into an array
+  * |gzpassthru| - Output all remaining data on a gz-file pointer
+
+
+vim:ft=help:

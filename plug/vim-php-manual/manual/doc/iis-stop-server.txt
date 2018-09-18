@@ -1,0 +1,17 @@
+iis_stop_server
+
+(PECL iisfunc SVN)
+
+iis_stop_server — Stops the virtual web server
+
+==============================================================================
+*Description*
+
+    int iis_stop_server ( int $server_instance )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

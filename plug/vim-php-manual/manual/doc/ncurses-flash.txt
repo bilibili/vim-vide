@@ -1,0 +1,30 @@
+ncurses_flash
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_flash — Flash terminal screen (visual bell)
+
+==============================================================================
+*Description*
+
+    bool ncurses_flash ( void )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+Flashes the screen, and if its not possible, sends an audible alert (bell).
+
+==============================================================================
+*Return* *Values*
+
+Returns FALSE on success, otherwise TRUE.
+
+==============================================================================
+*See* *Also*
+
+  * |ncurses_beep| - Let the terminal beep
+
+
+vim:ft=help:

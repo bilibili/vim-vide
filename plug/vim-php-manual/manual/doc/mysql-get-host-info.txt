@@ -1,0 +1,67 @@
+mysql_get_host_info
+
+(PHP 4 >= 4.0.5, PHP 5)
+
+mysql_get_host_info — Get MySQL host info
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_get_host_info()
+  * PDO::getAttribute(PDO::ATTR_CONNECTION_STATUS)
+
+==============================================================================
+*Description*
+
+    string mysql_get_host_info ([ resource $link_identifier = NULL ] )~
+
+Describes the type of connection in use for the connection, including the
+server host name.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    The MySQL connection. If the link identifier is not specified, the last
+    link opened by |mysql_connect| is assumed. If no such link is found, it
+    will try to create one as if |mysql_connect| had been called with no
+    arguments. If no connection is found or established, an E_WARNING level
+    error is generated.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string describing the type of MySQL connection in use for the
+connection or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mysql_get_host_info() example
+
+<?php >
+    $link = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+    if (!$link) {
+        die('Could not connect: ' . mysql_error());
+    }
+    printf("MySQL host info: %s\n", mysql_get_host_info());
+<?>
+
+The above example will output something similar to:
+
+MySQL host info: Localhost via UNIX socket
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_get_client_info| - Get MySQL client info
+  * |mysql_get_proto_info| - Get MySQL protocol info
+  * |mysql_get_server_info| - Get MySQL server info
+
+
+vim:ft=help:

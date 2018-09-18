@@ -1,0 +1,49 @@
+fam_monitor_directory
+
+(PHP 5 <= 5.0.5)
+
+fam_monitor_directory — Monitor a directory for changes
+
+==============================================================================
+*Description*
+
+    resource fam_monitor_directory ( resource $fam , string $dirname )~
+
+Requests monitoring for a directory and all contained files.
+
+A FAM event will be generated whenever the status of the directory (i.e. the
+result of function |stat| on that directory) or its content (i.e. the results
+of |readdir|) changes.
+
+The possible event codes are described in detail in the constants part of this
+section.
+
+==============================================================================
+*Parameters*
+
+{fam}
+
+    A resource representing a connection to the FAM service returned by 
+    |fam_open|
+
+{dirname}
+
+    Path to the monitored directory
+
+==============================================================================
+*Return* *Values*
+
+Returns a monitoring resource or FALSE on errors.
+
+==============================================================================
+*See* *Also*
+
+  * |fam_monitor_file| - Monitor a regular file for changes
+  * |fam_monitor_collection| - Monitor a collection of files in a directory
+    for changes
+  * |fam_cancel_monitor| - Terminate monitoring
+  * |fam_suspend_monitor| - Temporarily suspend monitoring
+  * |fam_resume_monitor| - Resume suspended monitoring
+
+
+vim:ft=help:

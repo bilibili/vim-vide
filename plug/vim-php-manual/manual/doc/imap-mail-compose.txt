@@ -1,0 +1,78 @@
+imap_mail_compose
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_mail_compose — Create a MIME message based on given envelope and body
+sections
+
+==============================================================================
+*Description*
+
+    string imap_mail_compose ( array $envelope , array $body )~
+
+Create a MIME message based on the given {envelope} and {body} sections.
+
+==============================================================================
+*Parameters*
+
+{envelope}
+
+    An associative array of headers fields. Valid keys are: "remail",
+    "return_path", "date", "from", "reply_to", "in_reply_to", "subject", "to",
+    "cc", "bcc", "message_id" and "custom_headers" (which contains associative
+    array of other headers).
+
+{body}
+
+    An indexed array of bodies
+
+    A body is an associative array which can consist of the following keys:
+    "type", "encoding", "charset", "type.parameters", "subtype", "id",
+    "description", "disposition.type", "disposition", "contents.data",
+    "lines", "bytes" and "md5".
+
+==============================================================================
+*Return* *Values*
+
+Returns the MIME message.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_mail_compose() example
+
+<?php >
+
+    $envelope["from"]= "joe@example.com";
+    $envelope["to"]  = "foo@example.com";
+    $envelope["cc"]  = "bar@example.com";
+
+    $part1["type"] = TYPEMULTIPART;
+    $part1["subtype"] = "mixed";
+
+    $filename = "/tmp/imap.c.gz";
+    $fp = fopen($filename, "r");
+    $contents = fread($fp, filesize($filename));
+    fclose($fp);
+
+    $part2["type"] = TYPEAPPLICATION;
+    $part2["encoding"] = ENCBINARY;
+    $part2["subtype"] = "octet-stream";
+    $part2["description"] = basename($filename);
+    $part2["contents.data"] = $contents;
+
+    $part3["type"] = TYPETEXT;
+    $part3["subtype"] = "plain";
+    $part3["description"] = "description3";
+    $part3["contents.data"] = "contents.data3\n\n\n\t";
+
+    $body[1] = $part1;
+    $body[2] = $part2;
+    $body[3] = $part3;
+
+    echo nl2br(imap_mail_compose($envelope, $body));
+
+<?>
+
+
+vim:ft=help:

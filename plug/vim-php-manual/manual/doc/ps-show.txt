@@ -1,0 +1,74 @@
+ps_show
+
+(PECL ps >= 1.1.0)
+
+ps_show — Output text
+
+==============================================================================
+*Description*
+
+    bool ps_show ( resource $psdoc , string $text )~
+
+Output a text at the current text position. The text position can be set by
+storing the x and y coordinates into the values textx and texty with the
+function |ps_set_value|. The function will issue an error if a font was not
+set before with |ps_setfont|.
+
+ps_show() evaluates the following parameters and values as set by 
+|ps_set_parameter| and |ps_set_value|.
+
+charspacing (value)
+
+    Distance between two consecutive glyphs. If this value is unequal to zero
+    then all ligatures will be resolved. Values less than zero are allowed.
+
+kerning (parameter)
+
+    Setting this parameter to "false" will turn off kerning. Kerning is turned
+    on by default.
+
+ligatures (parameter)
+
+    Setting this parameter to "false" will turn off the use of ligatures.
+    Ligatures are turned on by default.
+
+underline (parameter)
+
+    Setting this parameter to "true" will turn on underlining. Underlining is
+    turned off by default.
+
+overline (parameter)
+
+    Setting this parameter to "true" will turn on overlining. Overlining is
+    turned off by default.
+
+strikeout (parameter)
+
+    Setting this parameter to "true" will turn on striking out. Striking out
+    is turned off by default.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{text}
+
+    The text to be output.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_continue_text| - Continue text in next line
+  * |ps_show_xy| - Output text at given position
+  * |ps_setfont| - Sets font to use for following output
+
+
+vim:ft=help:

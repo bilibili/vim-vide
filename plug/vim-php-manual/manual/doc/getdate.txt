@@ -1,0 +1,89 @@
+getdate
+
+(PHP 4, PHP 5, PHP 7)
+
+getdate — Get date/time information
+
+==============================================================================
+*Description*
+
+    array getdate ([ int $timestamp = time() ] )~
+
+Returns an associative array containing the date information of the
+{timestamp}, or the current local time if no {timestamp} is given.
+
+==============================================================================
+*Parameters*
+
+{timestamp}
+
+    The optional {timestamp} parameter is an integer Unix timestamp that
+    defaults to the current local time if a {timestamp} is not given. In other
+    words, it defaults to the value of |time|.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array of information related to the {timestamp}.
+Elements from the returned associative array are as follows:
+
+                Key elements of the returned associative array
+   Key                  Description                  Example returned values
+"seconds" Numeric representation of seconds        0 to 59
+"minutes" Numeric representation of minutes        0 to 59
+"hours"   Numeric representation of hours          0 to 23
+"mday"    Numeric representation of the day of the 1 to 31
+          month
+"wday"    Numeric representation of the day of the 0 (for Sunday) through 6
+          week                                     (for Saturday)
+"mon"     Numeric representation of a month        1 through 12
+"year"    A full numeric representation of a year, Examples: 1999 or 2003
+          4 digits
+"yday"    Numeric representation of the day of the 0 through 365
+          year
+"weekday" A full textual representation of the day Sunday through Saturday
+          of the week
+"month"   A full textual representation of a       January through December
+          month, such as January or March
+          Seconds since the Unix Epoch, similar to System Dependent, typically
+0         the values returned by |time| and used   -2147483648 through
+          by |date|.                               2147483647.
+
+==============================================================================
+*Examples*
+
+Example #1 getdate() example
+
+<?php >
+    $today = getdate();
+    print_r($today);
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [seconds] => 40
+    [minutes] => 58
+    [hours]   => 21
+    [mday]    => 17
+    [wday]    => 2
+    [mon]     => 6
+    [year]    => 2003
+    [yday]    => 167
+    [weekday] => Tuesday
+    [month]   => June
+    [0]       => 1055901520
+)
+
+==============================================================================
+*See* *Also*
+
+  * |date| - Format a local time/date
+  * |idate| - Format a local time/date as integer
+  * |localtime| - Get the local time
+  * |time| - Return current Unix timestamp
+  * |setlocale| - Set locale information
+
+
+vim:ft=help:

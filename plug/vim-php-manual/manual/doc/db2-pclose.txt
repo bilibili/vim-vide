@@ -1,0 +1,66 @@
+db2_pclose
+
+(PECL ibm_db2 >= 1.8.0)
+
+db2_pclose — Closes a persistent database connection
+
+==============================================================================
+*Description*
+
+    bool db2_pclose ( resource $resource )~
+
+This function closes a DB2 client connection created with |db2_pconnect| and
+returns the corresponding resources to the database server.
+
+
+    Note:
+
+    This function is only available on i5/OS in response to i5/OS system
+    administration requests.
+
+If you have a persistent DB2 client connection created with |db2_pconnect|,
+you may use this function to close the connection. To avoid substantial
+connection performance penalties, this function should only be used in rare
+cases when the persistent connection has become unresponsive or the persistent
+connection will not be needed for a long period of time.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    Specifies an active DB2 client connection.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Closing a persistent connection
+
+The following example demonstrates a successful attempt to close a connection
+to an IBM DB2 i5/OS database.
+
+<?php >
+    $conn = db2_pconnect('', '', '');
+    $rc = db2_pclose($conn);
+    if ($rc) {
+        echo "Connection was successfully closed.";
+    }
+<?>
+
+The above example will output:
+
+Connection was successfully closed.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_close| - Closes a database connection
+  * |db2_pconnect| - Returns a persistent connection to a database
+
+
+vim:ft=help:

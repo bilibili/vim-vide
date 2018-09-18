@@ -1,0 +1,39 @@
+fann_set_learning_rate
+
+(PECL fann >= 1.0.0)
+
+fann_set_learning_rate — Sets the learning rate
+
+==============================================================================
+*Description*
+
+    bool fann_set_learning_rate ( resource $ann , float $learning_rate )~
+
+Sets the learning rate.
+
+More info available in |fann_get_learning_rate|.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{learning_rate}
+
+    The learning rate.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_learning_rate| - Returns the learning rate
+  * |fann_set_training_algorithm| - Sets the training algorithm
+
+
+vim:ft=help:

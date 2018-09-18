@@ -1,0 +1,105 @@
+maxdb_fetch_lengths
+
+maxdb_result::lengths
+
+(PECL maxdb >= 1.0)
+
+maxdb_fetch_lengths -- maxdb_result::lengths — Returns the lengths of the
+columns of the current row in the result set
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    array maxdb_fetch_lengths ( resource $result )~
+
+Object oriented style
+
+array $maxdb_result->lengths;
+
+The maxdb_fetch_lengths() function returns an array containing the lengths of
+every column of the current row within the result set represented by the
+{result} parameter. If successful, a numerically indexed array representing
+the lengths of each column is returned or FALSE on failure.
+
+==============================================================================
+*Return* *Values*
+
+An array of integers representing the size of each column (not including any
+terminating null characters). FALSE if an error occurred.
+
+maxdb_fetch_lengths() is valid only for the current row of the result set. It
+returns FALSE if you call it before calling maxdb_fetch_row/array/resource or
+after retrieving all rows in the result.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT * from hotel.customer WHERE cno = 3000";
+
+    if ($result = $maxdb->query($query)) {
+
+       $row = $result->fetch_row();
+
+       /* display column lengths */
+       foreach ($result->lengths as $i => $val) {
+           printf("Field %2d has Length %2d\n", $i+1, $val);
+       }
+       $result->close();
+    }
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT * from hotel.customer WHERE cno = 3000";
+
+    if ($result = maxdb_query($link, $query)) {
+
+       $row = maxdb_fetch_row($result);
+
+       /* display column lengths */
+       foreach (maxdb_fetch_lengths($result) as $i => $val) {
+           printf("Field %2d has Length %2d\n", $i+1, $val);
+       }
+       maxdb_free_result($result);
+    }
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Field  1 has Length  4
+Field  2 has Length  3
+Field  3 has Length  5
+Field  4 has Length  6
+Field  5 has Length  5
+Field  6 has Length 21
+
+
+vim:ft=help:

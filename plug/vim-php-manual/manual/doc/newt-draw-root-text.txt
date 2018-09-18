@@ -1,0 +1,75 @@
+newt_draw_root_text
+
+(PECL newt >= 0.1)
+
+newt_draw_root_text — Displays the string text at the position indicated
+
+==============================================================================
+*Description*
+
+    void newt_draw_root_text ( int $left , int $top , string $text )~
+
+Displays the string text at the position indicated.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+    Column number
+
+        Note:
+
+        If left is negative, the position is measured from the opposite side
+        of the screen.
+
+{top}
+
+    Line number
+
+        Note:
+
+        If top is negative, the position is measured from the opposite side of
+        the screen.
+
+{text}
+
+    Text to display.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 A newt_draw_root_text() example
+
+This code demonstrates drawing of titles in the both corners of the screen.
+
+<?php >
+     newt_init();
+     newt_cls();
+
+     newt_draw_root_text (2, 0, "Some root text");
+     newt_refresh();
+     sleep(1);
+
+     newt_draw_root_text (-30, 0, "Root text in the other corner");
+     newt_refresh();
+     sleep(1);
+
+     newt_finished();
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |newt_push_help_line| - Saves the current help line on a stack, and
+    displays the new line
+  * |newt_pop_help_line| - Replaces the current help line with the one from
+    the stack
+
+
+vim:ft=help:

@@ -1,0 +1,26 @@
+stats_rand_gen_exponential
+
+(PECL stats >= 1.0.0)
+
+stats_rand_gen_exponential — Generates a single random deviate from an
+exponential distribution with mean "av"
+
+==============================================================================
+*Description*
+
+    float stats_rand_gen_exponential ( float $av )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{av}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

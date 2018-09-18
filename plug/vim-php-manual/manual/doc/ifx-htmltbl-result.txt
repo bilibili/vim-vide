@@ -1,0 +1,58 @@
+ifx_htmltbl_result
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_htmltbl_result — Formats all rows of a query into a HTML table
+
+==============================================================================
+*Description*
+
+    int ifx_htmltbl_result ( resource $result_id [, string~
+    $html_table_options ] )~
+
+Formats and prints all rows of the {result_id} query into a HTML table.
+
+==============================================================================
+*Parameters*
+
+{result_id}
+
+    {result_id} is a valid resultid returned by |ifx_query| or |ifx_prepare|
+    (select type queries only!).
+
+{html_table_options}
+
+    This optional argument is a string of <table> tag options.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of fetched rows, or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 Informix results as HTML table
+
+<?php >
+    $rid = ifx_prepare ("select * from emp where name like " . $name,
+                         $connid, IFX_SCROLL);
+    if (! $rid) {
+        /* ... error ... */
+    }
+    $rowcount = ifx_affected_rows ($rid);
+    if ($rowcount > 1000) {
+        printf ("Too many rows in result set (%d)\n<br />", $rowcount);
+        die ("Please restrict your query<br />\n");
+    }
+    if (! ifx_do($rid)) {
+        /* ... error ... */
+    }
+
+    ifx_htmltbl_result ($rid, "border=\"2\"");
+
+    ifx_free_result($rid);
+<?>
+
+
+vim:ft=help:

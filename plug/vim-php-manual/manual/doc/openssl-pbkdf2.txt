@@ -1,0 +1,37 @@
+openssl_pbkdf2
+
+(PHP 5 >= 5.5.0, PHP 7)
+
+openssl_pbkdf2 — Generates a PKCS5 v2 PBKDF2 string, defaults to SHA-1
+
+==============================================================================
+*Description*
+
+    string openssl_pbkdf2 ( string $password , string $salt , int $key_length~
+    , int $iterations [, string $digest_algorithm ] )~
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{password}
+
+{salt}
+
+{key_length}
+
+{iterations}
+
+{digest_algorithm}
+
+==============================================================================
+*Return* *Values*
+
+Returns string or FALSE on failure.
+
+
+vim:ft=help:

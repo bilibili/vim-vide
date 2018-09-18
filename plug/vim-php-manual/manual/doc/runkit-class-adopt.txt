@@ -1,0 +1,59 @@
+runkit_class_adopt
+
+(PECL runkit >= 0.7.0)
+
+runkit_class_adopt — Convert a base class to an inherited class, add ancestral
+methods when appropriate
+
+==============================================================================
+*Description*
+
+    bool runkit_class_adopt ( string $classname , string $parentname )~
+
+==============================================================================
+*Parameters*
+
+{classname}
+
+    Name of class to be adopted
+
+{parentname}
+
+    Parent class which child class is extending
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A runkit_class_adopt() example
+
+<?php >
+    class myParent {
+      function parentFunc() {
+        echo "Parent Function Output\n";
+      }
+    }
+
+    class myChild {
+    }
+
+    runkit_class_adopt('myChild','myParent');
+    myChild::parentFunc();
+<?>
+
+The above example will output:
+
+Parent Function Output
+
+==============================================================================
+*See* *Also*
+
+  * |runkit_class_emancipate| - Convert an inherited class to a base class,
+    removes any method whose scope is ancestral
+
+
+vim:ft=help:

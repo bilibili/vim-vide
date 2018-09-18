@@ -1,0 +1,79 @@
+imagesetstyle
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+imagesetstyle — Set the style for line drawing
+
+==============================================================================
+*Description*
+
+    bool imagesetstyle ( resource $image , array $style )~
+
+imagesetstyle() sets the style to be used by all line drawing functions (such
+as |imageline| and |imagepolygon|) when drawing with the special color
+IMG_COLOR_STYLED or lines of images with color IMG_COLOR_STYLEDBRUSHED.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{style}
+
+    An array of pixel colors. You can use the IMG_COLOR_TRANSPARENT constant
+    to add a transparent pixel. Note that {style} must not be an empty array.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Following example script draws a dashed line from upper left to lower right
+corner of the canvas:
+
+Example #1 imagesetstyle() example
+
+<?php >
+    header("Content-type: image/jpeg");
+    $im  = imagecreatetruecolor(100, 100);
+    $w   = imagecolorallocate($im, 255, 255, 255);
+    $red = imagecolorallocate($im, 255, 0, 0);
+
+    /* Draw a dashed line, 5 red pixels, 5 white pixels */
+    $style = array($red, $red, $red, $red, $red, $w, $w, $w, $w, $w);
+    imagesetstyle($im, $style);
+    imageline($im, 0, 0, 100, 100, IMG_COLOR_STYLED);
+
+    /* Draw a line of happy faces using imagesetbrush() with imagesetstyle */
+    $style = array($w, $w, $w, $w, $w, $w, $w, $w, $w, $w, $w, $w, $red);
+    imagesetstyle($im, $style);
+
+    $brush = imagecreatefrompng("http://www.libpng.org/pub/png/images/
+    smile.happy.png");
+    $w2 = imagecolorallocate($brush, 255, 255, 255);
+    imagecolortransparent($brush, $w2);
+    imagesetbrush($im, $brush);
+    imageline($im, 100, 0, 0, 100, IMG_COLOR_STYLEDBRUSHED);
+
+    imagejpeg($im);
+    imagedestroy($im);
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagesetstyle()
+
+==============================================================================
+*See* *Also*
+
+  * |imagesetbrush| - Set the brush image for line drawing
+  * |imageline| - Draw a line
+
+
+vim:ft=help:

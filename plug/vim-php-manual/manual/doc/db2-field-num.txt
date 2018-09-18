@@ -1,0 +1,50 @@
+db2_field_num
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_field_num — Returns the position of the named column in a result set
+
+==============================================================================
+*Description*
+
+    int db2_field_num ( resource $stmt , mixed $column )~
+
+Returns the position of the named column in a result set.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    Specifies a statement resource containing a result set.
+
+{column}
+
+    Specifies the column in the result set. This can either be an integer
+    representing the 0-indexed position of the column, or a string containing
+    the name of the column.
+
+==============================================================================
+*Return* *Values*
+
+Returns an integer containing the 0-indexed position of the named column in
+the result set. If the specified column does not exist in the result set, 
+db2_field_num() returns FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_field_display_size| - Returns the maximum number of bytes required to
+    display a column
+  * |db2_field_name| - Returns the name of the column in the result set
+  * |db2_field_precision| - Returns the precision of the indicated column in a
+    result set
+  * |db2_field_scale| - Returns the scale of the indicated column in a result
+    set
+  * |db2_field_type| - Returns the data type of the indicated column in a
+    result set
+  * |db2_field_width| - Returns the width of the current value of the
+    indicated column in a result set
+
+
+vim:ft=help:

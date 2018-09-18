@@ -1,0 +1,28 @@
+imap_expunge
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_expunge — Delete all messages marked for deletion
+
+==============================================================================
+*Description*
+
+    bool imap_expunge ( resource $imap_stream )~
+
+Deletes all the messages marked for deletion by |imap_delete|, |imap_mail_move
+|, or |imap_setflag_full|.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE.
+
+
+vim:ft=help:

@@ -1,0 +1,105 @@
+version_compare
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+version_compare — Compares two "PHP-standardized" version number strings
+
+==============================================================================
+*Description*
+
+    mixed version_compare ( string $version1 , string $version2 [, string~
+    $operator ] )~
+
+version_compare() compares two "PHP-standardized" version number strings.
+
+The function first replaces _, - and + with a dot . in the version strings and
+also inserts dots . before and after any non number so that for example
+'4.3.2RC1' becomes '4.3.2.RC.1'. Then it compares the parts starting from left
+to right. If a part contains special version strings these are handled in the
+following order: any string not found in this list < dev < alpha = a < beta =
+b < RC = rc < # < pl = p. This way not only versions with different levels
+like '4.1' and '4.1.2' can be compared but also any PHP specific version
+containing development state.
+
+==============================================================================
+*Parameters*
+
+{version1}
+
+    First version number.
+
+{version2}
+
+    Second version number.
+
+{operator}
+
+    If the third optional {operator} argument is specified, test for a
+    particular relationship. The possible operators are: <, lt, <=, le, >, gt,
+    >=, ge, ==, =, eq, !=, <>, ne respectively.
+
+    This parameter is case-sensitive, values should be lowercase.
+
+==============================================================================
+*Return* *Values*
+
+By default, version_compare() returns -1 if the first version is lower than
+the second, 0 if they are equal, and 1 if the second is lower.
+
+When using the optional {operator} argument, the function will return TRUE if
+the relationship is the one specified by the operator, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+The examples below use the PHP_VERSION constant, because it contains the value
+of the PHP version that is executing the code.
+
+Example #1 version_compare() examples
+
+<?php >
+    if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
+        echo 'I am at least PHP version 7.0.0, my version: ' . PHP_VERSION . "\n";
+    }
+
+    if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
+        echo 'I am at least PHP version 5.3.0, my version: ' . PHP_VERSION . "\n";
+    }
+
+    if (version_compare(PHP_VERSION, '5.0.0', '>=')) {
+        echo 'I am at least PHP version 5.0.0, my version: ' . PHP_VERSION . "\n";
+    }
+
+    if (version_compare(PHP_VERSION, '5.0.0', '<')) {
+        echo 'I am still PHP 4, my version: ' . PHP_VERSION . "\n";
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The PHP_VERSION constant holds current PHP version.
+
+    Note:
+
+    Note that pre-release versions, such as 5.3.0-dev, are considered lower
+    than their final release counterparts (like 5.3.0).
+
+    Note:
+
+    Special version strings such as alpha and beta are case sensitive. Version
+    strings from arbitrary sources that do not adhere to the PHP standard may
+    need to be lowercased via |strtolower| before calling version_compare().
+
+==============================================================================
+*See* *Also*
+
+  * |phpversion| - Gets the current PHP version
+  * |php_uname| - Returns information about the operating system PHP is
+    running on
+  * |function_exists| - Return TRUE if the given function has been defined
+
+
+vim:ft=help:

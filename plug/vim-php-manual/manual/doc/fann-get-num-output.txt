@@ -1,0 +1,27 @@
+fann_get_num_output
+
+(PECL fann >= 1.0.0)
+
+fann_get_num_output — Get the number of output neurons
+
+==============================================================================
+*Description*
+
+    int fann_get_num_output ( resource $ann )~
+
+Get the number of output neurons.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+Number of output neurons, or FALSE on error
+
+
+vim:ft=help:

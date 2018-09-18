@@ -1,0 +1,49 @@
+fann_set_output_scaling_params
+
+(PECL fann >= 1.0.0)
+
+fann_set_output_scaling_params — Calculate output scaling parameters for
+future use based on training data
+
+==============================================================================
+*Description*
+
+    bool fann_set_output_scaling_params ( resource $ann , resource~
+    $train_data , float $new_output_min , float $new_output_max )~
+
+Calculate output scaling parameters for future use based on training data.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{train_data}
+
+    Neural network training data resource.
+
+{new_output_min}
+
+    The desired lower bound in output data after scaling (not strictly
+    followed)
+
+{new_output_max}
+
+    The desired upper bound in output data after scaling (not strictly
+    followed)
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_set_input_scaling_params| - Calculate input scaling parameters for
+    future use based on training data
+
+
+vim:ft=help:

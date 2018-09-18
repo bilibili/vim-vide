@@ -1,0 +1,43 @@
+fann_get_bit_fail_limit
+
+(PECL fann >= 1.0.0)
+
+fann_get_bit_fail_limit — Returns the bit fail limit used during training
+
+==============================================================================
+*Description*
+
+    float fann_get_bit_fail_limit ( resource $ann )~
+
+Returns the bit fail limit used during training.
+
+The bit fail limit is used during training where the stop function is set to
+FANN_STOPFUNC_BIT.
+
+The limit is the maximum accepted difference between the desired output and
+the actual output during training. Each output that diverges more than this
+limit is counted as an error bit. This difference is divided by two when
+dealing with symmetric activation functions, so that symmetric and not
+symmetric activation functions can use the same limit.
+
+The default bit fail limit is 0.35.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+The bit fail limit, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_set_bit_fail_limit| - Set the bit fail limit used during training
+
+
+vim:ft=help:

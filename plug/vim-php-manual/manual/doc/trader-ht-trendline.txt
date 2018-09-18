@@ -1,0 +1,25 @@
+trader_ht_trendline
+
+(PECL trader >= 0.2.0)
+
+trader_ht_trendline — Hilbert Transform - Instantaneous Trendline
+
+==============================================================================
+*Description*
+
+    array trader_ht_trendline ( array $real )~
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,64 @@
+sha1
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+sha1 — Calculate the sha1 hash of a string
+
+==============================================================================
+*Description*
+
+    string sha1 ( string $str [, bool $raw_output = false ] )~
+
+Calculates the sha1 hash of {str} using the >> US Secure Hash Algorithm 1.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The input string.
+
+{raw_output}
+
+    If the optional {raw_output} is set to TRUE, then the sha1 digest is
+    instead returned in raw binary format with a length of 20, otherwise the
+    returned value is a 40-character hexadecimal number.
+
+==============================================================================
+*Return* *Values*
+
+Returns the sha1 hash as a string.
+
+==============================================================================
+*Examples*
+
+Example #1 A sha1() example
+
+<?php >
+    $str = 'apple';
+
+    if (sha1($str) === 'd0be2dc421be4fcd0172e5afceea3970e2f3d940') {
+        echo "Would you like a green or red apple?";
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: Secure password hashing
+
+    It is not recommended to use this function to secure passwords, due to the
+    fast nature of this hashing algorithm. See here for details.
+
+==============================================================================
+*See* *Also*
+
+  * |sha1_file| - Calculate the sha1 hash of a file
+  * |crc32| - Calculates the crc32 polynomial of a string
+  * |md5| - Calculate the md5 hash of a string
+  * |hash| - Generate a hash value (message digest)
+  * |crypt| - One-way string hashing
+  * |password_hash| - Creates a password hash
+
+
+vim:ft=help:

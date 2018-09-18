@@ -1,0 +1,65 @@
+dbx_fetch_row
+
+(PHP 5 <= 5.0.5, PECL dbx >= 1.1.0)
+
+dbx_fetch_row — Fetches rows from a query-result that had the
+DBX_RESULT_UNBUFFERED flag set
+
+==============================================================================
+*Description*
+
+    mixed dbx_fetch_row ( object $result_identifier )~
+
+dbx_fetch_row() fetches rows from a result identifier that had the
+DBX_RESULT_UNBUFFERED flag set.
+
+When the DBX_RESULT_UNBUFFERED is not set in the query, dbx_fetch_row() will
+fail as all rows have already been fetched into the results data property.
+
+As a side effect, the rows property of the query-result object is incremented
+for each successful call to dbx_fetch_row().
+
+==============================================================================
+*Parameters*
+
+{result_identifier}
+
+    A result set returned by |dbx_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns an object on success that contains the same information as any row
+would have in the |dbx_query| result data property, including columns
+accessible by index or fieldname when the flags for |dbx_query| were set that
+way.
+
+Upon failure, returns 0 (e.g. when no more rows are available).
+
+==============================================================================
+*Examples*
+
+Example #1 How to handle the returned value
+
+<?php >
+    $result = dbx_query($link, 'SELECT id, parentid, description FROM table', 
+    DBX_RESULT_UNBUFFERED);
+
+    echo "<table>\n";
+    while ($row = dbx_fetch_row($result)) {
+        echo "<tr>\n";
+        foreach ($row as $field) {
+            echo "<td>$field</td>";
+        }
+        echo "</tr>\n";
+    }
+    echo "</table>\n";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |dbx_query| - Send a query and fetch all results (if any)
+
+
+vim:ft=help:

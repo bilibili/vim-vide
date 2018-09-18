@@ -1,0 +1,62 @@
+svn_auth_set_parameter
+
+(PECL svn >= 0.1.0)
+
+svn_auth_set_parameter — Sets an authentication parameter
+
+==============================================================================
+*Description*
+
+    void svn_auth_set_parameter ( string $key , string $value )~
+
+Sets authentication parameter at {key} to {value}. For a list of valid keys
+and their meanings, consult the authentication constants list.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    String key name. Use the authentication constants defined by this
+    extension to specify a key.
+
+{value}
+
+    String value to set to parameter at key. Format of value varies with the
+    parameter.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*Examples*
+
+Example #1 Default authentication example
+
+This example configures SVN so that the default username to use is 'Bob' and
+the default password is 'abc123':
+
+<?php >
+    svn_auth_set_parameter(SVN_AUTH_PARAM_DEFAULT_USERNAME, 'Bob');
+    svn_auth_set_parameter(SVN_AUTH_PARAM_DEFAULT_PASSWORD, 'abc123');
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |svn_auth_get_parameter| - Retrieves authentication parameter
+  * Authentication constants
+
+
+vim:ft=help:

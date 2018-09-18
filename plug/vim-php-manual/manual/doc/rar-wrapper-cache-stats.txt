@@ -1,0 +1,26 @@
+rar_wrapper_cache_stats
+
+(PECL rar >= 3.0.0)
+
+rar_wrapper_cache_stats — Cache hits and misses for the URL wrapper
+
+==============================================================================
+*Description*
+
+    string rar_wrapper_cache_stats ( void )~
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

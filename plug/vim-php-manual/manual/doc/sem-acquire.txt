@@ -1,0 +1,52 @@
+sem_acquire
+
+(PHP 4, PHP 5, PHP 7)
+
+sem_acquire — Acquire a semaphore
+
+==============================================================================
+*Description*
+
+    bool sem_acquire ( resource $sem_identifier [, bool $nowait = false ] )~
+
+sem_acquire() by default blocks (if necessary) until the semaphore can be
+acquired. A process attempting to acquire a semaphore which it has already
+acquired will block forever if acquiring the semaphore would cause its maximum
+number of semaphore to be exceeded.
+
+After processing a request, any semaphores acquired by the process but not
+explicitly released will be released automatically and a warning will be
+generated.
+
+==============================================================================
+*Parameters*
+
+{sem_identifier}
+
+    {sem_identifier} is a semaphore resource, obtained from |sem_get|.
+
+{nowait}
+
+    Specifies if the process shouldn't wait for the semaphore to be acquired.
+    If set to true, the call will return false immediately if a semaphore
+    cannot be immediately acquired.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version           Description
+5.6.1   The $nowait parameter was added.
+
+==============================================================================
+*See* *Also*
+
+  * |sem_get| - Get a semaphore id
+  * |sem_release| - Release a semaphore
+
+
+vim:ft=help:

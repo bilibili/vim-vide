@@ -1,0 +1,53 @@
+XMLWriter::writeDTDAttlist
+
+xmlwriter_write_dtd_attlist
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::writeDTDAttlist -- xmlwriter_write_dtd_attlist — Write full DTD
+AttList tag
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::writeDTDAttlist ( string $name , string $content )~
+
+Procedural style
+
+    bool xmlwriter_write_dtd_attlist ( resource $xmlwriter , string $name ,~
+    string $content )~
+
+Writes a DTD attribute list.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{name}
+
+    The name of the DTD attribute list.
+
+{content}
+
+    The content of the DTD attribute list.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::startDTDAttlist| - Create start DTD AttList
+  * |XMLWriter::endDTDAttlist| - End current DTD AttList
+
+
+vim:ft=help:

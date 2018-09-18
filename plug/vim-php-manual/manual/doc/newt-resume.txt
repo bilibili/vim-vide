@@ -1,0 +1,25 @@
+newt_resume
+
+(PECL newt >= 0.1)
+
+newt_resume — Resume using the newt interface after calling |newt_suspend|
+
+==============================================================================
+*Description*
+
+    void newt_resume ( void )~
+
+Resume using the newt interface after calling |newt_suspend|.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |newt_suspend| - Tells newt to return the terminal to its initial state
+
+
+vim:ft=help:

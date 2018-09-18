@@ -1,0 +1,53 @@
+filter_list
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+filter_list — Returns a list of all supported filters
+
+==============================================================================
+*Description*
+
+    array filter_list ( void )~
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of names of all supported filters, empty array if there are
+no such filters. Indexes of this array are not filter IDs, they can be
+obtained with |filter_id| from a name instead.
+
+==============================================================================
+*Examples*
+
+Example #1 A filter_list() example
+
+<?php >
+    print_r(filter_list());
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => int
+    [1] => boolean
+    [2] => float
+    [3] => validate_regexp
+    [4] => validate_url
+    [5] => validate_email
+    [6] => validate_ip
+    [7] => string
+    [8] => stripped
+    [9] => encoded
+    [10] => special_chars
+    [11] => unsafe_raw
+    [12] => email
+    [13] => url
+    [14] => number_int
+    [15] => number_float
+    [16] => magic_quotes
+    [17] => callback
+)
+
+
+vim:ft=help:

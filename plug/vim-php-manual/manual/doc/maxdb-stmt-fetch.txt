@@ -1,0 +1,148 @@
+maxdb_stmt_fetch
+
+maxdb_stmt::fetch
+
+(PECL maxdb >= 1.0)
+
+maxdb_stmt_fetch -- maxdb_stmt::fetch — Fetch results from a prepared
+statement into the bound variables
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_stmt_fetch ( resource $stmt )~
+
+Object oriented style
+
+    bool maxdb_stmt::fetch ( void )~
+
+maxdb_stmt_fetch() returns row data using the variables bound by 
+|maxdb_stmt_bind_result|.
+
+    Note:
+
+    Note that all columns must be bound by the application before calling 
+    maxdb_stmt_fetch().
+
+==============================================================================
+*Return* *Values*
+
+           Return values
+Value          Description
+TRUE  Success. Data has been fetched
+FALSE Error occurred
+NULL  No more rows/data exists
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT zip, name FROM hotel.city ORDER by name";
+
+    if ($stmt = $maxdb->prepare($query)) {
+
+       /* execute statement */
+       $stmt->execute();
+
+       /* bind result variables */
+       $stmt->bind_result($name, $code);
+
+       /* fetch values */
+       while ($stmt->fetch()) {
+           printf ("%s (%s)\n", $name, $code);
+       }
+
+       /* close statement */
+       $stmt->close();
+    }
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $query = "SELECT zip, name FROM hotel.city ORDER by name";
+
+    if ($stmt = maxdb_prepare($link, $query)) {
+
+       /* execute statement */
+       maxdb_stmt_execute($stmt);
+
+       /* bind result variables */
+       maxdb_stmt_bind_result($stmt, $name, $code);
+
+       /* fetch values */
+       while (maxdb_stmt_fetch($stmt)) {
+           printf ("%s (%s)\n", $name, $code);
+       }
+
+       /* close statement */
+       maxdb_stmt_close($stmt);
+    }
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+12203 (Albany)
+60601 (Chicago)
+60615 (Chicago)
+45211 (Cincinnati)
+33575 (Clearwater)
+75243 (Dallas)
+32018 (Daytona Beach)
+33441 (Deerfield Beach)
+48226 (Detroit)
+90029 (Hollywood)
+92714 (Irvine)
+90804 (Long Beach)
+11788 (Long Island)
+90018 (Los Angeles)
+70112 (New Orleans)
+10019 (New York)
+10580 (New York)
+92262 (Palm Springs)
+97213 (Portland)
+60018 (Rosemont)
+95054 (Santa Clara)
+20903 (Silver Spring)
+20005 (Washington)
+20019 (Washington)
+20037 (Washington)
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_prepare| - Prepare an SQL statement for execution
+  * |maxdb_stmt_errno| - Returns the error code for the most recent statement
+    call
+  * |maxdb_stmt_error| - Returns a string description for last statement error
+  * |maxdb_stmt_bind_result| - Binds variables to a prepared statement for
+    result storage
+
+
+vim:ft=help:

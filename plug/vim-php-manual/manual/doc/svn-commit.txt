@@ -1,0 +1,99 @@
+svn_commit
+
+(PECL svn >= 0.1.0)
+
+svn_commit — Sends changes from the local working copy to the repository
+
+==============================================================================
+*Description*
+
+    array svn_commit ( string $log , array $targets [, bool $recursive = true~
+    ] )~
+
+Commits changes made in the local working copy files enumerated in the
+{targets} array to the repository, with the log message {log}. Directories in
+the {targets} array will be recursively committed unless {recursive} is set to
+FALSE.
+
+    Note: This function does not have any parameters for specifying
+    authentication, so a username and password must be set using 
+    |svn_auth_set_parameter|
+
+==============================================================================
+*Parameters*
+
+{log}
+
+    String log text to commit
+
+{targets}
+
+    Array of local paths of files to be committed
+
+    Warning
+
+    This parameter must be an array, a string for a single target is not
+    acceptable.
+
+        Note: Relative paths will be resolved as if the current working
+        directory was the one that contains the PHP binary. To use the calling
+        script's working directory, use |realpath| or dirname(__FILE__).
+
+{recursive}
+
+    Boolean flag to disable recursive committing of directories in the
+    {targets} array. Default is TRUE.
+
+==============================================================================
+*Return* *Values*
+
+Returns array in form of:
+
+array(
+    0 => integer revision number of commit
+    1 => string ISO 8601 date and time of commit
+    2 => name of committer
+)
+
+Returns FALSE on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*Examples*
+
+Example #1 Basic example
+
+This example commits the calculator directory to a repository, using the
+username Bob and the password abc123 (hopefully, his password is stronger):
+
+<?php >
+    svn_auth_set_parameter(SVN_AUTH_PARAM_DEFAULT_USERNAME, 'Bob');
+    svn_auth_set_parameter(SVN_AUTH_PARAM_DEFAULT_PASSWORD, 'abc123');
+    var_dump(svn_commit('Log message of Bob\'s commit', array(realpath(
+    'calculator'))));
+<?>
+
+The above example will output:
+
+array(
+  0 => 1415,
+  1 => '2007-05-26T01:44:28.453125Z',
+  2 => 'Bob'
+)
+
+==============================================================================
+*See* *Also*
+
+  * |svn_auth_set_parameter| - Sets an authentication parameter
+  * >> SVN documentation on svn commit
+
+
+vim:ft=help:

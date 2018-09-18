@@ -1,0 +1,43 @@
+ps_setmiterlimit
+
+(PECL ps >= 1.1.0)
+
+ps_setmiterlimit — Sets the miter limit
+
+==============================================================================
+*Description*
+
+    bool ps_setmiterlimit ( resource $psdoc , float $value )~
+
+If two lines join in a small angle and the line join is set to
+PS_LINEJOIN_MITER, then the resulting spike will be very long. The miter limit
+is the maximum ratio of the miter length (the length of the spike) and the
+line width.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{value}
+
+    The maximum ratio between the miter length and the line width. Larger
+    values (> 10) will result in very long spikes when two lines meet in a
+    small angle. Keep the default unless you know what you are doing.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_setlinecap| - Sets appearance of line ends
+  * |ps_setlinejoin| - Sets how contected lines are joined
+  * |ps_setlinewidth| - Sets width of a line
+
+
+vim:ft=help:

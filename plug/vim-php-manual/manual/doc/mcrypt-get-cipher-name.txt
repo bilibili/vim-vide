@@ -1,0 +1,54 @@
+mcrypt_get_cipher_name
+
+(PHP 4, PHP 5, PHP 7)
+
+mcrypt_get_cipher_name — Gets the name of the specified cipher
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    string mcrypt_get_cipher_name ( int $cipher )~
+    string mcrypt_get_cipher_name ( string $cipher )~
+
+mcrypt_get_cipher_name() is used to get the name of the specified cipher.
+
+mcrypt_get_cipher_name() takes the cipher number as an argument (libmcrypt
+2.2.x) or takes the cipher name as an argument (libmcrypt 2.4.x or higher) and
+returns the name of the cipher or FALSE, if the cipher does not exist.
+
+==============================================================================
+*Parameters*
+
+{cipher}
+
+    One of the MCRYPT_ciphername constants, or the name of the algorithm as
+    string.
+
+==============================================================================
+*Return* *Values*
+
+This function returns the name of the cipher or FALSE if the cipher does not
+exist.
+
+==============================================================================
+*Examples*
+
+Example #1 mcrypt_get_cipher_name() Example
+
+<?php >
+       $cipher = MCRYPT_TripleDES;
+
+       echo mcrypt_get_cipher_name($cipher);
+<?>
+
+The above example will output:
+
+3DES
+
+
+vim:ft=help:

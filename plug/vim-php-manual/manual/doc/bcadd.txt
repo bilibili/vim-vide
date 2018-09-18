@@ -1,0 +1,59 @@
+bcadd
+
+(PHP 4, PHP 5, PHP 7)
+
+bcadd — Add two arbitrary precision numbers
+
+==============================================================================
+*Description*
+
+    string bcadd ( string $left_operand , string $right_operand [, int $scale~
+    = 0 ] )~
+
+Sums {left_operand} and {right_operand}.
+
+==============================================================================
+*Parameters*
+
+{left_operand}
+
+    The left operand, as a string.
+
+{right_operand}
+
+    The right operand, as a string.
+
+{ scale}
+
+    This optional parameter is used to set the number of digits after the
+    decimal place in the result. If omitted, it will default to the scale set
+    globally with the |bcscale| function, or fallback to 0 if this has not
+    been set.
+
+==============================================================================
+*Return* *Values*
+
+The sum of the two operands, as a string.
+
+==============================================================================
+*Examples*
+
+Example #1 bcadd() example
+
+<?php >
+
+    $a = '1.234';
+    $b = '5';
+
+    echo bcadd($a, $b);     // 6
+    echo bcadd($a, $b, 4);  // 6.2340
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |bcsub| - Subtract one arbitrary precision number from another
+
+
+vim:ft=help:

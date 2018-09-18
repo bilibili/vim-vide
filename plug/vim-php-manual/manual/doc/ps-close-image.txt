@@ -1,0 +1,39 @@
+ps_close_image
+
+(PECL ps >= 1.1.0)
+
+ps_close_image — Closes image and frees memory
+
+==============================================================================
+*Description*
+
+    void ps_close_image ( resource $psdoc , int $imageid )~
+
+Closes an image and frees its resources. Once an image is closed it cannot be
+used anymore.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{imageid}
+
+    Resource identifier of the image as returned by |ps_open_image| or 
+    |ps_open_image_file|.
+
+==============================================================================
+*Return* *Values*
+
+Returns NULL on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_open_image| - Reads an image for later placement
+  * |ps_open_image_file| - Opens image from file
+
+
+vim:ft=help:

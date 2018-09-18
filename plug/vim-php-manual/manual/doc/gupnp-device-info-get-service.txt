@@ -1,0 +1,62 @@
+gupnp_device_info_get_service
+
+(PECL gupnp >= 0.1.0)
+
+gupnp_device_info_get_service — Get the service with type
+
+==============================================================================
+*Description*
+
+    resource gupnp_device_info_get_service ( resource $root_device , string~
+    $type )~
+
+Get the service with type or false if no such device was found.
+
+==============================================================================
+*Parameters*
+
+{root_device}
+
+    A root device identifier, returned by |gupnp_root_device_new|.
+
+{type}
+
+    The type of the service to be retrieved.
+
+==============================================================================
+*Return* *Values*
+
+A service identifier.
+
+==============================================================================
+*Examples*
+
+Example #1 Create new UPnP context and get device info service
+
+<?php >
+
+    /* Create the UPnP context */
+    $context = gupnp_context_new();
+
+    if (!$context) {
+     die("Error creating the GUPnP context\n");
+    }
+
+    /* Create root device */
+    $location = "/BinaryLight1.xml";
+    $dev = gupnp_root_device_new($context, $location);
+
+    /* Set root device is available */
+    gupnp_root_device_set_available($dev, true);
+
+    /* Get the switch service from the root device */
+    $service_type = "urn:schemas-upnp-org:service:SwitchPower:1";
+    $service = gupnp_device_info_get_service($dev, $service_type);
+    if (!$service) {
+        die("Cannot get SwitchPower1 service\n");
+    }
+
+<?>
+
+
+vim:ft=help:

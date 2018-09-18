@@ -1,0 +1,29 @@
+iis_get_server_by_path
+
+(PECL iisfunc SVN)
+
+iis_get_server_by_path — Return the instance number associated with the Path
+
+==============================================================================
+*Description*
+
+    int iis_get_server_by_path ( string $path )~
+
+Each virtual server in IIS is associated with an instance number. 
+iis_get_server_by_path() finds the instance number from the actual path to the
+root directory.
+
+==============================================================================
+*Parameters*
+
+{path}
+
+    The path to the root directory
+
+==============================================================================
+*Return* *Values*
+
+Returns the server instance number.
+
+
+vim:ft=help:

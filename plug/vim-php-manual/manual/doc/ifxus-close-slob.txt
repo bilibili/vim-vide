@@ -1,0 +1,32 @@
+ifxus_close_slob
+
+(PHP 4, PHP <=5.2.0)
+
+ifxus_close_slob — Deletes the slob object
+
+==============================================================================
+*Description*
+
+    bool ifxus_close_slob ( int $bid )~
+
+Deletes the slob object on the given slob object-id {bid}.
+
+==============================================================================
+*Parameters*
+
+{bid}
+
+    An existing slob id.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ifxus_open_slob| - Opens an slob object
+
+
+vim:ft=help:

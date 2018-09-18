@@ -1,0 +1,66 @@
+stream_socket_accept
+
+(PHP 5, PHP 7)
+
+stream_socket_accept — Accept a connection on a socket created by 
+|stream_socket_server|
+
+==============================================================================
+*Description*
+
+    resource stream_socket_accept ( resource $server_socket [, float $timeout~
+    = ini_get("default_socket_timeout") [, string &$peername ]] )~
+
+Accept a connection on a socket previously created by |stream_socket_server|.
+
+==============================================================================
+*Parameters*
+
+{server_socket}
+
+    The server socket to accept a connection from.
+
+{timeout}
+
+    Override the default socket accept timeout. Time should be given in
+    seconds.
+
+{peername}
+
+    Will be set to the name (address) of the client which connected, if
+    included and available from the selected transport.
+
+        Note:
+
+        Can also be determined later using |stream_socket_get_name|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a stream to the accepted socket connection or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function should not be used with UDP server sockets. Instead, use 
+|stream_socket_recvfrom| and |stream_socket_sendto|.
+
+==============================================================================
+*See* *Also*
+
+  * |stream_socket_server| - Create an Internet or Unix domain server socket
+  * |stream_socket_get_name| - Retrieve the name of the local or remote
+    sockets
+  * |stream_set_blocking| - Set blocking/non-blocking mode on a stream
+  * |stream_set_timeout| - Set timeout period on a stream
+  * |fgets| - Gets line from file pointer
+  * |fgetss| - Gets line from file pointer and strip HTML tags
+  * |fwrite| - Binary-safe file write
+  * |fclose| - Closes an open file pointer
+  * |feof| - Tests for end-of-file on a file pointer
+  * cURL Functions
+
+
+vim:ft=help:

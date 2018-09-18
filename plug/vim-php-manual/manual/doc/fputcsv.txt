@@ -1,0 +1,98 @@
+fputcsv
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+fputcsv — Format line as CSV and write to file pointer
+
+==============================================================================
+*Description*
+
+    int fputcsv ( resource $handle , array $fields [, string $delimiter =~
+    "," [, string $enclosure = '"' [, string~
+    $escape_char = "\" ]]] )~
+
+fputcsv() formats a line (passed as a {fields} array) as CSV and write it
+(terminated by a newline) to the specified file {handle}.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    The file pointer must be valid, and must point to a file successfully
+    opened by |fopen| or |fsockopen| (and not yet closed by |fclose|).
+
+{fields}
+
+    An array of values.
+
+{delimiter}
+
+    The optional {delimiter} parameter sets the field delimiter (one character
+    only).
+
+{enclosure}
+
+    The optional {enclosure} parameter sets the field enclosure (one character
+    only).
+
+{escape_char}
+
+    The optional {escape_char} parameter sets the escape character (one
+    character only).
+
+==============================================================================
+*Return* *Values*
+
+Returns the length of the written string or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version              Description
+5.5.4   The {escape_char} parameter was added
+
+==============================================================================
+*Examples*
+
+Example #1 fputcsv() example
+
+<?php >
+
+    $list = array (
+        array('aaa', 'bbb', 'ccc', 'dddd'),
+        array('123', '456', '789'),
+        array('"aaa"', '"bbb"')
+    );
+
+    $fp = fopen('file.csv', 'w');
+
+    foreach ($list as $fields) {
+        fputcsv($fp, $fields);
+    }
+
+    fclose($fp);
+<?>
+
+The above example will write the following to file.csv:
+
+aaa,bbb,ccc,dddd
+123,456,789
+"""aaa""","""bbb"""
+
+
+==============================================================================
+*Notes*
+
+    Note: If PHP is not properly recognizing the line endings when reading
+    files either on or created by a Macintosh computer, enabling the
+    auto_detect_line_endings run-time configuration option may help resolve
+    the problem.
+
+==============================================================================
+*See* *Also*
+
+  * |fgetcsv| - Gets line from file pointer and parse for CSV fields
+
+
+vim:ft=help:

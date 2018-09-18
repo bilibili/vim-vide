@@ -1,0 +1,36 @@
+oauth_get_sbs
+
+(PECL OAuth >=0.99.7)
+
+oauth_get_sbs — Generate a Signature Base String
+
+==============================================================================
+*Description*
+
+    string oauth_get_sbs ( string $http_method , string $uri [, array~
+    $request_parameters ] )~
+
+Generates a Signature Base String according to pecl/oauth.
+
+==============================================================================
+*Parameters*
+
+{http_method}
+
+    The HTTP method.
+
+{uri}
+
+    URI to encode.
+
+{request_parameters}
+
+    Array of request parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns a Signature Base String.
+
+
+vim:ft=help:

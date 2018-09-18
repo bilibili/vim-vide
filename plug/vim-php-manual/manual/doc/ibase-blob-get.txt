@@ -1,0 +1,60 @@
+ibase_blob_get
+
+(PHP 5, PHP 7)
+
+ibase_blob_get — Get len bytes data from open blob
+
+==============================================================================
+*Description*
+
+    string ibase_blob_get ( resource $blob_handle , int $len )~
+
+This function returns at most {len} bytes from a BLOB that has been opened for
+reading by |ibase_blob_open|.
+
+    Note:
+
+    It is not possible to read from a BLOB that has been opened for writing by
+    |ibase_blob_create|.
+
+==============================================================================
+*Parameters*
+
+{blob_handle}
+
+    A BLOB handle opened with |ibase_blob_open|.
+
+{len}
+
+    Size of returned data.
+
+==============================================================================
+*Return* *Values*
+
+Returns at most {len} bytes from the BLOB, or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 ibase_blob_get() example
+
+<?php >
+    $result    = ibase_query("SELECT blob_value FROM table");
+    $data      = ibase_fetch_object($result);
+    $blob_data = ibase_blob_info($data->BLOB_VALUE);
+    $blob_hndl = ibase_blob_open($data->BLOB_VALUE);
+    echo         ibase_blob_get($blob_hndl, $blob_data[0]);
+<?>
+Whilst this example doesn't do much more than a 'ibase_blob_echo($data->
+BLOB_VALUE)' would do, it does show you how to get information into a
+$variable to manipulate as you please.
+
+==============================================================================
+*See* *Also*
+
+  * |ibase_blob_open| - Open blob for retrieving data parts
+  * |ibase_blob_close| - Close blob
+  * |ibase_blob_echo| - Output blob contents to browser
+
+
+vim:ft=help:

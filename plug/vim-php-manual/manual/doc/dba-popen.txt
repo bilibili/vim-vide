@@ -1,0 +1,47 @@
+dba_popen
+
+(PHP 4, PHP 5, PHP 7)
+
+dba_popen — Open database persistently
+
+==============================================================================
+*Description*
+
+    resource dba_popen ( string $path , string $mode [, string $handler [,~
+    mixed $... ]] )~
+
+dba_popen() establishes a persistent database instance for {path} with {mode}
+using {handler}.
+
+==============================================================================
+*Parameters*
+
+{path}
+
+    Commonly a regular path in your filesystem.
+
+{mode}
+
+    It is r for read access, w for read/write access to an already existing
+    database, c for read/write access and database creation if it doesn't
+    currently exist, and n for create, truncate and read/write access.
+
+{handler}
+
+    The name of the handler which shall be used for accessing {path}. It is
+    passed all optional parameters given to dba_popen() and can act on behalf
+    of them.
+
+==============================================================================
+*Return* *Values*
+
+Returns a positive handle on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |dba_open| - Open database
+  * |dba_close| - Close a DBA database
+
+
+vim:ft=help:

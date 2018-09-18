@@ -1,0 +1,32 @@
+mcrypt_enc_get_block_size
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+mcrypt_enc_get_block_size — Returns the blocksize of the opened algorithm
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    int mcrypt_enc_get_block_size ( resource $td )~
+
+Gets the blocksize of the opened algorithm.
+
+==============================================================================
+*Parameters*
+
+{td}
+
+    The encryption descriptor.
+
+==============================================================================
+*Return* *Values*
+
+Returns the block size of the specified algorithm in bytes.
+
+
+vim:ft=help:

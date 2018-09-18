@@ -1,0 +1,55 @@
+com_load_typelib
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+com_load_typelib — Loads a Typelib
+
+==============================================================================
+*Description*
+
+    bool com_load_typelib ( string $typelib_name [, bool $case_insensitive =~
+    true ] )~
+
+Loads a type-library and registers its constants in the engine, as though they
+were defined using |define|.
+
+Note that it is much more efficient to use the  configuration setting to
+pre-load and register the constants, although not so flexible.
+
+If you have turned on  , then PHP will attempt to automatically register the
+constants associated with a COM object when you instantiate it. This depends
+on the interfaces provided by the COM object itself, and may not always be
+possible.
+
+==============================================================================
+*Parameters*
+
+{typelib_name}
+
+    {typelib_name} can be one of the following:
+      + The filename of a .tlb file or the executable module that contains the
+        type library.
+
+      + The type library GUID, followed by its version number, for example
+        {00000200-0000-0010-8000-00AA006D2EA4},2,0.
+
+      + The type library name, e.g. Microsoft OLE DB ActiveX Data Objects 1.0
+        Library.
+
+    PHP will attempt to resolve the type library in this order, as the process
+    gets more and more expensive as you progress down the list; searching for
+    the type library by name is handled by physically enumerating the registry
+    until we find a match.
+
+{case_insensitive}
+
+    The {case_insensitive} behaves in the same way as the parameter with the
+    same name in the |define| function.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

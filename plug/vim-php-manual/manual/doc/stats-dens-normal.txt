@@ -1,0 +1,29 @@
+stats_dens_normal
+
+(PECL stats >= 1.0.0)
+
+stats_dens_normal — Not documented
+
+==============================================================================
+*Description*
+
+    float stats_dens_normal ( float $x , float $ave , float $stdev )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{x}
+
+{ave}
+
+{stdev}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

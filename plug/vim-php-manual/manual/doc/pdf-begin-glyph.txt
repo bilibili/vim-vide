@@ -1,0 +1,16 @@
+PDF_begin_glyph
+
+(PECL pdflib >= 2.0.0)
+
+PDF_begin_glyph — Start glyph definition for Type 3 font
+
+==============================================================================
+*Description*
+
+    bool PDF_begin_glyph ( resource $pdfdoc , string $glyphname , float $wx ,~
+    float $llx , float $lly , float $urx , float $ury )~
+
+Starts a glyph definition for a Type 3 font.
+
+
+vim:ft=help:

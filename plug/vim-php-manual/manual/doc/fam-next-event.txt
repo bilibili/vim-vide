@@ -1,0 +1,41 @@
+fam_next_event
+
+(PHP 5 <= 5.0.5)
+
+fam_next_event — Get next pending FAM event
+
+==============================================================================
+*Description*
+
+    array fam_next_event ( resource $fam )~
+
+Returns the next pending FAM event.
+
+The function will block until an event is available which can be checked for
+using |fam_pending|.
+
+==============================================================================
+*Parameters*
+
+{fam}
+
+    A resource representing a connection to the FAM service returned by 
+    |fam_open|
+
+==============================================================================
+*Return* *Values*
+
+Returns an array that contains a FAM event code in the 'code' element, the
+path of the file this event applies to in the 'filename' element and
+optionally a hostname in the 'hostname' element.
+
+The possible event codes are described in detail in the constants part of this
+section.
+
+==============================================================================
+*See* *Also*
+
+  * |fam_pending| - Check for pending FAM events
+
+
+vim:ft=help:

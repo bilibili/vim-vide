@@ -1,0 +1,56 @@
+strcmp
+
+(PHP 4, PHP 5, PHP 7)
+
+strcmp — Binary safe string comparison
+
+==============================================================================
+*Description*
+
+    int strcmp ( string $str1 , string $str2 )~
+
+Note that this comparison is case sensitive.
+
+==============================================================================
+*Parameters*
+
+{str1}
+
+    The first string.
+
+{str2}
+
+    The second string.
+
+==============================================================================
+*Return* *Values*
+
+Returns < 0 if {str1} is less than {str2}; > 0 if {str1} is greater than
+{str2}, and 0 if they are equal.
+
+==============================================================================
+*Examples*
+
+Example #1 strcmp() example
+
+<?php >
+    $var1 = "Hello";
+    $var2 = "hello";
+    if (strcmp($var1, $var2) !== 0) {
+        echo '$var1 is not equal to $var2 in a case sensitive string comparison';
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |strcasecmp| - Binary safe case-insensitive string comparison
+  * |preg_match| - Perform a regular expression match
+  * |substr_compare| - Binary safe comparison of two strings from an offset,
+    up to length characters
+  * |strncmp| - Binary safe string comparison of the first n characters
+  * |strstr| - Find the first occurrence of a string
+  * |substr| - Return part of a string
+
+
+vim:ft=help:

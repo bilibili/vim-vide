@@ -1,0 +1,14 @@
+PDF_setpolydash
+
+(PHP 4 >= 4.0.5, PECL pdflib >= 1.0.0)
+
+PDF_setpolydash — Set complicated dash pattern [deprecated]
+
+==============================================================================
+*Description*
+
+This function is deprecated since PDFlib version 5, use |PDF_setdashpattern|
+instead.
+
+
+vim:ft=help:

@@ -1,0 +1,196 @@
+db2_bind_param
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_bind_param — Binds a PHP variable to an SQL statement parameter
+
+==============================================================================
+*Description*
+
+    bool db2_bind_param ( resource $stmt , int $parameter-number , string~
+    $variable-name [, int $parameter-type [, int $data-type = 0 [, int~
+    $precision = -1 [, int $scale = 0 ]]]] )~
+
+Binds a PHP variable to an SQL statement parameter in a statement resource
+returned by |db2_prepare|. This function gives you more control over the
+parameter type, data type, precision, and scale for the parameter than simply
+passing the variable as part of the optional input array to |db2_execute|.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A prepared statement returned from |db2_prepare|.
+
+{parameter-number}
+
+    Specifies the 1-indexed position of the parameter in the prepared
+    statement.
+
+{variable-name}
+
+    A string specifying the name of the PHP variable to bind to the parameter
+    specified by {parameter-number}.
+
+{parameter-type}
+
+    A constant specifying whether the PHP variable should be bound to the SQL
+    parameter as an input parameter (DB2_PARAM_IN), an output parameter (
+    DB2_PARAM_OUT), or as a parameter that accepts input and returns output (
+    DB2_PARAM_INOUT). To avoid memory overhead, you can also specify
+    DB2_PARAM_FILE to bind the PHP variable to the name of a file that
+    contains large object (BLOB, CLOB, or DBCLOB) data.
+
+{data-type}
+
+    A constant specifying the SQL data type that the PHP variable should be
+    bound as: one of DB2_BINARY, DB2_CHAR, DB2_DOUBLE, or DB2_LONG .
+
+{precision}
+
+    Specifies the precision with which the variable should be bound to the
+    database. This parameter can also be used for retrieving XML output values
+    from stored procedures. A non-negative value specifies the maximum size of
+    the XML data that will be retrieved from the database. If this parameter
+    is not used, a default of 1MB will be assumed for retrieving the XML
+    output value from the stored procedure.
+
+{scale}
+
+    Specifies the scale with which the variable should be bound to the
+    database.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Binding PHP variables to a prepared statement
+
+The SQL statement in the following example uses two input parameters in the
+WHERE clause. We call db2_bind_param() to bind two PHP variables to the
+corresponding SQL parameters. Notice that the PHP variables do not have to be
+declared or assigned before the call to db2_bind_param(); in the example,
+$lower_limit is assigned a value before the call to db2_bind_param(), but
+$upper_limit is assigned a value after the call to db2_bind_param(). The
+variables must be bound and, for parameters that accept input, must have any
+value assigned, before calling |db2_execute|.
+
+<?php >
+
+    $sql = 'SELECT name, breed, weight FROM animals
+        WHERE weight > ? AND weight < ?';
+    $conn = db2_connect($database, $user, $password);
+    $stmt = db2_prepare($conn, $sql);
+
+    // We can declare the variable before calling db2_bind_param()
+    $lower_limit = 1;
+
+    db2_bind_param($stmt, 1, "lower_limit", DB2_PARAM_IN);
+    db2_bind_param($stmt, 2, "upper_limit", DB2_PARAM_IN);
+
+    // We can also declare the variable after calling db2_bind_param()
+    $upper_limit = 15.0;
+
+    if (db2_execute($stmt)) {
+        while ($row = db2_fetch_array($stmt)) {
+            print "{$row[0]}, {$row[1]}, {$row[2]}\n";
+        }
+    }
+<?>
+
+The above example will output:
+
+Pook, cat, 3.2
+Rickety Ride, goat, 9.7
+Peaches, dog, 12.3
+
+Example #2 Calling stored procedures with IN and OUT parameters
+
+The stored procedure match_animal in the following example accepts three
+different parameters:
+
+ 1. an input (IN) parameter that accepts the name of the first animal as input
+
+ 2. an input-output (INOUT) parameter that accepts the name of the second
+    animal as input and returns the string TRUE if an animal in the database
+    matches that name
+
+ 3. an output (OUT) parameter that returns the sum of the weight of the two
+    identified animals
+
+In addition, the stored procedure returns a result set consisting of the
+animals listed in alphabetic order starting at the animal corresponding to the
+input value of the first parameter and ending at the animal corresponding to
+the input value of the second parameter.
+
+<?php >
+
+    $sql = 'CALL match_animal(?, ?, ?)';
+    $conn = db2_connect($database, $user, $password);
+    $stmt = db2_prepare($conn, $sql);
+
+    $name = "Peaches";
+    $second_name = "Rickety Ride";
+    $weight = 0;
+
+    db2_bind_param($stmt, 1, "name", DB2_PARAM_IN);
+    db2_bind_param($stmt, 2, "second_name", DB2_PARAM_INOUT);
+    db2_bind_param($stmt, 3, "weight", DB2_PARAM_OUT);
+
+    print "Values of bound parameters _before_ CALL:\n";
+    print "  1: {$name} 2: {$second_name} 3: {$weight}\n\n";
+
+    if (db2_execute($stmt)) {
+        print "Values of bound parameters _after_ CALL:\n";
+        print "  1: {$name} 2: {$second_name} 3: {$weight}\n\n";
+
+        print "Results:\n";
+        while ($row = db2_fetch_array($stmt)) {
+            print "  {$row[0]}, {$row[1]}, {$row[2]}\n";
+        }
+    }
+<?>
+
+The above example will output:
+
+Values of bound parameters _before_ CALL:
+  1: Peaches 2: Rickety Ride 3: 0
+
+Values of bound parameters _after_ CALL:
+  1: Peaches 2: TRUE 3: 22
+
+Results:
+  Peaches, dog, 12.3
+  Pook, cat, 3.2
+  Rickety Ride, goat, 9.7
+
+Example #3 Inserting a binary large object (BLOB) directly from a file
+
+The data for large objects are typically stored in files, such as XML
+documents or audio files. Rather than reading an entire file into a PHP
+variable, and then binding that PHP variable into an SQL statement, you can
+avoid some memory overhead by binding the file directly to the input parameter
+of your SQL statement. The following example demonstrates how to bind a file
+directly into a BLOB column.
+
+<?php >
+    $stmt = db2_prepare($conn, "INSERT INTO animal_pictures(picture) VALUES (?)");
+
+    $picture = "/opt/albums/spook/grooming.jpg";
+    $rc = db2_bind_param($stmt, 1, "picture", DB2_PARAM_FILE);
+    $rc = db2_execute($stmt);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |db2_execute| - Executes a prepared SQL statement
+  * |db2_prepare| - Prepares an SQL statement to be executed
+
+
+vim:ft=help:

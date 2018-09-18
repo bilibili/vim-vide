@@ -1,0 +1,55 @@
+win32_ps_stat_proc
+
+(PECL win32ps >= 1.0.1)
+
+win32_ps_stat_proc — Stat process
+
+==============================================================================
+*Description*
+
+    array win32_ps_stat_proc ([ int $pid = 0 ] )~
+
+Retrieves statistics about the process with the process id {pid}.
+
+==============================================================================
+*Parameters*
+
+{pid}
+
+    The process id of the process to stat. If omitted, the id of the current
+    process.
+
+==============================================================================
+*Return* *Values*
+
+Returns FALSE on failure, or an array consisting of the following information
+on success:
+
+{pid}
+
+    The process id.
+
+{exe}
+
+    The path to the executable image.
+
+{mem}
+
+    An array containing information about the following memory utilization
+    indicators: {page_fault_count}, {peak_working_set_size},
+    {working_set_size}, {quota_peak_paged_pool_usage},
+    {quota_paged_pool_usage}, {quota_peak_non_paged_pool_usage},
+    {quota_non_paged_pool_usage}, {pagefile_usage} and {peak_pagefile_usage}.
+
+{tms}
+
+    An array containing information about the following CPU time utilization
+    indicators: {created}, {kernel} and {user}.
+
+==============================================================================
+*See* *Also*
+
+  * |win32_ps_list_procs| - List running processes
+
+
+vim:ft=help:

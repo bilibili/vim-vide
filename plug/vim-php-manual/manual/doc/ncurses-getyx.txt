@@ -1,0 +1,26 @@
+ncurses_getyx
+
+(PHP 4 >= 4.3.0, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_getyx — Returns the current cursor position for a window
+
+==============================================================================
+*Description*
+
+    void ncurses_getyx ( resource $window , int &$y , int &$x )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{window}
+
+{y}
+
+{x}
+
+
+vim:ft=help:

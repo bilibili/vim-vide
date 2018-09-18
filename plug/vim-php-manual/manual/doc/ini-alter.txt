@@ -1,0 +1,13 @@
+ini_alter
+
+(PHP 4, PHP 5, PHP 7)
+
+ini_alter — Alias of |ini_set|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |ini_set|.
+
+
+vim:ft=help:

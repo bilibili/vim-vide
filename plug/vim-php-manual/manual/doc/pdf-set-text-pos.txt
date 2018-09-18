@@ -1,0 +1,16 @@
+PDF_set_text_pos
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_set_text_pos — Set text position
+
+==============================================================================
+*Description*
+
+    bool PDF_set_text_pos ( resource $p , float $x , float $y )~
+
+Sets the position for text output on the page. Returns TRUE on success or
+FALSE on failure.
+
+
+vim:ft=help:

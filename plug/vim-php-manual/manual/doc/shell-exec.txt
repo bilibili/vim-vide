@@ -1,0 +1,59 @@
+shell_exec
+
+(PHP 4, PHP 5, PHP 7)
+
+shell_exec — Execute command via shell and return the complete output as a
+string
+
+==============================================================================
+*Description*
+
+    string shell_exec ( string $cmd )~
+
+This function is identical to the backtick operator.
+
+==============================================================================
+*Parameters*
+
+{cmd}
+
+    The command that will be executed.
+
+==============================================================================
+*Return* *Values*
+
+The output from the executed command or NULL if an error occurred or the
+command produces no output.
+
+    Note:
+
+    This function can return NULL both when an error occurs or the program
+    produces no output. It is not possible to detect execution failures using
+    this function. |exec| should be used when access to the program exit code
+    is required.
+
+==============================================================================
+*Examples*
+
+Example #1 A shell_exec() example
+
+<?php >
+    $output = shell_exec('ls -lart');
+    echo "<pre>$output</pre>";
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function is disabled when PHP is running in safe mode.
+
+==============================================================================
+*See* *Also*
+
+  * |exec| - Execute an external program
+  * |escapeshellcmd| - Escape shell metacharacters
+
+
+vim:ft=help:

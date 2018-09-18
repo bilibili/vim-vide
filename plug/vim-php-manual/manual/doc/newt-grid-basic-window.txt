@@ -1,0 +1,30 @@
+newt_grid_basic_window
+
+(PECL newt >= 0.1)
+
+newt_grid_basic_window —
+
+==============================================================================
+*Description*
+
+    resource newt_grid_basic_window ( resource $text , resource $middle ,~
+    resource $buttons )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{text}
+
+{middle}
+
+{buttons}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

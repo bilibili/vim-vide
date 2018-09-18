@@ -1,0 +1,132 @@
+imap_search
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_search — This function returns an array of messages matching the given
+search criteria
+
+==============================================================================
+*Description*
+
+    array imap_search ( resource $imap_stream , string $criteria [, int~
+    $options = SE_FREE [, string $charset = NULL ]] )~
+
+This function performs a search on the mailbox currently opened in the given 
+IMAP stream.
+
+For example, to match all unanswered messages sent by Mom, you'd use:
+"UNANSWERED FROM mom". Searches appear to be case insensitive. This list of
+criteria is from a reading of the UW c-client source code and may be
+incomplete or inaccurate (see also >> RFC2060, section 6.4.4).
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{criteria}
+
+    A string, delimited by spaces, in which the following keywords are
+    allowed. Any multi-word arguments (e.g. FROM "joey smith") must be quoted.
+    Results will match all {criteria} entries.
+      + ALL - return all messages matching the rest of the criteria
+      + ANSWERED - match messages with the \\ANSWERED flag set
+      + BCC "string" - match messages with "string" in the Bcc: field
+      + BEFORE "date" - match messages with Date: before "date"
+      + BODY "string" - match messages with "string" in the body of the
+        message
+      + CC "string" - match messages with "string" in the Cc: field
+      + DELETED - match deleted messages
+      + FLAGGED - match messages with the \\FLAGGED (sometimes referred to as
+        Important or Urgent) flag set
+      + FROM "string" - match messages with "string" in the From: field
+      + KEYWORD "string" - match messages with "string" as a keyword
+      + NEW - match new messages
+      + OLD - match old messages
+      + ON "date" - match messages with Date: matching "date"
+      + RECENT - match messages with the \\RECENT flag set
+      + SEEN - match messages that have been read (the \\SEEN flag is set)
+      + SINCE "date" - match messages with Date: after "date"
+      + SUBJECT "string" - match messages with "string" in the Subject:
+      + TEXT "string" - match messages with text "string"
+      + TO "string" - match messages with "string" in the To:
+      + UNANSWERED - match messages that have not been answered
+      + UNDELETED - match messages that are not deleted
+      + UNFLAGGED - match messages that are not flagged
+      + UNKEYWORD "string" - match messages that do not have the keyword
+        "string"
+      + UNSEEN - match messages which have not been read yet
+
+{options}
+
+    Valid values for {options} are SE_UID, which causes the returned array to
+    contain UIDs instead of messages sequence numbers.
+
+{charset}
+
+    MIME character set to use when searching strings.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of message numbers or UIDs.
+
+Return FALSE if it does not understand the search {criteria} or no messages
+have been found.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_search() example
+
+<?php >
+    $conn   = imap_open('{imap.example.com:993/imap/ssl}INBOX', 'foo@example.com'
+    , 'pass123', OP_READONLY);
+
+    $some   = imap_search($conn, 
+    'SUBJECT "HOWTO be Awesome" SINCE "8 August 2008"', SE_UID);
+    $msgnos = imap_search($conn, 'ALL');
+    $uids   = imap_search($conn, 'ALL', SE_UID);
+
+    print_r($some);
+    print_r($msgnos);
+    print_r($uids);
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => 4
+    [1] => 6
+    [2] => 11
+)
+Array
+(
+    [0] => 1
+    [1] => 2
+    [2] => 3
+    [3] => 4
+    [4] => 5
+    [5] => 6
+)
+Array
+(
+    [0] => 1
+    [1] => 4
+    [2] => 6
+    [3] => 8
+    [4] => 11
+    [5] => 12
+)
+
+==============================================================================
+*See* *Also*
+
+  * |imap_listscan| - Returns the list of mailboxes that matches the given
+    text
+
+
+vim:ft=help:

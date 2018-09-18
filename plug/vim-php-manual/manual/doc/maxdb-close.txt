@@ -1,0 +1,37 @@
+maxdb_close
+
+maxdb::close
+
+(PECL maxdb >= 1.0)
+
+maxdb_close -- maxdb::close — Closes a previously opened database connection
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_close ( resource $link )~
+
+Object oriented style
+
+    bool maxdb::close ( void )~
+
+The maxdb_close() function closes a previously opened database connection
+specified by the {link} parameter.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_connect| - Open a new connection to the MaxDB server
+  * |maxdb_init| - Initializes MaxDB and returns an resource for use with
+    maxdb_real_connect
+  * |maxdb_real_connect| - Opens a connection to a MaxDB server
+
+
+vim:ft=help:

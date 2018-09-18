@@ -1,0 +1,24 @@
+ncurses_wattrset
+
+(PHP 4 >= 4.3.0, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_wattrset — Set the attributes for a window
+
+==============================================================================
+*Description*
+
+    int ncurses_wattrset ( resource $window , int $attrs )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{window}
+
+{attrs}
+
+
+vim:ft=help:

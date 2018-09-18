@@ -1,0 +1,54 @@
+get_called_class
+
+(PHP 5 >= 5.3.0, PHP 7)
+
+get_called_class — the "Late Static Binding" class name
+
+==============================================================================
+*Description*
+
+    string get_called_class ( void )~
+
+Gets the name of the class the static method is called in.
+
+==============================================================================
+*Return* *Values*
+
+Returns the class name. Returns FALSE if called from outside a class.
+
+==============================================================================
+*Examples*
+
+Example #1 Using get_called_class()
+
+<?php >
+
+    class foo {
+        static public function test() {
+            var_dump(get_called_class());
+        }
+    }
+
+    class bar extends foo {
+    }
+
+    foo::test();
+    bar::test();
+
+<?>
+
+The above example will output:
+
+string(3) "foo"
+string(3) "bar"
+
+==============================================================================
+*See* *Also*
+
+  * |get_parent_class| - Retrieves the parent class name for object or class
+  * |get_class| - Returns the name of the class of an object
+  * |is_subclass_of| - Checks if the object has this class as one of its
+    parents or implements it.
+
+
+vim:ft=help:

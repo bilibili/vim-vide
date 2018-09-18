@@ -1,0 +1,24 @@
+eio_sync
+
+(PECL eio >= 0.0.1dev)
+
+eio_sync — Commit buffer cache to disk
+
+==============================================================================
+*Description*
+
+    resource eio_sync ([ int $pri = EIO_PRI_DEFAULT [, callable $callback =~
+    NULL [, mixed $data = NULL ]]] )~
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+eio_sync() returns request resource on success or FALSE on error.
+
+
+vim:ft=help:

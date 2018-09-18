@@ -1,0 +1,86 @@
+fgetss
+
+(PHP 4, PHP 5, PHP 7)
+
+fgetss — Gets line from file pointer and strip HTML tags
+
+==============================================================================
+*Description*
+
+    string fgetss ( resource $handle [, int $length [, string $allowable_tags~
+    ]] )~
+
+Identical to |fgets|, except that fgetss() attempts to strip any NUL bytes,
+HTML and PHP tags from the text it reads.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    The file pointer must be valid, and must point to a file successfully
+    opened by |fopen| or |fsockopen| (and not yet closed by |fclose|).
+
+{length}
+
+    Length of the data to be retrieved.
+
+{allowable_tags}
+
+    You can use the optional third parameter to specify tags which should not
+    be stripped. See |strip_tags| for details regarding {allowable_tags}.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string of up to {length} - 1 bytes read from the file pointed to by
+{handle}, with all HTML and PHP code stripped.
+
+If an error occurs, returns FALSE.
+
+Example #1 Reading a PHP file line-by-line
+
+<?php >
+    $str = <<<EOD
+    <html><body>
+     <p>Welcome! Today is the <?php echo(date('jS')); ?> of <?= date('F'); ?>.</p>
+    </body></html>
+    Text outside of the HTML block.
+    EOD;
+    file_put_contents('sample.php', $str);
+
+    $handle = @fopen("sample.php", "r");
+    if ($handle) {
+        while (!feof($handle)) {
+            $buffer = fgetss($handle, 4096);
+            echo $buffer;
+        }
+        fclose($handle);
+    }
+<?>
+
+The above example will output something similar to:
+
+ Welcome! Today is the  of .
+
+Text outside of the HTML block.
+
+==============================================================================
+*Notes*
+
+    Note: If PHP is not properly recognizing the line endings when reading
+    files either on or created by a Macintosh computer, enabling the
+    auto_detect_line_endings run-time configuration option may help resolve
+    the problem.
+
+==============================================================================
+*See* *Also*
+
+  * |fgets| - Gets line from file pointer
+  * |fopen| - Opens file or URL
+  * |popen| - Opens process file pointer
+  * |fsockopen| - Open Internet or Unix domain socket connection
+  * |strip_tags| - Strip HTML and PHP tags from a string
+
+
+vim:ft=help:

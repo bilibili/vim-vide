@@ -1,0 +1,46 @@
+maxdb_get_client_info
+
+(PECL maxdb >= 1.0)
+
+maxdb_get_client_info — Returns the MaxDB client version as a string
+
+==============================================================================
+*Description*
+
+    string maxdb_get_client_info ( void )~
+
+The maxdb_get_client_info() function is used to return a string representing
+the client version being used in the MaxDB extension.
+
+==============================================================================
+*Return* *Values*
+
+A string that represents the MaxDB client library version
+
+==============================================================================
+*Examples*
+
+Example #1 maxdb_get_client_info
+
+<?php >
+
+    /* We don't need a connection to determine
+       the version of MaxDB client library */
+
+    printf("Client library version: %s\n", maxdb_get_client_info());
+<?>
+
+The above example will output something similar to:
+
+Client library version: libSQLDBC <...>
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_get_client_version| - Get MaxDB client info
+  * |maxdb_get_server_info| - Returns the version of the MaxDB server
+  * |maxdb_get_server_version| - Returns the version of the MaxDB server as an
+    integer
+
+
+vim:ft=help:

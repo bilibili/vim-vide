@@ -1,0 +1,110 @@
+debug_zval_dump
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+debug_zval_dump — Dumps a string representation of an internal zend value to
+output
+
+==============================================================================
+*Description*
+
+    void debug_zval_dump ( mixed $variable [, mixed $... ] )~
+
+Dumps a string representation of an internal zend value to output.
+
+==============================================================================
+*Parameters*
+
+{variable}
+
+    The variable being evaluated.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 debug_zval_dump() example
+
+<?php >
+    $var1 = 'Hello World';
+    $var2 = '';
+
+    $var2 =& $var1;
+
+    debug_zval_dump(&$var1);
+<?>
+
+The above example will output:
+
+&string(11) "Hello World" refcount(3)
+
+    Note: Beware the refcount
+
+    The refcount value returned by this function is non-obvious in certain
+    circumstances. For example, a developer might expect the above example to
+    indicate a refcount of 2. The third reference is created when actually
+    calling debug_zval_dump().
+
+    This behavior is further compounded when a variable is not passed to 
+    debug_zval_dump() by reference. To illustrate, consider a slightly
+    modified version of the above example:
+
+    <?php >
+    $var1 = 'Hello World';
+    $var2 = '';
+
+    $var2 =& $var1;
+
+    debug_zval_dump($var1); // not passed by reference, this time
+<    ?>
+
+    The above example will output:
+
+    string(11) "Hello World" refcount(1)
+
+    Why refcount(1)? Because a copy of $var1 is being made, when the function
+    is called.
+
+    This function becomes even more confusing when a variable with a refcount
+    of 1 is passed (by copy/value):
+
+    <?php >
+    $var1 = 'Hello World';
+
+    debug_zval_dump($var1);
+<    ?>
+
+    The above example will output:
+
+    string(11) "Hello World" refcount(2)
+
+    A refcount of 2, here, is extremely non-obvious. Especially considering
+    the above examples. So what's happening?
+
+    When a variable has a single reference (as did $var1 before it was used as
+    an argument to debug_zval_dump()), PHP's engine optimizes the manner in
+    which it is passed to a function. Internally, PHP treats $var1 like a
+    reference (in that the refcount is increased for the scope of this
+    function), with the caveat that if the passed reference happens to be
+    written to, a copy is made, but only at the moment of writing. This is
+    known as "copy on write."
+
+    So, if debug_zval_dump() happened to write to its sole parameter (and it
+    doesn't), then a copy would be made. Until then, the parameter remains a
+    reference, causing the refcount to be incremented to 2 for the scope of
+    the function call.
+
+==============================================================================
+*See* *Also*
+
+  * |var_dump| - Dumps information about a variable
+  * |debug_backtrace| - Generates a backtrace
+  * References Explained
+  * >> References Explained (by Derick Rethans)
+
+
+vim:ft=help:

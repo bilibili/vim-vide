@@ -1,0 +1,36 @@
+db2_free_result
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_free_result — Frees resources associated with a result set
+
+==============================================================================
+*Description*
+
+    bool db2_free_result ( resource $stmt )~
+
+Frees the system and database resources that are associated with a result set.
+These resources are freed implicitly when a script finishes, but you can call 
+db2_free_result() to explicitly free the result set resources before the end
+of the script.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A valid statement resource.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_free_stmt| - Frees resources associated with the indicated statement
+    resource
+
+
+vim:ft=help:

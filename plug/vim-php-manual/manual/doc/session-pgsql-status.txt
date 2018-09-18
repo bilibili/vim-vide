@@ -1,0 +1,17 @@
+session_pgsql_status
+
+(PECL session_pgsql SVN)
+
+session_pgsql_status — Get current save handler status
+
+==============================================================================
+*Description*
+
+    array session_pgsql_status ( void )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

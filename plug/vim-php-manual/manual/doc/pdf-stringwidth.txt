@@ -1,0 +1,16 @@
+PDF_stringwidth
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_stringwidth — Return width of text
+
+==============================================================================
+*Description*
+
+    float PDF_stringwidth ( resource $p , string $text , int $font , float~
+    $fontsize )~
+
+Returns the width of {text} in an arbitrary font.
+
+
+vim:ft=help:

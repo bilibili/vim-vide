@@ -1,0 +1,53 @@
+mhash_keygen_s2k
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+mhash_keygen_s2k — Generates a key
+
+==============================================================================
+*Description*
+
+    string mhash_keygen_s2k ( int $hash , string $password , string $salt ,~
+    int $bytes )~
+
+Generates a key according to the given {hash}, using an user provided
+{password}.
+
+This is the Salted S2K algorithm as specified in the OpenPGP document (>> RFC
+2440).
+
+Keep in mind that user supplied passwords are not really suitable to be used
+as keys in cryptographic algorithms, since users normally choose keys they can
+write on keyboard. These passwords use only 6 to 7 bits per character (or
+less). It is highly recommended to use some kind of transformation (like this
+function) to the user supplied key.
+
+==============================================================================
+*Parameters*
+
+{hash}
+
+    The hash ID used to create the key. One of the MHASH_hashname constants.
+
+{password}
+
+    An user supplied password.
+
+{salt}
+
+    Must be different and random enough for every key you generate in order to
+    create different keys. Because {salt} must be known when you check the
+    keys, it is a good idea to append the key to it. Salt has a fixed length
+    of 8 bytes and will be padded with zeros if you supply less bytes.
+
+{bytes}
+
+    The key length, in bytes.
+
+==============================================================================
+*Return* *Values*
+
+Returns the generated key as a string, or FALSE on error.
+
+
+vim:ft=help:

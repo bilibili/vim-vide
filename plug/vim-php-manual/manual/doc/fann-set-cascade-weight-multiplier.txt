@@ -1,0 +1,37 @@
+fann_set_cascade_weight_multiplier
+
+(PECL fann >= 1.0.0)
+
+fann_set_cascade_weight_multiplier — Sets the weight multiplier
+
+==============================================================================
+*Description*
+
+    bool fann_set_cascade_weight_multiplier ( resource $ann , float~
+    $cascade_weight_multiplier )~
+
+Sets the weight multiplier.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{cascade_weight_multiplier}
+
+    The weight multiplier.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_cascade_weight_multiplier| - Returns the weight multiplier
+
+
+vim:ft=help:

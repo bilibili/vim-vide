@@ -1,0 +1,16 @@
+PDF_moveto
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_moveto — Set current point
+
+==============================================================================
+*Description*
+
+    bool PDF_moveto ( resource $p , float $x , float $y )~
+
+Sets the current point for graphics output. Returns TRUE on success or FALSE
+on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,29 @@
+stats_rand_gen_noncenral_chisquare
+
+(PECL stats >= 1.0.0)
+
+stats_rand_gen_noncenral_chisquare — Generates random deviate from the
+distribution of a noncentral chisquare with "df" degrees of freedom and
+noncentrality parameter "xnonc". d must be >= 1.0, xnonc must >= 0.0
+
+==============================================================================
+*Description*
+
+    float stats_rand_gen_noncenral_chisquare ( float $df , float $xnonc )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{df}
+
+{xnonc}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

@@ -1,0 +1,90 @@
+substr_count
+
+(PHP 4, PHP 5, PHP 7)
+
+substr_count — Count the number of substring occurrences
+
+==============================================================================
+*Description*
+
+    int substr_count ( string $haystack , string $needle [, int $offset = 0~
+    [, int $length ]] )~
+
+substr_count() returns the number of times the {needle} substring occurs in
+the {haystack} string. Please note that {needle} is case sensitive.
+
+    Note:
+
+    This function doesn't count overlapped substrings. See the example below!
+
+==============================================================================
+*Parameters*
+
+{haystack}
+
+    The string to search in
+
+{needle}
+
+    The substring to search for
+
+{offset}
+
+    The offset where to start counting. If the offset is negative, counting
+    starts from the end of the string.
+
+{length}
+
+    The maximum length after the specified offset to search for the substring.
+    It outputs a warning if the offset plus the length is greater than the
+    {haystack} length. A negative length counts from the end of {haystack}.
+
+==============================================================================
+*Return* *Values*
+
+This function returns an integer.
+
+==============================================================================
+*Changelog*
+
+Version                         Description
+7.1.0   Support for negative {offset}s and {length}s has been added.
+5.1.0   Added the {offset} and the {length} parameters
+
+==============================================================================
+*Examples*
+
+Example #1 A substr_count() example
+
+<?php >
+    $text = 'This is a test';
+    echo strlen($text); // 14
+
+    echo substr_count($text, 'is'); // 2
+
+    // the string is reduced to 's is a test', so it prints 1
+    echo substr_count($text, 'is', 3);
+
+    // the text is reduced to 's i', so it prints 0
+    echo substr_count($text, 'is', 3, 3);
+
+    // generates a warning because 5+10 > 14
+    echo substr_count($text, 'is', 5, 10);
+
+
+    // prints only 1, because it doesn't count overlapped substrings
+    $text2 = 'gcdgcdgcd';
+    echo substr_count($text2, 'gcdgcd');
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |count_chars| - Return information about characters used in a string
+  * |strpos| - Find the position of the first occurrence of a substring in a
+    string
+  * |substr| - Return part of a string
+  * |strstr| - Find the first occurrence of a string
+
+
+vim:ft=help:

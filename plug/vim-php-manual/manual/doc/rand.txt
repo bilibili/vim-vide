@@ -1,0 +1,92 @@
+rand
+
+(PHP 4, PHP 5, PHP 7)
+
+rand — Generate a random integer
+
+==============================================================================
+*Description*
+
+    int rand ( void )~
+    int rand ( int $min , int $max )~
+
+If called without the optional {min}, {max} arguments rand() returns a
+pseudo-random integer between 0 and |getrandmax|. If you want a random number
+between 5 and 15 (inclusive), for example, use rand(5, 15).
+
+Caution
+
+This function does not generate cryptographically secure values, and should
+not be used for cryptographic purposes. If you need a cryptographically secure
+value, consider using |random_int|, |random_bytes|, or 
+|openssl_random_pseudo_bytes| instead.
+
+    Note: On some platforms (such as Windows), |getrandmax| is only 32767. If
+    you require a range larger than 32767, specifying {min} and {max} will
+    allow you to create a range larger than this, or consider using |mt_rand|
+    instead.
+
+    Note: As of PHP 7.1.0, rand() has been made an alias of |mt_rand|.
+
+==============================================================================
+*Parameters*
+
+{min}
+
+    The lowest value to return (default: 0)
+
+{max}
+
+    The highest value to return (default: |getrandmax|)
+
+==============================================================================
+*Return* *Values*
+
+A pseudo random value between {min} (or 0) and {max} (or |getrandmax|,
+inclusive).
+
+==============================================================================
+*Changelog*
+
+Version                 Description
+7.1.0   rand() has been made an alias of |mt_rand|.
+
+==============================================================================
+*Examples*
+
+Example #1 rand() example
+
+<?php >
+    echo rand() . "\n";
+    echo rand() . "\n";
+
+    echo rand(5, 15);
+<?>
+
+The above example will output something similar to:
+
+7771
+22264
+11
+
+==============================================================================
+*Notes*
+
+Warning
+
+{min} {max} range must be within the range |getrandmax|. i.e. ({max} - {min})
+<= |getrandmax| Otherwise, rand() may return poor-quality random numbers.
+
+==============================================================================
+*See* *Also*
+
+  * |srand| - Seed the random number generator
+  * |getrandmax| - Show largest possible random value
+  * |mt_rand| - Generate a random value via the Mersenne Twister Random Number
+    Generator
+  * |random_int| - Generates cryptographically secure pseudo-random integers
+  * |random_bytes| - Generates cryptographically secure pseudo-random bytes
+  * |openssl_random_pseudo_bytes| - Generate a pseudo-random string of bytes
+
+
+vim:ft=help:

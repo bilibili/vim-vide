@@ -1,0 +1,95 @@
+hash
+
+(PHP 5 >= 5.1.2, PHP 7, PECL hash >= 1.1)
+
+hash — Generate a hash value (message digest)
+
+==============================================================================
+*Description*
+
+    string hash ( string $algo , string $data [, bool $raw_output = false ] )~
+
+==============================================================================
+*Parameters*
+
+{algo}
+
+    Name of selected hashing algorithm (e.g. "md5", "sha256", "haval160,4",
+    etc..)
+
+{data}
+
+    Message to be hashed.
+
+{raw_output}
+
+    When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string containing the calculated message digest as lowercase hexits
+unless {raw_output} is set to true in which case the raw binary representation
+of the message digest is returned.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.4.0   The tiger algorithm now uses big-endian byte ordering. See also
+        example below.
+
+==============================================================================
+*Examples*
+
+Example #1 A hash() example
+
+<?php >
+    echo hash('ripemd160', 'The quick brown fox jumped over the lazy dog.');
+<?>
+
+The above example will output:
+
+ec457d0a974c48d5685a7efa03d137dc8bbde7e3
+
+Example #2 Calculate pre PHP-5.4 tiger hashes with PHP-5.4 and higher
+
+<?php >
+    function old_tiger($data = "", $width=192, $rounds = 3) {
+        return substr(
+            implode(
+                array_map(
+                    function ($h) {
+                        return str_pad(bin2hex(strrev($h)), 16, "0");
+                    },
+                    str_split(hash("tiger192,$rounds", $data, true), 8)
+                )
+            ),
+            0, 48-(192-$width)/4
+        );
+    }
+    echo hash('tiger192,3', 'a-string'), PHP_EOL;
+    echo old_tiger('a-string'), PHP_EOL;
+<?>
+
+Output of the above example in PHP 5.3:
+
+146a7492719b3564094efe7abbd40a7416fd900179d02773
+64359b7192746a14740ad4bb7afe4e097327d0790190fd16
+
+Output of the above example in PHP 5.4:
+
+64359b7192746a14740ad4bb7afe4e097327d0790190fd16
+146a7492719b3564094efe7abbd40a7416fd900179d02773
+
+==============================================================================
+*See* *Also*
+
+  * |hash_file| - Generate a hash value using the contents of a given file
+  * |hash_hmac| - Generate a keyed hash value using the HMAC method
+  * |hash_init| - Initialize an incremental hashing context
+  * |md5| - Calculate the md5 hash of a string
+  * |sha1| - Calculate the sha1 hash of a string
+
+
+vim:ft=help:

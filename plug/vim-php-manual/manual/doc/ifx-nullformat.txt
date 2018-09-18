@@ -1,0 +1,27 @@
+ifx_nullformat
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_nullformat — Sets the default return value on a fetch row
+
+==============================================================================
+*Description*
+
+    bool ifx_nullformat ( int $mode )~
+
+Sets the default return value of a NULL-value on a fetch row.
+
+==============================================================================
+*Parameters*
+
+{mode}
+
+    Mode "0" returns "", and mode "1" returns "NULL".
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

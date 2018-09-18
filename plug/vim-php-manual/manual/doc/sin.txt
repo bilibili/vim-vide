@@ -1,0 +1,50 @@
+sin
+
+(PHP 4, PHP 5, PHP 7)
+
+sin — Sine
+
+==============================================================================
+*Description*
+
+    float sin ( float $arg )~
+
+sin() returns the sine of the {arg} parameter. The {arg} parameter is in
+radians.
+
+==============================================================================
+*Parameters*
+
+{arg}
+
+    A value in radians
+
+==============================================================================
+*Return* *Values*
+
+The sine of {arg}
+
+==============================================================================
+*Examples*
+
+Example #1 sin() example
+
+<?php >
+
+    // Precision depends on your precision directive
+    echo sin(deg2rad(60));  //  0.866025403 ...
+    echo sin(60);           // -0.304810621 ...
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |asin| - Arc sine
+  * |sinh| - Hyperbolic sine
+  * |cos| - Cosine
+  * |tan| - Tangent
+  * |deg2rad| - Converts the number in degrees to the radian equivalent
+
+
+vim:ft=help:

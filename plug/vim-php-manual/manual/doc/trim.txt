@@ -1,0 +1,146 @@
+trim
+
+(PHP 4, PHP 5, PHP 7)
+
+trim — Strip whitespace (or other characters) from the beginning and end of a
+string
+
+==============================================================================
+*Description*
+
+    string trim ( string $str [, string $character_mask = "~
+    \t\n\r\0\x0B" ] )~
+
+This function returns a string with whitespace stripped from the beginning and
+end of {str}. Without the second parameter, trim() will strip these
+characters:
+
+  * " " (ASCII 32 (0x20)), an ordinary space.
+  * "\t" (ASCII 9 (0x09)), a tab.
+  * "\n" (ASCII 10 (0x0A)), a new line (line feed).
+  * "\r" (ASCII 13 (0x0D)), a carriage return.
+  * "\0" (ASCII 0 (0x00)), the NUL-byte.
+  * "\x0B" (ASCII 11 (0x0B)), a vertical tab.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The string that will be trimmed.
+
+{character_mask}
+
+    Optionally, the stripped characters can also be specified using the
+    {character_mask} parameter. Simply list all characters that you want to be
+    stripped. With .. you can specify a range of characters.
+
+==============================================================================
+*Return* *Values*
+
+The trimmed string.
+
+==============================================================================
+*Examples*
+
+Example #1 Usage example of trim()
+
+<?php >
+
+    $text   = "\t\tThese are a few words :) ...  ";
+    $binary = "\x09Example string\x0A";
+    $hello  = "Hello World";
+    var_dump($text, $binary, $hello);
+
+    print "\n";
+
+    $trimmed = trim($text);
+    var_dump($trimmed);
+
+    $trimmed = trim($text, " \t.");
+    var_dump($trimmed);
+
+    $trimmed = trim($hello, "Hdle");
+    var_dump($trimmed);
+
+    $trimmed = trim($hello, 'HdWr');
+    var_dump($trimmed);
+
+    // trim the ASCII control characters at the beginning and end of $binary
+    // (from 0 to 31 inclusive)
+    $clean = trim($binary, "\x00..\x1F");
+    var_dump($clean);
+
+<?>
+
+The above example will output:
+
+string(32) "        These are a few words :) ...  "
+string(16) "    Example string
+"
+string(11) "Hello World"
+
+string(28) "These are a few words :) ..."
+string(24) "These are a few words :)"
+string(5) "o Wor"
+string(9) "ello Worl"
+string(14) "Example string"
+
+Example #2 Trimming array values with trim()
+
+<?php >
+    function trim_value(&$value) 
+    { 
+        $value = trim($value); 
+    }
+
+    $fruit = array('apple','banana ', ' cranberry ');
+    var_dump($fruit);
+
+    array_walk($fruit, 'trim_value');
+    var_dump($fruit);
+
+<?>
+
+The above example will output:
+
+array(3) {
+  [0]=>
+  string(5) "apple"
+  [1]=>
+  string(7) "banana "
+  [2]=>
+  string(11) " cranberry "
+}
+array(3) {
+  [0]=>
+  string(5) "apple"
+  [1]=>
+  string(6) "banana"
+  [2]=>
+  string(9) "cranberry"
+}
+
+
+==============================================================================
+*Notes*
+
+    Note: Possible gotcha: removing middle characters
+
+    Because trim() trims characters from the beginning and end of a string, it
+    may be confusing when characters are (or are not) removed from the middle.
+    trim('abc', 'bad') removes both 'a' and 'b' because it trims 'a' thus
+    moving 'b' to the beginning to also be trimmed. So, this is why it "works"
+    whereas trim('abc', 'b') seemingly does not.
+
+==============================================================================
+*See* *Also*
+
+  * |ltrim| - Strip whitespace (or other characters) from the beginning of a
+    string
+  * |rtrim| - Strip whitespace (or other characters) from the end of a string
+  * |str_replace| - Replace all occurrences of the search string with the
+    replacement string
+
+
+vim:ft=help:

@@ -1,0 +1,75 @@
+feof
+
+(PHP 4, PHP 5, PHP 7)
+
+feof — Tests for end-of-file on a file pointer
+
+==============================================================================
+*Description*
+
+    bool feof ( resource $handle )~
+
+Tests for end-of-file on a file pointer.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    The file pointer must be valid, and must point to a file successfully
+    opened by |fopen| or |fsockopen| (and not yet closed by |fclose|).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the file pointer is at EOF or an error occurs (including
+socket timeout); otherwise returns FALSE.
+
+==============================================================================
+*Notes*
+
+Warning
+
+If a connection opened by |fsockopen| wasn't closed by the server, feof() will
+hang. To workaround this, see below example:
+
+Example #1 Handling timeouts with feof()
+
+<?php >
+    function safe_feof($fp, &$start = NULL) {
+     $start = microtime(true);
+
+     return feof($fp);
+    }
+
+    /* Assuming $fp is previously opened by fsockopen() */
+
+    $start = NULL;
+    $timeout = ini_get('default_socket_timeout');
+
+    while(!safe_feof($fp, $start) && (microtime(true) - $start) < $timeout)
+    {
+     /* Handle */
+    }
+<?>
+
+Warning
+
+If the passed file pointer is not valid you may get an infinite loop, because 
+feof() fails to return TRUE.
+
+Example #2 feof() example with an invalid file pointer
+
+<?php >
+    // if file can not be read or doesn't exist fopen function returns FALSE
+    $file = @fopen("no_such_file", "r");
+
+    // FALSE from fopen will issue warning and result in infinite loop here
+    while (!feof($file)) {
+    }
+
+    fclose($file);
+<?>
+
+
+vim:ft=help:

@@ -1,0 +1,32 @@
+ifx_free_blob
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_free_blob — Deletes the blob object
+
+==============================================================================
+*Description*
+
+    bool ifx_free_blob ( int $bid )~
+
+Deletes the blobobject for the given blob object-id.
+
+==============================================================================
+*Parameters*
+
+{bid}
+
+    The BLOB object id.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ifx_create_blob| - Creates an blob object
+
+
+vim:ft=help:

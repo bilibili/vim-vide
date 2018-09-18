@@ -1,0 +1,17 @@
+PDF_concat
+
+(PHP 4 >= 4.0.5, PECL pdflib >= 1.0.0)
+
+PDF_concat — Concatenate a matrix to the CTM
+
+==============================================================================
+*Description*
+
+    bool PDF_concat ( resource $p , float $a , float $b , float $c , float $d~
+    , float $e , float $f )~
+
+Concatenates a matrix to the current transformation matrix (CTM). Returns TRUE
+on success or FALSE on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,69 @@
+xml_set_processing_instruction_handler
+
+(PHP 4, PHP 5, PHP 7)
+
+xml_set_processing_instruction_handler — Set up processing instruction (PI)
+handler
+
+==============================================================================
+*Description*
+
+    bool xml_set_processing_instruction_handler ( resource $parser , callable~
+    $handler )~
+
+Sets the processing instruction (PI) handler function for the XML parser
+{parser}.
+
+A processing instruction has the following format:
+
+<?
+
+target data
+
+<?>
+
+
+You can put PHP code into such a tag, but be aware of one limitation: in an
+XML PI, the PI end tag (?>) can not be quoted, so this character sequence
+should not appear in the PHP code you embed with PIs in XML documents.If it
+does, the rest of the PHP code, as well as the "real" PI end tag, will be
+treated as character data.
+
+==============================================================================
+*Parameters*
+
+{parser}
+
+    A reference to the XML parser to set up processing instruction (PI)
+    handler function.
+
+{handler}
+
+    {handler} is a string containing the name of a function that must exist
+    when |xml_parse| is called for {parser}.
+
+    The function named by {handler} must accept three parameters:
+
+    handler ( resource $parser , string $target , string $data )~
+
+    {parser}
+        The first parameter, parser, is a reference to the XML parser calling
+        the handler.
+    {target}
+        The second parameter, {target}, contains the PI target.
+    {data}
+        The third parameter, {data}, contains the PI data.
+
+    If a handler function is set to an empty string, or FALSE, the handler in
+    question is disabled.
+
+        Note: Instead of a function name, an array containing an object
+        reference and a method name can also be supplied.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

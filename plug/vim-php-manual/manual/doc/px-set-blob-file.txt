@@ -1,0 +1,42 @@
+px_set_blob_file
+
+(PECL paradox >= 1.3.0)
+
+px_set_blob_file — Sets the file where blobs are read from
+
+==============================================================================
+*Description*
+
+    bool px_set_blob_file ( resource $pxdoc , string $filename )~
+
+Sets the name of the file where blobs are going to be read from or written
+into. Without calling this function, |px_get_record| or |px_retrieve_record|
+will only return data in blob fields if the data is part of the record and not
+stored in the blob file. Blob data is stored in the record if it is small
+enough to fit in the size of the blob field.
+
+Calling |px_put_record|, |px_insert_record|, or |px_update_record| without
+calling px_set_blob_file() will result in truncated blob fields unless the
+data fits into the database file.
+
+Calling this function twice will close the first blob file and open the new
+one.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+{filename}
+
+    The name of the file. Its extension should be .MB.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

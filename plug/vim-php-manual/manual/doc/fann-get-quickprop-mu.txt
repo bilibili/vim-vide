@@ -1,0 +1,36 @@
+fann_get_quickprop_mu
+
+(PECL fann >= 1.0.0)
+
+fann_get_quickprop_mu — Returns the mu factor
+
+==============================================================================
+*Description*
+
+    float fann_get_quickprop_mu ( resource $ann )~
+
+The mu factor is used to increase and decrease the step-size during quickprop
+training. The mu factor should always be above 1, since it would otherwise
+decrease the step-size when it was suppose to increase it.
+
+The default mu factor is 1.75.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+The mu factor, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_set_quickprop_mu| - Sets the quickprop mu factor
+
+
+vim:ft=help:

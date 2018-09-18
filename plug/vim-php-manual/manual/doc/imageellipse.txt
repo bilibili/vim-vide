@@ -1,0 +1,95 @@
+imageellipse
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+imageellipse — Draw an ellipse
+
+==============================================================================
+*Description*
+
+    bool imageellipse ( resource $image , int $cx , int $cy , int $width ,~
+    int $height , int $color )~
+
+Draws an ellipse centered at the specified coordinates.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{cx}
+
+    x-coordinate of the center.
+
+{cy}
+
+    y-coordinate of the center.
+
+{width}
+
+    The ellipse width.
+
+{height}
+
+    The ellipse height.
+
+{color}
+
+    The color of the ellipse. A color identifier created with 
+    |imagecolorallocate|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imageellipse() example
+
+<?php >
+
+    // Create a blank image.
+    $image = imagecreatetruecolor(400, 300);
+
+    // Select the background color.
+    $bg = imagecolorallocate($image, 0, 0, 0);
+
+    // Fill the background with the color selected above.
+    imagefill($image, 0, 0, $bg);
+
+    // Choose a color for the ellipse.
+    $col_ellipse = imagecolorallocate($image, 255, 255, 255);
+
+    // Draw the ellipse.
+    imageellipse($image, 200, 150, 300, 200, $col_ellipse);
+
+    // Output the image.
+    header("Content-type: image/png");
+    imagepng($image);
+
+<?>
+
+The above example will output something similar to:
+
+Output of example : imageellipse()
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    imageellipse() ignores |imagesetthickness|.
+
+==============================================================================
+*See* *Also*
+
+  * |imagefilledellipse| - Draw a filled ellipse
+  * |imagearc| - Draws an arc
+
+
+vim:ft=help:

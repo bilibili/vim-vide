@@ -1,0 +1,32 @@
+openal_listener_get
+
+(PECL openal >= 0.1.0)
+
+openal_listener_get — Retrieve a listener property
+
+==============================================================================
+*Description*
+
+    mixed openal_listener_get ( int $property )~
+
+==============================================================================
+*Parameters*
+
+{property}
+
+    Property to retrieve, one of: AL_GAIN (float), AL_POSITION (array
+    (float,float,float)), AL_VELOCITY (array(float,float,float)) and
+    AL_ORIENTATION (array(float,float,float)).
+
+==============================================================================
+*Return* *Values*
+
+Returns a float or array of floats (as appropriate) or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_listener_set| - Set a listener property
+
+
+vim:ft=help:

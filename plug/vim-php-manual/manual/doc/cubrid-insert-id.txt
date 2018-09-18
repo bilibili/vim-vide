@@ -1,0 +1,77 @@
+cubrid_insert_id
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_insert_id — Return the ID generated for the last updated AUTO_INCREMENT
+column
+
+==============================================================================
+*Description*
+
+    string cubrid_insert_id ([ resource $conn_identifier ] )~
+
+The cubrid_insert_id() function retrieves the ID generated for the
+AUTO_INCREMENT column which is updated by the previous INSERT query. It
+returns 0 if the previous query does not generate new rows, or FALSE on
+failure.
+
+    Note:
+
+    CUBRID supports AUTO_INCREMENT for more than one columns in a table. In
+    most cases, there will be a single AUTO_INCREMENT column in a table. If
+    there are multiple AUTO_INCREMENT columns, this function should not be
+    used even if it will return a value.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    The connection identifier previously obtained by a call to |cubrid_connect
+    |.
+
+==============================================================================
+*Return* *Values*
+
+A string representing the ID generated for an AUTO_INCREMENT column by the
+previous query, on success.
+
+0, if the previous query does not generate new rows.
+
+FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+8.4.0   Change the return value from an array to string; Remove the first
+        parameter class_name.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_insert_id() example
+
+<?php >
+    $conn = cubrid_connect("localhost", 33000, "demodb");
+
+    @cubrid_execute($conn, "DROP TABLE cubrid_test");
+    cubrid_execute($conn, "CREATE TABLE cubrid_test (d int AUTO_INCREMENT
+    (1, 2), t varchar)");
+
+    for ($i = 0; $i < 10; $i++) {
+        cubrid_execute($conn, "INSERT INTO cubrid_test(t) VALUES('cubrid_test')");
+    }
+
+    $id = cubrid_insert_id();
+    var_dump($id);
+
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+string(2) "19"
+
+
+vim:ft=help:

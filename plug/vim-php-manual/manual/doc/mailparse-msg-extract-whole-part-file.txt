@@ -1,0 +1,39 @@
+mailparse_msg_extract_whole_part_file
+
+(PECL mailparse >= 0.9.0)
+
+mailparse_msg_extract_whole_part_file — Extracts a message section including
+headers without decoding the transfer encoding
+
+==============================================================================
+*Description*
+
+    string mailparse_msg_extract_whole_part_file ( resource $mimemail ,~
+    string $filename [, callable $callbackfunc ] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{mimemail}
+
+    A valid MIME resource.
+
+{filename}
+
+{callbackfunc}
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*See* *Also*
+
+  * |mailparse_msg_extract_part| - Extracts/decodes a message section
+  * |mailparse_msg_extract_part_file| - Extracts/decodes a message section
+
+
+vim:ft=help:

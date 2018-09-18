@@ -1,0 +1,72 @@
+easter_days
+
+(PHP 4, PHP 5, PHP 7)
+
+easter_days — Get number of days after March 21 on which Easter falls for a
+given year
+
+==============================================================================
+*Description*
+
+    int easter_days ([ int $year = date("Y") [, int $method =~
+    CAL_EASTER_DEFAULT ]] )~
+
+Returns the number of days after March 21 on which Easter falls for a given
+year. If no year is specified, the current year is assumed.
+
+This function can be used instead of |easter_date| to calculate Easter for
+years which fall outside the range of Unix timestamps (i.e. before 1970 or
+after 2037).
+
+The date of Easter Day was defined by the Council of Nicaea in AD325 as the
+Sunday after the first full moon which falls on or after the Spring Equinox.
+The Equinox is assumed to always fall on 21st March, so the calculation
+reduces to determining the date of the full moon and the date of the following
+Sunday. The algorithm used here was introduced around the year 532 by
+Dionysius Exiguus. Under the Julian Calendar (for years before 1753) a simple
+19-year cycle is used to track the phases of the Moon. Under the Gregorian
+Calendar (for years after 1753 - devised by Clavius and Lilius, and introduced
+by Pope Gregory XIII in October 1582, and into Britain and its then colonies
+in September 1752) two correction factors are added to make the cycle more
+accurate.
+
+==============================================================================
+*Parameters*
+
+{year}
+
+    The year as a positive number. If omitted, defaults to the current year
+    according to the local time.
+
+{method}
+
+    Allows Easter dates to be calculated based on the Gregorian calendar
+    during the years 1582 - 1752 when set to CAL_EASTER_ROMAN. See the
+    calendar constants for more valid constants.
+
+==============================================================================
+*Return* *Values*
+
+The number of days after March 21st that the Easter Sunday is in the given
+{year}.
+
+==============================================================================
+*Examples*
+
+Example #1 easter_days() example
+
+<?php >
+
+    echo easter_days(1999);        // 14, i.e. April 4
+    echo easter_days(1492);        // 32, i.e. April 22
+    echo easter_days(1913);        //  2, i.e. March 23
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |easter_date| - Get Unix timestamp for midnight on Easter of a given year
+
+
+vim:ft=help:

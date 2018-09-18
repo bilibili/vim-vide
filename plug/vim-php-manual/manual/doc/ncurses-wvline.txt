@@ -1,0 +1,27 @@
+ncurses_wvline
+
+(PHP 4 >= 4.3.0, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_wvline — Draws a vertical line in a window at current position using
+an attributed character and max. n characters long
+
+==============================================================================
+*Description*
+
+    int ncurses_wvline ( resource $window , int $charattr , int $n )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{window}
+
+{charattr}
+
+{n}
+
+
+vim:ft=help:

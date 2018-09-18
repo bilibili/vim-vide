@@ -1,0 +1,36 @@
+dbplus_rrename
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_rrename — Rename a relation
+
+==============================================================================
+*Description*
+
+    int dbplus_rrename ( resource $relation , string $name )~
+
+dbplus_rrename() will change the name of {relation} to {name}.
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+{name}
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

@@ -1,0 +1,50 @@
+gmp_sqrt
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_sqrt — Calculate square root
+
+==============================================================================
+*Description*
+
+    GMP gmp_sqrt ( GMP $a )~
+
+Calculates square root of {a}.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+The integer portion of the square root, as a GMP number.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_sqrt() example
+
+<?php >
+    $sqrt1 = gmp_sqrt("9");
+    $sqrt2 = gmp_sqrt("7");
+    $sqrt3 = gmp_sqrt("1524157875019052100");
+
+    echo gmp_strval($sqrt1) . "\n";
+    echo gmp_strval($sqrt2) . "\n";
+    echo gmp_strval($sqrt3) . "\n";
+<?>
+
+The above example will output:
+
+3
+2
+1234567890
+
+
+vim:ft=help:

@@ -1,0 +1,52 @@
+sqlsrv_configure
+
+(No version information available, might only be in Git)
+
+sqlsrv_configure — Changes the driver error handling and logging
+configurations
+
+==============================================================================
+*Description*
+
+    bool sqlsrv_configure ( string $setting , mixed $value )~
+
+Changes the driver error handling and logging configurations.
+
+==============================================================================
+*Parameters*
+
+{setting}
+
+    The name of the setting to set. The possible values are
+    "WarningsReturnAsErrors", "LogSubsystems", and "LogSeverity".
+
+{value}
+
+    The value of the specified setting. The following table shows possible
+    values:
+
+                      Error and Logging Setting Options
+           Setting                               Options
+    WarningsReturnAsErrors 1 (TRUE) or 0 (FALSE)
+                           SQLSRV_LOG_SYSTEM_ALL (-1) SQLSRV_LOG_SYSTEM_CONN
+    LogSubsystems          (2) SQLSRV_LOG_SYSTEM_INIT (1)
+                           SQLSRV_LOG_SYSTEM_OFF (0) SQLSRV_LOG_SYSTEM_STMT
+                           (4) SQLSRV_LOG_SYSTEM_UTIL (8)
+                           SQLSRV_LOG_SEVERITY_ALL (-1)
+    LogSeverity            SQLSRV_LOG_SEVERITY_ERROR (1)
+                           SQLSRV_LOG_SEVERITY_NOTICE (4)
+                           SQLSRV_LOG_SEVERITY_WARNING (2)
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * >> SQLSRV Error Handling.
+  * >> Logging SQLSRV Activity.
+
+
+vim:ft=help:

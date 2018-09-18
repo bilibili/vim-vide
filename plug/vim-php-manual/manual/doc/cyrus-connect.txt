@@ -1,0 +1,34 @@
+cyrus_connect
+
+(PHP 4 >= 4.1.0, PECL cyrus 1.0)
+
+cyrus_connect — Connect to a Cyrus IMAP server
+
+==============================================================================
+*Description*
+
+    resource cyrus_connect ([ string $host [, string $port [, int $flags ]]]~
+)~
+
+Connects to a Cyrus IMAP server.
+
+==============================================================================
+*Parameters*
+
+{host}
+
+    The Cyrus IMAP host name.
+
+{port}
+
+    The port number.
+
+{flags}
+
+==============================================================================
+*Return* *Values*
+
+Returns a connection handler on success or FALSE on failure.
+
+
+vim:ft=help:

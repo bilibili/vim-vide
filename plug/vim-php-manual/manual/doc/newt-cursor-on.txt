@@ -1,0 +1,22 @@
+newt_cursor_on
+
+(PECL newt >= 0.1)
+
+newt_cursor_on —
+
+==============================================================================
+*Description*
+
+    void newt_cursor_on ( void )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

@@ -1,0 +1,13 @@
+mysqli_report
+
+(PHP 5, PHP 7)
+
+mysqli_report — Alias of mysqli_driver->report_mode
+
+==============================================================================
+*Description*
+
+This function is an alias of: mysqli_driver->report_mode
+
+
+vim:ft=help:

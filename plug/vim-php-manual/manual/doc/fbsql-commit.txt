@@ -1,0 +1,40 @@
+fbsql_commit
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_commit — Commits a transaction to the database
+
+==============================================================================
+*Description*
+
+    bool fbsql_commit ([ resource $link_identifier ] )~
+
+Ends the current transaction by writing all inserts, updates and deletes to
+the disk and unlocking all row and table locks held by the transaction. This
+command is only needed if autocommit is set to false.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_autocommit| - Enable or disable autocommit
+  * |fbsql_rollback| - Rollback a transaction to the database
+
+
+vim:ft=help:

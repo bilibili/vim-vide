@@ -1,0 +1,81 @@
+geoip_time_zone_by_country_and_region
+
+(PECL geoip >= 1.0.4)
+
+geoip_time_zone_by_country_and_region — Returns the time zone for some country
+and region code combo
+
+==============================================================================
+*Description*
+
+    string geoip_time_zone_by_country_and_region ( string $country_code [,~
+    string $region_code ] )~
+
+The geoip_time_zone_by_country_and_region() function will return the time zone
+corresponding to a country and region code combo.
+
+In the United States, the region code corresponds to the two-letter
+abbreviation of each state. In Canada, the region code corresponds to the
+two-letter province or territory code as attributed by Canada Post.
+
+For the rest of the world, GeoIP uses FIPS 10-4 codes to represent regions.
+You can check >> http://www.maxmind.com/app/fips10_4 for a detailed list of
+FIPS 10-4 codes.
+
+This function is always available if using GeoIP Library version 1.4.1 or
+newer. The data is taken directly from the GeoIP Library and not from any
+database.
+
+==============================================================================
+*Parameters*
+
+{country_code}
+
+    The two-letter country code (see |geoip_country_code_by_name|)
+
+{region_code}
+
+    The two-letter (or digit) region code (see |geoip_region_by_name|)
+
+==============================================================================
+*Return* *Values*
+
+Returns the time zone on success, or FALSE if the country and region code
+combo cannot be found.
+
+==============================================================================
+*Examples*
+
+Example #1 A geoip_time_zone_by_country_and_region() example using region code
+for US/Canada
+
+This will print the time zone for country CA (Canada), region QC (Quebec).
+
+<?php >
+    $timezone = geoip_time_zone_by_country_and_region('CA', 'QC');
+    if ($timezone) {
+        echo 'Time zone for CA/QC is: ' . $timezone;
+    }
+<?>
+
+The above example will output:
+
+Time zone for CA/QC is: America/Montreal
+
+Example #2 A geoip_time_zone_by_country_and_region() example using FIPS codes
+
+This will print the time zone for country JP (Japan), region 01 (Aichi).
+
+<?php >
+    $timezone = geoip_time_zone_by_country_and_region('JP', '01');
+    if ($timezone) {
+        echo 'Time zone for JP/01 is: ' . $timezone;
+    }
+<?>
+
+The above example will output:
+
+Time zone for JP/01 is: Asia/Tokyo
+
+
+vim:ft=help:

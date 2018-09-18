@@ -1,0 +1,51 @@
+imap_setacl
+
+(PHP 4 >= 4.0.7, PHP 5, PHP 7)
+
+imap_setacl — Sets the ACL for a given mailbox
+
+==============================================================================
+*Description*
+
+    bool imap_setacl ( resource $imap_stream , string $mailbox , string $id ,~
+    string $rights )~
+
+Sets the ACL for a giving mailbox.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{mailbox}
+
+    The mailbox name, see |imap_open| for more information
+
+{id}
+
+    The user to give the rights to.
+
+{rights}
+
+    The rights to give to the user. Passing an empty string will delete acl.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+This function is currently only available to users of the c-client2000 or
+greater library.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_getacl| - Gets the ACL for a given mailbox
+
+
+vim:ft=help:

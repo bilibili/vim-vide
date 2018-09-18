@@ -1,0 +1,67 @@
+chr
+
+(PHP 4, PHP 5, PHP 7)
+
+chr — Return a specific character
+
+==============================================================================
+*Description*
+
+    string chr ( int $ascii )~
+
+Returns a one-character string containing the character specified by {ascii}.
+
+This function complements |ord|.
+
+==============================================================================
+*Parameters*
+
+{ascii}
+
+    The extended ASCII code.
+
+    Values outside the valid range (0..255) will be bitwise and'ed with 255,
+    which is equivalent to the following algorithm:
+    while ($ascii < 0) {
+        $ascii += 256;
+    }
+    $ascii %= 256;
+
+==============================================================================
+*Return* *Values*
+
+Returns the specified character.
+
+==============================================================================
+*Examples*
+
+Example #1 chr() example
+
+<?php >
+    $str = "The string ends in escape: ";
+    $str .= chr(27); /* add an escape character at the end of $str */
+
+    /* Often this is more useful */
+
+    $str = sprintf("The string ends in escape: %c", 27);
+<?>
+
+Example #2 Overflow behavior
+
+<?php >
+    echo chr(-159), chr(833), PHP_EOL;
+<?>
+
+The above example will output:
+
+aA
+
+==============================================================================
+*See* *Also*
+
+  * |sprintf| - Return a formatted string with a format string of %c
+  * |ord|
+  * An >> ASCII-table
+
+
+vim:ft=help:

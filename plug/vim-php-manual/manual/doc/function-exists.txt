@@ -1,0 +1,65 @@
+function_exists
+
+(PHP 4, PHP 5, PHP 7)
+
+function_exists — Return TRUE if the given function has been defined
+
+==============================================================================
+*Description*
+
+    bool function_exists ( string $function_name )~
+
+Checks the list of defined functions, both built-in (internal) and
+user-defined, for {function_name}.
+
+==============================================================================
+*Parameters*
+
+{function_name}
+
+    The function name, as a string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {function_name} exists and is a function, FALSE otherwise.
+
+    Note:
+
+    This function will return FALSE for constructs, such as |include_once| and
+    |echo|.
+
+==============================================================================
+*Examples*
+
+Example #1 function_exists() example
+
+<?php >
+    if (function_exists('imap_open')) {
+        echo "IMAP functions are available.<br />\n";
+    } else {
+        echo "IMAP functions are not available.<br />\n";
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    A function name may exist even if the function itself is unusable due to
+    configuration or compiling options (with the image functions being an
+    example).
+
+==============================================================================
+*See* *Also*
+
+  * |method_exists| - Checks if the class method exists
+  * |is_callable| - Verify that the contents of a variable can be called as a
+    function
+  * |get_defined_functions| - Returns an array of all defined functions
+  * |class_exists| - Checks if the class has been defined
+  * |extension_loaded| - Find out whether an extension is loaded
+
+
+vim:ft=help:

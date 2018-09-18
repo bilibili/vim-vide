@@ -1,0 +1,139 @@
+imagefttext
+
+(PHP 4 >= 4.0.7, PHP 5, PHP 7)
+
+imagefttext — Write text to the image using fonts using FreeType 2
+
+==============================================================================
+*Description*
+
+    array imagefttext ( resource $image , float $size , float $angle , int $x~
+    , int $y , int $color , string $fontfile , string $text [, array~
+    $extrainfo ] )~
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{size}
+
+    The font size to use in points.
+
+{angle}
+
+    The angle in degrees, with 0 degrees being left-to-right reading text.
+    Higher values represent a counter-clockwise rotation. For example, a value
+    of 90 would result in bottom-to-top reading text.
+
+{x}
+
+    The coordinates given by {x} and {y} will define the basepoint of the
+    first character (roughly the lower-left corner of the character). This is
+    different from the |imagestring|, where {x} and {y} define the upper-left
+    corner of the first character. For example, "top left" is 0, 0.
+
+{y}
+
+    The y-ordinate. This sets the position of the fonts baseline, not the very
+    bottom of the character.
+
+{color}
+
+    The index of the desired color for the text, see |imagecolorexact|.
+
+{fontfile}
+
+    The path to the TrueType font you wish to use.
+
+    Depending on which version of the GD library PHP is using, when {fontfile}
+    does not begin with a leading / then .ttf will be appended to the filename
+    and the library will attempt to search for that filename along a
+    library-defined font path.
+
+    When using versions of the GD library lower than 2.0.18, a space
+    character, rather than a semicolon, was used as the 'path separator' for
+    different font files. Unintentional use of this feature will result in the
+    warning message: Warning: Could not find/open font. For these affected
+    versions, the only solution is moving the font to a path which does not
+    contain spaces.
+
+    In many cases where a font resides in the same directory as the script
+    using it the following trick will alleviate any include problems.
+    <?php >
+    // Set the enviroment variable for GD
+    putenv('GDFONTPATH=' . realpath('.'));
+
+    // Name the font to be used (note the lack of the .ttf extension)
+    $font = 'SomeFont';
+<    ?>
+
+{text}
+
+    Text to be inserted into image.
+
+{extrainfo}
+
+     Possible array indexes for {extrainfo}
+        Key     Type            Meaning
+    linespacing float Defines drawing linespacing
+
+==============================================================================
+*Return* *Values*
+
+This function returns an array defining the four points of the box, starting
+in the lower left and moving counter-clockwise:
+
+0 lower left x-coordinate
+1 lower left y-coordinate
+2 lower right x-coordinate
+3 lower right y-coordinate
+4 upper right x-coordinate
+5 upper right y-coordinate
+6 upper left x-coordinate
+7 upper left y-coordinate
+
+==============================================================================
+*Examples*
+
+Example #1 imagefttext() example
+
+<?php >
+    // Create a 300x100 image
+    $im = imagecreatetruecolor(300, 100);
+    $red = imagecolorallocate($im, 0xFF, 0x00, 0x00);
+    $black = imagecolorallocate($im, 0x00, 0x00, 0x00);
+
+    // Make the background red
+    imagefilledrectangle($im, 0, 0, 299, 99, $red);
+
+    // Path to our ttf font file
+    $font_file = './arial.ttf';
+
+    // Draw the text 'PHP Manual' using font size 13
+    imagefttext($im, 13, 0, 105, 55, $black, $font_file, 'PHP Manual');
+
+    // Output image to the browser
+    header('Content-Type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available if PHP is compiled with freetype
+    support (--with-freetype-dir=DIR )
+
+==============================================================================
+*See* *Also*
+
+  * |imageftbbox| - Give the bounding box of a text using fonts via freetype2
+  * |imagettftext| - Write text to the image using TrueType fonts
+
+
+vim:ft=help:

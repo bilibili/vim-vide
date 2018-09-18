@@ -1,0 +1,34 @@
+newt_checkbox_tree_multi
+
+(PECL newt >= 0.1)
+
+newt_checkbox_tree_multi —
+
+==============================================================================
+*Description*
+
+    resource newt_checkbox_tree_multi ( int $left , int $top , int $height ,~
+    string $seq [, int $flags ] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+{top}
+
+{height}
+
+{seq}
+
+{flags}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

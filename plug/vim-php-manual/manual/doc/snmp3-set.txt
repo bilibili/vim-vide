@@ -1,0 +1,144 @@
+snmp3_set
+
+(PHP 4, PHP 5, PHP 7)
+
+snmp3_set — Set the value of an SNMP object
+
+==============================================================================
+*Description*
+
+    bool snmp3_set ( string $host , string $sec_name , string $sec_level ,~
+    string $auth_protocol , string $auth_passphrase , string $priv_protocol ,~
+    string $priv_passphrase , string $object_id , string $type , string~
+    $value [, int $timeout = 1000000 [, int $retries = 5 ]] )~
+
+snmp3_set() is used to set the value of an SNMP object specified by the
+{object_id}.
+
+Even if the security level does not use an auth or priv protocol/password
+valid values have to be specified.
+
+==============================================================================
+*Parameters*
+
+{host}
+
+    The hostname of the SNMP agent (server).
+
+{sec_name}
+
+    the security name, usually some kind of username
+
+{sec_level}
+
+    the security level (noAuthNoPriv|authNoPriv|authPriv)
+
+{auth_protocol}
+
+    the authentication protocol (MD5 or SHA)
+
+{auth_passphrase}
+
+    the authentication pass phrase
+
+{priv_protocol}
+
+    the privacy protocol (DES or AES)
+
+{priv_passphrase}
+
+    the privacy pass phrase
+
+{object_id}
+
+    The SNMP object id.
+
+{type}
+
+    The MIB defines the type of each object id. It has to be specified as a
+    single character from the below list.
+
+               types
+    = The type is taken from the MIB
+    i INTEGER
+    u INTEGER
+    s STRING
+    x HEX STRING
+    d DECIMAL STRING
+    n NULLOBJ
+    o OBJID
+    t TIMETICKS
+    a IPADDRESS
+    b BITS
+
+    If OPAQUE_SPECIAL_TYPES was defined while compiling the SNMP library, the
+    following are also valid:
+
+        types
+    U unsigned int64
+    I signed int64
+    F float
+    D double
+
+    Most of these will use the obvious corresponding ASN.1 type. 's', 'x', 'd'
+    and 'b' are all different ways of specifying an OCTET STRING value, and
+    the 'u' unsigned type is also used for handling Gauge32 values.
+
+    If the MIB-Files are loaded by into the MIB Tree with "snmp_read_mib" or
+    by specifying it in the libsnmp config, '=' may be used as the {type}
+    parameter for all object ids as the type can then be automatically read
+    from the MIB.
+
+    Note that there are two ways to set a variable of the type BITS like e.g.
+    "SYNTAX BITS {telnet(0), ftp(1), http(2), icmp(3), snmp(4), ssh(5), https
+    (6)}":
+
+      + Using type "b" and a list of bit numbers. This method is not
+        recommended since GET query for the same OID would return e.g. 0xF8.
+      + Using type "x" and a hex number but without(!) the usual "0x" prefix.
+
+    See examples section for more details.
+
+{value}
+
+    The new value
+
+{timeout}
+
+    The number of microseconds until the first timeout.
+
+{retries}
+
+    The number of times to retry if timeouts occur.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+If the SNMP host rejects the data type, an E_WARNING message like "Warning:
+Error in packet. Reason: (badValue) The value given has the wrong type or
+length." is shown. If an unknown or invalid OID is specified the warning
+probably reads "Could not add variable".
+
+==============================================================================
+*Examples*
+
+Example #1 Using snmp3_set()
+
+<?php >
+      snmp3_set('localhost', 'james', 'authPriv', 'SHA', 'secret007', 'AES', 
+    'secret007', 'IF-MIB::ifAlias.3', 's', "foo");
+<?>
+
+Example #2 Using snmp3_set() for setting BITS SNMP object id
+
+<?php >
+      snmp3_set('localhost', 'james', 'authPriv', 'SHA', 'secret007', 'AES', 
+    'secret007', 'FOO-MIB::bar.42', 'b', '0 1 2 3 4');
+    // or
+      snmp3_set('localhost', 'james', 'authPriv', 'SHA', 'secret007', 'AES', 
+    'secret007', 'FOO-MIB::bar.42', 'x', 'F0');
+<?>
+
+vim:ft=help:

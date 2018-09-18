@@ -1,0 +1,13 @@
+gzputs
+
+(PHP 4, PHP 5, PHP 7)
+
+gzputs — Alias of |gzwrite|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |gzwrite|.
+
+
+vim:ft=help:

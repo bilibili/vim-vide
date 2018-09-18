@@ -1,0 +1,32 @@
+hwapi_hgcsp
+
+(PHP 4, PHP 5 < 5.2.0, PECL hwapi SVN)
+
+hwapi_hgcsp — Returns object of class hw_api
+
+==============================================================================
+*Description*
+
+    HW_API hwapi_hgcsp ( string $hostname [, int $port ] )~
+
+Opens a connection to the Hyperwave server on host {hostname}. The protocol
+used is HGCSP.
+
+==============================================================================
+*Parameters*
+
+{hostname}
+
+    The host name.
+
+{port}
+
+    If you do not pass a port number, 418 is used.
+
+==============================================================================
+*Return* *Values*
+
+Returns an instance of HW_API.
+
+
+vim:ft=help:

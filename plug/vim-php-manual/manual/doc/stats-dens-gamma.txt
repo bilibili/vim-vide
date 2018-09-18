@@ -1,0 +1,29 @@
+stats_dens_gamma
+
+(PECL stats >= 1.0.0)
+
+stats_dens_gamma — Not documented
+
+==============================================================================
+*Description*
+
+    float stats_dens_gamma ( float $x , float $shape , float $scale )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{x}
+
+{shape}
+
+{scale}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

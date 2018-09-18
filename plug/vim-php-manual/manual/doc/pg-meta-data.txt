@@ -1,0 +1,109 @@
+pg_meta_data
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+pg_meta_data — Get meta data for table
+
+==============================================================================
+*Description*
+
+    array pg_meta_data ( resource $connection , string $table_name [, bool~
+    $extended ] )~
+
+pg_meta_data() returns table definition for table_name as an array.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource.
+
+{table_name}
+
+    The name of the table.
+
+{extended}
+
+    Flag for returning extended meta data. Default to FALSE.
+
+==============================================================================
+*Return* *Values*
+
+An array of the table definition, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 Getting table metadata
+
+<?php >
+      $dbconn = pg_connect("dbname=publisher") or die("Could not connect");
+
+      $meta = pg_meta_data($dbconn, 'authors');
+      if (is_array($meta)) {
+          echo '<pre>';
+          var_dump($meta);
+          echo '</pre>';
+      }
+<?>
+
+The above example will output:
+
+array(3) {
+["author"]=>
+array(5) {
+  ["num"]=>
+  int(1)
+  ["type"]=>
+  string(7) "varchar"
+  ["len"]=>
+  int(-1)
+  ["not null"]=>
+  bool(false)
+  ["has default"]=>
+  bool(false)
+}
+["year"]=>
+array(5) {
+  ["num"]=>
+  int(2)
+  ["type"]=>
+  string(4) "int2"
+  ["len"]=>
+  int(2)
+  ["not null"]=>
+  bool(false)
+  ["has default"]=>
+  bool(false)
+}
+["title"]=>
+array(5) {
+  ["num"]=>
+  int(3)
+  ["type"]=>
+  string(7) "varchar"
+  ["len"]=>
+  int(-1)
+  ["not null"]=>
+  bool(false)
+  ["has default"]=>
+  bool(false)
+}
+}
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.6.0   No longer experimental. Added "is enum" as default attribute.
+        {extended} flag is added.
+
+==============================================================================
+*See* *Also*
+
+  * |pg_convert| - Convert associative array values into suitable for SQL
+    statement
+
+
+vim:ft=help:

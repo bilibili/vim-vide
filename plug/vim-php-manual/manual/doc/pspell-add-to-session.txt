@@ -1,0 +1,30 @@
+pspell_add_to_session
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+pspell_add_to_session — Add the word to the wordlist in the current session
+
+==============================================================================
+*Description*
+
+    bool pspell_add_to_session ( int $dictionary_link , string $word )~
+
+pspell_add_to_session() adds a word to the wordlist associated with the
+current session. It is very similar to |pspell_add_to_personal|
+
+==============================================================================
+*Parameters*
+
+{dictionary_link}
+
+{word}
+
+    The added word.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

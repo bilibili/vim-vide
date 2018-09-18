@@ -1,0 +1,51 @@
+ssh2_sftp_rmdir
+
+(PECL ssh2 >= 0.9.0)
+
+ssh2_sftp_rmdir — Remove a directory
+
+==============================================================================
+*Description*
+
+    bool ssh2_sftp_rmdir ( resource $sftp , string $dirname )~
+
+Removes a directory from the remote file server.
+
+This function is similar to using |rmdir| with the ssh2.sftp:// wrapper.
+
+==============================================================================
+*Parameters*
+
+{sftp}
+
+    An SSH2 SFTP resource opened by |ssh2_sftp|.
+
+{dirname}
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Removing a directory on a remote server
+
+<?php >
+    $connection = ssh2_connect('shell.example.com', 22);
+    ssh2_auth_password($connection, 'username', 'password');
+    $sftp = ssh2_sftp($connection);
+
+    ssh2_sftp_rmdir($sftp, '/home/username/deltodel');
+    /* Or:  rmdir("ssh2.sftp://$sftp/home/username/dirtodel"); */
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |rmdir| - Removes directory
+  * |ssh2_sftp_mkdir| - Create a directory
+
+
+vim:ft=help:

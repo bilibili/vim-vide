@@ -1,0 +1,126 @@
+get_defined_constants
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+get_defined_constants — Returns an associative array with the names of all the
+constants and their values
+
+==============================================================================
+*Description*
+
+    array get_defined_constants ([ bool $categorize = false ] )~
+
+Returns the names and values of all the constants currently defined. This
+includes those created by extensions as well as those created with the |define
+| function.
+
+==============================================================================
+*Parameters*
+
+{categorize}
+
+    Causing this function to return a multi-dimensional array with categories
+    in the keys of the first dimension and constants and their values in the
+    second dimension.
+    <?php >
+    define("MY_CONSTANT", 1);
+    print_r(get_defined_constants(true));
+<    ?>
+
+    The above example will output something similar to:
+
+    Array
+    (
+        [Core] => Array
+            (
+                [E_ERROR] => 1
+                [E_WARNING] => 2
+                [E_PARSE] => 4
+                [E_NOTICE] => 8
+                [E_CORE_ERROR] => 16
+                [E_CORE_WARNING] => 32
+                [E_COMPILE_ERROR] => 64
+                [E_COMPILE_WARNING] => 128
+                [E_USER_ERROR] => 256
+                [E_USER_WARNING] => 512
+                [E_USER_NOTICE] => 1024
+                [E_ALL] => 2047
+                [TRUE] => 1
+            )
+
+        [pcre] => Array
+            (
+                [PREG_PATTERN_ORDER] => 1
+                [PREG_SET_ORDER] => 2
+                [PREG_OFFSET_CAPTURE] => 256
+                [PREG_SPLIT_NO_EMPTY] => 1
+                [PREG_SPLIT_DELIM_CAPTURE] => 2
+                [PREG_SPLIT_OFFSET_CAPTURE] => 4
+                [PREG_GREP_INVERT] => 1
+            )
+
+        [user] => Array
+            (
+                [MY_CONSTANT] => 1
+            )
+
+    )
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of constant name => constant value array, optionally groupped
+by extension name registering the constant.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.1   Windows only: Core constants are categorized under Core, previously
+        mhash.
+5.3.0   Core constants are categorized under Core, previously internal. On
+        Windows, the Core Constants are categorized under mhash.
+        The {categorize} parameter now operates appropriately. Previously, the
+5.2.11  {categorize} parameter was interpreted as !is_null($categorize),
+        making any value other than NULL force the constants to be
+        categorized.
+
+==============================================================================
+*Examples*
+
+Example #1 get_defined_constants() Example
+
+<?php >
+    print_r(get_defined_constants());
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [E_ERROR] => 1
+    [E_WARNING] => 2
+    [E_PARSE] => 4
+    [E_NOTICE] => 8
+    [E_CORE_ERROR] => 16
+    [E_CORE_WARNING] => 32
+    [E_COMPILE_ERROR] => 64
+    [E_COMPILE_WARNING] => 128
+    [E_USER_ERROR] => 256
+    [E_USER_WARNING] => 512
+    [E_USER_NOTICE] => 1024
+    [E_ALL] => 2047
+    [TRUE] => 1
+)
+
+==============================================================================
+*See* *Also*
+
+  * |defined| - Checks whether a given named constant exists
+  * |get_loaded_extensions| - Returns an array with the names of all modules
+    compiled and loaded
+  * |get_defined_functions| - Returns an array of all defined functions
+  * |get_defined_vars| - Returns an array of all defined variables
+
+
+vim:ft=help:

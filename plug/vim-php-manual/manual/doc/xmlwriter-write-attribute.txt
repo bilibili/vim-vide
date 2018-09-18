@@ -1,0 +1,54 @@
+XMLWriter::writeAttribute
+
+xmlwriter_write_attribute
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::writeAttribute -- xmlwriter_write_attribute — Write full attribute
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::writeAttribute ( string $name , string $value )~
+
+Procedural style
+
+    bool xmlwriter_write_attribute ( resource $xmlwriter , string $name ,~
+    string $value )~
+
+Writes a full attribute.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{name}
+
+    The name of the attribute.
+
+{value}
+
+    The value of the attribute.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::writeAttributeNS| - Write full namespaced attribute
+  * |XMLWriter::startAttribute| - Create start attribute
+  * |XMLWriter::startAttributeNS| - Create start namespaced attribute
+  * |XMLWriter::endAttribute| - End attribute
+
+
+vim:ft=help:

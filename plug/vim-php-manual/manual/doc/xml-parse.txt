@@ -1,0 +1,48 @@
+xml_parse
+
+(PHP 4, PHP 5, PHP 7)
+
+xml_parse — Start parsing an XML document
+
+==============================================================================
+*Description*
+
+    int xml_parse ( resource $parser , string $data [, bool $is_final = false~
+    ] )~
+
+xml_parse() parses an XML document. The handlers for the configured events are
+called as many times as necessary.
+
+==============================================================================
+*Parameters*
+
+{parser}
+
+    A reference to the XML parser to use.
+
+{data}
+
+    Chunk of data to parse. A document may be parsed piece-wise by calling 
+    xml_parse() several times with new data, as long as the {is_final}
+    parameter is set and TRUE when the last data is parsed.
+
+{is_final}
+
+    If set and TRUE, {data} is the last piece of data sent in this parse.
+
+==============================================================================
+*Return* *Values*
+
+Returns 1 on success or 0 on failure.
+
+For unsuccessful parses, error information can be retrieved with 
+|xml_get_error_code|, |xml_error_string|, |xml_get_current_line_number|, 
+|xml_get_current_column_number| and |xml_get_current_byte_index|.
+
+    Note:
+
+    Entity errors are reported at the end of the data thus only if {is_final}
+    is set and TRUE.
+
+
+vim:ft=help:

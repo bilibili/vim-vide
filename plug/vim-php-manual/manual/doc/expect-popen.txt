@@ -1,0 +1,49 @@
+expect_popen
+
+(PECL expect >= 0.1.0)
+
+expect_popen — Execute command via Bourne shell, and open the PTY stream to
+the process
+
+==============================================================================
+*Description*
+
+    resource expect_popen ( string $command )~
+
+Execute command via Bourne shell, and open the PTY stream to the process.
+
+==============================================================================
+*Parameters*
+
+{command}
+
+    Command to execute.
+
+==============================================================================
+*Return* *Values*
+
+Returns an open PTY stream to the processes stdio, stdout, and stderr.
+
+On failure this function returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 expect_popen() example
+
+<?php >
+    // Login to the PHP.net CVS repository:
+    $stream = expect_popen ("cvs -d :pserver:anonymous@cvs.php.net:/
+    repository login");
+    sleep (3);
+    fwrite ($stream, "phpfi\n");
+    fclose ($stream);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |popen| - Opens process file pointer
+
+
+vim:ft=help:

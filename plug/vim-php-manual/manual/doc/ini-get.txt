@@ -1,0 +1,115 @@
+ini_get
+
+(PHP 4, PHP 5, PHP 7)
+
+ini_get — Gets the value of a configuration option
+
+==============================================================================
+*Description*
+
+    string ini_get ( string $varname )~
+
+Returns the value of the configuration option on success.
+
+==============================================================================
+*Parameters*
+
+{varname}
+
+    The configuration option name.
+
+==============================================================================
+*Return* *Values*
+
+Returns the value of the configuration option as a string on success, or an
+empty string for null values. Returns FALSE if the configuration option
+doesn't exist.
+
+==============================================================================
+*Examples*
+
+Example #1 A few ini_get() examples
+
+<?php >
+    /*
+    Our php.ini contains the following settings:
+
+    display_errors = On
+    register_globals = Off
+    post_max_size = 8M
+    */
+
+    echo 'display_errors = ' . ini_get('display_errors') . "\n";
+    echo 'register_globals = ' . ini_get('register_globals') . "\n";
+    echo 'post_max_size = ' . ini_get('post_max_size') . "\n";
+    echo 'post_max_size+1 = ' . (ini_get('post_max_size')+1) . "\n";
+    echo 'post_max_size in bytes = ' . return_bytes(ini_get('post_max_size'));
+
+    function return_bytes($val) {
+        $val = trim($val);
+        $last = strtolower($val[strlen($val)-1]);
+        switch($last) {
+            // The 'G' modifier is available since PHP 5.1.0
+            case 'g':
+                $val *= 1024;
+            case 'm':
+                $val *= 1024;
+            case 'k':
+                $val *= 1024;
+        }
+
+        return $val;
+    }
+
+<?>
+
+The above example will output something similar to:
+
+
+display_errors = 1
+register_globals = 0
+post_max_size = 8M
+post_max_size+1 = 9
+post_max_size in bytes = 8388608
+
+
+==============================================================================
+*Notes*
+
+    Note: When querying boolean values
+
+    A boolean ini value of off will be returned as an empty string or "0"
+    while a boolean ini value of on will be returned as "1". The function can
+    also return the literal string of INI value.
+
+    Note: When querying memory size values
+
+    Many ini memory size values, such as upload_max_filesize, are stored in
+    the php.ini file in shorthand notation. ini_get() will return the exact
+    string stored in the php.ini file and NOT its integer equivalent.
+    Attempting normal arithmetic functions on these values will not have
+    otherwise expected results. The example above shows one way to convert
+    shorthand notation into bytes, much like how the PHP source does it.
+
+    Note:
+
+    ini_get() can't read "array" ini options such as pdo.dsn.*, and returns
+    FALSE in this case.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   Previously, the empty string was returned if the configuration option
+        didn't exist. now, FALSE is returned instead.
+
+==============================================================================
+*See* *Also*
+
+  * |get_cfg_var| - Gets the value of a PHP configuration option
+  * |ini_get_all| - Gets all configuration options
+  * |ini_restore| - Restores the value of a configuration option
+  * |ini_set| - Sets the value of a configuration option
+
+
+vim:ft=help:

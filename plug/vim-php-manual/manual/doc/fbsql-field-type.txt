@@ -1,0 +1,69 @@
+fbsql_field_type
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_field_type — Get the type of the specified field in a result
+
+==============================================================================
+*Description*
+
+    string fbsql_field_type ( resource $result [, int $field_offset ] )~
+
+fbsql_field_type() is similar to the |fbsql_field_name| function, but the
+field type is returned instead.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    A result identifier returned by |fbsql_query| or |fbsql_db_query|.
+
+{field_offset}
+
+    The numerical offset of the field. The field index starts at 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns the field type, as a string.
+
+This can be one of int, real, string, blob, and others as detailed in the >>
+ FrontBase documentation.
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_field_type() example
+
+<?php >
+
+    fbsql_connect("localhost", "_SYSTEM", "");
+    fbsql_select_db("wisconsin");
+    $result = fbsql_query("SELECT * FROM onek;");
+    $fields = fbsql_num_fields($result);
+    $rows   = fbsql_num_rows($result);
+    $i = 0;
+    $table = fbsql_field_table($result, $i);
+    echo "Your '" . $table . "' table has " . $fields . " fields and " . $rows . 
+    " records <br />";
+    echo "The table has the following fields <br />";
+    while ($i < $fields) {
+        $type  = fbsql_field_type($result, $i);
+        $name  = fbsql_field_name($result, $i);
+        $len   = fbsql_field_len($result, $i);
+        $flags = fbsql_field_flags($result, $i);
+        echo $type . " " . $name . " " . $len . " " . $flags . "<br />";
+        $i++;
+    }
+    fbsql_close();
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_field_name| - Get the name of the specified field in a result
+
+
+vim:ft=help:

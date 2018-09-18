@@ -1,0 +1,54 @@
+disk_total_space
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+disk_total_space — Returns the total size of a filesystem or disk partition
+
+==============================================================================
+*Description*
+
+    float disk_total_space ( string $directory )~
+
+Given a string containing a directory, this function will return the total
+number of bytes on the corresponding filesystem or disk partition.
+
+==============================================================================
+*Parameters*
+
+{directory}
+
+    A directory of the filesystem or disk partition.
+
+==============================================================================
+*Return* *Values*
+
+Returns the total number of bytes as a float or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 disk_total_space() example
+
+<?php >
+    // $ds contains the total number of bytes available on "/"
+    $ds = disk_total_space("/");
+
+    // On Windows:
+    $ds = disk_total_space("C:");
+    $ds = disk_total_space("D:");
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function will not work on remote files as the file to be
+    examined must be accessible via the server's filesystem.
+
+==============================================================================
+*See* *Also*
+
+  * |disk_free_space| - Returns available space on filesystem or disk
+    partition
+
+
+vim:ft=help:

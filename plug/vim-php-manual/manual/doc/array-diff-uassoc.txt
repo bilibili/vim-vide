@@ -1,0 +1,119 @@
+array_diff_uassoc
+
+(PHP 5, PHP 7)
+
+array_diff_uassoc — Computes the difference of arrays with additional index
+check which is performed by a user supplied callback function
+
+==============================================================================
+*Description*
+
+    array array_diff_uassoc ( array $array1 , array $array2 [, array $... ],~
+    callable $key_compare_func )~
+
+Compares {array1} against {array2} and returns the difference. Unlike 
+|array_diff| the array keys are used in the comparison.
+
+Unlike |array_diff_assoc| a user supplied callback function is used for the
+indices comparison, not internal function.
+
+==============================================================================
+*Parameters*
+
+{array1}
+
+    The array to compare from
+
+{array2}
+
+    An array to compare against
+
+{...}
+
+    More arrays to compare against
+
+{key_compare_func}
+
+    The comparison function must return an integer less than, equal to, or
+    greater than zero if the first argument is considered to be respectively
+    less than, equal to, or greater than the second. Note that before PHP
+    7.0.0 this integer had to be in the range from -2147483648 to 2147483647.
+
+
+    int callback ( mixed $a, mixed $b )~
+
+==============================================================================
+*Return* *Values*
+
+Returns an array containing all the entries from {array1} that are not present
+in any of the other arrays.
+
+==============================================================================
+*Examples*
+
+Example #1 array_diff_uassoc() example
+
+The "a" => "green" pair is present in both arrays and thus it is not in the
+output from the function. Unlike this, the pair 0 => "red" is in the output
+because in the second argument "red" has key which is 1.
+
+<?php >
+    function key_compare_func($a, $b)
+    {
+        if ($a === $b) {
+            return 0;
+        }
+        return ($a > $b)? 1:-1;
+    }
+
+    $array1 = array("a" => "green", "b" => "brown", "c" => "blue", "red");
+    $array2 = array("a" => "green", "yellow", "red");
+    $result = array_diff_uassoc($array1, $array2, "key_compare_func");
+    print_r($result);
+<?>
+
+The above example will output:
+
+Array
+(
+    [b] => brown
+    [c] => blue
+    [0] => red
+)
+
+The equality of 2 indices is checked by the user supplied callback function.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function only checks one dimension of a n-dimensional array. Of
+    course you can check deeper dimensions by using, for example,
+    array_diff_uassoc($array1[0], $array2[0], "key_compare_func");.
+
+==============================================================================
+*See* *Also*
+
+  * |array_diff| - Computes the difference of arrays
+  * |array_diff_assoc| - Computes the difference of arrays with additional
+    index check
+  * |array_udiff| - Computes the difference of arrays by using a callback
+    function for data comparison
+  * |array_udiff_assoc| - Computes the difference of arrays with additional
+    index check, compares data by a callback function
+  * |array_udiff_uassoc| - Computes the difference of arrays with additional
+    index check, compares data and indexes by a callback function
+  * |array_intersect| - Computes the intersection of arrays
+  * |array_intersect_assoc| - Computes the intersection of arrays with
+    additional index check
+  * |array_uintersect| - Computes the intersection of arrays, compares data by
+    a callback function
+  * |array_uintersect_assoc| - Computes the intersection of arrays with
+    additional index check, compares data by a callback function
+  * |array_uintersect_uassoc| - Computes the intersection of arrays with
+    additional index check, compares data and indexes by separate callback
+    functions
+
+
+vim:ft=help:

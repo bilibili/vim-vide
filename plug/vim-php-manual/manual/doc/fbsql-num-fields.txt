@@ -1,0 +1,36 @@
+fbsql_num_fields
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_num_fields — Get number of fields in result
+
+==============================================================================
+*Description*
+
+    int fbsql_num_fields ( resource $result )~
+
+Returns the number of fields in the given {result} set.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    A result identifier returned by |fbsql_query| or |fbsql_db_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of fields, as an integer.
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_db_query| - Send a FrontBase query
+  * |fbsql_query| - Send a FrontBase query
+  * |fbsql_fetch_field| - Get column information from a result and return as
+    an object
+  * |fbsql_num_rows| - Get number of rows in result
+
+
+vim:ft=help:

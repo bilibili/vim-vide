@@ -1,0 +1,39 @@
+runkit_constant_add
+
+(PECL runkit >= 0.7.0)
+
+runkit_constant_add — Similar to define(), but allows defining in class
+definitions as well
+
+==============================================================================
+*Description*
+
+    bool runkit_constant_add ( string $constname , mixed $value )~
+
+==============================================================================
+*Parameters*
+
+{constname}
+
+    Name of constant to declare. Either a string to indicate a global
+    constant, or classname::constname to indicate a class constant.
+
+{value}
+
+    NULL, Bool, Long, Double, String, or Resource value to store in the new
+    constant.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |define| - Defines a named constant
+  * |runkit_constant_redefine| - Redefine an already defined constant
+  * |runkit_constant_remove| - Remove/Delete an already defined constant
+
+
+vim:ft=help:

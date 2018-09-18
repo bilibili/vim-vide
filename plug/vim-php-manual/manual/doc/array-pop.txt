@@ -1,0 +1,68 @@
+array_pop
+
+(PHP 4, PHP 5, PHP 7)
+
+array_pop — Pop the element off the end of array
+
+==============================================================================
+*Description*
+
+    mixed array_pop ( array &$array )~
+
+array_pop() pops and returns the last value of the {array}, shortening the
+{array} by one element.
+
+    Note: This function will |reset| the array pointer of the input array
+    after use.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    The array to get the value from.
+
+==============================================================================
+*Return* *Values*
+
+Returns the last value of {array}. If {array} is empty (or is not an array),
+NULL will be returned.
+
+==============================================================================
+*Errors/Exceptions*
+
+This function will produce an error of level E_WARNING when called on a
+non-array.
+
+==============================================================================
+*Examples*
+
+Example #1 array_pop() example
+
+<?php >
+    $stack = array("orange", "banana", "apple", "raspberry");
+    $fruit = array_pop($stack);
+    print_r($stack);
+<?>
+
+After this, $stack will have only 3 elements:
+
+Array
+(
+    [0] => orange
+    [1] => banana
+    [2] => apple
+)
+
+and raspberry will be assigned to $fruit.
+
+==============================================================================
+*See* *Also*
+
+  * |array_push| - Push one or more elements onto the end of array
+  * |array_shift| - Shift an element off the beginning of array
+  * |array_unshift| - Prepend one or more elements to the beginning of an
+    array
+
+
+vim:ft=help:

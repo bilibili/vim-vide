@@ -1,0 +1,45 @@
+sqlite_num_fields
+
+SQLiteResult::numFields
+
+SQLiteUnbuffered::numFields
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.0)
+
+sqlite_num_fields -- SQLiteResult::numFields -- SQLiteUnbuffered::numFields — 
+Returns the number of fields in a result set
+
+==============================================================================
+*Description*
+
+    int sqlite_num_fields ( resource $result )~
+
+Object oriented style (method):
+
+    int SQLiteResult::numFields ( void )~
+    int SQLiteUnbuffered::numFields ( void )~
+
+Returns the number of fields in the {result} set.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The SQLite result resource. This parameter is not required when using the
+    object-oriented method.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of fields, as an integer.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_changes| - Returns the number of rows that were changed by the
+    most recent SQL statement
+  * |sqlite_num_rows| - Returns the number of rows in a buffered result set
+
+
+vim:ft=help:

@@ -1,0 +1,79 @@
+apc_exists
+
+(PECL apc >= 3.1.4)
+
+apc_exists — Checks if APC key exists
+
+==============================================================================
+*Description*
+
+    mixed apc_exists ( mixed $keys )~
+
+Checks if one or more APC keys exist.
+
+==============================================================================
+*Parameters*
+
+{keys}
+
+    A string, or an array of strings, that contain keys.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the key exists, otherwise FALSE Or if an array was passed to
+{keys}, then an array is returned that contains all existing keys, or an empty
+array if none exist.
+
+==============================================================================
+*Examples*
+
+Example #1 apc_exists() example
+
+<?php >
+    $fruit  = 'apple';
+    $veggie = 'carrot';
+
+    apc_store('foo', $fruit);
+    apc_store('bar', $veggie);
+
+    if (apc_exists('foo')) {
+        echo "Foo exists: ";
+        echo apc_fetch('foo');
+    } else {
+        echo "Foo does not exist";
+    }
+
+    echo PHP_EOL;
+    if (apc_exists('baz')) {
+        echo "Baz exists.";
+    } else {
+        echo "Baz does not exist";
+    }
+
+    echo PHP_EOL;
+
+    $ret = apc_exists(array('foo', 'donotexist', 'bar'));
+    var_dump($ret);
+
+<?>
+
+The above example will output something similar to:
+
+Foo exists: apple
+Baz does not exist
+array(2) {
+  ["foo"]=>
+  bool(true)
+  ["bar"]=>
+  bool(true)
+}
+
+==============================================================================
+*See* *Also*
+
+  * |apc_cache_info| - Retrieves cached information from APC's data store
+  * |apc_fetch| - Fetch a stored variable from the cache
+
+
+vim:ft=help:

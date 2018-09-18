@@ -1,0 +1,84 @@
+apcu_cache_info
+
+(PECL apcu >= 4.0.0)
+
+apcu_cache_info — Retrieves cached information from APCu's data store
+
+==============================================================================
+*Description*
+
+    array apcu_cache_info ([ bool $limited = false ] )~
+
+Retrieves cached information and meta-data from APC's data store.
+
+==============================================================================
+*Parameters*
+
+{limited}
+
+    If {limited} is TRUE, the return value will exclude the individual list of
+    cache entries. This is useful when trying to optimize calls for statistics
+    gathering.
+
+==============================================================================
+*Return* *Values*
+
+Array of cached data (and meta-data) or FALSE on failure
+
+    Note: apcu_cache_info() will raise a warning if it is unable to retrieve
+    APC cache data. This typically occurs when APC is not enabled.
+
+==============================================================================
+*Changelog*
+
+Version                             Description
+3.0.11  The {limited} parameter was introduced.
+3.0.16  The "filehits" option for the {cache_type} parameter was introduced.
+
+==============================================================================
+*Examples*
+
+Example #1 A apcu_cache_info() example
+
+<?php >
+    print_r(apcu_cache_info());
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [num_slots] => 2000
+    [ttl] => 0
+    [num_hits] => 9
+    [num_misses] => 3
+    [start_time] => 1123958803
+    [cache_list] => Array
+        (
+            [0] => Array
+                (
+                    [filename] => /path/to/apcu_test.php
+                    [device] => 29954
+                    [inode] => 1130511
+                    [type] => file
+                    [num_hits] => 1
+                    [mtime] => 1123960686
+                    [creation_time] => 1123960696
+                    [deletion_time] => 0
+                    [access_time] => 1123962864
+                    [ref_count] => 1
+                    [mem_size] => 677
+                )
+            [1] => Array (...iterates for each cached file)
+)
+
+==============================================================================
+*See* *Also*
+
+  * APCu configuration directives
+  * APCUIterator::getTotalSize() - Get total cache size
+  * APCUIterator::getTotalHits() - Get total cache hits
+  * APCUIterator::getTotalCount() - Get total count
+
+
+vim:ft=help:

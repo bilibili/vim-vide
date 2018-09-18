@@ -1,0 +1,32 @@
+http_send_status
+
+(PECL pecl_http >= 0.1.0)
+
+http_send_status — Send HTTP response status
+
+==============================================================================
+*Description*
+
+    bool http_send_status ( int $status )~
+
+Send HTTP status code.
+
+==============================================================================
+*Parameters*
+
+{status}
+
+    HTTP status code (100-599)
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * the  HttpResponse class if you are using PHP 5.1.0 and above
+
+
+vim:ft=help:

@@ -1,0 +1,62 @@
+imagepalettecopy
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7)
+
+imagepalettecopy — Copy the palette from one image to another
+
+==============================================================================
+*Description*
+
+    void imagepalettecopy ( resource $destination , resource $source )~
+
+imagepalettecopy() copies the palette from the {source} image to the
+{destination} image.
+
+==============================================================================
+*Parameters*
+
+{destination}
+
+    The destination image resource.
+
+{source}
+
+    The source image resource.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 imagepalettecopy() example
+
+<?php >
+    // Create two palette images
+    $palette1 = imagecreate(100, 100);
+    $palette2 = imagecreate(100, 100);
+
+    // Allocate the background to be 
+    // green in the first palette image
+    $green = imagecolorallocate($palette1, 0, 255, 0);
+
+    // Copy the palette from image 1 to image 2
+    imagepalettecopy($palette2, $palette1);
+
+    // Since the palette is now copied we can use the 
+    // green color allocated to image 1 without using 
+    // imagecolorallocate() twice
+    imagefilledrectangle($palette2, 0, 0, 99, 99, $green);
+
+    // Output image to the browser
+    header('Content-type: image/png');
+
+    imagepng($palette2);
+    imagedestroy($palette1);
+    imagedestroy($palette2);
+<?>
+
+
+vim:ft=help:

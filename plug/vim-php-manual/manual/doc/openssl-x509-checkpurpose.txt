@@ -1,0 +1,59 @@
+openssl_x509_checkpurpose
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+openssl_x509_checkpurpose — Verifies if a certificate can be used for a
+particular purpose
+
+==============================================================================
+*Description*
+
+    int openssl_x509_checkpurpose ( mixed $x509cert , int $purpose [, array~
+    $cainfo = array() [, string $untrustedfile ]] )~
+
+openssl_x509_checkpurpose() examines a certificate to see if it can be used
+for the specified {purpose}.
+
+==============================================================================
+*Parameters*
+
+{x509cert}
+
+    The examined certificate.
+
+{purpose}
+
+                     openssl_x509_checkpurpose() purposes
+             Constant                            Description
+    X509_PURPOSE_SSL_CLIENT    Can the certificate be used for the client side
+                               of an SSL connection?
+    X509_PURPOSE_SSL_SERVER    Can the certificate be used for the server side
+                               of an SSL connection?
+    X509_PURPOSE_NS_SSL_SERVER Can the cert be used for Netscape SSL server?
+    X509_PURPOSE_SMIME_SIGN    Can the cert be used to sign S/MIME email?
+    X509_PURPOSE_SMIME_ENCRYPT Can the cert be used to encrypt S/MIME email?
+    X509_PURPOSE_CRL_SIGN      Can the cert be used to sign a certificate
+                               revocation list (CRL)?
+    X509_PURPOSE_ANY           Can the cert be used for Any/All purposes?
+
+    These options are not bitfields - you may specify one only!
+
+{cainfo}
+
+    {cainfo} should be an array of trusted CA files/dirs as described in
+    Certificate Verification.
+
+{untrustedfile}
+
+    If specified, this should be the name of a PEM encoded file holding
+    certificates that can be used to help verify the certificate, although no
+    trust is placed in the certificates that come from that file.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the certificate can be used for the intended purpose, FALSE if
+it cannot, or -1 on error.
+
+
+vim:ft=help:

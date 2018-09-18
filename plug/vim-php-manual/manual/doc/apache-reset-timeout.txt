@@ -1,0 +1,36 @@
+apache_reset_timeout
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+apache_reset_timeout — Reset the Apache write timer
+
+==============================================================================
+*Description*
+
+    bool apache_reset_timeout ( void )~
+
+apache_reset_timeout() resets the Apache write timer, which defaults to 300
+seconds. With set_time_limit(0); ignore_user_abort(true) and periodic 
+apache_reset_timeout() calls, Apache can theoretically run forever.
+
+This function requires Apache 1.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+    Note: This function is disabled when PHP is running in safe mode.
+
+==============================================================================
+*See* *Also*
+
+  * |set_time_limit| - Limits the maximum execution time
+  * |ignore_user_abort| - Set whether a client disconnect should abort script
+    execution
+
+
+vim:ft=help:

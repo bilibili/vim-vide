@@ -1,0 +1,13 @@
+ftp_quit
+
+(PHP 4, PHP 5, PHP 7)
+
+ftp_quit — Alias of |ftp_close|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |ftp_close|.
+
+
+vim:ft=help:

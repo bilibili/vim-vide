@@ -1,0 +1,38 @@
+px_delete_record
+
+(PECL paradox >= 1.4.0)
+
+px_delete_record — Deletes record from paradox database
+
+==============================================================================
+*Description*
+
+    bool px_delete_record ( resource $pxdoc , int $num )~
+
+This function deletes a record from the database. It does not free the space
+in the database file but just marks it as deleted. Inserting a new record
+afterwards will reuse the space.
+
+    Note:
+
+    This function is only available if pxlib >= 0.6.0 is used.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+{num}
+
+    The record number is an artificial number counting records in the order as
+    they are stored in the database. The first record has number 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,33 @@
+zip_entry_name
+
+(PHP 4 >= 4.1.0, PHP 5 >= 5.2.0, PHP 7, PECL zip >= 1.0.0)
+
+zip_entry_name — Retrieve the name of a directory entry
+
+==============================================================================
+*Description*
+
+    string zip_entry_name ( resource $zip_entry )~
+
+Returns the name of the specified directory entry.
+
+==============================================================================
+*Parameters*
+
+{zip_entry}
+
+    A directory entry returned by |zip_read|.
+
+==============================================================================
+*Return* *Values*
+
+The name of the directory entry.
+
+==============================================================================
+*See* *Also*
+
+  * |zip_open| - Open a ZIP file archive
+  * |zip_read| - Read next entry in a ZIP file archive
+
+
+vim:ft=help:

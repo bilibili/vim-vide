@@ -1,0 +1,27 @@
+session_module_name
+
+(PHP 4, PHP 5, PHP 7)
+
+session_module_name — Get and/or set the current session module
+
+==============================================================================
+*Description*
+
+    string session_module_name ([ string $module ] )~
+
+session_module_name() gets the name of the current session module.
+
+==============================================================================
+*Parameters*
+
+{module}
+
+    If {module} is specified, that module will be used instead.
+
+==============================================================================
+*Return* *Values*
+
+Returns the name of the current session module.
+
+
+vim:ft=help:

@@ -1,0 +1,51 @@
+gnupg_setarmor
+
+(PECL gnupg >= 0.1)
+
+gnupg_setarmor — Toggle armored output
+
+==============================================================================
+*Description*
+
+    bool gnupg_setarmor ( resource $identifier , int $armor )~
+
+Toggle the armored output.
+
+==============================================================================
+*Parameters*
+
+{identifier}
+
+    The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+{armor}
+
+    Pass a non-zero integer-value to this function to enable armored-output
+    (default). Pass 0 to disable armored output.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural gnupg_setarmor() example
+
+<?php >
+    $res = gnupg_init();
+    gnupg_setarmor($res,1); // enable armored output;
+    gnupg_setarmor($res,0); // disable armored output;
+<?>
+
+Example #2 OO gnupg_setarmor() example
+
+<?php >
+    $gpg = new gnupg();
+    $gpg -> setarmor(1); // enable armored output;
+    $gpg -> setarmor(0); // disable armored output;
+<?>
+
+
+vim:ft=help:

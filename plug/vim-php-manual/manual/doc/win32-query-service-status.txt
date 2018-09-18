@@ -1,0 +1,81 @@
+win32_query_service_status
+
+(PECL win32service SVN)
+
+win32_query_service_status — Queries the status of a service
+
+==============================================================================
+*Description*
+
+    mixed win32_query_service_status ( string $servicename [, string $machine~
+    ] )~
+
+Queries the current status for a service, returning an array of information.
+
+==============================================================================
+*Parameters*
+
+{servicename}
+
+    The short name of the service.
+
+{machine}
+
+    The optional machine name. If omitted, the local machine will be used.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array consisting of the following information on success, FALSE if
+there is a problem with the parameters or a Win32 Error Code on failure.
+
+{ServiceType}
+
+    The dwServiceType. See Win32Service Service Type Bitmasks.
+
+{CurrentState}
+
+    The dwCurrentState. See Win32Service Service Status Constants.
+
+{ControlsAccepted}
+
+    Which service controls are accepted by the service. See Win32Service
+    Service Control Message Accepted Bitmasks.
+
+{Win32ExitCode}
+
+    If the service exited, the return code from the process.
+
+{ServiceSpecificExitCode}
+
+    If the service exited with an error condition, the service specific code
+    that is logged in the event log is visible here.
+
+{CheckPoint}
+
+    If the service is shutting down, holds the current check point number.
+    This is used by the SCM as a kind of heart-beat to detect a wedged service
+    process. The value of the check point is best interpreted in conjunction
+    with the WaitHint value.
+
+{WaitHint}
+
+    If the service is shutting down it will set WaitHint to a checkpoint value
+    that will indicate 100% completion. This can be used to implement a
+    progress indicator.
+
+{ProcessId}
+
+    The Windows process identifier. If 0, the process is not running.
+
+{ServiceFlags}
+
+    The dwServiceFlags. See Win32Service Service Service Flag Constants.
+
+==============================================================================
+*See* *Also*
+
+  * Win32Service Predefined Constants
+
+
+vim:ft=help:

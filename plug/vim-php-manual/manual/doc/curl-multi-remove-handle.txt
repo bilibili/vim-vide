@@ -1,0 +1,41 @@
+curl_multi_remove_handle
+
+(PHP 5, PHP 7)
+
+curl_multi_remove_handle — Remove a multi handle from a set of cURL handles
+
+==============================================================================
+*Description*
+
+    int curl_multi_remove_handle ( resource $mh , resource $ch )~
+
+Removes a given {ch} handle from the given {mh} handle. When the {ch} handle
+has been removed, it is again perfectly legal to run |curl_exec| on this
+handle. Removing the {ch} handle while being used, will effectively halt the
+transfer in progress involving that handle.
+
+==============================================================================
+*Parameters*
+
+{mh}
+
+    A cURL multi handle returned by |curl_multi_init|.
+
+{ch}
+
+    A cURL handle returned by |curl_init|.
+
+==============================================================================
+*Return* *Values*
+
+Returns 0 on success, or one of the CURLM_XXX error codes.
+
+==============================================================================
+*See* *Also*
+
+  * |curl_init| - Initialize a cURL session
+  * |curl_multi_init| - Returns a new cURL multi handle
+  * |curl_multi_add_handle| - Add a normal cURL handle to a cURL multi handle
+
+
+vim:ft=help:

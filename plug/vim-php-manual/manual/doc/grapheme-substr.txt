@@ -1,0 +1,81 @@
+grapheme_substr
+
+(PHP 5 >= 5.3.0, PHP 7, PECL intl >= 1.0.0)
+
+grapheme_substr — Return part of a string
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    int grapheme_substr ( string $string , int $start [, int $length ] )~
+
+Return part of a string
+
+==============================================================================
+*Parameters*
+
+{string}
+
+    The input string. Must be valid UTF-8.
+
+{start}
+
+    Start position in default grapheme units. If $start is non-negative, the
+    returned string will start at the $start'th position in $string, counting
+    from zero. If $start is negative, the returned string will start at the
+    $start'th grapheme unit from the end of string.
+
+{length}
+
+    Length in grapheme units. If $length is given and is positive, the string
+    returned will contain at most $length grapheme units beginning from $start
+    (depending on the length of string). If $length is given and is negative,
+    then that many grapheme units will be omitted from the end of string
+    (after the start position has been calculated when a start is negative).
+    If $start denotes a position beyond this truncation, FALSE will be
+    returned.
+
+==============================================================================
+*Return* *Values*
+
+Returns the extracted part of $string.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        If {length} is given and positive and the argument string is shorter
+5.4     than the specified length, all the rest of the string according to
+        {start} parameter is returned. Previously, FALSE was returned.
+
+==============================================================================
+*Examples*
+
+Example #1 grapheme_substr() example
+
+<?php >
+
+    $char_a_ring_nfd = "a\xCC\x8A";  // 'LATIN SMALL LETTER A WITH RING ABOVE' 
+    (U+00E5) normalization form "D"
+    $char_o_diaeresis_nfd = "o\xCC\x88"; // 'LATIN SMALL LETTER O WITH DIAERESIS' 
+    (U+00F6) normalization form "D"
+
+    print urlencode(grapheme_substr( "ao" . $char_a_ring_nfd . "bc" . 
+    $char_o_diaeresis_nfd . "O", 2, -1 ));
+<?>
+
+The above example will output:
+
+a%CC%8Abco%CC%88
+
+==============================================================================
+*See* *Also*
+
+  * |grapheme_extract| - Function to extract a sequence of default grapheme
+    clusters from a text buffer, which must be encoded in UTF-8.
+  * >>  Unicode Text Segmentation: Grapheme Cluster Boundaries
+
+
+vim:ft=help:

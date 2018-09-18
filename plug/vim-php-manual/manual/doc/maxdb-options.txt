@@ -1,0 +1,72 @@
+maxdb_options
+
+maxdb::options
+
+(PECL maxdb >= 1.0)
+
+maxdb_options -- maxdb::options — Set options
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_options ( resource $link , int $option , mixed $value )~
+
+Object oriented style
+
+    bool maxdb::options ( int $option , mixed $value )~
+
+maxdb_options() can be used to set extra connect options and affect behavior
+for a connection.
+
+This function may be called multiple times to set several options.
+
+maxdb_options() should be called after |maxdb_init| and before 
+|maxdb_real_connect|.
+
+The parameter {option} is the option that you want to set, the {value} is the
+value for the option. For detailed description of the options see >> http://
+maxdb.sap.com/documentation/ The parameter {option} can be one of the
+following values:
+
+                                Valid options
+          Name                                Description
+MAXDB_COMPNAME           The component name used to initialise the SQLDBC
+                         runtime environment.
+MAXDB_APPLICATION        The application to be connected to the database.
+MAXDB_APPVERSION         The version of the application.
+MAXDB_SQLMODE            The SQL mode.
+MAXDB_UNICODE            TRUE, if the connection is an unicode (UCS2) client
+                         or FALSE, if not.
+                         The maximum allowed time of inactivity after which
+MAXDB_TIMEOUT            the connection to the database is closed by the
+                         system.
+MAXDB_ISOLATIONLEVEL     Specifies whether and how shared locks and exclusive
+                         locks are implicitly requested or released.
+MAXDB_PACKETCOUNT        The number of different request packets used for the
+                         connection.
+MAXDB_STATEMENTCACHESIZE The number of prepared statements to be cached for
+                         the connection for re-use.
+MAXDB_CURSORPREFIX       The prefix to use for result tables that are
+                         automatically named.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+See |maxdb_real_connect|.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_init| - Initializes MaxDB and returns an resource for use with
+    maxdb_real_connect
+  * |maxdb_real_connect| - Opens a connection to a MaxDB server
+
+
+vim:ft=help:

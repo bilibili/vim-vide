@@ -1,0 +1,34 @@
+ps_setflat
+
+(PECL ps >= 1.1.0)
+
+ps_setflat — Sets flatness
+
+==============================================================================
+*Description*
+
+    bool ps_setflat ( resource $psdoc , float $value )~
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{value}
+
+    The {value} must be between 0.2 and 1.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

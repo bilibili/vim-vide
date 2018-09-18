@@ -1,0 +1,13 @@
+odbc_do
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_do — Alias of |odbc_exec|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |odbc_exec|.
+
+
+vim:ft=help:

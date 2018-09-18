@@ -1,0 +1,57 @@
+fann_create_standard
+
+(PECL fann >= 1.0.0)
+
+fann_create_standard — Creates a standard fully connected backpropagation
+neural network
+
+==============================================================================
+*Description*
+
+    resource fann_create_standard ( int $num_layers , int $num_neurons1 , int~
+    $num_neurons2 [, int $... ] )~
+
+Creates a standard fully connected backpropagation neural network.
+
+There will be a bias neuron in each layer (except the output layer), and this
+bias neuron will be connected to all neurons in the next layer. When running
+the network, the bias nodes always emits 1.
+
+To destroy a neural network use the |fann_destroy| function.
+
+==============================================================================
+*Parameters*
+
+{num_layers}
+
+    The total number of layers including the input and the output layer.
+
+{num_neurons1}
+
+    Number of neurons in the first layer.
+
+{num_neurons2}
+
+    Number of neurons in the second layer.
+
+{...}
+
+    Number of neurons in other layers.
+
+==============================================================================
+*Return* *Values*
+
+Returns a neural network resource on success, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_create_standard_array| - Creates a standard fully connected
+    backpropagation neural network using an array of layer sizes
+  * |fann_create_sparse| - Creates a standard backpropagation neural network,
+    which is not fully connected
+  * |fann_create_shortcut| - Creates a standard backpropagation neural network
+    which is not fully connectected and has shortcut connections
+
+
+vim:ft=help:

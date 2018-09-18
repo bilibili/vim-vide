@@ -1,0 +1,13 @@
+user_error
+
+(PHP 4, PHP 5, PHP 7)
+
+user_error — Alias of |trigger_error|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |trigger_error|.
+
+
+vim:ft=help:

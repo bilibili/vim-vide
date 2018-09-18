@@ -1,0 +1,69 @@
+openssl_open
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+openssl_open — Open sealed data
+
+==============================================================================
+*Description*
+
+    bool openssl_open ( string $sealed_data , string &$open_data , string~
+    $env_key , mixed $priv_key_id [, string $method ] )~
+
+openssl_open() opens (decrypts) {sealed_data} using the private key associated
+with the key identifier {priv_key_id} and the envelope key {env_key}, and
+fills {open_data} with the decrypted data. The envelope key is generated when
+the data are sealed and can only be used by one specific private key. See 
+|openssl_seal| for more information.
+
+==============================================================================
+*Parameters*
+
+{sealed_data}
+
+{open_data}
+
+    If the call is successful the opened data is returned in this parameter.
+
+{env_key}
+
+{priv_key_id}
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 openssl_open() example
+
+<?php >
+    // $sealed and $env_key are assumed to contain the sealed data
+    // and our envelope key, both given to us by the sealer.
+
+    // fetch private key from file and ready it
+    $fp = fopen("/src/openssl-0.9.6/demos/sign/key.pem", "r");
+    $priv_key = fread($fp, 8192);
+    fclose($fp);
+    $pkeyid = openssl_get_privatekey($priv_key);
+
+    // decrypt the data and store it in $open
+    if (openssl_open($sealed, $open, $env_key, $pkeyid)) {
+        echo "here is the opened data: ", $open;
+    } else {
+        echo "failed to open data";
+    }
+
+    // free the private key from memory
+    openssl_free_key($pkeyid);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |openssl_seal| - Seal (encrypt) data
+
+
+vim:ft=help:

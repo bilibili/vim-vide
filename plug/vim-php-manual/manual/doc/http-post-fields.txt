@@ -1,0 +1,67 @@
+http_post_fields
+
+(PECL pecl_http >= 0.10.0)
+
+http_post_fields — Perform POST request with data to be encoded
+
+==============================================================================
+*Description*
+
+    string http_post_fields ( string $url , array $data [, array $files [,~
+    array $options [, array &$info ]]] )~
+
+Performs an HTTP POST request on the supplied url.
+
+See the full list of request options.
+
+==============================================================================
+*Parameters*
+
+{url}
+
+    URL
+
+{data}
+
+    Associative array of POST values
+
+{files}
+
+    Array of files to post
+
+{options}
+
+    request options
+
+{info}
+
+    Request/response information
+
+==============================================================================
+*Return* *Values*
+
+Returns the HTTP response(s) as string on success, or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A http_post_fields() example
+
+<?php >
+    $fields = array(
+        'name' => 'mike',
+        'pass' => 'se_ret'
+    );
+    $files = array(
+        array(
+            'name' => 'uimg',
+            'type' => 'image/jpeg',
+            'file' => './profile.jpg',
+        )
+    );
+
+    $response = http_post_fields("http://www.example.com/", $fields, $files);
+<?>
+
+
+vim:ft=help:

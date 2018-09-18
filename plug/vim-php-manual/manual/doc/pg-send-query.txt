@@ -1,0 +1,85 @@
+pg_send_query
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+pg_send_query — Sends asynchronous query
+
+==============================================================================
+*Description*
+
+    bool pg_send_query ( resource $connection , string $query )~
+
+pg_send_query() sends a query or queries asynchronously to the {connection}.
+Unlike |pg_query|, it can send multiple queries at once to PostgreSQL and get
+the results one by one using |pg_get_result|.
+
+Script execution is not blocked while the queries are executing. Use 
+|pg_connection_busy| to check if the connection is busy (i.e. the query is
+executing). Queries may be cancelled using |pg_cancel_query|.
+
+Although the user can send multiple queries at once, multiple queries cannot
+be sent over a busy connection. If a query is sent while the connection is
+busy, it waits until the last query is finished and discards all its results.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource.
+
+{query}
+
+    The SQL statement or statements to be executed.
+
+    Data inside the query should be |properly escaped|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+Use |pg_get_result| to determine the query result.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_send_query() example
+
+<?php >
+      $dbconn = pg_connect("dbname=publisher") or die("Could not connect");
+
+      if (!pg_connection_busy($dbconn)) {
+          pg_send_query($dbconn, "select * from authors; select count(*)
+     from authors;");
+      }
+      
+      $res1 = pg_get_result($dbconn);
+      echo "First call to pg_get_result(): $res1\n";
+      $rows1 = pg_num_rows($res1);
+      echo "$res1 has $rows1 records\n\n";
+      
+      $res2 = pg_get_result($dbconn);
+      echo "Second call to pg_get_result(): $res2\n";
+      $rows2 = pg_num_rows($res2);
+      echo "$res2 has $rows2 records\n";
+<?>
+
+The above example will output:
+
+First call to pg_get_result(): Resource id #3
+Resource id #3 has 3 records
+
+Second call to pg_get_result(): Resource id #4
+Resource id #4 has 1 records
+
+==============================================================================
+*See* *Also*
+
+  * |pg_query| - Execute a query
+  * |pg_cancel_query| - Cancel an asynchronous query
+  * |pg_get_result| - Get asynchronous query result
+  * |pg_connection_busy| - Get connection is busy or not
+
+
+vim:ft=help:

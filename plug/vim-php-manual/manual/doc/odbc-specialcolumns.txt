@@ -1,0 +1,69 @@
+odbc_specialcolumns
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_specialcolumns — Retrieves special columns
+
+==============================================================================
+*Description*
+
+    resource odbc_specialcolumns ( resource $connection_id , int $type ,~
+    string $qualifier , string $owner , string $table , int $scope , int~
+    $nullable )~
+
+Retrieves either the optimal set of columns that uniquely identifies a row in
+the table, or columns that are automatically updated when any value in the row
+is updated by a transaction.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+{type}
+    When the type argument is SQL_BEST_ROWID, odbc_specialcolumns() returns
+    the column or columns that uniquely identify each row in the table. When
+    the type argument is SQL_ROWVER, odbc_specialcolumns() returns the column
+    or columns in the specified table, if any, that are automatically updated
+    by the data source when any value in the row is updated by any
+    transaction.
+{qualifier}
+
+    The qualifier.
+
+{owner}
+
+    The owner.
+
+{table}
+
+    The table.
+
+{scope}
+
+    The scope, which orders the result set.
+
+{nullable}
+
+    The nullable option.
+
+==============================================================================
+*Return* *Values*
+
+Returns an ODBC result identifier or FALSE on failure.
+
+The result set has the following columns:
+
+  * SCOPE
+  * COLUMN_NAME
+  * DATA_TYPE
+  * TYPE_NAME
+  * PRECISION
+  * LENGTH
+  * SCALE
+  * PSEUDO_COLUMN
+
+
+vim:ft=help:

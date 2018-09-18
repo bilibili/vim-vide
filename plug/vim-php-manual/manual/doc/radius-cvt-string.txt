@@ -1,0 +1,45 @@
+radius_cvt_string
+
+(PECL radius >= 1.1.0)
+
+radius_cvt_string — Converts raw data to string
+
+==============================================================================
+*Description*
+
+    string radius_cvt_string ( string $data )~
+
+==============================================================================
+*Examples*
+
+Example #1 radius_cvt_string() example
+
+<?php >
+    while ($resa = radius_get_attr($res)) {
+
+        if (!is_array($resa)) {
+            printf ("Error getting attribute: %s\n",  radius_strerror($res));
+            exit;
+        }
+
+        $attr = $resa['attr'];
+        $data = $resa['data'];
+        
+        switch ($attr) {
+
+        case RADIUS_FILTER_ID:
+            $id = radius_cvt_string($data);
+            echo "Filter ID: $id<br>\n";
+            break;
+        }
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |radius_cvt_addr| - Converts raw data to IP-Address
+  * |radius_cvt_int| - Converts raw data to integer
+
+
+vim:ft=help:

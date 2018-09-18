@@ -1,0 +1,61 @@
+imagefontheight
+
+(PHP 4, PHP 5, PHP 7)
+
+imagefontheight — Get font height
+
+==============================================================================
+*Description*
+
+    int imagefontheight ( int $font )~
+
+Returns the pixel height of a character in the specified font.
+
+==============================================================================
+*Parameters*
+
+{ font}
+
+    Can be 1, 2, 3, 4, 5 for built-in fonts in latin2 encoding (where higher
+    numbers corresponding to larger fonts) or any of your own font identifiers
+    registered with |imageloadfont|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the pixel height of the font.
+
+==============================================================================
+*Examples*
+
+Example #1 Using imagefontheight() on built-in fonts
+
+<?php >
+    echo 'Font height: ' . imagefontheight(4);
+<?>
+
+The above example will output something similar to:
+
+Font height: 16
+
+Example #2 Using imagefontheight() together with |imageloadfont|
+
+<?php >
+    // Load a .gdf font
+    $font = imageloadfont('anonymous.gdf');
+
+    echo 'Font height: ' . imagefontheight($font);
+<?>
+
+The above example will output something similar to:
+
+Font height: 43
+
+==============================================================================
+*See* *Also*
+
+  * |imagefontwidth| - Get font width
+  * |imageloadfont| - Load a new font
+
+
+vim:ft=help:

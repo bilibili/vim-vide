@@ -1,0 +1,83 @@
+oci_error
+
+(PHP 5, PHP 7, PECL OCI8 >= 1.1.0)
+
+oci_error — Returns the last error found
+
+==============================================================================
+*Description*
+
+    array oci_error ([ resource $resource ] )~
+
+Returns the last error found.
+
+The function should be called immediately after an error occurs. Errors are
+cleared by a successful statement.
+
+==============================================================================
+*Parameters*
+
+{resource}
+
+    For most errors, {resource} is the resource handle that was passed to the
+    failing function call. For connection errors with |oci_connect|, 
+    |oci_new_connect| or |oci_pconnect| do not pass {resource}.
+
+==============================================================================
+*Return* *Values*
+
+If no error is found, oci_error() returns FALSE. Otherwise, oci_error()
+returns the error information as an associative array.
+
+                        oci_error() Array Description
+ Array   Type                            Description
+  key
+code    integer The Oracle error number.
+message string  The Oracle error text.
+offset  integer The byte position of an error in the SQL statement. If there
+                was no statement, this is 0
+sqltext string  The SQL statement text. If there was no statement, this is an
+                empty string.
+
+==============================================================================
+*Examples*
+
+Example #1 Displaying the Oracle error message after a connection error
+
+<?php >
+    $conn = oci_connect("hr", "welcome", "localhost/XE");
+    if (!$conn) {
+        $e = oci_error();   // For oci_connect errors do not pass a handle
+        trigger_error(htmlentities($e['message']), E_USER_ERROR);
+    }
+<?>
+
+Example #2 Displaying the Oracle error message after a parsing error
+
+<?php >
+    $stid = oci_parse($conn, "select ' from dual");  // note mismatched quote
+    if (!$stid) {
+        $e = oci_error($conn);  // For oci_parse errors pass the connection handle
+        trigger_error(htmlentities($e['message']), E_USER_ERROR);
+    }
+<?>
+
+Example #3 Displaying the Oracle error message, the problematic statement, and
+the position of the problem of an execution error
+
+<?php >
+    $stid = oci_parse($conn, "select does_not_exist from dual");
+    $r = oci_execute($stid);
+    if (!$r) {
+        $e = oci_error($stid);  //
+     For oci_execute errors pass the statement handle
+        print htmlentities($e['message']);
+        print "\n<pre>\n";
+        print htmlentities($e['sqltext']);
+        printf("\n%".($e['offset']+1)."s", "^");
+        print  "\n</pre>\n";
+    }
+<?>
+
+
+vim:ft=help:

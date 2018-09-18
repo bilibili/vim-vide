@@ -1,0 +1,46 @@
+imap_body
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_body — Read the message body
+
+==============================================================================
+*Description*
+
+    string imap_body ( resource $imap_stream , int $msg_number [, int~
+    $options = 0 ] )~
+
+imap_body() returns the body of the message, numbered {msg_number} in the
+current mailbox.
+
+imap_body() will only return a verbatim copy of the message body. To extract
+single parts of a multipart MIME-encoded message you have to use 
+|imap_fetchstructure| to analyze its structure and |imap_fetchbody| to extract
+a copy of a single body component.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{msg_number}
+
+    The message number
+
+{options}
+
+    The optional {options} are a bit mask with one or more of the following:
+      + FT_UID - The {msg_number} is a UID
+      + FT_PEEK - Do not set the \Seen flag if not already set
+      + FT_INTERNAL - The return string is in internal format, will not
+        canonicalize to CRLF.
+
+==============================================================================
+*Return* *Values*
+
+Returns the body of the specified message, as a string.
+
+
+vim:ft=help:

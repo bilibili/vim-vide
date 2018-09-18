@@ -1,0 +1,27 @@
+udm_free_res
+
+(PHP 4 >= 4.0.5, PHP 5 <= 5.0.5, PECL mnogosearch >= 1.0.0)
+
+udm_free_res — Free mnoGoSearch result
+
+==============================================================================
+*Description*
+
+    bool udm_free_res ( resource $res )~
+
+Freeing up memory allocated for results.
+
+==============================================================================
+*Parameters*
+
+{res}
+
+    A link to a result identifier, received after call to |udm_find|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

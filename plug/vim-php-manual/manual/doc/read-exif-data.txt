@@ -1,0 +1,13 @@
+read_exif_data
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7)
+
+read_exif_data — Alias of |exif_read_data|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |exif_read_data|.
+
+
+vim:ft=help:

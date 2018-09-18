@@ -1,0 +1,16 @@
+PDF_initgraphics
+
+(PHP 4 >= 4.0.5, PECL pdflib >= 1.0.0)
+
+PDF_initgraphics — Reset graphic state
+
+==============================================================================
+*Description*
+
+    bool PDF_initgraphics ( resource $p )~
+
+Reset all color and graphics state parameters to their defaults. Returns TRUE
+on success or FALSE on failure.
+
+
+vim:ft=help:

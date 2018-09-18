@@ -1,0 +1,67 @@
+ldap_parse_result
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+ldap_parse_result — Extract information from result
+
+==============================================================================
+*Description*
+
+    bool ldap_parse_result ( resource $link , resource $result , int~
+    &$errcode [, string &$matcheddn [, string &$errmsg [, array &$referrals~
+    ]]] )~
+
+Parses an LDAP search result.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{result_identifier}
+
+    An LDAP result resource, returned by |ldap_list| or |ldap_search|.
+
+{errcode}
+
+    A reference to a variable that will be set to the LDAP error code in the
+    result, or 0 if no error occurred.
+
+{matcheddn}
+
+    A reference to a variable that will be set to a matched DN if one was
+    recognised within the request, otherwise it will be set to NULL.
+
+{errmsg}
+
+    A reference to a variable that will be set to the LDAP error message in
+    the result, or an empty string if no error occurred.
+
+{referrals}
+
+    A reference to a variable that will be set to an array set to all of the
+    referral strings in the result, or an empty array if no referrals were
+    returned.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 ldap_parse_result() example
+
+<?php >
+    $result = ldap_search($link, "cn=userref,dc=my-domain,dc=com", "(cn=user*)");
+    $errcode = $dn = $errmsg = $refs =  null;
+    if (ldap_parse_result($link, $result, $errcode, $dn, $errmsg, $refs)) {
+        // do something with $errcode, $dn, $errmsg and $refs
+    }
+<?>
+
+
+vim:ft=help:

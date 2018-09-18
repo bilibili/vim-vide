@@ -1,0 +1,51 @@
+imap_clearflag_full
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_clearflag_full — Clears flags on messages
+
+==============================================================================
+*Description*
+
+    bool imap_clearflag_full ( resource $imap_stream , string $sequence ,~
+    string $flag [, int $options = 0 ] )~
+
+This function causes a store to delete the specified {flag} to the flags set
+for the messages in the specified {sequence}.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{sequence}
+
+    A sequence of message numbers. You can enumerate desired messages with the
+    X,Y syntax, or retrieve all messages within an interval with the X:Y
+    syntax
+
+{flag}
+
+    The flags which you can unset are "\\Seen", "\\Answered", "\\Flagged", "\\
+    Deleted", and "\\Draft" (as defined by >> RFC2060)
+
+{options}
+
+    {options} are a bit mask and may contain the single option:
+      + ST_UID - The sequence argument contains UIDs instead of sequence
+        numbers
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_setflag_full| - Sets flags on messages
+
+
+vim:ft=help:

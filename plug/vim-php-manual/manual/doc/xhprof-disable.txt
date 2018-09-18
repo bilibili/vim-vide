@@ -1,0 +1,64 @@
+xhprof_disable
+
+(PECL xhprof >= 0.9.0)
+
+xhprof_disable — Stops xhprof profiler
+
+==============================================================================
+*Description*
+
+    array xhprof_disable ( void )~
+
+Stops the profiler, and returns xhprof data from the run.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+An array of xhprof data, from the run.
+
+==============================================================================
+*Examples*
+
+Example #1 xhprof_disable() example
+
+<?php >
+    xhprof_enable();
+
+    $foo = strlen("foo bar");
+
+    $xhprof_data = xhprof_disable();
+
+    print_r($xhprof_data);
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [main()==>strlen] => Array
+        (
+            [ct] => 1
+            [wt] => 279
+        )
+
+    [main()==>xhprof_disable] => Array
+        (
+            [ct] => 1
+            [wt] => 9
+        )
+
+    [main()] => Array
+        (
+            [ct] => 1
+            [wt] => 610
+        )
+
+)
+
+
+vim:ft=help:

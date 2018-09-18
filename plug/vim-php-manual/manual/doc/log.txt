@@ -1,0 +1,40 @@
+log
+
+(PHP 4, PHP 5, PHP 7)
+
+log — Natural logarithm
+
+==============================================================================
+*Description*
+
+    float log ( float $arg [, float $base = M_E ] )~
+
+If the optional {base} parameter is specified, log() returns log[base] {arg},
+otherwise log() returns the natural logarithm of {arg}.
+
+==============================================================================
+*Parameters*
+
+{arg}
+
+    The value to calculate the logarithm for
+
+{base}
+
+    The optional logarithmic base to use (defaults to 'e' and so to the
+    natural logarithm).
+
+==============================================================================
+*Return* *Values*
+
+The logarithm of {arg} to {base}, if given, or the natural logarithm.
+
+==============================================================================
+*See* *Also*
+
+  * |log10| - Base-10 logarithm
+  * |exp| - Calculates the exponent of e
+  * |pow| - Exponential expression
+
+
+vim:ft=help:

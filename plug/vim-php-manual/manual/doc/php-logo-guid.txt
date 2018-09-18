@@ -1,0 +1,51 @@
+php_logo_guid
+
+(PHP 4, PHP 5 < 5.5)
+
+php_logo_guid — Gets the logo guid
+
+==============================================================================
+*Description*
+
+    string php_logo_guid ( void )~
+
+This function returns the ID which can be used to display the PHP logo using
+the built-in image. Logo is displayed only if expose_php is On.
+
+Warning
+
+This function has been DEPRECATED and REMOVED as of PHP 5.5.0.
+
+==============================================================================
+*Return* *Values*
+
+Returns PHPE9568F34-D428-11d2-A769-00AA001ACF42.
+
+==============================================================================
+*Changelog*
+
+Version                Description
+5.5.0   php_logo_guid() has been removed from PHP.
+
+==============================================================================
+*Examples*
+
+Example #1 php_logo_guid() example
+
+<?php >
+
+    echo '<img src="' . $_SERVER['PHP_SELF'] .
+         '?=' . php_logo_guid() . '" alt="PHP Logo !" />';
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |phpinfo| - Outputs information about PHP's configuration
+  * |phpversion| - Gets the current PHP version
+  * |phpcredits| - Prints out the credits for PHP
+  * |zend_logo_guid| - Gets the Zend guid
+
+
+vim:ft=help:

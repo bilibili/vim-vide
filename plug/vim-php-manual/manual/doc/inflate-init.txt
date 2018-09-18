@@ -1,0 +1,66 @@
+inflate_init
+
+(PHP 7)
+
+inflate_init — Initialize an incremental inflate context
+
+==============================================================================
+*Description*
+
+    resource inflate_init ( int $encoding [, array $options = array() ] )~
+
+Initialize an incremental inflate context with the specified {encoding}.
+
+==============================================================================
+*Parameters*
+
+{encoding}
+
+    One of the ZLIB_ENCODING_* constants.
+
+{options}
+
+    An associative array which may contain the following elements:
+
+    level
+
+        The compression level in range -1..9; defaults to -1.
+
+    memory
+
+        The compression memory level in range 1..9; defaults to 8.
+
+    window
+
+        The zlib window size (logarithmic) in range 8..15; defaults to 15.
+
+    strategy
+
+        One of ZLIB_FILTERED, ZLIB_HUFFMAN_ONLY, ZLIB_RLE, ZLIB_FIXED or
+        ZLIB_DEFAULT_STRATEGY (the default).
+
+    dictionary
+
+        A string or an array of strings of the preset dictionary (default: no
+        preset dictionary).
+
+==============================================================================
+*Return* *Values*
+
+Returns an inflate context resource (zlib.inflate) on success, or FALSE on
+failure.
+
+==============================================================================
+*Errors/Exceptions*
+
+If an invalid encoding or option is passed to {options}, or the context
+couldn't be created, an error of level E_WARNING is generated.
+
+==============================================================================
+*See* *Also*
+
+  * |inflate_add| - Incrementally inflate encoded data
+  * |deflate_init| - Initialize an incremental deflate context
+
+
+vim:ft=help:

@@ -1,0 +1,56 @@
+event_timer_set
+
+(PECL libevent >= 0.0.2)
+
+event_timer_set — Prepare a timer event
+
+==============================================================================
+*Description*
+
+    bool event_timer_set ( resource $event , callable $callback [, mixed $arg~
+    ] )~
+
+Prepares the timer event to be used in event_add(). The event is prepared to
+call the function specified by the {callback} when the event timeout elapses.
+
+After initializing the event, use |event_base_set| to associate the event with
+its event base.
+
+In case of matching event, these three arguments are passed to the {callback}
+function:
+
+{fd}
+
+    Signal number or resource indicating the stream.
+
+{events}
+
+    A flag indicating the event. This will always be EV_TIMEOUT for timer
+    events.
+
+{arg}
+
+    Optional parameter, previously passed to event_timer_set() as {arg}.
+
+==============================================================================
+*Parameters*
+
+{event}
+
+    Valid event resource.
+
+{callback}
+
+    Callback function to be called when the matching event occurs.
+
+{arg}
+
+    Optional callback parameter.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

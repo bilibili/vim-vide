@@ -1,0 +1,29 @@
+apd_callstack
+
+(PECL apd 0.2-0.4)
+
+apd_callstack — Returns the current call stack as an array
+
+==============================================================================
+*Description*
+
+    array apd_callstack ( void )~
+
+Returns the current call stack as an array
+
+==============================================================================
+*Return* *Values*
+
+An array containing the current call stack.
+
+==============================================================================
+*Examples*
+
+Example #1 apd_callstack() example
+
+<?php >
+    print_r(apd_callstack());
+<?>
+
+
+vim:ft=help:

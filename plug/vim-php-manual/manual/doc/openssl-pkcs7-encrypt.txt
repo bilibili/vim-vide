@@ -1,0 +1,90 @@
+openssl_pkcs7_encrypt
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+openssl_pkcs7_encrypt — Encrypt an S/MIME message
+
+==============================================================================
+*Description*
+
+    bool openssl_pkcs7_encrypt ( string $infile , string $outfile , mixed~
+    $recipcerts , array $headers [, int $flags = 0 [, int $cipherid =~
+    OPENSSL_CIPHER_RC2_40 ]] )~
+
+openssl_pkcs7_encrypt() takes the contents of the file named {infile} and
+encrypts them using an RC2 40-bit cipher so that they can only be read by the
+intended recipients specified by {recipcerts}.
+
+==============================================================================
+*Parameters*
+
+{infile}
+
+{outfile}
+
+{recipcerts}
+
+    Either a lone X.509 certificate, or an array of X.509 certificates.
+
+{headers}
+
+    {headers} is an array of headers that will be prepended to the data after
+    it has been encrypted.
+
+    {headers} can be either an associative array keyed by header name, or an
+    indexed array, where each element contains a single header line.
+
+{flags}
+
+    {flags} can be used to specify options that affect the encoding process -
+    see PKCS7 constants.
+
+{cipherid}
+
+    One of cipher constants.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 openssl_pkcs7_encrypt() example
+
+<?php >
+    // the message you want to encrypt and send to your secret agent
+    // in the field, known as nighthawk.  You have his certificate
+    // in the file nighthawk.pem
+    $data = <<<EOD
+    Nighthawk,
+
+    Top secret, for your eyes only!
+
+    The enemy is closing in! Meet me at the cafe at 8.30am
+    to collect your forged passport!
+
+    HQ
+    EOD;
+
+    // load key
+    $key = file_get_contents("nighthawk.pem");
+
+    // save message to file
+    $fp = fopen("msg.txt", "w");
+    fwrite($fp, $data);
+    fclose($fp);
+
+    // encrypt it
+    if (openssl_pkcs7_encrypt("msg.txt", "enc.txt", $key,
+        array("To" => "nighthawk@example.com", // keyed syntax
+              "From: HQ <hq@example.com>", // indexed syntax
+              "Subject" => "Eyes only"))) {
+        // message encrypted - send it!
+        exec(ini_get("sendmail_path") . " < enc.txt");
+    }
+<?>
+
+
+vim:ft=help:

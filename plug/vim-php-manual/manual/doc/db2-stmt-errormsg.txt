@@ -1,0 +1,43 @@
+db2_stmt_errormsg
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_stmt_errormsg — Returns a string containing the last SQL statement error
+message
+
+==============================================================================
+*Description*
+
+    string db2_stmt_errormsg ([ resource $stmt ] )~
+
+Returns a string containing the last SQL statement error message.
+
+If you do not pass a statement resource as an argument to db2_stmt_errormsg(),
+the driver returns the error message associated with the last attempt to
+return a statement resource, for example, from |db2_prepare| or |db2_exec|.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A valid statement resource.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string containing the error message and SQLCODE value for the last
+error that occurred issuing an SQL statement.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_conn_error| - Returns a string containing the SQLSTATE returned by
+    the last connection attempt
+  * |db2_conn_errormsg| - Returns the last connection error message and
+    SQLCODE value
+  * |db2_stmt_error| - Returns a string containing the SQLSTATE returned by an
+    SQL statement
+
+
+vim:ft=help:

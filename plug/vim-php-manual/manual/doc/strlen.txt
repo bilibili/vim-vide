@@ -1,0 +1,68 @@
+strlen
+
+(PHP 4, PHP 5, PHP 7)
+
+strlen — Get string length
+
+==============================================================================
+*Description*
+
+    int strlen ( string $string )~
+
+Returns the length of the given {string}.
+
+==============================================================================
+*Parameters*
+
+{string}
+
+    The string being measured for length.
+
+==============================================================================
+*Return* *Values*
+
+The length of the {string} on success, and 0 if the {string} is empty.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   Prior versions treated arrays as the string Array, thus returning a
+        string length of 5 and emitting an E_NOTICE level error.
+
+==============================================================================
+*Examples*
+
+Example #1 A strlen() example
+
+<?php >
+    $str = 'abcdef';
+    echo strlen($str); // 6
+
+    $str = ' ab cd ';
+    echo strlen($str); // 7
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    strlen() returns the number of bytes rather than the number of characters
+    in a string.
+
+    Note:
+
+    strlen() returns NULL when executed on arrays, and an E_WARNING level
+    error is emitted.
+
+==============================================================================
+*See* *Also*
+
+  * |count| - Count all elements in an array, or something in an object
+  * |grapheme_strlen| - Get string length in grapheme units
+  * |iconv_strlen| - Returns the character count of string
+  * |mb_strlen| - Get string length
+
+
+vim:ft=help:

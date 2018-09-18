@@ -1,0 +1,47 @@
+fann_test
+
+(PECL fann >= 1.0.0)
+
+fann_test — Test with a set of inputs, and a set of desired outputs
+
+==============================================================================
+*Description*
+
+    bool fann_test ( resource $ann , array $input , array $desired_output )~
+
+Test with a set of inputs, and a set of desired outputs. This operation
+updates the mean square error, but does not change the network in any way.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{input}
+
+    An array of inputs. This array must be exactly |fann_get_num_input| long.
+
+{desired_output}
+
+    An array of desired outputs. This array must be exactly 
+    |fann_get_num_output| long.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_test_data| - Test a set of training data and calculates the MSE for
+    the training data
+  * |fann_train| - Train one iteration with a set of inputs, and a set of
+    desired outputs
+  * |fann_get_num_input| - Get the number of input neurons
+  * |fann_get_num_output| - Get the number of output neurons
+
+
+vim:ft=help:

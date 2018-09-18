@@ -1,0 +1,52 @@
+fann_create_sparse_array
+
+(PECL fann >= 1.0.0)
+
+fann_create_sparse_array — Creates a standard backpropagation neural network,
+which is not fully connected using an array of layer sizes
+
+==============================================================================
+*Description*
+
+    ReturnType fann_create_sparse_array ( float $connection_rate , int~
+    $num_layers , array $layers )~
+
+Creates a standard backpropagation neural network, which is not fully
+connected using an array of layer sizes.
+
+==============================================================================
+*Parameters*
+
+{connection_rate}
+
+    The connection rate controls how many connections there will be in the
+    network. If the connection rate is set to 1, the network will be fully
+    connected, but if it is set to 0.5 only half of the connections will be
+    set. A connection rate of 1 will yield the same result as 
+    |fann_create_standard|.
+
+{num_layers}
+
+    The total number of layers including the input and the output layer.
+
+{layers}
+
+    An array of layer sizes.
+
+==============================================================================
+*Return* *Values*
+
+Returns a neural network resource on success, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_create_sparse| - Creates a standard backpropagation neural network,
+    which is not fully connected
+  * |fann_create_standard| - Creates a standard fully connected
+    backpropagation neural network
+  * |fann_create_shortcut| - Creates a standard backpropagation neural network
+    which is not fully connectected and has shortcut connections
+
+
+vim:ft=help:

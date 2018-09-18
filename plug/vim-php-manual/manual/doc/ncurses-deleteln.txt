@@ -1,0 +1,33 @@
+ncurses_deleteln
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_deleteln — Delete line at current position, move rest of screen up
+
+==============================================================================
+*Description*
+
+    bool ncurses_deleteln ( void )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+Deletes the current line under cursor position. All lines below the current
+line are moved up one line. The bottom line of window is cleared. Cursor
+position does not change.
+
+==============================================================================
+*Return* *Values*
+
+Returns FALSE on success, otherwise TRUE.
+
+==============================================================================
+*See* *Also*
+
+  * |ncurses_delch| - Delete character at current position, move rest of line
+    left
+
+
+vim:ft=help:

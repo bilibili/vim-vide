@@ -1,0 +1,79 @@
+fpassthru
+
+(PHP 4, PHP 5, PHP 7)
+
+fpassthru — Output all remaining data on a file pointer
+
+==============================================================================
+*Description*
+
+    int fpassthru ( resource $handle )~
+
+Reads to EOF on the given file pointer from the current position and writes
+the results to the output buffer.
+
+You may need to call |rewind| to reset the file pointer to the beginning of
+the file if you have already written data to the file.
+
+If you just want to dump the contents of a file to the output buffer, without
+first modifying it or seeking to a particular offset, you may want to use the 
+|readfile|, which saves you the |fopen| call.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    The file pointer must be valid, and must point to a file successfully
+    opened by |fopen| or |fsockopen| (and not yet closed by |fclose|).
+
+==============================================================================
+*Return* *Values*
+
+If an error occurs, fpassthru() returns FALSE. Otherwise, fpassthru() returns
+the number of characters read from {handle} and passed through to the output.
+
+==============================================================================
+*Examples*
+
+Example #1 Using fpassthru() with binary files
+
+<?php >
+
+    // open the file in a binary mode
+    $name = './img/ok.png';
+    $fp = fopen($name, 'rb');
+
+    // send the right headers
+    header("Content-Type: image/png");
+    header("Content-Length: " . filesize($name));
+
+    // dump the picture and stop the script
+    fpassthru($fp);
+    exit;
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    When using fpassthru() on a binary file on Windows systems, you should
+    make sure to open the file in binary mode by appending a b to the mode
+    used in the call to |fopen|.
+
+    You are encouraged to use the b flag when dealing with binary files, even
+    if your system does not require it, so that your scripts will be more
+    portable.
+
+==============================================================================
+*See* *Also*
+
+  * |readfile| - Outputs a file
+  * |fopen| - Opens file or URL
+  * |popen| - Opens process file pointer
+  * |fsockopen| - Open Internet or Unix domain socket connection
+
+
+vim:ft=help:

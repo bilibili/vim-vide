@@ -1,0 +1,59 @@
+cubrid_error
+
+(PECL CUBRID >= 8.3.1)
+
+cubrid_error — Get the error message
+
+==============================================================================
+*Description*
+
+    string cubrid_error ([ resource $connection ] )~
+
+The cubrid_error() function is used to get the error message that occurred
+during the use of CUBRID API. Usually, it gets error message when API returns
+false as its return value.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    The CUBRID connection.
+
+==============================================================================
+*Return* *Values*
+
+Error message that occurred.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_error() example
+
+<?php >
+    $con = cubrid_connect('localhost', 33000, 'demodb', 'dba', '');
+    $req = cubrid_execute($con, "select id, name from person");
+    if ($req) {
+        while (list ($id, $name) = cubrid_fetch($req)) 
+        echo $id, $name;
+    } else {
+        echo "Error Code: ", cubrid_errno($con);
+        echo "Error Message: ", cubrid_error($con);
+    }
+<?>
+
+The above example will output:
+
+Error Code: -493 Error Message: Syntax: Unknown class "person". select id, [name] from person
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_errno| - Return the numerical value of the error message from
+    previous CUBRID operation
+  * |cubrid_error_code| - Get error code for the most recent function call
+  * |cubrid_error_msg| - Get last error message for the most recent function
+    call
+
+
+vim:ft=help:

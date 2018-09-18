@@ -1,0 +1,51 @@
+newt_get_screen_size
+
+(PECL newt >= 0.1)
+
+newt_get_screen_size — Fills in the passed references with the current size of
+the terminal
+
+==============================================================================
+*Description*
+
+    void newt_get_screen_size ( int &$cols , int &$rows )~
+
+Fills in the passed references with the current size of the terminal.
+
+==============================================================================
+*Parameters*
+
+{cols}
+
+    Number of columns in the terminal
+
+{rows}
+
+    Number of rows in the terminal
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 A newt_get_screen_size() example
+
+This code prints out the screen size of your terminal.
+
+<?php >
+     newt_init();
+     newt_get_screen_size (&$cols, &$rows);
+     newt_finished();
+
+     print "Your terminal size is: {$cols}x{$rows}\n";
+<?>
+
+The above example will output:
+
+Your terminal size is: 138x47
+
+
+vim:ft=help:

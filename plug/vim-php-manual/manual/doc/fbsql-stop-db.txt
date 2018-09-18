@@ -1,0 +1,43 @@
+fbsql_stop_db
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_stop_db — Stop a database on local or remote server
+
+==============================================================================
+*Description*
+
+    bool fbsql_stop_db ( string $database_name [, resource $link_identifier ]~
+)~
+
+Stops a database on local or remote server.
+
+==============================================================================
+*Parameters*
+
+{database_name}
+
+    The database name.
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_db_status| - Get the status for a given database
+  * |fbsql_start_db| - Start a database on local or remote server
+
+
+vim:ft=help:

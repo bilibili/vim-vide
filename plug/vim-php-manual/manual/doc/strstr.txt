@@ -1,0 +1,81 @@
+strstr
+
+(PHP 4, PHP 5, PHP 7)
+
+strstr — Find the first occurrence of a string
+
+==============================================================================
+*Description*
+
+    string strstr ( string $haystack , mixed $needle [, bool $before_needle =~
+    false ] )~
+
+Returns part of {haystack} string starting from and including the first
+occurrence of {needle} to the end of {haystack}.
+
+    Note:
+
+    This function is case-sensitive. For case-insensitive searches, use 
+    |stristr|.
+
+    Note:
+
+    If you only want to determine if a particular {needle} occurs within
+    {haystack}, use the faster and less memory intensive function |strpos|
+    instead.
+
+==============================================================================
+*Parameters*
+
+{haystack}
+
+    The input string.
+
+{needle}
+
+    If {needle} is not a string, it is converted to an integer and applied as
+    the ordinal value of a character.
+
+{before_needle}
+
+    If TRUE, strstr() returns the part of the {haystack} before the first
+    occurrence of the {needle} (excluding the needle).
+
+==============================================================================
+*Return* *Values*
+
+Returns the portion of string, or FALSE if {needle} is not found.
+
+==============================================================================
+*Changelog*
+
+Version                  Description
+5.3.0   Added the optional parameter {before_needle}.
+4.3.0   strstr() was made binary safe.
+
+==============================================================================
+*Examples*
+
+Example #1 strstr() example
+
+<?php >
+    $email  = 'name@example.com';
+    $domain = strstr($email, '@');
+    echo $domain; // prints @example.com
+
+    $user = strstr($email, '@', true); // As of PHP 5.3.0
+    echo $user; // prints name
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |stristr| - Case-insensitive strstr
+  * |strrchr| - Find the last occurrence of a character in a string
+  * |strpos| - Find the position of the first occurrence of a substring in a
+    string
+  * |strpbrk| - Search a string for any of a set of characters
+  * |preg_match| - Perform a regular expression match
+
+
+vim:ft=help:

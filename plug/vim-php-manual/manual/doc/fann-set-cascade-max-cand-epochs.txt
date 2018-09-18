@@ -1,0 +1,37 @@
+fann_set_cascade_max_cand_epochs
+
+(PECL fann >= 1.0.0)
+
+fann_set_cascade_max_cand_epochs — Sets the max candidate epochs
+
+==============================================================================
+*Description*
+
+    bool fann_set_cascade_max_cand_epochs ( resource $ann , int~
+    $cascade_max_cand_epochs )~
+
+Sets the max candidate epochs.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{cascade_max_cand_epochs}
+
+    The max candidate epochs.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_cascade_max_cand_epochs| - Returns the maximum candidate epochs
+
+
+vim:ft=help:

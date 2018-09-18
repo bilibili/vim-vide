@@ -1,0 +1,65 @@
+fbsql_connect
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_connect — Open a connection to a FrontBase Server
+
+==============================================================================
+*Description*
+
+    resource fbsql_connect ([ string $hostname =~
+    ini_get("fbsql.default_host") [, string $username =~
+    ini_get("fbsql.default_user") [, string $password =~
+    ini_get("fbsql.default_password") ]]] )~
+
+fbsql_connect() establishes a connection to a FrontBase server.
+
+If a second call is made to fbsql_connect() with the same arguments, no new
+link will be established, but instead, the link identifier of the already
+opened link will be returned.
+
+The link to the server will be closed as soon as the execution of the script
+ends, unless it's closed earlier by explicitly calling |fbsql_close|.
+
+==============================================================================
+*Parameters*
+
+{hostname}
+
+    The server host name.
+
+{username}
+
+    The user name for the connection.
+
+{password}
+
+    The password for the connection.
+
+==============================================================================
+*Return* *Values*
+
+Returns a positive FrontBase link identifier on success, or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_connect() example
+
+<?php >
+
+    $link = fbsql_connect("localhost", "_SYSTEM", "secret")
+        or die("Could not connect");
+    echo "Connected successfully";
+    fbsql_close($link);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_pconnect| - Open a persistent connection to a FrontBase Server
+  * |fbsql_close| - Close FrontBase connection
+
+
+vim:ft=help:

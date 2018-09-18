@@ -1,0 +1,61 @@
+pcntl_signal_get_handler
+
+(PHP 7.1)
+
+pcntl_signal_get_handler — Get the current handler for specified signal
+
+==============================================================================
+*Description*
+
+    int|string pcntl_signal_get_handler ( int $signo )~
+
+The pcntl_signal_get_handler() function will get the current handler for the
+specified {signo}.
+
+==============================================================================
+*Parameters*
+
+{signo}
+
+    The signal number.
+
+==============================================================================
+*Return* *Values*
+
+This function may return an integer value that refers to SIG_DFL or SIG_IGN.
+If you set a custom handler a string value containing the function name is
+returned.
+
+==============================================================================
+*Changelog*
+
+            Version                  Description
+Enter the version of change here Describe the change
+
+==============================================================================
+*Examples*
+
+Example #1 pcntl_signal_get_handler() example
+
+<?php >
+    var_dump(pcntl_signal_get_handler(SIGUSR1)); // Outputs: int(0)
+
+    function pcntl_test($signo) {}
+    pcntl_signal(SIGUSR1, 'pcntl_test');
+    var_dump(pcntl_signal_get_handler(SIGUSR1)); // Outputs: string(10)
+     "pcntl_test"
+
+    pcntl_signal(SIGUSR1, SIG_DFL);
+    var_dump(pcntl_signal_get_handler(SIGUSR1)); // Outputs: int(0)
+
+    pcntl_signal(SIGUSR1, SIG_IGN);
+    var_dump(pcntl_signal_get_handler(SIGUSR1)); // Outputs: int(1)
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_signal| - Installs a signal handler
+
+
+vim:ft=help:

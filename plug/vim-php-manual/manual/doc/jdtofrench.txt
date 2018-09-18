@@ -1,0 +1,34 @@
+jdtofrench
+
+(PHP 4, PHP 5, PHP 7)
+
+jdtofrench — Converts a Julian Day Count to the French Republican Calendar
+
+==============================================================================
+*Description*
+
+    string jdtofrench ( int $juliandaycount )~
+
+Converts a Julian Day Count to the French Republican Calendar.
+
+==============================================================================
+*Parameters*
+
+{julianday}
+
+    A julian day number as integer
+
+==============================================================================
+*Return* *Values*
+
+The french revolution date as a string in the form "month/day/year"
+
+==============================================================================
+*See* *Also*
+
+  * |frenchtojd| - Converts a date from the French Republican Calendar to a
+    Julian Day Count
+  * |cal_from_jd| - Converts from Julian Day Count to a supported calendar
+
+
+vim:ft=help:

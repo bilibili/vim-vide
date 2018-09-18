@@ -1,0 +1,43 @@
+XMLWriter::endDTDEntity
+
+xmlwriter_end_dtd_entity
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::endDTDEntity -- xmlwriter_end_dtd_entity — End current DTD Entity
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::endDTDEntity ( void )~
+
+Procedural style
+
+    bool xmlwriter_end_dtd_entity ( resource $xmlwriter )~
+
+Ends the current DTD entity.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::startDTDEntity| - Create start DTD Entity
+  * |XMLWriter::writeDTDEntity| - Write full DTD Entity tag
+
+
+vim:ft=help:

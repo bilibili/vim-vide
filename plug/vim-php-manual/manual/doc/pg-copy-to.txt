@@ -1,0 +1,63 @@
+pg_copy_to
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+pg_copy_to — Copy a table to an array
+
+==============================================================================
+*Description*
+
+    array pg_copy_to ( resource $connection , string $table_name [, string~
+    $delimiter [, string $null_as ]] )~
+
+pg_copy_to() copies a table to an array. It issues COPY TO SQL command
+internally to retrieve records.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource.
+
+{table_name}
+
+    Name of the table from which to copy the data into {rows}.
+
+{delimiter}
+
+    The token that separates values for each field in each element of {rows}.
+    Default is TAB.
+
+{null_as}
+
+    How SQL NULL values are represented in the {rows}. Default is \N ("\\N").
+
+==============================================================================
+*Return* *Values*
+
+An array with one element for each line of COPY data. It returns FALSE on
+failure.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_copy_to() example
+
+<?php >
+       $db = pg_connect("dbname=publisher") or die("Could not connect");
+       
+       $rows = pg_copy_to($db, $table_name);
+       
+       pg_query($db, "DELETE FROM $table_name");
+       
+       pg_copy_from($db, $table_name, $rows);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_copy_from| - Insert records into a table from an array
+
+
+vim:ft=help:

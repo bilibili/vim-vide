@@ -1,0 +1,50 @@
+gmp_invert
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_invert — Inverse by modulo
+
+==============================================================================
+*Description*
+
+    GMP gmp_invert ( GMP $a , GMP $b )~
+
+Computes the inverse of {a} modulo {b}.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{b}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+A GMP number on success or FALSE if an inverse does not exist.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_invert() example
+
+<?php >
+    echo gmp_invert("5", "10"); // no inverse, outputs nothing, result is FALSE
+    $invert = gmp_invert("5", "11");
+    echo gmp_strval($invert) . "\n";
+<?>
+
+The above example will output:
+
+9
+
+
+vim:ft=help:

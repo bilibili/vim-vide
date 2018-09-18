@@ -1,0 +1,62 @@
+imagetruecolortopalette
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+imagetruecolortopalette — Convert a true color image to a palette image
+
+==============================================================================
+*Description*
+
+    bool imagetruecolortopalette ( resource $image , bool $dither , int~
+    $ncolors )~
+
+imagetruecolortopalette() converts a truecolor image to a palette image. The
+code for this function was originally drawn from the Independent JPEG Group
+library code, which is excellent. The code has been modified to preserve as
+much alpha channel information as possible in the resulting palette, in
+addition to preserving colors as well as possible. This does not work as well
+as might be hoped. It is usually best to simply produce a truecolor output
+image instead, which guarantees the highest output quality.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{dither}
+
+    Indicates if the image should be dithered - if it is TRUE then dithering
+    will be used which will result in a more speckled image but with better
+    color approximation.
+
+{ncolors}
+
+    Sets the maximum number of colors that should be retained in the palette.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Converting a true color image to a palette-based image
+
+<?php >
+    // Create a new true color image
+    $im = imagecreatetruecolor(100, 100);
+
+    // Convert to palette-based with no dithering and 255 colors
+    imagetruecolortopalette($im, false, 255);
+
+    // Save the image
+    imagepng($im, './paletteimage.png');
+    imagedestroy($im);
+<?>
+
+
+vim:ft=help:

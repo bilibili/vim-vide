@@ -1,0 +1,40 @@
+imageaffine
+
+(PHP 5 >= 5.5.0, PHP 7)
+
+imageaffine — Return an image containing the affine transformed src image,
+using an optional clipping area
+
+==============================================================================
+*Description*
+
+    resource imageaffine ( resource $image , array $affine [, array $clip ] )~
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{affine}
+
+    Array with keys 0 to 5.
+
+{clip}
+
+    Array with keys "x", "y", "width" and "height".
+
+==============================================================================
+*Return* *Values*
+
+Return affined image resource on success or FALSE on failure.
+
+
+vim:ft=help:

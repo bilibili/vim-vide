@@ -1,0 +1,38 @@
+newt_push_help_line
+
+(PECL newt >= 0.1)
+
+newt_push_help_line — Saves the current help line on a stack, and displays the
+new line
+
+==============================================================================
+*Description*
+
+    void newt_push_help_line ([ string $text ] )~
+
+Saves the current help line on a stack, and displays the new line.
+
+==============================================================================
+*Parameters*
+
+{text}
+
+    New help text message
+
+        Note:
+
+        If not specified, the help line is cleared.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |newt_pop_help_line| - Replaces the current help line with the one from
+    the stack
+
+
+vim:ft=help:

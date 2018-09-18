@@ -1,0 +1,13 @@
+openssl_get_publickey
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+openssl_get_publickey — Alias of |openssl_pkey_get_public|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |openssl_pkey_get_public|.
+
+
+vim:ft=help:

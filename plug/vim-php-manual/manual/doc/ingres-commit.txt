@@ -1,0 +1,45 @@
+ingres_commit
+
+(PHP 4 >= 4.0.2, PHP 5 <= 5.0.5, PECL ingres >= 1.0.0)
+
+ingres_commit — Commit a transaction
+
+==============================================================================
+*Description*
+
+    bool ingres_commit ( resource $link )~
+
+ingres_commit() commits the currently open transaction, making all changes
+made to the database permanent.
+
+This closes the transaction. A new transaction can be opened by sending a
+query with |ingres_query|.
+
+You can also have the server commit automatically after every query by calling
+|ingres_autocommit| before opening the transaction.
+
+By default Ingres will roll back any uncommitted transactions at the end of a
+request. Use this function or |ingres_autocommit| to ensure your that data is
+committed to the database.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    The connection link identifier
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_query| - Send an SQL query to Ingres
+  * |ingres_rollback| - Roll back a transaction
+  * |ingres_autocommit| - Switch autocommit on or off
+
+
+vim:ft=help:

@@ -1,0 +1,49 @@
+posix_setrlimit
+
+(PHP 7)
+
+posix_setrlimit — Set system resource limits
+
+==============================================================================
+*Description*
+
+    bool posix_setrlimit ( int $resource , int $softlimit , int $hardlimit )~
+
+posix_setrlimit() sets the soft and hard limits for a given system resource.
+
+Each resource has an associated soft and hard limit. The soft limit is the
+value that the kernel enforces for the corresponding resource. The hard limit
+acts as a ceiling for the soft limit. An unprivileged process may only set its
+soft limit to a value from 0 to the hard limit, and irreversibly lower its
+hard limit.
+
+==============================================================================
+*Parameters*
+
+{resource}
+
+    The resource limit constant corresponding to the limit that is being set.
+
+{softlimit}
+
+    The soft limit, in whatever unit the resource limit requires, or
+    POSIX_RLIMIT_INFINITY.
+
+{hardlimit}
+
+    The hard limit, in whatever unit the resource limit requires, or
+    POSIX_RLIMIT_INFINITY.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * man page SETRLIMIT(2)
+  * |posix_getrlimit| - Return info about system resource limits
+
+
+vim:ft=help:

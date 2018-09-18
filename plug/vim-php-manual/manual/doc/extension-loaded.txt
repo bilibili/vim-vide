@@ -1,0 +1,71 @@
+extension_loaded
+
+(PHP 4, PHP 5, PHP 7)
+
+extension_loaded — Find out whether an extension is loaded
+
+==============================================================================
+*Description*
+
+    bool extension_loaded ( string $name )~
+
+Finds out whether the extension is loaded.
+
+==============================================================================
+*Parameters*
+
+{name}
+
+    The extension name. This parameter is case-insensitive.
+
+    You can see the names of various extensions by using |phpinfo| or if
+    you're using the CGI or CLI version of PHP you can use the -m switch to
+    list all available extensions:
+
+    $ php -m
+    [PHP Modules]
+    xml
+    tokenizer
+    standard
+    sockets
+    session
+    posix
+    pcre
+    overload
+    mysql
+    mbstring
+    ctype
+
+    [Zend Modules]
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the extension identified by {name} is loaded, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 extension_loaded() example
+
+<?php >
+    if (!extension_loaded('gd')) {
+        if (!dl('gd.so')) {
+            exit;
+        }
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |get_loaded_extensions| - Returns an array with the names of all modules
+    compiled and loaded
+  * |get_extension_funcs| - Returns an array with the names of the functions
+    of a module
+  * |phpinfo| - Outputs information about PHP's configuration
+  * |dl| - Loads a PHP extension at runtime
+  * |function_exists| - Return TRUE if the given function has been defined
+
+
+vim:ft=help:

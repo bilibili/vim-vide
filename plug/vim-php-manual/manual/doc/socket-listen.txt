@@ -1,0 +1,60 @@
+socket_listen
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_listen — Listens for a connection on a socket
+
+==============================================================================
+*Description*
+
+    bool socket_listen ( resource $socket [, int $backlog = 0 ] )~
+
+After the socket {socket} has been created using |socket_create| and bound to
+a name with |socket_bind|, it may be told to listen for incoming connections
+on {socket}.
+
+socket_listen() is applicable only to sockets of type SOCK_STREAM or
+SOCK_SEQPACKET.
+
+==============================================================================
+*Parameters*
+
+{socket}
+
+    A valid socket resource created with |socket_create|.
+
+{backlog}
+
+    A maximum of {backlog} incoming connections will be queued for processing.
+    If a connection request arrives with the queue full the client may receive
+    an error with an indication of ECONNREFUSED, or, if the underlying
+    protocol supports retransmission, the request may be ignored so that
+    retries may succeed.
+
+        Note:
+
+        The maximum number passed to the {backlog} parameter highly depends on
+        the underlying platform. On Linux, it is silently truncated to
+        SOMAXCONN. On win32, if passed SOMAXCONN, the underlying service
+        provider responsible for the socket will set the backlog to a maximum
+        reasonable value. There is no standard provision to find out the
+        actual backlog value on this platform.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure. The error code can be retrieved
+with |socket_last_error|. This code may be passed to |socket_strerror| to get
+a textual explanation of the error.
+
+==============================================================================
+*See* *Also*
+
+  * |socket_accept| - Accepts a connection on a socket
+  * |socket_bind| - Binds a name to a socket
+  * |socket_connect| - Initiates a connection on a socket
+  * |socket_create| - Create a socket (endpoint for communication)
+  * |socket_strerror| - Return a string describing a socket error
+
+
+vim:ft=help:

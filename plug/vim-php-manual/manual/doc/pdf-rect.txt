@@ -1,0 +1,16 @@
+PDF_rect
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_rect — Draw rectangle
+
+==============================================================================
+*Description*
+
+    bool PDF_rect ( resource $p , float $x , float $y , float $width , float~
+    $height )~
+
+Draws a rectangle. Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

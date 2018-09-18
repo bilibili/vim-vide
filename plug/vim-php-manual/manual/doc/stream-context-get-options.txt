@@ -1,0 +1,51 @@
+stream_context_get_options
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+stream_context_get_options — Retrieve options for a stream/wrapper/context
+
+==============================================================================
+*Description*
+
+    array stream_context_get_options ( resource $stream_or_context )~
+
+Returns an array of options on the specified stream or context.
+
+==============================================================================
+*Parameters*
+
+{stream_or_context}
+
+    The stream or context to get options from
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array with the options.
+
+==============================================================================
+*Examples*
+
+Example #1 stream_context_get_options() example
+
+<?php >
+    $params = array("method" => "POST");
+
+    stream_context_set_default(array("http" => $params));
+
+    var_dump(stream_context_get_options(stream_context_get_default()));
+
+<?>
+
+The above example will output something similar to:
+
+array(1) {
+  ["http"]=>
+  array(1) {
+    ["method"]=>
+    string(4) "POST"
+  }
+}
+
+
+vim:ft=help:

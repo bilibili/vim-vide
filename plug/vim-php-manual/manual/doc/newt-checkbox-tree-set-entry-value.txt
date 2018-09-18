@@ -1,0 +1,32 @@
+newt_checkbox_tree_set_entry_value
+
+(PECL newt >= 0.1)
+
+newt_checkbox_tree_set_entry_value —
+
+==============================================================================
+*Description*
+
+    void newt_checkbox_tree_set_entry_value ( resource $checkboxtree , mixed~
+    $data , string $value )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{checkboxtree}
+
+{data}
+
+{value}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

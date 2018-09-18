@@ -1,0 +1,42 @@
+apd_continue
+
+(PECL apd >= 0.2)
+
+apd_continue — Restarts the interpreter
+
+==============================================================================
+*Description*
+
+    bool apd_continue ( int $debug_level )~
+
+Usually sent via the socket to restart the interpreter.
+
+==============================================================================
+*Parameters*
+
+{ debug_level}
+
+    An integer which is formed by adding together the XXX_TRACE constants.
+
+    It is not recommended to use MEMORY_TRACE. It is very slow and does not
+    appear to be accurate. ASSIGNMENT_TRACE is not implemented yet.
+
+    To turn on all functional traces (TIMING, FUNCTIONS, ARGS SUMMARY (like
+    strace -c)) use the value 99
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 apd_continue() example
+
+<?php >
+    apd_continue(0);
+<?>
+
+
+vim:ft=help:

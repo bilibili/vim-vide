@@ -1,0 +1,49 @@
+db2_num_rows
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_num_rows — Returns the number of rows affected by an SQL statement
+
+==============================================================================
+*Description*
+
+    int db2_num_rows ( resource $stmt )~
+
+Returns the number of rows deleted, inserted, or updated by an SQL statement.
+
+To determine the number of rows that will be returned by a SELECT statement,
+issue SELECT COUNT(*) with the same predicates as your intended SELECT
+statement and retrieve the value.
+
+If your application logic checks the number of rows returned by a SELECT
+statement and branches if the number of rows is 0, consider modifying your
+application to attempt to return the first row with one of |db2_fetch_assoc|, 
+|db2_fetch_both|, |db2_fetch_array|, or |db2_fetch_row|, and branch if the
+fetch function returns FALSE.
+
+    Note:
+
+    If you issue a SELECT statement using a scrollable cursor, db2_num_rows()
+    returns the number of rows returned by the SELECT statement. However, the
+    overhead associated with scrollable cursors significantly degrades the
+    performance of your application, so if this is the only reason you are
+    considering using scrollable cursors, you should use a forward-only cursor
+    and either call SELECT COUNT(*) or rely on the boolean return value of the
+    fetch functions to achieve the equivalent functionality with much better
+    performance.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A valid stmt resource containing a result set.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of rows affected by the last SQL statement issued by the
+specified statement handle.
+
+
+vim:ft=help:

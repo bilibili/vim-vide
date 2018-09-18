@@ -1,0 +1,46 @@
+XMLWriter::setIndent
+
+xmlwriter_set_indent
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::setIndent -- xmlwriter_set_indent — Toggle indentation on/off
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::setIndent ( bool $indent )~
+
+Procedural style
+
+    bool xmlwriter_set_indent ( resource $xmlwriter , bool $indent )~
+
+Toggles indentation on or off.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{indent}
+
+    Whether indentation is enabled.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::setIndentString| - Set string used for indenting
+
+
+vim:ft=help:

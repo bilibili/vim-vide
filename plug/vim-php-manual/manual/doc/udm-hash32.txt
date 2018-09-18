@@ -1,0 +1,37 @@
+udm_hash32
+
+(PHP 4 >= 4.3.3, PHP 5 <= 5.0.5, PECL mnogosearch >= 1.0.0)
+
+udm_hash32 — Return Hash32 checksum of given string
+
+==============================================================================
+*Description*
+
+    int udm_hash32 ( resource $agent , string $str )~
+
+udm_hash32() will take a string {str} and return a quite unique 32-bit hash
+number from it.
+
+==============================================================================
+*Parameters*
+
+{agent}
+
+    A link to Agent, received after call to |udm_alloc_agent|.
+
+{str}
+
+    The input string.
+
+==============================================================================
+*Return* *Values*
+
+Returns a 32-bit hash number.
+
+==============================================================================
+*See* *Also*
+
+  * |udm_alloc_agent| - Allocate mnoGoSearch session
+
+
+vim:ft=help:

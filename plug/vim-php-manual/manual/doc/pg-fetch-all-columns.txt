@@ -1,0 +1,70 @@
+pg_fetch_all_columns
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+pg_fetch_all_columns — Fetches all rows in a particular result column as an
+array
+
+==============================================================================
+*Description*
+
+    array pg_fetch_all_columns ( resource $result [, int $column = 0 ] )~
+
+pg_fetch_all_columns() returns an array that contains all rows (records) in a
+particular column of the result resource.
+
+    Note: This function sets NULL fields to the PHP NULL value.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    PostgreSQL query result resource, returned by |pg_query|, |pg_query_params
+    | or |pg_execute| (among others).
+
+{column}
+
+    Column number, zero-based, to be retrieved from the result resource.
+    Defaults to the first column if not specified.
+
+==============================================================================
+*Return* *Values*
+
+An array with all values in the result column.
+
+FALSE is returned if {column} is larger than the number of columns in the
+result, or on any other error.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_fetch_all_columns() example
+
+<?php  >
+    $conn = pg_pconnect("dbname=publisher");
+    if (!$conn) {
+      echo "An error occurred.\n";
+      exit;
+    }
+
+    $result = pg_query($conn, "SELECT title, name, address FROM authors");
+    if (!$result) {
+      echo "An error occurred.\n";
+      exit;
+    }
+
+    // Get an array of all author names
+    $arr = pg_fetch_all_columns($result, 1);
+
+    var_dump($arr);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_fetch_all| - Fetches all rows from a result as an array
+
+
+vim:ft=help:

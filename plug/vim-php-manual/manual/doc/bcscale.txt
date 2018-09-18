@@ -1,0 +1,44 @@
+bcscale
+
+(PHP 4, PHP 5, PHP 7)
+
+bcscale — Set default scale parameter for all bc math functions
+
+==============================================================================
+*Description*
+
+    bool bcscale ( int $scale )~
+
+Sets the default scale parameter for all subsequent calls to bc math functions
+that do not explicitly specify a scale parameter.
+
+==============================================================================
+*Parameters*
+
+{scale}
+
+    The scale factor.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 bcscale() example
+
+<?php >
+
+    // default scale : 3
+    bcscale(3);
+    echo bcdiv('105', '6.55957'); // 16.007
+
+    // this is the same without bcscale()
+    echo bcdiv('105', '6.55957', 3); // 16.007
+
+<?>
+
+
+vim:ft=help:

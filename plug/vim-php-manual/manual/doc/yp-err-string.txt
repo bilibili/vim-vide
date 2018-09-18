@@ -1,0 +1,42 @@
+yp_err_string
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5)
+
+yp_err_string — Returns the error string associated with the given error code
+
+==============================================================================
+*Description*
+
+    string yp_err_string ( int $errorcode )~
+
+Returns the error message associated with the given error code. Useful to
+indicate what exactly went wrong.
+
+==============================================================================
+*Parameters*
+
+{errorcode}
+
+    The error code.
+
+==============================================================================
+*Return* *Values*
+
+Returns the error message, as a string.
+
+==============================================================================
+*Examples*
+
+Example #1 Example for NIS errors
+
+<?php >
+    echo "Error: " . yp_err_string(yp_errno());
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |yp_errno| - Returns the error code of the previous operation
+
+
+vim:ft=help:

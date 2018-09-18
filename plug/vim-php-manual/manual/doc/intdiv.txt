@@ -1,0 +1,71 @@
+intdiv
+
+(PHP 7)
+
+intdiv — Integer division
+
+==============================================================================
+*Description*
+
+    int intdiv ( int $dividend , int $divisor )~
+
+Returns the integer quotient of the division of {dividend} by {divisor}.
+
+==============================================================================
+*Parameters*
+
+{dividend}
+
+    Number to be divided.
+
+{divisor}
+
+    Number which divides the {dividend}.
+
+==============================================================================
+*Return* *Values*
+
+The integer quotient of the division of {dividend} by {divisor}.
+
+==============================================================================
+*Errors/Exceptions*
+
+If {divisor} is 0, a DivisionByZeroError exception is thrown. If the
+{dividend} is PHP_INT_MIN and the {divisor} is -1, then an ArithmeticError
+exception is thrown.
+
+==============================================================================
+*Examples*
+
+Example #1 intdiv() example
+
+<?php >
+    var_dump(intdiv(3, 2));
+    var_dump(intdiv(-3, 2));
+    var_dump(intdiv(3, -2));
+    var_dump(intdiv(-3, -2));
+    var_dump(intdiv(PHP_INT_MAX, PHP_INT_MAX));
+    var_dump(intdiv(PHP_INT_MIN, PHP_INT_MIN));
+    var_dump(intdiv(PHP_INT_MIN, -1));
+    var_dump(intdiv(1, 0));
+<?>
+
+int(1)
+int(-1)
+int(-1)
+int(1)
+int(1)
+int(1)
+
+Fatal error: Uncaught ArithmeticError: Division of PHP_INT_MIN by -1 is not an integer in %s on line 8
+Fatal error: Uncaught DivisionByZeroError: Division by zero in %s on line 9
+
+==============================================================================
+*See* *Also*
+
+  * / - Floating-point division
+  * % - Integer modulus
+  * |fmod| - Floating-point modulo
+
+
+vim:ft=help:

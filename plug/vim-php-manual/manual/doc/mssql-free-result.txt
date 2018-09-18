@@ -1,0 +1,61 @@
+mssql_free_result
+
+(PHP 4, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_free_result — Free result memory
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * |odbc_free_result|
+
+==============================================================================
+*Description*
+
+    bool mssql_free_result ( resource $result )~
+
+mssql_free_result() only needs to be called if you are worried about using too
+much memory while your script is running. All result memory will automatically
+be freed when the script ends. You may call mssql_free_result() with the
+result identifier as an argument and the associated result memory will be
+freed.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The result resource that is being freed. This result comes from a call to 
+    |mssql_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mssql_free_result() example
+
+<?php >
+    // Select some data from a table
+    $query = mssql_query('SELECT * FROM [php].[dbo].[persons]', $link);
+
+    // Handle query result here
+
+    // When we're done we free the result by calling
+    // mssql_free_result like so:
+    mssql_free_result($query);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mssql_free_statement| - Free statement memory
+
+
+vim:ft=help:

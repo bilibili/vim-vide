@@ -1,0 +1,71 @@
+dbase_add_record
+
+(PHP 5 < 5.3.0, dbase 5, dbase 7)
+
+dbase_add_record — Adds a record to a database
+
+==============================================================================
+*Description*
+
+    bool dbase_add_record ( resource $dbase_identifier , array $record )~
+
+Adds the given data to the database.
+
+==============================================================================
+*Parameters*
+
+{dbase_identifier}
+
+    The database link identifier, returned by |dbase_open| or |dbase_create|.
+
+{record}
+
+    An indexed array of data. The number of items must be equal to the number
+    of fields in the database, otherwise dbase_add_record() will fail.
+
+        Note:
+
+        If you're using |dbase_get_record| return value for this parameter,
+        remember to reset the key named deleted.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+  Version                         Description
+dbase 7.0.0 {dbase_identifier} is now a resource instead of an int.
+
+==============================================================================
+*Examples*
+
+Example #1 Inserting a record in a dBase database
+
+<?php >
+
+    // open in read-write mode
+    $db = dbase_open('/tmp/test.dbf', 2);
+
+    if ($db) {
+      dbase_add_record($db, array(
+          date('Ymd'), 
+          'Maxim Topolov', 
+          '23', 
+          'max@example.com',
+          'T'));   
+      dbase_close($db);
+    }
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |dbase_delete_record| - Deletes a record from a database
+  * |dbase_replace_record| - Replaces a record in a database
+
+
+vim:ft=help:

@@ -1,0 +1,36 @@
+ifx_update_char
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_update_char — Updates the content of the char object
+
+==============================================================================
+*Description*
+
+    bool ifx_update_char ( int $bid , string $content )~
+
+Updates the content of the char object for the given char object {bid}.
+
+==============================================================================
+*Parameters*
+
+{bid}
+
+    A char object identifier.
+
+{content}
+
+    The new data, as a string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ifx_update_blob| - Updates the content of the blob object
+
+
+vim:ft=help:

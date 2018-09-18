@@ -1,0 +1,85 @@
+db2_rollback
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_rollback — Rolls back a transaction
+
+==============================================================================
+*Description*
+
+    bool db2_rollback ( resource $connection )~
+
+Rolls back an in-progress transaction on the specified connection resource and
+begins a new transaction. PHP applications normally default to AUTOCOMMIT
+mode, so db2_rollback() normally has no effect unless AUTOCOMMIT has been
+turned off for the connection resource.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    A valid database connection resource variable as returned from 
+    |db2_connect| or |db2_pconnect|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Rolling back a DELETE statement
+
+In the following example, we count the number of rows in a table, turn off
+AUTOCOMMIT mode on a database connection, delete all of the rows in the table
+and return the count of 0 to prove that the rows have been removed. We then
+issue db2_rollback() and return the updated count of rows in the table to show
+that the number is the same as before we issued the DELETE statement. The
+return to the original state of the table demonstrates that the roll back of
+the transaction succeeded.
+
+<?php >
+    $conn = db2_connect($database, $user, $password);
+
+    if ($conn) {
+        $stmt = db2_exec($conn, "SELECT count(*) FROM animals");
+        $res = db2_fetch_array( $stmt );
+        echo $res[0] . "\n";
+        
+        // Turn AUTOCOMMIT off
+        db2_autocommit($conn, DB2_AUTOCOMMIT_OFF);
+       
+        // Delete all rows from ANIMALS
+        db2_exec($conn, "DELETE FROM animals");
+        
+        $stmt = db2_exec($conn, "SELECT count(*) FROM animals");
+        $res = db2_fetch_array( $stmt );
+        echo $res[0] . "\n";
+        
+        // Roll back the DELETE statement
+        db2_rollback( $conn );
+        
+        $stmt = db2_exec( $conn, "SELECT count(*) FROM animals" );
+        $res = db2_fetch_array( $stmt );
+        echo $res[0] . "\n";
+        db2_close($conn);
+    }
+<?>
+
+The above example will output:
+
+7
+0
+7
+
+==============================================================================
+*See* *Also*
+
+  * |db2_autocommit| - Returns or sets the AUTOCOMMIT state for a database
+    connection
+  * |db2_commit| - Commits a transaction
+
+
+vim:ft=help:

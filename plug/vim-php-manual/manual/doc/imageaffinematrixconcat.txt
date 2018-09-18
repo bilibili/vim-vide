@@ -1,0 +1,67 @@
+imageaffinematrixconcat
+
+(PHP 5 >= 5.5.0, PHP 7)
+
+imageaffinematrixconcat — Concatenate two affine transformation matrices
+
+==============================================================================
+*Description*
+
+    array imageaffinematrixconcat ( array $m1 , array $m2 )~
+
+Returns the concatenation of two affine transformation matrices, what is
+useful if multiple transformations should be applied to the same image in one
+go.
+
+==============================================================================
+*Parameters*
+
+{m1}
+
+    An affine transformation matrix (an array with keys 0 to 5 and float
+    values).
+
+{m2}
+
+    An affine transformation matrix (an array with keys 0 to 5 and float
+    values).
+
+==============================================================================
+*Return* *Values*
+
+An affine transformation matrix (an array with keys 0 to 5 and float values)
+or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imageaffinematrixconcat() example
+
+<?php >
+    $m1 = imageaffinematrixget(IMG_AFFINE_TRANSLATE, array('x' = 2, 'y' => 3));
+    $m2 = imageaffinematrixget(IMG_AFFINE_SCALE, array('x' = 4, 'y' => 5));
+    $matrix = imageaffinematrixconcat($m1, $m2);
+    print_r($matrix);
+<?>
+
+The above example will output:
+
+Array
+(
+    [0] => 4
+    [1] => 0
+    [2] => 0
+    [3] => 5
+    [4] => 8
+    [5] => 15
+)
+
+==============================================================================
+*See* *Also*
+
+  * |imageaffine| - Return an image containing the affine transformed src
+    image, using an optional clipping area
+  * |imageaffinematrixget| - Get an affine transformation matrix
+
+
+vim:ft=help:

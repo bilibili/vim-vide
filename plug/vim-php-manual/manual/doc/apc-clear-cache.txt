@@ -1,0 +1,33 @@
+apc_clear_cache
+
+(PECL apc >= 2.0.0)
+
+apc_clear_cache — Clears the APC cache
+
+==============================================================================
+*Description*
+
+    bool apc_clear_cache ([ string $cache_type = "" ] )~
+
+Clears the user/system cache.
+
+==============================================================================
+*Parameters*
+
+{cache_type}
+
+    If {cache_type} is "user", the user cache will be cleared; otherwise, the
+    system cache (cached files) will be cleared.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE always
+
+==============================================================================
+*See* *Also*
+
+  * |apc_cache_info| - Retrieves cached information from APC's data store
+
+
+vim:ft=help:

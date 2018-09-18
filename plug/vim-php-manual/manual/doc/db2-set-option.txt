@@ -1,0 +1,609 @@
+db2_set_option
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_set_option — Set options for connection or statement resources
+
+==============================================================================
+*Description*
+
+    bool db2_set_option ( resource $resource , array $options , int $type )~
+
+Sets options for a statement resource or a connection resource. You cannot set
+options for result set resources.
+
+==============================================================================
+*Parameters*
+
+{resource}
+
+    A valid statement resource as returned from |db2_prepare| or a valid
+    connection resource as returned from |db2_connect| or |db2_pconnect|.
+
+{options}
+
+    An associative array containing valid statement or connection options.
+    This parameter can be used to change autocommit values, cursor types
+    (scrollable or forward), and to specify the case of the column names
+    (lower, upper, or natural) that will appear in a result set.
+
+    {autocommit}
+
+        Passing DB2_AUTOCOMMIT_ON turns autocommit on for the specified
+        connection resource.
+
+        Passing DB2_AUTOCOMMIT_OFF turns autocommit off for the specified
+        connection resource.
+
+    {cursor}
+
+        Passing DB2_FORWARD_ONLY specifies a forward-only cursor for a
+        statement resource. This is the default cursor type, and is supported
+        by all database servers.
+
+        Passing DB2_SCROLLABLE specifies a scrollable cursor for a statement
+        resource. Scrollable cursors enable result set rows to be accessed in
+        non-sequential order, but are only supported by IBM DB2 Universal
+        Database databases.
+
+    {binmode}
+
+        Passing DB2_BINARY specifies that binary data will be returned as is.
+        This is the default mode. This is the equivalent of setting
+        ibm_db2.binmode=1 in php.ini.
+
+        Passing DB2_CONVERT specifies that binary data will be converted to
+        hexadecimal encoding, and will be returned as such. This is the
+        equivalent of setting ibm_db2.binmode=2 in php.ini.
+
+        Passing DB2_PASSTHRU specifies that binary data will be converted to
+        NULL. This is the equivalent of setting ibm_db2.binmode=3 in php.ini.
+
+    {db2_attr_case}
+
+        Passing DB2_CASE_LOWER specifies that column names of the result set
+        are returned in lower case.
+
+        Passing DB2_CASE_UPPER specifies that column names of the result set
+        are returned in upper case.
+
+        Passing DB2_CASE_NATURAL specifies that column names of the result set
+        are returned in natural case.
+
+    {deferred_prepare}
+
+        Passing DB2_DEFERRED_PREPARE_ON turns deferred prepare on for the
+        specified statement resource.
+
+        Passing DB2_DEFERRED_PREPARE_OFF turns deferred prepare off for the
+        specified statement resource.
+
+    The following new i5/OS options are available in ibm_db2 version 1.5.1 and
+    later. These options apply only when running PHP and ibm_db2 natively on
+    i5 systems.
+
+    {i5_fetch_only}
+
+        DB2_I5_FETCH_ON - Cursors are read-only and cannot be used for
+        positioned updates or deletes. This is the default unless
+        SQL_ATTR_FOR_FETCH_ONLY environment has been set to SQL_FALSE.
+
+        DB2_I5_FETCH_OFF - Cursors can be used for positioned updates and
+        deletes.
+
+    The following new option is available in ibm_db2 version 1.8.0 and later.
+
+    {rowcount}
+
+        DB2_ROWCOUNT_PREFETCH_ON - Client can request the full row count prior
+        to fetching, which means that |db2_num_rows| returns the number of
+        rows selected even when a ROLLFORWARD_ONLY cursor is used.
+
+        DB2_ROWCOUNT_PREFETCH_OFF - Client cannot request the full row count
+        prior to fetching.
+
+    The following new options are available in ibm_db2 version 1.7.0 and
+    later.
+
+    {trusted_user}
+
+        To switch the user to a trusted user, pass the User ID (String) of the
+        trusted user as the value of this key. This option can be set on a
+        connection resource only. To use this option, trusted context must be
+        enabled on the connection resource.
+
+    {trusted_password}
+
+        The password (String) that corresponds to the user specified by the
+        trusted_user key.
+
+    The following new options are available in ibm_db2 version 1.6.0 and
+    later. These options provide useful tracking information that can be
+    accessed during execution with |db2_get_option|.
+
+
+        Note:
+
+        When the value in each option is being set, some servers might not
+        handle the entire length provided and might truncate the value.
+
+        To ensure that the data specified in each option is converted
+        correctly when transmitted to a host system, use only the characters A
+        through Z, 0 through 9, and the underscore (_) or period (.).
+
+    {userid}
+
+        SQL_ATTR_INFO_USERID - A pointer to a null-terminated character string
+        used to identify the client user ID sent to the host database server
+        when using DB2 Connect.
+
+
+            Note:
+
+            DB2 for z/OS and OS/390 servers support up to a length of 16
+            characters. This user-id is not to be confused with the
+            authentication user-id, it is for identification purposes only and
+            is not used for any authorization.
+
+    {acctstr}
+
+        SQL_ATTR_INFO_ACCTSTR - A pointer to a null-terminated character
+        string used to identify the client accounting string sent to the host
+        database server when using DB2 Connect.
+
+
+            Note:
+
+            DB2 for z/OS and OS/390 servers support up to a length of 200
+            characters.
+
+    {applname}
+
+        SQL_ATTR_INFO_APPLNAME - A pointer to a null-terminated character
+        string used to identify the client application name sent to the host
+        database server when using DB2 Connect.
+
+
+            Note:
+
+            DB2 for z/OS and OS/390 servers support up to a length of 32
+            characters.
+
+    {wrkstnname}
+
+        SQL_ATTR_INFO_WRKSTNNAME - A pointer to a null-terminated character
+        string used to identify the client workstation name sent to the host
+        database server when using DB2 Connect.
+
+
+            Note:
+
+            DB2 for z/OS and OS/390 servers support up to a length of 18
+            characters.
+
+{type}
+
+    An integer value that specifies the type of resource that was passed into
+    the function. The type of resource and this value must correspond.
+
+    Passing 1 as the value specifies that a connection resource has been
+    passed into the function.
+
+    Passing any integer not equal to 1 as the value specifies that a statement
+    resource has been passed into the function.
+
+The following table specifies which options are compatible with the available
+resource types:
+
+                        Resource-Parameter Matrix
+      Key                  Value                    Resource Type
+                                           Connection Statement Result Set
+autocommit       DB2_AUTOCOMMIT_ON         X          -         -
+autocommit       DB2_AUTOCOMMIT_OFF        X          -         -
+cursor           DB2_SCROLLABLE            -          X         -
+cursor           DB2_FORWARD_ONLY          -          X         -
+binmode          DB2_BINARY                X          X         -
+binmode          DB2_CONVERT               X          X         -
+binmode          DB2_PASSTHRU              X          X         -
+db2_attr_case    DB2_CASE_LOWER            X          X         -
+db2_attr_case    DB2_CASE_UPPER            X          X         -
+db2_attr_case    DB2_CASE_NATURAL          X          X         -
+deferred_prepare DB2_DEFERRED_PREPARE_ON   -          X         -
+deferred_prepare DB2_DEFERRED_PREPARE_OFF  -          X         -
+i5_fetch_only    DB2_I5_FETCH_ON           -          X         -
+i5_fetch_only    DB2_I5_FETCH_OFF          -          X         -
+rowcount         DB2_ROWCOUNT_PREFETCH_ON  -          X         -
+rowcount         DB2_ROWCOUNT_PREFETCH_OFF -          X         -
+trusted_user     <USER NAME> (String)      X          -         -
+trusted_password <PASSWORD> (String)       X          -         -
+userid           SQL_ATTR_INFO_USERID      X          X         -
+acctstr          SQL_ATTR_INFO_ACCTSTR     X          X         -
+applname         SQL_ATTR_INFO_APPLNAME    X          X         -
+wrkstnname       SQL_ATTR_INFO_WRKSTNNAME  X          X         -
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Setting one parameter with a connection resource
+
+<?php >
+    /* Database Connection Parameters */
+    $database = 'SAMPLE';
+    $hostname = 'localhost';
+    $port = 50000;
+    $protocol = 'TCPIP';
+    $username = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Connection String */
+    $conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$database;";
+    $conn_string .= "HOSTNAME=$hostname;PORT=$port;PROTOCOL=$protocol;";
+    $conn_string .= "UID=$username;PWD=$password;";
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($conn_string, '', '');
+
+    /* Create the associative options array with valid key-value pairs */
+    $options = array('autocommit' => DB2_AUTOCOMMIT_ON);
+
+    /
+    * Call the function using the correct resource, options array, and type values *
+    /
+    $result = db2_set_option($conn, $options, 1);
+
+    /* Check if all options could be set correctly */
+    if($result)
+    {
+      echo 'Options Set Successfully';
+    }
+    else
+    {
+      echo 'Could Not Set Options';
+    }
+<?>
+
+The above example will output:
+
+Options Set Successfully
+
+Example #2 Setting multiple parameters with a connection resource
+
+<?php >
+    /* Database Connection Parameters */
+    $database = 'SAMPLE';
+    $hostname = 'localhost';
+    $port = 50000;
+    $protocol = 'TCPIP';
+    $username = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Connection String */
+    $conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$database;";
+    $conn_string .= "HOSTNAME=$hostname;PORT=$port;PROTOCOL=$protocol;";
+    $conn_string .= "UID=$username;PWD=$password;";
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($conn_string, '', '');
+
+    /* Create the associative options array with valid key-value pairs */
+    $options = array('autocommit' => DB2_AUTOCOMMIT_OFF, 
+                        'binmode' => DB2_PASSTHRU,
+                  'db2_attr_case' => DB2_CASE_UPPER,
+                         'cursor' => DB2_SCROLLABLE);
+
+    /
+    * Call the function using the correct resource, options array, and type values *
+    /
+    $result = db2_set_option($conn, $options, 1);
+
+    /* Check if all options could be set correctly */
+    if($result)
+    {
+      echo 'Options Set Successfully';
+    }
+    else
+    {
+      echo 'Could Not Set Options';
+    }
+<?>
+
+The above example will output:
+
+Options Set Successfully
+
+Example #3 Setting multiple parameters with an invalid key
+
+<?php >
+    /* Database Connection Parameters */
+    $database = 'SAMPLE';
+    $hostname = 'localhost';
+    $port = 50000;
+    $protocol = 'TCPIP';
+    $username = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Connection String */
+    $conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$database;";
+    $conn_string .= "HOSTNAME=$hostname;PORT=$port;PROTOCOL=$protocol;";
+    $conn_string .= "UID=$username;PWD=$password;";
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($conn_string, '', '');
+
+    /* Create the associative options array with valid key-value pairs */
+    $options = array('autocommit' => DB2_AUTOCOMMIT_OFF, 
+                 'MY_INVALID_KEY' => DB2_PASSTHRU,
+                  'db2_attr_case' => DB2_CASE_UPPER,
+                         'cursor' => DB2_SCROLLABLE);
+
+    /
+    * Call the function using the correct resource, options array, and type values *
+    /
+    $result = db2_set_option($conn, $options, 1);
+
+    /* Check if all options could be set correctly */
+    if($result)
+    {
+      echo 'Options Set Successfully';
+    }
+    else
+    {
+      echo 'Could Not Set Options';
+    }
+<?>
+
+The above example will output:
+
+Could Not Set Options
+
+Example #4 Setting multiple parameters with an invalid value
+
+<?php >
+    /* Database Connection Parameters */
+    $database = 'SAMPLE';
+    $hostname = 'localhost';
+    $port = 50000;
+    $protocol = 'TCPIP';
+    $username = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Connection String */
+    $conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$database;";
+    $conn_string .= "HOSTNAME=$hostname;PORT=$port;PROTOCOL=$protocol;";
+    $conn_string .= "UID=$username;PWD=$password;";
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($conn_string, '', '');
+
+    /* Create the associative options array with valid key-value pairs */
+    $options = array('autocommit' => DB2_AUTOCOMMIT_OFF, 
+                        'binmode' => 'INVALID_VALUE',
+                  'db2_attr_case' => DB2_CASE_UPPER,
+                         'cursor' => DB2_SCROLLABLE);
+
+    /
+    * Call the function using the correct resource, options array, and type values *
+    /
+    $result = db2_set_option($conn, $options, 1);
+
+    /* Check if all options could be set correctly */
+    if($result)
+    {
+      echo 'Options Set Successfully';
+    }
+    else
+    {
+      echo 'Could Not Set Options';
+    }
+<?>
+
+The above example will output:
+
+Could Not Set Options
+
+Example #5 Setting multiple parameters with a connection resource and the
+wrong type
+
+<?php >
+    /* Database Connection Parameters */
+    $database = 'SAMPLE';
+    $hostname = 'localhost';
+    $port = 50000;
+    $protocol = 'TCPIP';
+    $username = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Connection String */
+    $conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$database;";
+    $conn_string .= "HOSTNAME=$hostname;PORT=$port;PROTOCOL=$protocol;";
+    $conn_string .= "UID=$username;PWD=$password;";
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($conn_string, '', '');
+
+    /* Create the associative options array with valid key-value pairs */
+    $options = array('autocommit' => DB2_AUTOCOMMIT_OFF, 
+                        'binmode' => DB2_PASSTHRU,
+                  'db2_attr_case' => DB2_CASE_UPPER,
+                         'cursor' => DB2_SCROLLABLE);
+
+    /
+    * Call the function using the correct resource, options array, and the wrong type value *
+    /
+    $result = db2_set_option($conn, $options, 2);
+
+    /* Check if all options could be set correctly */
+    if($result)
+    {
+      echo 'Options Set Successfully';
+    }
+    else
+    {
+      echo 'Could Not Set Options';
+    }
+<?>
+
+The above example will output:
+
+Could Not Set Options
+
+Example #6 Setting multiple parameters with the wrong resource
+
+<?php >
+    /* Database Connection Parameters */
+    $database = 'SAMPLE';
+    $hostname = 'localhost';
+    $port = 50000;
+    $protocol = 'TCPIP';
+    $username = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Connection String */
+    $conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$database;";
+    $conn_string .= "HOSTNAME=$hostname;PORT=$port;PROTOCOL=$protocol;";
+    $conn_string .= "UID=$username;PWD=$password;";
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($conn_string, '', '');
+
+    /* Create the associative options array with valid key-value pairs */
+    $options = array('autocommit' => DB2_AUTOCOMMIT_OFF, 
+                        'binmode' => DB2_PASSTHRU,
+                  'db2_attr_case' => DB2_CASE_UPPER,
+                         'cursor' => DB2_SCROLLABLE);
+
+    $stmt = db2_prepare($conn, 'SELECT * FROM EMPLOYEE');
+
+    /
+    * Call the function using the wrong resource, and the correct options array, and type values *
+    /
+    $result = db2_set_option($stmt, $options, 1);
+
+    /* Check if all options could be set correctly */
+    if($result)
+    {
+      echo 'Options Set Successfully';
+    }
+    else
+    {
+      echo 'Could Not Set Options';
+    }
+<?>
+
+The above example will output:
+
+Could Not Set Options
+
+Example #7 Putting it all together
+
+<?php >
+    /* Database Connection Parameters */
+    $database = 'SAMPLE';
+    $hostname = 'localhost';
+    $port = 50000;
+    $protocol = 'TCPIP';
+    $username = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Connection String */
+    $conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$database;";
+    $conn_string .= "HOSTNAME=$hostname;PORT=$port;PROTOCOL=$protocol;";
+    $conn_string .= "UID=$username;PWD=$password;";
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($conn_string, '', '');
+
+    /* Create the associative options array with valid key-value pairs */
+    $options = array('db2_attr_case' => DB2_CASE_LOWER,
+                            'cursor' => DB2_SCROLLABLE);
+
+    $stmt = db2_prepare($conn, 'SELECT * FROM EMPLOYEE WHERE EMPNO = ? OR EMPNO =
+     ?');
+
+    /
+    * Call the function using the correct resource, options array, and type values *
+    /
+    $option_result = db2_set_option($stmt, $options, 2);
+    $result = db2_execute($stmt, array('000130', '000140'));
+
+    /* Get Row 2 before Row 1 since Scrollable Cursor */
+    print_r(db2_fetch_assoc($stmt, 2));
+    print '<br /><br />';
+    print_r(db2_fetch_assoc($stmt, 1));
+
+<?>
+
+The above example will output:
+
+Array
+(
+    [empno] => 000140
+    [firstnme] => HEATHER
+    [midinit] => A
+    [lastname] => NICHOLLS
+    [workdept] => C01
+    [phoneno] => 1793
+    [hiredate] => 1976-12-15
+    [job] => ANALYST
+    [edlevel] => 18
+    [sex] => F
+    [birthdate] => 1946-01-19
+    [salary] => 28420.00
+    [bonus] => 600.00
+    [comm] => 2274.00
+)
+
+Array
+(
+    [empno] => 000130
+    [firstnme] => DELORES
+    [midinit] => M
+    [lastname] => QUINTANA
+    [workdept] => C01
+    [phoneno] => 4578
+    [hiredate] => 1971-07-28
+    [job] => ANALYST
+    [edlevel] => 16
+    [sex] => F
+    [birthdate] => 1925-09-15
+    [salary] => 23800.00
+    [bonus] => 500.00
+    [comm] => 1904.00
+)
+
+Example #8 i5/OS cursors are read-only
+
+<?php >
+      $conn = db2_connect("", "", "", array("i5_lib"=>"nobody"));
+      $stmt = db2_prepare($conn, 'select * from names where first = ?');
+      $name = "first2";
+      db2_bind_param($stmt, 1, "name", DB2_PARAM_IN);
+      $options = array("i5_fetch_only"=>DB2_I5_FETCH_ON);
+      db2_set_option($stmt,$options,0);
+      if (db2_execute($stmt)) {
+        while ($row = db2_fetch_array($stmt)) {
+          echo "{$row[0]} {$row[1]}";
+        }
+      }
+<?>
+
+The above example will output:
+
+first2 last2
+
+==============================================================================
+*See* *Also*
+
+  * |db2_connect| - Returns a connection to a database
+  * |db2_pconnect| - Returns a persistent connection to a database
+  * |db2_exec| - Executes an SQL statement directly
+  * |db2_prepare| - Prepares an SQL statement to be executed
+  * |db2_cursor_type| - Returns the cursor type used by a statement resource
+
+
+vim:ft=help:

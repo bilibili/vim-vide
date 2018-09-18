@@ -1,0 +1,74 @@
+pg_parameter_status
+
+(PHP 5, PHP 7)
+
+pg_parameter_status — Looks up a current parameter setting of the server.
+
+==============================================================================
+*Description*
+
+    string pg_parameter_status ([ resource $connection ], string $param_name~
+)~
+
+Looks up a current parameter setting of the server.
+
+Certain parameter values are reported by the server automatically at
+connection startup or whenever their values change. pg_parameter_status() can
+be used to interrogate these settings. It returns the current value of a
+parameter if known, or FALSE if the parameter is not known.
+
+Parameters reported as of PostgreSQL 8.0 include server_version,
+server_encoding, client_encoding, is_superuser, session_authorization,
+DateStyle, TimeZone, and integer_datetimes. (server_encoding, TimeZone, and
+integer_datetimes were not reported by releases before 8.0.) Note that
+server_version, server_encoding and integer_datetimes cannot change after
+PostgreSQL startup.
+
+PostgreSQL 7.3 or lower servers do not report parameter settings, 
+pg_parameter_status() includes logic to obtain values for server_version and
+client_encoding anyway. Applications are encouraged to use pg_parameter_status
+() rather than ad hoc code to determine these values.
+
+Caution
+
+On a pre-7.4 PostgreSQL server, changing client_encoding via SET after
+connection startup will not be reflected by pg_parameter_status().
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource. When {connection} is not present,
+    the default connection is used. The default connection is the last
+    connection made by |pg_connect| or |pg_pconnect|.
+
+{param_name}
+
+    Possible {param_name} values include server_version, server_encoding,
+    client_encoding, is_superuser, session_authorization, DateStyle, TimeZone,
+    and integer_datetimes.
+
+==============================================================================
+*Return* *Values*
+
+A string containing the value of the parameter, FALSE on failure or invalid
+{param_name}.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_parameter_status() example
+
+<?php >
+      $dbconn = pg_connect("dbname=publisher") or die("Could not connect");
+
+      echo "Server encoding: ", pg_parameter_status($dbconn, "server_encoding");
+<?>
+
+The above example will output:
+
+Server encoding: SQL_ASCII
+
+
+vim:ft=help:

@@ -1,0 +1,35 @@
+imap_base64
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_base64 — Decode BASE64 encoded text
+
+==============================================================================
+*Description*
+
+    string imap_base64 ( string $text )~
+
+Decodes the given BASE-64 encoded {text}.
+
+==============================================================================
+*Parameters*
+
+{text}
+
+    The encoded text
+
+==============================================================================
+*Return* *Values*
+
+Returns the decoded message as a string.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_binary| - Convert an 8bit string to a base64 string
+  * |base64_encode| - Encodes data with MIME base64
+  * |base64_decode| - Decodes data encoded with MIME base64
+  * >> RFC2045, Section 6.8
+
+
+vim:ft=help:

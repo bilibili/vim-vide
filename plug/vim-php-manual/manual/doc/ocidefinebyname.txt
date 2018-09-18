@@ -1,0 +1,18 @@
+ocidefinebyname
+
+(PHP 4, PHP 5, PHP 7, PECL OCI8 >= 1.0.0)
+
+ocidefinebyname — Alias of |oci_define_by_name|
+
+==============================================================================
+*Description*
+
+Alias of |oci_define_by_name|
+
+Warning
+
+This alias has been DEPRECATED as of PHP 5.4.0. Relying on this alias is
+highly discouraged.
+
+
+vim:ft=help:

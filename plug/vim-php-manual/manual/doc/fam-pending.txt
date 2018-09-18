@@ -1,0 +1,34 @@
+fam_pending
+
+(PHP 5 <= 5.0.5)
+
+fam_pending — Check for pending FAM events
+
+==============================================================================
+*Description*
+
+    int fam_pending ( resource $fam )~
+
+Checks for pending FAM events.
+
+==============================================================================
+*Parameters*
+
+{fam}
+
+    A resource representing a connection to the FAM service returned by 
+    |fam_open|
+
+==============================================================================
+*Return* *Values*
+
+Returns non-zero if events are available to be fetched using |fam_next_event|,
+zero otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fam_next_event| - Get next pending FAM event
+
+
+vim:ft=help:

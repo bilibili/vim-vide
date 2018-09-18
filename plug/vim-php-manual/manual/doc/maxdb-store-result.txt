@@ -1,0 +1,40 @@
+maxdb_store_result
+
+maxdb::store_result
+
+(PECL maxdb >= 1.0)
+
+maxdb_store_result -- maxdb::store_result — Transfers a result set from the
+last query
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    resource maxdb_store_result ( resource $link )~
+
+Object oriented style
+
+    object maxdb::store_result ( void )~
+
+This function has no functionally effect.
+
+==============================================================================
+*Return* *Values*
+
+Returns a result resource or FALSE if an error occurred.
+
+==============================================================================
+*Examples*
+
+See |maxdb_multi_query|.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_real_query| - Execute an SQL query
+  * |maxdb_use_result| - Initiate a result set retrieval
+
+
+vim:ft=help:

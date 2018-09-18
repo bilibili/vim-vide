@@ -1,0 +1,35 @@
+pcntl_wstopsig
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+pcntl_wstopsig — Returns the signal which caused the child to stop
+
+==============================================================================
+*Description*
+
+    int pcntl_wstopsig ( int $status )~
+
+Returns the number of the signal which caused the child to stop. This function
+is only useful if |pcntl_wifstopped| returned TRUE.
+
+==============================================================================
+*Parameters*
+
+{status}
+
+    The {status} parameter is the status parameter supplied to a successful
+    call to |pcntl_waitpid|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the signal number.
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_waitpid| - Waits on or returns the status of a forked child
+  * |pcntl_wifstopped| - Checks whether the child process is currently stopped
+
+
+vim:ft=help:

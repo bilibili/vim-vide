@@ -1,0 +1,77 @@
+cairo_image_surface_create_for_data
+
+(PECL cairo >= 0.1.0)
+
+cairo_image_surface_create_for_data — Description
+
+==============================================================================
+*Description*
+
+    CairoImageSurface cairo_image_surface_create_for_data ( string $data ,~
+    int $format , int $width , int $height [, int $stride = -1 ] )~
+
+The function description goes here.
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    Description...
+
+{format}
+
+    Description...
+
+{width}
+
+    Description...
+
+{height}
+
+    Description...
+
+{stride}
+
+    Description...
+
+==============================================================================
+*Return* *Values*
+
+What is returned on success and failure
+
+==============================================================================
+*Errors/Exceptions*
+
+When does this function issue E_* level errors, and/or throw exceptions.
+
+==============================================================================
+*Examples*
+
+Example #1 cairo_image_surface_create_for_data() example
+
+Any text that describes the purpose of the example, or what goes on in the
+example should be here.
+
+<?php >
+
+    /* ... */
+
+<?>
+
+The above example will output something similar to:
+
+...
+
+==============================================================================
+*See* *Also*
+
+  * related function name here()
+
+
+vim:ft=help:

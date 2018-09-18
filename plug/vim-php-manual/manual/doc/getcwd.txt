@@ -1,0 +1,52 @@
+getcwd
+
+(PHP 4, PHP 5, PHP 7)
+
+getcwd — Gets the current working directory
+
+==============================================================================
+*Description*
+
+    string getcwd ( void )~
+
+Gets the current working directory.
+
+==============================================================================
+*Return* *Values*
+
+Returns the current working directory on success, or FALSE on failure.
+
+On some Unix variants, getcwd() will return FALSE if any one of the parent
+directories does not have the readable or search mode set, even if the current
+directory does. See |chmod| for more information on modes and permissions.
+
+==============================================================================
+*Examples*
+
+Example #1 getcwd() example
+
+<?php >
+
+    // current directory
+    echo getcwd() . "\n";
+
+    chdir('cvs');
+
+    // current directory
+    echo getcwd() . "\n";
+
+<?>
+
+The above example will output something similar to:
+
+/home/didou
+/home/didou/cvs
+
+==============================================================================
+*See* *Also*
+
+  * |chdir| - Change directory
+  * |chmod| - Changes file mode
+
+
+vim:ft=help:

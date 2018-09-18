@@ -1,0 +1,57 @@
+image2wbmp
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+image2wbmp — Output image to browser or file
+
+==============================================================================
+*Description*
+
+    bool image2wbmp ( resource $image [, string $filename [, int $threshold~
+    ]] )~
+
+image2wbmp() outputs or save a WBMP version of the given {image}.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{filename}
+
+    Path to the saved file. If not given, the raw image stream will be output
+    directly.
+
+{threshold}
+
+    Threshold value, between 0 and 255 (inclusive).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 image2wbmp() example
+
+<?php >
+    $file = 'php.png';
+    $image = imagecreatefrompng($file);
+
+    header('Content-Type: ' . image_type_to_mime_type(IMAGETYPE_WBMP));
+    image2wbmp($image); // output the stream directly
+    imagedestroy($image);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imagewbmp| - Output image to browser or file
+
+
+vim:ft=help:

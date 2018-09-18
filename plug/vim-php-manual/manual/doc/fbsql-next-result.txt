@@ -1,0 +1,49 @@
+fbsql_next_result
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_next_result — Move the internal result pointer to the next result
+
+==============================================================================
+*Description*
+
+    bool fbsql_next_result ( resource $result )~
+
+When sending more than one SQL statement to the server or executing a stored
+procedure with multiple results will cause the server to return multiple
+result sets. This function will test for additional results available form the
+server. If an additional result set exists it will free the existing result
+set and prepare to fetch the words from the new result set.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    A result identifier returned by |fbsql_query| or |fbsql_db_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if an additional result set was available or FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_next_result() example
+
+<?php >
+    $link = fbsql_connect("localhost", "_SYSTEM", "secret");
+    fbsql_select_db("MyDB", $link);
+    $SQL = "Select * from table1; select * from table2;";
+    $rs = fbsql_query($SQL, $link);
+    do {
+        while ($row = fbsql_fetch_row($rs)) {
+        }
+    } while (fbsql_next_result($rs));
+    fbsql_free_result($rs);
+    fbsql_close($link);
+<?>
+
+
+vim:ft=help:

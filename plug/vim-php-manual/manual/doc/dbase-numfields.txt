@@ -1,0 +1,58 @@
+dbase_numfields
+
+(PHP 5 < 5.3.0, dbase 5, dbase 7)
+
+dbase_numfields — Gets the number of fields of a database
+
+==============================================================================
+*Description*
+
+    int dbase_numfields ( resource $dbase_identifier )~
+
+Gets the number of fields (columns) in the specified database.
+
+    Note:
+
+    Field numbers are between 0 and dbase_numfields($db)-1, while record
+    numbers are between 1 and dbase_numrecords($db).
+
+==============================================================================
+*Parameters*
+
+{dbase_identifier}
+
+    The database link identifier, returned by |dbase_open| or |dbase_create|.
+
+==============================================================================
+*Return* *Values*
+
+The number of fields in the database, or FALSE if an error occurs.
+
+==============================================================================
+*Changelog*
+
+  Version                         Description
+dbase 7.0.0 {dbase_identifier} is now a resource instead of an int.
+
+==============================================================================
+*Examples*
+
+Example #1 dbase_numfields() Example
+
+<?php >
+
+    $rec = dbase_get_record($db, $recno);
+    $nf  = dbase_numfields($db);
+    for ($i = 0; $i < $nf; $i++) {
+      echo $rec[$i], "\n";
+    }
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |dbase_numrecords| - Gets the number of records in a database
+
+
+vim:ft=help:

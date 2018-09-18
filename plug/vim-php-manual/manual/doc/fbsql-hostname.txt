@@ -1,0 +1,43 @@
+fbsql_hostname
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_hostname — Get or set the host name used with a connection
+
+==============================================================================
+*Description*
+
+    string fbsql_hostname ( resource $link_identifier [, string $host_name ]~
+)~
+
+Gets or sets the host name used with a connection.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+{host_name}
+
+    If provided, this will be the new connection host name.
+
+==============================================================================
+*Return* *Values*
+
+Returns the current host name used for the connection.
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_username| - Get or set the username for the connection
+  * |fbsql_password| - Get or set the user password used with a connection
+
+
+vim:ft=help:

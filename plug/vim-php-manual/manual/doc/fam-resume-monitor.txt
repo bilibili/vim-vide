@@ -1,0 +1,38 @@
+fam_resume_monitor
+
+(PHP 5 <= 5.0.5)
+
+fam_resume_monitor — Resume suspended monitoring
+
+==============================================================================
+*Description*
+
+    bool fam_resume_monitor ( resource $fam , resource $fam_monitor )~
+
+Resumes monitoring of a resource previously suspended using 
+|fam_suspend_monitor|.
+
+==============================================================================
+*Parameters*
+
+{fam}
+
+    A resource representing a connection to the FAM service returned by 
+    |fam_open|
+
+{fam_monitor}
+
+    A resource returned by one of the fam_monitor_XXX functions
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |fam_suspend_monitor| - Temporarily suspend monitoring
+
+
+vim:ft=help:

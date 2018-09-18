@@ -1,0 +1,49 @@
+msql_connect
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_connect — Open mSQL connection
+
+==============================================================================
+*Description*
+
+    resource msql_connect ([ string $hostname ] )~
+
+msql_connect() establishes a connection to a mSQL server.
+
+If a second call is made to msql_connect() with the same arguments, no new
+link will be established, but instead, the link identifier of the already
+opened link will be returned.
+
+The link to the server will be closed as soon as the execution of the script
+ends, unless it's closed earlier by explicitly calling |msql_close|.
+
+==============================================================================
+*Parameters*
+
+{hostname}
+
+    The hostname can also include a port number. e.g. hostname,port.
+
+    If not specified, the connection is established by the means of a Unix
+    domain socket, being then more efficient then a localhost TCP socket
+    connection.
+
+        Note:
+
+        While this function will accept a colon (:) as a host/port separator,
+        a comma (,) is the preferred method.
+
+==============================================================================
+*Return* *Values*
+
+Returns a positive mSQL link identifier on success, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |msql_pconnect| - Open persistent mSQL connection
+  * |msql_close| - Close mSQL connection
+
+
+vim:ft=help:

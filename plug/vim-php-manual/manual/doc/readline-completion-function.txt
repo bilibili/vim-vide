@@ -1,0 +1,29 @@
+readline_completion_function
+
+(PHP 4, PHP 5, PHP 7)
+
+readline_completion_function — Registers a completion function
+
+==============================================================================
+*Description*
+
+    bool readline_completion_function ( callable $function )~
+
+This function registers a completion function. This is the same kind of
+functionality you'd get if you hit your tab key while using Bash.
+
+==============================================================================
+*Parameters*
+
+{function}
+
+    You must supply the name of an existing function which accepts a partial
+    command line and returns an array of possible matches.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

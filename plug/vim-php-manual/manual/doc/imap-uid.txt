@@ -1,0 +1,47 @@
+imap_uid
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_uid — This function returns the UID for the given message sequence number
+
+==============================================================================
+*Description*
+
+    int imap_uid ( resource $imap_stream , int $msg_number )~
+
+This function returns the UID for the given message sequence number. An UID is
+a unique identifier that will not change over time while a message sequence
+number may change whenever the content of the mailbox changes.
+
+This function is the inverse of |imap_msgno|.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{msg_number}
+
+    The message number.
+
+==============================================================================
+*Return* *Values*
+
+The UID of the given message.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function is not supported by POP3 mailboxes.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_msgno| - Gets the message sequence number for the given UID
+
+
+vim:ft=help:

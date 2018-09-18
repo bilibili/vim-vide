@@ -1,0 +1,34 @@
+newt_entry
+
+(PECL newt >= 0.1)
+
+newt_entry —
+
+==============================================================================
+*Description*
+
+    resource newt_entry ( int $left , int $top , int $width [, string~
+    $init_value [, int $flags ]] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+{top}
+
+{width}
+
+{init_value}
+
+{flags}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

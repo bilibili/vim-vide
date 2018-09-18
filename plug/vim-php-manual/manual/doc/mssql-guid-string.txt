@@ -1,0 +1,53 @@
+mssql_guid_string
+
+(PHP 4 >= 4.0.7, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_guid_string — Converts a 16 byte binary GUID to a string
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    string mssql_guid_string ( string $binary [, bool $short_format = false ]~
+)~
+
+Converts a 16 byte binary GUID to a string.
+
+==============================================================================
+*Parameters*
+
+{binary}
+
+    A 16 byte binary GUID.
+
+{short_format}
+
+    Whenever to use short format.
+
+==============================================================================
+*Return* *Values*
+
+Returns the converted string on success.
+
+==============================================================================
+*Examples*
+
+Example #1 mssql_guid_string() example
+
+<?php >
+    $binary = '19555081977808608437941339997619274330352755554827939936';
+
+    var_dump(mssql_guid_string($binary));
+    var_dump(mssql_guid_string($binary, true));
+<?>
+
+The above example will output:
+
+string(36) "35353931-3035-3138-3937-373830383630"
+string(32) "31393535353038313937373830383630"
+
+
+vim:ft=help:

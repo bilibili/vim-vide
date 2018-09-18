@@ -1,0 +1,43 @@
+XMLWriter::endComment
+
+xmlwriter_end_comment
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 1.0.0)
+
+XMLWriter::endComment -- xmlwriter_end_comment — Create end comment
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::endComment ( void )~
+
+Procedural style
+
+    bool xmlwriter_end_comment ( resource $xmlwriter )~
+
+Ends the current comment.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::startComment| - Create start comment
+  * |XMLWriter::writeComment| - Write full comment tag
+
+
+vim:ft=help:

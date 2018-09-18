@@ -1,0 +1,34 @@
+ob_clean
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+ob_clean — Clean (erase) the output buffer
+
+==============================================================================
+*Description*
+
+    void ob_clean ( void )~
+
+This function discards the contents of the output buffer.
+
+This function does not destroy the output buffer like |ob_end_clean| does.
+
+The output buffer must be started by |ob_start| with
+PHP_OUTPUT_HANDLER_CLEANABLE flag. Otherwise ob_clean() will not work.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |ob_flush| - Flush (send) the output buffer
+  * |ob_end_flush| - Flush (send) the output buffer and turn off output
+    buffering
+  * |ob_end_clean| - Clean (erase) the output buffer and turn off output
+    buffering
+
+
+vim:ft=help:

@@ -1,0 +1,51 @@
+curl_copy_handle
+
+(PHP 5, PHP 7)
+
+curl_copy_handle — Copy a cURL handle along with all of its preferences
+
+==============================================================================
+*Description*
+
+    resource curl_copy_handle ( resource $ch )~
+
+Copies a cURL handle keeping the same preferences.
+
+==============================================================================
+*Parameters*
+
+{ch}
+
+    A cURL handle returned by |curl_init|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a new cURL handle.
+
+==============================================================================
+*Examples*
+
+Example #1 Copying a cURL handle
+
+<?php >
+    // create a new cURL resource
+    $ch = curl_init();
+
+    // set URL and other appropriate options
+    curl_setopt($ch, CURLOPT_URL, 'http://www.example.com/');
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    // copy the handle
+    $ch2 = curl_copy_handle($ch);
+
+    // grab URL (http://www.example.com/) and pass it to the browser
+    curl_exec($ch2);
+
+    // close cURL resources, and free up system resources
+    curl_close($ch2);
+    curl_close($ch);
+<?>
+
+
+vim:ft=help:

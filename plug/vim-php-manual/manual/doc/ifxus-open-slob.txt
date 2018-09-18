@@ -1,0 +1,38 @@
+ifxus_open_slob
+
+(PHP 4, PHP <=5.2.0)
+
+ifxus_open_slob — Opens an slob object
+
+==============================================================================
+*Description*
+
+    int ifxus_open_slob ( int $bid , int $mode )~
+
+Opens an slob object. {bid} should be an existing slob id.
+
+==============================================================================
+*Parameters*
+
+{bid}
+
+    An existing slob id.
+
+{mode}
+
+    A combination of IFX_LO_RDONLY, IFX_LO_WRONLY, IFX_LO_APPEND IFX_LO_RDWR,
+    IFX_LO_BUFFER, IFX_LO_NOBUFFER.
+
+==============================================================================
+*Return* *Values*
+
+Returns the new slob object-id, or FALSE on errors.
+
+==============================================================================
+*See* *Also*
+
+  * |ifxus_close_slob| - Deletes the slob object
+  * |ifxus_free_slob| - Deletes the slob object
+
+
+vim:ft=help:

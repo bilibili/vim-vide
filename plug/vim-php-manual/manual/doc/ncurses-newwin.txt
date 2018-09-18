@@ -1,0 +1,47 @@
+ncurses_newwin
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_newwin — Create a new window
+
+==============================================================================
+*Description*
+
+    resource ncurses_newwin ( int $rows , int $cols , int $y , int $x )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+Creates a new window to draw elements in.
+
+When creating additional windows, remember to use |ncurses_getmaxyx| to check
+for available space, as terminal size is individual and may vary.
+
+==============================================================================
+*Parameters*
+
+{rows}
+
+    Number of rows
+
+{cols}
+
+    Number of columns
+
+{y}
+
+    y-coordinate of the origin
+
+{x}
+
+    x-coordinate of the origin
+
+==============================================================================
+*Return* *Values*
+
+Returns a resource ID for the new window.
+
+
+vim:ft=help:

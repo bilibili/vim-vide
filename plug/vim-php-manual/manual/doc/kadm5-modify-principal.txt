@@ -1,0 +1,67 @@
+kadm5_modify_principal
+
+(PECL kadm5 >= 0.2.3)
+
+kadm5_modify_principal — Modifies a kerberos principal with the given
+parameters
+
+==============================================================================
+*Description*
+
+    bool kadm5_modify_principal ( resource $handle , string $principal ,~
+    array $options )~
+
+Modifies a {principal} according to the given {options}.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    A KADM5 handle.
+
+{principal}
+
+    The principal.
+
+{options}
+
+    It is possible to specify several optional parameters within the array
+    {options}. Allowed are the following options: KADM5_PRINC_EXPIRE_TIME,
+    KADM5_PW_EXPIRATION, KADM5_ATTRIBUTES, KADM5_MAX_LIFE, KADM5_KVNO,
+    KADM5_POLICY, KADM5_CLEARPOLICY, KADM5_MAX_RLIFE. KADM5_FAIL_AUTH_COUNT.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Example of modifying principal
+
+<?php >
+
+    $handle = kadm5_init_with_password("afs-1", "GONICUS.LOCAL", "admin/admin", 
+    "password");
+
+    $attributes = KRB5_KDB_REQUIRES_PRE_AUTH;
+    $options = array(KADM5_PRINC_EXPIRE_TIME => 3451234,
+                     KADM5_POLICY => "gonicus",
+                     KADM5_ATTRIBUTES => $attributes);
+
+    kadm5_modify_principal($handle, "burbach@GONICUS.LOCAL", $options);
+
+    kadm5_destroy($handle);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |kadm5_create_principal| - Creates a kerberos principal with the given
+    parameters
+  * |kadm5_delete_principal| - Deletes a kerberos principal
+
+
+vim:ft=help:

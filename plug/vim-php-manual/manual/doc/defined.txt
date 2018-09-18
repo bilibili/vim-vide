@@ -1,0 +1,57 @@
+defined
+
+(PHP 4, PHP 5, PHP 7)
+
+defined — Checks whether a given named constant exists
+
+==============================================================================
+*Description*
+
+    bool defined ( string $name )~
+
+Checks whether the given constant exists and is defined.
+
+    Note:
+
+    If you want to see if a variable exists, use |isset| as defined() only
+    applies to constants. If you want to see if a function exists, use 
+    |function_exists|.
+
+==============================================================================
+*Parameters*
+
+{name}
+
+    The constant name.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the named constant given by {name} has been defined, FALSE
+otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 Checking Constants
+
+<?php >
+    /* Note the use of quotes, this is important.  This example is checking
+     * if the string 'TEST' is the name of a constant named TEST */
+    if (defined('TEST')) {
+        echo TEST;
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |define| - Defines a named constant
+  * |constant| - Returns the value of a constant
+  * |get_defined_constants| - Returns an associative array with the names of
+    all the constants and their values
+  * |function_exists| - Return TRUE if the given function has been defined
+  * The section on Constants
+
+
+vim:ft=help:

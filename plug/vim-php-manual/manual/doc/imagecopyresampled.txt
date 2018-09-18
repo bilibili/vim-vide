@@ -1,0 +1,173 @@
+imagecopyresampled
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+imagecopyresampled — Copy and resize part of an image with resampling
+
+==============================================================================
+*Description*
+
+    bool imagecopyresampled ( resource $dst_image , resource $src_image , int~
+    $dst_x , int $dst_y , int $src_x , int $src_y , int $dst_w , int $dst_h ,~
+    int $src_w , int $src_h )~
+
+imagecopyresampled() copies a rectangular portion of one image to another
+image, smoothly interpolating pixel values so that, in particular, reducing
+the size of an image still retains a great deal of clarity.
+
+In other words, imagecopyresampled() will take a rectangular area from
+{src_image} of width {src_w} and height {src_h} at position ({src_x},{src_y})
+and place it in a rectangular area of {dst_image} of width {dst_w} and height
+{dst_h} at position ({dst_x},{dst_y}).
+
+If the source and destination coordinates and width and heights differ,
+appropriate stretching or shrinking of the image fragment will be performed.
+The coordinates refer to the upper left corner. This function can be used to
+copy regions within the same image (if {dst_image} is the same as {src_image})
+but if the regions overlap the results will be unpredictable.
+
+==============================================================================
+*Parameters*
+
+{dst_image}
+
+    Destination image link resource.
+
+{src_image}
+
+    Source image link resource.
+
+{dst_x}
+
+    x-coordinate of destination point.
+
+{dst_y}
+
+    y-coordinate of destination point.
+
+{src_x}
+
+    x-coordinate of source point.
+
+{src_y}
+
+    y-coordinate of source point.
+
+{dst_w}
+
+    Destination width.
+
+{dst_h}
+
+    Destination height.
+
+{src_w}
+
+    Source width.
+
+{src_h}
+
+    Source height.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Simple example
+
+This example will resample an image to half its original size.
+
+<?php >
+    // The file
+    $filename = 'test.jpg';
+    $percent = 0.5;
+
+    // Content type
+    header('Content-Type: image/jpeg');
+
+    // Get new dimensions
+    list($width, $height) = getimagesize($filename);
+    $new_width = $width * $percent;
+    $new_height = $height * $percent;
+
+    // Resample
+    $image_p = imagecreatetruecolor($new_width, $new_height);
+    $image = imagecreatefromjpeg($filename);
+    imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, 
+    $width, $height);
+
+    // Output
+    imagejpeg($image_p, null, 100);
+<?>
+
+The above example will output something similar to:
+
+Output of example : Simple example
+
+Example #2 Resampling an image proportionally
+
+This example will display an image with the maximum width, or height, of 200
+pixels.
+
+<?php >
+    // The file
+    $filename = 'test.jpg';
+
+    // Set a maximum height and width
+    $width = 200;
+    $height = 200;
+
+    // Content type
+    header('Content-Type: image/jpeg');
+
+    // Get new dimensions
+    list($width_orig, $height_orig) = getimagesize($filename);
+
+    $ratio_orig = $width_orig/$height_orig;
+
+    if ($width/$height > $ratio_orig) {
+       $width = $height*$ratio_orig;
+    } else {
+       $height = $width/$ratio_orig;
+    }
+
+    // Resample
+    $image_p = imagecreatetruecolor($width, $height);
+    $image = imagecreatefromjpeg($filename);
+    imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig
+    , $height_orig);
+
+    // Output
+    imagejpeg($image_p, null, 100);
+<?>
+
+The above example will output something similar to:
+
+Output of example : Resampling an image proportionally
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    There is a problem due to palette image limitations (255+1 colors).
+    Resampling or filtering an image commonly needs more colors than 255, a
+    kind of approximation is used to calculate the new resampled pixel and its
+    color. With a palette image we try to allocate a new color, if that
+    failed, we choose the closest (in theory) computed color. This is not
+    always the closest visual color. That may produce a weird result, like
+    blank (or visually blank) images. To skip this problem, please use a
+    truecolor image as a destination image, such as one created by 
+    |imagecreatetruecolor|.
+
+==============================================================================
+*See* *Also*
+
+|imagecopyresized| - Copy and resize part of an image
+
+
+vim:ft=help:

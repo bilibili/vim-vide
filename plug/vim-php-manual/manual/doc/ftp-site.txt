@@ -1,0 +1,62 @@
+ftp_site
+
+(PHP 4, PHP 5, PHP 7)
+
+ftp_site — Sends a SITE command to the server
+
+==============================================================================
+*Description*
+
+    bool ftp_site ( resource $ftp_stream , string $command )~
+
+ftp_site() sends the given SITE command to the FTP server.
+
+SITE commands are not standardized, and vary from server to server. They are
+useful for handling such things as file permissions and group membership.
+
+==============================================================================
+*Parameters*
+
+{ftp_stream}
+
+    The link identifier of the FTP connection.
+
+{command}
+
+    The SITE command. Note that this parameter isn't escaped so there may be
+    some issues with filenames containing spaces and other characters.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Sending a SITE command to an ftp server
+
+<?php >
+    // Connect to FTP server
+    $conn = ftp_connect('ftp.example.com');
+    if (!$conn) die('Unable to connect to ftp.example.com');
+
+    // Login as "user" with password "pass"
+    if (!ftp_login($conn, 'user', 'pass')) die(
+    'Error logging into ftp.example.com');
+
+    // Issue: "SITE CHMOD 0600 /home/user/privatefile" command to ftp server
+    if (ftp_site($conn, 'CHMOD 0600 /home/user/privatefile')) {
+       echo "Command executed successfully.\n";
+    } else {
+       die('Command failed.');
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ftp_raw| - Sends an arbitrary command to an FTP server
+
+
+vim:ft=help:

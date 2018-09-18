@@ -1,0 +1,57 @@
+bcompiler_read
+
+(PECL bcompiler >= 0.4)
+
+bcompiler_read — Reads and creates classes from a filehandle
+
+==============================================================================
+*Description*
+
+    bool bcompiler_read ( resource $filehandle )~
+
+Reads data from a open file handle and creates classes from the bytecodes.
+
+==============================================================================
+*Parameters*
+
+{filehandle}
+
+    A file handle as returned by |fopen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 bcompiler_read() example
+
+<?php >
+    $fh = fopen("/tmp/example","r");
+    bcompiler_read($fh);
+    fclose($fh);
+    print_r(get_defined_classes());
+
+<?>
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+    Note:
+
+    Please use include or require statements to parse bytecodes, it's more
+    portable and convenient way than using this function.
+
+    Please note that this function won't execute script body code contained in
+    the bytecode file.
+
+
+vim:ft=help:

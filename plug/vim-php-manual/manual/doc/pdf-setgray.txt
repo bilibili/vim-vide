@@ -1,0 +1,19 @@
+PDF_setgray
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_setgray — Set color to gray [deprecated]
+
+==============================================================================
+*Description*
+
+    bool PDF_setgray ( resource $p , float $g )~
+
+Sets the current fill and stroke color to a gray value between 0 and 1
+inclusive. Returns TRUE on success or FALSE on failure.
+
+This function is deprecated since PDFlib version 4, use |PDF_setcolor|
+instead.
+
+
+vim:ft=help:

@@ -1,0 +1,110 @@
+maxdb_query
+
+maxdb::query
+
+(PECL maxdb >= 1.0)
+
+maxdb_query -- maxdb::query — Performs a query on the database
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    mixed maxdb_query ( resource $link , string $query [, int $resultmode ] )~
+
+Object oriented style
+
+    mixed maxdb::query ( string $query )~
+
+The maxdb_query() function is used to simplify the act of performing a query
+against the database represented by the {link} parameter.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure. For SELECT, SHOW, DESCRIBE or
+EXPLAIN maxdb_query() will return a result resource.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    /* Create table doesn't return a resultset */
+    if ($maxdb->query("CREATE TABLE temp.mycity LIKE hotel.city") === TRUE) {
+       printf("Table mycity successfully created.\n");
+    }
+
+    /* Select queries return a resultset */
+    if ($result = $maxdb->query("SELECT name FROM hotel.city")) {
+       printf("Select returned %d rows.\n", $result->num_rows);
+
+       /* free result set */
+       $result->close();
+    }
+
+    /* If we have to retrieve large amount of data we use MAXDB_USE_RESULT */
+    if ($result = $maxdb->query("SELECT * FROM hotel.city", MAXDB_USE_RESULT)) {
+       $result->close();
+    }
+
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    /* Create table doesn't return a resultset */
+    if (maxdb_query($link, "CREATE TABLE temp.mycity LIKE hotel.city") === TRUE) {
+       printf("Table mycity successfully created.\n");
+    }
+
+    /* Select queries return a resultset */
+    if ($result = maxdb_query($link, "SELECT name FROM hotel.city")) {
+       printf("Select returned %d rows.\n", maxdb_num_rows($result));
+
+       /* free result set */
+       maxdb_free_result($result);
+    }
+
+    /* If we have to retrieve large amount of data we use MAXDB_USE_RESULT */
+    if ($result = maxdb_query($link, "SELECT * FROM hotel.city", MAXDB_USE_RESULT
+    )) {
+       maxdb_free_result($result);
+    }
+
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Table mycity successfully created.
+Select returned 25 rows.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_real_query| - Execute an SQL query
+  * |maxdb_multi_query| - Performs a query on the database
+  * |maxdb_free_result| - Frees the memory associated with a result
+
+
+vim:ft=help:

@@ -1,0 +1,64 @@
+hash_init
+
+(PHP 5 >= 5.1.2, PHP 7, PECL hash >= 1.1)
+
+hash_init — Initialize an incremental hashing context
+
+==============================================================================
+*Description*
+
+    resource hash_init ( string $algo [, int $options = 0 [, string $key =~
+    NULL ]] )~
+
+==============================================================================
+*Parameters*
+
+{algo}
+
+    Name of selected hashing algorithm (i.e. "md5", "sha256", "haval160,4",
+    etc..). For a list of supported algorithms see |hash_algos|.
+
+{options}
+
+    Optional settings for hash generation, currently supports only one option:
+    HASH_HMAC. When specified, the {key} must be specified.
+
+{key}
+
+    When HASH_HMAC is specified for {options}, a shared secret key to be used
+    with the HMAC hashing method must be supplied in this parameter.
+
+==============================================================================
+*Return* *Values*
+
+Returns a Hashing Context resource for use with |hash_update|, 
+|hash_update_stream|, |hash_update_file|, and |hash_final|.
+
+==============================================================================
+*Examples*
+
+Example #1 Incremental hashing example
+
+<?php >
+    $ctx = hash_init('md5');
+    hash_update($ctx, 'The quick brown fox ');
+    hash_update($ctx, 'jumped over the lazy dog.');
+    echo hash_final($ctx);
+<?>
+
+The above example will output:
+
+5c6ffbdd40d9556b73a21e63c3e0e904
+
+==============================================================================
+*See* *Also*
+
+  * |hash| - Generate a hash value (message digest)
+  * |hash_algos| - Return a list of registered hashing algorithms
+  * |hash_file| - Generate a hash value using the contents of a given file
+  * |hash_hmac| - Generate a keyed hash value using the HMAC method
+  * |hash_hmac_file| - Generate a keyed hash value using the HMAC method and
+    the contents of a given file
+
+
+vim:ft=help:

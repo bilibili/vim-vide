@@ -1,0 +1,23 @@
+pspell_config_dict_dir
+
+(PHP 5, PHP 7)
+
+pspell_config_dict_dir — Location of the main word list
+
+==============================================================================
+*Description*
+
+    bool pspell_config_dict_dir ( int $conf , string $directory )~
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

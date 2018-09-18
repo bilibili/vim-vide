@@ -1,0 +1,34 @@
+mailparse_msg_free
+
+(PECL mailparse >= 0.9.0)
+
+mailparse_msg_free — Frees a MIME resource
+
+==============================================================================
+*Description*
+
+    bool mailparse_msg_free ( resource $mimemail )~
+
+Frees a MIME resource.
+
+==============================================================================
+*Parameters*
+
+{mimemail}
+
+    A valid MIME resource allocated by |mailparse_msg_create| or 
+    |mailparse_msg_parse_file|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |mailparse_msg_create| - Create a mime mail resource
+  * |mailparse_msg_parse_file| - Parses a file
+
+
+vim:ft=help:

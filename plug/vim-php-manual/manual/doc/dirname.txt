@@ -1,0 +1,85 @@
+dirname
+
+(PHP 4, PHP 5, PHP 7)
+
+dirname — Returns a parent directory's path
+
+==============================================================================
+*Description*
+
+    string dirname ( string $path [, int $levels = 1 ] )~
+
+Given a string containing the path of a file or directory, this function will
+return the parent directory's path that is {levels} up from the current
+directory.
+
+    Note:
+
+    dirname() operates naively on the input string, and is not aware of the
+    actual filesystem, or path components such as "..".
+
+Caution
+
+dirname() is locale aware, so for it to see the correct directory name with
+multibyte character paths, the matching locale must be set using the 
+|setlocale| function.
+
+==============================================================================
+*Parameters*
+
+{path}
+
+    A path.
+
+    On Windows, both slash (/) and backslash (\) are used as directory
+    separator character. In other environments, it is the forward slash (/).
+
+{levels}
+
+    The number of parent directories to go up.
+
+    This must be an integer greater than 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns the path of a parent directory. If there are no slashes in {path}, a
+dot ('.') is returned, indicating the current directory. Otherwise, the
+returned string is {path} with any trailing /component removed.
+
+==============================================================================
+*Changelog*
+
+Version              Description
+7.0.0   Added the optional {levels} parameter.
+5.0.0   dirname() is now binary safe
+
+==============================================================================
+*Examples*
+
+Example #1 dirname() example
+
+<?php >
+echo dirname("/etc/passwd") . PHP_EOL;
+echo dirname("/etc/") . PHP_EOL;
+echo dirname(".") . PHP_EOL;
+echo dirname("C:\\") . PHP_EOL;
+echo dirname("/usr/local/lib", 2);
+
+The above example will output something similar to:
+
+/etc
+/ (or \ on Windows)
+.
+C:\
+/usr
+
+==============================================================================
+*See* *Also*
+
+  * |basename| - Returns trailing name component of path
+  * |pathinfo| - Returns information about a file path
+  * |realpath| - Returns canonicalized absolute pathname
+
+
+vim:ft=help:

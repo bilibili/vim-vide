@@ -1,0 +1,33 @@
+shm_remove
+
+(PHP 4, PHP 5, PHP 7)
+
+shm_remove — Removes shared memory from Unix systems
+
+==============================================================================
+*Description*
+
+    bool shm_remove ( resource $shm_identifier )~
+
+shm_remove() removes the shared memory {shm_identifier}. All data will be
+destroyed.
+
+==============================================================================
+*Parameters*
+
+{shm_identifier}
+
+    The shared memory identifier as returned by |shm_attach|
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |shm_remove_var| - Removes a variable from shared memory
+
+
+vim:ft=help:

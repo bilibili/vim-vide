@@ -1,0 +1,276 @@
+json_encode
+
+(PHP 5 >= 5.2.0, PECL json >= 1.2.0, PHP 7)
+
+json_encode — Returns the JSON representation of a value
+
+==============================================================================
+*Description*
+
+    string json_encode ( mixed $value [, int $options = 0 [, int $depth = 512~
+    ]] )~
+
+Returns a string containing the JSON representation of {value}.
+
+==============================================================================
+*Parameters*
+
+{value}
+
+    The {value} being encoded. Can be any type except a resource.
+
+    All string data must be UTF-8 encoded.
+
+        Note:
+
+        PHP implements a superset of JSON as specified in the original >> RFC
+        7159.
+
+{options}
+
+    Bitmask consisting of JSON_HEX_QUOT, JSON_HEX_TAG, JSON_HEX_AMP,
+    JSON_HEX_APOS, JSON_NUMERIC_CHECK, JSON_PRETTY_PRINT,
+    JSON_UNESCAPED_SLASHES, JSON_FORCE_OBJECT, JSON_PRESERVE_ZERO_FRACTION,
+    JSON_UNESCAPED_UNICODE, JSON_PARTIAL_OUTPUT_ON_ERROR. The behaviour of
+    these constants is described on the JSON constants page.
+
+{depth}
+
+    Set the maximum depth. Must be greater than zero.
+
+==============================================================================
+*Return* *Values*
+
+Returns a JSON encoded string on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+7.1.0   serialize_precision is used instead of precision when encoding double
+        values.
+5.6.6   JSON_PRESERVE_ZERO_FRACTION {option} was added.
+5.5.0   {depth} parameter was added.
+5.4.0   JSON_PRETTY_PRINT, JSON_UNESCAPED_SLASHES, and JSON_UNESCAPED_UNICODE
+        {options} were added.
+5.3.3   JSON_NUMERIC_CHECK {option} was added.
+5.3.0   The {options} parameter was added.
+
+==============================================================================
+*Examples*
+
+Example #1 A json_encode() example
+
+<?php >
+    $arr = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+
+    echo json_encode($arr);
+<?>
+
+The above example will output:
+
+{"a":1,"b":2,"c":3,"d":4,"e":5}
+
+Example #2 A json_encode() example showing some options in use
+
+<?php >
+    $a = array('<foo>',"'bar'",'"baz"','&blong&', "\xc3\xa9");
+
+    echo "Normal: ",  json_encode($a), "\n";
+    echo "Tags: ",    json_encode($a, JSON_HEX_TAG), "\n";
+    echo "Apos: ",    json_encode($a, JSON_HEX_APOS), "\n";
+    echo "Quot: ",    json_encode($a, JSON_HEX_QUOT), "\n";
+    echo "Amp: ",     json_encode($a, JSON_HEX_AMP), "\n";
+    echo "Unicode: ", json_encode($a, JSON_UNESCAPED_UNICODE), "\n";
+    echo "All: ",     json_encode($a, JSON_HEX_TAG | JSON_HEX_APOS | 
+    JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE), "\n\n";
+
+    $b = array();
+
+    echo "Empty array output as array: ", json_encode($b), "\n";
+    echo "Empty array output as object: ", json_encode($b, JSON_FORCE_OBJECT), "\n
+    \n";
+
+    $c = array(array(1,2,3));
+
+    echo "Non-associative array output as array: ", json_encode($c), "\n";
+    echo "Non-associative array output as object: ", json_encode($c, 
+    JSON_FORCE_OBJECT), "\n\n";
+
+    $d = array('foo' => 'bar', 'baz' => 'long');
+
+    echo "Associative array always output as object: ", json_encode($d), "\n";
+    echo "Associative array always output as object: ", json_encode($d, 
+    JSON_FORCE_OBJECT), "\n\n";
+<?>
+
+The above example will output:
+
+Normal: ["<foo>","'bar'","\"baz\"","&blong&","\u00e9"]
+Tags: ["\u003Cfoo\u003E","'bar'","\"baz\"","&blong&","\u00e9"]
+Apos: ["<foo>","\u0027bar\u0027","\"baz\"","&blong&","\u00e9"]
+Quot: ["<foo>","'bar'","\u0022baz\u0022","&blong&","\u00e9"]
+Amp: ["<foo>","'bar'","\"baz\"","\u0026blong\u0026","\u00e9"]
+Unicode: ["<foo>","'bar'","\"baz\"","&blong&","é"]
+All: ["\u003Cfoo\u003E","\u0027bar\u0027","\u0022baz\u0022","\u0026blong\u0026","é"]
+
+Empty array output as array: []
+Empty array output as object: {}
+
+Non-associative array output as array: [[1,2,3]]
+Non-associative array output as object: {"0":{"0":1,"1":2,"2":3}}
+
+Associative array always output as object: {"foo":"bar","baz":"long"}
+Associative array always output as object: {"foo":"bar","baz":"long"}
+
+Example #3 JSON_NUMERIC_CHECK option example
+
+<?php >
+    echo "Strings representing numbers automatically turned into numbers".PHP_EOL;
+    $numbers = array('+123123', '-123123', '1.2e3', '0.00001');
+    var_dump(
+     $numbers,
+     json_encode($numbers, JSON_NUMERIC_CHECK)
+    );
+    echo "Strings containing improperly formatted numbers".PHP_EOL;
+    $strings = array('+a33123456789', 'a123');
+    var_dump(
+     $strings,
+     json_encode($strings, JSON_NUMERIC_CHECK)
+    );
+<?>
+
+The above example will output something similar to:
+
+Strings representing numbers automatically turned into numbers
+array(4) {
+  [0]=>
+  string(7) "+123123"
+  [1]=>
+  string(7) "-123123"
+  [2]=>
+  string(5) "1.2e3"
+  [3]=>
+  string(7) "0.00001"
+}
+string(28) "[123123,-123123,1200,1.0e-5]"
+Strings containing improperly formatted numbers
+array(2) {
+  [0]=>
+  string(13) "+a33123456789"
+  [1]=>
+  string(4) "a123"
+}
+string(24) "["+a33123456789","a123"]"
+
+Example #4 Sequential versus non-sequential array example
+
+<?php >
+    echo "Sequential array".PHP_EOL;
+    $sequential = array("foo", "bar", "baz", "blong");
+    var_dump(
+     $sequential,
+     json_encode($sequential)
+    );
+
+    echo PHP_EOL."Non-sequential array".PHP_EOL;
+    $nonsequential = array(1=>"foo", 2=>"bar", 3=>"baz", 4=>"blong");
+    var_dump(
+     $nonsequential,
+     json_encode($nonsequential)
+    );
+
+    echo PHP_EOL."Sequential array with one key unset".PHP_EOL;
+    unset($sequential[1]);
+    var_dump(
+     $sequential,
+     json_encode($sequential)
+    );
+<?>
+
+The above example will output:
+
+Sequential array
+array(4) {
+  [0]=>
+  string(3) "foo"
+  [1]=>
+  string(3) "bar"
+  [2]=>
+  string(3) "baz"
+  [3]=>
+  string(5) "blong"
+}
+string(27) "["foo","bar","baz","blong"]"
+
+Non-sequential array
+array(4) {
+  [1]=>
+  string(3) "foo"
+  [2]=>
+  string(3) "bar"
+  [3]=>
+  string(3) "baz"
+  [4]=>
+  string(5) "blong"
+}
+string(43) "{"1":"foo","2":"bar","3":"baz","4":"blong"}"
+
+Sequential array with one key unset
+array(3) {
+  [0]=>
+  string(3) "foo"
+  [2]=>
+  string(3) "baz"
+  [3]=>
+  string(5) "blong"
+}
+string(33) "{"0":"foo","2":"baz","3":"blong"}"
+
+Example #5 JSON_PRESERVE_ZERO_FRACTION option example
+
+<?php >
+    var_dump(json_encode(12.0, JSON_PRESERVE_ZERO_FRACTION));
+    var_dump(json_encode(12.0));
+<?>
+
+The above example will output:
+
+string(4) "12.0"
+string(2) "12"
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    In the event of a failure to encode, |json_last_error| can be used to
+    determine the exact nature of the error.
+
+    Note:
+
+    When encoding an array, if the keys are not a continuous numeric sequence
+    starting from 0, all keys are encoded as strings, and specified explicitly
+    for each key-value pair.
+
+    Note:
+
+    Like the reference JSON encoder, json_encode() will generate JSON that is
+    a simple value (that is, neither an object nor an array) if given a string
+    , integer, float or boolean as an input {value}. While most decoders will
+    accept these values as valid JSON, some may not, as the specification is
+    ambiguous on this point.
+
+    To summarise, always test that your JSON decoder can handle the output you
+    generate from json_encode().
+
+==============================================================================
+*See* *Also*
+
+  * JsonSerializable
+  * |json_decode| - Decodes a JSON string
+  * |json_last_error| - Returns the last error occurred
+  * |serialize| - Generates a storable representation of a value
+
+
+vim:ft=help:

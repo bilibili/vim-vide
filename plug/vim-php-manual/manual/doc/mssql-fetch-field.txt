@@ -1,0 +1,107 @@
+mssql_fetch_field
+
+(PHP 4, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_fetch_field — Get field information
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * PDOStatement::getColumnMeta()
+  * |sqlsrv_field_metadata|
+  * The various odbc_field_* functions in the unified ODBC driver.
+
+==============================================================================
+*Description*
+
+    object mssql_fetch_field ( resource $result [, int $field_offset = -1 ] )~
+
+mssql_fetch_field() can be used in order to obtain information about fields in
+a certain query result.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mssql_query|.
+
+{field_offset}
+
+    The numerical field offset. If the field offset is not specified, the next
+    field that was not yet retrieved by this function is retrieved. The
+    {field_offset} starts at 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns an object containing field information.
+
+The properties of the object are:
+
+  * name - column name. if the column is a result of a function, this property
+    is set to computed#N, where #N is a serial number.
+  * column_source - the table from which the column was taken
+  * max_length - maximum length of the column
+  * numeric - 1 if the column is numeric
+  * type - the column type.
+
+==============================================================================
+*Examples*
+
+Example #1 mssql_fetch_field() example
+
+<?php >
+    // Connect to MSSQL and select the database
+    mssql_connect('MANGO\SQLEXPRESS', 'sa', 'phpfi');
+    mssql_select_db('php');
+
+    // Send a select query to MSSQL
+    $query = mssql_query('SELECT * FROM [php].[dbo].[persons]');
+
+    // Construct table
+    echo '<h3>Table structure for \'persons\'</h3>';
+    echo '<table border="1">';
+
+    // Table header
+    echo '<thead>';
+    echo '<tr>';
+    echo '<td>Field name</td>';
+    echo '<td>Data type</td>';
+    echo '<td>Max length</td>';
+    echo '</tr>';
+    echo '</thead>';
+
+    // Dump all fields
+    echo '<tbody>';
+
+    for ($i = 0; $i < mssql_num_fields($query); ++$i) {
+        // Fetch the field information
+        $field = mssql_fetch_field($query, $i);
+
+        // Print the row
+        echo '<tr>';
+        echo '<td>' . $field->name . '</td>';
+        echo '<td>' . strtoupper($field->type) . '</td>';
+        echo '<td>' . $field->max_length . '</td>';
+        echo '</tr>';
+    }
+
+    echo '</tbody>';
+    echo '</table>';
+
+    // Free the query result
+    mssql_free_result($query);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mssql_field_seek| - Seeks to the specified field offset
+
+
+vim:ft=help:

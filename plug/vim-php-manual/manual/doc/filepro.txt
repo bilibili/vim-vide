@@ -1,0 +1,34 @@
+filepro
+
+(PHP 4, PHP 5 <= 5.1.6, PHP 7)
+
+filepro — Read and verify the map file
+
+==============================================================================
+*Description*
+
+    bool filepro ( string $directory )~
+
+This reads and verifies the map file, storing the field count and info.
+
+No locking is done, so you should avoid modifying your filePro database while
+it may be opened in PHP.
+
+    Note: When safe mode is enabled, PHP checks whether the files or
+    directories being operated upon have the same UID (owner) as the script
+    that is being executed.
+
+==============================================================================
+*Parameters*
+
+{directory}
+
+    The map directory.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

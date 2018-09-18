@@ -1,0 +1,23 @@
+vpopmail_alias_get
+
+(PHP 4 >= 4.0.7, PECL vpopmail >= 0.2)
+
+vpopmail_alias_get — Get all lines of an alias for a domain
+
+==============================================================================
+*Description*
+
+    array vpopmail_alias_get ( string $alias , string $domain )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

@@ -1,0 +1,80 @@
+pg_escape_bytea
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+pg_escape_bytea — Escape a string for insertion into a bytea field
+
+==============================================================================
+*Description*
+
+    string pg_escape_bytea ([ resource $connection ], string $data )~
+
+pg_escape_bytea() escapes string for bytea datatype. It returns escaped
+string.
+
+    Note:
+
+    When you SELECT a bytea type, PostgreSQL returns octal byte values
+    prefixed with '\' (e.g. \032). Users are supposed to convert back to
+    binary format manually.
+
+    This function requires PostgreSQL 7.2 or later. With PostgreSQL 7.2.0 and
+    7.2.1, bytea values must be cast when you enable multi-byte support. i.e.
+    INSERT INTO test_table (image) VALUES ('$image_escaped'::bytea);
+    PostgreSQL 7.2.2 or later does not need a cast. The exception is when the
+    client and backend character encoding does not match, and there may be
+    multi-byte stream error. User must then cast to bytea to avoid this error.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource. When {connection} is not present,
+    the default connection is used. The default connection is the last
+    connection made by |pg_connect| or |pg_pconnect|.
+
+{data}
+
+    A string containing text or binary data to be inserted into a bytea
+    column.
+
+==============================================================================
+*Return* *Values*
+
+A string containing the escaped data.
+
+==============================================================================
+*Changelog*
+
+Version     Description
+5.2.0   {connection} added
+
+==============================================================================
+*Examples*
+
+Example #1 pg_escape_bytea() example
+
+<?php  >
+      // Connect to the database
+      $dbconn = pg_connect('dbname=foo');
+      
+      // Read in a binary file
+      $data = file_get_contents('image1.jpg');
+      
+      // Escape the binary data
+      $escaped = pg_escape_bytea($data);
+      
+      // Insert it into the database
+      pg_query("INSERT INTO gallery (name, data) VALUES ('Pine trees', '{$escaped}
+    ')");
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_unescape_bytea| - Unescape binary for bytea type
+  * |pg_escape_string| - Escape a string for query
+
+
+vim:ft=help:

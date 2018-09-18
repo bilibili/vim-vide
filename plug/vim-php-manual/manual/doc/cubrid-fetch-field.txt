@@ -1,0 +1,154 @@
+cubrid_fetch_field
+
+(PECL CUBRID >= 8.3.1)
+
+cubrid_fetch_field — Get column information from a result and return as an
+object
+
+==============================================================================
+*Description*
+
+    object cubrid_fetch_field ( resource $result [, int $field_offset = 0 ] )~
+
+This function returns an object with certain properties of the specific
+column. The properties of the object are:
+
+{name}
+
+    column name
+
+{table}
+
+    name of the table that the column belongs to
+
+{def}
+
+    default value of the column
+
+{max_length}
+
+    maximum length of the column
+
+{not_null}
+
+    1 if the column cannot be NULL
+
+{primary_key}
+
+    1 if the column is a primary key
+
+{unique_key}
+
+    1 if the column is an unique key
+
+{multiple_key}
+
+    1 if the column is a non-unique key
+
+{numeric}
+
+    1 if the column is numeric
+
+{blob}
+
+    1 if the column is a BLOB
+
+{type}
+
+    the type of the column
+
+{unsigned}
+
+    1 if the column is unsigned
+
+{zerofill}
+
+    1 if the column is zero-filled
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    {result} comes from a call to |cubrid_execute|
+
+{field_offset}
+
+    The numerical field offset. If the field offset is not specified, the next
+    field (that was not yet retrieved by this function) is retrieved. The
+    {field_offset} starts at 0.
+
+==============================================================================
+*Return* *Values*
+
+Object with certain properties of the specific column, when process is
+successful.
+
+FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_fetch_field() example
+
+<?php >
+    $conn = cubrid_connect("localhost", 33000, "demodb");
+    $req = cubrid_execute($conn, 
+    "SELECT event_code,athlete_code,nation_code,game_date FROM game WHERE host_year
+    =1988 and event_code=20001;");
+
+    var_dump(cubrid_fetch_row($req));
+
+    cubrid_field_seek($req, 1);
+    $field = cubrid_fetch_field($req);
+
+    printf("\n--- Field Properties ---\n");
+    printf("%-30s %s\n", "name:", $field->name);
+    printf("%-30s %s\n", "table:", $field->table);
+    printf("%-30s \"%s\"\n", "default value:", $field->def);
+    printf("%-30s %d\n", "max length:", $field->max_length);
+    printf("%-30s %d\n", "not null:", $field->not_null);
+    printf("%-30s %d\n", "primary key:", $field->primary_key);
+    printf("%-30s %d\n", "unique key:", $field->unique_key);
+    printf("%-30s %d\n", "multiple key:", $field->multiple_key);
+    printf("%-30s %d\n", "numeric:", $field->numeric);
+    printf("%-30s %d\n", "blob:", $field->blob);
+    printf("%-30s %s\n", "type:", $field->type);
+    printf("%-30s %d\n", "unsigned:", $field->unsigned);
+    printf("%-30s %d\n", "zerofill:", $field->zerofill);
+
+    cubrid_close_request($req);
+
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+array(4) {
+  [0]=>
+  string(5) "20001"
+  [1]=>
+  string(5) "16681"
+  [2]=>
+  string(3) "KOR"
+  [3]=>
+  string(9) "1988-9-30"
+}
+
+--- Field Properties ---
+name:                          athlete_code
+table:                         game
+default value:                 ""
+max length:                    0
+not null:                      1
+primary key:                   1
+unique key:                    1
+multiple key:                  0
+numeric:                       1
+blob:                          0
+type:                          integer
+unsigned:                      0
+zerofill:                      0
+
+
+vim:ft=help:

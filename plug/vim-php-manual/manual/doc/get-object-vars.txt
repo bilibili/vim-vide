@@ -1,0 +1,88 @@
+get_object_vars
+
+(PHP 4, PHP 5, PHP 7)
+
+get_object_vars — Gets the properties of the given object
+
+==============================================================================
+*Description*
+
+    array get_object_vars ( object $object )~
+
+Gets the accessible non-static properties of the given {object} according to
+scope.
+
+==============================================================================
+*Parameters*
+
+{object}
+
+    An object instance.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array of defined object accessible non-static
+properties for the specified {object} in scope. If a property has not been
+assigned a value, it will be returned with a NULL value.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   This function now returns NULL if the {object} isn't an object.
+        Previously FALSE was returned.
+
+==============================================================================
+*Examples*
+
+Example #1 Use of get_object_vars()
+
+<?php >
+
+    class foo {
+        private $a;
+        public $b = 1;
+        public $c;
+        private $d;
+        static $e;
+       
+        public function test() {
+            var_dump(get_object_vars($this));
+        }
+    }
+
+    $test = new foo;
+    var_dump(get_object_vars($test));
+
+    $test->test();
+
+<?>
+
+The above example will output:
+
+array(2) {
+  ["b"]=>
+  int(1)
+  ["c"]=>
+  NULL
+}
+array(4) {
+  ["a"]=>
+  NULL
+  ["b"]=>
+  int(1)
+  ["c"]=>
+  NULL
+  ["d"]=>
+  NULL
+}
+
+==============================================================================
+*See* *Also*
+
+  * |get_class_methods| - Gets the class methods' names
+  * |get_class_vars| - Get the default properties of the class
+
+
+vim:ft=help:

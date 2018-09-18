@@ -1,0 +1,72 @@
+method_exists
+
+(PHP 4, PHP 5, PHP 7)
+
+method_exists — Checks if the class method exists
+
+==============================================================================
+*Description*
+
+    bool method_exists ( mixed $object , string $method_name )~
+
+Checks if the class method exists in the given {object}.
+
+==============================================================================
+*Parameters*
+
+{object}
+
+    An object instance or a class name
+
+{method_name}
+
+    The method name
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the method given by {method_name} has been defined for the
+given {object}, FALSE otherwise.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Using this function will use any registered autoloaders if the class is
+    not already known.
+
+==============================================================================
+*Examples*
+
+Example #1 method_exists() example
+
+<?php >
+    $directory = new Directory('.');
+    var_dump(method_exists($directory,'read'));
+<?>
+
+The above example will output:
+
+bool(true)
+
+Example #2 Static method_exists() example
+
+<?php >
+    var_dump(method_exists('Directory','read'));
+<?>
+
+The above example will output:
+
+bool(true)
+
+==============================================================================
+*See* *Also*
+
+  * |function_exists| - Return TRUE if the given function has been defined
+  * |is_callable| - Verify that the contents of a variable can be called as a
+    function
+  * |class_exists| - Checks if the class has been defined
+
+
+vim:ft=help:

@@ -1,0 +1,66 @@
+gmp_hamdist
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_hamdist — Hamming distance
+
+==============================================================================
+*Description*
+
+    int gmp_hamdist ( GMP $a , GMP $b )~
+
+Returns the hamming distance between {a} and {b}. Both operands should be
+non-negative.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+    It should be positive.
+
+{b}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+    It should be positive.
+
+==============================================================================
+*Return* *Values*
+
+A GMP number resource in PHP 5.5 and earlier, or a GMP object in PHP 5.6 and
+later.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_hamdist() example
+
+<?php >
+    $ham1 = gmp_init("1001010011", 2);
+    $ham2 = gmp_init("1011111100", 2);
+    echo gmp_hamdist($ham1, $ham2) . "\n";
+
+    /* hamdist is equivalent to: */
+    echo gmp_popcount(gmp_xor($ham1, $ham2)) . "\n";
+<?>
+
+The above example will output:
+
+6
+6
+
+==============================================================================
+*See* *Also*
+
+  * |gmp_popcount| - Population count
+  * |gmp_xor| - Bitwise XOR
+
+
+vim:ft=help:

@@ -1,0 +1,37 @@
+fann_get_rprop_decrease_factor
+
+(PECL fann >= 1.0.0)
+
+fann_get_rprop_decrease_factor — Returns the increase factor used during RPROP
+training
+
+==============================================================================
+*Description*
+
+    float fann_get_rprop_decrease_factor ( resource $ann )~
+
+The decrease factor is a value smaller than 1, which is used to decrease the
+step-size during RPROP training.
+
+The default decrease factor is 0.5.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+The decrease factor, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_set_rprop_decrease_factor| - Sets the decrease factor used during
+    RPROP training
+
+
+vim:ft=help:

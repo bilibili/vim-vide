@@ -1,0 +1,28 @@
+hwapi_object_new
+
+(No version information available, might only be in Git)
+
+hwapi_object_new — Creates a new instance of class hwapi_object_new
+
+==============================================================================
+*Description*
+
+    hw_api_object hwapi_object_new ( array $parameter )~
+
+Creates a new instance of the class hw_api_object.
+
+==============================================================================
+*Parameters*
+
+{parameter}
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*See* *Also*
+
+  * hw_api::lock
+
+
+vim:ft=help:

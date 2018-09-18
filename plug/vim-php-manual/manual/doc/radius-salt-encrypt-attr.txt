@@ -1,0 +1,40 @@
+radius_salt_encrypt_attr
+
+(PECL radius >= 1.3.0)
+
+radius_salt_encrypt_attr — Salt-encrypts a value
+
+==============================================================================
+*Description*
+
+    string radius_salt_encrypt_attr ( resource $radius_handle , string $data~
+)~
+
+Applies the RADIUS salt-encryption algorithm to the given value.
+
+In general, this is achieved automatically by providing the RADIUS_OPTION_SALT
+option to an attribute setter function, but this function can be used if
+low-level request construction is required.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    The data to be salt-encrypted.
+
+==============================================================================
+*Return* *Values*
+
+Returns the salt-encrypted data or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |radius_put_addr| - Attaches an IP address attribute
+  * |radius_put_attr| - Attaches a binary attribute
+  * |radius_put_int| - Attaches an integer attribute
+  * |radius_put_string| - Attaches a string attribute
+
+
+vim:ft=help:

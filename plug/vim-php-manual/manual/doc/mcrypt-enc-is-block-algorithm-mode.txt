@@ -1,0 +1,35 @@
+mcrypt_enc_is_block_algorithm_mode
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+mcrypt_enc_is_block_algorithm_mode — Checks whether the encryption of the
+opened mode works on blocks
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    bool mcrypt_enc_is_block_algorithm_mode ( resource $td )~
+
+Tells whether the algorithm of the opened mode works on blocks (e.g. FALSE for
+stream, and TRUE for cbc, cfb, ofb)..
+
+==============================================================================
+*Parameters*
+
+{td}
+
+    The encryption descriptor.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the mode is for use with block algorithms, otherwise it
+returns FALSE.
+
+
+vim:ft=help:

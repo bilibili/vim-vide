@@ -1,0 +1,35 @@
+pcntl_wexitstatus
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+pcntl_wexitstatus — Returns the return code of a terminated child
+
+==============================================================================
+*Description*
+
+    int pcntl_wexitstatus ( int $status )~
+
+Returns the return code of a terminated child. This function is only useful if
+|pcntl_wifexited| returned TRUE.
+
+==============================================================================
+*Parameters*
+
+{status}
+
+    The {status} parameter is the status parameter supplied to a successful
+    call to |pcntl_waitpid|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the return code, as an integer.
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_waitpid| - Waits on or returns the status of a forked child
+  * |pcntl_wifexited| - Checks if status code represents a normal exit
+
+
+vim:ft=help:

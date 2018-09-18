@@ -1,0 +1,93 @@
+runkit_function_redefine
+
+(PECL runkit >= 0.7.0)
+
+runkit_function_redefine — Replace a function definition with a new
+implementation
+
+==============================================================================
+*Description*
+
+    bool runkit_function_redefine ( string $funcname , string $arglist ,~
+    string $code [, bool $return_by_reference = NULL [, string $doc_comment =~
+    NULL ]] )~
+    bool runkit_function_redefine ( string $funcname , Closure $closure [,~
+    string $doc_comment = NULL ] )~
+
+
+    Note: By default, only userspace functions may be removed, renamed, or
+    modified. In order to override internal functions, you must enable the
+    runkit.internal_override setting in php.ini.
+
+==============================================================================
+*Parameters*
+
+{funcname}
+
+    Name of function to redefine
+
+{arglist}
+
+    New list of arguments to be accepted by function
+
+{code}
+
+    New code implementation
+
+{closure}
+
+    A closure that defines the function.
+
+{return_by_reference}
+
+    Whether the function should return by reference.
+
+{doc_comment}
+
+    The doc comment of the function.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+ Version                               Description
+runkit     An alternative syntax expecting a {closure} has been added.
+1.0.4
+runkit     The optional parameters {return_by_reference} and {doc_comment}
+1.0.4      have been added.
+
+==============================================================================
+*Examples*
+
+Example #1 A runkit_function_redefine() example
+
+<?php >
+    function testme() {
+      echo "Original Testme Implementation\n";
+    }
+    testme();
+    runkit_function_redefine('testme','','echo "New Testme Implementation\n";');
+    testme();
+<?>
+
+The above example will output:
+
+Original Testme Implementation
+New Testme Implementation
+
+==============================================================================
+*See* *Also*
+
+  * |runkit_function_add| - Add a new function, similar to create_function
+  * |runkit_function_copy| - Copy a function to a new function name
+  * |runkit_function_rename| - Change a function's name
+  * |runkit_function_remove| - Remove a function definition
+  * |runkit_method_redefine| - Dynamically changes the code of the given
+    method
+
+
+vim:ft=help:

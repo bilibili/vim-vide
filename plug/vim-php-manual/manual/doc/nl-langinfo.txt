@@ -1,0 +1,113 @@
+nl_langinfo
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+nl_langinfo — Query language and locale information
+
+==============================================================================
+*Description*
+
+    string nl_langinfo ( int $item )~
+
+nl_langinfo() is used to access individual elements of the locale categories.
+Unlike |localeconv|, which returns all of the elements, nl_langinfo() allows
+you to select any specific element.
+
+==============================================================================
+*Parameters*
+
+{item}
+
+    {item} may be an integer value of the element or the constant name of the
+    element. The following is a list of constant names for {item} that may be
+    used and their description. Some of these constants may not be defined or
+    hold no value for certain locales.
+
+                            nl_langinfo Constants
+        Constant                            Description
+    LC_TIME Category Constants
+    ABDAY_(1-7)       Abbreviated name of n-th day of the week.
+    DAY_(1-7)         Name of the n-th day of the week (DAY_1 = Sunday).
+    ABMON_(1-12)      Abbreviated name of the n-th month of the year.
+    MON_(1-12)        Name of the n-th month of the year.
+    AM_STR            String for Ante meridian.
+    PM_STR            String for Post meridian.
+    D_T_FMT           String that can be used as the format string for 
+                      |strftime| to represent time and date.
+    D_FMT             String that can be used as the format string for 
+                      |strftime| to represent date.
+    T_FMT             String that can be used as the format string for 
+                      |strftime| to represent time.
+                      String that can be used as the format string for |
+    T_FMT_AMPM        strftime| to represent time in 12-hour format with ante/
+                      post meridian.
+    ERA               Alternate era.
+    ERA_YEAR          Year in alternate era format.
+    ERA_D_T_FMT       Date and time in alternate era format (string can be
+                      used in |strftime|).
+    ERA_D_FMT         Date in alternate era format (string can be used in 
+                      |strftime|).
+    ERA_T_FMT         Time in alternate era format (string can be used in 
+                      |strftime|).
+    LC_MONETARY Category Constants
+    INT_CURR_SYMBOL   International currency symbol.
+    CURRENCY_SYMBOL   Local currency symbol.
+    CRNCYSTR          Same value as CURRENCY_SYMBOL.
+    MON_DECIMAL_POINT Decimal point character.
+    MON_THOUSANDS_SEP Thousands separator (groups of three digits).
+    MON_GROUPING      Like "grouping" element.
+    POSITIVE_SIGN     Sign for positive values.
+    NEGATIVE_SIGN     Sign for negative values.
+    INT_FRAC_DIGITS   International fractional digits.
+    FRAC_DIGITS       Local fractional digits.
+    P_CS_PRECEDES     Returns 1 if CURRENCY_SYMBOL precedes a positive value.
+    P_SEP_BY_SPACE    Returns 1 if a space separates CURRENCY_SYMBOL from a
+                      positive value.
+    N_CS_PRECEDES     Returns 1 if CURRENCY_SYMBOL precedes a negative value.
+    N_SEP_BY_SPACE    Returns 1 if a space separates CURRENCY_SYMBOL from a
+                      negative value.
+                        * Returns 0 if parentheses surround the quantity and
+                          CURRENCY_SYMBOL.
+    P_SIGN_POSN         * Returns 1 if the sign string precedes the quantity
+                          and CURRENCY_SYMBOL.
+                        * Returns 2 if the sign string follows the quantity
+                          and CURRENCY_SYMBOL.
+                        * Returns 3 if the sign string immediately precedes
+                          the CURRENCY_SYMBOL.
+    N_SIGN_POSN         * Returns 4 if the sign string immediately follows the
+                          CURRENCY_SYMBOL.
+
+
+    LC_NUMERIC Category Constants
+    DECIMAL_POINT     Decimal point character.
+    RADIXCHAR         Same value as DECIMAL_POINT.
+    THOUSANDS_SEP     Separator character for thousands (groups of three
+                      digits).
+    THOUSEP           Same value as THOUSANDS_SEP.
+    GROUPING           
+    LC_MESSAGES Category Constants
+    YESEXPR           Regex string for matching "yes" input.
+    NOEXPR            Regex string for matching "no" input.
+    YESSTR            Output string for "yes".
+    NOSTR             Output string for "no".
+    LC_CTYPE Category Constants
+    CODESET           Return a string with the name of the character encoding.
+
+==============================================================================
+*Return* *Values*
+
+Returns the element as a string, or FALSE if {item} is not valid.
+
+==============================================================================
+*Notes*
+
+    Note: This function is not implemented on Windows platforms.
+
+==============================================================================
+*See* *Also*
+
+  * |setlocale| - Set locale information
+  * |localeconv| - Get numeric formatting information
+
+
+vim:ft=help:

@@ -1,0 +1,25 @@
+maxdb_send_query
+
+maxdb::send_query
+
+(PECL maxdb >= 1.0)
+
+maxdb_send_query -- maxdb::send_query — Send the query and return
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_send_query ( resource $link , string $query )~
+
+Object oriented style
+
+    bool maxdb::send_query ( string $query )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

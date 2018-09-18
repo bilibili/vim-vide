@@ -1,0 +1,281 @@
+db2_exec
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_exec — Executes an SQL statement directly
+
+==============================================================================
+*Description*
+
+    resource db2_exec ( resource $connection , string $statement [, array~
+    $options ] )~
+
+Executes an SQL statement directly.
+
+If you plan to interpolate PHP variables into the SQL statement, understand
+that this is one of the more common security exposures. Consider calling 
+|db2_prepare| to prepare an SQL statement with parameter markers for input
+values. Then you can call |db2_execute| to pass in the input values and avoid
+SQL injection attacks.
+
+If you plan to repeatedly issue the same SQL statement with different
+parameters, consider calling |db2_prepare| and |db2_execute| to enable the
+database server to reuse its access plan and increase the efficiency of your
+database access.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    A valid database connection resource variable as returned from 
+    |db2_connect| or |db2_pconnect|.
+
+{statement}
+
+    An SQL statement. The statement cannot contain any parameter markers.
+
+{options}
+
+    An associative array containing statement options. You can use this
+    parameter to request a scrollable cursor on database servers that support
+    this functionality.
+
+    For a description of valid statement options, see |db2_set_option|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a statement resource if the SQL statement was issued successfully, or
+FALSE if the database failed to execute the SQL statement.
+
+==============================================================================
+*Examples*
+
+Example #1 Creating a table with db2_exec()
+
+The following example uses db2_exec() to issue a set of DDL statements in the
+process of creating a table.
+
+<?php >
+    $conn = db2_connect($database, $user, $password);
+
+    // Create the test table
+    $create = 'CREATE TABLE animals (id INTEGER, breed VARCHAR(32),
+        name CHAR(16), weight DECIMAL(7,2))';
+    $result = db2_exec($conn, $create);
+    if ($result) {
+        print "Successfully created the table.\n";
+    }
+
+    // Populate the test table
+    $animals = array(
+        array(0, 'cat', 'Pook', 3.2),
+        array(1, 'dog', 'Peaches', 12.3),
+        array(2, 'horse', 'Smarty', 350.0),
+        array(3, 'gold fish', 'Bubbles', 0.1),
+        array(4, 'budgerigar', 'Gizmo', 0.2),
+        array(5, 'goat', 'Rickety Ride', 9.7),
+        array(6, 'llama', 'Sweater', 150)
+    );
+
+    foreach ($animals as $animal) {
+        $rc = db2_exec($conn, "INSERT INTO animals (id, breed, name, weight)
+          VALUES ({$animal[0]}, '{$animal[1]}', '{$animal[2]}', {$animal[3]})");
+        if ($rc) {
+            print "Insert... ";
+        }
+    }
+<?>
+
+The above example will output:
+
+Successfully created the table.
+Insert... Insert... Insert... Insert... Insert... Insert... Insert...
+
+Example #2 Executing a SELECT statement with a scrollable cursor
+
+The following example demonstrates how to request a scrollable cursor for an
+SQL statement issued by db2_exec().
+
+<?php >
+    $conn = db2_connect($database, $user, $password);
+    $sql = "SELECT name FROM animals
+        WHERE weight < 10.0
+        ORDER BY name";
+    if ($conn) {
+        require_once('prepare.inc');
+        $stmt = db2_exec($conn, $sql, array('cursor' => DB2_SCROLLABLE));
+        while ($row = db2_fetch_array($stmt)) {
+            print "$row[0]\n";
+        }
+    } 
+<?>
+
+The above example will output:
+
+Bubbles
+Gizmo
+Pook
+Rickety Ride
+
+Example #3 Returning XML data as an SQL ResultSet
+
+The following example demonstrates how to work with documents stored in a XML
+column using the SAMPLE database. Using some pretty simple SQL/XML, this
+example returns some of the nodes in a XML document in an SQL ResultSet format
+that most users are familiar with.
+
+<?php >
+
+    $conn = db2_connect("SAMPLE", "db2inst1", "ibmdb2");
+
+    $query = 'SELECT * FROM XMLTABLE(
+        XMLNAMESPACES (DEFAULT \'http://posample.org\'),
+        \'db2-fn:xmlcolumn("CUSTOMER.INFO")/customerinfo\'
+        COLUMNS
+        "CID" VARCHAR (50) PATH \'@Cid\',
+        "NAME" VARCHAR (50) PATH \'name\',
+        "PHONE" VARCHAR (50) PATH \'phone [ @type = "work"]\'
+        ) AS T
+        WHERE NAME = \'Kathy Smith\'
+        ';
+    $stmt = db2_exec($conn, $query);
+
+    while($row = db2_fetch_object($stmt)){
+        printf("$row->CID     $row->NAME     $row->PHONE\n");
+    }
+    db2_close($conn);
+
+<?>
+
+The above example will output:
+
+1000     Kathy Smith     416-555-1358
+1001     Kathy Smith     905-555-7258
+
+Example #4 Performing a "JOIN" with XML data
+
+The following example works with documents stored in 2 different XML columns
+in the SAMPLE database. It creates 2 temporary tables from the XML documents
+from 2 different columns and returns an SQL ResultSet with information
+regarding shipping status for the customer.
+
+<?php >
+
+    $conn = db2_connect("SAMPLE", "db2inst1", "ibmdb2");
+
+    $query = '
+        SELECT A.CID, A.NAME, A.PHONE, C.PONUM, C.STATUS
+        FROM
+        XMLTABLE(
+        XMLNAMESPACES (DEFAULT \'http://posample.org\'),
+        \'db2-fn:xmlcolumn("CUSTOMER.INFO")/customerinfo\'
+        COLUMNS
+        "CID" BIGINT PATH \'@Cid\',
+        "NAME" VARCHAR (50) PATH \'name\',
+        "PHONE" VARCHAR (50) PATH \'phone [ @type = "work"]\'
+        ) as A,
+        PURCHASEORDER AS B,
+        XMLTABLE (
+        XMLNAMESPACES (DEFAULT \'http://posample.org\'),
+        \'db2-fn:xmlcolumn("PURCHASEORDER.PORDER")/PurchaseOrder\'
+        COLUMNS
+        "PONUM"  BIGINT PATH \'@PoNum\',
+        "STATUS" VARCHAR (50) PATH \'@Status\'
+        ) as C
+        WHERE A.CID = B.CUSTID AND
+        B.POID = C.PONUM AND
+        A.NAME = \'Kathy Smith\'
+    ';
+
+    $stmt = db2_exec($conn, $query);
+
+    while($row = db2_fetch_object($stmt)){
+        printf("$row->CID     $row->NAME     $row->PHONE     $row->PONUM     $row
+    ->STATUS\n");
+    }
+
+    db2_close($conn);
+
+<?>
+
+The above example will output:
+
+1001     Kathy Smith     905-555-7258     5002     Shipped
+
+Example #5 Returning SQL data as part of a larger XML document
+
+The following example works with a portion of the PRODUCT.DESCRIPTION
+documents in the SAMPLE database. It creates a XML document containing product
+description (XML data) and pricing info (SQL data).
+
+<?php >
+
+    $conn = db2_connect("SAMPLE", "db2inst1", "ibmdb2");
+
+    $query = '
+    SELECT
+    XMLSERIALIZE(
+    XMLQUERY(\'
+        declare boundary-space strip;
+        declare default element namespace "http://posample.org";
+        <promoList> {
+        for $prod in $doc/product
+        where $prod/description/price < 10.00
+        order by $prod/description/price ascending
+        return(
+            <promoitem> {
+            $prod,
+            <startdate> {$start} </startdate>,
+            <enddate> {$end} </enddate>,
+            <promoprice> {$promo} </promoprice>
+            } </promoitem>
+        )
+        } </promoList>
+    \' passing by ref DESCRIPTION AS "doc",
+    PROMOSTART as "start",
+    PROMOEND as "end",
+    PROMOPRICE as "promo"
+    RETURNING SEQUENCE)
+    AS CLOB (32000))
+    AS NEW_PRODUCT_INFO
+    FROM PRODUCT
+    WHERE PID = \'100-100-01\'
+    ';
+
+    $stmt = db2_exec($conn, $query);
+
+    while($row = db2_fetch_array($stmt)){
+        printf("$row[0]\n");
+    }
+    db2_close($conn);
+
+<?>
+
+The above example will output:
+
+<promoList xmlns="http://posample.org">
+    <promoitem>
+    <product pid="100-100-01">
+        <description>
+            <name>Snow Shovel, Basic 22 inch</name>
+            <details>Basic Snow Shovel, 22 inches wide, straight handle with D-Grip</details>
+            <price>9.99</price>
+            <weight>1 kg</weight>
+        </description>
+    </product>
+    <startdate>2004-11-19</startdate>
+    <enddate>2004-12-19</enddate>
+    <promoprice>7.25</promoprice>
+    </promoitem>
+</promoList>
+
+==============================================================================
+*See* *Also*
+
+  * |db2_execute| - Executes a prepared SQL statement
+  * |db2_prepare| - Prepares an SQL statement to be executed
+
+
+vim:ft=help:

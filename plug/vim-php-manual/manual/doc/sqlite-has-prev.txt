@@ -1,0 +1,47 @@
+sqlite_has_prev
+
+SQLiteResult::hasPrev
+
+(PHP 5 < 5.4.0)
+
+sqlite_has_prev -- SQLiteResult::hasPrev — Returns whether or not a previous
+row is available
+
+==============================================================================
+*Description*
+
+    bool sqlite_has_prev ( resource $result )~
+
+Object oriented style (method):
+
+    bool SQLiteResult::hasPrev ( void )~
+
+Find whether there are more previous rows from the given result handle.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The SQLite result resource. This parameter is not required when using the
+    object-oriented method.
+
+        Note:
+
+        This function cannot be used with unbuffered result handles.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if there are more previous rows available from the {result}
+handle, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_prev| - Seek to the previous row number of a result set
+  * |sqlite_has_more| - Finds whether or not more rows are available
+  * |sqlite_num_rows| - Returns the number of rows in a buffered result set
+
+
+vim:ft=help:

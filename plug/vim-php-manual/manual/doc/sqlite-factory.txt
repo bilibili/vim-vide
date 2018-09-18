@@ -1,0 +1,67 @@
+sqlite_factory
+
+(PHP 5 < 5.4.0)
+
+sqlite_factory — Opens an SQLite database and returns an SQLiteDatabase object
+
+==============================================================================
+*Description*
+
+    SQLiteDatabase sqlite_factory ( string $filename [, int $mode = 0666 [,~
+    string &$error_message ]] )~
+
+sqlite_factory() behaves similarly to |sqlite_open| in that it opens an SQLite
+database or attempts to create it if it does not exist. However, a
+SQLiteDatabase object is returned rather than a resource. Please see the 
+|sqlite_open| reference page for further usage and caveats.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The filename of the SQLite database.
+
+{mode}
+
+    The mode of the file. Intended to be used to open the database in
+    read-only mode. Presently, this parameter is ignored by the sqlite
+    library. The default value for mode is the octal value 0666 and this is
+    the recommended value.
+
+{error_message}
+
+    Passed by reference and is set to hold a descriptive error message
+    explaining why the database could not be opened if there was an error.
+
+==============================================================================
+*Return* *Values*
+
+Returns an SQLiteDatabase object on success, NULL on error.
+
+==============================================================================
+*Examples*
+
+Example #1 sqlite_factory() example
+
+<?php >
+    $dbhandle = sqlite_factory('sqlitedb');
+    $dbhandle->query('SELECT user_id, username FROM users');
+
+    /* functionally equivalent to: */
+
+    $dbhandle = new SQLiteDatabase('sqlitedb');
+    $dbhandle->query('SELECT user_id, username FROM users');
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_open| - Opens an SQLite database and create the database if it
+    does not exist
+  * |sqlite_popen| - Opens a persistent handle to an SQLite database and
+    create the database if it does not exist
+
+
+vim:ft=help:

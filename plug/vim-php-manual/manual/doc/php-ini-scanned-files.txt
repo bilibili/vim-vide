@@ -1,0 +1,56 @@
+php_ini_scanned_files
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+php_ini_scanned_files — Return a list of .ini files parsed from the additional
+ini dir
+
+==============================================================================
+*Description*
+
+    string php_ini_scanned_files ( void )~
+
+php_ini_scanned_files() returns a comma-separated list of configuration files
+parsed after php.ini. The directories searched are set by a compile time
+option and, optionally, by an environment variable at run time: more
+information can be found in the installation guide.
+
+The returned configuration files include the full path.
+
+==============================================================================
+*Return* *Values*
+
+Returns a comma-separated string of .ini files on success. Each comma is
+followed by a newline. If the configure directive --with-config-file-scan-dir
+wasn't set and the PHP_INI_SCAN_DIR environment variable isn't set, FALSE is
+returned. If it was set and the directory was empty, an empty string is
+returned. If a file is unrecognizable, the file will still make it into the
+returned string but a PHP error will also result. This PHP error will be seen
+both at compile time and while using php_ini_scanned_files().
+
+==============================================================================
+*Examples*
+
+Example #1 A simple example to list the returned ini files
+
+<?php >
+    if ($filelist = php_ini_scanned_files()) {
+        if (strlen($filelist) > 0) {
+            $files = explode(',', $filelist);
+
+            foreach ($files as $file) {
+                echo "<li>" . trim($file) . "</li>\n";
+            }
+        }
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ini_set| - Sets the value of a configuration option
+  * |phpinfo| - Outputs information about PHP's configuration
+  * |php_ini_loaded_file| - Retrieve a path to the loaded php.ini file
+
+
+vim:ft=help:

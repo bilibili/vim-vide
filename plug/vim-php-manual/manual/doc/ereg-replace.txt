@@ -1,0 +1,105 @@
+ereg_replace
+
+(PHP 4, PHP 5)
+
+ereg_replace — Replace regular expression
+
+Warning
+
+This function was DEPRECATED in PHP 5.3.0, and REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * |preg_replace|
+
+==============================================================================
+*Description*
+
+    string ereg_replace ( string $pattern , string $replacement , string~
+    $string )~
+
+This function scans {string} for matches to {pattern}, then replaces the
+matched text with {replacement}.
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    A POSIX extended regular expression.
+
+{replacement}
+
+    If {pattern} contains parenthesized substrings, {replacement} may contain
+    substrings of the form \digit, which will be replaced by the text matching
+    the digit'th parenthesized substring; \0 will produce the entire contents
+    of string. Up to nine substrings may be used. Parentheses may be nested,
+    in which case they are counted by the opening parenthesis.
+
+{string}
+
+    The input string.
+
+==============================================================================
+*Return* *Values*
+
+The modified string is returned. If no matches are found in {string}, then it
+will be returned unchanged.
+
+==============================================================================
+*Examples*
+
+For example, the following code snippet prints "This was a test" three times:
+
+Example #1 ereg_replace() example
+
+<?php >
+
+    $string = "This is a test";
+    echo str_replace(" is", " was", $string);
+    echo ereg_replace("( )is", "\\1was", $string);
+    echo ereg_replace("(( )is)", "\\2was", $string);
+
+<?>
+
+One thing to take note of is that if you use an integer value as the
+{replacement} parameter, you may not get the results you expect. This is
+because ereg_replace() will interpret the number as the ordinal value of a
+character, and apply that. For instance:
+
+Example #2 ereg_replace() example
+
+<?php >
+    /* This will not work as expected. */
+    $num = 4;
+    $string = "This string has four words.";
+    $string = ereg_replace('four', $num, $string);
+    echo $string;   /* Output: 'This string has   words.' */
+
+    /* This will work. */
+    $num = '4';
+    $string = "This string has four words.";
+    $string = ereg_replace('four', $num, $string);
+    echo $string;   /* Output: 'This string has 4 words.' */
+<?>
+
+Example #3 Replace URLs with links
+
+<?php >
+    $text = ereg_replace("[[:alpha:]]+://[^<>[:space:]]+[[:alnum:]/]",
+                         '<a href="\\0">\\0</a>', $text);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ereg| - Regular expression match
+  * |eregi| - Case insensitive regular expression match
+  * |eregi_replace| - Replace regular expression case insensitive
+  * |str_replace| - Replace all occurrences of the search string with the
+    replacement string
+  * |preg_replace| - Perform a regular expression search and replace
+  * |quotemeta| - Quote meta characters
+
+
+vim:ft=help:

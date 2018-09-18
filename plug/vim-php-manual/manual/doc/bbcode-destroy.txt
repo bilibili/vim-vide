@@ -1,0 +1,27 @@
+bbcode_destroy
+
+(PECL bbcode >= 0.9.0)
+
+bbcode_destroy — Close BBCode_container resource
+
+==============================================================================
+*Description*
+
+    bool bbcode_destroy ( resource $bbcode_container )~
+
+This function closes the resource opened by |bbcode_create|.
+
+==============================================================================
+*Parameters*
+
+{bbcode_container}
+
+    BBCode_Container resource returned by |bbcode_create|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

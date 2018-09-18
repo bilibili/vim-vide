@@ -1,0 +1,45 @@
+pcntl_setpriority
+
+(PHP 5, PHP 7)
+
+pcntl_setpriority — Change the priority of any process
+
+==============================================================================
+*Description*
+
+    bool pcntl_setpriority ( int $priority [, int $pid = getmypid() [, int~
+    $process_identifier = PRIO_PROCESS ]] )~
+
+pcntl_setpriority() sets the priority of {pid}.
+
+==============================================================================
+*Parameters*
+
+{priority}
+
+    {priority} is generally a value in the range -20 to 20. The default
+    priority is 0 while a lower numerical value causes more favorable
+    scheduling. Because priority levels can differ between system types and
+    kernel versions, please see your system's setpriority(2) man page for
+    specific details.
+
+{pid}
+
+    If not specified, the pid of the current process is used.
+
+{process_identifier}
+
+    One of PRIO_PGRP, PRIO_USER or PRIO_PROCESS.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_getpriority| - Get the priority of any process
+
+
+vim:ft=help:

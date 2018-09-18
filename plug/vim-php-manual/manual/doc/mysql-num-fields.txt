@@ -1,0 +1,72 @@
+mysql_num_fields
+
+(PHP 4, PHP 5)
+
+mysql_num_fields — Get number of fields in result
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_num_fields()
+  * PDOStatement::columnCount()
+
+==============================================================================
+*Description*
+
+    int mysql_num_fields ( resource $result )~
+
+Retrieves the number of fields from a query.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mysql_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of fields in the result set resource on success or FALSE on
+failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A mysql_num_fields() example
+
+<?php >
+    $result = mysql_query("SELECT id,email FROM people WHERE id = '42'");
+    if (!$result) {
+        echo 'Could not run query: ' . mysql_error();
+        exit;
+    }
+
+    /* returns 2 because id,email === two fields */
+    echo mysql_num_fields($result);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    For backward compatibility, the following deprecated alias may be used: 
+    mysql_numfields()
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_select_db| - Select a MySQL database
+  * |mysql_query| - Send a MySQL query
+  * |mysql_fetch_field| - Get column information from a result and return as
+    an object
+  * |mysql_num_rows| - Get number of rows in result
+
+
+vim:ft=help:

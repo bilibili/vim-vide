@@ -1,0 +1,40 @@
+ftok
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+ftok — Convert a pathname and a project identifier to a System V IPC key
+
+==============================================================================
+*Description*
+
+    int ftok ( string $pathname , string $proj )~
+
+The function converts the {pathname} of an existing accessible file and a
+project identifier into an integer for use with for example |shmop_open| and
+other System V IPC keys.
+
+==============================================================================
+*Parameters*
+
+{pathname}
+
+    Path to an accessible file.
+
+{proj}
+
+    Project identifier. This must be a one character string.
+
+==============================================================================
+*Return* *Values*
+
+On success the return value will be the created key value, otherwise -1 is
+returned.
+
+==============================================================================
+*See* *Also*
+
+  * |shmop_open| - Create or open shared memory block
+  * |sem_get| - Get a semaphore id
+
+
+vim:ft=help:

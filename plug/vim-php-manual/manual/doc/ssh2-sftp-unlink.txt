@@ -1,0 +1,47 @@
+ssh2_sftp_unlink
+
+(PECL ssh2 >= 0.9.0)
+
+ssh2_sftp_unlink — Delete a file
+
+==============================================================================
+*Description*
+
+    bool ssh2_sftp_unlink ( resource $sftp , string $filename )~
+
+Deletes a file on the remote filesystem.
+
+==============================================================================
+*Parameters*
+
+{sftp}
+
+    An SSH2 SFTP resource opened by |ssh2_sftp|.
+
+{filename}
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Deleting a file
+
+<?php >
+    $connection = ssh2_connect('shell.example.com', 22);
+    ssh2_auth_password($connection, 'username', 'password');
+    $sftp = ssh2_sftp($connection);
+
+    ssh2_sftp_unlink($sftp, '/home/username/stale_file');
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |unlink| - Deletes a file
+
+
+vim:ft=help:

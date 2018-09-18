@@ -1,0 +1,56 @@
+sqlsrv_close
+
+(No version information available, might only be in Git)
+
+sqlsrv_close — Closes an open connection and releases resourses associated
+with the connection
+
+==============================================================================
+*Description*
+
+    bool sqlsrv_close ( resource $conn )~
+
+Closes an open connection and releases resourses associated with the
+connection.
+
+==============================================================================
+*Parameters*
+
+{conn}
+
+    The connection to be closed.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 sqlsrv_close() example
+
+<?php >
+    $serverName = "serverName\sqlexpres";
+    $connOptions = array("UID"=>"username", "PWD"=>"password", "Database"=>
+    "dbname");
+    $conn = sqlsrv_connect( $serverName, $connOptions );
+    if( $conn === false ) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    //-------------------------------------
+    // Perform database operations here.
+    //-------------------------------------
+
+    // Close the connection.
+    sqlsrv_close( $conn );
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |sqlsrv_connect| - Opens a connection to a Microsoft SQL Server database
+
+
+vim:ft=help:

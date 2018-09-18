@@ -1,0 +1,32 @@
+msql_field_len
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_field_len — Get field length
+
+==============================================================================
+*Description*
+
+    int msql_field_len ( resource $result , int $field_offset )~
+
+msql_field_len() returns the length of the specified field.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |msql_query|.
+
+{ field_offset}
+
+    The numerical field offset. The {field_offset} starts at 1.
+
+==============================================================================
+*Return* *Values*
+
+Returns the length of the specified field or FALSE on error.
+
+
+vim:ft=help:

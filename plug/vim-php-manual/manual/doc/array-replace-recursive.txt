@@ -1,0 +1,140 @@
+array_replace_recursive
+
+(PHP 5 >= 5.3.0, PHP 7)
+
+array_replace_recursive — Replaces elements from passed arrays into the first
+array recursively
+
+==============================================================================
+*Description*
+
+    array array_replace_recursive ( array $array1 , array $array2 [, array~
+    $... ] )~
+
+array_replace_recursive() replaces the values of {array1} with the same values
+from all the following arrays. If a key from the first array exists in the
+second array, its value will be replaced by the value from the second array.
+If the key exists in the second array, and not the first, it will be created
+in the first array. If a key only exists in the first array, it will be left
+as is. If several arrays are passed for replacement, they will be processed in
+order, the later array overwriting the previous values.
+
+array_replace_recursive() is recursive : it will recurse into arrays and apply
+the same process to the inner value.
+
+When the value in {array1} is scalar, it will be replaced by the value in
+{array2}, may it be scalar or array. When the value in {array1} and {array2}
+are both arrays, array_replace_recursive() will replace their respective value
+recursively.
+
+==============================================================================
+*Parameters*
+
+{array1}
+
+    The array in which elements are replaced.
+
+{array2}
+
+    The array from which elements will be extracted.
+
+{...}
+
+    Optional. More arrays from which elements will be extracted.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array, or NULL if an error occurs.
+
+==============================================================================
+*Examples*
+
+Example #1 array_replace_recursive() example
+
+<?php >
+    $base = array('citrus' => array( "orange") , 'berries' => array("blackberry", 
+    "raspberry"), );
+    $replacements = array('citrus' => array('pineapple'), 'berries' => array(
+    'blueberry'));
+
+    $basket = array_replace_recursive($base, $replacements);
+    print_r($basket);
+
+    $basket = array_replace($base, $replacements);
+    print_r($basket);
+<?>
+
+The above example will output:
+
+Array
+(
+    [citrus] => Array
+        (
+            [0] => pineapple
+        )
+
+    [berries] => Array
+        (
+            [0] => blueberry
+            [1] => raspberry
+        )
+
+)
+Array
+(
+    [citrus] => Array
+        (
+            [0] => pineapple
+        )
+
+    [berries] => Array
+        (
+            [0] => blueberry
+        )
+
+)
+
+
+Example #2 array_replace_recursive() and recursive behavior
+
+<?php >
+    $base = array('citrus' => array("orange") , 'berries' => array("blackberry", 
+    "raspberry"), 'others' => 'banana' );
+    $replacements = array('citrus' => 'pineapple', 'berries' => array('blueberry'
+    ), 'others' => array('litchis'));
+    $replacements2 = array('citrus' => array('pineapple'), 'berries' => array(
+    'blueberry'), 'others' => 'litchis');
+
+    $basket = array_replace_recursive($base, $replacements, $replacements2);
+    print_r($basket);
+
+<?>
+
+The above example will output:
+
+Array
+(
+    [citrus] => Array
+        (
+            [0] => pineapple
+        )
+
+    [berries] => Array
+        (
+            [0] => blueberry
+            [1] => raspberry
+        )
+
+    [others] => litchis
+)
+
+==============================================================================
+*See* *Also*
+
+  * |array_replace| - Replaces elements from passed arrays into the first
+    array
+  * |array_merge_recursive| - Merge two or more arrays recursively
+
+
+vim:ft=help:

@@ -1,0 +1,169 @@
+call_user_func
+
+(PHP 4, PHP 5, PHP 7)
+
+call_user_func — Call the callback given by the first parameter
+
+==============================================================================
+*Description*
+
+    mixed call_user_func ( callable $callback [, mixed $parameter [, mixed~
+    $... ]] )~
+
+Calls the {callback} given by the first parameter and passes the remaining
+parameters as arguments.
+
+==============================================================================
+*Parameters*
+
+{callback}
+
+    The callable to be called.
+
+{parameter}
+
+    Zero or more parameters to be passed to the callback.
+
+        Note:
+
+        Note that the parameters for call_user_func() are not passed by
+        reference.
+       
+        Example #1 call_user_func() example and references
+
+        <?php >
+        error_reporting(E_ALL);
+        function increment(&$var)
+        {
+            $var++;
+        }
+
+        $a = 0;
+        call_user_func('increment', $a);
+        echo $a."\n";
+
+        // You can use this instead
+        call_user_func_array('increment', array(&$a));
+        echo $a."\n";
+<        ?>
+
+        The above example will output:
+
+        0
+        1
+
+==============================================================================
+*Return* *Values*
+
+Returns the return value of the callback.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        The interpretation of object oriented keywords like parent and self
+5.3.0   has changed. Previously, calling them using the double colon syntax
+        would emit an E_STRICT warning because they were interpreted as
+        static.
+
+==============================================================================
+*Examples*
+
+Example #2 call_user_func() example
+
+<?php >
+    function barber($type)
+    {
+        echo "You wanted a $type haircut, no problem\n";
+    }
+    call_user_func('barber', "mushroom");
+    call_user_func('barber', "shave");
+<?>
+
+The above example will output:
+
+You wanted a mushroom haircut, no problem
+You wanted a shave haircut, no problem
+
+Example #3 call_user_func() using namespace name
+
+<?php >
+
+    namespace Foobar;
+
+    class Foo {
+        static public function test() {
+            print "Hello world!\n";
+        }
+    }
+
+    call_user_func(__NAMESPACE__ .'\Foo::test'); // As of PHP 5.3.0
+    call_user_func(array(__NAMESPACE__ .'\Foo', 'test')); // As of PHP 5.3.0
+
+<?>
+
+The above example will output:
+
+Hello world!
+Hello world!
+
+Example #4 Using a class method with call_user_func()
+
+<?php >
+
+    class myclass {
+        static function say_hello()
+        {
+            echo "Hello!\n";
+        }
+    }
+
+    $classname = "myclass";
+
+    call_user_func(array($classname, 'say_hello'));
+    call_user_func($classname .'::say_hello'); // As of 5.2.3
+
+    $myobject = new myclass();
+
+    call_user_func(array($myobject, 'say_hello'));
+
+<?>
+
+The above example will output:
+
+Hello!
+Hello!
+Hello!
+
+Example #5 Using lambda function with call_user_func()
+
+<?php >
+    call_user_func(function($arg) { print "[$arg]\n"; }, 'test'); /
+    * As of PHP 5.3.0 */
+<?>
+
+The above example will output:
+
+[test]
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Callbacks registered with functions such as call_user_func() and 
+    |call_user_func_array| will not be called if there is an uncaught exception
+    thrown in a previous callback.
+
+==============================================================================
+*See* *Also*
+
+  * |call_user_func_array| - Call a callback with an array of parameters
+  * |is_callable| - Verify that the contents of a variable can be called as a
+    function
+  * information about the callback type
+  * ReflectionFunction::invoke() - Invokes function
+  * ReflectionMethod::invoke() - Invoke
+
+
+vim:ft=help:

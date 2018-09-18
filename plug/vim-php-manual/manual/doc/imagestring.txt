@@ -1,0 +1,84 @@
+imagestring
+
+(PHP 4, PHP 5, PHP 7)
+
+imagestring — Draw a string horizontally
+
+==============================================================================
+*Description*
+
+    bool imagestring ( resource $image , int $font , int $x , int $y , string~
+    $string , int $color )~
+
+Draws a {string} at the given coordinates.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{ font}
+
+    Can be 1, 2, 3, 4, 5 for built-in fonts in latin2 encoding (where higher
+    numbers corresponding to larger fonts) or any of your own font identifiers
+    registered with |imageloadfont|.
+
+{x}
+
+    x-coordinate of the upper left corner.
+
+{y}
+
+    y-coordinate of the upper left corner.
+
+{string}
+
+    The string to be written.
+
+{color}
+
+    A color identifier created with |imagecolorallocate|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imagestring() example
+
+<?php >
+    // Create a 100*30 image
+    $im = imagecreate(100, 30);
+
+    // White background and blue text
+    $bg = imagecolorallocate($im, 255, 255, 255);
+    $textcolor = imagecolorallocate($im, 0, 0, 255);
+
+    // Write the string at the top left
+    imagestring($im, 5, 0, 0, 'Hello world!', $textcolor);
+
+    // Output the image
+    header('Content-type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagestring()
+
+==============================================================================
+*See* *Also*
+
+  * |imageloadfont| - Load a new font
+  * |imagettftext| - Write text to the image using TrueType fonts
+
+
+vim:ft=help:

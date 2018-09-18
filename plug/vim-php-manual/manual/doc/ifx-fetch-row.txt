@@ -1,0 +1,75 @@
+ifx_fetch_row
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_fetch_row — Get row as an associative array
+
+==============================================================================
+*Description*
+
+    array ifx_fetch_row ( resource $result_id [, mixed $position ] )~
+
+Fetches one row of data from the result associated with the specified result
+identifier.
+
+Subsequent calls to ifx_fetch_row() would return the next row in the result
+set, or FALSE if there are no more rows.
+
+==============================================================================
+*Parameters*
+
+{result_id}
+
+    {result_id} is a valid resultid returned by |ifx_query| or |ifx_prepare|
+    (select type queries only!).
+
+{position}
+
+    An optional parameter for a "fetch" operation on "scroll" cursors: NEXT,
+    PREVIOUS, CURRENT, FIRST, LAST or a number. If you specify a number, an
+    "absolute" row fetch is executed. This parameter is optional, and only
+    valid for SCROLL cursors.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array that corresponds to the fetched row, or FALSE if
+there are no more rows.
+
+Blob columns are returned as integer blob id values for use in |ifx_get_blob|
+unless you have used ifx_textasvarchar(1) or ifx_byteasvarchar(1), in which
+case blobs are returned as string values.
+
+==============================================================================
+*Examples*
+
+Example #1 Informix fetch rows
+
+<?php >
+    $rid = ifx_prepare ("select * from emp where name like " . $name,
+                         $connid, IFX_SCROLL);
+    if (! $rid) {
+        /* ... error ... */
+    }
+    $rowcount = ifx_affected_rows($rid);
+    if ($rowcount > 1000) {
+        printf ("Too many rows in result set (%d)\n<br />", $rowcount);
+        die ("Please restrict your query<br />\n");
+    }
+    if (! ifx_do ($rid)) {
+       /* ... error ... */
+    }
+    $row = ifx_fetch_row ($rid, "NEXT");
+    while (is_array($row)) {
+        for (reset($row); $fieldname=key($row); next($row)) {
+            $fieldvalue = $row[$fieldname];
+            printf ("%s = %s,", $fieldname, $fieldvalue);
+        }
+        printf("\n<br />");
+        $row = ifx_fetch_row($rid, "NEXT");
+    }
+    ifx_free_result ($rid);
+<?>
+
+
+vim:ft=help:

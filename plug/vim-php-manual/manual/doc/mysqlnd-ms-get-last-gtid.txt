@@ -1,0 +1,83 @@
+mysqlnd_ms_get_last_gtid
+
+(PECL mysqlnd_ms >= 1.2.0)
+
+mysqlnd_ms_get_last_gtid — Returns the latest global transaction ID
+
+==============================================================================
+*Description*
+
+    string mysqlnd_ms_get_last_gtid ( mixed $connection )~
+
+Returns a global transaction identifier which belongs to a write operation no
+older than the last write performed by the client. It is not guaranteed that
+the global transaction identifier is identical to that one created for the
+last write transaction performed by the client.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    A PECL/mysqlnd_ms connection handle to a MySQL server of the type
+    PDO_MYSQL, mysqli> or ext/mysql. The connection handle is obtained when
+    opening a connection with a host name that matches a mysqlnd_ms
+    configuration file entry using any of the above three MySQL driver
+    extensions.
+
+==============================================================================
+*Return* *Values*
+
+Returns a global transaction ID (GTID) on success. Otherwise, returns FALSE.
+
+The function mysqlnd_ms_get_last_gtid() returns the GTID obtained when
+executing the SQL statement from the fetch_last_gtid entry of the
+global_transaction_id_injection section from the plugins configuration file.
+
+The function may be called after the GTID has been incremented.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    mysqlnd_ms_get_last_gtid() requires PHP >= 5.4.0 and PECL mysqlnd_ms >=
+    1.2.0. Internally, it is using a mysqlnd library C functionality not
+    available with PHP 5.3.
+
+    Please note, all MySQL 5.6 production versions do not provide clients with
+    enough information to use GTIDs for enforcing session consistency. In the
+    worst case, the plugin will choose the master only.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_ms_get_last_gtid() example
+
+<?php >
+    /* Open mysqlnd_ms connection using mysqli, PDO_MySQL or mysql extension */
+    $mysqli = new mysqli("myapp", "username", "password", "database");
+    if (!$mysqli)
+      /* Of course, your error handling is nicer... */
+      die(sprintf("[%d] %s\n", mysqli_connect_errno(), mysqli_connect_error()));
+
+    /* auto commit mode, transaction on master, GTID must be incremented */
+    if (!$mysqli->query("DROP TABLE IF EXISTS test"))
+      die(sprintf("[%d] %s\n", $mysqli->errno, $mysqli->error));
+
+    printf("GTID after transaction %s\n", mysqlnd_ms_get_last_gtid($mysqli));
+
+    /* auto commit mode, transaction on master, GTID must be incremented */
+    if (!$mysqli->query("CREATE TABLE test(id INT)"))
+      die(sprintf("[%d] %s\n", $mysqli->errno, $mysqli->error));
+
+    printf("GTID after transaction %s\n", mysqlnd_ms_get_last_gtid($mysqli));
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * Global Transaction IDs
+
+
+vim:ft=help:

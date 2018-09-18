@@ -1,0 +1,34 @@
+fann_create_from_file
+
+(PECL fann >= 1.0.0)
+
+fann_create_from_file — Constructs a backpropagation neural network from a
+configuration file
+
+==============================================================================
+*Description*
+
+    resource fann_create_from_file ( string $configuration_file )~
+
+Constructs a backpropagation neural network from a configuration file, which
+have been saved by |fann_save|.
+
+==============================================================================
+*Parameters*
+
+{configuration_file}
+
+    The configuration file path.
+
+==============================================================================
+*Return* *Values*
+
+Returns a neural network resource on success, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_save| - Saves the entire network to a configuration file
+
+
+vim:ft=help:

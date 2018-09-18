@@ -1,0 +1,57 @@
+fann_create_shortcut
+
+(PECL fann >= 1.0.0)
+
+fann_create_shortcut — Creates a standard backpropagation neural network which
+is not fully connectected and has shortcut connections
+
+==============================================================================
+*Description*
+
+    reference fann_create_shortcut ( int $num_layers , int $num_neurons1 ,~
+    int $num_neurons2 [, int $... ] )~
+
+Creates a standard backpropagation neural network, which is not fully
+connected and which also has shortcut connections.
+
+Shortcut connections are connections that skip layers. A fully connected
+network with shortcut connections, is a network where all neurons are
+connected to all neurons in later layers. Including direct connections from
+the input layer to the output layer.
+
+==============================================================================
+*Parameters*
+
+{num_layers}
+
+    The total number of layers including the input and the output layer.
+
+{num_neurons1}
+
+    Number of neurons in the first layer.
+
+{num_neurons2}
+
+    Number of neurons in the second layer.
+
+{...}
+
+    Number of neurons in other layers.
+
+==============================================================================
+*Return* *Values*
+
+Returns a neural network resource on success, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_create_shortcut_array| - Creates a standard backpropagation neural
+    network which is not fully connectected and has shortcut connections
+  * |fann_create_sparse| - Creates a standard backpropagation neural network,
+    which is not fully connected
+  * |fann_create_standard| - Creates a standard fully connected
+    backpropagation neural network
+
+
+vim:ft=help:

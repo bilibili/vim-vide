@@ -1,0 +1,13 @@
+pos
+
+(PHP 4, PHP 5, PHP 7)
+
+pos — Alias of |current|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |current|
+
+
+vim:ft=help:

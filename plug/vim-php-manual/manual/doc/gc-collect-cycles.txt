@@ -1,0 +1,30 @@
+gc_collect_cycles
+
+(PHP 5 >= 5.3.0, PHP 7)
+
+gc_collect_cycles — Forces collection of any existing garbage cycles
+
+==============================================================================
+*Description*
+
+    int gc_collect_cycles ( void )~
+
+Forces collection of any existing garbage cycles.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns number of collected cycles.
+
+==============================================================================
+*See* *Also*
+
+  * Garbage Collection
+
+
+vim:ft=help:

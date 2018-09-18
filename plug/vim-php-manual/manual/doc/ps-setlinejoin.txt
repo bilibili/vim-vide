@@ -1,0 +1,39 @@
+ps_setlinejoin
+
+(PECL ps >= 1.1.0)
+
+ps_setlinejoin — Sets how contected lines are joined
+
+==============================================================================
+*Description*
+
+    bool ps_setlinejoin ( resource $psdoc , int $type )~
+
+Sets how lines are joined.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{type}
+
+    The way lines are joined. Possible values are PS_LINEJOIN_MITER,
+    PS_LINEJOIN_ROUND, or PS_LINEJOIN_BEVEL.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_setlinecap| - Sets appearance of line ends
+  * |ps_setlinewidth| - Sets width of a line
+  * |ps_setmiterlimit| - Sets the miter limit
+
+
+vim:ft=help:

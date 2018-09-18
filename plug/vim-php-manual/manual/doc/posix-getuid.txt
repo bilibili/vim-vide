@@ -1,0 +1,35 @@
+posix_getuid
+
+(PHP 4, PHP 5, PHP 7)
+
+posix_getuid — Return the real user ID of the current process
+
+==============================================================================
+*Description*
+
+    int posix_getuid ( void )~
+
+Return the numeric real user ID of the current process.
+
+==============================================================================
+*Return* *Values*
+
+Returns the user id, as an integer
+
+==============================================================================
+*Examples*
+
+Example #1 Example use of posix_getuid()
+
+<?php >
+    echo posix_getuid(); //10000
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |posix_getpwuid| - Return info about a user by user id
+  * POSIX man page GETUID(2)
+
+
+vim:ft=help:

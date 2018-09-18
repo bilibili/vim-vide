@@ -1,0 +1,17 @@
+msession_get
+
+(PHP 4 >= 4.2.0, PHP 5 <= 5.1.2)
+
+msession_get — Get value from session
+
+==============================================================================
+*Description*
+
+    string msession_get ( string $session , string $name , string $value )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

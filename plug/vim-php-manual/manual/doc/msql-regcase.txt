@@ -1,0 +1,13 @@
+msql_regcase
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_regcase — Alias of |sql_regcase|
+
+==============================================================================
+*Description*
+
+This function is an alias of |sql_regcase|.
+
+
+vim:ft=help:

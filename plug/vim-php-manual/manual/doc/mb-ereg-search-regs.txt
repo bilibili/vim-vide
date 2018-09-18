@@ -1,0 +1,53 @@
+mb_ereg_search_regs
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+mb_ereg_search_regs — Returns the matched part of a multibyte regular
+expression
+
+==============================================================================
+*Description*
+
+    array mb_ereg_search_regs ([ string $pattern [, string $option =~
+    "ms" ]] )~
+
+Returns the matched part of a multibyte regular expression.
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    The search pattern.
+
+{option}
+
+    The search option.
+
+==============================================================================
+*Return* *Values*
+
+mb_ereg_search_regs() executes the multibyte regular expression match, and if
+there are some matched part, it returns an array including substring of
+matched part as first element, the first grouped part with brackets as second
+element, the second grouped part as third element, and so on. It returns FALSE
+on error.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The internal encoding or the character encoding specified by 
+    |mb_regex_encoding| will be used as the character encoding for this
+    function.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_regex_encoding| - Set/Get character encoding for multibyte regex
+  * |mb_ereg_search_init| - Setup string and regular expression for a
+    multibyte regular expression match
+
+
+vim:ft=help:

@@ -1,0 +1,64 @@
+imagewebp
+
+(PHP 5 >= 5.5.0, PHP 7)
+
+imagewebp — Output a WebP image to browser or file
+
+==============================================================================
+*Description*
+
+    bool imagewebp ( resource $image , mixed $to [, int $quality = 80 ] )~
+
+Outputs or save an WebP version of the given {image}.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{to}
+
+    The path or an open stream resource (which is automatically being closed
+    after this function returns) to save the file to. If not set or NULL, the
+    raw image stream will be outputted directly.
+
+{quality}
+
+    {quality} ranges from 0 (worst quality, smaller file) to 100 (best
+    quality, biggest file).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                     Description
+5.4.0   Added support for passing a stream resource to {to}.
+
+==============================================================================
+*Examples*
+
+Example #1 Saving an WebP file
+
+<?php >
+    // Create a blank image and add some text
+    $im = imagecreatetruecolor(120, 20);
+    $text_color = imagecolorallocate($im, 233, 14, 91);
+
+    imagestring($im, 1, 5, 5,  'WebP with PHP', $text_color);
+
+    // Save the image
+    imagewebp($im, 'php.webp');
+
+    // Free up memory
+    imagedestroy($im);
+<?>
+
+
+vim:ft=help:

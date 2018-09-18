@@ -1,0 +1,43 @@
+posix_get_last_error
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+posix_get_last_error — Retrieve the error number set by the last posix
+function that failed
+
+==============================================================================
+*Description*
+
+    int posix_get_last_error ( void )~
+
+Retrieve the error number set by the last posix function that failed. The
+system error message associated with the errno may be checked with 
+|posix_strerror|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the errno (error number) set by the last posix function that failed.
+If no errors exist, 0 is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 posix_get_last_error() example
+
+This example attempt to kill a bogus process id, which will set the last
+error. We will then print out the last errno.
+
+<?php >
+    posix_kill(999459,SIGKILL);
+    echo 'Your error returned was '.posix_get_last_error(); //Your error was ___
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |posix_strerror| - Retrieve the system error message associated with the
+    given errno
+
+
+vim:ft=help:

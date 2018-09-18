@@ -1,0 +1,50 @@
+ifx_error
+
+(PHP 4, PHP <=5.2.0)
+
+ifx_error — Returns error code of last Informix call
+
+==============================================================================
+*Description*
+
+    string ifx_error ([ resource $link_identifier ] )~
+
+Returns in a string one character describing the general results of a
+statement and both SQLSTATE and SQLCODE associated with the most recent SQL
+statement executed.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    The link identifier.
+
+==============================================================================
+*Return* *Values*
+
+The Informix error codes (SQLSTATE & SQLCODE) formatted as x [SQLSTATE = aa
+bbb SQLCODE=cccc].
+
+where x = space : no error
+
+E : error
+
+N : no more data
+
+W : warning
+
+? : undefined
+
+If the "x" character is anything other than space, SQLSTATE and SQLCODE
+describe the error in more detail.
+
+See the Informix manual for the description of SQLSTATE and SQLCODE
+
+==============================================================================
+*See* *Also*
+
+  * |ifx_errormsg| - Returns error message of last Informix call
+
+
+vim:ft=help:

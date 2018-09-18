@@ -1,0 +1,69 @@
+fann_read_train_from_file
+
+(PECL fann >= 1.0.0)
+
+fann_read_train_from_file — Reads a file that stores training data
+
+==============================================================================
+*Description*
+
+    resource fann_read_train_from_file ( string $filename )~
+
+Reads a file that stores training data.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The input file in the following format:
+
+    num_train_data num_input num_output
+    inputdata seperated by space
+    outputdata seperated by space
+
+    .
+    .
+    .
+
+    inputdata seperated by space
+    outputdata seperated by space
+
+==============================================================================
+*Return* *Values*
+
+Returns a train data resource on success, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 fann_read_train_from_file() example
+
+<?php >
+    $train_data = fann_read_train_from_file("xor.data");
+    if ($train_data) {
+        // Do something with $train_data for XOR function
+    }
+<?>
+
+Contents of xor.data
+
+4 2 1
+-1 -1
+-1
+-1 1
+1
+1 -1
+1
+1 1
+-1
+
+==============================================================================
+*See* *Also*
+
+  * |fann_train_on_data| - Trains on an entire dataset for a period of time
+  * |fann_destroy_train| - Destructs the training data
+  * |fann_save_train| - Save the training structure to a file
+
+
+vim:ft=help:

@@ -1,0 +1,45 @@
+sqlite_next
+
+SQLiteResult::next
+
+SQLiteUnbuffered::next
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.0)
+
+sqlite_next -- SQLiteResult::next -- SQLiteUnbuffered::next — Seek to the next
+row number
+
+==============================================================================
+*Description*
+
+    bool sqlite_next ( resource $result )~
+
+Object oriented style (method):
+
+    bool SQLiteResult::next ( void )~
+    bool SQLiteUnbuffered::next ( void )~
+
+sqlite_next() advances the result handle {result} to the next row.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The SQLite result resource. This parameter is not required when using the
+    object-oriented method.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE if there are no more rows.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_seek| - Seek to a particular row number of a buffered result set
+  * |sqlite_current| - Fetches the current row from a result set as an array
+  * |sqlite_rewind| - Seek to the first row number
+
+
+vim:ft=help:

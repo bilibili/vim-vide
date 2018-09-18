@@ -1,0 +1,88 @@
+touch
+
+(PHP 4, PHP 5, PHP 7)
+
+touch — Sets access and modification time of file
+
+==============================================================================
+*Description*
+
+    bool touch ( string $filename [, int $time = time() [, int $atime ]] )~
+
+Attempts to set the access and modification times of the file named in the
+{filename} parameter to the value given in {time}. Note that the access time
+is always modified, regardless of the number of parameters.
+
+If the file does not exist, it will be created.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The name of the file being touched.
+
+{time}
+
+    The touch time. If {time} is not supplied, the current system time is
+    used.
+
+{atime}
+
+    If present, the access time of the given filename is set to the value of
+    {atime}. Otherwise, it is set to the value passed to the {time} parameter.
+    If neither are present, the current system time is used.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   It became possible to change the modification time of a directory
+        under Windows.
+
+==============================================================================
+*Examples*
+
+Example #1 touch() example
+
+<?php >
+    if (touch($filename)) {
+        echo $filename . ' modification time has been changed to present time';
+    } else {
+        echo 'Sorry, could not change modification time of ' . $filename;
+    }
+<?>
+
+Example #2 touch() using the {time} parameter
+
+<?php >
+    // This is the touch time, we'll set it to one hour in the past.
+    $time = time() - 3600;
+
+    // Touch the file
+    if (!touch('some_file.txt', $time)) {
+        echo 'Whoops, something went wrong...';
+    } else {
+        echo 'Touched file with success';
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Note that time resolution may differ from one file system to another.
+
+Warning
+
+Prior to PHP 5.3.0 it was not possible to change the modification time of a
+directory with this function under Windows.
+
+
+vim:ft=help:

@@ -1,0 +1,17 @@
+maxdb_get_metadata
+
+(PECL maxdb 1.0)
+
+maxdb_get_metadata — Alias of |maxdb_stmt_result_metadata|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |maxdb_stmt_result_metadata|.
+
+This function alias is deprecated and only exists for backwards compatibility
+reasons. The use of this function is not recommended, as it may be removed
+from PHP in the future.
+
+
+vim:ft=help:

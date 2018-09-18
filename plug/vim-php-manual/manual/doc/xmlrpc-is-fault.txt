@@ -1,0 +1,41 @@
+xmlrpc_is_fault
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+xmlrpc_is_fault — Determines if an array value represents an XMLRPC fault
+
+==============================================================================
+*Description*
+
+    bool xmlrpc_is_fault ( array $arg )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*Parameters*
+
+{arg}
+
+    Array returned by |xmlrpc_decode|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the argument means fault, FALSE otherwise. Fault description
+is available in $arg["faultString"], fault code is in $arg["faultCode"].
+
+==============================================================================
+*Examples*
+
+See example by |xmlrpc_encode_request|.
+
+==============================================================================
+*See* *Also*
+
+  * |xmlrpc_decode| - Decodes XML into native PHP types
+
+
+vim:ft=help:

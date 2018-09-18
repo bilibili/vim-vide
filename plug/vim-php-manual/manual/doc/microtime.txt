@@ -1,0 +1,97 @@
+microtime
+
+(PHP 4, PHP 5, PHP 7)
+
+microtime — Return current Unix timestamp with microseconds
+
+==============================================================================
+*Description*
+
+    mixed microtime ([ bool $get_as_float = false ] )~
+
+microtime() returns the current Unix timestamp with microseconds. This
+function is only available on operating systems that support the gettimeofday
+() system call.
+
+==============================================================================
+*Parameters*
+
+{get_as_float}
+
+    If used and set to TRUE, microtime() will return a float instead of a 
+    string, as described in the return values section below.
+
+==============================================================================
+*Return* *Values*
+
+By default, microtime() returns a string in the form "msec sec", where sec is
+the number of seconds since the Unix epoch (0:00:00 January 1,1970 GMT), and
+msec measures microseconds that have elapsed since sec and is also expressed
+in seconds.
+
+If {get_as_float} is set to TRUE, then microtime() returns a float, which
+represents the current time in seconds since the Unix epoch accurate to the
+nearest microsecond.
+
+==============================================================================
+*Examples*
+
+Example #1 Timing script execution with microtime()
+
+<?php >
+    /**
+     * Simple function to replicate PHP 5 behaviour
+     */
+    function microtime_float()
+    {
+        list($usec, $sec) = explode(" ", microtime());
+        return ((float)$usec + (float)$sec);
+    }
+
+    $time_start = microtime_float();
+
+    // Sleep for a while
+    usleep(100);
+
+    $time_end = microtime_float();
+    $time = $time_end - $time_start;
+
+    echo "Did nothing in $time seconds\n";
+<?>
+
+Example #2 Timing script execution in PHP 5
+
+<?php >
+    $time_start = microtime(true);
+
+    // Sleep for a while
+    usleep(100);
+
+    $time_end = microtime(true);
+    $time = $time_end - $time_start;
+
+    echo "Did nothing in $time seconds\n";
+<?>
+
+Example #3 microtime() and REQUEST_TIME_FLOAT (as of PHP 5.4.0)
+
+<?php >
+    // Randomize sleeping time
+    usleep(mt_rand(100, 10000));
+
+    //
+     As of PHP 5.4.0, REQUEST_TIME_FLOAT is available in the $_SERVER superglobal array.
+    //
+     It contains the timestamp of the start of the request with microsecond precision.
+    $time = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+
+    echo "Did nothing in $time seconds\n";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |time| - Return current Unix timestamp
+
+
+vim:ft=help:

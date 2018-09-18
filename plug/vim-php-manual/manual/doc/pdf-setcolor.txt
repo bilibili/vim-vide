@@ -1,0 +1,17 @@
+PDF_setcolor
+
+(PHP 4 >= 4.0.5, PECL pdflib >= 1.0.0)
+
+PDF_setcolor — Set fill and stroke color
+
+==============================================================================
+*Description*
+
+    bool PDF_setcolor ( resource $p , string $fstype , string $colorspace ,~
+    float $c1 , float $c2 , float $c3 , float $c4 )~
+
+Sets the current color space and color. Returns TRUE on success or FALSE on
+failure.
+
+
+vim:ft=help:

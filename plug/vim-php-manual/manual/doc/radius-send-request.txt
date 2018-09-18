@@ -1,0 +1,32 @@
+radius_send_request
+
+(PECL radius >= 1.1.0)
+
+radius_send_request — Sends the request and waites for a reply
+
+==============================================================================
+*Description*
+
+    int radius_send_request ( resource $radius_handle )~
+
+After the Radius request has been constructed, it is sent by 
+radius_send_request().
+
+The radius_send_request() function sends the request and waits for a valid
+reply, retrying the defined servers in round-robin fashion as necessary.
+
+==============================================================================
+*Return* *Values*
+
+If a valid response is received, radius_send_request() returns the Radius code
+which specifies the type of the response. This will typically be
+RADIUS_ACCESS_ACCEPT, RADIUS_ACCESS_REJECT, or RADIUS_ACCESS_CHALLENGE. If no
+valid response is received, radius_send_request() returns FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |radius_create_request| - Create accounting or authentication request
+
+
+vim:ft=help:

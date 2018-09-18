@@ -1,0 +1,13 @@
+date_get_last_errors
+
+(PHP 5 >= 5.3.0, PHP 7)
+
+date_get_last_errors — Alias of DateTime::getLastErrors()
+
+==============================================================================
+*Description*
+
+This function is an alias of: DateTime::getLastErrors()
+
+
+vim:ft=help:

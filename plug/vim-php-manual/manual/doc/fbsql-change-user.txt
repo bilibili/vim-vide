@@ -1,0 +1,48 @@
+fbsql_change_user
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_change_user — Change logged in user of the active connection
+
+==============================================================================
+*Description*
+
+    bool fbsql_change_user ( string $user , string $password [, string~
+    $database [, resource $link_identifier ]] )~
+
+fbsql_change_user() changes the logged in user of the specified connection. If
+the new user and password authorization fails, the current connected user
+stays active.
+
+==============================================================================
+*Parameters*
+
+{user}
+
+    The new user name.
+
+{password}
+
+    The new user password.
+
+{database}
+
+    If specified, this will be the default or current database after the user
+    has been changed.
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

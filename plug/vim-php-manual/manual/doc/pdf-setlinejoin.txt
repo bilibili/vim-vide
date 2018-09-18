@@ -1,0 +1,16 @@
+PDF_setlinejoin
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_setlinejoin — Set linejoin parameter
+
+==============================================================================
+*Description*
+
+    bool PDF_setlinejoin ( resource $p , int $value )~
+
+Sets the {linejoin} parameter to specify the shape at the corners of paths
+that are stroked. Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

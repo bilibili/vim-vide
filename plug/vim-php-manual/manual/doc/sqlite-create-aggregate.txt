@@ -1,0 +1,157 @@
+sqlite_create_aggregate
+
+SQLiteDatabase::createAggregate
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.0)
+
+sqlite_create_aggregate -- SQLiteDatabase::createAggregate — Register an
+aggregating UDF for use in SQL statements
+
+==============================================================================
+*Description*
+
+    void sqlite_create_aggregate ( resource $dbhandle , string $function_name~
+    , callable $step_func , callable $finalize_func [, int $num_args = -1 ] )~
+
+Object oriented style (method):
+
+    public void SQLiteDatabase::createAggregate ( string $function_name ,~
+    callable $step_func , callable $finalize_func [, int $num_args = -1 ] )~
+
+sqlite_create_aggregate() is similar to |sqlite_create_function| except that
+it registers functions that can be used to calculate a result aggregated
+across all the rows of a query.
+
+The key difference between this function and |sqlite_create_function| is that
+two functions are required to manage the aggregate; {step_func} is called for
+each row of the result set. Your PHP function should accumulate the result and
+store it into the aggregation context. Once all the rows have been processed,
+{finalize_func} will be called and it should then take the data from the
+aggregation context and return the result. Callback functions should return a
+type understood by SQLite (i.e. scalar type).
+
+==============================================================================
+*Parameters*
+
+{dbhandle}
+
+    The SQLite Database resource; returned from |sqlite_open| when used
+    procedurally. This parameter is not required when using the
+    object-oriented method.
+
+{function_name}
+
+    The name of the function used in SQL statements.
+
+{step_func}
+
+    Callback function called for each row of the result set. Function
+    parameters are &$context, $value, ....
+
+{finalize_func}
+
+    Callback function to aggregate the "stepped" data from each row. Function
+    parameter is &$context and the function should return the final result of
+    aggregation.
+
+{num_args}
+
+    Hint to the SQLite parser if the callback function accepts a predetermined
+    number of arguments.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 max_length aggregation function example
+
+<?php >
+    $data = array(
+       'one',
+       'two',
+       'three',
+       'four',
+       'five',
+       'six',
+       'seven',
+       'eight',
+       'nine',
+       'ten',
+       );
+    $dbhandle = sqlite_open(':memory:');
+    sqlite_query($dbhandle, "CREATE TABLE strings(a)");
+    foreach ($data as $str) {
+        $str = sqlite_escape_string($str);
+        sqlite_query($dbhandle, "INSERT INTO strings VALUES ('$str')");
+    }
+
+    function max_len_step(&$context, $string) 
+    {
+        if (strlen($string) > $context) {
+            $context = strlen($string);
+        }
+    }
+
+    function max_len_finalize(&$context) 
+    {
+        return $context;
+    }
+
+    sqlite_create_aggregate($dbhandle, 'max_len', 'max_len_step', 
+    'max_len_finalize');
+
+    var_dump(sqlite_array_query($dbhandle, 'SELECT max_len(a) from strings'));
+
+<?>
+
+In this example, we are creating an aggregating function that will calculate
+the length of the longest string in one of the columns of the table. For each
+row, the max_len_step function is called and passed a {context} parameter. The
+context parameter is just like any other PHP variable and be set to hold an
+array or even an object value. In this example, we are simply using it to hold
+the maximum length we have seen so far; if the {string} has a length longer
+than the current maximum, we update the context to hold this new maximum
+length.
+
+After all of the rows have been processed, SQLite calls the max_len_finalize
+function to determine the aggregate result. Here, we could perform some kind
+of calculation based on the data found in the {context}. In our simple example
+though, we have been calculating the result as the query progressed, so we
+simply need to return the context value.
+
+    Note:
+
+    The example above will not work correctly if the column contains binary
+    data. Take a look at the manual page for |sqlite_udf_decode_binary| for an
+    explanation of why this is so, and an example of how to make it respect
+    the binary encoding.
+
+Tip
+
+It is NOT recommended for you to store a copy of the values in the context and
+then process them at the end, as you would cause SQLite to use a lot of memory
+to process the query - just think of how much memory you would need if a
+million rows were stored in memory, each containing a string 32 bytes in
+length.
+
+Tip
+
+You can use |sqlite_create_function| and sqlite_create_aggregate() to override
+SQLite native SQL functions.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_create_function| - Registers a "regular" User Defined Function for
+    use in SQL statements
+  * |sqlite_udf_encode_binary| - Encode binary data before returning it from
+    an UDF
+  * |sqlite_udf_decode_binary| - Decode binary data passed as parameters to an
+    UDF
+
+
+vim:ft=help:

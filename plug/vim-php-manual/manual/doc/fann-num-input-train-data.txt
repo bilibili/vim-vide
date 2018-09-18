@@ -1,0 +1,37 @@
+fann_num_input_train_data
+
+(PECL fann >= 1.0.0)
+
+fann_num_input_train_data — Returns the number of inputs in each of the
+training patterns in the train data
+
+==============================================================================
+*Description*
+
+    int fann_num_input_train_data ( resource $data )~
+
+Returns the number of inputs in each of the training patterns in the train
+data resource.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    Neural network training data resource.
+
+==============================================================================
+*Return* *Values*
+
+The number of inputs, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_length_train_data| - Returns the number of training patterns in the
+    train data
+  * |fann_num_output_train_data| - Returns the number of outputs in each of
+    the training patterns in the train data
+
+
+vim:ft=help:

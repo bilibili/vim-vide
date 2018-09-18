@@ -1,0 +1,42 @@
+ezmlm_hash
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+ezmlm_hash — Calculate the hash value needed by EZMLM
+
+==============================================================================
+*Description*
+
+    int ezmlm_hash ( string $addr )~
+
+ezmlm_hash() calculates the hash value needed when keeping EZMLM mailing lists
+in a MySQL database.
+
+==============================================================================
+*Parameters*
+
+{addr}
+
+    The email address that's being hashed.
+
+==============================================================================
+*Return* *Values*
+
+The hash value of {addr}.
+
+==============================================================================
+*Examples*
+
+Example #1 Calculating the hash and subscribing a user
+
+<?php >
+
+    $user = "joecool@example.com";
+    $hash = ezmlm_hash($user);
+    $query = sprintf("INSERT INTO sample VALUES (%s, '%s')", $hash, $user);
+    $db->query($query); // using PHPLIB db interface
+
+<?>
+
+
+vim:ft=help:

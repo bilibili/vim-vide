@@ -1,0 +1,42 @@
+ps_setfont
+
+(PECL ps >= 1.1.0)
+
+ps_setfont — Sets font to use for following output
+
+==============================================================================
+*Description*
+
+    bool ps_setfont ( resource $psdoc , int $fontid , float $size )~
+
+Sets a font, which has to be loaded before with |ps_findfont|. Outputting text
+without setting a font results in an error.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{fontid}
+
+    The font identifier as returned by |ps_findfont|.
+
+{size}
+
+    The size of the font.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_findfont| - Loads a font
+  * |ps_set_text_pos| - Sets position for text output for an example.
+
+
+vim:ft=help:

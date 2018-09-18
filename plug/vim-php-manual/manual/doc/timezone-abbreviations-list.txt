@@ -1,0 +1,13 @@
+timezone_abbreviations_list
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+timezone_abbreviations_list — Alias of DateTimeZone::listAbbreviations()
+
+==============================================================================
+*Description*
+
+This function is an alias of: DateTimeZone::listAbbreviations()
+
+
+vim:ft=help:

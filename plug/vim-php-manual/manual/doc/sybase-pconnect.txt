@@ -1,0 +1,71 @@
+sybase_pconnect
+
+(PHP 4, PHP 5)
+
+sybase_pconnect — Open persistent Sybase connection
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    resource sybase_pconnect ([ string $servername [, string $username [,~
+    string $password [, string $charset [, string $appname ]]]]] )~
+
+sybase_pconnect() acts very much like |sybase_connect| with two major
+differences.
+
+First, when connecting, the function would first try to find a (persistent)
+link that's already open with the same host, username and password. If one is
+found, an identifier for it will be returned instead of opening a new
+connection.
+
+Second, the connection to the SQL server will not be closed when the execution
+of the script ends. Instead, the link will remain open for future use (
+|sybase_close| will not close links established by sybase_pconnect()).
+
+This type of links is therefore called 'persistent'.
+
+==============================================================================
+*Parameters*
+
+{servername}
+
+    The servername argument has to be a valid servername that is defined in
+    the 'interfaces' file.
+
+{username}
+
+    Sybase user name
+
+{password}
+
+    Password associated with {username}.
+
+{charset}
+
+    Specifies the charset for the connection
+
+{appname}
+
+    Specifies an appname for the Sybase connection. This allow you to make
+    separate connections in the same script to the same database. This may
+    come handy when you have started a transaction in your current connection,
+    and you need to be able to do a separate query which cannot be performed
+    inside this transaction.
+
+==============================================================================
+*Return* *Values*
+
+Returns a positive Sybase persistent link identifier on success, or FALSE on
+error.
+
+==============================================================================
+*See* *Also*
+
+  * |sybase_connect| - Opens a Sybase server connection
+
+
+vim:ft=help:

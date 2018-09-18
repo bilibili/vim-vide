@@ -1,0 +1,70 @@
+iterator_count
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+iterator_count — Count the elements in an iterator
+
+==============================================================================
+*Description*
+
+    int iterator_count ( Traversable $iterator )~
+
+Count the elements in an iterator. iterator_count() is not guaranteed to
+retain the current position of the {iterator}.
+
+==============================================================================
+*Parameters*
+
+{iterator}
+
+    The iterator being counted.
+
+==============================================================================
+*Return* *Values*
+
+The number of elements in {iterator}.
+
+==============================================================================
+*Examples*
+
+Example #1 iterator_count() example
+
+<?php >
+    $iterator = new ArrayIterator(array('recipe'=>'pancakes', 'egg', 'milk', 
+    'flour'));
+    var_dump(iterator_count($iterator));
+<?>
+
+The above example will output:
+
+int(4)
+
+Example #2 iterator_count() modifies position
+
+<?php >
+    $iterator = new ArrayIterator(['one', 'two', 'three']);
+    var_dump($iterator->current());
+    var_dump(iterator_count($iterator));
+    var_dump($iterator->current());
+<?>
+
+The above example will output:
+
+string(3) "one"
+int(3)
+NULL
+
+Example #3 iterator_count() in foreach loops
+
+<?php >
+$iterator = new ArrayIterator(['one', 'two', 'three']);
+foreach ($iterator as $key => $value) {
+    echo "$key: $value (", iterator_count($iterator), ")\n";
+}?>
+
+The above example will output:
+
+0: one (3)
+
+
+vim:ft=help:

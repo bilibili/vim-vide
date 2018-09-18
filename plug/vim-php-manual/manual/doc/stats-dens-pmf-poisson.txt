@@ -1,0 +1,27 @@
+stats_dens_pmf_poisson
+
+(PECL stats >= 1.0.0)
+
+stats_dens_pmf_poisson — Not documented
+
+==============================================================================
+*Description*
+
+    float stats_dens_pmf_poisson ( float $x , float $lb )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{x}
+
+{lb}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

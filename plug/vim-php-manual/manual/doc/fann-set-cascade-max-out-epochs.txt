@@ -1,0 +1,37 @@
+fann_set_cascade_max_out_epochs
+
+(PECL fann >= 1.0.0)
+
+fann_set_cascade_max_out_epochs — Sets the maximum out epochs
+
+==============================================================================
+*Description*
+
+    bool fann_set_cascade_max_out_epochs ( resource $ann , int~
+    $cascade_max_out_epochs )~
+
+Sets the maximum out epochs.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{cascade_max_out_epochs}
+
+    The maximum out epochs.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_cascade_max_out_epochs| - Returns the maximum out epochs
+
+
+vim:ft=help:

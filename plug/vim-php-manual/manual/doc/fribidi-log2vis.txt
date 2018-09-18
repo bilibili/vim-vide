@@ -1,0 +1,35 @@
+fribidi_log2vis
+
+(PHP 4 >= 4.0.4 and PHP 4 <= 4.1.0, PECL fribidi >= 1.0)
+
+fribidi_log2vis — Convert a logical string to a visual one
+
+==============================================================================
+*Description*
+
+    string fribidi_log2vis ( string $str , string $direction , int $charset )~
+
+Converts a logical string to a visual one.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The logical string.
+
+{direction}
+
+    One of FRIBIDI_RTL, FRIBIDI_LTR or FRIBIDI_AUTO.
+
+{charset}
+
+    One of the FRIBIDI_CHARSET_XXX constants.
+
+==============================================================================
+*Return* *Values*
+
+Returns the visual string on success or FALSE on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,46 @@
+fann_save
+
+(PECL fann >= 1.0.0)
+
+fann_save — Saves the entire network to a configuration file
+
+==============================================================================
+*Description*
+
+    bool fann_save ( resource $ann , string $configuration_file )~
+
+Saves the entire network to a configuration file.
+
+The configuration file contains all information about the neural network and
+enables |fann_create_from_file| to create an exact copy of the neural network
+and all of the parameters associated with the neural network.
+
+These three parameters (|fann_set_callback|, |fann_set_error_log|, 
+fann_set_user_data()) are NOT saved to the file because they cannot safely be
+ported to a different location. Also temporary parameters generated during
+training like |fann_get_MSE| is not saved.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{configuration_file}
+
+    The configuration file path.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_create_from_file| - Constructs a backpropagation neural network from
+    a configuration file
+
+
+vim:ft=help:

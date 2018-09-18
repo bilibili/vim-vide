@@ -1,0 +1,81 @@
+stream_get_contents
+
+(PHP 5, PHP 7)
+
+stream_get_contents — Reads remainder of a stream into a string
+
+==============================================================================
+*Description*
+
+    string stream_get_contents ( resource $handle [, int $maxlength = -1 [,~
+    int $offset = -1 ]] )~
+
+Identical to |file_get_contents|, except that stream_get_contents() operates
+on an already open stream resource and returns the remaining contents in a
+string, up to {maxlength} bytes and starting at the specified {offset}.
+
+==============================================================================
+*Parameters*
+
+{handle} (resource)
+
+    A stream resource (e.g. returned from |fopen|)
+
+{maxlength} (integer)
+
+    The maximum bytes to read. Defaults to -1 (read all the remaining buffer).
+
+{offset} (integer)
+
+    Seek to the specified offset before reading. If this number is negative,
+    no seeking will occur and reading will start from the current position.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version       Description
+5.1.0   The {offset} was added.
+
+==============================================================================
+*Examples*
+
+Example #1 stream_get_contents() example
+
+<?php >
+
+    if ($stream = fopen('http://www.example.com', 'r')) {
+        // print all the page starting at the offset 10
+        echo stream_get_contents($stream, -1, 10);
+
+        fclose($stream);
+    }
+
+
+    if ($stream = fopen('http://www.example.net', 'r')) {
+        // print the first 5 bytes
+        echo stream_get_contents($stream, 5);
+
+        fclose($stream);
+    }
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function is binary-safe.
+
+==============================================================================
+*See* *Also*
+
+  * |fgets| - Gets line from file pointer
+  * |fread| - Binary-safe file read
+  * |fpassthru| - Output all remaining data on a file pointer
+
+
+vim:ft=help:

@@ -1,0 +1,57 @@
+get_defined_vars
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+get_defined_vars — Returns an array of all defined variables
+
+==============================================================================
+*Description*
+
+    array get_defined_vars ( void )~
+
+This function returns a multidimensional array containing a list of all
+defined variables, be them environment, server or user-defined variables,
+within the scope that get_defined_vars() is called.
+
+==============================================================================
+*Return* *Values*
+
+A multidimensional array with all the variables.
+
+==============================================================================
+*Examples*
+
+Example #1 get_defined_vars() Example
+
+<?php >
+    $b = array(1, 1, 2, 3, 5, 8);
+
+    $arr = get_defined_vars();
+
+    // print $b
+    print_r($arr["b"]);
+
+    /* print path to the PHP interpreter (if used as a CGI)
+     * e.g. /usr/local/bin/php */
+    echo $arr["_"];
+
+    // print the command-line parameters if any
+    print_r($arr["argv"]);
+
+    // print all the server vars
+    print_r($arr["_SERVER"]);
+
+    // print all the available keys for the arrays of variables
+    print_r(array_keys(get_defined_vars()));
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |isset| - Determine if a variable is set and is not NULL
+  * |get_defined_functions| - Returns an array of all defined functions
+  * |get_defined_constants| - Returns an associative array with the names of
+    all the constants and their values
+
+
+vim:ft=help:

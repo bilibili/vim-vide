@@ -1,0 +1,69 @@
+ps_lineto
+
+(PECL ps >= 1.1.0)
+
+ps_lineto — Draws a line
+
+==============================================================================
+*Description*
+
+    bool ps_lineto ( resource $psdoc , float $x , float $y )~
+
+Adds a straight line from the current point to the given coordinates to the
+current path. Use |ps_moveto| to set the starting point of the line.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{x}
+
+    x-coordinate of the end point of the line.
+
+{y}
+
+    y-coordinate of the end point of the line.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Drawing a rectangle
+
+<?php >
+    $ps = ps_new();
+    if (!ps_open_file($ps, "rectangle.ps")) {
+      print "Cannot open PostScript file\n";
+      exit;
+    }
+
+    ps_set_info($ps, "Creator", "rectangle.php");
+    ps_set_info($ps, "Author", "Uwe Steinmann");
+    ps_set_info($ps, "Title", "Lineto example");
+
+    ps_begin_page($ps, 596, 842);
+    ps_moveto($ps, 100, 100);
+    ps_lineto($ps, 100, 200);
+    ps_lineto($ps, 200, 200);
+    ps_lineto($ps, 200, 100);
+    ps_lineto($ps, 100, 100);
+    ps_stroke($ps);
+    ps_end_page($ps);
+
+    ps_delete($ps);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ps_moveto| - Sets current point
+
+
+vim:ft=help:

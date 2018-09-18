@@ -1,0 +1,43 @@
+XMLWriter::flush
+
+xmlwriter_flush
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 1.0.0)
+
+XMLWriter::flush -- xmlwriter_flush — Flush current buffer
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    mixed XMLWriter::flush ([ bool $empty = true ] )~
+
+Procedural style
+
+    mixed xmlwriter_flush ( resource $xmlwriter [, bool $empty = true ] )~
+
+Flushes the current buffer.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{empty}
+
+    Whether to empty the buffer or not. Default is TRUE.
+
+==============================================================================
+*Return* *Values*
+
+If you opened the writer in memory, this function returns the generated XML
+buffer, Else, if using URI, this function will write the buffer and return the
+number of written bytes.
+
+
+vim:ft=help:

@@ -1,0 +1,17 @@
+msession_unlock
+
+(PHP 4 >= 4.2.0, PHP 5 <= 5.1.2)
+
+msession_unlock — Unlock a session
+
+==============================================================================
+*Description*
+
+    int msession_unlock ( string $session , int $key )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

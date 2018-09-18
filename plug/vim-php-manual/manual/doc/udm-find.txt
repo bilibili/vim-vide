@@ -1,0 +1,57 @@
+udm_find
+
+(PHP 4 >= 4.0.5, PHP 5 <= 5.0.5, PECL mnogosearch >= 1.0.0)
+
+udm_find — Perform search
+
+==============================================================================
+*Description*
+
+    resource udm_find ( resource $agent , string $query )~
+
+Performs a search.
+
+The search itself. The first argument - session, the next one - query itself.
+To find something just type words you want to find and press SUBMIT button.
+For example, "mysql odbc". You should not use quotes " in query, they are
+written here only to divide a query from other text. mnoGoSearch will find all
+documents that contain word "mysql" and/or word "odbc". Best documents having
+bigger weights will be displayed first. If you use search mode ALL, search
+will return documents that contain both (or more) words you entered. In case
+you use mode ANY, the search will return list of documents that contain any of
+the words you entered. If you want more advanced results you may use query
+language. You should select "bool" match mode in the search from.
+
+==============================================================================
+*Parameters*
+
+{agent}
+
+    A link to Agent, received after call to |udm_alloc_agent|.
+
+{query}
+
+    mnoGoSearch understands the following boolean operators:
+
+    & - logical AND. For example, "mysql & odbc". mnoGoSearch will find any
+    URLs that contain both "mysql" and "odbc".
+
+    | - logical OR. For example "mysql|odbc". mnoGoSearch will find any URLs,
+    that contain word "mysql" or word "odbc".
+
+    ~ - logical NOT. For example "mysql & ~odbc". mnoGoSearch will find URLs
+    that contain word "mysql" and do not contain word "odbc" at the same time.
+    Note that ~ just excludes given word from results. Query "~odbc" will find
+    nothing!
+
+    () - group command to compose more complex queries. For example "(mysql |
+    msql) & ~postgres". Query language is simple and powerful at the same
+    time. Just consider query as usual boolean expression.
+
+==============================================================================
+*Return* *Values*
+
+Returns a result link identifier on success or FALSE on failure.
+
+
+vim:ft=help:

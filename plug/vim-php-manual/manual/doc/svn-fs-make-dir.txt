@@ -1,0 +1,29 @@
+svn_fs_make_dir
+
+(PECL svn >= 0.2.0)
+
+svn_fs_make_dir — Creates a new empty directory, returns true if all is ok,
+false otherwise
+
+==============================================================================
+*Description*
+
+    bool svn_fs_make_dir ( resource $root , string $path )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+Creates a new empty directory, returns true if all is ok, false otherwise
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

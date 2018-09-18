@@ -1,0 +1,36 @@
+strrev
+
+(PHP 4, PHP 5, PHP 7)
+
+strrev — Reverse a string
+
+==============================================================================
+*Description*
+
+    string strrev ( string $string )~
+
+Returns {string}, reversed.
+
+==============================================================================
+*Parameters*
+
+{string}
+
+    The string to be reversed.
+
+==============================================================================
+*Return* *Values*
+
+Returns the reversed string.
+
+==============================================================================
+*Examples*
+
+Example #1 Reversing a string with strrev()
+
+<?php >
+    echo strrev("Hello world!"); // outputs "!dlrow olleH"
+<?>
+
+
+vim:ft=help:

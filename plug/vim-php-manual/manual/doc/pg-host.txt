@@ -1,0 +1,53 @@
+pg_host
+
+(PHP 4, PHP 5, PHP 7)
+
+pg_host — Returns the host name associated with the connection
+
+==============================================================================
+*Description*
+
+    string pg_host ([ resource $connection ] )~
+
+pg_host() returns the host name of the given PostgreSQL {connection} resource
+is connected to.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource. When {connection} is not present,
+    the default connection is used. The default connection is the last
+    connection made by |pg_connect| or |pg_pconnect|.
+
+==============================================================================
+*Return* *Values*
+
+A string containing the name of the host the {connection} is to, or FALSE on
+error.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_host() example
+
+<?php >
+    $pgsql_conn = pg_connect("dbname=mark host=localhost");
+
+    if ($pgsql_conn) {
+       print "Successfully connected to: " . pg_host($pgsql_conn) . "<br/>\n";
+    } else {
+       print pg_last_error($pgsql_conn);
+       exit;
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_connect| - Open a PostgreSQL connection
+  * |pg_pconnect| - Open a persistent PostgreSQL connection
+
+
+vim:ft=help:

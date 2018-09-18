@@ -1,0 +1,38 @@
+dbplus_restorepos
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_restorepos — Restore position
+
+==============================================================================
+*Description*
+
+    int dbplus_restorepos ( resource $relation , array $tuple )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+{tuple}
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

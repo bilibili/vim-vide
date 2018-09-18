@@ -1,0 +1,108 @@
+date_parse
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+date_parse — Returns associative array with detailed info about given date
+
+==============================================================================
+*Description*
+
+    array date_parse ( string $date )~
+
+==============================================================================
+*Parameters*
+
+{date}
+
+    Date in format accepted by |strtotime|.
+
+==============================================================================
+*Return* *Values*
+
+Returns array with information about the parsed date on success or FALSE on
+failure.
+
+==============================================================================
+*Errors/Exceptions*
+
+In case the date format has an error, the element 'errors' will contains the
+error messages.
+
+==============================================================================
+*Examples*
+
+Example #1 A date_parse() example
+
+<?php >
+    print_r(date_parse("2006-12-12 10:00:00.5"));
+<?>
+
+The above example will output:
+
+Array
+(
+    [year] => 2006
+    [month] => 12
+    [day] => 12
+    [hour] => 10
+    [minute] => 0
+    [second] => 0
+    [fraction] => 0.5
+    [warning_count] => 0
+    [warnings] => Array()
+    [error_count] => 0
+    [errors] => Array()
+    [is_localtime] =>
+)
+
+Relative formats do not influence the values parsed from absolute formats, but
+are parsed into the "relative" element.
+
+Example #2 date_parse() with relative formats
+
+<?php >
+    print_r(date_parse("2006-12-12 10:00:00.5 +1 week +1 hour"));
+<?>
+
+The above example will output:
+
+Array
+(
+    [year] => 2006
+    [month] => 12
+    [day] => 12
+    [hour] => 10
+    [minute] => 0
+    [second] => 0
+    [fraction] => 0.5
+    [warning_count] => 0
+    [warnings] => Array
+        (
+        )
+
+    [error_count] => 0
+    [errors] => Array
+        (
+        )
+
+    [is_localtime] =>
+    [relative] => Array
+        (
+            [year] => 0
+            [month] => 0
+            [day] => 7
+            [hour] => 1
+            [minute] => 0
+            [second] => 0
+        )
+
+)
+
+==============================================================================
+*See* *Also*
+
+  * |checkdate| - Validate a Gregorian date
+  * |getdate| - Get date/time information
+
+
+vim:ft=help:

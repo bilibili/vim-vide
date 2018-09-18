@@ -1,0 +1,87 @@
+oci_field_scale
+
+(PHP 5, PHP 7, PECL OCI8 >= 1.1.0)
+
+oci_field_scale — Tell the scale of the field
+
+==============================================================================
+*Description*
+
+    int oci_field_scale ( resource $statement , mixed $field )~
+
+Returns the scale of the column with {field} index.
+
+For FLOAT columns, precision is nonzero and scale is -127. If precision is 0,
+then column is NUMBER. Else it's NUMBER(precision, scale).
+
+==============================================================================
+*Parameters*
+
+{statement}
+
+    A valid OCI statement identifier.
+
+{field}
+
+    Can be the field's index (1-based) or name.
+
+==============================================================================
+*Return* *Values*
+
+Returns the scale as an integer, or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 oci_field_scale() Example
+
+<?php >
+
+    // Create the table with:
+    //   CREATE TABLE mytab (c1 NUMBER, c2 FLOAT, c3 NUMBER(4), c4 NUMBER(5,3));
+
+    $conn = oci_connect("hr", "hrpwd", "localhost/XE");
+    if (!$conn) {
+        $m = oci_error();
+        trigger_error(htmlentities($m['message']), E_USER_ERROR);
+    }
+
+    $stid = oci_parse($conn, "SELECT * FROM mytab");
+    oci_execute($stid, OCI_DESCRIBE_ONLY); //
+     Use OCI_DESCRIBE_ONLY if not fetching rows
+
+    $ncols = oci_num_fields($stid);
+    for ($i = 1; $i <= $ncols; $i++) {
+        echo oci_field_name($stid, $i) . " " 
+            . oci_field_precision($stid, $i) . " " 
+            . oci_field_scale($stid, $i) . "<br>\n";
+    }
+
+    // Outputs:
+    //   C1    0 -127
+    //   C2  126 -127
+    //   C3    4    0
+    //   C4    5    3
+
+    oci_free_statement($stid);
+    oci_close($conn);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    In PHP versions before 5.0.0 you must use |ocicolumnscale| instead. This
+    name still can be used, it was left as alias of oci_field_scale() for
+    downwards compatability. This, however, is deprecated and not recommended.
+
+==============================================================================
+*See* *Also*
+
+  * |oci_field_precision| - Tell the precision of a field
+  * |oci_field_type| - Returns a field's data type name
+
+
+vim:ft=help:

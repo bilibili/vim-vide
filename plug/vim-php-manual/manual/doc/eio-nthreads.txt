@@ -1,0 +1,30 @@
+eio_nthreads
+
+(PECL eio >= 0.0.1dev)
+
+eio_nthreads — Returns number of threads currently in use
+
+==============================================================================
+*Description*
+
+    int eio_nthreads ( void )~
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+eio_nthreads() returns number of threads currently in use.
+
+==============================================================================
+*See* *Also*
+
+  * eio_npending
+  * eio_nready
+  * eio_nreqs
+
+
+vim:ft=help:

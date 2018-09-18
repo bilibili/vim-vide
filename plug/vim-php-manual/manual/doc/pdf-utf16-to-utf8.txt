@@ -1,0 +1,15 @@
+PDF_utf16_to_utf8
+
+(PECL pdflib >= 2.0.3)
+
+PDF_utf16_to_utf8 — Convert string from UTF-16 to UTF-8
+
+==============================================================================
+*Description*
+
+    string PDF_utf16_to_utf8 ( resource $pdfdoc , string $utf16string )~
+
+Converts a string from UTF-16 format to UTF-8.
+
+
+vim:ft=help:

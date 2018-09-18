@@ -1,0 +1,44 @@
+xdiff_string_patch_binary
+
+(PECL xdiff >= 0.2.0)
+
+xdiff_string_patch_binary — Alias of xdiff_string_bpatch
+
+==============================================================================
+*Description*
+
+    string xdiff_string_patch_binary ( string $str , string $patch )~
+
+Patches a string {str} with a binary {patch}. This function accepts patches
+created both via |xdiff_string_bdiff| and |xdiff_string_rabdiff| functions or
+their file counterparts.
+
+Starting with version 1.5.0 this function is an alias of |xdiff_string_bpatch|
+.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The original binary string.
+
+{patch}
+
+    The binary patch string.
+
+==============================================================================
+*Return* *Values*
+
+Returns the patched string, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |xdiff_string_bpatch| - Patch a string with a binary diff
+  * |xdiff_string_bdiff| - Make binary diff of two strings
+  * |xdiff_string_rabdiff| - Make binary diff of two strings using the Rabin's
+    polynomial fingerprinting algorithm
+
+
+vim:ft=help:

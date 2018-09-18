@@ -1,0 +1,80 @@
+idn_to_utf8
+
+(PHP 5 >= 5.3.0, PHP 7, PECL intl >= 1.0.2, PHP 7, PECL idn >= 0.1)
+
+idn_to_utf8 — Convert domain name from IDNA ASCII to Unicode.
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    string idn_to_utf8 ( string $domain [, int $options = 0 [, int $variant =~
+    INTL_IDNA_VARIANT_2003 [, array &$idna_info ]]] )~
+
+This function converts a Unicode domain name from an IDNA ASCII-compatible
+format to plain Unicode, encoded in UTF-8.
+
+==============================================================================
+*Parameters*
+
+{domain}
+
+    Domain to convert in an IDNA ASCII-compatible format.
+
+{options}
+
+    Conversion options - combination of IDNA_* constants (except IDNA_ERROR_*
+    constants).
+
+{variant}
+
+    Either INTL_IDNA_VARIANT_2003 for IDNA 2003 or INTL_IDNA_VARIANT_UTS46 for
+    UTS #46.
+
+{idna_info}
+
+    This parameter can be used only if INTL_IDNA_VARIANT_UTS46 was used for
+    {variant}. In that case, it will be filled with an array with the keys
+    'result', the possibly illegal result of the transformation,
+    'isTransitionalDifferent', a boolean indicating whether the usage of the
+    transitional mechanisms of UTS #46 either has or would have changed the
+    result and 'errors', which is an int representing a bitset of the error
+    constants IDNA_ERROR_*.
+
+==============================================================================
+*Return* *Values*
+
+The domain name in Unicode, encoded in UTF-8, or FALSE on failure
+
+==============================================================================
+*Changelog*
+
+   Version                               Description
+7.2.0          INTL_IDNA_VARIANT_2003 has been deprecated; use
+               INTL_IDNA_VARIANT_UTS46 instead.
+5.4.0/PECL     Added the parameters {variant} and {idna_info}; UTS #46
+2.0.0b1        support.
+
+==============================================================================
+*Examples*
+
+Example #1 idn_to_utf8() example
+
+<?php >
+
+    echo idn_to_utf8('xn--tst-qla.de'); 
+
+<?>
+
+The above example will output:
+
+täst.de
+
+==============================================================================
+*See* *Also*
+
+  * |idn_to_ascii| - Convert domain name to IDNA ASCII form.
+
+
+vim:ft=help:

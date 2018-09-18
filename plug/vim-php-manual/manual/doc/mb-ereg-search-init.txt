@@ -1,0 +1,55 @@
+mb_ereg_search_init
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+mb_ereg_search_init — Setup string and regular expression for a multibyte
+regular expression match
+
+==============================================================================
+*Description*
+
+    bool mb_ereg_search_init ( string $string [, string $pattern [, string~
+    $option = "msr" ]] )~
+
+mb_ereg_search_init() sets {string} and {pattern} for a multibyte regular
+expression. These values are used for |mb_ereg_search|, |mb_ereg_search_pos|,
+and |mb_ereg_search_regs|.
+
+==============================================================================
+*Parameters*
+
+{string}
+
+    The search string.
+
+{pattern}
+
+    The search pattern.
+
+{option}
+
+    The search option.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The internal encoding or the character encoding specified by 
+    |mb_regex_encoding| will be used as the character encoding for this
+    function.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_regex_encoding| - Set/Get character encoding for multibyte regex
+  * |mb_ereg_search_regs| - Returns the matched part of a multibyte regular
+    expression
+
+
+vim:ft=help:

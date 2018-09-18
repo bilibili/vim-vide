@@ -1,0 +1,31 @@
+event_base_set
+
+(PECL libevent >= 0.0.1)
+
+event_base_set — Associate event base with an event
+
+==============================================================================
+*Description*
+
+    bool event_base_set ( resource $event , resource $event_base )~
+
+Associates the {event_base} with the {event}.
+
+==============================================================================
+*Parameters*
+
+{event}
+
+    Valid event resource.
+
+{event_base}
+
+    Valid event base resource.
+
+==============================================================================
+*Return* *Values*
+
+event_base_set() returns TRUE on success or FALSE on error.
+
+
+vim:ft=help:

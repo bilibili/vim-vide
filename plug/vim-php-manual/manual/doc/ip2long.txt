@@ -1,0 +1,98 @@
+ip2long
+
+(PHP 4, PHP 5, PHP 7)
+
+ip2long — Converts a string containing an (IPv4) Internet Protocol dotted
+address into a long integer
+
+==============================================================================
+*Description*
+
+    int ip2long ( string $ip_address )~
+
+The function ip2long() generates an long integer representation of IPv4
+Internet network address from its Internet standard format (dotted string)
+representation.
+
+ip2long() will also work with non-complete IP addresses. Read >> http://
+publibn.boulder.ibm.com/doc_link/en_US/a_doc_lib/libs/commtrf2/inet_addr.htm
+for more info.
+
+==============================================================================
+*Parameters*
+
+{ip_address}
+
+    A standard format address.
+
+==============================================================================
+*Return* *Values*
+
+Returns the long integer or FALSE if {ip_address} is invalid.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Prior to this version, on Windows ip2long() would sometimes return a
+5.5.0   valid number even if passed a value which was not an (IPv4) Internet
+        Protocol dotted address.
+        Prior to this version, ip2long() would sometimes return a valid number
+5.2.10  even if passed a value which was not an (IPv4) Internet Protocol
+        dotted address.
+
+==============================================================================
+*Examples*
+
+Example #1 ip2long() Example
+
+<?php >
+    $ip = gethostbyname('www.example.com');
+    $out = "The following URLs are equivalent:<br />\n";
+    $out .= 'http://www.example.com/, http://' . $ip . '/, and http://' . sprintf(
+    "%u", ip2long($ip)) . "/<br />\n";
+    echo $out;
+<?>
+
+Example #2 Displaying an IP address
+
+This second example shows how to print a converted address with the |printf|
+function:
+
+<?php >
+    $ip   = gethostbyname('www.example.com');
+    $long = ip2long($ip);
+
+    if ($long == -1 || $long === FALSE) {
+        echo 'Invalid IP, please try again';
+    } else {
+        echo $ip   . "\n";           // 192.0.34.166
+        echo $long . "\n";           // -1073732954
+        printf("%u\n", ip2long($ip)); // 3221234342
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Because PHP's integer type is signed, and many IP addresses will result in
+    negative integers on 32-bit architectures, you need to use the "%u"
+    formatter of |sprintf| or |printf| to get the string representation of the
+    unsigned IP address.
+
+    Note:
+
+    ip2long() will return FALSE for the IP 255.255.255.255 in PHP 5 <= 5.0.2.
+    It was fixed in PHP 5.0.3 where it returns -1.
+
+==============================================================================
+*See* *Also*
+
+  * |long2ip| - Converts an long integer address into a string in (IPv4)
+    Internet standard dotted format
+  * |sprintf| - Return a formatted string
+
+
+vim:ft=help:

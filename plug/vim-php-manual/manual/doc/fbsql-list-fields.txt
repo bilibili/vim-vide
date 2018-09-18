@@ -1,0 +1,81 @@
+fbsql_list_fields
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_list_fields — List FrontBase result fields
+
+==============================================================================
+*Description*
+
+    resource fbsql_list_fields ( string $database_name , string $table_name~
+    [, resource $link_identifier ] )~
+
+Retrieves information about the given table.
+
+==============================================================================
+*Parameters*
+
+{database_name}
+
+    The database name.
+
+{table_name}
+
+    The table name.
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+==============================================================================
+*Return* *Values*
+
+Returns a result pointer which can be used with the fbsql_field_xxx functions,
+or FALSE on error.
+
+==============================================================================
+*Errors/Exceptions*
+
+A string describing the error will be placed in $phperrmsg, and unless the
+function was called as @fbsql() then this error string will also be printed
+out.
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_list_fields() example
+
+<?php >
+    $link = fbsql_connect('localhost', 'myname', 'secret');
+
+    $fields = fbsql_list_fields("database1", "table1", $link);
+    $columns = fbsql_num_fields($fields);
+
+    for ($i = 0; $i < $columns; $i++) {
+        echo fbsql_field_name($fields, $i) . "\n";;
+    }
+<?>
+
+The above example will output something similar to:
+
+field1
+field2
+field3
+...
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_field_len| - Returns the length of the specified field
+  * |fbsql_field_name| - Get the name of the specified field in a result
+  * |fbsql_field_type| - Get the type of the specified field in a result
+  * |fbsql_field_flags| - Get the flags associated with the specified field in
+    a result
+
+
+vim:ft=help:

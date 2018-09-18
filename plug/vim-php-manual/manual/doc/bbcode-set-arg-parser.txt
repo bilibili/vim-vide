@@ -1,0 +1,125 @@
+bbcode_set_arg_parser
+
+(PECL bbcode >= 0.10.2)
+
+bbcode_set_arg_parser — Attach another parser in order to use another rule set
+for argument parsing
+
+==============================================================================
+*Description*
+
+    bool bbcode_set_arg_parser ( resource $bbcode_container , resource~
+    $bbcode_arg_parser )~
+
+Attaches another parser to the bbcode_container. This parser is used only when
+arguments must be parsed. If this function is not used, the default argument
+parser is the parser itself.
+
+==============================================================================
+*Parameters*
+
+{bbcode_container}
+
+    BBCode_Container resource, returned by |bbcode_create|.
+
+{bbcode_arg_parser}
+
+    BBCode_Container resource, returned by |bbcode_create|. It will be used
+    only for parsed arguments
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 bbcode_set_arg_parser() usage example
+
+<?php >
+    /*
+     * Generating bbcode ruleset for main parser 
+     */
+    $arrayBBCode=array(
+        'quote'=>    array('type'=>BBCODE_TYPE_ARG,
+                           'open_tag'=>'<quote><h4>Source: {PARAM}</h4>', 
+                           'close_tag'=>'</quote>',
+                           'flags'=>BBCODE_FLAGS_REMOVE_IF_EMPTY|
+    BBCODE_FLAGS_ARG_PARSING),
+        'b'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<b>', 'close_tag'=>'</b>', 
+                           'flags'=>BBCODE_FLAGS_REMOVE_IF_EMPTY),
+        'u'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<u>', 'close_tag'=>'</u>', 
+                           'flags'=>BBCODE_FLAGS_SMILEYS_OFF | 
+    BBCODE_FLAGS_REMOVE_IF_EMPTY | BBCODE_FLAGS_SMILEYS_OFF),
+        'i'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<i>', 'close_tag'=>'</i>', 
+                           'flags'=>BBCODE_FLAGS_REMOVE_IF_EMPTY),
+    );
+    /*
+     * Generating bbcode ruleset for argument parser 
+     */
+    $arrayBBCode_arg=array(
+        'b'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<b class="sub">', 'close_tag'=>'</b>', 
+                           'flags'=>BBCODE_FLAGS_REMOVE_IF_EMPTY),
+        'u'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<u>', 'close_tag'=>'</u>',
+                           'flags'=>BBCODE_FLAGS_SMILEYS_OFF | 
+    BBCODE_FLAGS_REMOVE_IF_EMPTY | BBCODE_FLAGS_SMILEYS_OFF),
+        'i'=>        array('type'=>BBCODE_TYPE_NOARG, 
+                           'open_tag'=>'<i>', 'close_tag'=>'</i>', 
+                           'flags'=>BBCODE_FLAGS_REMOVE_IF_EMPTY),
+    );
+    /*
+     * Text we are going to parse
+     */
+    $text=<<<EOF
+    [quote="[b]Test[/b]"]
+    Foo :)
+    [/quote]
+    [b]Bar example :)[/b] :)
+    EOF;
+    /*
+     * Init the two parsers
+     */
+    $BBHandler=bbcode_create($arrayBBCode);
+    $BBArgHandler=bbcode_create($arrayBBCode_arg);
+    /*
+     * Setting Flags on the parsers
+     */
+    bbcode_set_flags($BBHandler,
+                     BBCODE_CORRECT_REOPEN_TAGS|BBCODE_DEFAULT_SMILEYS_ON|
+    BBCODE_ARG_DOUBLE_QUOTE|
+                     BBCODE_ARG_SINGLE_QUOTE|BBCODE_ARG_HTML_QUOTE,
+    BBCODE_SET_FLAGS_SET);
+    bbcode_set_flags($BBArgHandler,
+                     BBCODE_CORRECT_REOPEN_TAGS|BBCODE_DEFAULT_SMILEYS_ON|
+    BBCODE_ARG_DOUBLE_QUOTE|
+                     BBCODE_ARG_SINGLE_QUOTE|BBCODE_ARG_HTML_QUOTE,
+    BBCODE_SET_FLAGS_SET);
+    /*
+     * Setting $BBArgHandler as the BBHandler argument parser
+     */
+    bbcode_set_arg_parser($BBHandler,$BBArgHandler);
+    /*
+     * Adding Smileys handling rules to Main parser
+     */
+    bbcode_add_smiley($BBHandler, ":)", "<img src=\"smiley.gif\" alt=\":)\" />");
+    /*
+     * Use the main parser to parse text
+     */
+    echo bbcode_parse($BBHandler,$text);
+<?>
+
+The above example will output:
+
+<quote><h4>Source: <b class="sub">Test</b></h4>
+Foo <img src="smiley.gif" alt=":)" />
+</quote>
+<b>Bar example :)</b> <img src="smiley.gif" alt=":)" />
+
+
+vim:ft=help:

@@ -1,0 +1,17 @@
+PDF_fit_textline
+
+(PECL pdflib >= 2.0.0)
+
+PDF_fit_textline — Place single line of text
+
+==============================================================================
+*Description*
+
+    bool PDF_fit_textline ( resource $pdfdoc , string $text , float $x ,~
+    float $y , string $optlist )~
+
+Places a single line of text on the page, subject to various options. Returns
+TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

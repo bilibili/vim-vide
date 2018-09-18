@@ -1,0 +1,21 @@
+maxdb_thread_safe
+
+(PECL maxdb >= 7.6.06.04)
+
+maxdb_thread_safe — Returns whether thread safety is given or not
+
+==============================================================================
+*Description*
+
+    bool maxdb_thread_safe ( void )~
+
+maxdb_thread_safe() indicates whether the client library is compiled as
+thread-safe.
+
+==============================================================================
+*Return* *Values*
+
+TRUE if the client library is thread-safe, otherwise FALSE.
+
+
+vim:ft=help:

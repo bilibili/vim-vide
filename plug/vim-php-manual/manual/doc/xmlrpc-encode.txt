@@ -1,0 +1,23 @@
+xmlrpc_encode
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+xmlrpc_encode — Generates XML for a PHP value
+
+==============================================================================
+*Description*
+
+    string xmlrpc_encode ( mixed $value )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

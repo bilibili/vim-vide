@@ -1,0 +1,28 @@
+trader_log10
+
+(PECL trader >= 0.2.0)
+
+trader_log10 — Vector Log10
+
+==============================================================================
+*Description*
+
+    array trader_log10 ( array $real )~
+
+Calculates the base-10 logarithm for each value in {real} and returns the
+resulting array.
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

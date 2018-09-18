@@ -1,0 +1,35 @@
+rrd_graph
+
+(PECL rrd >= 0.9.0)
+
+rrd_graph — Creates image from a data.
+
+==============================================================================
+*Description*
+
+    array rrd_graph ( string $filename , array $options )~
+
+Creates image for a particular data from RRD file.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The filename to output the graph to. This will generally end in either
+    .png, .svg or .eps, depending on the format you want to output.
+
+{options}
+
+    Options for generating image. See man page of rrd graph for all possible
+    options. All options (data definitions, variable defintions, etc.) are
+    allowed.
+
+==============================================================================
+*Return* *Values*
+
+Array with information about generated image is returned, FALSE when error
+occurs.
+
+
+vim:ft=help:

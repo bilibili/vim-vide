@@ -1,0 +1,50 @@
+socket_accept
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_accept — Accepts a connection on a socket
+
+==============================================================================
+*Description*
+
+    resource socket_accept ( resource $socket )~
+
+After the socket {socket} has been created using |socket_create|, bound to a
+name with |socket_bind|, and told to listen for connections with 
+|socket_listen|, this function will accept incoming connections on that socket.
+Once a successful connection is made, a new socket resource is returned, which
+may be used for communication. If there are multiple connections queued on the
+socket, the first will be used. If there are no pending connections, 
+socket_accept() will block until a connection becomes present. If {socket} has
+been made non-blocking using |socket_set_blocking| or |socket_set_nonblock|,
+FALSE will be returned.
+
+The socket resource returned by socket_accept() may not be used to accept new
+connections. The original listening socket {socket}, however, remains open and
+may be reused.
+
+==============================================================================
+*Parameters*
+
+{socket}
+
+    A valid socket resource created with |socket_create|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a new socket resource on success, or FALSE on error. The actual error
+code can be retrieved by calling |socket_last_error|. This error code may be
+passed to |socket_strerror| to get a textual explanation of the error.
+
+==============================================================================
+*See* *Also*
+
+  * |socket_connect| - Initiates a connection on a socket
+  * |socket_listen| - Listens for a connection on a socket
+  * |socket_create| - Create a socket (endpoint for communication)
+  * |socket_bind| - Binds a name to a socket
+  * |socket_strerror| - Return a string describing a socket error
+
+
+vim:ft=help:

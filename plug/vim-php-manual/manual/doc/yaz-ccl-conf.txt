@@ -1,0 +1,66 @@
+yaz_ccl_conf
+
+(PHP 4 >= 4.0.5, PECL yaz >= 0.9.0)
+
+yaz_ccl_conf — Configure CCL parser
+
+==============================================================================
+*Description*
+
+    void yaz_ccl_conf ( resource $id , array $config )~
+
+This function configures the CCL query parser for a server with definitions of
+access points (CCL qualifiers) and their mapping to RPN.
+
+To map a specific CCL query to RPN afterwards call the |yaz_ccl_parse|
+function.
+
+==============================================================================
+*Parameters*
+
+{id}
+
+    The connection resource returned by |yaz_connect|.
+
+{config}
+
+    An array of configuration. Each key of the array is the name of a CCL
+    field and the corresponding value holds a string that specifies a mapping
+    to RPN.
+
+    The mapping is a sequence of attribute-type, attribute-value pairs.
+    Attribute-type and attribute-value is separated by an equal sign (=). Each
+    pair is separated by white space.
+
+    Additional information can be found on the >> CCL page.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+In the example below, the CCL parser is configured to support three CCL
+fields: ti, au and isbn. Each field is mapped to their BIB-1 equivalent. It is
+assumed that variable $id is the connection ID.
+
+Example #1 CCL configuration
+
+<?php >
+    $fields = array(
+      "ti" => "1=4",
+      "au"   => "1=1",
+      "isbn" => "1=7"
+    );
+    yaz_ccl_conf($id, $fields);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |yaz_ccl_parse| - Invoke CCL Parser
+
+
+vim:ft=help:

@@ -1,0 +1,84 @@
+openlog
+
+(PHP 4, PHP 5, PHP 7)
+
+openlog — Open connection to system logger
+
+==============================================================================
+*Description*
+
+    bool openlog ( string $ident , int $option , int $facility )~
+
+openlog() opens a connection to the system logger for a program.
+
+The use of openlog() is optional. It will automatically be called by |syslog|
+if necessary, in which case {ident} will default to FALSE.
+
+==============================================================================
+*Parameters*
+
+{ident}
+
+    The string {ident} is added to each message.
+
+{option}
+
+    The {option} argument is used to indicate what logging options will be
+    used when generating a log message.
+
+                              openlog() Options
+     Constant                            Description
+    LOG_CONS   if there is an error while sending data to the system logger,
+               write directly to the system console
+    LOG_NDELAY open the connection to the logger immediately
+    LOG_ODELAY (default) delay opening the connection until the first message
+               is logged
+    LOG_PERROR print log message also to standard error
+    LOG_PID    include PID with each message
+
+    You can use one or more of this options. When using multiple options you
+    need to OR them, i.e. to open the connection immediately, write to the
+    console and include the PID in each message, you will use: LOG_CONS |
+    LOG_NDELAY | LOG_PID
+
+{facility}
+
+    The {facility} argument is used to specify what type of program is logging
+    the message. This allows you to specify (in your machine's syslog
+    configuration) how messages coming from different facilities will be
+    handled.
+
+                             openlog() Facilities
+       Constant                            Description
+    LOG_AUTH        security/authorization messages (use LOG_AUTHPRIV instead
+                    in systems where that constant is defined)
+    LOG_AUTHPRIV    security/authorization messages (private)
+    LOG_CRON        clock daemon (cron and at)
+    LOG_DAEMON      other system daemons
+    LOG_KERN        kernel messages
+    LOG_LOCAL0 ...  reserved for local use, these are not available in Windows
+    LOG_LOCAL7
+    LOG_LPR         line printer subsystem
+    LOG_MAIL        mail subsystem
+    LOG_NEWS        USENET news subsystem
+    LOG_SYSLOG      messages generated internally by syslogd
+    LOG_USER        generic user-level messages
+    LOG_UUCP        UUCP subsystem
+
+        Note:
+
+        LOG_USER is the only valid log type under Windows operating systems
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |syslog| - Generate a system log message
+  * |closelog| - Close connection to system logger
+
+
+vim:ft=help:

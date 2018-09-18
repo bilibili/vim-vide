@@ -1,0 +1,102 @@
+db2_prepare
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_prepare — Prepares an SQL statement to be executed
+
+==============================================================================
+*Description*
+
+    resource db2_prepare ( resource $connection , string $statement [, array~
+    $options ] )~
+
+db2_prepare() creates a prepared SQL statement which can include 0 or more
+parameter markers (? characters) representing parameters for input, output, or
+input/output. You can pass parameters to the prepared statement using 
+|db2_bind_param|, or for input values only, as an array passed to |db2_execute|
+.
+
+There are three main advantages to using prepared statements in your
+application:
+
+  * Performance: when you prepare a statement, the database server creates an
+    optimized access plan for retrieving data with that statement.
+    Subsequently issuing the prepared statement with |db2_execute| enables the
+    statements to reuse that access plan and avoids the overhead of
+    dynamically creating a new access plan for every statement you issue.
+
+  * Security: when you prepare a statement, you can include parameter markers
+    for input values. When you execute a prepared statement with input values
+    for placeholders, the database server checks each input value to ensure
+    that the type matches the column definition or parameter definition.
+
+  * Advanced functionality: Parameter markers not only enable you to pass
+    input values to prepared SQL statements, they also enable you to retrieve
+    OUT and INOUT parameters from stored procedures using |db2_bind_param|.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    A valid database connection resource variable as returned from 
+    |db2_connect| or |db2_pconnect|.
+
+{statement}
+
+    An SQL statement, optionally containing one or more parameter markers..
+
+{options}
+
+    An associative array containing statement options. You can use this
+    parameter to request a scrollable cursor on database servers that support
+    this functionality.
+
+    For a description of valid statement options, see |db2_set_option|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a statement resource if the SQL statement was successfully parsed and
+prepared by the database server. Returns FALSE if the database server returned
+an error. You can determine which error was returned by calling 
+|db2_stmt_error| or |db2_stmt_errormsg|.
+
+==============================================================================
+*Examples*
+
+Example #1 Preparing and executing an SQL statement with parameter markers
+
+The following example prepares an INSERT statement that accepts four parameter
+markers, then iterates over an array of arrays containing the input values to
+be passed to |db2_execute|.
+
+<?php >
+    $animals = array(
+        array(0, 'cat', 'Pook', 3.2),
+        array(1, 'dog', 'Peaches', 12.3),
+        array(2, 'horse', 'Smarty', 350.0),
+    );
+
+    $insert = 'INSERT INTO animals (id, breed, name, weight)
+        VALUES (?, ?, ?, ?)';
+    $stmt = db2_prepare($conn, $insert);
+    if ($stmt) {
+        foreach ($animals as $animal) {
+            $result = db2_execute($stmt, $animal);
+        }
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |db2_bind_param| - Binds a PHP variable to an SQL statement parameter
+  * |db2_execute| - Executes a prepared SQL statement
+  * |db2_stmt_error| - Returns a string containing the SQLSTATE returned by an
+    SQL statement
+  * |db2_stmt_errormsg| - Returns a string containing the last SQL statement
+    error message
+
+
+vim:ft=help:

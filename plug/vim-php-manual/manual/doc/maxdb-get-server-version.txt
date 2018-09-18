@@ -1,0 +1,83 @@
+maxdb_get_server_version
+
+maxdb::server_version
+
+(PECL maxdb >= 1.0)
+
+maxdb_get_server_version -- maxdb::server_version — Returns the version of the
+MaxDB server as an integer
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    int maxdb_get_server_version ( resource $link )~
+
+Object oriented style
+
+int $maxdb->server_version;
+
+The maxdb_get_server_version() function returns the version of the server
+connected to (represented by the {link} parameter) as an integer.
+
+The form of this version number is main_version * 10000 + minor_version * 100
++ sub_version (i.e. version 7.5.0 is 70500).
+
+==============================================================================
+*Return* *Values*
+
+An integer representing the server version.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    /* print server version */
+    printf("Server version: %d\n", $maxdb->server_version);
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    /* print server version */
+    printf("Server version: %d\n", maxdb_get_server_version($link));
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Server version: 7<...>
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_get_client_info| - Returns the MaxDB client version as a string
+  * |maxdb_get_client_version| - Get MaxDB client info
+  * |maxdb_get_server_info| - Returns the version of the MaxDB server
+
+
+vim:ft=help:

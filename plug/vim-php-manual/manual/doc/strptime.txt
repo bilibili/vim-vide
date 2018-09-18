@@ -1,0 +1,117 @@
+strptime
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+strptime — Parse a time/date generated with |strftime|
+
+==============================================================================
+*Description*
+
+    array strptime ( string $date , string $format )~
+
+strptime() returns an array with the {date} parsed, or FALSE on error.
+
+Month and weekday names and other language dependent strings respect the
+current locale set with |setlocale| (LC_TIME).
+
+==============================================================================
+*Parameters*
+
+{date} (string)
+
+    The string to parse (e.g. returned from |strftime|).
+
+{format} (string)
+
+    The format used in {date} (e.g. the same as used in |strftime|). Note that
+    some of the format options available to |strftime| may not have any effect
+    within strptime(); the exact subset that are supported will vary based on
+    the operating system and C library in use.
+
+    For more information about the format options, read the |strftime| page.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array or FALSE on failure.
+
+              The following parameters are returned in the array
+parameters                             Description
+"tm_sec"   Seconds after the minute (0-61)
+"tm_min"   Minutes after the hour (0-59)
+"tm_hour"  Hour since midnight (0-23)
+"tm_mday"  Day of the month (1-31)
+"tm_mon"   Months since January (0-11)
+"tm_year"  Years since 1900
+"tm_wday"  Days since Sunday (0-6)
+"tm_yday"  Days since January 1 (0-365)
+"unparsed" the {date} part which was not recognized using the specified
+           {format}
+
+==============================================================================
+*Examples*
+
+Example #1 strptime() example
+
+<?php >
+    $format = '%d/%m/%Y %H:%M:%S';
+    $strf = strftime($format);
+
+    echo "$strf\n";
+
+    print_r(strptime($strf, $format));
+<?>
+
+The above example will output something similar to:
+
+03/10/2004 15:54:19
+
+Array
+(
+    [tm_sec] => 19
+    [tm_min] => 54
+    [tm_hour] => 15
+    [tm_mday] => 3
+    [tm_mon] => 9
+    [tm_year] => 104
+    [tm_wday] => 0
+    [tm_yday] => 276
+    [unparsed] =>
+)
+
+==============================================================================
+*Notes*
+
+    Note: This function is not implemented on Windows platforms.
+
+    Note:
+
+    Internally, this function calls the strptime() function provided by the
+    system's C library. This function can exhibit noticeably different
+    behaviour across different operating systems. The use of 
+    |date_parse_from_format|, which does not suffer from these issues, is
+    recommended on PHP 5.3.0 and later.
+
+    Note:
+
+    "tm_sec" includes any leap seconds (currently upto 2 a year). For more
+    information on leap seconds, see the >> Wikipedia article on leap seconds.
+
+    Note:
+
+    Prior to PHP 5.2.0, this function could return undefined behaviour.
+    Notably, the "tm_sec", "tm_min" and "tm_hour" entries would return
+    undefined values.
+
+==============================================================================
+*See* *Also*
+
+  * |checkdate| - Validate a Gregorian date
+  * |strftime| - Format a local time/date according to locale settings
+  * |date_parse_from_format| - Get info about given date formatted according
+    to the specified format
+  * DateTime::createFromFormat() - Parses a time string according to a
+    specified format
+
+
+vim:ft=help:

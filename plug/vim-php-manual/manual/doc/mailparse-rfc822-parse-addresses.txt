@@ -1,0 +1,74 @@
+mailparse_rfc822_parse_addresses
+
+(PECL mailparse >= 0.9.0)
+
+mailparse_rfc822_parse_addresses — Parse RFC 822 compliant addresses
+
+==============================================================================
+*Description*
+
+    array mailparse_rfc822_parse_addresses ( string $addresses )~
+
+Parses a >> RFC 822 compliant recipient list, such as that found in the To:
+header.
+
+==============================================================================
+*Parameters*
+
+{addresses}
+
+    A string containing addresses, like in: Wez Furlong <wez@example.com>,
+    doe@example.com
+
+        Note:
+
+        This string must not include the header name.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of associative arrays with the following keys for each
+recipient:
+
+display  The recipient name, for display purpose. If this part is not set for
+         a recipient, this key will hold the same value as address.
+address  The email address
+is_group TRUE if the recipient is a newsgroup, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 mailparse_rfc822_parse_addresses() example
+
+<?php >
+
+    $to = 'Wez Furlong <wez@example.com>, doe@example.com';
+    var_dump(mailparse_rfc822_parse_addresses($to));
+
+<?>
+
+The above example will output:
+
+array(2) {
+  [0]=>
+  array(3) {
+    ["display"]=>
+    string(11) "Wez Furlong"
+    ["address"]=>
+    string(15) "wez@example.com"
+    ["is_group"]=>
+    bool(false)
+  }
+  [1]=>
+  array(3) {
+    ["display"]=>
+    string(15) "doe@example.com"
+    ["address"]=>
+    string(15) "doe@example.com"
+    ["is_group"]=>
+    bool(false)
+  }
+}
+
+
+vim:ft=help:

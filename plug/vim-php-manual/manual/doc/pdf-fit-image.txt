@@ -1,0 +1,17 @@
+PDF_fit_image
+
+(PECL pdflib >= 2.0.0)
+
+PDF_fit_image — Place image or template
+
+==============================================================================
+*Description*
+
+    bool PDF_fit_image ( resource $pdfdoc , int $image , float $x , float $y~
+    , string $optlist )~
+
+Places an image or template on the page, subject to various options. Returns
+TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

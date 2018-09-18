@@ -1,0 +1,27 @@
+newt_checkbox_set_value
+
+(PECL newt >= 0.1)
+
+newt_checkbox_set_value — Sets the value of the checkbox
+
+==============================================================================
+*Description*
+
+    void newt_checkbox_set_value ( resource $checkbox , string $value )~
+
+This function allows to set the current value of the checkbox resource.
+
+==============================================================================
+*Parameters*
+
+{checkbox}
+
+{value}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

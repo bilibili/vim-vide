@@ -1,0 +1,27 @@
+stats_dens_t
+
+(PECL stats >= 1.0.0)
+
+stats_dens_t — Not documented
+
+==============================================================================
+*Description*
+
+    float stats_dens_t ( float $x , float $dfr )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{x}
+
+{dfr}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

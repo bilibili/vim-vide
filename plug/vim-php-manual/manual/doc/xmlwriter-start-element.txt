@@ -1,0 +1,47 @@
+XMLWriter::startElement
+
+xmlwriter_start_element
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::startElement -- xmlwriter_start_element — Create start element tag
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::startElement ( string $name )~
+
+Procedural style
+
+    bool xmlwriter_start_element ( resource $xmlwriter , string $name )~
+
+Starts an element.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{name}
+
+    The element name.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::endElement| - End current element
+  * |XMLWriter::writeElement| - Write full element tag
+
+
+vim:ft=help:

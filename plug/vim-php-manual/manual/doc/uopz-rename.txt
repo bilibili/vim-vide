@@ -1,0 +1,71 @@
+uopz_rename
+
+(PECL uopz >= 1.0.0)
+
+uopz_rename — Rename a function at runtime
+
+==============================================================================
+*Description*
+
+    void uopz_rename ( string $class , string $function , string $rename )~
+    void uopz_rename ( string $function , string $rename )~
+
+Renames {function} to {rename}
+
+    Note:
+
+    If both functions exist, this effectively swaps their names
+
+==============================================================================
+*Parameters*
+
+{class}
+
+    The name of the class containing the function
+
+{function}
+
+    The name of an existing function
+
+{rename}
+
+    The new name for the function
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Examples*
+
+Example #1 uopz_rename() example
+
+<?php >
+    uopz_rename("strlen", "original_strlen");
+
+    echo original_strlen("Hello World");
+<?>
+
+The above example will output something similar to:
+
+11
+
+Example #2 uopz_rename() class example
+
+<?php >
+    class My {
+        public function strlen($arg) {
+            return strlen($arg);
+        }
+    }
+
+    uopz_rename(My::class, "strlen", "original_strlen");
+
+    echo My::original_strlen("Hello World");
+<?>
+
+The above example will output something similar to:
+
+11
+
+
+vim:ft=help:

@@ -1,0 +1,55 @@
+gnupg_seterrormode
+
+(PECL gnupg >= 0.6)
+
+gnupg_seterrormode — Sets the mode for error_reporting
+
+==============================================================================
+*Description*
+
+    void gnupg_seterrormode ( resource $identifier , int $errormode )~
+
+Sets the mode for error_reporting.
+
+==============================================================================
+*Parameters*
+
+{identifier}
+
+    The gnupg identifier, from a call to |gnupg_init| or gnupg.
+
+{errormode}
+
+    The error mode.
+
+    {errormode} takes a constant indicating what type of error_reporting
+    should be used. The possible values are GNUPG_ERROR_WARNING,
+    GNUPG_ERROR_EXCEPTION and GNUPG_ERROR_SILENT. By default
+    GNUPG_ERROR_SILENT is used.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural gnupg_seterrormode() example
+
+<?php >
+    $res = gnupg_init();
+    gnupg_seterrormode($res,GNUPG_ERROR_WARNING); //
+     raise a PHP-Warning in case of an error
+<?>
+
+Example #2 OO gnupg_seterrormode() example
+
+<?php >
+    $gpg = new gnupg();
+    $gpg -> seterrormode(gnupg::ERROR_EXCEPTION); //
+     throw an exception in case of an error
+<?>
+
+
+vim:ft=help:

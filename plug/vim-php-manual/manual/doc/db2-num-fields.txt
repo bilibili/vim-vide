@@ -1,0 +1,71 @@
+db2_num_fields
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_num_fields — Returns the number of fields contained in a result set
+
+==============================================================================
+*Description*
+
+    int db2_num_fields ( resource $stmt )~
+
+Returns the number of fields contained in a result set. This is most useful
+for handling the result sets returned by dynamically generated queries, or for
+result sets returned by stored procedures, where your application cannot
+otherwise know how to retrieve and use the results.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    A valid statement resource containing a result set.
+
+==============================================================================
+*Return* *Values*
+
+Returns an integer value representing the number of fields in the result set
+associated with the specified statement resource. Returns FALSE if the
+statement resource is not a valid input value.
+
+==============================================================================
+*Examples*
+
+Example #1 Retrieving the number of fields in a result set
+
+The following example demonstrates how to retrieve the number of fields
+returned in a result set.
+
+<?php >
+
+    $sql = "SELECT id, name, breed, weight FROM animals ORDER BY breed";
+    $stmt = db2_prepare($conn, $sql);
+    db2_execute($stmt, $sql);
+    $columns = db2_num_fields($stmt);
+
+    echo "There are {$columns} columns in the result set.";
+<?>
+
+The above example will output:
+
+There are 4 columns in the result set.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_execute| - Executes a prepared SQL statement
+  * |db2_field_display_size| - Returns the maximum number of bytes required to
+    display a column
+  * |db2_field_name| - Returns the name of the column in the result set
+  * |db2_field_num| - Returns the position of the named column in a result set
+  * |db2_field_precision| - Returns the precision of the indicated column in a
+    result set
+  * |db2_field_scale| - Returns the scale of the indicated column in a result
+    set
+  * |db2_field_type| - Returns the data type of the indicated column in a
+    result set
+  * |db2_field_width| - Returns the width of the current value of the
+    indicated column in a result set
+
+
+vim:ft=help:

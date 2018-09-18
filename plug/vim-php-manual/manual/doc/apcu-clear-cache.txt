@@ -1,0 +1,30 @@
+apcu_clear_cache
+
+(PECL apcu >= 4.0.0)
+
+apcu_clear_cache — Clears the APCu cache
+
+==============================================================================
+*Description*
+
+    bool apcu_clear_cache ( void )~
+
+Clears the cache.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE always
+
+==============================================================================
+*See* *Also*
+
+  * |apcu_cache_info| - Retrieves cached information from APCu's data store
+
+
+vim:ft=help:

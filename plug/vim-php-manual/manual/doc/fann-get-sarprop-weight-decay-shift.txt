@@ -1,0 +1,35 @@
+fann_get_sarprop_weight_decay_shift
+
+(PECL fann >= 1.0.0)
+
+fann_get_sarprop_weight_decay_shift — Returns the sarprop weight decay shift
+
+==============================================================================
+*Description*
+
+    float fann_get_sarprop_weight_decay_shift ( resource $ann )~
+
+The sarprop weight decay shift.
+
+The default delta max is -6.644.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+The sarprop weight decay shift, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_set_sarprop_weight_decay_shift| - Sets the sarprop weight decay
+    shift
+
+
+vim:ft=help:

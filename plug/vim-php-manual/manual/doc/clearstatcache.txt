@@ -1,0 +1,97 @@
+clearstatcache
+
+(PHP 4, PHP 5, PHP 7)
+
+clearstatcache — Clears file status cache
+
+==============================================================================
+*Description*
+
+    void clearstatcache ([ bool $clear_realpath_cache = false [, string~
+    $filename ]] )~
+
+When you use |stat|, |lstat|, or any of the other functions listed in the
+affected functions list (below), PHP caches the information those functions
+return in order to provide faster performance. However, in certain cases, you
+may want to clear the cached information. For instance, if the same file is
+being checked multiple times within a single script, and that file is in
+danger of being removed or changed during that script's operation, you may
+elect to clear the status cache. In these cases, you can use the 
+clearstatcache() function to clear the information that PHP caches about a
+file.
+
+You should also note that PHP doesn't cache information about non-existent
+files. So, if you call |file_exists| on a file that doesn't exist, it will
+return FALSE until you create the file. If you create the file, it will return
+TRUE even if you then delete the file. However |unlink| clears the cache
+automatically.
+
+    Note:
+
+    This function caches information about specific filenames, so you only
+    need to call clearstatcache() if you are performing multiple operations on
+    the same filename and require the information about that particular file
+    to not be cached.
+
+Affected functions include |stat|, |lstat|, |file_exists|, |is_writable|, 
+|is_readable|, |is_executable|, |is_file|, |is_dir|, |is_link|, |filectime|, 
+|fileatime|, |filemtime|, |fileinode|, |filegroup|, |fileowner|, |filesize|, 
+|filetype|, and |fileperms|.
+
+==============================================================================
+*Parameters*
+
+{clear_realpath_cache}
+
+    Whether to clear the realpath cache or not.
+
+{filename}
+
+    Clear the realpath and the stat cache for a specific filename only; only
+    used if {clear_realpath_cache} is TRUE.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Changelog*
+
+Version                           Description
+5.3.0   Added optional {clear_realpath_cache} and {filename} parameters.
+
+==============================================================================
+*Examples*
+
+Example #1 clearstatcache() example
+
+<?php >
+    $file = 'output_log.txt';
+
+    function get_owner($file)
+    {
+        $stat = stat($file);
+        $user = posix_getpwuid($stat['uid']);
+        return $user['name'];
+    }
+
+    $format = "UID @ %s: %s\n";
+
+    printf($format, date('r'), get_owner($file));
+
+    chown($file, 'ross');
+    printf($format, date('r'), get_owner($file));
+
+    clearstatcache();
+    printf($format, date('r'), get_owner($file));
+<?>
+
+The above example will output something similar to:
+
+UID @ Sun, 12 Oct 2008 20:48:28 +0100: root
+UID @ Sun, 12 Oct 2008 20:48:28 +0100: root
+UID @ Sun, 12 Oct 2008 20:48:28 +0100: ross
+
+
+vim:ft=help:

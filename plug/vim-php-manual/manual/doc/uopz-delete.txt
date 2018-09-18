@@ -1,0 +1,59 @@
+uopz_delete
+
+(PECL uopz >= 1.0.0)
+
+uopz_delete — Delete a function
+
+==============================================================================
+*Description*
+
+    void uopz_delete ( string $class , string $function )~
+    void uopz_delete ( string $function )~
+
+Deletes a function or method
+
+==============================================================================
+*Parameters*
+
+{class}
+
+{function}
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Examples*
+
+Example #1 uopz_delete() example
+
+<?php >
+    uopz_delete("strlen");
+
+    echo strlen("Hello World");
+<?>
+
+The above example will output something similar to:
+
+PHP Fatal error: Call to undefined function strlen() in /path/to/script.php on line 4
+
+Example #2 uopz_delete() class example
+
+<?php >
+    class My {
+        public static function strlen($arg) {
+            return strlen($arg);
+        }
+    }
+
+    uopz_delete(My::class, "strlen");
+
+    echo My::strlen("Hello World");
+<?>
+
+The above example will output something similar to:
+
+PHP Fatal error: Call to undefined method My::strlen() in /path/to/script.php on line 10
+
+
+vim:ft=help:

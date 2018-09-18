@@ -1,0 +1,29 @@
+trader_medprice
+
+(PECL trader >= 0.2.0)
+
+trader_medprice — Median Price
+
+==============================================================================
+*Description*
+
+    array trader_medprice ( array $high , array $low )~
+
+==============================================================================
+*Parameters*
+
+{high}
+
+    High price, array of real values.
+
+{low}
+
+    Low price, array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

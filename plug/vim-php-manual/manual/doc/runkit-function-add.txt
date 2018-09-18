@@ -1,0 +1,85 @@
+runkit_function_add
+
+(PECL runkit >= 0.7.0)
+
+runkit_function_add — Add a new function, similar to |create_function|
+
+==============================================================================
+*Description*
+
+    bool runkit_function_add ( string $funcname , string $arglist , string~
+    $code [, bool $return_by_reference = NULL [, string $doc_comment = NULL~
+    ]] )~
+    bool runkit_function_add ( string $funcname , Closure $closure [, string~
+    $doc_comment = NULL ] )~
+
+==============================================================================
+*Parameters*
+
+{funcname}
+
+    Name of function to be created
+
+{arglist}
+
+    Comma separated argument list
+
+{code}
+
+    Code making up the function
+
+{closure}
+
+    A closure that defines the function.
+
+{return_by_reference}
+
+    Whether the function should return by reference.
+
+{doc_comment}
+
+    The doc comment of the function.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+ Version                               Description
+runkit     An alternative syntax expecting a {closure} has been added.
+1.0.4
+runkit     The optional parameters {return_by_reference} and {doc_comment}
+1.0.4      have been added.
+
+==============================================================================
+*Examples*
+
+Example #1 A runkit_function_add() example
+
+<?php >
+    runkit_function_add('testme','$a,$b','echo "The value of a is $a\n";
+     echo "The value of b is $b\n";');
+    testme(1,2);
+<?>
+
+The above example will output:
+
+The value of a is 1
+The value of b is 2
+
+==============================================================================
+*See* *Also*
+
+  * |create_function| - Create an anonymous (lambda-style) function
+  * |runkit_function_redefine| - Replace a function definition with a new
+    implementation
+  * |runkit_function_copy| - Copy a function to a new function name
+  * |runkit_function_rename| - Change a function's name
+  * |runkit_function_remove| - Remove a function definition
+  * |runkit_method_add| - Dynamically adds a new method to a given class
+
+
+vim:ft=help:

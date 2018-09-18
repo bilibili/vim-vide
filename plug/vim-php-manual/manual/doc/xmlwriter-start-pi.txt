@@ -1,0 +1,47 @@
+XMLWriter::startPI
+
+xmlwriter_start_pi
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::startPI -- xmlwriter_start_pi — Create start PI tag
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::startPI ( string $target )~
+
+Procedural style
+
+    bool xmlwriter_start_pi ( resource $xmlwriter , string $target )~
+
+Starts a processing instruction tag.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{target}
+
+    The target of the processing instruction.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::endPI| - End current PI
+  * |XMLWriter::writePI| - Writes a PI
+
+
+vim:ft=help:

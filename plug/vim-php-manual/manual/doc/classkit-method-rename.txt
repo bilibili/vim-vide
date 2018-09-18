@@ -1,0 +1,80 @@
+classkit_method_rename
+
+(PECL classkit >= 0.1)
+
+classkit_method_rename — Dynamically changes the name of the given method
+
+==============================================================================
+*Description*
+
+    bool classkit_method_rename ( string $classname , string $methodname ,~
+    string $newname )~
+
+
+    Note: This function cannot be used to manipulate the currently running (or
+    chained) method.
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*Parameters*
+
+{classname}
+
+    The class in which to rename the method
+
+{methodname}
+
+    The name of the method to rename
+
+{newname}
+
+    The new name to give to the renamed method
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 classkit_method_rename() example
+
+<?php >
+    class Example {
+        function foo() {
+            return "foo!\n";
+        }
+    }
+
+    // Rename the 'foo' method to 'bar'
+    classkit_method_rename(
+        'Example',
+        'foo',
+        'bar'
+    );
+
+    // output renamed function
+    echo Example::bar();
+<?>
+
+The above example will output:
+
+foo!
+
+==============================================================================
+*See* *Also*
+
+  * |classkit_method_add| - Dynamically adds a new method to a given class
+  * |classkit_method_copy| - Copies a method from class to another
+  * |classkit_method_redefine| - Dynamically changes the code of the given
+    method
+  * |classkit_method_remove| - Dynamically removes the given method
+
+
+vim:ft=help:

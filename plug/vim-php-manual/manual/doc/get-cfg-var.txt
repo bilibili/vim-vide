@@ -1,0 +1,47 @@
+get_cfg_var
+
+(PHP 4, PHP 5, PHP 7)
+
+get_cfg_var — Gets the value of a PHP configuration option
+
+==============================================================================
+*Description*
+
+    string get_cfg_var ( string $option )~
+
+Gets the value of a PHP configuration {option}.
+
+This function will not return configuration information set when the PHP was
+compiled, or read from an Apache configuration file.
+
+To check whether the system is using a configuration file, try retrieving the
+value of the cfg_file_path configuration setting. If this is available, a
+configuration file is being used.
+
+==============================================================================
+*Parameters*
+
+{option}
+
+    The configuration option name.
+
+==============================================================================
+*Return* *Values*
+
+Returns the current value of the PHP configuration variable specified by
+{option}, or FALSE if an error occurs.
+
+==============================================================================
+*Changelog*
+
+Version                            Description
+5.3.0   get_cfg_var() was fixed to be able to return "array" ini options.
+
+==============================================================================
+*See* *Also*
+
+  * |ini_get| - Gets the value of a configuration option
+  * |ini_get_all| - Gets all configuration options
+
+
+vim:ft=help:

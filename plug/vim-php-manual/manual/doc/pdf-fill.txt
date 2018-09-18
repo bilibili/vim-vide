@@ -1,0 +1,16 @@
+PDF_fill
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_fill — Fill current path
+
+==============================================================================
+*Description*
+
+    bool PDF_fill ( resource $p )~
+
+Fills the interior of the current path with the current fill color. Returns
+TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,58 @@
+is_null
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+is_null — Finds whether a variable is NULL
+
+==============================================================================
+*Description*
+
+    bool is_null ( mixed $var )~
+
+Finds whether the given variable is NULL.
+
+==============================================================================
+*Parameters*
+
+{var}
+
+    The variable being evaluated.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {var} is null, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 is_null() example
+
+<?php >
+
+    error_reporting(E_ALL);
+
+    $foo = NULL;
+    var_dump(is_null($inexistent), is_null($foo));
+
+<?>
+
+Notice: Undefined variable: inexistent in ...
+bool(true)
+bool(true)
+
+==============================================================================
+*See* *Also*
+
+  * The NULL type
+  * |isset| - Determine if a variable is set and is not NULL
+  * |is_bool| - Finds out whether a variable is a boolean
+  * |is_numeric| - Finds whether a variable is a number or a numeric string
+  * |is_float| - Finds whether the type of a variable is float
+  * |is_int| - Find whether the type of a variable is integer
+  * |is_string| - Find whether the type of a variable is string
+  * |is_object| - Finds whether a variable is an object
+  * |is_array| - Finds whether a variable is an array
+
+
+vim:ft=help:

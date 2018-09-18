@@ -1,0 +1,22 @@
+ming_useconstants
+
+(PHP 5 <= 5.3.0, PECL ming SVN)
+
+ming_useconstants — Use constant pool
+
+==============================================================================
+*Description*
+
+    void ming_useconstants ( int $use )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

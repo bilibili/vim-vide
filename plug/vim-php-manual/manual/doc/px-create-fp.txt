@@ -1,0 +1,91 @@
+px_create_fp
+
+(PECL paradox >= 1.0.0)
+
+px_create_fp — Create a new paradox database
+
+==============================================================================
+*Description*
+
+    bool px_create_fp ( resource $pxdoc , resource $file , array $fielddesc )~
+
+Create a new paradox database file. The actual file has to be opened before
+with |fopen|. Make sure the file is writable.
+
+    Note:
+
+    Calling this functions issues a warning about an empty tablename which can
+    be safely ignored. Just set the tablename afterwards with 
+    |px_set_parameter|.
+
+    Note:
+
+    This function is highly experimental, due to insufficient documentation of
+    the paradox file format. Database files created with this function can be
+    opened by |px_open_fp| and has been successfully opened by the Paradox
+    software, but your milage may vary.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+{file}
+
+    File handle as returned by |fopen|.
+
+{fielddesc}
+
+    fielddesc is an array containing one element for each field specification.
+    A field specification is an array itself with either two or three
+    elements.The first element is always a string value used as the name of
+    the field. It may not be larger than ten characters. The second element
+    contains the field type which is one of the constants listed in the table
+    Constants for field types. In the case of a character field or bcd field,
+    you will have to provide a third element specifying the length
+    respectively the precesion of the field. If your field specification
+    contains blob fields, you will have to make sure to either make the field
+    large enough for all field values to fit or specify a blob file with 
+    |px_set_blob_file| for storing the blobs. If this is not done the field
+    data is truncated.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Creating a Paradox database with two fields
+
+<?php >
+    if(!$pxdoc = px_new()) {
+      /* Error handling */
+    }
+    $fp = fopen("test.db", "w+");
+    $fields = array(array("col1", "S"), array("col2", "I"));
+    if(!px_create_fp($pxdoc, $fp, $fields)) {
+      /* Error handling */
+    }
+    px_set_parameter($pxdoc, "tablename", "testtable");
+    for($i=-50; $i<50; $i++) {
+      $rec = array($i, -$i);
+      px_put_record($pxdoc, $rec);
+    }   
+    px_close($pxdoc);
+    px_delete($pxdoc);
+    fclose($fp);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |px_new| - Create a new paradox object
+  * |px_put_record| - Stores record into paradox database
+  * |fopen| - Opens file or URL
+
+
+vim:ft=help:

@@ -1,0 +1,27 @@
+stats_stat_correlation
+
+(PECL stats >= 1.0.0)
+
+stats_stat_correlation — Not documented
+
+==============================================================================
+*Description*
+
+    float stats_stat_correlation ( array $arr1 , array $arr2 )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{arr1}
+
+{arr2}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

@@ -1,0 +1,33 @@
+openal_source_pause
+
+(PECL openal >= 0.1.0)
+
+openal_source_pause — Pause the source
+
+==============================================================================
+*Description*
+
+    bool openal_source_pause ( resource $source )~
+
+==============================================================================
+*Parameters*
+
+{source}
+
+    An Open AL(Source) resource (previously created by |openal_source_create|
+    ).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_source_stop| - Stop playing the source
+  * |openal_source_play| - Start playing the source
+  * |openal_source_rewind| - Rewind the source
+
+
+vim:ft=help:

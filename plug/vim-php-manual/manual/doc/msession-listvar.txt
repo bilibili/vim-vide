@@ -1,0 +1,28 @@
+msession_listvar
+
+(PHP 4 >= 4.2.0, PHP 5 <= 5.1.2)
+
+msession_listvar — List sessions with variable
+
+==============================================================================
+*Description*
+
+    array msession_listvar ( string $name )~
+
+Used for searching sessions with common attributes.
+
+==============================================================================
+*Parameters*
+
+{name}
+
+    The name being searched.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array of value/session for all sessions with a variable
+named {name}.
+
+
+vim:ft=help:

@@ -1,0 +1,47 @@
+rpm_is_valid
+
+(PECL rpmreader >= 0.1.0)
+
+rpm_is_valid — Tests a filename for validity as an RPM file
+
+==============================================================================
+*Description*
+
+    bool rpm_is_valid ( string $filename )~
+
+rpm_is_valid() will test an RPM file for validity as an RPM file. This is not
+the same as |rpm_open| as it only checks the file for validity but does not
+return a file pointer to be used by further functions.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The filename of the RPM file you wish to check for validity.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 rpm_is_valid() example
+
+<?php >
+
+    $file = "/path/to/file.rpm";
+
+    if (rpm_is_valid($file)) {
+        echo "File is recognized as an RPM file.<br>\n";
+    }
+    else {
+        echo "File is not recognized as an RPM file.<br>\n";
+    }
+
+<?>
+
+
+vim:ft=help:

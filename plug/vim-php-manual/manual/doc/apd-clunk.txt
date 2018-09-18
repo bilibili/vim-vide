@@ -1,0 +1,46 @@
+apd_clunk
+
+(PECL apd 0.2-0.4)
+
+apd_clunk — Throw a warning and a callstack
+
+==============================================================================
+*Description*
+
+    void apd_clunk ( string $warning [, string $delimiter = "<BR~
+    />" ] )~
+
+Behaves like perl's Carp::cluck. Throw a warning and a callstack.
+
+==============================================================================
+*Parameters*
+
+{warning}
+
+    The warning to throw.
+
+{delimiter}
+
+    The delimiter. Default to <BR />.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 apd_clunk() example
+
+<?php >
+    apd_clunk("Some Warning", "<br/>");
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |apd_croak| - Throw an error, a callstack and then exit
+
+
+vim:ft=help:

@@ -1,0 +1,62 @@
+gmp_powm
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_powm — Raise number into power with modulo
+
+==============================================================================
+*Description*
+
+    GMP gmp_powm ( GMP $base , GMP $exp , GMP $mod )~
+
+Calculate ({base} raised into power {exp}) modulo {mod}. If {exp} is negative,
+result is undefined.
+
+==============================================================================
+*Parameters*
+
+{base}
+
+    The base number.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{exp}
+
+    The positive power to raise the {base}.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{mod}
+
+    The modulo.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+The new (raised) number, as a GMP number.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_powm() example
+
+<?php >
+    $pow1 = gmp_powm("2", "31", "2147483649");
+    echo gmp_strval($pow1) . "\n";
+<?>
+
+The above example will output:
+
+2147483648
+
+
+vim:ft=help:

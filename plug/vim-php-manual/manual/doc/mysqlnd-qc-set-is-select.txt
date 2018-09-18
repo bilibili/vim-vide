@@ -1,0 +1,105 @@
+mysqlnd_qc_set_is_select
+
+(PECL mysqlnd_qc >= 1.0.0)
+
+mysqlnd_qc_set_is_select — Installs a callback which decides whether a
+statement is cached
+
+==============================================================================
+*Description*
+
+    mixed mysqlnd_qc_set_is_select ( string $callback )~
+
+Installs a callback which decides whether a statement is cached.
+
+There are several ways of hinting PELC/mysqlnd_qc to cache a query. By
+default, PECL/mysqlnd_qc attempts to cache a if caching of all statements is
+enabled or the query string begins with a certain SQL hint. The plugin
+internally calls a function named is_select() to find out. This internal
+function can be replaced with a user-defined callback. Then, the user-defined
+callback is responsible to decide whether the plugin attempts to cache a
+statement. Because the internal function is replaced with the callback, the
+callback gains full control. The callback is free to ignore the configuration
+setting mysqlnd_qc.cache_by_default and SQL hints.
+
+The callback is invoked for every statement inspected by the plugin. It is
+given the statements string as a parameter. The callback returns FALSE if the
+statement shall not be cached. It returns TRUE to make the plugin attempt to
+cache the statements result set, if any. A so-created cache entry is given the
+default TTL set with the PHP configuration directive mysqlnd_qc.ttl. If a
+different TTL shall be used, the callback returns a numeric value to be used
+as the TTL.
+
+The internal is_select function is part of the internal cache storage handler
+interface. Thus, a user-defined storage handler offers the same capabilities.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_qc_set_is_select() example
+
+<?php >
+    /* callback which decides if query is cached */
+    function is_select($query) {
+      static $patterns = array(
+       /* true - use default from mysqlnd_qc.ttl */
+       "@SELECT\s+.*\s+FROM\s+test@ismU" => true,
+       /* 3 - use TTL = 3 seconds */
+       "@SELECT\s+.*\s+FROM\s+news@ismU" => 3
+      );
+      /* check if query does match pattern */
+      foreach ($patterns as $pattern => $ttl) {
+        if (preg_match($pattern, $query)) {
+          printf("is_select(%45s): cache\n", $query);
+          return $ttl;
+        }
+      }
+      printf("is_select(%45s): do not cache\n", $query);
+      return false;
+    }
+    mysqlnd_qc_set_is_select("is_select");
+
+    /* Connect, create and populate test table */
+    $mysqli = new mysqli("host", "user", "password", "schema");
+    $mysqli->query("DROP TABLE IF EXISTS test");
+    $mysqli->query("CREATE TABLE test(id INT)");
+    $mysqli->query("INSERT INTO test(id) VALUES (1), (2), (3)");
+
+    /* cache put */
+    $mysqli->query("SELECT id FROM test WHERE id = 1");
+    /* cache hit */
+    $mysqli->query("SELECT id FROM test WHERE id = 1");
+    /* cache put */
+    $mysqli->query("SELECT * FROM test");
+<?>
+
+The above examples will output:
+
+is_select(                    DROP TABLE IF EXISTS test): do not cache
+is_select(                    CREATE TABLE test(id INT)): do not cache
+is_select(    INSERT INTO test(id) VALUES (1), (2), (3)): do not cache
+is_select(             SELECT id FROM test WHERE id = 1): cache
+is_select(             SELECT id FROM test WHERE id = 1): cache
+is_select(                           SELECT * FROM test): cache
+
+==============================================================================
+*See* *Also*
+
+  * Runtime configuration
+  * mysqlnd_qc.ttl
+  * mysqlnd_qc.cache_by_default
+  * |mysqlnd_qc_set_user_handlers| - Sets the callback functions for a
+    user-defined procedural storage handler
+
+
+vim:ft=help:

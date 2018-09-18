@@ -1,0 +1,36 @@
+ps_get_buffer
+
+(PECL ps >= 1.1.0)
+
+ps_get_buffer — Fetches the full buffer containig the generated PS data
+
+==============================================================================
+*Description*
+
+    string ps_get_buffer ( resource $psdoc )~
+
+This function is not implemented yet. It will always return an empty string.
+The idea for a later implementation is to write the contents of the postscript
+file into an internal buffer if in memory creation is requested, and retrieve
+the buffer content with this function. Currently, documents created in memory
+are send to the browser without buffering.
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_open_file| - Opens a file for output
+
+
+vim:ft=help:

@@ -1,0 +1,77 @@
+imagesetbrush
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+imagesetbrush — Set the brush image for line drawing
+
+==============================================================================
+*Description*
+
+    bool imagesetbrush ( resource $image , resource $brush )~
+
+imagesetbrush() sets the brush image to be used by all line drawing functions
+(such as |imageline| and |imagepolygon|) when drawing with the special colors
+IMG_COLOR_BRUSHED or IMG_COLOR_STYLEDBRUSHED.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{brush}
+
+    An image resource.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 imagesetbrush() example
+
+<?php >
+    // Load a mini php logo
+    $php = imagecreatefrompng('./php.png');
+
+    // Create the main image, 100x100
+    $im = imagecreatetruecolor(100, 100);
+
+    // Fill the background with white
+    $white = imagecolorallocate($im, 255, 255, 255);
+    imagefilledrectangle($im, 0, 0, 299, 99, $white);
+
+    // Set the brush
+    imagesetbrush($im, $php);
+
+    // Draw a couple of brushes, each overlaying each
+    imageline($im, 50, 50, 50, 60, IMG_COLOR_BRUSHED);
+
+    // Output image to the browser
+    header('Content-type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+    imagedestroy($php);
+<?>
+
+The above example will output something similar to:
+
+Output of example : imagesetbrush()
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    You need not take special action when you are finished with a brush, but
+    if you destroy the brush image, you must not use the IMG_COLOR_BRUSHED or
+    IMG_COLOR_STYLEDBRUSHED colors until you have set a new brush image!
+
+
+vim:ft=help:

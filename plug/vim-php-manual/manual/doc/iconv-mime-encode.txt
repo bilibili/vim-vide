@@ -1,0 +1,134 @@
+iconv_mime_encode
+
+(PHP 5, PHP 7)
+
+iconv_mime_encode — Composes a MIME header field
+
+==============================================================================
+*Description*
+
+    string iconv_mime_encode ( string $field_name , string $field_value [,~
+    array $preferences = NULL ] )~
+
+Composes and returns a string that represents a valid MIME header field, which
+looks like the following:
+
+Subject: =?ISO-8859-1?Q?Pr=FCfung_f=FCr?= Entwerfen von einer MIME kopfzeile
+
+In the above example, "Subject" is the field name and the portion that begins
+with "=?ISO-8859-1?..." is the field value.
+
+==============================================================================
+*Parameters*
+
+{field_name}
+
+    The field name.
+
+{field_value}
+
+    The field value.
+
+{preferences}
+
+    You can control the behaviour of iconv_mime_encode() by specifying an
+    associative array that contains configuration items to the optional third
+    parameter {preferences}. The items supported by iconv_mime_encode() are
+    listed below. Note that item names are treated case-sensitive.
+
+                 Configuration items supported by iconv_mime_encode()
+          Item        Type         Description            Default value       Example
+                             Specifies the method to
+                             encode a field value
+                             by. The value of this
+                             item may be either "B"
+    scheme           string  or "Q", where "B"       B                       B
+                             stands for base64
+                             encoding scheme and "Q"
+                             stands for
+                             quoted-printable
+                             encoding scheme.
+                             Specifies the character
+                             set in which the first
+                             parameter {field_name}
+                             and the second
+                             parameter {field_value}
+                             are presented. If not
+    input-charset    string  given,                  iconv.internal_encoding ISO-8859-1
+                             iconv_mime_encode()
+                             assumes those
+                             parameters are
+                             presented to it in the
+                             iconv.internal_encoding
+                             ini setting.
+                             Specifies the character
+    output-charset   string  set to use to compose   iconv.internal_encoding UTF-8
+                             the MIME header.
+                             Specifies the maximum
+                             length of the header
+                             lines. The resulting
+                             header is "folded" to a
+                             set of multiple lines
+                             in case the resulting
+                             header field would be
+    line-length      integer longer than the value   76                      996
+                             of this parameter,
+                             according to >> RFC2822
+                             - Internet Message
+                             Format. If not given,
+                             the length will be
+                             limited to 76
+                             characters.
+                             Specifies the sequence
+                             of characters to append
+                             to each line as an
+                             end-of-line sign when
+                             "folding" is performed
+                             on a long header field.
+    line-break-chars string  If not given, this      \r\n                    \n
+                             defaults to "\r\n" (CR
+                             LF). Note that this
+                             parameter is always
+                             treated as an ASCII
+                             string regardless of
+                             the value of
+                             input-charset.
+
+==============================================================================
+*Return* *Values*
+
+Returns an encoded MIME field on success, or FALSE if an error occurs during
+the encoding.
+
+==============================================================================
+*Examples*
+
+Example #1 iconv_mime_encode() example
+
+<?php >
+    $preferences = array(
+        "input-charset" => "ISO-8859-1",
+        "output-charset" => "UTF-8",
+        "line-length" => 76,
+        "line-break-chars" => "\n"
+    );
+    $preferences["scheme"] = "Q";
+    // This yields "Subject: =?UTF-8?Q?Pr=C3=BCfung=20Pr=C3=BCfung?="
+    echo iconv_mime_encode("Subject", "Prüfung Prüfung", $preferences);
+
+    $preferences["scheme"] = "B";
+    // This yields "Subject: =?UTF-8?B?UHLDvGZ1bmcgUHLDvGZ1bmc=?="
+    echo iconv_mime_encode("Subject", "Prüfung Prüfung", $preferences);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imap_binary| - Convert an 8bit string to a base64 string
+  * |mb_encode_mimeheader| - Encode string for MIME header
+  * |imap_8bit| - Convert an 8bit string to a quoted-printable string
+  * |quoted_printable_encode| - Convert a 8 bit string to a quoted-printable
+    string
+
+
+vim:ft=help:

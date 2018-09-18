@@ -1,0 +1,122 @@
+cubrid_connect
+
+(PECL CUBRID >= 8.3.1)
+
+cubrid_connect — Open a connection to a CUBRID Server
+
+==============================================================================
+*Description*
+
+    resource cubrid_connect ( string $host , int $port , string $dbname [,~
+    string $userid [, string $passwd [, bool $new_link = false ]]] )~
+
+The cubrid_connect() function is used to establish the environment for
+connecting to your server by using your server address, port number, database
+name, user name, and password. If the user name and password is not given,
+then the "PUBLIC" connection will be made by default.
+
+==============================================================================
+*Parameters*
+
+{host}
+
+    Host name or IP address of CUBRID CAS server.
+
+{port}
+
+    Port number of CUBRID CAS server (BROKER_PORT configured in $CUBRID/conf/
+    cubrid_broker.conf).
+
+{dbname}
+
+    Name of database.
+
+{userid}
+
+    User name for the database. If not given, the default value is "public".
+
+{passwd}
+
+    User password. If not given, the default value is "".
+
+{new_link}
+
+    If a second call is made to cubrid_connect() with the same arguments, no
+    new connection will be established, but instead, the connection identifier
+    of the already opened connection will be returned. The {new_link}
+    parameter modifies this behavior and makes cubrid_connect() always open a
+    new connection, even if cubrid_connect() was called before with the same
+    parameters.
+
+==============================================================================
+*Return* *Values*
+
+Connection identifier, when process is successful.
+
+FALSE, when process is unsuccessful.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_connect() example
+
+<?php >
+    printf("%-30s %s\n", "CUBRID PHP Version:", cubrid_version());
+
+    printf("\n");
+
+    $conn = cubrid_connect("localhost", 33000, "demodb", "dba");
+
+    if (!$conn) {
+        die('Connect Error ('. cubrid_error_code() .')' . cubrid_error_msg());
+    }
+
+    $db_params = cubrid_get_db_parameter($conn);
+
+    while (list($param_name, $param_value) = each($db_params)) {
+        printf("%-30s %s\n", $param_name, $param_value);
+    }
+
+    printf("\n");
+
+    $server_info = cubrid_get_server_info($conn);
+    $client_info = cubrid_get_client_info();
+
+    printf("%-30s %s\n", "Server Info:", $server_info);
+    printf("%-30s %s\n", "Client Info:", $client_info);
+
+    printf("\n");
+
+    $charset = cubrid_get_charset($conn);
+
+    printf("%-30s %s\n", "CUBRID Charset:", $charset);
+
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+CUBRID PHP Version:            9.1.0.0001
+
+PARAM_ISOLATION_LEVEL          3
+LOCK_TIMEOUT                   -1
+MAX_STRING_LENGTH              1073741823
+PARAM_AUTO_COMMIT              1
+
+Server Info:                   9.1.0.0212
+Client Info:                   9.1.0
+
+CUBRID Charset:                iso8859-1
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_pconnect| - Open a persistent connection to a CUBRID server
+  * |cubrid_connect_with_url| - Establish the environment for connecting to
+    CUBRID server
+  * |cubrid_pconnect_with_url| - Open a persistent connection to CUBRID server
+  * |cubrid_disconnect| - Close a database connection
+  * |cubrid_close| - Close CUBRID connection
+
+
+vim:ft=help:

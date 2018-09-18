@@ -1,0 +1,75 @@
+mysql_field_len
+
+(PHP 4, PHP 5)
+
+mysql_field_len — Returns the length of the specified field
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_fetch_field_direct() [length]
+  * PDOStatement::getColumnMeta() [len]
+
+==============================================================================
+*Description*
+
+    int mysql_field_len ( resource $result , int $field_offset )~
+
+mysql_field_len() returns the length of the specified field.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mysql_query|.
+
+{ field_offset}
+
+    The numerical field offset. The {field_offset} starts at 0. If
+    {field_offset} does not exist, an error of level E_WARNING is also issued.
+
+==============================================================================
+*Return* *Values*
+
+The length of the specified field index on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mysql_field_len() example
+
+<?php >
+    $result = mysql_query("SELECT id,email FROM people WHERE id = '42'");
+    if (!$result) {
+        echo 'Could not run query: ' . mysql_error();
+        exit;
+    }
+
+    // Will get the length of the id field as specified in the database
+    // schema. 
+    $length = mysql_field_len($result, 0);
+    echo $length;
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    For backward compatibility, the following deprecated alias may be used: 
+    mysql_fieldlen()
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_fetch_lengths| - Get the length of each output in a result
+  * |strlen| - Get string length
+
+
+vim:ft=help:

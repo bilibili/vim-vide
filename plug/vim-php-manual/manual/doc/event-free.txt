@@ -1,0 +1,22 @@
+event_free
+
+(PECL libevent >= 0.0.1)
+
+event_free — Free event resource
+
+==============================================================================
+*Description*
+
+    void event_free ( resource $event )~
+
+Frees previously created event resource.
+
+==============================================================================
+*Parameters*
+
+{event}
+
+    Valid event resource.
+
+
+vim:ft=help:

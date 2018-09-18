@@ -1,0 +1,25 @@
+newt_button_bar
+
+(PECL newt >= 0.1)
+
+newt_button_bar — This function returns a grid containing the buttons created.
+
+==============================================================================
+*Description*
+
+    resource newt_button_bar ( array &$buttons )~
+
+This function returns a grid containing the buttons created.
+
+==============================================================================
+*Parameters*
+
+{buttons}
+
+==============================================================================
+*Return* *Values*
+
+Returns grid containing the buttons created.
+
+
+vim:ft=help:

@@ -1,0 +1,77 @@
+fscanf
+
+(PHP 4 >= 4.0.1, PHP 5, PHP 7)
+
+fscanf — Parses input from a file according to a format
+
+==============================================================================
+*Description*
+
+    mixed fscanf ( resource $handle , string $format [, mixed &$... ] )~
+
+The function fscanf() is similar to |sscanf|, but it takes its input from a
+file associated with {handle} and interprets the input according to the
+specified {format}, which is described in the documentation for |sprintf|.
+
+Any whitespace in the format string matches any whitespace in the input
+stream. This means that even a tab \t in the format string can match a single
+space character in the input stream.
+
+Each call to fscanf() reads one line from the file.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    A file system pointer resource that is typically created using |fopen|.
+
+{format}
+
+    The specified format as described in the |sprintf| documentation.
+
+{...}
+
+    The optional assigned values.
+
+==============================================================================
+*Return* *Values*
+
+If only two parameters were passed to this function, the values parsed will be
+returned as an array. Otherwise, if optional parameters are passed, the
+function will return the number of assigned values. The optional parameters
+must be passed by reference.
+
+==============================================================================
+*Examples*
+
+Example #1 fscanf() Example
+
+<?php >
+    $handle = fopen("users.txt", "r");
+    while ($userinfo = fscanf($handle, "%s\t%s\t%s\n")) {
+        list ($name, $profession, $countrycode) = $userinfo;
+        //... do something with the values
+    }
+    fclose($handle);
+<?>
+
+Example #2 Contents of users.txt
+
+javier  argonaut        pe
+hiroshi sculptor        jp
+robert  slacker us
+luigi   florist it
+
+==============================================================================
+*See* *Also*
+
+  * |fread| - Binary-safe file read
+  * |fgets| - Gets line from file pointer
+  * |fgetss| - Gets line from file pointer and strip HTML tags
+  * |sscanf| - Parses input from a string according to a format
+  * |printf| - Output a formatted string
+  * |sprintf| - Return a formatted string
+
+
+vim:ft=help:

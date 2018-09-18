@@ -1,0 +1,36 @@
+pcntl_wifstopped
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+pcntl_wifstopped — Checks whether the child process is currently stopped
+
+==============================================================================
+*Description*
+
+    bool pcntl_wifstopped ( int $status )~
+
+Checks whether the child process which caused the return is currently stopped;
+this is only possible if the call to |pcntl_waitpid| was done using the option
+WUNTRACED.
+
+==============================================================================
+*Parameters*
+
+{status}
+
+    The {status} parameter is the status parameter supplied to a successful
+    call to |pcntl_waitpid|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the child process which caused the return is currently
+stopped, FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_waitpid| - Waits on or returns the status of a forked child
+
+
+vim:ft=help:

@@ -1,0 +1,37 @@
+readline_callback_read_char
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+readline_callback_read_char — Reads a character and informs the readline
+callback interface when a line is received
+
+==============================================================================
+*Description*
+
+    void readline_callback_read_char ( void )~
+
+Reads a character of user input. When a line is received, this function
+informs the readline callback interface installed using 
+|readline_callback_handler_install| that a line is ready for input.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+See |readline_callback_handler_install| for an example of how to use the
+readline callback interface.
+
+==============================================================================
+*See* *Also*
+
+  * |readline_callback_handler_install| - Initializes the readline callback
+    interface and terminal, prints the prompt and returns immediately
+  * |readline_callback_handler_remove| - Removes a previously installed
+    callback handler and restores terminal settings
+
+
+vim:ft=help:

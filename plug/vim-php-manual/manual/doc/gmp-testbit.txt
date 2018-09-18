@@ -1,0 +1,62 @@
+gmp_testbit
+
+(PHP 5 >= 5.3.0, PHP 7)
+
+gmp_testbit — Tests if a bit is set
+
+==============================================================================
+*Description*
+
+    bool gmp_testbit ( GMP $a , int $index )~
+
+Tests if the specified bit is set.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{index}
+
+    The bit to test
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the bit is set in resource $a, otherwise FALSE.
+
+==============================================================================
+*Errors/Exceptions*
+
+An E_WARNING level error is issued when {index} is less than zero, and FALSE
+is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_testbit() example
+
+<?php >
+    $n = gmp_init("1000000");
+    var_dump(gmp_testbit($n, 1));
+    gmp_setbit($n, 1);
+    var_dump(gmp_testbit($n, 1));
+<?>
+
+The above example will output:
+
+bool(false)
+bool(true)
+
+==============================================================================
+*See* *Also*
+
+  * |gmp_setbit| - Set bit
+  * |gmp_clrbit| - Clear bit
+
+
+vim:ft=help:

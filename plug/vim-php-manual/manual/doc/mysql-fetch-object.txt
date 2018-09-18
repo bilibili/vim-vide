@@ -1,0 +1,111 @@
+mysql_fetch_object
+
+(PHP 4, PHP 5)
+
+mysql_fetch_object — Fetch a result row as an object
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_fetch_object()
+  * PDOStatement::fetch(PDO::FETCH_OBJ)
+
+==============================================================================
+*Description*
+
+    object mysql_fetch_object ( resource $result [, string $class_name [,~
+    array $params ]] )~
+
+Returns an object with properties that correspond to the fetched row and moves
+the internal data pointer ahead.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mysql_query|.
+
+{class_name}
+
+    The name of the class to instantiate, set the properties of and return. If
+    not specified, a stdClass object is returned.
+
+{params}
+
+    An optional array of parameters to pass to the constructor for
+    {class_name} objects.
+
+==============================================================================
+*Return* *Values*
+
+Returns an object with string properties that correspond to the fetched row,
+or FALSE if there are no more rows.
+
+==============================================================================
+*Examples*
+
+Example #1 mysql_fetch_object() example
+
+<?php >
+    mysql_connect("hostname", "user", "password");
+    mysql_select_db("mydb");
+    $result = mysql_query("select * from mytable");
+    while ($row = mysql_fetch_object($result)) {
+        echo $row->user_id;
+        echo $row->fullname;
+    }
+    mysql_free_result($result);
+<?>
+
+Example #2 mysql_fetch_object() example
+
+<?php >
+    class foo {
+        public $name;
+    }
+
+    mysql_connect("hostname", "user", "password");
+    mysql_select_db("mydb");
+
+    $result = mysql_query("select name from mytable limit 1");
+    $obj = mysql_fetch_object($result, 'foo');
+    var_dump($obj);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: Performance
+
+    Speed-wise, the function is identical to |mysql_fetch_array|, and almost
+    as quick as |mysql_fetch_row| (the difference is insignificant).
+
+    Note:
+
+    mysql_fetch_object() is similar to |mysql_fetch_array|, with one
+    difference - an object is returned, instead of an array. Indirectly, that
+    means that you can only access the data by the field names, and not by
+    their offsets (numbers are illegal property names).
+
+    Note: Field names returned by this function are case-sensitive.
+
+    Note: This function sets NULL fields to the PHP NULL value.
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_fetch_array| - Fetch a result row as an associative array, a
+    numeric array, or both
+  * |mysql_fetch_assoc| - Fetch a result row as an associative array
+  * |mysql_fetch_row| - Get a result row as an enumerated array
+  * |mysql_data_seek| - Move internal result pointer
+  * |mysql_query| - Send a MySQL query
+
+
+vim:ft=help:

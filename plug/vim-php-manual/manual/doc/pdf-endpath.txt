@@ -1,0 +1,15 @@
+PDF_endpath
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_endpath — End current path
+
+==============================================================================
+*Description*
+
+    bool PDF_endpath ( resource $p )~
+
+Ends the current path without filling or stroking it.
+
+
+vim:ft=help:

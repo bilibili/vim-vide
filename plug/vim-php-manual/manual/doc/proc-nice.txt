@@ -1,0 +1,75 @@
+proc_nice
+
+(PHP 5, PHP 7)
+
+proc_nice — Change the priority of the current process
+
+==============================================================================
+*Description*
+
+    bool proc_nice ( int $increment )~
+
+proc_nice() changes the priority of the current process by the amount
+specified in {increment}. A positive {increment} will lower the priority of
+the current process, whereas a negative {increment} will raise the priority.
+
+proc_nice() is not related to |proc_open| and its associated functions in any
+way.
+
+==============================================================================
+*Parameters*
+
+{increment}
+
+    The new priority value, the value of this may differ on platforms.
+
+    on Unix, a low value, such as -20 means high priority wheras a positive
+    value have a lower priority.
+
+    For Windows the {increment} parameter have the following meanings:
+
+       Priority class              Possible values
+    High priority         {increment} < -9
+    Above normal priority {increment} < -4
+    Normal priority       {increment} < 5 & {increment} > -5
+    Below normal priority {increment} > 5
+    Idle priority         {increment} > 9
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure. If an error occurs, like the user
+lacks permission to change the priority, an error of level E_WARNING is also
+generated.
+
+==============================================================================
+*Examples*
+
+Example #1 Using |proc_open| to set the process priority to high
+
+<?php >
+    // Highest priority
+    proc_nice(-20);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                Description
+7.2.0   This function is now available on Windows.
+
+==============================================================================
+*Notes*
+
+    Note: Availability
+
+    proc_nice() will only exist if your system has 'nice' capabilities. 'nice'
+    conforms to: SVr4, SVID EXT, AT&T, X/OPEN, BSD 4.3.
+
+    Note: Windows only
+
+    proc_nice() will change the current process priority, even if PHP was
+    compiled using thread safety.
+
+
+vim:ft=help:

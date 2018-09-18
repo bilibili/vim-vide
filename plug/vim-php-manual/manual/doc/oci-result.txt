@@ -1,0 +1,87 @@
+oci_result
+
+(PHP 5, PHP 7, PECL OCI8 >= 1.1.0)
+
+oci_result — Returns field's value from the fetched row
+
+==============================================================================
+*Description*
+
+    mixed oci_result ( resource $statement , mixed $field )~
+
+Returns the data from {field} in the current row, fetched by |oci_fetch|.
+
+For details on the data type mapping performed by the OCI8 extension, see the
+datatypes supported by the driver
+
+==============================================================================
+*Parameters*
+
+{statement}
+
+{field}
+
+    Can be either use the column number (1-based) or the column name. The case
+    of the column name must be the case that Oracle meta data describes the
+    column as, which is uppercase for columns created case insensitively.
+
+==============================================================================
+*Return* *Values*
+
+Returns everything as strings except for abstract types (ROWIDs, LOBs and
+FILEs). Returns FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 |oci_fetch| with oci_result()
+
+<?php >
+
+    $conn = oci_connect('hr', 'welcome', 'localhost/XE');
+    if (!$conn) {
+        $e = oci_error();
+        trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+
+    $sql = 'SELECT location_id, city FROM locations WHERE location_id < 1200';
+    $stid = oci_parse($conn, $sql);
+    oci_execute($stid);
+
+    while (oci_fetch($stid)) {
+        echo oci_result($stid, 'LOCATION_ID') . " is ";
+        echo oci_result($stid, 'CITY') . "<br>\n";
+    }
+
+    // Displays:
+    //   1000 is Roma
+    //   1100 is Venice
+
+    oci_free_statement($stid);
+    oci_close($conn);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    In PHP versions before 5.0.0 you must use |ociresult| instead. This name
+    still can be used, it was left as alias of oci_result() for downwards
+    compatability. This, however, is deprecated and not recommended.
+
+==============================================================================
+*See* *Also*
+
+  * |oci_fetch_array| - Returns the next row from a query as an associative or
+    numeric array
+  * |oci_fetch_assoc| - Returns the next row from a query as an associative
+    array
+  * |oci_fetch_object| - Returns the next row from a query as an object
+  * |oci_fetch_row| - Returns the next row from a query as a numeric array
+  * |oci_fetch_all| - Fetches multiple rows from a query into a
+    two-dimensional array
+
+
+vim:ft=help:

@@ -1,0 +1,24 @@
+ncurses_wattron
+
+(PHP 4 >= 4.3.0, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_wattron — Turns on attributes for a window
+
+==============================================================================
+*Description*
+
+    int ncurses_wattron ( resource $window , int $attrs )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{window}
+
+{attrs}
+
+
+vim:ft=help:

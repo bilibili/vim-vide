@@ -1,0 +1,72 @@
+cubrid_lob2_import
+
+(PECL CUBRID >= 8.4.1)
+
+cubrid_lob2_import — Import BLOB/CLOB data from a file.
+
+==============================================================================
+*Description*
+
+    bool cubrid_lob2_import ( resource $lob_identifier , string $file_name )~
+
+The cubrid_lob2_import() function is used to save the contents of BLOB/CLOB
+data from a file. To use this function, you must use |cubrid_lob2_new| or
+fetch a lob object from CUBRID database first. If the file already exists, the
+operation will fail. This function will not influence the cursor position of
+the lob object. It operates the entire lob object.
+
+==============================================================================
+*Parameters*
+
+{lob_identifier}
+
+    Lob identifier as a result of |cubrid_lob2_new| or get from the result
+    set.
+
+{filename}
+
+    File name you want to import BLOB/CLOB data. It also supports the path of
+    the file.
+
+==============================================================================
+*Return* *Values*
+
+TRUE if the process is successful and FALSE for failure.
+
+==============================================================================
+*Examples*
+
+Example #1 |cubrid_lob2_export| example
+
+<?php >
+
+    $conn = cubrid_connect("localhost", 33000, "demodb", "dba", "");
+
+    cubrid_execute($conn,"DROP TABLE if exists test_lob");
+    cubrid_execute($conn,"CREATE TABLE test_lob (id INT, contents CLOB)");
+     
+    $req = cubrid_prepare($conn, "INSERT INTO test_lob VALUES (?, ?)");
+    cubrid_bind($req, 1, 1);
+
+    $lob = cubrid_lob2_new($conn, "clob");
+    cubrid_lob2_import($lob, "doc_1.txt");
+    cubrid_lob2_bind($req, 2, $lob, 'CLOB'); // or cubrid_lob2_bind
+    ($req, 2, $lob);
+
+    cubrid_execute($req);
+
+    cubrid_lob2_close($lob);
+    cubrid_disconnect($conn);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_lob2_new| - Create a lob object.
+  * |cubrid_lob2_close| - Close LOB object.
+  * |cubrid_lob2_export| - Export the lob object to a file.
+  * |cubrid_lob2_bind| - Bind a lob object or a string as a lob object to a
+    prepared statement as parameters.
+
+
+vim:ft=help:

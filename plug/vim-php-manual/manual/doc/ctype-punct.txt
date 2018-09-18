@@ -1,0 +1,69 @@
+ctype_punct
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+ctype_punct — Check for any printable character which is not whitespace or an
+alphanumeric character
+
+==============================================================================
+*Description*
+
+    bool ctype_punct ( string $text )~
+
+Checks if all of the characters in the provided string, {text}, are
+punctuation character.
+
+==============================================================================
+*Parameters*
+
+{text}
+
+    The tested string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if every character in {text} is printable, but neither letter,
+digit or blank, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 A ctype_punct() example
+
+<?php >
+    $strings = array('ABasdk!@!$#', '!@ # $', '*&$()');
+    foreach ($strings as $testcase) {
+        if (ctype_punct($testcase)) {
+            echo "The string $testcase consists of all punctuation.\n";
+        } else {
+            echo "The string $testcase does not consist of all punctuation.\n";
+        }
+    }
+<?>
+
+The above example will output:
+
+The string ABasdk!@!$# does not consist of all punctuation.
+The string !@ # $ does not consist of all punctuation.
+The string *&$() consists of all punctuation.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    If an integer between -128 and 255 inclusive is provided, it is
+    interpreted as the ASCII value of a single character (negative values have
+    256 added in order to allow characters in the Extended ASCII range). Any
+    other integer is interpreted as a string containing the decimal digits of
+    the integer.
+
+==============================================================================
+*See* *Also*
+
+  * |ctype_cntrl| - Check for control character(s)
+  * |ctype_graph| - Check for any printable character(s) except space
+
+
+vim:ft=help:

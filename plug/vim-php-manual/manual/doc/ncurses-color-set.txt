@@ -1,0 +1,64 @@
+ncurses_color_set
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_color_set — Set active foreground and background colors
+
+==============================================================================
+*Description*
+
+    int ncurses_color_set ( int $pair )~
+
+Sets the active foreground and background colors. Any characters written after
+this function is invoked will have these colors. This function requires
+terminal colors to be supported and initialized using |ncurses_start_color|
+beforehand.
+
+ncurses uses color pairs to specify both foreground and background colors. Use
+|ncurses_init_pair| to define a color pair.
+
+==============================================================================
+*Parameters*
+
+{pair}
+
+    The color pair from which to get the foreground and background colors to
+    set as the active colors.
+
+==============================================================================
+*Return* *Values*
+
+Returns -1 on success, and 0 on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Writing a string with a specified color to the screen
+
+<?php >
+    ncurses_init();
+
+    // If the terminal supports colors, initialize and set active color
+    if (ncurses_has_colors()) {
+        ncurses_start_color();
+        ncurses_init_pair(1, NCURSES_COLOR_YELLOW, NCURSES_COLOR_BLUE);
+        ncurses_color_set(1);
+    }
+
+    // Write a string at specified location
+    ncurses_mvaddstr(10, 10, "Hello world! Yellow on blue text!");
+
+    // Flush output to screen
+    ncurses_refresh();
+
+    ncurses_end();
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ncurses_init_pair| - Define a color pair
+  * |ncurses_start_color| - Initializes color functionality
+
+
+vim:ft=help:

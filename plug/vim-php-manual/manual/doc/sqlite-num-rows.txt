@@ -1,0 +1,71 @@
+sqlite_num_rows
+
+SQLiteResult::numRows
+
+(PHP 5 < 5.4.0, PECL sqlite >= 1.0.0)
+
+sqlite_num_rows -- SQLiteResult::numRows — Returns the number of rows in a
+buffered result set
+
+==============================================================================
+*Description*
+
+    int sqlite_num_rows ( resource $result )~
+
+Object oriented style (method):
+
+    int SQLiteResult::numRows ( void )~
+
+Returns the number of rows in the buffered {result} set.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The SQLite result resource. This parameter is not required when using the
+    object-oriented method.
+
+        Note:
+
+        This function cannot be used with unbuffered result handles.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of rows, as an integer.
+
+==============================================================================
+*Examples*
+
+Example #1 Procedural example
+
+<?php >
+    $db = sqlite_open('mysqlitedb');
+    $result = sqlite_query($db, "SELECT * FROM mytable WHERE name='John Doe'");
+    $rows = sqlite_num_rows($result);
+
+    echo "Number of rows: $rows";
+<?>
+
+Example #2 Object-oriented example
+
+<?php >
+    $db = new SQLiteDatabase('mysqlitedb');
+    $result = $db->query("SELECT * FROM mytable WHERE name='John Doe'");
+    $rows = $result->numRows();
+
+    echo "Number of rows: $rows";
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |sqlite_changes| - Returns the number of rows that were changed by the
+    most recent SQL statement
+  * |sqlite_query| - Executes a query against a given database and returns a
+    result handle
+  * |sqlite_num_fields| - Returns the number of fields in a result set
+
+
+vim:ft=help:

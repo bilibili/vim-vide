@@ -1,0 +1,105 @@
+parse_str
+
+(PHP 4, PHP 5, PHP 7)
+
+parse_str — Parses the string into variables
+
+==============================================================================
+*Description*
+
+    void parse_str ( string $encoded_string [, array &$result ] )~
+
+Parses {encoded_string} as if it were the query string passed via a URL and
+sets variables in the current scope (or in the array if {result} is provided).
+
+==============================================================================
+*Parameters*
+
+{encoded_string}
+
+    The input string.
+
+{result}
+
+    If the second parameter {result} is present, variables are stored in this
+    variable as array elements instead.
+
+    Warning
+
+    Using this function without second parameter is DISCOURAGED. Dynamically
+    setting variables in function's scope suffers from exactly same problems
+    as register_globals.
+
+    Read section on security of Using Register Globals explaining why it is
+    dangerous.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 Using parse_str()
+
+<?php >
+    $str = "first=value&arr[]=foo+bar&arr[]=baz";
+
+    // Recommended
+    parse_str($str, $output);
+    echo $output['first'];  // value
+    echo $output['arr'][0]; // foo bar
+    echo $output['arr'][1]; // baz
+
+    // DISCOURAGED
+    parse_str($str);
+    echo $first;  // value
+    echo $arr[0]; // foo bar
+    echo $arr[1]; // baz
+<?>
+
+Because variables in PHP can't have dots and spaces in their names, those are
+converted to underscores. Same applies to naming of respective key names in
+case of using this function with {result} parameter.
+
+Example #2 parse_str() name mangling
+
+<?php >
+    parse_str($"My Value=Something");
+    echo $My_Value; // Something
+
+    parse_str($"My Value=Something", $output);
+    echo $output['My_Value']; // Something
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    All variables created (or values returned into array if second parameter
+    is set) are already |urldecode|d.
+
+    Note:
+
+    To get the current QUERY_STRING, you may use the variable $_SERVER
+    ['QUERY_STRING']. Also, you may want to read the section on variables from
+    external sources.
+
+    Note:
+
+    The magic_quotes_gpc setting affects the output of this function, as 
+    parse_str() uses the same mechanism that PHP uses to populate the $_GET,
+    $_POST, etc. variables.
+
+==============================================================================
+*See* *Also*
+
+  * |parse_url| - Parse a URL and return its components
+  * |pathinfo| - Returns information about a file path
+  * |http_build_query| - Generate URL-encoded query string
+  * |urldecode| - Decodes URL-encoded string
+
+
+vim:ft=help:

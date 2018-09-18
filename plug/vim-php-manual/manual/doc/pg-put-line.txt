@@ -1,0 +1,73 @@
+pg_put_line
+
+(PHP 4 >= 4.0.3, PHP 5, PHP 7)
+
+pg_put_line — Send a NULL-terminated string to PostgreSQL backend
+
+==============================================================================
+*Description*
+
+    bool pg_put_line ([ resource $connection ], string $data )~
+
+pg_put_line() sends a NULL-terminated string to the PostgreSQL backend server.
+This is needed in conjunction with PostgreSQL's COPY FROM command.
+
+COPY is a high-speed data loading interface supported by PostgreSQL. Data is
+passed in without being parsed, and in a single transaction.
+
+An alternative to using raw pg_put_line() commands is to use |pg_copy_from|.
+This is a far simpler interface.
+
+    Note:
+
+    The application must explicitly send the two characters "\." on the last
+    line to indicate to the backend that it has finished sending its data,
+    before issuing |pg_end_copy|.
+
+Warning
+
+Use of the pg_put_line() causes most large object operations, including 
+|pg_lo_read| and |pg_lo_tell|, to subsequently fail. You can use |pg_copy_from|
+and |pg_copy_to| instead.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource. When {connection} is not present,
+    the default connection is used. The default connection is the last
+    connection made by |pg_connect| or |pg_pconnect|.
+
+{data}
+
+    A line of text to be sent directly to the PostgreSQL backend. A NULL
+    terminator is added automatically.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_put_line() example
+
+<?php  >
+      $conn = pg_pconnect("dbname=foo");
+      pg_query($conn, "create table bar (a int4, b char(16), d float8)");
+      pg_query($conn, "copy bar from stdin");
+      pg_put_line($conn, "3\thello world\t4.5\n");
+      pg_put_line($conn, "4\tgoodbye world\t7.11\n");
+      pg_put_line($conn, "\\.\n");
+      pg_end_copy($conn);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pg_end_copy| - Sync with PostgreSQL backend
+
+
+vim:ft=help:

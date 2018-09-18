@@ -1,0 +1,63 @@
+mysql_client_encoding
+
+(PHP 4 >= 4.3.0, PHP 5)
+
+mysql_client_encoding — Returns the name of the character set
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_character_set_name()
+
+==============================================================================
+*Description*
+
+    string mysql_client_encoding ([ resource $link_identifier = NULL ] )~
+
+Retrieves the character_set variable from MySQL.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    The MySQL connection. If the link identifier is not specified, the last
+    link opened by |mysql_connect| is assumed. If no such link is found, it
+    will try to create one as if |mysql_connect| had been called with no
+    arguments. If no connection is found or established, an E_WARNING level
+    error is generated.
+
+==============================================================================
+*Return* *Values*
+
+Returns the default character set name for the current connection.
+
+==============================================================================
+*Examples*
+
+Example #1 mysql_client_encoding() example
+
+<?php >
+    $link    = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+    $charset = mysql_client_encoding($link);
+
+    echo "The current character set is: $charset\n";
+<?>
+
+The above example will output something similar to:
+
+The current character set is: latin1
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_set_charset| - Sets the client character set
+  * |mysql_real_escape_string| - Escapes special characters in a string for
+    use in an SQL statement
+
+
+vim:ft=help:

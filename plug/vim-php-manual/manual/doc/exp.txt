@@ -1,0 +1,53 @@
+exp
+
+(PHP 4, PHP 5, PHP 7)
+
+exp — Calculates the exponent of e
+
+==============================================================================
+*Description*
+
+    float exp ( float $arg )~
+
+Returns e raised to the power of {arg}.
+
+    Note:
+
+    'e' is the base of the natural system of logarithms, or approximately
+    2.718282.
+
+==============================================================================
+*Parameters*
+
+{arg}
+
+    The argument to process
+
+==============================================================================
+*Return* *Values*
+
+'e' raised to the power of {arg}
+
+==============================================================================
+*Examples*
+
+Example #1 exp() example
+
+<?php >
+    echo exp(12) . "\n";
+    echo exp(5.7);
+<?>
+
+The above example will output:
+
+1.6275E+005
+298.87
+
+==============================================================================
+*See* *Also*
+
+  * |log| - Natural logarithm
+  * |pow| - Exponential expression
+
+
+vim:ft=help:

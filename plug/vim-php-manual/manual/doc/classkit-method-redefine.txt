@@ -1,0 +1,103 @@
+classkit_method_redefine
+
+(PECL classkit >= 0.1)
+
+classkit_method_redefine — Dynamically changes the code of the given method
+
+==============================================================================
+*Description*
+
+    bool classkit_method_redefine ( string $classname , string $methodname ,~
+    string $args , string $code [, int $flags = CLASSKIT_ACC_PUBLIC ] )~
+
+
+    Note: This function cannot be used to manipulate the currently running (or
+    chained) method.
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*Parameters*
+
+{classname}
+
+    The class in which to redefine the method
+
+{methodname}
+
+    The name of the method to redefine
+
+{args}
+
+    Comma-delimited list of arguments for the redefined method
+
+{code}
+
+    The new code to be evaluated when {methodname} is called
+
+{flags}
+
+    The redefined method can be CLASSKIT_ACC_PUBLIC, CLASSKIT_ACC_PROTECTED or
+    CLASSKIT_ACC_PRIVATE
+
+        Note:
+
+        This parameter is only used as of PHP 5, because, prior to this, all
+        methods were public.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 classkit_method_redefine() example
+
+<?php >
+    class Example {
+        function foo() {
+            return "foo!\n";
+        }
+    }
+
+    // create an Example object
+    $e = new Example();
+
+    // output Example::foo() (before redefine)
+    echo "Before: " . $e->foo();
+
+    // Redefine the 'foo' method
+    classkit_method_redefine(
+        'Example',
+        'foo',
+        '',
+        'return "bar!\n";',
+        CLASSKIT_ACC_PUBLIC
+    );
+
+    // output Example::foo() (after redefine)
+    echo "After: " . $e->foo();
+<?>
+
+The above example will output:
+
+Before: foo!
+After: bar!
+
+==============================================================================
+*See* *Also*
+
+  * |classkit_method_add| - Dynamically adds a new method to a given class
+  * |classkit_method_copy| - Copies a method from class to another
+  * |classkit_method_remove| - Dynamically removes the given method
+  * |classkit_method_rename| - Dynamically changes the name of the given
+    method
+
+
+vim:ft=help:

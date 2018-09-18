@@ -1,0 +1,68 @@
+memory_get_usage
+
+(PHP 4 >= 4.3.2, PHP 5, PHP 7)
+
+memory_get_usage — Returns the amount of memory allocated to PHP
+
+==============================================================================
+*Description*
+
+    int memory_get_usage ([ bool $real_usage = false ] )~
+
+Returns the amount of memory, in bytes, that's currently being allocated to
+your PHP script.
+
+==============================================================================
+*Parameters*
+
+{real_usage}
+
+    Set this to TRUE to get total memory allocated from system, including
+    unused pages. If not set or FALSE only the used memory is reported.
+
+    Note:
+
+    PHP does not track memory that is not allocated by emalloc()
+
+==============================================================================
+*Return* *Values*
+
+Returns the memory amount in bytes.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.2.1   Compiling with --enable-memory-limit is no longer required for this
+        function to exist.
+5.2.0   {real_usage} was added.
+
+==============================================================================
+*Examples*
+
+Example #1 A memory_get_usage() example
+
+<?php >
+    // This is only an example, the numbers below will
+    // differ depending on your system
+
+    echo memory_get_usage() . "\n"; // 36640
+
+    $a = str_repeat("Hello", 4242);
+
+    echo memory_get_usage() . "\n"; // 57960
+
+    unset($a);
+
+    echo memory_get_usage() . "\n"; // 36744
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |memory_get_peak_usage| - Returns the peak of memory allocated by PHP
+  * memory_limit
+
+
+vim:ft=help:

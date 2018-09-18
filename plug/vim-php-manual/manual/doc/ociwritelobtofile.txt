@@ -1,0 +1,18 @@
+ociwritelobtofile
+
+(PHP 4, PHP 5, PHP 7, PECL OCI8 >= 1.0.0)
+
+ociwritelobtofile — Alias of OCI-Lob::export()
+
+==============================================================================
+*Description*
+
+Alias of OCI-Lob::export()
+
+Warning
+
+This alias has been DEPRECATED as of PHP 5.4.0. Relying on this alias is
+highly discouraged.
+
+
+vim:ft=help:

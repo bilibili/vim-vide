@@ -1,0 +1,41 @@
+fann_scale_output
+
+(PECL fann >= 1.0.0)
+
+fann_scale_output — Scale data in output vector before feed it to ann based on
+previously calculated parameters
+
+==============================================================================
+*Description*
+
+    bool fann_scale_output ( resource $ann , array $output_vector )~
+
+Scale data in output vector before feed it to ann based on previously
+calculated parameters.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{output_vector}
+
+    Output vector that will be scaled
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_descale_output| - Scale data in output vector after get it from ann
+    based on previously calculated parameters
+  * |fann_scale_input| - Scale data in input vector before feed it to ann
+    based on previously calculated parameters
+
+
+vim:ft=help:

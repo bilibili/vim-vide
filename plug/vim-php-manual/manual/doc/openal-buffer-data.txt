@@ -1,0 +1,46 @@
+openal_buffer_data
+
+(PECL openal >= 0.1.0)
+
+openal_buffer_data — Load a buffer with data
+
+==============================================================================
+*Description*
+
+    bool openal_buffer_data ( resource $buffer , int $format , string $data ,~
+    int $freq )~
+
+==============================================================================
+*Parameters*
+
+{buffer}
+
+    An Open AL(Buffer) resource (previously created by |openal_buffer_create|
+    ).
+
+{format}
+
+    Format of {data}, one of: AL_FORMAT_MONO8, AL_FORMAT_MONO16,
+    AL_FORMAT_STEREO8 and AL_FORMAT_STEREO16
+
+{data}
+
+    Block of binary audio data in the {format} and {freq} specified.
+
+{freq}
+
+    Frequency of {data} given in Hz.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_buffer_loadwav| - Load a .wav file into a buffer
+  * |openal_stream| - Begin streaming on a source
+
+
+vim:ft=help:

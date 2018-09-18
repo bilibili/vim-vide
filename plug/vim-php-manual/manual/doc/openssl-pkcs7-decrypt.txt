@@ -1,0 +1,54 @@
+openssl_pkcs7_decrypt
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+openssl_pkcs7_decrypt — Decrypts an S/MIME encrypted message
+
+==============================================================================
+*Description*
+
+    bool openssl_pkcs7_decrypt ( string $infilename , string $outfilename ,~
+    mixed $recipcert [, mixed $recipkey ] )~
+
+Decrypts the S/MIME encrypted message contained in the file specified by
+{infilename} using the certificate and its associated private key specified by
+{recipcert} and {recipkey}.
+
+==============================================================================
+*Parameters*
+
+{infilename}
+
+{outfilename}
+
+    The decrypted message is written to the file specified by {outfilename}.
+
+{recipcert}
+
+{recipkey}
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 openssl_pkcs7_decrypt() example
+
+<?php >
+    // $cert and $key are assumed to contain your personal certificate and private
+    // key pair, and that you are the recipient of an S/MIME message
+    $infilename = "encrypted.msg";  // this file holds your encrypted message
+    $outfilename = "decrypted.msg"; // make sure you can write to this file
+
+    if (openssl_pkcs7_decrypt($infilename, $outfilename, $cert, $key)) {
+        echo "decrypted!";
+    } else {
+        echo "failed to decrypt!";
+    }
+<?>
+
+
+vim:ft=help:

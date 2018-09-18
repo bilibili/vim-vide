@@ -1,0 +1,41 @@
+session_save_path
+
+(PHP 4, PHP 5, PHP 7)
+
+session_save_path — Get and/or set the current session save path
+
+==============================================================================
+*Description*
+
+    string session_save_path ([ string $path ] )~
+
+session_save_path() returns the path of the current directory used to save
+session data.
+
+==============================================================================
+*Parameters*
+
+{path}
+
+    Session data path. If specified, the path to which data is saved will be
+    changed. session_save_path() needs to be called before |session_start| for
+    that purpose.
+
+        Note:
+
+        On some operating systems, you may want to specify a path on a
+        filesystem that handles lots of small files efficiently. For example,
+        on Linux, reiserfs may provide better performance than ext2fs.
+
+==============================================================================
+*Return* *Values*
+
+Returns the path of the current directory used for data storage.
+
+==============================================================================
+*See* *Also*
+
+  * The session.save_path configuration directive
+
+
+vim:ft=help:

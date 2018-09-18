@@ -1,0 +1,51 @@
+cubrid_list_dbs
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_list_dbs — Return an array with the list of all existing CUBRID
+databases
+
+==============================================================================
+*Description*
+
+    array cubrid_list_dbs ([ resource $conn_identifier ] )~
+
+This function returns an array with the list of all existing Cubrid databases.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    The CUBRID connection.
+
+==============================================================================
+*Return* *Values*
+
+An numeric array with all existing Cubrid databases; on success.
+
+FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_list_dbs() example
+
+<?php >
+    $conn = cubrid_connect("localhost", 33000, "demodb");
+
+    $db_list = cubrid_list_dbs($conn);
+    var_dump($db_list);
+
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+array(1) {
+  [0]=>
+  string(6) "demodb"
+}
+
+
+vim:ft=help:

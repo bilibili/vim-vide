@@ -1,0 +1,56 @@
+gmp_scan0
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_scan0 — Scan for 0
+
+==============================================================================
+*Description*
+
+    int gmp_scan0 ( GMP $a , int $start )~
+
+Scans {a}, starting with bit {start}, towards more significant bits, until the
+first clear bit is found.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    The number to scan.
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{start}
+
+    The starting bit.
+
+==============================================================================
+*Return* *Values*
+
+Returns the index of the found bit, as an integer. The index starts from 0.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_scan0() example
+
+<?php >
+    // "0" bit is found at position 3. index starts at 0
+    $s1 = gmp_init("10111", 2);
+    echo gmp_scan0($s1, 0) . "\n";
+
+    // "0" bit is found at position 7. index starts at 5
+    $s2 = gmp_init("101110000", 2);
+    echo gmp_scan0($s2, 5) . "\n";
+<?>
+
+The above example will output:
+
+3
+7
+
+
+vim:ft=help:

@@ -1,0 +1,132 @@
+get_class
+
+(PHP 4, PHP 5, PHP 7)
+
+get_class — Returns the name of the class of an object
+
+==============================================================================
+*Description*
+
+    string get_class ([ object $object = NULL ] )~
+
+Gets the name of the class of the given {object}.
+
+==============================================================================
+*Parameters*
+
+{object}
+
+    The tested object. This parameter may be omitted when inside a class.
+
+==============================================================================
+*Return* *Values*
+
+Returns the name of the class of which {object} is an instance. Returns FALSE
+if {object} is not an object.
+
+If {object} is omitted when inside a class, the name of that class is
+returned.
+
+If the {object} is an instance of a class which exists in a namespace, the
+qualified namespaced name of that class is returned.
+
+==============================================================================
+*Errors/Exceptions*
+
+If get_class() is called with anything other than an object, an E_WARNING
+level error is raised.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.3.0   NULL became the default value for {object}, so passing NULL to
+        {object} now has the same result as not passing any value.
+
+==============================================================================
+*Examples*
+
+Example #1 Using get_class()
+
+<?php >
+
+    class foo {
+        function name()
+        {
+            echo "My name is " , get_class($this) , "\n";
+        }
+    }
+
+    // create an object
+    $bar = new foo();
+
+    // external call
+    echo "Its name is " , get_class($bar) , "\n";
+
+    // internal call
+    $bar->name();
+
+<?>
+
+The above example will output:
+
+Its name is foo
+My name is foo
+
+Example #2 Using get_class() in superclass
+
+<?php >
+
+    abstract class bar {
+        public function __construct()
+        {
+            var_dump(get_class($this));
+            var_dump(get_class());
+        }
+    }
+
+    class foo extends bar {
+    }
+
+    new foo;
+
+<?>
+
+The above example will output:
+
+string(3) "foo"
+string(3) "bar"
+
+Example #3 Using get_class() with namespaced classes
+
+<?php >
+
+    namespace Foo\Bar;
+
+    class Baz {
+        public function __construct()
+        {
+
+        }
+    }
+
+    $baz = new \Foo\Bar\Baz;
+
+    var_dump(get_class($baz));
+<?>
+
+The above example will output:
+
+string(11) "Foo\Bar\Baz"
+
+==============================================================================
+*See* *Also*
+
+  * |get_called_class| - the "Late Static Binding" class name
+  * |get_parent_class| - Retrieves the parent class name for object or class
+  * |gettype| - Get the type of a variable
+  * |is_subclass_of| - Checks if the object has this class as one of its
+    parents or implements it.
+
+
+vim:ft=help:

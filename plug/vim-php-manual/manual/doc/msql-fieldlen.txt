@@ -1,0 +1,13 @@
+msql_fieldlen
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_fieldlen — Alias of |msql_field_len|
+
+==============================================================================
+*Description*
+
+This function is an alias of |msql_field_len|.
+
+
+vim:ft=help:

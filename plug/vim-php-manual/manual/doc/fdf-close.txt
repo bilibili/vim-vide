@@ -1,0 +1,33 @@
+fdf_close
+
+(PHP 4, PHP 5, PHP 7)
+
+fdf_close — Close an FDF document
+
+==============================================================================
+*Description*
+
+    void fdf_close ( resource $fdf_document )~
+
+Closes the FDF document.
+
+==============================================================================
+*Parameters*
+
+{fdf_document}
+
+    The FDF document handle, returned by |fdf_create|, |fdf_open| or 
+    |fdf_open_string|.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |fdf_open| - Open a FDF document
+
+
+vim:ft=help:

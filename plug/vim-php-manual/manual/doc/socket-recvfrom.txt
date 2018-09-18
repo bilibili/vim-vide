@@ -1,0 +1,117 @@
+socket_recvfrom
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_recvfrom — Receives data from a socket whether or not it is
+connection-oriented
+
+==============================================================================
+*Description*
+
+    int socket_recvfrom ( resource $socket , string &$buf , int $len , int~
+    $flags , string &$name [, int &$port ] )~
+
+The socket_recvfrom() function receives {len} bytes of data in {buf} from
+{name} on port {port} (if the socket is not of type AF_UNIX) using {socket}. 
+socket_recvfrom() can be used to gather data from both connected and
+unconnected sockets. Additionally, one or more flags can be specified to
+modify the behaviour of the function.
+
+The {name} and {port} must be passed by reference. If the socket is not
+connection-oriented, {name} will be set to the internet protocol address of
+the remote host or the path to the UNIX socket. If the socket is
+connection-oriented, {name} is NULL. Additionally, the {port} will contain the
+port of the remote host in the case of an unconnected AF_INET or AF_INET6
+socket.
+
+==============================================================================
+*Parameters*
+
+{socket}
+
+    The {socket} must be a socket resource previously created by socket_create
+    ().
+
+{buf}
+
+    The data received will be fetched to the variable specified with {buf}.
+
+{len}
+
+    Up to {len} bytes will be fetched from remote host.
+
+{flags}
+
+    The value of {flags} can be any combination of the following flags, joined
+    with the binary OR (|) operator.
+
+                         Possible values for {flags}
+        Flag                              Description
+    MSG_OOB      Process out-of-band data.
+    MSG_PEEK     Receive data from the beginning of the receive queue without
+                 removing it from the queue.
+                 Block until at least {len} are received. However, if a signal
+    MSG_WAITALL  is caught or the remote host disconnects, the function may
+                 return less data.
+    MSG_DONTWAIT With this flag set, the function returns even if it would
+                 normally have blocked.
+
+{name}
+
+    If the socket is of the type AF_UNIX type, {name} is the path to the file.
+    Else, for unconnected sockets, {name} is the IP address of, the remote
+    host, or NULL if the socket is connection-oriented.
+
+{port}
+
+    This argument only applies to AF_INET and AF_INET6 sockets, and specifies
+    the remote port from which the data is received. If the socket is
+    connection-oriented, {port} will be NULL.
+
+==============================================================================
+*Return* *Values*
+
+socket_recvfrom() returns the number of bytes received, or FALSE if there was
+an error. The actual error code can be retrieved by calling |socket_last_error
+|. This error code may be passed to |socket_strerror| to get a textual
+explanation of the error.
+
+==============================================================================
+*Examples*
+
+Example #1 socket_recvfrom() example
+
+<?php >
+    error_reporting(E_ALL | E_STRICT);
+
+    $socket = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
+    socket_bind($socket, '127.0.0.1', 1223);
+
+    $from = '';
+    $port = 0;
+    socket_recvfrom($socket, $buf, 12, 0, $from, $port);
+
+    echo "Received $buf from remote address $from and remote port $port" . PHP_EOL
+    ;
+<?>
+
+This example will initiate a UDP socket on port 1223 of 127.0.0.1 and print at
+most 12 characters received from a remote host.
+
+==============================================================================
+*Changelog*
+
+Version              Description
+4.3.0   socket_recvfrom() is now binary safe.
+
+==============================================================================
+*See* *Also*
+
+  * |socket_recv| - Receives data from a connected socket
+  * |socket_send| - Sends data to a connected socket
+  * |socket_sendto| - Sends a message to a socket, whether it is connected or
+    not
+  * |socket_create| - Create a socket (endpoint for communication)
+
+
+vim:ft=help:

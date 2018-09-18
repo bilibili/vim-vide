@@ -1,0 +1,113 @@
+cubrid_get
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_get — Get a column using OID
+
+==============================================================================
+*Description*
+
+    mixed cubrid_get ( resource $conn_identifier , string $oid [, mixed $attr~
+    ] )~
+
+The cubrid_get() function is used to get the attribute of the instance of the
+given {oid}. You can get single attribute by using string data type for the
+{attr} argument, or many attributes by using array data type for the {attr}
+argument.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    Connection identifier.
+
+{oid}
+
+    OID of the instance that you want to read.
+
+{attr}
+
+    Name of the attribute that you want to read.
+
+==============================================================================
+*Return* *Values*
+
+Content of the requested attribute, when process is successful; When {attr} is
+set with string data type, the result is returned as a string; when {attr} is
+set with array data type (0-based numerical array), then the result is
+returned in associative array. When {attr} is omitted, then all attributes are
+received in array form.
+
+FALSE when process is unsuccessful or result is NULL (If error occurs to
+distinguish empty string from NULL, then it prints the warning message. You
+can check the error by using |cubrid_error_code|)
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_get() example
+
+<?php >
+    $conn = cubrid_connect("localhost", 33000, "demodb");
+
+    @cubrid_execute($conn, "DROP TABLE foo");
+    cubrid_execute($conn, "CREATE TABLE foo(a int AUTO_INCREMENT, b set
+    (int), c list(int), d char(10))");
+    cubrid_execute($conn, "INSERT INTO foo(a, b, c, d) VALUES(1, {1,2,3}, 
+    {11,22,33,333}, 'a')");
+    cubrid_execute($conn, "INSERT INTO foo(a, b, c, d) VALUES(2, {4,5,7}, 
+    {44,55,66,666}, 'b')");
+
+    $req = cubrid_execute($conn, "SELECT * FROM foo", CUBRID_INCLUDE_OID);
+
+    cubrid_move_cursor($req, 1, CUBRID_CURSOR_FIRST);
+    $oid = cubrid_current_oid($req);
+
+    $attr = cubrid_get($conn, $oid, "b");
+    var_dump($attr);
+
+    $attr = cubrid_get($conn, $oid);
+    var_dump($attr);
+
+    cubrid_close_request($req);
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+string(9) "{1, 2, 3}"
+array(4) {
+  ["a"]=>
+  string(1) "1"
+  ["b"]=>
+  array(3) {
+    [0]=>
+    string(1) "1"
+    [1]=>
+    string(1) "2"
+    [2]=>
+    string(1) "3"
+  }
+  ["c"]=>
+  array(4) {
+    [0]=>
+    string(2) "11"
+    [1]=>
+    string(2) "22"
+    [2]=>
+    string(2) "33"
+    [3]=>
+    string(3) "333"
+  }
+  ["d"]=>
+  string(10) "a         "
+}
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_put| - Update a column using OID
+
+
+vim:ft=help:

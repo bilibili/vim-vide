@@ -1,0 +1,47 @@
+http_send_content_disposition
+
+(PECL pecl_http >= 0.10.0)
+
+http_send_content_disposition — Send Content-Disposition
+
+==============================================================================
+*Description*
+
+    bool http_send_content_disposition ( string $filename [, bool $inline =~
+    false ] )~
+
+Send the Content-Disposition. The Content-Disposition header is very useful if
+the data actually being sent came from a file or something similar, that
+should be "saved" by the client/user (i.e. by the browser's "Save as..." popup
+window).
+
+    Note: This function should be used in conjunction with |http_send_data|, 
+    |http_send_file| and |http_send_stream|.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    the file name the "Save as..." dialog should display
+
+{inline}
+
+    if set to TRUE and the user agent knows how to handle the content type, it
+    will probably not cause the popup window to be shown
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |http_send_data| - Send arbitrary data
+  * |http_send_file| - Send file
+  * |http_send_stream| - Send stream
+  * the  HttpResponse class if you are using PHP 5.1.0 and above
+
+
+vim:ft=help:

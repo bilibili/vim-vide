@@ -1,0 +1,57 @@
+crack_check
+
+(PECL crack >= 0.1)
+
+crack_check — Performs an obscure check with the given password
+
+==============================================================================
+*Description*
+
+    bool crack_check ( resource $dictionary , string $password )~
+    bool crack_check ( string $password , string $username = "" ,~
+    string $gecos = "" , resource $dictionary = NULL )~
+
+Performs an obscure check with the given password on the specified dictionary.
+The alternative signature also takes into account the username and the GECOS
+information.
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*Parameters*
+
+{dictionary}
+
+    The crack lib dictionary. If not specified, the last opened dictionary is
+    used.
+
+{password}
+
+    The password to be checked.
+
+{username}
+
+    The username of the account with the password.
+
+{gecos}
+
+    The GECOS information associated with the user account.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {password} is strong, or FALSE otherwise.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+0.3     The {username}, {gecos} and {dictionary} parameters were added to the
+        alternative signature.
+
+
+vim:ft=help:

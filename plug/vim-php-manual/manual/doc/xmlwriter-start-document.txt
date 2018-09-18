@@ -1,0 +1,56 @@
+XMLWriter::startDocument
+
+xmlwriter_start_document
+
+(PHP 5 >= 5.1.2, PHP 7, PECL xmlwriter >= 0.1.0)
+
+XMLWriter::startDocument -- xmlwriter_start_document — Create document tag
+
+==============================================================================
+*Description*
+
+Object oriented style
+
+    bool XMLWriter::startDocument ([ string $version = 1.0 [, string~
+    $encoding = NULL [, string $standalone ]]] )~
+
+Procedural style
+
+    bool xmlwriter_start_document ( resource $xmlwriter [, string $version =~
+    1.0 [, string $encoding = NULL [, string $standalone ]]] )~
+
+Starts a document.
+
+==============================================================================
+*Parameters*
+
+{ xmlwriter}
+
+    Only for procedural calls. The XMLWriter resource that is being modified.
+    This resource comes from a call to |xmlwriter_open_uri| or 
+    |xmlwriter_open_memory|.
+
+{version}
+
+    The version number of the document as part of the XML declaration.
+
+{encoding}
+
+    The encoding of the document as part of the XML declaration.
+
+{standalone}
+
+    yes or no.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |XMLWriter::endDocument| - End current document
+
+
+vim:ft=help:

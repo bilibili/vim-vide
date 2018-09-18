@@ -1,0 +1,77 @@
+urlencode
+
+(PHP 4, PHP 5, PHP 7)
+
+urlencode — URL-encodes string
+
+==============================================================================
+*Description*
+
+    string urlencode ( string $str )~
+
+This function is convenient when encoding a string to be used in a query part
+of a URL, as a convenient way to pass variables to the next page.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The string to be encoded.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string in which all non-alphanumeric characters except -_. have been
+replaced with a percent (%) sign followed by two hex digits and spaces encoded
+as plus (+) signs. It is encoded the same way that the posted data from a WWW
+form is encoded, that is the same way as in application/x-www-form-urlencoded
+media type. This differs from the >> RFC 3986 encoding (see |rawurlencode|) in
+that for historical reasons, spaces are encoded as plus (+) signs.
+
+==============================================================================
+*Examples*
+
+Example #1 urlencode() example
+
+<?php >
+    echo '<a href="mycgi?foo=', urlencode($userinput), '">';
+<?>
+
+Example #2 urlencode() and |htmlentities| example
+
+<?php >
+    $query_string = 'foo=' . urlencode($foo) . '&bar=' . urlencode($bar);
+    echo '<a href="mycgi?' . htmlentities($query_string) . '">';
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Be careful about variables that may match HTML entities. Things like &amp,
+    &copy and &pound are parsed by the browser and the actual entity is used
+    instead of the desired variable name. This is an obvious hassle that the
+    W3C has been telling people about for years. The reference is here: >>
+     http://www.w3.org/TR/html4/appendix/notes.html#h-B.2.2.
+
+    PHP supports changing the argument separator to the W3C-suggested
+    semi-colon through the arg_separator .ini directive. Unfortunately most
+    user agents do not send form data in this semi-colon separated format. A
+    more portable way around this is to use &amp; instead of & as the
+    separator. You don't need to change PHP's arg_separator for this. Leave it
+    as &, but simply encode your URLs using |htmlentities| or |
+    htmlspecialchars|.
+
+==============================================================================
+*See* *Also*
+
+  * |urldecode| - Decodes URL-encoded string
+  * |htmlentities| - Convert all applicable characters to HTML entities
+  * |rawurlencode| - URL-encode according to RFC 3986
+  * |rawurldecode| - Decode URL-encoded strings
+  * >> RFC 3986
+
+
+vim:ft=help:

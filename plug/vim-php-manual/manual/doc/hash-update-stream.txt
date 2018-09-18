@@ -1,0 +1,64 @@
+hash_update_stream
+
+(PHP 5 >= 5.1.2, PHP 7, PECL hash >= 1.1)
+
+hash_update_stream — Pump data into an active hashing context from an open
+stream
+
+==============================================================================
+*Description*
+
+    int hash_update_stream ( resource $context , resource $handle [, int~
+    $length = -1 ] )~
+
+==============================================================================
+*Parameters*
+
+{context}
+
+    Hashing context returned by |hash_init|.
+
+{handle}
+
+    Open file handle as returned by any stream creation function.
+
+{length}
+
+    Maximum number of characters to copy from {handle} into the hashing
+    context.
+
+==============================================================================
+*Return* *Values*
+
+Actual number of bytes added to the hashing context from {handle}.
+
+==============================================================================
+*Examples*
+
+Example #1 hash_update_stream() example
+
+<?php >
+    $fp = tmpfile();
+    fwrite($fp, 'The quick brown fox jumped over the lazy dog.');
+    rewind($fp);
+
+    $ctx = hash_init('md5');
+    hash_update_stream($ctx, $fp);
+    echo hash_final($ctx);
+<?>
+
+The above example will output:
+
+5c6ffbdd40d9556b73a21e63c3e0e904
+
+==============================================================================
+*See* *Also*
+
+  * |hash_init| - Initialize an incremental hashing context
+  * |hash_update| - Pump data into an active hashing context
+  * |hash_final| - Finalize an incremental hash and return resulting digest
+  * |hash| - Generate a hash value (message digest)
+  * |hash_file| - Generate a hash value using the contents of a given file
+
+
+vim:ft=help:

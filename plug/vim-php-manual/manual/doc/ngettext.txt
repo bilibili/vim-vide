@@ -1,0 +1,52 @@
+ngettext
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+ngettext — Plural version of gettext
+
+==============================================================================
+*Description*
+
+    string ngettext ( string $msgid1 , string $msgid2 , int $n )~
+
+The plural version of |gettext|. Some languages have more than one form for
+plural messages dependent on the count.
+
+==============================================================================
+*Parameters*
+
+{msgid1}
+
+    The singular message ID.
+
+{msgid2}
+
+    The plural message ID.
+
+{n}
+
+    The number (e.g. item count) to determine the translation for the
+    respective grammatical number.
+
+==============================================================================
+*Return* *Values*
+
+Returns correct plural form of message identified by {msgid1} and {msgid2} for
+count {n}.
+
+==============================================================================
+*Examples*
+
+Example #1 ngettext() example
+
+<?php >
+
+    setlocale(LC_ALL, 'cs_CZ');
+    printf(ngettext("%d window", "%d windows", 1), 1); // 1 okno
+    printf(ngettext("%d window", "%d windows", 2), 2); // 2 okna
+    printf(ngettext("%d window", "%d windows", 5), 5); // 5 oken
+
+<?>
+
+
+vim:ft=help:

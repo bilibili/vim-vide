@@ -1,0 +1,16 @@
+PDF_closepath_fill_stroke
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_closepath_fill_stroke — Close, fill and stroke current path
+
+==============================================================================
+*Description*
+
+    bool PDF_closepath_fill_stroke ( resource $p )~
+
+Closes the path, fills, and strokes it. Returns TRUE on success or FALSE on
+failure.
+
+
+vim:ft=help:

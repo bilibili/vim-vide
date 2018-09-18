@@ -1,0 +1,27 @@
+newt_draw_form
+
+(PECL newt >= 0.1)
+
+newt_draw_form —
+
+==============================================================================
+*Description*
+
+    void newt_draw_form ( resource $form )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{form}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

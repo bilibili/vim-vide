@@ -1,0 +1,35 @@
+udm_free_ispell_data
+
+(PHP 4 >= 4.0.5, PHP 5 <= 5.0.5, PECL mnogosearch >= 1.0.0)
+
+udm_free_ispell_data — Free memory allocated for ispell data
+
+==============================================================================
+*Description*
+
+    bool udm_free_ispell_data ( int $agent )~
+
+Frees the memory allocated for ispell data.
+
+==============================================================================
+*Parameters*
+
+{agent}
+
+    A link to Agent, received after call to |udm_alloc_agent|.
+
+==============================================================================
+*Return* *Values*
+
+udm_free_ispell_data() always returns TRUE.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function is supported beginning from version 3.1.12 of mnoGoSearch
+    and it does not do anything in previous versions.
+
+
+vim:ft=help:

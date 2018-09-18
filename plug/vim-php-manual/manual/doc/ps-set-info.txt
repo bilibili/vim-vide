@@ -1,0 +1,64 @@
+ps_set_info
+
+(PECL ps >= 1.1.0)
+
+ps_set_info — Sets information fields of document
+
+==============================================================================
+*Description*
+
+    bool ps_set_info ( resource $p , string $key , string $val )~
+
+Sets certain information fields of the document. This fields will be shown as
+a comment in the header of the PostScript file. If the document is converted
+to pdf this fields will also be used for the document information.
+
+The BoundingBox is usually set to the value given to the first page. This only
+works if |ps_findfont| has not been called before. In such cases the
+BoundingBox would be left unset unless you set it explicitly with this
+function.
+
+This function will have no effect anymore when the header of the postscript
+file has been already written. It must be called before the first page or the
+first call of |ps_findfont|.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{key}
+
+    The name of the information field to set. The values which can be set are
+    Keywords, Subject, Title, Creator, Author, BoundingBox, and Orientation.
+    Be aware that some of them has a meaning to PostScript viewers.
+
+{value}
+
+    The value of the information field. The field Orientation can be set to
+    either Portrait or Landscape. The BoundingBox is a string consisting of
+    four numbers. The first two numbers are the coordinates of the lower left
+    corner of the page. The last two numbers are the coordinates of the upper
+    right corner.
+
+        Note:
+
+        Up to version 0.2.6 of pslib, the BoundingBox and Orientation will be
+        overwritten by |ps_begin_page|, unless |ps_findfont| has been called
+        before.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_findfont| - Loads a font
+  * |ps_begin_page| - Start a new page
+
+
+vim:ft=help:

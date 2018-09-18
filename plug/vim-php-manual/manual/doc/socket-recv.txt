@@ -1,0 +1,145 @@
+socket_recv
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_recv — Receives data from a connected socket
+
+==============================================================================
+*Description*
+
+    int socket_recv ( resource $socket , string &$buf , int $len , int $flags~
+)~
+
+The socket_recv() function receives {len} bytes of data in {buf} from
+{socket}. socket_recv() can be used to gather data from connected sockets.
+Additionally, one or more flags can be specified to modify the behaviour of
+the function.
+
+{buf} is passed by reference, so it must be specified as a variable in the
+argument list. Data read from {socket} by socket_recv() will be returned in
+{buf}.
+
+==============================================================================
+*Parameters*
+
+{socket}
+
+    The {socket} must be a socket resource previously created by socket_create
+    ().
+
+{buf}
+
+    The data received will be fetched to the variable specified with {buf}. If
+    an error occurs, if the connection is reset, or if no data is available,
+    {buf} will be set to NULL.
+
+{len}
+
+    Up to {len} bytes will be fetched from remote host.
+
+{flags}
+
+    The value of {flags} can be any combination of the following flags, joined
+    with the binary OR (|) operator.
+
+                         Possible values for {flags}
+        Flag                              Description
+    MSG_OOB      Process out-of-band data.
+    MSG_PEEK     Receive data from the beginning of the receive queue without
+                 removing it from the queue.
+                 Block until at least {len} are received. However, if a signal
+    MSG_WAITALL  is caught or the remote host disconnects, the function may
+                 return less data.
+    MSG_DONTWAIT With this flag set, the function returns even if it would
+                 normally have blocked.
+
+==============================================================================
+*Return* *Values*
+
+socket_recv() returns the number of bytes received, or FALSE if there was an
+error. The actual error code can be retrieved by calling |socket_last_error|.
+This error code may be passed to |socket_strerror| to get a textual
+explanation of the error.
+
+==============================================================================
+*Examples*
+
+Example #1 socket_recv() example
+
+This example is a simple rewrite of the first example from Examples to use 
+socket_recv().
+
+<?php >
+    error_reporting(E_ALL);
+
+    echo "<h2>TCP/IP Connection</h2>\n";
+
+    /* Get the port for the WWW service. */
+    $service_port = getservbyname('www', 'tcp');
+
+    /* Get the IP address for the target host. */
+    $address = gethostbyname('www.example.com');
+
+    /* Create a TCP/IP socket. */
+    $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+    if ($socket === false) {
+        echo "socket_create() failed: reason: " . socket_strerror(
+    socket_last_error()) . "\n";
+    } else {
+        echo "OK.\n";
+    }
+
+    echo "Attempting to connect to '$address' on port '$service_port'...";
+    $result = socket_connect($socket, $address, $service_port);
+    if ($result === false) {
+        echo "socket_connect() failed.\nReason: ($result) " . socket_strerror(
+    socket_last_error($socket)) . "\n";
+    } else {
+        echo "OK.\n";
+    }
+
+    $in = "HEAD / HTTP/1.1\r\n";
+    $in .= "Host: www.example.com\r\n";
+    $in .= "Connection: Close\r\n\r\n";
+    $out = '';
+
+    echo "Sending HTTP HEAD request...";
+    socket_write($socket, $in, strlen($in));
+    echo "OK.\n";
+
+    echo "Reading response:\n\n";
+    $buf = 'This is my buffer.';
+    if (false !== ($bytes = socket_recv($socket, $buf, 2048, MSG_WAITALL))) {
+        echo "Read $bytes bytes from socket_recv(). Closing socket...";
+    } else {
+        echo "socket_recv() failed; reason: " . socket_strerror(socket_last_error(
+    $socket)) . "\n";
+    }
+    socket_close($socket);
+
+    echo $buf . "\n";
+    echo "OK.\n\n";
+<?>
+
+The above example will produce something like:
+
+<h2>TCP/IP Connection</h2>
+OK.
+Attempting to connect to '208.77.188.166' on port '80'...OK.
+Sending HTTP HEAD request...OK.
+Reading response:
+
+Read 123 bytes from socket_recv(). Closing socket...HTTP/1.1 200 OK
+Date: Mon, 14 Sep 2009 08:56:36 GMT
+Server: Apache/2.2.3 (Red Hat)
+Last-Modified: Tue, 15 Nov 2005 13:24:10 GMT
+ETag: "b80f4-1b6-80bfd280"
+Accept-Ranges: bytes
+Content-Length: 438
+Connection: close
+Content-Type: text/html; charset=UTF-8
+
+OK.
+
+
+vim:ft=help:

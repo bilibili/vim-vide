@@ -1,0 +1,120 @@
+wincache_ucache_set
+
+(PECL wincache >= 1.1.0)
+
+wincache_ucache_set — Adds a variable in user cache and overwrites a variable
+if it already exists in the cache
+
+==============================================================================
+*Description*
+
+    bool wincache_ucache_set ( mixed $key , mixed $value [, int $ttl = 0 ] )~
+    bool wincache_ucache_set ( array $values [, mixed $unused = NULL [, int~
+    $ttl = 0 ]] )~
+
+Adds a variable in user cache. Overwrites a variable if it already exists in
+the cache. The added or updated variable remains in the user cache unless its
+time to live expires or it is deleted by using |wincache_ucache_delete| or 
+|wincache_ucache_clear| functions.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    Store the variable using this {key} name. If a variable with same {key} is
+    already present the function will overwrite the previous value with the
+    new one. {key} is case sensitive. {key} can also take array of name =>
+    value pairs where names will be used as keys. This can be used to add
+    multiple values in the cache in one operation, thus avoiding race
+    condition.
+
+{value}
+
+    Value of a variable to store. {Value} supports all data types except
+    resources, such as file handles. This paramter is ignored if first
+    argument is an array. A general guidance is to pass NULL as {value} while
+    using array as {key}. If {value} is an object, or an array containing
+    objects, then the objects will be serialized. See __sleep() for details on
+    serializing objects.
+
+{values}
+
+    Associative array of keys and values.
+
+{ttl}
+
+    Time for the variable to live in the cache in seconds. After the value
+    specified in {ttl} has passed the stored variable will be deleted from the
+    cache. This parameter takes a default value of 0 which means the variable
+    will stay in the cache unless explicitly deleted by using 
+    |wincache_ucache_delete| or |wincache_ucache_clear| functions.
+
+==============================================================================
+*Return* *Values*
+
+If {key} is string, the function returns TRUE on success and FALSE on failure.
+
+If {key} is an array, the function returns:
+
+  * If all the name => value pairs in the array can be set, function returns
+    an empty array;
+  * If all the name => value pairs in the array cannot be set, function
+    returns FALSE;
+  * If some can be set while others cannot, function returns an array with
+    name=>value pair for which the addition failed in the user cache.
+
+==============================================================================
+*Examples*
+
+Example #1 wincache_ucache_set() with {key} as a string
+
+<?php >
+    $bar = 'BAR';
+    var_dump(wincache_ucache_set('foo', $bar));
+    var_dump(wincache_ucache_get('foo'));
+    $bar1 = 'BAR1';
+    var_dump(wincache_ucache_set('foo', $bar1));
+    var_dump(wincache_ucache_get('foo'));
+<?>
+
+The above example will output:
+
+bool(true)
+string(3) "BAR"
+bool(true)
+string(3) "BAR1"
+
+Example #2 wincache_ucache_set() with {key} as an array
+
+<?php >
+    $colors_array = array('green' => '5', 'Blue' => '6', 'yellow' => '7', 'cyan' 
+    => '8');
+    var_dump(wincache_ucache_set($colors_array));
+    var_dump(wincache_ucache_set($colors_array));
+    var_dump(wincache_ucache_get('Blue'));
+<?>
+
+The above example will output:
+
+array(0) {}
+array(0) {}
+string(1) "6"
+
+==============================================================================
+*See* *Also*
+
+  * |wincache_ucache_add| - Adds a variable in user cache only if variable
+    does not already exist in the cache
+  * |wincache_ucache_get| - Gets a variable stored in the user cache
+  * |wincache_ucache_delete| - Deletes variables from the user cache
+  * |wincache_ucache_clear| - Deletes entire content of the user cache
+  * |wincache_ucache_exists| - Checks if a variable exists in the user cache
+  * |wincache_ucache_meminfo| - Retrieves information about user cache memory
+    usage
+  * |wincache_ucache_info| - Retrieves information about data stored in the
+    user cache
+  * __sleep()
+
+
+vim:ft=help:

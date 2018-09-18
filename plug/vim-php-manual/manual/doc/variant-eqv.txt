@@ -1,0 +1,47 @@
+variant_eqv
+
+(PHP 5, PHP 7)
+
+variant_eqv — Performs a bitwise equivalence on two variants
+
+==============================================================================
+*Description*
+
+    mixed variant_eqv ( mixed $left , mixed $right )~
+
+Performs a bitwise equivalence on two variants.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+    The left operand.
+
+{right}
+
+    The right operand.
+
+    Note:
+
+    As with all the variant arithmetic functions, the parameters for this
+    function can be either a PHP native type (integer, string, floating point,
+    boolean or NULL), or an instance of a COM, VARIANT or DOTNET class. PHP
+    native types will be converted to variants using the same rules as found
+    in the constructor for the VARIANT class. COM and DOTNET objects will have
+    the value of their default property taken and used as the variant value.
+
+    The variant arithmetic functions are wrappers around the similarly named
+    functions in the COM library; for more information on these functions,
+    consult the MSDN library. The PHP functions are named slightly
+    differently; for example |variant_add| in PHP corresponds to VarAdd() in
+    the MSDN documentation.
+
+==============================================================================
+*Return* *Values*
+
+If each bit in {left} is equal to the corresponding bit in {right} then TRUE
+is returned, otherwise FALSE is returned.
+
+
+vim:ft=help:

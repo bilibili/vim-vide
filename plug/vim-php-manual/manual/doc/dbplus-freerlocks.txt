@@ -1,0 +1,41 @@
+dbplus_freerlocks
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_freerlocks — Free all tuple locks on given relation
+
+==============================================================================
+*Description*
+
+    int dbplus_freerlocks ( resource $relation )~
+
+Frees all tuple locks held on the given {relation}.
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*See* *Also*
+
+  * |dbplus_getlock| - Get a write lock on a tuple
+  * |dbplus_freelock| - Release write lock on tuple
+  * |dbplus_freealllocks| - Free all locks held by this client
+
+
+vim:ft=help:

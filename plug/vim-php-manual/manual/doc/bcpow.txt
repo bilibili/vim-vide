@@ -1,0 +1,72 @@
+bcpow
+
+(PHP 4, PHP 5, PHP 7)
+
+bcpow — Raise an arbitrary precision number to another
+
+==============================================================================
+*Description*
+
+    string bcpow ( string $left_operand , string $right_operand [, int $scale~
+    = 0 ] )~
+
+Raise {left_operand} to the power {right_operand}.
+
+==============================================================================
+*Parameters*
+
+{left_operand}
+
+    The left operand, as a string.
+
+{right_operand}
+
+    The right operand, as a string.
+
+{ scale}
+
+    This optional parameter is used to set the number of digits after the
+    decimal place in the result. If omitted, it will default to the scale set
+    globally with the |bcscale| function, or fallback to 0 if this has not
+    been set.
+
+==============================================================================
+*Return* *Values*
+
+Returns the result as a string.
+
+==============================================================================
+*Examples*
+
+Example #1 bcpow() example
+
+<?php >
+
+    echo bcpow('4.2', '3', 2); // 74.08
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    bcpow() may return a result with fewer digits after the decimal point than
+    the {scale} parameter would indicate. This only occurs when the result
+    doesn't require all of the precision allowed by the {scale}. For example:
+   
+    Example #2 bcpow() scale example
+
+    <?php >
+    echo bcpow('5', '2', 2);     // prints "25", not "25.00"
+<    ?>
+
+==============================================================================
+*See* *Also*
+
+  * |bcpowmod| - Raise an arbitrary precision number to another, reduced by a
+    specified modulus
+  * |bcsqrt| - Get the square root of an arbitrary precision number
+
+
+vim:ft=help:

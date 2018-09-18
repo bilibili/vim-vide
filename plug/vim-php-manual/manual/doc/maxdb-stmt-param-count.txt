@@ -1,0 +1,92 @@
+maxdb_stmt_param_count
+
+maxdb_stmt::param_count
+
+(PECL maxdb >= 1.0)
+
+maxdb_stmt_param_count -- maxdb_stmt::param_count — Returns the number of
+parameter for the given statement
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    int maxdb_stmt_param_count ( resource $stmt )~
+
+Object oriented style
+
+int $maxdb_stmt->param_count;
+
+maxdb_stmt_param_count() returns the number of parameter markers present in
+the prepared statement.
+
+==============================================================================
+*Return* *Values*
+
+returns an integer representing the number of parameters.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    if ($stmt = $maxdb->prepare("SELECT name FROM hotel.city WHERE name=? OR state
+    =?")) {
+
+       $marker = $stmt->param_count;
+       printf("Statement has %d markers.\n", $marker);
+
+       /* close statement */
+       $stmt->close();
+    }
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    if ($stmt = maxdb_prepare($link, "SELECT name FROM hotel.city WHERE name=?
+     OR state=?")) {
+
+       $marker = maxdb_stmt_param_count($stmt);
+       printf("Statement has %d markers.\n", $marker);
+
+       /* close statement */
+       maxdb_stmt_close($stmt);
+    }
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Statement has 2 markers.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_prepare| - Prepare an SQL statement for execution
+
+
+vim:ft=help:

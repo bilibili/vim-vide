@@ -1,0 +1,17 @@
+msession_get_array
+
+(PHP 4 >= 4.2.0, PHP 5 <= 5.1.2)
+
+msession_get_array — Get array of msession variables
+
+==============================================================================
+*Description*
+
+    array msession_get_array ( string $session )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

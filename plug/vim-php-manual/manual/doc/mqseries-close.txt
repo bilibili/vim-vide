@@ -1,0 +1,67 @@
+mqseries_close
+
+(PECL mqseries >= 0.10.0)
+
+mqseries_close — MQSeries MQCLOSE
+
+==============================================================================
+*Description*
+
+    void mqseries_close ( resource $hconn , resource $hobj , int $options ,~
+    resource &$compCode , resource &$reason )~
+
+The mqseries_close() (MQCLOSE) call relinquishes access to an object, and is
+the inverse of the |mqseries_open| (MQOPEN) call.
+
+==============================================================================
+*Parameters*
+
+{hConn}
+
+    Connection handle.
+
+    This handle represents the connection to the queue manager.
+
+{hObj}
+
+    Object handle.
+
+    This handle represents the object to be used.
+
+{options}
+
+{compCode}
+
+    Completion code.
+
+{reason}
+
+    Reason code qualifying the compCode.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 mqseries_close() example
+
+<?php >
+        mqseries_close($conn, $obj, MQSERIES_MQCO_NONE, $comp_code, $reason);
+        if ($comp_code !== MQSERIES_MQCC_OK) {
+            printf("close CompCode:%d Reason:%d Text:%s<br>\n", $comp_code, 
+    $reason, mqseries_strerror($reason));
+        }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mqseries_open| - MQSeries MQOPEN
+  * |mqseries_conn| - MQSeries MQCONN
+  * |mqseries_connx| - MQSeries MQCONNX
+
+
+vim:ft=help:

@@ -1,0 +1,62 @@
+dba_fetch
+
+(PHP 4, PHP 5, PHP 7)
+
+dba_fetch — Fetch data specified by key
+
+==============================================================================
+*Description*
+
+    string dba_fetch ( string $key , resource $handle )~
+    string dba_fetch ( string $key , int $skip , resource $handle )~
+
+dba_fetch() fetches the data specified by {key} from the database specified
+with {handle}.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    The key the data is specified by.
+
+        Note:
+
+        When working with inifiles this function accepts arrays as keys where
+        index 0 is the group and index 1 is the value name. See: 
+        |dba_key_split|.
+
+{skip}
+
+    The number of key-value pairs to ignore when using cdb databases. This
+    value is ignored for all other databases which do not support multiple
+    keys with the same name.
+
+{handle}
+
+    The database handler, returned by |dba_open| or |dba_popen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the associated string if the key/data pair is found, FALSE otherwise.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+4.3.0   The {skip} parameter is available to support cdb's capability of
+        multiple keys having the same name.
+
+==============================================================================
+*See* *Also*
+
+  * |dba_exists| - Check whether key exists
+  * |dba_delete| - Delete DBA entry specified by key
+  * |dba_insert| - Insert entry
+  * |dba_replace| - Replace or insert entry
+  * |dba_key_split| - Splits a key in string representation into array
+    representation
+
+
+vim:ft=help:

@@ -1,0 +1,15 @@
+PDF_end_item
+
+(PECL pdflib >= 2.0.0)
+
+PDF_end_item — Close structure element or other content item
+
+==============================================================================
+*Description*
+
+    bool PDF_end_item ( resource $pdfdoc , int $id )~
+
+Closes a structure element or other content item.
+
+
+vim:ft=help:

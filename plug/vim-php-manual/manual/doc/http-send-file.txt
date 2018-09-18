@@ -1,0 +1,68 @@
+http_send_file
+
+(PECL pecl_http >= 0.1.0)
+
+http_send_file — Send file
+
+==============================================================================
+*Description*
+
+    bool http_send_file ( string $file )~
+
+Sends a file with support for (multiple) range requests.
+
+This functions behaviour and further action is dependent on the following INI
+settings: http.send.not_found_404 and http.log.not_found.
+
+If the INI setting http.send.not_found_404 is enabled and the INI setting
+http.log.not_found points to a writable file, a log message is written when
+the {file} was not found.
+
+==============================================================================
+*Parameters*
+
+{file}
+
+    the file to send
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A http_send_file() example
+
+<?php >
+    http_send_content_disposition("document.pdf", true);
+    http_send_content_type("application/pdf");
+    http_throttle(0.1, 2048);
+    http_send_file("../report.pdf");
+<?>
+
+The above example will output:
+
+HTTP/1.1 206 Partial Content
+X-Powered-By: PHP/5.2.2
+Accept-Ranges: bytes
+Content-Length: 12345
+Content-Range: bytes 0-12344
+Content-Type: application/pdf
+Content-Disposition: inline; filename="document.pdf"
+
+%PDF...
+
+==============================================================================
+*See* *Also*
+
+  * |http_send_data| - Send arbitrary data
+  * |http_send_stream| - Send stream
+  * |http_throttle| - HTTP throttling
+  * |http_send_content_type| - Send Content-Type
+  * |http_send_content_disposition| - Send Content-Disposition
+  * the  HttpResponse class if you are using PHP 5.1.0 and above
+
+
+vim:ft=help:

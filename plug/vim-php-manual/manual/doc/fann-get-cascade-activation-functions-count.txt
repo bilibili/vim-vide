@@ -1,0 +1,39 @@
+fann_get_cascade_activation_functions_count
+
+(PECL fann >= 1.0.0)
+
+fann_get_cascade_activation_functions_count — Returns the number of cascade
+activation functions
+
+==============================================================================
+*Description*
+
+    int fann_get_cascade_activation_functions_count ( resource $ann )~
+
+The number of activation functions in the 
+|fann_get_cascade_activation_functions| array.
+
+The default number of activation functions is 6.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+The number of cascade activation functions, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_cascade_activation_functions| - Returns the cascade activation
+    functions
+  * |fann_set_cascade_activation_functions| - Sets the array of cascade
+    candidate activation functions
+
+
+vim:ft=help:

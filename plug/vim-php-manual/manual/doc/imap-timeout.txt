@@ -1,0 +1,47 @@
+imap_timeout
+
+(PHP 4 >= 4.3.3, PHP 5, PHP 7)
+
+imap_timeout — Set or fetch imap timeout
+
+==============================================================================
+*Description*
+
+    mixed imap_timeout ( int $timeout_type [, int $timeout = -1 ] )~
+
+Sets or fetches the imap timeout.
+
+==============================================================================
+*Parameters*
+
+{timeout_type}
+
+    One of the following: IMAP_OPENTIMEOUT, IMAP_READTIMEOUT,
+    IMAP_WRITETIMEOUT, or IMAP_CLOSETIMEOUT.
+
+{timeout}
+
+    The timeout, in seconds.
+
+==============================================================================
+*Return* *Values*
+
+If the {timeout} parameter is set, this function returns TRUE on success and
+FALSE on failure.
+
+If {timeout} is not provided or evaluates to -1, the current timeout value of
+{timeout_type} is returned as an integer.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_timeout() example
+
+<?php >
+
+    echo "The current read timeout is " . imap_timeout(IMAP_READTIMEOUT) . "\n";
+
+<?>
+
+
+vim:ft=help:

@@ -1,0 +1,15 @@
+PDF_rotate
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_rotate — Rotate coordinate system
+
+==============================================================================
+*Description*
+
+    bool PDF_rotate ( resource $p , float $phi )~
+
+Rotates the coordinate system. Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

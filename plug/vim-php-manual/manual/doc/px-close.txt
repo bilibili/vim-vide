@@ -1,0 +1,34 @@
+px_close
+
+(PECL paradox >= 1.0.0)
+
+px_close — Closes a paradox database
+
+==============================================================================
+*Description*
+
+    bool px_close ( resource $pxdoc )~
+
+Closes the paradox database. This function will not close the file. You will
+have to call |fclose| afterwards.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |px_open_fp| - Open paradox database
+  * The example at |px_new| - Create a new paradox object
+
+
+vim:ft=help:

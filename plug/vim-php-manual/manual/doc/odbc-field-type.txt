@@ -1,0 +1,32 @@
+odbc_field_type
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_field_type — Datatype of a field
+
+==============================================================================
+*Description*
+
+    string odbc_field_type ( resource $result_id , int $field_number )~
+
+Gets the SQL type of the field referenced by number in the given result
+identifier.
+
+==============================================================================
+*Parameters*
+
+{result_id}
+
+    The result identifier.
+
+{field_number}
+
+    The field number. Field numbering starts at 1.
+
+==============================================================================
+*Return* *Values*
+
+Returns the field type as a string, or FALSE on error.
+
+
+vim:ft=help:

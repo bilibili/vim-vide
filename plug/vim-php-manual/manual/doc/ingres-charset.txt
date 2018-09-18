@@ -1,0 +1,54 @@
+ingres_charset
+
+(PECL ingres >= 2.1.0)
+
+ingres_charset — Returns the installation character set
+
+==============================================================================
+*Description*
+
+    string ingres_charset ( resource $link )~
+
+ingres_charset() is called to determine the character set being used by the
+Ingres client, from II_CHARSETxx (where xx is the installation code).
+
+    Note:
+
+    You can override the value returned by using the function |putenv|.
+    Changing the value of II_CHARSETxx in a running Ingres installation can
+    cause data corruption.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    The connection link identifier
+
+==============================================================================
+*Return* *Values*
+
+Returns a string with the value for II_CHARSETxx or returns NULL if the value
+could not be determined.
+
+==============================================================================
+*Examples*
+
+Example #1 ingres_charset() - Get the installation character set
+
+<?php >
+    $link = ingres_connect($database, $user, $password);
+
+    echo ingres_charset($link) . "\n";
+
+    ingres_close($link);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_connect| - Open a connection to an Ingres database
+  * |ingres_query| - Send an SQL query to Ingres
+
+
+vim:ft=help:

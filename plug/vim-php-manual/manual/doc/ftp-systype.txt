@@ -1,0 +1,51 @@
+ftp_systype
+
+(PHP 4, PHP 5, PHP 7)
+
+ftp_systype — Returns the system type identifier of the remote FTP server
+
+==============================================================================
+*Description*
+
+    string ftp_systype ( resource $ftp_stream )~
+
+Returns the system type identifier of the remote FTP server.
+
+==============================================================================
+*Parameters*
+
+{ftp_stream}
+
+    The link identifier of the FTP connection.
+
+==============================================================================
+*Return* *Values*
+
+Returns the remote system type, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 ftp_systype() example
+
+<?php >
+
+    // ftp connection
+    $ftp = ftp_connect('ftp.example.com');
+    ftp_login($ftp, 'user', 'password');
+
+    // get the system type
+    if ($type = ftp_systype($ftp)) {
+        echo "Example.com is powered by $type\n";
+    } else {
+        echo "Couldn't get the systype";
+    }
+
+<?>
+
+The above example will output something similar to:
+
+Example.com is powered by UNIX
+
+
+vim:ft=help:

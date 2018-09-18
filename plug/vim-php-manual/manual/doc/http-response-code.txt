@@ -1,0 +1,81 @@
+http_response_code
+
+(PHP 5 >= 5.4.0, PHP 7)
+
+http_response_code — Get or Set the HTTP response code
+
+==============================================================================
+*Description*
+
+    mixed http_response_code ([ int $response_code ] )~
+
+Gets or sets the HTTP response status code.
+
+==============================================================================
+*Parameters*
+
+{response_code}
+
+    The optional {response_code} will set the response code.
+
+==============================================================================
+*Return* *Values*
+
+If {response_code} is provided, then the previous status code will be
+returned. If {response_code} is not provided, then the current status code
+will be returned. Both of these values will default to a 200 status code if
+used in a web server environment.
+
+FALSE will be returned if {response_code} is not provided and it is not
+invoked in a web server environment (such as from a CLI application). TRUE
+will be returned if {response_code} is provided and it is not invoked in a web
+server environment (but only when no previous response status has been set).
+
+==============================================================================
+*Examples*
+
+Example #1 Using http_response_code() in a web server environment
+
+<?php >
+
+    // Get the current response code and set a new one
+    var_dump(http_response_code(404));
+
+    // Get the new response code
+    var_dump(http_response_code());
+<?>
+
+The above example will output:
+
+int(200)
+int(404)
+
+Example #2 Using http_response_code() in a CLI environment
+
+<?php >
+
+    // Get the current default response code
+    var_dump(http_response_code());
+
+    // Set a response code
+    var_dump(http_response_code(201));
+
+    // Get the new response code
+    var_dump(http_response_code());
+<?>
+
+The above example will output:
+
+bool(false)
+bool(true)
+int(201)
+
+==============================================================================
+*See* *Also*
+
+  * |header| - Send a raw HTTP header
+  * |headers_list| - Returns a list of response headers sent (or ready to
+    send)
+
+
+vim:ft=help:

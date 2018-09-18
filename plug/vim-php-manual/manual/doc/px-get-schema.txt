@@ -1,0 +1,38 @@
+px_get_schema
+
+(PECL paradox >= 1.0.0)
+
+px_get_schema — Returns the database schema
+
+==============================================================================
+*Description*
+
+    array px_get_schema ( resource $pxdoc [, int $mode = 0 ] )~
+
+px_get_schema() returns the database schema.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+{mode}
+
+    If the optional {mode} is PX_KEYTOLOWER or PX_KEYTOUPPER the keys of the
+    returned array will be converted to lower or upper case. If {mode} is 0 or
+    not passed at all, then the key name will be identical to the field name.
+
+==============================================================================
+*Return* *Values*
+
+Returns the schema of a database file as an associated array. The key name is
+equal to the field name. Each array element is itself an associated array
+containing the two fields type and size. type is one of the constants in table
+Constants for field types. size is the number of bytes this field consumes in
+the record. The total of all field sizes is equal to the record size as it can
+be retrieved with |px-get-info|.
+
+
+vim:ft=help:

@@ -1,0 +1,71 @@
+is_object
+
+(PHP 4, PHP 5, PHP 7)
+
+is_object — Finds whether a variable is an object
+
+==============================================================================
+*Description*
+
+    bool is_object ( mixed $var )~
+
+Finds whether the given variable is an object.
+
+==============================================================================
+*Parameters*
+
+{var}
+
+    The variable being evaluated.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {var} is an object, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 is_object() example
+
+<?php >
+    // Declare a simple function to return an 
+    // array from our object
+    function get_students($obj)
+    {
+        if (!is_object($obj)) {
+            return false;
+        }
+
+        return $obj->students;
+    }
+
+    // Declare a new class instance and fill up 
+    // some values
+    $obj = new stdClass();
+    $obj->students = array('Kalle', 'Ross', 'Felipe');
+
+    var_dump(get_students(null));
+    var_dump(get_students($obj));
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function will return FALSE if used on an unserialized object where
+    the class definition is not present (even though |gettype| returns object
+    ).
+
+==============================================================================
+*See* *Also*
+
+  * |is_bool| - Finds out whether a variable is a boolean
+  * |is_int| - Find whether the type of a variable is integer
+  * |is_float| - Finds whether the type of a variable is float
+  * |is_string| - Find whether the type of a variable is string
+  * |is_array| - Finds whether a variable is an array
+
+
+vim:ft=help:

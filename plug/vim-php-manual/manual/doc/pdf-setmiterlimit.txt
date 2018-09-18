@@ -1,0 +1,15 @@
+PDF_setmiterlimit
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_setmiterlimit — Set miter limit
+
+==============================================================================
+*Description*
+
+    bool PDF_setmiterlimit ( resource $pdfdoc , float $miter )~
+
+Sets the miter limit.Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

@@ -1,0 +1,34 @@
+ps_closepath
+
+(PECL ps >= 1.1.0)
+
+ps_closepath — Closes path
+
+==============================================================================
+*Description*
+
+    bool ps_closepath ( resource $psdoc )~
+
+Connects the last point with the first point of a path. The resulting path can
+be used for stroking, filling, clipping, etc..
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_clip| - Clips drawing to current path
+  * |ps_closepath_stroke| - Closes and strokes path
+
+
+vim:ft=help:

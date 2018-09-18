@@ -1,0 +1,77 @@
+iconv_mime_decode
+
+(PHP 5, PHP 7)
+
+iconv_mime_decode — Decodes a MIME header field
+
+==============================================================================
+*Description*
+
+    string iconv_mime_decode ( string $encoded_header [, int $mode = 0 [,~
+    string $charset = ini_get("iconv.internal_encoding") ]] )~
+
+Decodes a MIME header field.
+
+==============================================================================
+*Parameters*
+
+{encoded_header}
+
+    The encoded header, as a string.
+
+{mode}
+
+    {mode} determines the behaviour in the event iconv_mime_decode()
+    encounters a malformed MIME header field. You can specify any combination
+    of the following bitmasks.
+
+                  Bitmasks acceptable to iconv_mime_decode()
+    Value              Constant                         Description
+                                              If set, the given header is
+                                              decoded in full conformance with
+                                              the standards defined in >>
+                                               RFC2047. This option is
+    1     ICONV_MIME_DECODE_STRICT            disabled by default because
+                                              there are a lot of broken mail
+                                              user agents that don't follow
+                                              the specification and don't
+                                              produce correct MIME headers.
+                                              If set, |
+                                              iconv_mime_decode_headers|
+    2     ICONV_MIME_DECODE_CONTINUE_ON_ERROR attempts to ignore any
+                                              grammatical errors and continue
+                                              to process a given header.
+
+{charset}
+
+    The optional {charset} parameter specifies the character set to represent
+    the result by. If omitted, iconv.internal_encoding will be used.
+
+==============================================================================
+*Return* *Values*
+
+Returns a decoded MIME field on success, or FALSE if an error occurs during
+the decoding.
+
+==============================================================================
+*Examples*
+
+Example #1 iconv_mime_decode() example
+
+<?php >
+    // This yields "Subject: Prüfung Prüfung"
+    echo iconv_mime_decode("Subject: =?UTF-8?B?UHLDvGZ1bmcgUHLDvGZ1bmc=?=",
+                           0, "ISO-8859-1");
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |iconv_mime_decode_headers| - Decodes multiple MIME header fields at once
+  * |mb_decode_mimeheader| - Decode string in MIME header field
+  * |imap_mime_header_decode| - Decode MIME header elements
+  * |imap_base64| - Decode BASE64 encoded text
+  * |imap_qprint| - Convert a quoted-printable string to an 8 bit string
+
+
+vim:ft=help:

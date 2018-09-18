@@ -1,0 +1,34 @@
+mcrypt_enc_is_block_mode
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+mcrypt_enc_is_block_mode — Checks whether the opened mode outputs blocks
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    bool mcrypt_enc_is_block_mode ( resource $td )~
+
+Tells whether the opened mode outputs blocks (e.g. TRUE for cbc and ecb, and
+FALSE for cfb and stream).
+
+==============================================================================
+*Parameters*
+
+{td}
+
+    The encryption descriptor.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the mode outputs blocks of bytes, or FALSE if it outputs just
+bytes.
+
+
+vim:ft=help:

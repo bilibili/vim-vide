@@ -1,0 +1,36 @@
+yp_all
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5)
+
+yp_all — Traverse the map and call a function on each entry
+
+==============================================================================
+*Description*
+
+    void yp_all ( string $domain , string $map , string $callback )~
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{domain}
+
+    The NIS domain name.
+
+{map}
+
+    The NIS map.
+
+{callback}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

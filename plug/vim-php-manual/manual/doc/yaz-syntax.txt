@@ -1,0 +1,35 @@
+yaz_syntax
+
+(PHP 4 >= 4.0.1, PECL yaz >= 0.9.0)
+
+yaz_syntax — Specifies the preferred record syntax for retrieval
+
+==============================================================================
+*Description*
+
+    void yaz_syntax ( resource $id , string $syntax )~
+
+yaz_syntax() specifies the preferred record syntax for retrieval
+
+This function should be called before |yaz_search| or |yaz_present|.
+
+==============================================================================
+*Parameters*
+
+{id}
+
+    The connection resource returned by |yaz_connect|.
+
+{syntax}
+
+    The syntax must be specified as an OID (Object Identifier) in a raw
+    dot-notation (like 1.2.840.10003.5.10) or as one of the known registered
+    record syntaxes (sutrs, usmarc, grs1, xml, etc.).
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

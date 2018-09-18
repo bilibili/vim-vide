@@ -1,0 +1,68 @@
+newt_form
+
+(PECL newt >= 0.1)
+
+newt_form — Create a form
+
+==============================================================================
+*Description*
+
+    resource newt_form ([ resource $vert_bar [, string $help [, int $flags~
+    ]]] )~
+
+Create a new form.
+
+==============================================================================
+*Parameters*
+
+{vert_bar}
+
+    Vertical scrollbar which should be associated with the form
+
+{help}
+
+    Help text string
+
+{flags}
+
+    Various flags
+
+==============================================================================
+*Return* *Values*
+
+Returns a resource link to the created form component, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 A newt_form() example
+
+Displays a single button "Quit", which closes the application once it's
+pressed.
+
+<?php >
+    newt_init();
+    newt_cls();
+
+    $myform = newt_form();
+    $button = newt_button (5, 12, "Quit");
+
+    newt_form_add_component ($myform, $button);
+    newt_refresh ();
+    newt_run_form ($myform);
+
+    newt_finished ();
+    newt_form_destroy ($myform);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |newt_form_run| - Runs a form
+  * |newt_run_form| - Runs a form
+  * |newt_form_add_component| - Adds a single component to the form
+  * |newt_form_add_components| - Add several components to the form
+  * |newt_form_destroy| - Destroys a form
+
+
+vim:ft=help:

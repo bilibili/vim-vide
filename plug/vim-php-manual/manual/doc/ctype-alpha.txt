@@ -1,0 +1,71 @@
+ctype_alpha
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+ctype_alpha — Check for alphabetic character(s)
+
+==============================================================================
+*Description*
+
+    bool ctype_alpha ( string $text )~
+
+Checks if all of the characters in the provided string, {text}, are
+alphabetic. In the standard C locale letters are just [A-Za-z] and ctype_alpha
+() is equivalent to (ctype_upper($text) || ctype_lower($text)) if $text is
+just a single character, but other languages have letters that are considered
+neither upper nor lower case.
+
+==============================================================================
+*Parameters*
+
+{text}
+
+    The tested string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if every character in {text} is a letter from the current locale,
+FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 A ctype_alpha() example (using the default locale)
+
+<?php >
+    $strings = array('KjgWZC', 'arf12');
+    foreach ($strings as $testcase) {
+        if (ctype_alpha($testcase)) {
+            echo "The string $testcase consists of all letters.\n";
+        } else {
+            echo "The string $testcase does not consist of all letters.\n";
+        }
+    }
+<?>
+
+The above example will output:
+
+The string KjgWZC consists of all letters.
+The string arf12 does not consist of all letters.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    If an integer between -128 and 255 inclusive is provided, it is
+    interpreted as the ASCII value of a single character (negative values have
+    256 added in order to allow characters in the Extended ASCII range). Any
+    other integer is interpreted as a string containing the decimal digits of
+    the integer.
+
+==============================================================================
+*See* *Also*
+
+  * |ctype_upper| - Check for uppercase character(s)
+  * |ctype_lower| - Check for lowercase character(s)
+  * |setlocale| - Set locale information
+
+
+vim:ft=help:

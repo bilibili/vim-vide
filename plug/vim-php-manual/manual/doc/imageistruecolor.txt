@@ -1,0 +1,62 @@
+imageistruecolor
+
+(PHP 4 >= 4.3.2, PHP 5, PHP 7)
+
+imageistruecolor — Finds whether an image is a truecolor image
+
+==============================================================================
+*Description*
+
+    bool imageistruecolor ( resource $image )~
+
+imageistruecolor() finds whether the image {image} is a truecolor image.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the {image} is truecolor, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 Simple detection of true color image instances using 
+imageistruecolor()
+
+<?php >
+    // $im is an image instance
+
+    // Check if image is a true color image or not
+    if(!imageistruecolor($im))
+    {
+        // Create a new true color image instance
+        $tc = imagecreatetruecolor(imagesx($im), imagesy($im));
+
+        // Copy over the pixels
+        imagecopy($tc, $im, 0, 0, 0, 0, imagesx($im), imagesy($im));
+        imagedestroy($im);
+
+        $im = $tc;
+        $tc = NULL;
+
+        // OR use imagepalettetotruecolor()
+    }
+
+    // Continue working with image instance
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imagecreatetruecolor| - Create a new true color image
+  * |imagepalettetotruecolor| - Converts a palette based image to true color
+
+
+vim:ft=help:

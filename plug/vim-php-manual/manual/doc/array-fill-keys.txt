@@ -1,0 +1,61 @@
+array_fill_keys
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+array_fill_keys — Fill an array with values, specifying keys
+
+==============================================================================
+*Description*
+
+    array array_fill_keys ( array $keys , mixed $value )~
+
+Fills an array with the value of the {value} parameter, using the values of
+the {keys} array as keys.
+
+==============================================================================
+*Parameters*
+
+{keys}
+
+    Array of values that will be used as keys. Illegal values for key will be
+    converted to string.
+
+{value}
+
+    Value to use for filling
+
+==============================================================================
+*Return* *Values*
+
+Returns the filled array
+
+==============================================================================
+*Examples*
+
+Example #1 array_fill_keys() example
+
+<?php >
+    $keys = array('foo', 5, 10, 'bar');
+    $a = array_fill_keys($keys, 'banana');
+    print_r($a);
+<?>
+
+The above example will output:
+
+Array
+(
+    [foo] => banana
+    [5] => banana
+    [10] => banana
+    [bar] => banana
+)
+
+==============================================================================
+*See* *Also*
+
+  * |array_fill| - Fill an array with values
+  * |array_combine| - Creates an array by using one array for keys and another
+    for its values
+
+
+vim:ft=help:

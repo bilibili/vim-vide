@@ -1,0 +1,31 @@
+event_buffer_timeout_set
+
+(PECL libevent >= 0.0.1)
+
+event_buffer_timeout_set — Set read and write timeouts for a buffered event
+
+==============================================================================
+*Description*
+
+    void event_buffer_timeout_set ( resource $bevent , int $read_timeout ,~
+    int $write_timeout )~
+
+Sets the read and write timeouts for the specified buffered event.
+
+==============================================================================
+*Parameters*
+
+{bevent}
+
+    Valid buffered event resource.
+
+{read_timeout}
+
+    Read timeout (in seconds).
+
+{write_timeout}
+
+    Write timeout (in seconds).
+
+
+vim:ft=help:

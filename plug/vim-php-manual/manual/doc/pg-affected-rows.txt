@@ -1,0 +1,66 @@
+pg_affected_rows
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+pg_affected_rows — Returns number of affected records (tuples)
+
+==============================================================================
+*Description*
+
+    int pg_affected_rows ( resource $result )~
+
+pg_affected_rows() returns the number of tuples (instances/records/rows)
+affected by INSERT, UPDATE, and DELETE queries.
+
+Since PostgreSQL 9.0 and above, the server returns the number of SELECTed
+rows. Older PostgreSQL return 0 for SELECT.
+
+    Note:
+
+    This function used to be called pg_cmdtuples().
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    PostgreSQL query result resource, returned by |pg_query|, |pg_query_params
+    | or |pg_execute| (among others).
+
+==============================================================================
+*Return* *Values*
+
+The number of rows affected by the query. If no tuple is affected, it will
+return 0.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_affected_rows() example
+
+<?php >
+    $result = pg_query($conn, "INSERT INTO authors VALUES 
+    ('Orwell', 2002, 'Animal Farm')");
+
+    $cmdtuples = pg_affected_rows($result);
+
+    echo $cmdtuples . " tuples are affected.\n";
+<?>
+
+The above example will output:
+
+1 tuples are affected.
+
+==============================================================================
+*See* *Also*
+
+  * |pg_query| - Execute a query
+  * |pg_query_params| - Submits a command to the server and waits for the
+    result, with the ability to pass parameters separately from the SQL
+    command text.
+  * |pg_execute| - Sends a request to execute a prepared statement with given
+    parameters, and waits for the result.
+  * |pg_num_rows| - Returns the number of rows in a result
+
+
+vim:ft=help:

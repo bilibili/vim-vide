@@ -1,0 +1,16 @@
+PDF_begin_document
+
+(PECL pdflib >= 2.0.0)
+
+PDF_begin_document — Create new PDF file
+
+==============================================================================
+*Description*
+
+    int PDF_begin_document ( resource $pdfdoc , string $filename , string~
+    $optlist )~
+
+Creates a new PDF file subject to various options.
+
+
+vim:ft=help:

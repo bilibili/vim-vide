@@ -1,0 +1,75 @@
+variant_cmp
+
+(PHP 5, PHP 7)
+
+variant_cmp — Compares two variants
+
+==============================================================================
+*Description*
+
+    int variant_cmp ( mixed $left , mixed $right [, int $lcid [, int $flags~
+    ]] )~
+
+Compares {left} with {right}.
+
+This function will only compare scalar values, not arrays or variant records.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+    The left operand.
+
+{right}
+
+    The right operand.
+
+{lcid}
+
+    A valid Locale Identifier to use when comparing strings (this affects
+    string collation).
+
+{flags}
+
+    {flags} can be one or more of the following values OR'd together, and
+    affects string comparisons:
+
+               Variant Comparision Flags
+           value                    meaning
+    NORM_IGNORECASE     Compare case insensitively
+    NORM_IGNORENONSPACE Ignore nonspacing characters
+    NORM_IGNORESYMBOLS  Ignore symbols
+    NORM_IGNOREWIDTH    Ignore string width
+    NORM_IGNOREKANATYPE Ignore Kana type
+    NORM_IGNOREKASHIDA  Ignore Arabic kashida characters
+
+    Note:
+
+    As with all the variant arithmetic functions, the parameters for this
+    function can be either a PHP native type (integer, string, floating point,
+    boolean or NULL), or an instance of a COM, VARIANT or DOTNET class. PHP
+    native types will be converted to variants using the same rules as found
+    in the constructor for the VARIANT class. COM and DOTNET objects will have
+    the value of their default property taken and used as the variant value.
+
+    The variant arithmetic functions are wrappers around the similarly named
+    functions in the COM library; for more information on these functions,
+    consult the MSDN library. The PHP functions are named slightly
+    differently; for example |variant_add| in PHP corresponds to VarAdd() in
+    the MSDN documentation.
+
+==============================================================================
+*Return* *Values*
+
+Returns one of the following:
+
+            Variant Comparision Results
+   value                    meaning
+VARCMP_LT   {left} is less than {right}
+VARCMP_EQ   {left} is equal to {right}
+VARCMP_GT   {left} is greater than {right}
+VARCMP_NULL Either {left}, {right} or both are NULL
+
+
+vim:ft=help:

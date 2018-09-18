@@ -1,0 +1,18 @@
+ldap_set_rebind_proc
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+ldap_set_rebind_proc — Set a callback function to do re-binds on referral
+chasing
+
+==============================================================================
+*Description*
+
+    bool ldap_set_rebind_proc ( resource $link , callable $callback )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

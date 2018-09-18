@@ -1,0 +1,28 @@
+newt_wait_for_key
+
+(PECL newt >= 0.1)
+
+newt_wait_for_key — Doesn't return until a key has been pressed
+
+==============================================================================
+*Description*
+
+    void newt_wait_for_key ( void )~
+
+This function doesn't return until a key has been pressed. The keystroke is
+then ignored. If a key is already in the terminal's buffer, this function
+discards a keystroke and returns immediately.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |newt_clear_key_buffer| - Discards the contents of the terminal's input
+    buffer without waiting for additional input
+
+
+vim:ft=help:

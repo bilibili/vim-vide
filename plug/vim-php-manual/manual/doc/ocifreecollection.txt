@@ -1,0 +1,18 @@
+ocifreecollection
+
+(PHP 4 >= 4.0.7, PHP 5, PHP 7, PECL OCI8 >= 1.0.0)
+
+ocifreecollection — Alias of OCI-Collection::free()
+
+==============================================================================
+*Description*
+
+Alias of OCI-Collection::free()
+
+Warning
+
+This alias has been DEPRECATED as of PHP 5.4.0. Relying on this alias is
+highly discouraged.
+
+
+vim:ft=help:

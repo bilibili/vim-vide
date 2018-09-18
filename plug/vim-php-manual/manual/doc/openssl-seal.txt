@@ -1,0 +1,91 @@
+openssl_seal
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+openssl_seal — Seal (encrypt) data
+
+==============================================================================
+*Description*
+
+    int openssl_seal ( string $data , string &$sealed_data , array &$env_keys~
+    , array $pub_key_ids [, string $method = "RC4" ] )~
+
+openssl_seal() seals (encrypts) {data} by using the given {method} with a
+randomly generated secret key. The key is encrypted with each of the public
+keys associated with the identifiers in {pub_key_ids} and each encrypted key
+is returned in {env_keys}. This means that one can send sealed data to
+multiple recipients (provided one has obtained their public keys). Each
+recipient must receive both the sealed data and the envelope key that was
+encrypted with the recipient's public key.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    The data to seal.
+
+{sealed_data}
+
+    The sealed data.
+
+{env_keys}
+
+    Array of encrypted keys.
+
+{pub_key_ids}
+
+    Array of public key resource identifiers.
+
+{method}
+
+    The cipher method.
+
+==============================================================================
+*Return* *Values*
+
+Returns the length of the sealed data on success, or FALSE on error. If
+successful the sealed data is returned in {sealed_data}, and the envelope keys
+in {env_keys}.
+
+==============================================================================
+*Examples*
+
+Example #1 openssl_seal() example
+
+<?php >
+    // $data is assumed to contain the data to be sealed
+
+    // fetch public keys for our recipients, and ready them
+    $fp = fopen("/src/openssl-0.9.6/demos/maurice/cert.pem", "r");
+    $cert = fread($fp, 8192);
+    fclose($fp);
+    $pk1 = openssl_get_publickey($cert);
+    // Repeat for second recipient
+    $fp = fopen("/src/openssl-0.9.6/demos/sign/cert.pem", "r");
+    $cert = fread($fp, 8192);
+    fclose($fp);
+    $pk2 = openssl_get_publickey($cert);
+
+    // seal message, only owners of $pk1 and $pk2 can decrypt $sealed with keys
+    // $ekeys[0] and $ekeys[1] respectively.
+    openssl_seal($data, $sealed, $ekeys, array($pk1, $pk2));
+
+    // free the keys from memory
+    openssl_free_key($pk1);
+    openssl_free_key($pk2);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version            Description
+5.3.0   The {method} parameter was added.
+
+==============================================================================
+*See* *Also*
+
+  * |openssl_open| - Open sealed data
+
+
+vim:ft=help:

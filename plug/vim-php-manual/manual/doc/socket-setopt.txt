@@ -1,0 +1,13 @@
+socket_setopt
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+socket_setopt — Alias of |socket_set_option|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |socket_set_option|.
+
+
+vim:ft=help:

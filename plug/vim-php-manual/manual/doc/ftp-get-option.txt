@@ -1,0 +1,54 @@
+ftp_get_option
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+ftp_get_option — Retrieves various runtime behaviours of the current FTP
+stream
+
+==============================================================================
+*Description*
+
+    mixed ftp_get_option ( resource $ftp_stream , int $option )~
+
+This function returns the value for the requested {option} from the specified
+FTP connection.
+
+==============================================================================
+*Parameters*
+
+{ftp_stream}
+
+    The link identifier of the FTP connection.
+
+{option}
+
+    Currently, the following options are supported:
+
+                        Supported runtime FTP options
+    FTP_TIMEOUT_SEC Returns the current timeout used for network related
+                    operations.
+    FTP_AUTOSEEK    Returns TRUE if this option is on, FALSE otherwise.
+
+==============================================================================
+*Return* *Values*
+
+Returns the value on success or FALSE if the given {option} is not supported.
+In the latter case, a warning message is also thrown.
+
+==============================================================================
+*Examples*
+
+Example #1 ftp_get_option() example
+
+<?php >
+    // Get the timeout of the given FTP stream
+    $timeout = ftp_get_option($conn_id, FTP_TIMEOUT_SEC);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ftp_set_option| - Set miscellaneous runtime FTP options
+
+
+vim:ft=help:

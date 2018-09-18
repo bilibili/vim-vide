@@ -1,0 +1,33 @@
+imap_8bit
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_8bit — Convert an 8bit string to a quoted-printable string
+
+==============================================================================
+*Description*
+
+    string imap_8bit ( string $string )~
+
+Convert an 8bit string to a quoted-printable string (according to >> RFC2045,
+section 6.7).
+
+==============================================================================
+*Parameters*
+
+{string}
+
+    The 8bit string to convert
+
+==============================================================================
+*Return* *Values*
+
+Returns a quoted-printable string.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_qprint| - Convert a quoted-printable string to an 8 bit string
+
+
+vim:ft=help:

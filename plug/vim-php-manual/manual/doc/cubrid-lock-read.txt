@@ -1,0 +1,102 @@
+cubrid_lock_read
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_lock_read — Set a read lock on the given OID
+
+==============================================================================
+*Description*
+
+    bool cubrid_lock_read ( resource $conn_identifier , string $oid )~
+
+The cubrid_lock_read() function is used to put read lock on the instance
+pointed by given {oid}.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    Connection identifier.
+
+{oid}
+
+    OID of the instance that you want to put read lock on.
+
+==============================================================================
+*Return* *Values*
+
+TRUE, when process is successful.
+
+FALSE, when process is unsuccessful.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_lock_read() example
+
+<?php >
+    $conn = cubrid_connect("localhost", 33000, "demodb", "dba");
+
+    @cubrid_execute($conn, "DROP TABLE foo");
+    cubrid_execute($conn, "CREATE TABLE foo(a int AUTO_INCREMENT, b set
+    (int), c list(int), d char(10))");
+    cubrid_execute($conn, "INSERT INTO foo(a, b, c, d) VALUES(1, {1,2,3}, 
+    {11,22,33,333}, 'a')");
+    cubrid_execute($conn, "INSERT INTO foo(a, b, c, d) VALUES(2, {4,5,7}, 
+    {44,55,66,666}, 'b')");
+
+    $req = cubrid_execute($conn, "SELECT * FROM foo", CUBRID_INCLUDE_OID);
+
+    cubrid_move_cursor($req, 1, CUBRID_CURSOR_FIRST);
+    $oid = cubrid_current_oid($req);
+
+    cubrid_lock_read($conn, $oid);
+
+    $attr = cubrid_get($conn, $oid, "b");
+    var_dump($attr);
+
+    $attr = cubrid_get($conn, $oid);
+    var_dump($attr);
+
+    cubrid_close_request($req);
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+string(9) "{1, 2, 3}"
+array(4) {
+  ["a"]=>
+  string(1) "1"
+  ["b"]=>
+  array(3) {
+    [0]=>
+    string(1) "1"
+    [1]=>
+    string(1) "2"
+    [2]=>
+    string(1) "3"
+  }
+  ["c"]=>
+  array(4) {
+    [0]=>
+    string(2) "11"
+    [1]=>
+    string(2) "22"
+    [2]=>
+    string(2) "33"
+    [3]=>
+    string(3) "333"
+  }
+  ["d"]=>
+  string(10) "a         "
+}
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_lock_write| - Set a write lock on the given OID
+
+
+vim:ft=help:

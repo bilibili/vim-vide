@@ -1,0 +1,29 @@
+stats_cdf_exponential
+
+(PECL stats >= 1.0.0)
+
+stats_cdf_exponential — Not documented
+
+==============================================================================
+*Description*
+
+    float stats_cdf_exponential ( float $par1 , float $par2 , int $which )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{par1}
+
+{par2}
+
+{which}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

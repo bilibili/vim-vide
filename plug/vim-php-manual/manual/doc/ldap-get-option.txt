@@ -1,0 +1,93 @@
+ldap_get_option
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+ldap_get_option — Get the current value for given option
+
+==============================================================================
+*Description*
+
+    bool ldap_get_option ( resource $link_identifier , int $option , mixed~
+    &$retval )~
+
+Sets {retval} to the value of the specified option.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{option}
+
+    The parameter {option} can be one of:
+
+               Option              Type
+    LDAP_OPT_DEREF                integer
+    LDAP_OPT_SIZELIMIT            integer
+    LDAP_OPT_TIMELIMIT            integer
+    LDAP_OPT_NETWORK_TIMEOUT      integer
+    LDAP_OPT_PROTOCOL_VERSION     integer
+    LDAP_OPT_ERROR_NUMBER         integer
+    LDAP_OPT_REFERRALS            bool
+    LDAP_OPT_RESTART              bool
+    LDAP_OPT_HOST_NAME            string
+    LDAP_OPT_ERROR_STRING         string
+    LDAP_OPT_MATCHED_DN           string
+    LDAP_OPT_SERVER_CONTROLS      array
+    LDAP_OPT_CLIENT_CONTROLS      array
+    LDAP_OPT_X_KEEPALIVE_IDLE     int      
+    LDAP_OPT_X_KEEPALIVE_PROBES   int      
+    LDAP_OPT_X_KEEPALIVE_INTERVAL int      
+    LDAP_OPT_X_TLS_CACERTDIR      string   
+    LDAP_OPT_X_TLS_CACERTFILE     string   
+    LDAP_OPT_X_TLS_CERTFILE       string   
+    LDAP_OPT_X_TLS_CIPHER_SUITE   string   
+    LDAP_OPT_X_TLS_CRLCHECK       integer  
+    LDAP_OPT_X_TLS_CRLFILE        string   
+    LDAP_OPT_X_TLS_DHFILE         string   
+    LDAP_OPT_X_TLS_KEYILE         string   
+    LDAP_OPT_X_TLS_PACKAGE        string   
+    LDAP_OPT_X_TLS_PROTOCOL_MIN   integer  
+    LDAP_OPT_X_TLS_RANDOM_FILE    string   
+    LDAP_OPT_X_TLS_REQUIRE_CERT   integer  
+
+{retval}
+
+    This will be set to the option value.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Check protocol version
+
+<?php >
+    // $ds is a valid link identifier for a directory server
+    if (ldap_get_option($ds, LDAP_OPT_PROTOCOL_VERSION, $version)) {
+        echo "Using protocol version $version\n";
+    } else {
+        echo "Unable to determine protocol version\n";
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function is only available when using OpenLDAP 2.x.x OR Netscape
+    Directory SDK x.x.
+
+==============================================================================
+*See* *Also*
+
+  * |ldap_set_option| - Set the value of the given option
+
+
+vim:ft=help:

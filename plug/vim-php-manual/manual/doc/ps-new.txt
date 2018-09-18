@@ -1,0 +1,28 @@
+ps_new
+
+(PECL ps >= 1.1.0)
+
+ps_new — Creates a new PostScript document object
+
+==============================================================================
+*Description*
+
+    resource ps_new ( void )~
+
+Creates a new document instance. It does not create the file on disk or in
+memory, it just sets up everything. ps_new() is usually followed by a call of 
+|ps_open_file| to actually create the postscript document.
+
+==============================================================================
+*Return* *Values*
+
+Resource of PostScript document or FALSE on failure. The return value is
+passed to all other functions as the first argument.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_delete| - Deletes all resources of a PostScript document
+
+
+vim:ft=help:

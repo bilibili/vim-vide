@@ -1,0 +1,83 @@
+odbc_foreignkeys
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_foreignkeys — Retrieves a list of foreign keys
+
+==============================================================================
+*Description*
+
+    resource odbc_foreignkeys ( resource $connection_id , string~
+    $pk_qualifier , string $pk_owner , string $pk_table , string~
+    $fk_qualifier , string $fk_owner , string $fk_table )~
+
+Retrieves a list of foreign keys in the specified table or a list of foreign
+keys in other tables that refer to the primary key in the specified table
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+{pk_qualifier}
+
+    The primary key qualifier.
+
+{pk_owner}
+
+    The primary key owner.
+
+{pk_table}
+
+    The primary key table.
+
+{fk_qualifier}
+
+    The foreign key qualifier.
+
+{fk_owner}
+
+    The foreign key owner.
+
+{fk_table}
+
+    The foreign key table.
+
+==============================================================================
+*Return* *Values*
+
+Returns an ODBC result identifier or FALSE on failure.
+
+The result set has the following columns:
+
+  * PKTABLE_QUALIFIER
+  * PKTABLE_OWNER
+  * PKTABLE_NAME
+  * PKCOLUMN_NAME
+  * FKTABLE_QUALIFIER
+  * FKTABLE_OWNER
+  * FKTABLE_NAME
+  * FKCOLUMN_NAME
+  * KEY_SEQ
+  * UPDATE_RULE
+  * DELETE_RULE
+  * FK_NAME
+  * PK_NAME
+
+If {pk_table} contains a table name, odbc_foreignkeys() returns a result set
+containing the primary key of the specified table and all of the foreign keys
+that refer to it.
+
+If {fk_table} contains a table name, odbc_foreignkeys() returns a result set
+containing all of the foreign keys in the specified table and the primary keys
+(in other tables) to which they refer.
+
+If both {pk_table} and {fk_table} contain table names, odbc_foreignkeys()
+returns the foreign keys in the table specified in {fk_table} that refer to
+the primary key of the table specified in {pk_table}. This should be one key
+at most.
+
+
+vim:ft=help:

@@ -1,0 +1,50 @@
+px_get_record
+
+(PECL paradox >= 1.0.0)
+
+px_get_record — Returns record of paradox database
+
+==============================================================================
+*Description*
+
+    array px_get_record ( resource $pxdoc , int $num [, int $mode = 0 ] )~
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+{num}
+
+    The record number is an artificial number counting records in the order as
+    they are stored in the database. The first record has number 0.
+
+{mode}
+
+    The optional {mode} can be PX_KEYTOLOWER or PX_KEYTOUPPER in order to
+    convert the keys of the returned array into lower or upper case. If {mode}
+    is not passed or is 0, then the key will be exactly like the field name.
+    The element values will contain the field values. NULL values will be
+    retained and are different from 0.0, 0 or the empty string. Fields of type
+    PX_FIELD_TIME will be returned as an integer counting the number of
+    milliseconds starting at midnight. A timestamp (PX_FIELD_TIMESTAMP) and
+    date (PX_FIELD_DATE) are floating point respectively int values counting
+    milliseconds respectively days starting at the beginning of julian
+    calendar. Use the functions |px-timestamp2string| and |px-date2string| to
+    convert them into a character representation.
+
+==============================================================================
+*Return* *Values*
+
+Returns the {num}'th record from the paradox database. The record is returned
+as an associated array with its keys being the field names.
+
+==============================================================================
+*See* *Also*
+
+  * |px_retrieve_record| - Returns record of paradox database
+
+
+vim:ft=help:

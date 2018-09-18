@@ -1,0 +1,53 @@
+zip_entry_open
+
+(PHP 4 >= 4.1.0, PHP 5 >= 5.2.0, PHP 7, PECL zip >= 1.0.0)
+
+zip_entry_open — Open a directory entry for reading
+
+==============================================================================
+*Description*
+
+    bool zip_entry_open ( resource $zip , resource $zip_entry [, string $mode~
+    ] )~
+
+Opens a directory entry in a zip file for reading.
+
+==============================================================================
+*Parameters*
+
+{zip}
+
+    A valid resource handle returned by |zip_open|.
+
+{zip_entry}
+
+    A directory entry returned by |zip_read|.
+
+{mode}
+
+    Any of the modes specified in the documentation of |fopen|.
+
+        Note:
+
+        Currently, {mode} is ignored and is always "rb". This is due to the
+        fact that zip support in PHP is read only access.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+    Note:
+
+    Unlike |fopen| and other similar functions, the return value of 
+    zip_entry_open() only indicates the result of the operation and is not
+    needed for reading or closing the directory entry.
+
+==============================================================================
+*See* *Also*
+
+  * |zip_entry_close| - Close a directory entry
+  * |zip_entry_read| - Read from an open directory entry
+
+
+vim:ft=help:

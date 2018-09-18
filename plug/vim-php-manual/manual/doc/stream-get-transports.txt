@@ -1,0 +1,46 @@
+stream_get_transports
+
+(PHP 5, PHP 7)
+
+stream_get_transports — Retrieve list of registered socket transports
+
+==============================================================================
+*Description*
+
+    array stream_get_transports ( void )~
+
+Returns an indexed array containing the name of all socket transports
+available on the running system.
+
+==============================================================================
+*Return* *Values*
+
+Returns an indexed array of socket transports names.
+
+==============================================================================
+*Examples*
+
+Example #1 Using stream_get_transports()
+
+<?php >
+    $xportlist = stream_get_transports();
+    print_r($xportlist);
+<?>
+
+The above example will output something similar to:
+
+Array (
+  [0] => tcp
+  [1] => udp
+  [2] => unix
+  [3] => udg
+)
+
+==============================================================================
+*See* *Also*
+
+  * |stream_get_filters| - Retrieve list of registered filters
+  * |stream_get_wrappers| - Retrieve list of registered streams
+
+
+vim:ft=help:

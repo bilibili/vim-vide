@@ -1,0 +1,54 @@
+ibase_trans
+
+(PHP 5, PHP 7)
+
+ibase_trans — Begin a transaction
+
+==============================================================================
+*Description*
+
+    resource ibase_trans ([ int $trans_args [, resource $link_identifier ]] )~
+    resource ibase_trans ([ resource $link_identifier [, int $trans_args ]] )~
+
+Begins a transaction.
+
+    Note:
+
+    The first call to ibase_trans() will not return the default transaction of
+    a connection. All transactions started by ibase_trans() will be rolled
+    back at the end of the script if they were not committed or rolled back by
+    either |ibase_commit| or |ibase_rollback|.
+
+    Note:
+
+    This function will accept multiple {trans_args} and {link_identifier}
+    arguments. This allows transactions over multiple database connections,
+    which are committed using a 2-phase commit algorithm. This means you can
+    rely on the updates to either succeed in every database, or fail in every
+    database. It does NOT mean you can use tables from different databases in
+    the same query!
+
+    If you use transactions over multiple databases, you will have to specify
+    both the {link_id} and {transaction_id} in calls to |ibase_query| and 
+    |ibase_prepare|.
+
+==============================================================================
+*Parameters*
+
+{trans_args}
+
+    {trans_args} can be a combination of IBASE_READ, IBASE_WRITE,
+    IBASE_COMMITTED, IBASE_CONSISTENCY, IBASE_CONCURRENCY, IBASE_REC_VERSION,
+    IBASE_REC_NO_VERSION, IBASE_WAIT and IBASE_NOWAIT.
+
+{link_identifier}
+
+    An InterBase link identifier. If omitted, the last opened link is assumed.
+
+==============================================================================
+*Return* *Values*
+
+Returns a transaction handle, or FALSE on error.
+
+
+vim:ft=help:

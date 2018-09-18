@@ -1,0 +1,38 @@
+trader_cdl3whitesoldiers
+
+(PECL trader >= 0.2.0)
+
+trader_cdl3whitesoldiers — Three Advancing White Soldiers
+
+==============================================================================
+*Description*
+
+    array trader_cdl3whitesoldiers ( array $open , array $high , array $low ,~
+    array $close )~
+
+==============================================================================
+*Parameters*
+
+{open}
+
+    Opening price, array of real values.
+
+{high}
+
+    High price, array of real values.
+
+{low}
+
+    Low price, array of real values.
+
+{close}
+
+    Closing price, array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

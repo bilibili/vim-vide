@@ -1,0 +1,17 @@
+ldap_t61_to_8859
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+ldap_t61_to_8859 — Translate t61 characters to 8859 characters
+
+==============================================================================
+*Description*
+
+    string ldap_t61_to_8859 ( string $value )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

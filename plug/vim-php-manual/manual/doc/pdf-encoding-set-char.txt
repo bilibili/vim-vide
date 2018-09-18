@@ -1,0 +1,16 @@
+PDF_encoding_set_char
+
+(PECL pdflib >= 2.0.0)
+
+PDF_encoding_set_char — Add glyph name and/or Unicode value
+
+==============================================================================
+*Description*
+
+    bool PDF_encoding_set_char ( resource $pdfdoc , string $encoding , int~
+    $slot , string $glyphname , int $uv )~
+
+Adds a glyph name and/or Unicode value to a custom encoding.
+
+
+vim:ft=help:

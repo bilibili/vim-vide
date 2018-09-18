@@ -1,0 +1,89 @@
+readdir
+
+(PHP 4, PHP 5, PHP 7)
+
+readdir — Read entry from directory handle
+
+==============================================================================
+*Description*
+
+    string readdir ([ resource $dir_handle ] )~
+
+Returns the name of the next entry in the directory. The entries are returned
+in the order in which they are stored by the filesystem.
+
+==============================================================================
+*Parameters*
+
+{dir_handle}
+
+    The directory handle resource previously opened with |opendir|. If the
+    directory handle is not specified, the last link opened by |opendir| is
+    assumed.
+
+==============================================================================
+*Return* *Values*
+
+Returns the entry name on success or FALSE on failure.
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*Examples*
+
+Example #1 List all entries in a directory
+
+Please note the fashion in which readdir()'s return value is checked in the
+examples below. We are explicitly testing whether the return value is
+identical to (equal to and of the same type as--see Comparison Operators for
+more information) FALSE since otherwise, any directory entry whose name
+evaluates to FALSE will stop the loop (e.g. a directory named "0").
+
+<?php >
+
+    if ($handle = opendir('/path/to/files')) {
+        echo "Directory handle: $handle\n";
+        echo "Entries:\n";
+
+        /* This is the correct way to loop over the directory. */
+        while (false !== ($entry = readdir($handle))) {
+            echo "$entry\n";
+        }
+
+        /* This is the WRONG way to loop over the directory. */
+        while ($entry = readdir($handle)) {
+            echo "$entry\n";
+        }
+
+        closedir($handle);
+    }
+<?>
+
+Example #2 List all entries in the current directory and strip out . and ..
+
+<?php >
+    if ($handle = opendir('.')) {
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+                echo "$entry\n";
+            }
+        }
+        closedir($handle);
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |is_dir| - Tells whether the filename is a directory
+  * |glob| - Find pathnames matching a pattern
+  * |opendir| - Open directory handle
+  * |scandir| - List files and directories inside the specified path
+
+
+vim:ft=help:

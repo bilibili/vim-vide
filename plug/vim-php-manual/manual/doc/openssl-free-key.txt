@@ -1,0 +1,26 @@
+openssl_free_key
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+openssl_free_key — Free key resource
+
+==============================================================================
+*Description*
+
+    void openssl_free_key ( resource $key_identifier )~
+
+openssl_free_key() frees the key associated with the specified
+{key_identifier} from memory.
+
+==============================================================================
+*Parameters*
+
+{key_identifier}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

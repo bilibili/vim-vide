@@ -1,0 +1,51 @@
+yp_first
+
+(PHP 4, PHP 5 <= 5.0.5)
+
+yp_first — Returns the first key-value pair from the named map
+
+==============================================================================
+*Description*
+
+    array yp_first ( string $domain , string $map )~
+
+Gets the first key-value pair from the named {map} in the named {domain}.
+
+==============================================================================
+*Parameters*
+
+{domain}
+
+    The NIS domain name.
+
+{map}
+
+    The NIS map.
+
+==============================================================================
+*Return* *Values*
+
+Returns the first key-value pair as an array on success, or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 Example for the NIS first
+
+<?php >
+    $entry = yp_first($domain, "passwd.byname");
+
+    $key = key($entry);
+    $value = $entry[$key];
+
+    echo "First entry in this map has key " . $key . " and value " . $value;
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |yp_next| - Returns the next key-value pair in the named map
+  * |yp_get_default_domain| - Fetches the machine's default NIS domain
+
+
+vim:ft=help:

@@ -1,0 +1,164 @@
+substr
+
+(PHP 4, PHP 5, PHP 7)
+
+substr — Return part of a string
+
+==============================================================================
+*Description*
+
+    string substr ( string $string , int $start [, int $length ] )~
+
+Returns the portion of {string} specified by the {start} and {length}
+parameters.
+
+==============================================================================
+*Parameters*
+
+{string}
+
+    The input string. Must be one character or longer.
+
+{start}
+
+    If {start} is non-negative, the returned string will start at the {start}
+    'th position in {string}, counting from zero. For instance, in the string
+    'abcdef', the character at position 0 is 'a', the character at position 2
+    is 'c', and so forth.
+
+    If {start} is negative, the returned string will start at the {start}'th
+    character from the end of {string}.
+
+    If {string} is less than {start} characters long, FALSE will be returned.
+
+    Example #1 Using a negative {start}
+
+    <?php >
+    $rest = substr("abcdef", -1);    // returns "f"
+    $rest = substr("abcdef", -2);    // returns "ef"
+    $rest = substr("abcdef", -3, 1); // returns "d"
+<    ?>
+
+{length}
+
+    If {length} is given and is positive, the string returned will contain at
+    most {length} characters beginning from {start} (depending on the length
+    of {string}).
+
+    If {length} is given and is negative, then that many characters will be
+    omitted from the end of {string} (after the start position has been
+    calculated when a {start} is negative). If {start} denotes the position of
+    this truncation or beyond, FALSE will be returned.
+
+    If {length} is given and is 0, FALSE or NULL, an empty string will be
+    returned.
+
+    If {length} is omitted, the substring starting from {start} until the end
+    of the string will be returned.
+
+    Example #2 Using a negative {length}
+
+    <?php >
+    $rest = substr("abcdef", 0, -1);  // returns "abcde"
+    $rest = substr("abcdef", 2, -1);  // returns "cde"
+    $rest = substr("abcdef", 4, -4);  // returns false
+    $rest = substr("abcdef", -3, -1); // returns "de"
+<    ?>
+
+==============================================================================
+*Return* *Values*
+
+Returns the extracted part of {string}; or FALSE on failure, or an empty
+string.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+7.0.0   If {string} is equal to {start} characters long, an empty string will
+        be returned. Prior to this version, FALSE was returned in this case.
+5.2.2 - If the {start} parameter indicates the position of a negative
+5.2.6   truncation or beyond, false is returned. Other versions get the string
+        from start.
+
+==============================================================================
+*Examples*
+
+Example #3 Basic substr() usage
+
+<?php >
+    echo substr('abcdef', 1);     // bcdef
+    echo substr('abcdef', 1, 3);  // bcd
+    echo substr('abcdef', 0, 4);  // abcd
+    echo substr('abcdef', 0, 8);  // abcdef
+    echo substr('abcdef', -1, 1); // f
+
+    // Accessing single characters in a string
+    // can also be achieved using "square brackets"
+    $string = 'abcdef';
+    echo $string[0];                 // a
+    echo $string[3];                 // d
+    echo $string[strlen($string)-1]; // f
+
+<?>
+
+Example #4 substr() casting behaviour
+
+<?php >
+    class apple {
+        public function __toString() {
+            return "green";
+        }
+    }
+
+    echo "1) ".var_export(substr("pear", 0, 2), true).PHP_EOL;
+    echo "2) ".var_export(substr(54321, 0, 2), true).PHP_EOL;
+    echo "3) ".var_export(substr(new apple(), 0, 2), true).PHP_EOL;
+    echo "4) ".var_export(substr(true, 0, 1), true).PHP_EOL;
+    echo "5) ".var_export(substr(false, 0, 1), true).PHP_EOL;
+    echo "6) ".var_export(substr("", 0, 1), true).PHP_EOL;
+    echo "7) ".var_export(substr(1.2e3, 0, 4), true).PHP_EOL;
+<?>
+
+Output of the above example in PHP 7:
+
+1) 'pe'
+2) '54'
+3) 'gr'
+4) '1'
+5) ''
+6) ''
+7) '1200'
+
+Output of the above example in PHP 5:
+
+1) 'pe'
+2) '54'
+3) 'gr'
+4) '1'
+5) false
+6) false
+7) '1200'
+
+==============================================================================
+*Errors/Exceptions*
+
+Returns FALSE on error.
+<?php >
+    var_dump(substr('a', 2)); // bool(false)
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |strrchr| - Find the last occurrence of a character in a string
+  * |substr_replace| - Replace text within a portion of a string
+  * |preg_match| - Perform a regular expression match
+  * |trim| - Strip whitespace (or other characters) from the beginning and end
+    of a string
+  * |mb_substr| - Get part of string
+  * |wordwrap| - Wraps a string to a given number of characters
+  * String access and modification by character
+
+
+vim:ft=help:

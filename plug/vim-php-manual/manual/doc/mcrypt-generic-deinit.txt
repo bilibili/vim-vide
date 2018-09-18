@@ -1,0 +1,43 @@
+mcrypt_generic_deinit
+
+(PHP 4 >= 4.0.7, PHP 5, PHP 7)
+
+mcrypt_generic_deinit — This function deinitializes an encryption module
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    bool mcrypt_generic_deinit ( resource $td )~
+
+This function terminates encryption specified by the encryption descriptor
+({td}). It clears all buffers, but does not close the module. You need to call
+|mcrypt_module_close| yourself. (But PHP does this for you at the end of the
+script.)
+
+==============================================================================
+*Parameters*
+
+{td}
+
+    The encryption descriptor.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |mcrypt_module_open| - Opens the module of the algorithm and the mode to
+    be used
+  * |mcrypt_generic_init| - This function initializes all buffers needed for
+    encryption
+
+
+vim:ft=help:

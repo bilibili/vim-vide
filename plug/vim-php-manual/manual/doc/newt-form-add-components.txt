@@ -1,0 +1,50 @@
+newt_form_add_components
+
+(PECL newt >= 0.1)
+
+newt_form_add_components — Add several components to the form
+
+==============================================================================
+*Description*
+
+    void newt_form_add_components ( resource $form , array $components )~
+
+Adds several components to the {form}.
+
+==============================================================================
+*Parameters*
+
+{form}
+
+    Form to which components will be added
+
+{components}
+
+    Array of components to add to the form
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 A newt_form_add_components() example
+
+<?php >
+    $form = newt_form();
+
+    $b1 = newt_button(5, 12, "Run Tool");
+    $b2 = newt_button(21, 12, "Quit");
+
+    newt_form_add_components($form, array($b1, $b2));
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |newt_form_add_component| - Adds a single component to the form
+
+
+vim:ft=help:

@@ -1,0 +1,50 @@
+dbx_close
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5, PECL dbx >= 1.1.0)
+
+dbx_close — Close an open connection/database
+
+==============================================================================
+*Description*
+
+    int dbx_close ( object $link_identifier )~
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    The DBX link object to close.
+
+==============================================================================
+*Return* *Values*
+
+Returns 1 on success and 0 on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 dbx_close() example
+
+<?php >
+    $link = dbx_connect(DBX_MYSQL, "localhost", "db", "username", "password")
+        or die("Could not connect");
+
+    echo "Connected successfully";
+    dbx_close($link);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Always refer to the module-specific documentation as well.
+
+==============================================================================
+*See* *Also*
+
+  * |dbx_connect| - Open a connection/database
+
+
+vim:ft=help:

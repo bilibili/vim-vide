@@ -1,0 +1,83 @@
+maxdb_character_set_name
+
+maxdb::character_set_name
+
+(PECL maxdb >= 1.0)
+
+maxdb_character_set_name -- maxdb::character_set_name — Returns the default
+character set for the database connection
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    string maxdb_character_set_name ( resource $link )~
+
+Object oriented style
+
+    string maxdb::character_set_name ( void )~
+
+Returns the current character set for the database connection specified by the
+{link} parameter.
+
+==============================================================================
+*Return* *Values*
+
+The default character set for the current connection, either ascii or unicode.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    /* Open a connection */
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    /* Print current character set */
+    $charset = $maxdb->character_set_name();
+    printf ("Current character set is %s\n", $charset);
+
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (!$link) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    /* Print current character set */
+    $charset = maxdb_character_set_name($link);
+    printf ("Current character set is %s\n",$charset);
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Current character set is ascii
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_client_encoding| - Alias of maxdb_character_set_name
+  * |maxdb_real_escape_string| - Escapes special characters in a string for
+    use in an SQL statement, taking into account the current charset of the
+    connection
+
+
+vim:ft=help:

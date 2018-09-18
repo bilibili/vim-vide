@@ -1,0 +1,213 @@
+mysqlnd_qc_get_normalized_query_trace_log
+
+(PECL mysqlnd_qc >= 1.0.0)
+
+mysqlnd_qc_get_normalized_query_trace_log — Returns a normalized query trace
+log for each query inspected by the query cache
+
+==============================================================================
+*Description*
+
+    array mysqlnd_qc_get_normalized_query_trace_log ( void )~
+
+Returns a normalized query trace log for each query inspected by the query
+cache. The collection of the trace log is disabled by default. To collect the
+trace log you have to set the PHP configuration directive
+mysqlnd_qc.collect_normalized_query_trace to 1
+
+Entries in the trace log are grouped by the normalized query statement. The
+normalized query statement is the query statement with all statement parameter
+values being replaced with a question mark. For example, the two statements
+SELECT id FROM test WHERE id = 1 and SELECT id FROM test WHERE id = 2 are
+normalized as SELECT id FROM test WHERE id = ?. Whenever a statement is
+inspected by the query cache which matches the normalized statement pattern,
+its statistics are grouped by the normalized statement string.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+An array of query log. Every list entry contains the normalized query
+stringand further detail information.
+
+        Key                                 Description
+query                Normalized statement string.
+                     How many statements have matched the normalized statement
+                     string in addition to the one which has created the log
+occurences           entry. The value is zero if a statement has been
+                     normalized, its normalized representation has been added
+                     to the log but no further queries inspected by PECL/
+                     mysqlnd_qc have the same normalized statement string.
+                     Whether the statement could be cached. An statement
+                     eligible for caching has not necessarily been cached. It
+eligible_for_caching not possible to tell for sure if or how many cached
+                     statement have contributed to the aggregated normalized
+                     statement log entry. However, comparing the minimum and
+                     average run time one can make an educated guess.
+                     The average run time of all queries contributing to the
+avg_run_time         query log entry. The run time is the time between sending
+                     the query statement to MySQL and receiving an answer from
+                     MySQL.
+                     The average store time of all queries contributing to the
+avg_store_time       query log entry. The store time is the time needed to
+                     fetch a statements result set from the server to the
+                     client and, storing it on the client.
+min_run_time         The minimum run time of all queries contributing to the
+                     query log entry.
+min_store_time       The minimum store time of all queries contributing to the
+                     query log entry.
+max_run_time         The maximum run time of all queries contributing to the
+                     query log entry.
+max_store_time       The maximum store time of all queries contributing to the
+                     query log entry.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_qc_get_normalized_query_trace_log() example
+
+mysqlnd_qc.collect_normalized_query_trace=1
+
+<?php >
+    /* Connect, create and populate test table */
+    $mysqli = new mysqli("host", "user", "password", "schema", "port", "socket");
+    $mysqli->query("DROP TABLE IF EXISTS test");
+    $mysqli->query("CREATE TABLE test(id INT)");
+    $mysqli->query("INSERT INTO test(id) VALUES (1), (2)");
+
+    /* not cached */
+    $res = $mysqli->query("SELECT id FROM test WHERE id = 1");
+    var_dump($res->fetch_assoc());
+    $res->free();
+
+    /* cache put */
+    $res = $mysqli->query("/*" . MYSQLND_QC_ENABLE_SWITCH . "*/" . 
+    "SELECT id FROM test WHERE id = 2");
+    var_dump($res->fetch_assoc());
+    $res->free();
+
+    /* cache hit */
+    $res = $mysqli->query("/*" . MYSQLND_QC_ENABLE_SWITCH . "*/" . 
+    "SELECT id FROM test WHERE id = 2");
+    var_dump($res->fetch_assoc());
+    $res->free();
+
+    var_dump(mysqlnd_qc_get_normalized_query_trace_log());
+<?>
+
+The above examples will output:
+
+array(1) {
+  ["id"]=>
+  string(1) "1"
+}
+array(1) {
+  ["id"]=>
+  string(1) "2"
+}
+array(1) {
+  ["id"]=>
+  string(1) "2"
+}
+array(4) {
+  [0]=>
+  array(9) {
+    ["query"]=>
+    string(25) "DROP TABLE IF EXISTS test"
+    ["occurences"]=>
+    int(0)
+    ["eligible_for_caching"]=>
+    bool(false)
+    ["avg_run_time"]=>
+    int(0)
+    ["min_run_time"]=>
+    int(0)
+    ["max_run_time"]=>
+    int(0)
+    ["avg_store_time"]=>
+    int(0)
+    ["min_store_time"]=>
+    int(0)
+    ["max_store_time"]=>
+    int(0)
+  }
+  [1]=>
+  array(9) {
+    ["query"]=>
+    string(27) "CREATE TABLE test (id INT )"
+    ["occurences"]=>
+    int(0)
+    ["eligible_for_caching"]=>
+    bool(false)
+    ["avg_run_time"]=>
+    int(0)
+    ["min_run_time"]=>
+    int(0)
+    ["max_run_time"]=>
+    int(0)
+    ["avg_store_time"]=>
+    int(0)
+    ["min_store_time"]=>
+    int(0)
+    ["max_store_time"]=>
+    int(0)
+  }
+  [2]=>
+  array(9) {
+    ["query"]=>
+    string(40) "INSERT INTO test (id ) VALUES (? ), (? )"
+    ["occurences"]=>
+    int(0)
+    ["eligible_for_caching"]=>
+    bool(false)
+    ["avg_run_time"]=>
+    int(0)
+    ["min_run_time"]=>
+    int(0)
+    ["max_run_time"]=>
+    int(0)
+    ["avg_store_time"]=>
+    int(0)
+    ["min_store_time"]=>
+    int(0)
+    ["max_store_time"]=>
+    int(0)
+  }
+  [3]=>
+  array(9) {
+    ["query"]=>
+    string(31) "SELECT id FROM test WHERE id =?"
+    ["occurences"]=>
+    int(2)
+    ["eligible_for_caching"]=>
+    bool(true)
+    ["avg_run_time"]=>
+    int(159)
+    ["min_run_time"]=>
+    int(12)
+    ["max_run_time"]=>
+    int(307)
+    ["avg_store_time"]=>
+    int(10)
+    ["min_store_time"]=>
+    int(8)
+    ["max_store_time"]=>
+    int(13)
+  }
+}
+
+==============================================================================
+*See* *Also*
+
+  * Runtime configuration
+  * mysqlnd_qc.collect_normalized_query_trace
+  * mysqlnd_qc.time_statistics
+  * |mysqlnd_qc_get_query_trace_log| - Returns a backtrace for each query
+    inspected by the query cache
+
+
+vim:ft=help:

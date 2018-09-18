@@ -1,0 +1,40 @@
+ingres_next_error
+
+(PECL ingres >= 2.0.0)
+
+ingres_next_error — Get the next Ingres error
+
+==============================================================================
+*Description*
+
+    bool ingres_next_error ([ resource $link ] )~
+
+Get the next Ingres error for the last executed query. Each call to 
+ingres_next_error() can be followed by a call to |ingres_errno|, |ingres_error
+| or |ingres_errsqlstate| to get the respective error number, error text, or
+SQL STATE. While ingres_next_error() returns TRUE, there are more errors to
+fetch.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    The connection link identifier
+
+==============================================================================
+*Return* *Values*
+
+ingres_next_error() returns TRUE if there is another error to retrieve or
+FALSE when there are no more errors
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_errno| - Get the last Ingres error number generated
+  * |ingres_error| - Get a meaningful error message for the last error
+    generated
+  * |ingres_errsqlstate| - Get the last SQLSTATE error code generated
+
+
+vim:ft=help:

@@ -1,0 +1,81 @@
+iconv
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+iconv — Convert string to requested character encoding
+
+==============================================================================
+*Description*
+
+    string iconv ( string $in_charset , string $out_charset , string $str )~
+
+Performs a character set conversion on the string {str} from {in_charset} to
+{out_charset}.
+
+==============================================================================
+*Parameters*
+
+{in_charset}
+
+    The input charset.
+
+{out_charset}
+
+    The output charset.
+
+    If you append the string //TRANSLIT to {out_charset} transliteration is
+    activated. This means that when a character can't be represented in the
+    target charset, it can be approximated through one or several similarly
+    looking characters. If you append the string //IGNORE, characters that
+    cannot be represented in the target charset are silently discarded.
+    Otherwise, E_NOTICE is generated and the function will return FALSE.
+
+    Caution
+
+    If and how //TRANSLIT works exactly depends on the system's iconv()
+    implementation (cf. ICONV_IMPL). Some implementations are known to ignore
+    //TRANSLIT, so the conversion is likely to fail for characters which are
+    illegal for the {out_charset}.
+
+{str}
+
+    The string to be converted.
+
+==============================================================================
+*Return* *Values*
+
+Returns the converted string or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Since this version, the function returns FALSE on illegal characters,
+5.4.0   unless //IGNORE is specified in output charset. Before, it returned
+        partial output string.
+
+==============================================================================
+*Examples*
+
+Example #1 iconv() example
+
+<?php >
+    $text = "This is the Euro symbol '€'.";
+
+    echo 'Original : ', $text, PHP_EOL;
+    echo 'TRANSLIT : ', iconv("UTF-8", "ISO-8859-1//TRANSLIT", $text), PHP_EOL;
+    echo 'IGNORE   : ', iconv("UTF-8", "ISO-8859-1//IGNORE", $text), PHP_EOL;
+    echo 'Plain    : ', iconv("UTF-8", "ISO-8859-1", $text), PHP_EOL;
+
+<?>
+
+The above example will output something similar to:
+
+Original : This is the Euro symbol '€'.
+TRANSLIT : This is the Euro symbol 'EUR'.
+IGNORE   : This is the Euro symbol ''.
+Plain    :
+Notice: iconv(): Detected an illegal character in input string in .\iconv-example.php on line 7
+
+
+vim:ft=help:

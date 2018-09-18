@@ -1,0 +1,66 @@
+iconv_get_encoding
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+iconv_get_encoding — Retrieve internal configuration variables of iconv
+extension
+
+==============================================================================
+*Description*
+
+    mixed iconv_get_encoding ([ string $type = "all" ] )~
+
+Retrieve internal configuration variables of iconv extension.
+
+==============================================================================
+*Parameters*
+
+{type}
+
+    The value of the optional {type} can be:
+      + all
+      + input_encoding
+      + output_encoding
+      + internal_encoding
+
+==============================================================================
+*Return* *Values*
+
+Returns the current value of the internal configuration variable if successful
+or FALSE on failure.
+
+If {type} is omitted or set to "all", iconv_get_encoding() returns an array
+that stores all these variables.
+
+==============================================================================
+*Examples*
+
+Example #1 iconv_get_encoding() example
+
+<pre>
+<?php >
+    iconv_set_encoding("internal_encoding", "UTF-8");
+    iconv_set_encoding("output_encoding", "ISO-8859-1");
+    var_dump(iconv_get_encoding('all'));
+<?>
+</pre>
+
+The above example will output:
+
+Array
+(
+    [input_encoding] => ISO-8859-1
+    [output_encoding] => ISO-8859-1
+    [internal_encoding] => UTF-8
+)
+
+
+==============================================================================
+*See* *Also*
+
+  * |iconv_set_encoding| - Set current setting for character encoding
+    conversion
+  * |ob_iconv_handler| - Convert character encoding as output buffer handler
+
+
+vim:ft=help:

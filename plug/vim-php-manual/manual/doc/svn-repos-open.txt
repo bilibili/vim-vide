@@ -1,0 +1,28 @@
+svn_repos_open
+
+(PECL svn >= 0.1.0)
+
+svn_repos_open — Open a shared lock on a repository.
+
+==============================================================================
+*Description*
+
+    resource svn_repos_open ( string $path )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+Open a shared lock on a repository.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

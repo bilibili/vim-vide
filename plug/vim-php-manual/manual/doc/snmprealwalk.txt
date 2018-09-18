@@ -1,0 +1,74 @@
+snmprealwalk
+
+(PHP 4, PHP 5, PHP 7)
+
+snmprealwalk — Return all objects including their respective object ID within
+the specified one
+
+==============================================================================
+*Description*
+
+    array snmprealwalk ( string $host , string $community , string $object_id~
+    [, int $timeout = 1000000 [, int $retries = 5 ]] )~
+
+The snmprealwalk() function is used to traverse over a number of SNMP objects
+starting from {object_id} and return not only their values but also their
+object ids.
+
+==============================================================================
+*Parameters*
+
+{host}
+
+    The hostname of the SNMP agent (server).
+
+{community}
+
+    The read community.
+
+{object_id}
+
+    The SNMP object id which precedes the wanted one.
+
+{timeout}
+
+    The number of microseconds until the first timeout.
+
+{retries}
+
+    The number of times to retry if timeouts occur.
+
+==============================================================================
+*Return* *Values*
+
+Returns an associative array of the SNMP object ids and their values on
+success or FALSE on error. In case of an error, an E_WARNING message is shown.
+
+==============================================================================
+*Examples*
+
+Example #1 Using snmprealwalk()
+
+<?php >
+     print_r(snmprealwalk("localhost", "public", "IF-MIB::ifName"));
+<?>
+
+The above will output something like:
+
+
+    Array
+      (
+      [IF-MIB::ifName.1] => STRING: lo
+      [IF-MIB::ifName.2] => STRING: eth0
+      [IF-MIB::ifName.3] => STRING: eth2
+      [IF-MIB::ifName.4] => STRING: sit0
+      [IF-MIB::ifName.5] => STRING: sixxs
+    )
+
+==============================================================================
+*See* *Also*
+
+  * |snmpwalk| - Fetch all the SNMP objects from an agent
+
+
+vim:ft=help:

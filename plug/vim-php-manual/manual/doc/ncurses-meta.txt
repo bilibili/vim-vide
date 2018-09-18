@@ -1,0 +1,24 @@
+ncurses_meta
+
+(PHP 4 >= 4.3.0, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_meta — Enables/Disable 8-bit meta key information
+
+==============================================================================
+*Description*
+
+    int ncurses_meta ( resource $window , bool $8bit )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{window}
+
+{8bit}
+
+
+vim:ft=help:

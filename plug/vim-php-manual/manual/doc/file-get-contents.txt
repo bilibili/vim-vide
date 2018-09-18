@@ -1,0 +1,173 @@
+file_get_contents
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+file_get_contents — Reads entire file into a string
+
+==============================================================================
+*Description*
+
+    string file_get_contents ( string $filename [, bool $use_include_path =~
+    false [, resource $context [, int $offset = 0 [, int $maxlen ]]]] )~
+
+This function is similar to |file|, except that file_get_contents() returns
+the file in a string, starting at the specified {offset} up to {maxlen} bytes.
+On failure, file_get_contents() will return FALSE.
+
+file_get_contents() is the preferred way to read the contents of a file into a
+string. It will use memory mapping techniques if supported by your OS to
+enhance performance.
+
+    Note:
+
+    If you're opening a URI with special characters, such as spaces, you need
+    to encode the URI with |urlencode|.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Name of the file to read.
+
+{use_include_path}
+
+
+        Note:
+
+        As of PHP 5 the FILE_USE_INCLUDE_PATH constant can be used to trigger
+        include path search.
+
+{context}
+
+    A valid context resource created with |stream_context_create|. If you
+    don't need to use a custom context, you can skip this parameter by NULL.
+
+{offset}
+
+    The offset where the reading starts on the original stream. Negative
+    offsets count from the end of the stream.
+
+    Seeking ({offset}) is not supported with remote files. Attempting to seek
+    on non-local files may work with small offsets, but this is unpredictable
+    because it works on the buffered stream.
+
+{maxlen}
+
+    Maximum length of data read. The default is to read until end of file is
+    reached. Note that this parameter is applied to the stream processed by
+    the filters.
+
+==============================================================================
+*Return* *Values*
+
+The function returns the read data or FALSE on failure.
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*Errors/Exceptions*
+
+An E_WARNING level error is generated if {filename} cannot be found,
+{maxlength} is less than zero, or if seeking to the specified {offset} in the
+stream fails.
+
+==============================================================================
+*Examples*
+
+Example #1 Get and output the source of the homepage of a website
+
+<?php >
+    $homepage = file_get_contents('http://www.example.com/');
+    echo $homepage;
+<?>
+
+Example #2 Searching within the include_path
+
+<?php >
+    // <= PHP 5
+    $file = file_get_contents('./people.txt', true);
+    // > PHP 5
+    $file = file_get_contents('./people.txt', FILE_USE_INCLUDE_PATH);
+<?>
+
+Example #3 Reading a section of a file
+
+<?php >
+    // Read 14 characters starting from the 21st character
+    $section = file_get_contents('./people.txt', NULL, NULL, 20, 14);
+    var_dump($section);
+<?>
+
+The above example will output something similar to:
+
+string(14) "lle Bjori Ro"
+
+Example #4 Using stream contexts
+
+<?php >
+    // Create a stream
+    $opts = array(
+      'http'=>array(
+        'method'=>"GET",
+        'header'=>"Accept-language: en\r\n" .
+                  "Cookie: foo=bar\r\n"
+      )
+    );
+
+    $context = stream_context_create($opts);
+
+    // Open the file using the HTTP headers set above
+    $file = file_get_contents('http://www.example.com/', false, $context);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                  Description
+7.1.0   Support for negative {offset}s has been added.
+5.1.0   Added the {offset} and {maxlen} parameters.
+
+==============================================================================
+*Notes*
+
+    Note: This function is binary-safe.
+
+Tip
+
+A URL can be used as a filename with this function if the fopen wrappers have
+been enabled. See |fopen| for more details on how to specify the filename. See
+the Supported Protocols and Wrappers for links to information about what
+abilities the various wrappers have, notes on their usage, and information on
+any predefined variables they may provide.
+
+Warning
+
+When using SSL, Microsoft IIS will violate the protocol by closing the
+connection without sending a close_notify indicator. PHP will report this as
+"SSL: Fatal Protocol Error" when you reach the end of the data. To work around
+this, the value of error_reporting should be lowered to a level that does not
+include warnings. PHP can detect buggy IIS server software when you open the
+stream using the https:// wrapper and will suppress the warning. When using 
+|fsockopen| to create an ssl:// socket, the developer is responsible for
+detecting and suppressing this warning.
+
+==============================================================================
+*See* *Also*
+
+  * |file| - Reads entire file into an array
+  * |fgets| - Gets line from file pointer
+  * |fread| - Binary-safe file read
+  * |readfile| - Outputs a file
+  * |file_put_contents| - Write a string to a file
+  * |stream_get_contents| - Reads remainder of a stream into a string
+  * |stream_context_create| - Creates a stream context
+  * $http_response_header
+
+
+vim:ft=help:

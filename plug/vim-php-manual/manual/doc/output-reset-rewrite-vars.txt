@@ -1,0 +1,62 @@
+output_reset_rewrite_vars
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+output_reset_rewrite_vars — Reset URL rewriter values
+
+==============================================================================
+*Description*
+
+    bool output_reset_rewrite_vars ( void )~
+
+This function resets the URL rewriter and removes all rewrite variables
+previously set by the |output_add_rewrite_var| function.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Before PHP 7.1.0, rewrite vars set by |output_add_rewrite_var| use the
+7.1.0   same Session module trans sid output buffer. Since PHP 7.1.0,
+        dedicated output buffer is used and output_reset_rewrite_vars() only
+        removes rewrite vars defined by |output_add_rewrite_var|.
+
+==============================================================================
+*Examples*
+
+Example #1 output_reset_rewrite_vars() example
+
+<?php >
+    session_start();
+    output_add_rewrite_var('var', 'value');
+
+    echo '<a href="file.php">link</a>';
+    ob_flush();
+
+    output_reset_rewrite_vars();
+    echo '<a href="file.php">link</a>';
+<?>
+
+The above example will output:
+
+<a href="file.php?PHPSESSID=xxx&var=value">link</a>
+<a href="file.php">link</a>
+
+==============================================================================
+*See* *Also*
+
+  * |output_add_rewrite_var| - Add URL rewriter values
+  * |ob_flush| - Flush (send) the output buffer
+  * |ob_list_handlers| - List all output handlers in use
+  * url_rewriter.tags
+  * url_rewriter.hosts
+  * session.trans_sid_tags
+  * session.trans_sid_hosts
+
+
+vim:ft=help:

@@ -1,0 +1,13 @@
+openssl_get_privatekey
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+openssl_get_privatekey — Alias of |openssl_pkey_get_private|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |openssl_pkey_get_private|.
+
+
+vim:ft=help:

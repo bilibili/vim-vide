@@ -1,0 +1,64 @@
+bzread
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+bzread — Binary safe bzip2 file read
+
+==============================================================================
+*Description*
+
+    string bzread ( resource $bz [, int $length = 1024 ] )~
+
+bzread() reads from the given bzip2 file pointer.
+
+Reading stops when {length} (uncompressed) bytes have been read or EOF is
+reached, whichever comes first.
+
+==============================================================================
+*Parameters*
+
+{bz}
+
+    The file pointer. It must be valid and must point to a file successfully
+    opened by |bzopen|.
+
+{length}
+
+    If not specified, bzread() will read 1024 (uncompressed) bytes at a time.
+    A maximum of 8192 uncompressed bytes will be read at a time.
+
+==============================================================================
+*Return* *Values*
+
+Returns the uncompressed data, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 bzread() example
+
+<?php >
+
+    $file = "/tmp/foo.bz2";
+    $bz = bzopen($file, "r") or die("Couldn't open $file");
+
+    $decompressed_file = '';
+    while (!feof($bz)) {
+      $decompressed_file .= bzread($bz, 4096);
+    }
+    bzclose($bz);
+
+    echo "The contents of $file are: <br />\n";
+    echo $decompressed_file;
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |bzwrite| - Binary safe bzip2 file write
+  * |feof| - Tests for end-of-file on a file pointer
+  * |bzopen| - Opens a bzip2 compressed file
+
+
+vim:ft=help:

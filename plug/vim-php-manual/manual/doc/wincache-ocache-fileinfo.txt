@@ -1,0 +1,117 @@
+wincache_ocache_fileinfo
+
+(PECL wincache >= 1.0.0)
+
+wincache_ocache_fileinfo — Retrieves information about files cached in the
+opcode cache
+
+==============================================================================
+*Description*
+
+    array wincache_ocache_fileinfo ([ bool $summaryonly = false ] )~
+
+Retrieves information about opcode cache content and its usage.
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Parameters*
+
+{summaryonly}
+
+    Controls whether the returned array will contain information about
+    individual cache entries along with the opcode cache summary.
+
+==============================================================================
+*Return* *Values*
+
+Array of meta data about opcode cache or FALSE on failure
+
+The array returned by this function contains the following elements:
+
+  * total_cache_uptime - total time in seconds that the opcode cache has been
+    active
+  * total_file_count - total number of files that are currently in the opcode
+    cache
+  * total_hit_count - number of times the compiled opcode have been served
+    from the cache
+  * total_miss_count - number of times the compiled opcode have not been found
+    in the cache
+  * is_local_cache - true is the cache metadata is for a local cache instance,
+    false if the metadata is for the global cache
+  * file_entries - an array that contains the information about all the cached
+    files:
+      + file_name - absolute file name of the cached file
+      + add_time - time in seconds since the file has been added to the opcode
+        cache
+      + use_time - time in seconds since the file has been accessed in the
+        opcode cache
+      + last_check - time in seconds since the file has been checked for
+        modifications
+      + hit_count - number of times the file has been served from the cache
+      + function_count - number of functions in the cached file
+      + class_count - number of classes in the cached file
+
+==============================================================================
+*Examples*
+
+Example #1 A wincache_ocache_fileinfo() example
+
+<pre>
+<?php >
+    print_r(wincache_ocache_fileinfo());
+<?>
+</pre>
+
+The above example will output:
+
+Array
+(
+    [total_cache_uptime] => 17357
+    [total_file_count] => 121
+    [total_hit_count] => 36562
+    [total_miss_count] => 201
+    [file_entries] => Array
+        (
+            [1] => Array
+                (
+                    [file_name] => c:\inetpub\wwwroot\checkcache.php
+                    [add_time] => 17356
+                    [use_time] => 7
+                    [last_check] => 10
+                    [hit_count] => 454
+                    [function_count] => 0
+                    [class_count] => 1
+                )
+            [2] => Array (...iterates for each cached file)
+        )
+)
+
+==============================================================================
+*See* *Also*
+
+  * |wincache_fcache_fileinfo| - Retrieves information about files cached in
+    the file cache
+  * |wincache_fcache_meminfo| - Retrieves information about file cache memory
+    usage
+  * |wincache_ocache_meminfo| - Retrieves information about opcode cache
+    memory usage
+  * |wincache_rplist_fileinfo| - Retrieves information about resolve file path
+    cache
+  * |wincache_rplist_meminfo| - Retrieves information about memory usage by
+    the resolve file path cache
+  * |wincache_refresh_if_changed| - Refreshes the cache entries for the cached
+    files
+  * |wincache_ucache_meminfo| - Retrieves information about user cache memory
+    usage
+  * |wincache_ucache_info| - Retrieves information about data stored in the
+    user cache
+  * |wincache_scache_info| - Retrieves information about files cached in the
+    session cache
+  * |wincache_scache_meminfo| - Retrieves information about session cache
+    memory usage
+
+
+vim:ft=help:

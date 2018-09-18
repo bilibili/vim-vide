@@ -1,0 +1,117 @@
+mqseries_get
+
+(PECL mqseries >= 0.10.0)
+
+mqseries_get — MQSeries MQGET
+
+==============================================================================
+*Description*
+
+    void mqseries_get ( resource $hConn , resource $hObj , array &$md , array~
+    &$gmo , int &$bufferLength , string &$msg , int &$data_length , resource~
+    &$compCode , resource &$reason )~
+
+The mqseries_get() (MQGET) call retrieves a message from a local queue that
+has been opened using the |mqseries_open| (MQOPEN) call
+
+==============================================================================
+*Parameters*
+
+{hConn}
+
+    Connection handle.
+
+    This handle represents the connection to the queue manager.
+
+{hObj}
+
+    Object handle.
+
+    This handle represents the object to be used.
+
+{md}
+
+    Message descriptor (MQMD).
+
+{gmo}
+
+    Get message options (MQGMO).
+
+{bufferLength}
+
+    Expected length of the result buffer
+
+{msg}
+
+    Buffer holding the message that was retrieved from the object.
+
+{data_length}
+
+    Actual buffer length
+
+{compCode}
+
+    Completion code.
+
+{reason}
+
+    Reason code qualifying the compCode.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 mqseries_get() example
+
+<?php >
+    // open connection to the queue manager
+        mqseries_conn('WMQ1', $conn, $comp_code, $reason);
+    // $conn now hold the reference to the connection to the queue manager.
+
+    // open the connection to the testq queue
+        mqseries_open(
+                    $conn,
+                    array('ObjectName' => 'TESTQ'),
+                    MQSERIES_MQOO_INPUT_AS_Q_DEF | 
+    MQSERIES_MQOO_FAIL_IF_QUIESCING | MQSERIES_MQOO_OUTPUT,
+                    $obj,
+                    $comp_code,
+                    $reason);
+    // $obj now holds the reference to the object (TESTQ)
+
+    // setup empty message descriptor.
+        $mdg = array();
+    // setup get message options    
+        $gmo = array('Options' => MQSERIES_MQGMO_FAIL_IF_QUIESCING | 
+    MQSERIES_MQGMO_WAIT, 'WaitInterval' => 3000);
+
+    // get the message from the queueu    
+        mqseries_get($conn, $obj, $mdg, $gmo, 255, $msg, $data_length, $comp_code
+    , $reason);
+        if ($comp_code !== MQSERIES_MQCC_OK) {
+            printf("GET CompCode:%d Reason:%d Text:%s<br>", $comp_code, $reason, 
+    mqseries_strerror($reason));
+        }
+        
+    // close the object reference $obj    
+        mqseries_close($conn, $obj, MQSERIES_MQCO_NONE, $comp_code, $reason);
+
+    // disconnect from the queue manager.    
+        mqseries_disc($conn, $comp_code, $reason);
+        
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mqseries_conn| - MQSeries MQCONN
+  * |mqseries_connx| - MQSeries MQCONNX
+  * |mqseries_open| - MQSeries MQOPEN
+  * |mqseries_put| - MQSeries MQPUT
+
+
+vim:ft=help:

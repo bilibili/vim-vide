@@ -1,0 +1,39 @@
+fann_set_cascade_candidate_change_fraction
+
+(PECL fann >= 1.0.0)
+
+fann_set_cascade_candidate_change_fraction — Sets the cascade candidate change
+fraction
+
+==============================================================================
+*Description*
+
+    bool fann_set_cascade_candidate_change_fraction ( resource $ann , float~
+    $cascade_candidate_change_fraction )~
+
+Sets the cascade candidate change fraction.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{cascade_candidate_change_fraction}
+
+    The cascade candidate change fraction.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_cascade_candidate_change_fraction| - Returns the cascade
+    candidate change fraction
+
+
+vim:ft=help:

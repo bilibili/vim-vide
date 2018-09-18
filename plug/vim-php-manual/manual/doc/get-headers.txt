@@ -1,0 +1,102 @@
+get_headers
+
+(PHP 5, PHP 7)
+
+get_headers — Fetches all the headers sent by the server in response to a HTTP
+request
+
+==============================================================================
+*Description*
+
+    array get_headers ( string $url [, int $format = 0 ] )~
+
+get_headers() returns an array with the headers sent by the server in response
+to a HTTP request.
+
+==============================================================================
+*Parameters*
+
+{url}
+
+    The target URL.
+
+{format}
+
+    If the optional {format} parameter is set to non-zero, get_headers()
+    parses the response and sets the array's keys.
+
+==============================================================================
+*Return* *Values*
+
+Returns an indexed or associative array with the headers, or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.1.3   This function now uses the default stream context, which can be set/
+        changed with the |stream_context_set_default| function.
+
+==============================================================================
+*Examples*
+
+Example #1 get_headers() example
+
+<?php >
+    $url = 'http://www.example.com';
+
+    print_r(get_headers($url));
+
+    print_r(get_headers($url, 1));
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => HTTP/1.1 200 OK
+    [1] => Date: Sat, 29 May 2004 12:28:13 GMT
+    [2] => Server: Apache/1.3.27 (Unix)  (Red-Hat/Linux)
+    [3] => Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT
+    [4] => ETag: "3f80f-1b6-3e1cb03b"
+    [5] => Accept-Ranges: bytes
+    [6] => Content-Length: 438
+    [7] => Connection: close
+    [8] => Content-Type: text/html
+)
+
+Array
+(
+    [0] => HTTP/1.1 200 OK
+    [Date] => Sat, 29 May 2004 12:28:14 GMT
+    [Server] => Apache/1.3.27 (Unix)  (Red-Hat/Linux)
+    [Last-Modified] => Wed, 08 Jan 2003 23:11:55 GMT
+    [ETag] => "3f80f-1b6-3e1cb03b"
+    [Accept-Ranges] => bytes
+    [Content-Length] => 438
+    [Connection] => close
+    [Content-Type] => text/html
+)
+
+Example #2 get_headers() using HEAD example
+
+<?php >
+    // By default get_headers uses a GET request to fetch the headers. If you
+    // want to send a HEAD request instead, you can do so using a stream context:
+    stream_context_set_default(
+        array(
+            'http' => array(
+                'method' => 'HEAD'
+            )
+        )
+    );
+    $headers = get_headers('http://example.com');
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |apache_request_headers| - Fetch all HTTP request headers
+
+
+vim:ft=help:

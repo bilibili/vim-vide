@@ -1,0 +1,72 @@
+dio_seek
+
+(PHP 4 >= 4.2.0, PHP 5 <= 5.0.5, PHP 7)
+
+dio_seek — Seeks to pos on fd from whence
+
+==============================================================================
+*Description*
+
+    int dio_seek ( resource $fd , int $pos [, int $whence = SEEK_SET ] )~
+
+The function dio_seek() is used to change the file position of the given file
+descriptor.
+
+==============================================================================
+*Parameters*
+
+{fd}
+
+    The file descriptor returned by |dio_open|.
+
+{pos}
+
+    The new position.
+
+{whence}
+
+    Specifies how the position {pos} should be interpreted:
+      + SEEK_SET (default) - specifies that {pos} is specified from the
+        beginning of the file.
+
+      + SEEK_CUR - Specifies that {pos} is a count of characters from the
+        current file position. This count may be positive or negative.
+
+      + SEEK_END - Specifies that {pos} is a count of characters from the end
+        of the file. A negative count specifies a position within the current
+        extent of the file; a positive count specifies a position past the
+        current end. If you set the position past the current end, and
+        actually write data, you will extend the file with zeros up to that
+        position.
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Examples*
+
+Example #1 Positioning in a file
+
+<?php >
+
+    $fd = dio_open('/dev/ttyS0', O_RDWR);
+
+    dio_seek($fd, 10, SEEK_SET);
+    // position is now at 10 characters from the start of the file
+
+    dio_seek($fd, -2, SEEK_CUR);
+    // position is now at 8 characters from the start of the file
+
+    dio_seek($fd, -5, SEEK_END);
+    // position is now at 5 characters from the end of the file
+
+    dio_seek($fd, 10, SEEK_END);
+    // position is now at 10 characters past the end of the file. 
+    // The 10 characters between the end of the file and the current
+    // position are filled with zeros.
+
+    dio_close($fd);
+<?>
+
+
+vim:ft=help:

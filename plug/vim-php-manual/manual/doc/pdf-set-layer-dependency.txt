@@ -1,0 +1,19 @@
+PDF_set_layer_dependency
+
+(PECL pdflib >= 2.0.0)
+
+PDF_set_layer_dependency — Define relationships among layers
+
+==============================================================================
+*Description*
+
+    bool PDF_set_layer_dependency ( resource $pdfdoc , string $type , string~
+    $optlist )~
+
+Defines hierarchical and group relationships among layers. Returns TRUE on
+success or FALSE on failure.
+
+This function requires PDF 1.5.
+
+
+vim:ft=help:

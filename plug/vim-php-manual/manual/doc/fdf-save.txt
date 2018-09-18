@@ -1,0 +1,41 @@
+fdf_save
+
+(PHP 4, PHP 5, PHP 7)
+
+fdf_save — Save a FDF document
+
+==============================================================================
+*Description*
+
+    bool fdf_save ( resource $fdf_document [, string $filename ] )~
+
+Saves a FDF document.
+
+==============================================================================
+*Parameters*
+
+{fdf_document}
+
+    The FDF document handle, returned by |fdf_create|, |fdf_open| or 
+    |fdf_open_string|.
+
+{filename}
+
+    If provided, the resulting FDF will be written in this parameter.
+    Otherwise, this function will write the FDF to the default PHP output
+    stream.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |fdf_close| - Close an FDF document
+  * |fdf_create| - Create a new FDF document
+  * |fdf_save_string| - Returns the FDF document as a string
+
+
+vim:ft=help:

@@ -1,0 +1,51 @@
+pcntl_fork
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+pcntl_fork — Forks the currently running process
+
+==============================================================================
+*Description*
+
+    int pcntl_fork ( void )~
+
+The pcntl_fork() function creates a child process that differs from the parent
+process only in its PID and PPID. Please see your system's fork(2) man page
+for specific details as to how fork works on your system.
+
+==============================================================================
+*Return* *Values*
+
+On success, the PID of the child process is returned in the parent's thread of
+execution, and a 0 is returned in the child's thread of execution. On failure,
+a -1 will be returned in the parent's context, no child process will be
+created, and a PHP error is raised.
+
+==============================================================================
+*Examples*
+
+Example #1 pcntl_fork() example
+
+<?php >
+
+    $pid = pcntl_fork();
+    if ($pid == -1) {
+         die('could not fork');
+    } else if ($pid) {
+         // we are the parent
+         pcntl_wait($status); //Protect against Zombie children
+    } else {
+         // we are the child
+    }
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_waitpid| - Waits on or returns the status of a forked child
+  * |pcntl_signal| - Installs a signal handler
+  * |setproctitle| - Set the process title
+
+
+vim:ft=help:

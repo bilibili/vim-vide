@@ -1,0 +1,86 @@
+is_scalar
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+is_scalar — Finds whether a variable is a scalar
+
+==============================================================================
+*Description*
+
+    bool is_scalar ( mixed $var )~
+
+Finds whether the given variable is a scalar.
+
+Scalar variables are those containing an integer, float, string or boolean.
+Types array, object and resource are not scalar.
+
+    Note:
+
+    is_scalar() does not consider resource type values to be scalar as
+    resources are abstract datatypes which are currently based on integers.
+    This implementation detail should not be relied upon, as it may change.
+
+    Note:
+
+    is_scalar() does not consider NULL to be scalar.
+
+==============================================================================
+*Parameters*
+
+{var}
+
+    The variable being evaluated.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {var} is a scalar, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 is_scalar() example
+
+<?php >
+    function show_var($var) 
+    {
+        if (is_scalar($var)) {
+            echo $var;
+        } else {
+            var_dump($var);
+        }
+    }
+    $pi = 3.1416;
+    $proteins = array("hemoglobin", "cytochrome c oxidase", "ferredoxin");
+
+    show_var($pi);
+    show_var($proteins)
+
+<?>
+
+The above example will output:
+
+3.1416
+array(3) {
+  [0]=>
+  string(10) "hemoglobin"
+  [1]=>
+  string(20) "cytochrome c oxidase"
+  [2]=>
+  string(10) "ferredoxin"
+}
+
+==============================================================================
+*See* *Also*
+
+  * |is_float| - Finds whether the type of a variable is float
+  * |is_int| - Find whether the type of a variable is integer
+  * |is_numeric| - Finds whether a variable is a number or a numeric string
+  * |is_real| - Alias of is_float
+  * |is_string| - Find whether the type of a variable is string
+  * |is_bool| - Finds out whether a variable is a boolean
+  * |is_object| - Finds whether a variable is an object
+  * |is_array| - Finds whether a variable is an array
+
+
+vim:ft=help:

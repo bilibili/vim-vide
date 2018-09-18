@@ -1,0 +1,264 @@
+mysqlnd_qc_get_cache_info
+
+(PECL mysqlnd_qc >= 1.0.0)
+
+mysqlnd_qc_get_cache_info — Returns information on the current handler, the
+number of cache entries and cache entries, if available
+
+==============================================================================
+*Description*
+
+    array mysqlnd_qc_get_cache_info ( void )~
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns information on the current handler, the number of cache entries and
+cache entries, if available. If and what data will be returned for the cache
+entries is subject to the active storage handler. Storage handler are free to
+return any data. Storage handler are recommended to return at least the data
+provided by the default handler, if technically possible.
+
+The scope of the information is the PHP process. Depending on the PHP
+deployment model a process may serve one or more web requests.
+
+Values are aggregated for all cache activities on a per storage handler basis.
+It is not possible to tell how much queries originating from mysqli, PDO_MySQL
+or mysql.API calls have contributed to the aggregated data values. Use 
+|mysqlnd_qc_get_core_stats| to get timing data aggregated for all storage
+handlers.
+
+Array of cache information
+
+{handler} string
+
+    The active storage handler.
+
+    All storage handler. Since 1.0.0.
+
+{handler_version} string
+
+    The version of the active storage handler.
+
+    All storage handler. Since 1.0.0.
+
+{num_entries} int
+
+    The number of cache entries. The value depends on the storage handler in
+    use.
+
+    The default, APC and SQLite storage handler provide the actual number of
+    cache entries.
+
+    The MEMCACHE storage handler always returns 0. MEMCACHE does not support
+    counting the number of cache entries.
+
+    If a user defined handler is used, the number of entries of the data
+    property is reported.
+
+    Since 1.0.0.
+
+{data} array
+
+    The version of the active storage handler.
+
+    Additional storage handler dependent data on the cache entries. Storage
+    handler are requested to provide similar and comparable information. A
+    user defined storage handler is free to return any data.
+
+    Since 1.0.0.
+
+    The following information is provided by the default storage handler for
+    the data property.
+
+    The data property holds a hash. The hash is indexed by the internal cache
+    entry identifier of the storage handler. The cache entry identifier is
+    human-readable and contains the query string leading to the cache entry.
+    Please, see also the example below. The following data is given for every
+    cache entry.
+
+    {statistics} array
+
+        Statistics of the cache entry.
+
+        Since 1.0.0.
+
+           Property                      Description                   Version
+        rows           Number of rows of the cached result set.        Since
+                                                                       1.0.0.
+                       The size of the cached result set in bytes.
+                       This is the size of the payload. The value is   Since
+        stored_size    not suited for calculating the total memory     1.0.0.
+                       consumption of all cache entries including the
+                       administrative overhead of the cache entries.
+        cache_hits     How often the cached entry has been returned.   Since
+                                                                       1.0.0.
+                       Run time of the statement to which the cache
+                       entry belongs. This is the run time of the
+                       uncached statement. It is the time between
+        run_time       sending the statement to MySQL receiving a      Since
+                       reply from MySQL. Run time saved by using the   1.0.0.
+                       query cache plugin can be calculated like this:
+                       cache_hits * ((run_time - avg_run_time) +
+                       (store_time - avg_store_time)).
+                       Store time of the statements result set to
+        store_time     which the cache entry belongs. This is the time Since
+                       it took to fetch and store the results of the   1.0.0.
+                       uncached statement.
+                       Minimum run time of the cached statement. How   Since
+        min_run_time   long it took to find the statement in the       1.0.0.
+                       cache.
+                       Minimum store time of the cached statement. The Since
+        min_store_time time taken for fetching the cached result set   1.0.0.
+                       from the storage medium and decoding
+        avg_run_time   Average run time of the cached statement.       Since
+                                                                       1.0.0.
+        avg_store_time Average store time of the cached statement.     Since
+                                                                       1.0.0.
+        max_run_time   Average run time of the cached statement.       Since
+                                                                       1.0.0.
+        max_store_time Average store time of the cached statement.     Since
+                                                                       1.0.0.
+        valid_until    Timestamp when the cache entry expires.         Since
+                                                                       1.1.0.
+
+    {metadata} array
+
+        Metadata of the cache entry. This is the metadata provided by MySQL
+        together with the result set of the statement in question. Different
+        versions of the MySQL server may return different metadata. Unlike
+        with some of the PHP MySQL extensions no attempt is made to hide MySQL
+        server version dependencies and version details from the caller.
+        Please, refer to the MySQL C API documentation that belongs to the
+        MySQL server in use for further details.
+
+        The metadata list contains one entry for every column.
+
+        Since 1.0.0.
+
+         Property                      Description                     Version
+        name       The field name. Depending on the MySQL version this Since
+                   may be the fields alias name.                       1.0.0.
+        org_name   The field name.                                     Since
+                                                                       1.0.0.
+        table      The table name. If an alias name was used for the   Since
+                   table, this usually holds the alias name.           1.0.0.
+        org_table  The table name.                                     Since
+                                                                       1.0.0.
+        db         The database/schema name.                           Since
+                                                                       1.0.0.
+        max_length The maximum width of the field. Details may vary by Since
+                   MySQL server version.                               1.0.0.
+        length     The width of the field. Details may vary by MySQL   Since
+                   server version.                                     1.0.0.
+                   The data type of the field. Details may vary by the
+                   MySQL server in use. This is the MySQL C API type
+        type       constants value. It is recommended to use type      Since
+                   constants provided by the mysqli extension to test  1.0.0.
+                   for its meaning. You should not test for certain
+                   type values by comparing with certain numbers.
+
+    The APC storage handler returns the same information for the data property
+    but no metadata. The metadata of a cache entry is set to NULL.
+
+    The MEMCACHE storage handler does not fill the data property. Statistics
+    are not available on a per cache entry basis with the MEMCACHE storage
+    handler.
+
+    A user defined storage handler is free to provide any data.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_qc_get_cache_info() example
+
+The example shows the output from the built-in default storage handler. Other
+storage handler may report different data.
+
+<?php >
+    /* Populate the cache, e.g. using mysqli */
+    $mysqli = new mysqli("host", "user", "password", "schema");
+    $mysqli->query("/*" . MYSQLND_QC_ENABLE_SWITCH . "*/SELECT id FROM test");
+
+    /* Display cache information */
+    var_dump(mysqlnd_qc_get_cache_info());
+<?>
+
+The above examples will output:
+
+array(4) {
+ ["num_entries"]=>
+ int(1)
+ ["handler"]=>
+ string(7) "default"
+ ["handler_version"]=>
+ string(5) "1.0.0"
+ ["data"]=>
+ array(1) {
+   ["Localhost via UNIX socket 3306 user schema|/*qc=on*/SELECT id FROM test"]=>
+   array(2) {
+     ["statistics"]=>
+     array(11) {
+       ["rows"]=>
+       int(6)
+       ["stored_size"]=>
+       int(101)
+       ["cache_hits"]=>
+       int(0)
+       ["run_time"]=>
+       int(471)
+       ["store_time"]=>
+       int(27)
+       ["min_run_time"]=>
+       int(0)
+       ["max_run_time"]=>
+       int(0)
+       ["min_store_time"]=>
+       int(0)
+       ["max_store_time"]=>
+       int(0)
+       ["avg_run_time"]=>
+       int(0)
+       ["avg_store_time"]=>
+       int(0)
+     }
+     ["metadata"]=>
+     array(1) {
+       [0]=>
+       array(8) {
+         ["name"]=>
+         string(2) "id"
+         ["orig_name"]=>
+         string(2) "id"
+         ["table"]=>
+         string(4) "test"
+         ["orig_table"]=>
+         string(4) "test"
+         ["db"]=>
+         string(4) "schema"
+         ["max_length"]=>
+         int(1)
+         ["length"]=>
+         int(11)
+         ["type"]=>
+         int(3)
+       }
+     }
+   }
+ }
+}
+
+
+==============================================================================
+*See* *Also*
+
+  * |mysqlnd_qc_get_core_stats| - Statistics collected by the core of the
+    query cache
+
+
+vim:ft=help:

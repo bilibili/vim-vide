@@ -1,0 +1,45 @@
+trader_bbands
+
+(PECL trader >= 0.2.0)
+
+trader_bbands — Bollinger Bands
+
+==============================================================================
+*Description*
+
+    array trader_bbands ( array $real [, integer $timePeriod [, float~
+    $nbDevUp [, float $nbDevDn [, integer $mAType ]]]] )~
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+{timePeriod}
+
+    Number of period. Valid range from 2 to 100000.
+
+{nbDevUp}
+
+    Deviation multiplier for upper band. Valid range from TRADER_REAL_MIN to
+    TRADER_REAL_MAX.
+
+{nbDevDn}
+
+    Deviation multiplier for lower band. Valid range from TRADER_REAL_MIN to
+    TRADER_REAL_MAX.
+
+{mAType}
+
+    Type of Moving Average. TRADER_MA_TYPE_* series of constants should be
+    used.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

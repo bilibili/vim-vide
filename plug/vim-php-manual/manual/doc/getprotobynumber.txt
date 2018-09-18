@@ -1,0 +1,33 @@
+getprotobynumber
+
+(PHP 4, PHP 5, PHP 7)
+
+getprotobynumber — Get protocol name associated with protocol number
+
+==============================================================================
+*Description*
+
+    string getprotobynumber ( int $number )~
+
+getprotobynumber() returns the protocol name associated with protocol {number}
+as per /etc/protocols.
+
+==============================================================================
+*Parameters*
+
+{number}
+
+    The protocol number.
+
+==============================================================================
+*Return* *Values*
+
+Returns the protocol name as a string, or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |getprotobyname| - Get protocol number associated with protocol name
+
+
+vim:ft=help:

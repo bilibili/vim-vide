@@ -1,0 +1,66 @@
+openssl_pkey_get_details
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+openssl_pkey_get_details — Returns an array with the key details
+
+==============================================================================
+*Description*
+
+    array openssl_pkey_get_details ( resource $key )~
+
+This function returns the key details (bits, key, type).
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    Resource holding the key.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with the key details in success or FALSE in failure. Returned
+array has indexes bits (number of bits), key (string representation of the
+public key) and type (type of the key which is one of OPENSSL_KEYTYPE_RSA,
+OPENSSL_KEYTYPE_DSA, OPENSSL_KEYTYPE_DH, OPENSSL_KEYTYPE_EC or -1 meaning
+unknown).
+
+Depending on the key type used, additional details may be returned. Note that
+some elements may not always be available.
+
+  * OPENSSL_KEYTYPE_RSA, an additional array key named "rsa", containing the
+    key data is returned.
+
+     Key   Description
+    "n"     
+    "e"     
+    "d"     
+    "p"     
+    "q"     
+    "dmp1"  
+    "dmq1"  
+    "iqmp"  
+
+  * OPENSSL_KEYTYPE_DSA, an additional array key named "dsa", containing the
+    key data is returned.
+
+       Key     Description
+    "p"         
+    "q"         
+    "g"         
+    "priv_key"  
+    "pub_key"   
+
+  * OPENSSL_KEYTYPE_DH, an additional array key named "dh", containing the key
+    data is returned.
+
+       Key     Description
+    "p"         
+    "g"         
+    "priv_key"  
+    "pub_key"   
+
+
+vim:ft=help:

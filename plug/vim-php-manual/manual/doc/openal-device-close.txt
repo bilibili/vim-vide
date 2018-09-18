@@ -1,0 +1,31 @@
+openal_device_close
+
+(PECL openal >= 0.1.0)
+
+openal_device_close — Close an OpenAL device
+
+==============================================================================
+*Description*
+
+    bool openal_device_close ( resource $device )~
+
+==============================================================================
+*Parameters*
+
+{device}
+
+    An Open AL(Device) resource (previously created by |openal_device_open|)
+    to be closed.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_device_open| - Initialize the OpenAL audio layer
+
+
+vim:ft=help:

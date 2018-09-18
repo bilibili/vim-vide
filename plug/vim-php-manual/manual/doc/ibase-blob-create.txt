@@ -1,0 +1,35 @@
+ibase_blob_create
+
+(PHP 5, PHP 7)
+
+ibase_blob_create — Create a new blob for adding data
+
+==============================================================================
+*Description*
+
+    resource ibase_blob_create ([ resource $link_identifier = NULL ] )~
+
+ibase_blob_create() creates a new BLOB for filling with data.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An InterBase link identifier. If omitted, the last opened link is assumed.
+
+==============================================================================
+*Return* *Values*
+
+Returns a BLOB handle for later use with |ibase_blob_add| or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ibase_blob_add| - Add data into a newly created blob
+  * |ibase_blob_cancel| - Cancel creating blob
+  * |ibase_blob_close| - Close blob
+  * |ibase_blob_import| - Create blob, copy file in it, and close it
+
+
+vim:ft=help:

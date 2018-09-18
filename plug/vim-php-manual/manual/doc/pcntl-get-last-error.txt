@@ -1,0 +1,35 @@
+pcntl_get_last_error
+
+(PHP 5 >= 5.3.4, PHP 7)
+
+pcntl_get_last_error — Retrieve the error number set by the last pcntl
+function which failed
+
+==============================================================================
+*Description*
+
+    int pcntl_get_last_error ( void )~
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns error code.
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_strerror| - Retrieve the system error message associated with the
+    given errno
+
+
+vim:ft=help:

@@ -1,0 +1,54 @@
+gzinflate
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gzinflate — Inflate a deflated string
+
+==============================================================================
+*Description*
+
+    string gzinflate ( string $data [, int $length = 0 ] )~
+
+This function inflates a deflated string.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    The data compressed by |gzdeflate|.
+
+{length}
+
+    The maximum length of data to decode.
+
+==============================================================================
+*Return* *Values*
+
+The original uncompressed data or FALSE on error.
+
+The function will return an error if the uncompressed data is more than 32768
+times the length of the compressed input {data} or more than the optional
+parameter {length}.
+
+==============================================================================
+*Examples*
+
+Example #1 gzinflate() example
+
+<?php >
+    $compressed   = gzdeflate('Compress me', 9);
+    $uncompressed = gzinflate($compressed);
+    echo $uncompressed;
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |gzdeflate| - Deflate a string
+  * |gzcompress| - Compress a string
+  * |gzuncompress| - Uncompress a compressed string
+  * |gzencode| - Create a gzip compressed string
+
+
+vim:ft=help:

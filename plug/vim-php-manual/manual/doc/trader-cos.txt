@@ -1,0 +1,28 @@
+trader_cos
+
+(PECL trader >= 0.2.0)
+
+trader_cos — Vector Trigonometric Cos
+
+==============================================================================
+*Description*
+
+    array trader_cos ( array $real )~
+
+Calculates the cosine for each value in {real} and returns the resulting
+array.
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

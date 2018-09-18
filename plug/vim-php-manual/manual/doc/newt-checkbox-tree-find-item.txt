@@ -1,0 +1,28 @@
+newt_checkbox_tree_find_item
+
+(PECL newt >= 0.1)
+
+newt_checkbox_tree_find_item — Finds an item in the checkbox tree
+
+==============================================================================
+*Description*
+
+    array newt_checkbox_tree_find_item ( resource $checkboxtree , mixed $data~
+)~
+
+Finds an item in the checkbox tree by item's data.
+
+==============================================================================
+*Parameters*
+
+{checkboxtree}
+
+{data}
+
+==============================================================================
+*Return* *Values*
+
+Returns checkbox tree item resource, or NULL if it wasn't found.
+
+
+vim:ft=help:

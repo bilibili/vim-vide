@@ -1,0 +1,84 @@
+mysql_tablename
+
+(PHP 4, PHP 5)
+
+mysql_tablename — Get table name of field
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * SQL Query: SHOW TABLES
+
+==============================================================================
+*Description*
+
+    string mysql_tablename ( resource $result , int $i )~
+
+Retrieves the table name from a {result}.
+
+This function is deprecated. It is preferable to use |mysql_query| to issue an
+SQL SHOW TABLES [FROM db_name] [LIKE 'pattern'] statement instead.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    A result pointer resource that's returned from |mysql_list_tables|.
+
+{i}
+
+    The integer index (row/table number)
+
+==============================================================================
+*Return* *Values*
+
+The name of the table on success or FALSE on failure.
+
+Use the mysql_tablename() function to traverse this result pointer, or any
+function for result tables, such as |mysql_fetch_array|.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.5.0   The mysql_tablename() function is deprecated, and emits an
+        E_DEPRECATED level error.
+
+==============================================================================
+*Examples*
+
+Example #1 mysql_tablename() example
+
+<?php >
+    mysql_connect("localhost", "mysql_user", "mysql_password");
+    $result = mysql_list_tables("mydb");
+    $num_rows = mysql_num_rows($result);
+    for ($i = 0; $i < $num_rows; $i++) {
+        echo "Table: ", mysql_tablename($result, $i), "\n";
+    }
+
+    mysql_free_result($result);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The |mysql_num_rows| function may be used to determine the number of
+    tables in the result pointer.
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_list_tables| - List tables in a MySQL database
+  * |mysql_field_table| - Get name of the table the specified field is in
+  * |mysql_db_name| - Retrieves database name from the call to mysql_list_dbs
+
+
+vim:ft=help:

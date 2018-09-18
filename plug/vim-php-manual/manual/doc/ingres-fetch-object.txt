@@ -1,0 +1,68 @@
+ingres_fetch_object
+
+(PHP 4 >= 4.0.2, PHP 5 <= 5.0.5, PECL ingres >= 1.0.0)
+
+ingres_fetch_object — Fetch a row of result into an object
+
+==============================================================================
+*Description*
+
+    object ingres_fetch_object ( resource $result [, int $result_type ] )~
+
+This function is similar to |ingres_fetch_array|, with one difference - an
+object is returned instead of an array. Indirectly, this means that you can
+access the data only by the field names and not by their offsets (numbers are
+illegal property names).
+
+With regard to speed, the function is identical to |ingres_fetch_array|, and
+almost as quick as |ingres_fetch_row| (the difference is insignificant).
+
+    Note: Related Configurations
+
+    See also the ingres.fetch_buffer_size and ingres.utf8 directives in
+    Runtime Configuration.
+
+==============================================================================
+*Parameters*
+
+{link}
+
+    The query result identifier
+
+{result_type}
+
+    (Optional argument.) {result_type} is a constant and can take the
+    following values: INGRES_ASSOC, INGRES_NUM, and INGRES_BOTH.
+
+==============================================================================
+*Return* *Values*
+
+Returns an object that corresponds to the fetched row, or FALSE if there are
+no more rows
+
+==============================================================================
+*Examples*
+
+Example #1 Fetch a row into an object
+
+<?php >
+    $link = ingres_connect($database, $user, $password);
+    $result = ingres_query($link, "select * from table");
+    while ($row = ingres_fetch_object($result)) {
+        echo $row->user_id;
+        echo $row->fullname;
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_query| - Send an SQL query to Ingres
+  * |ingres_num_fields| - Get the number of fields returned by the last query
+  * |ingres_field_name| - Get the name of a field in a query result
+  * |ingres_fetch_array| - Fetch a row of result into an array
+  * |ingres_fetch_assoc| - Fetch a row of result into an associative array
+  * |ingres_fetch_row| - Fetch a row of result into an enumerated array
+
+
+vim:ft=help:

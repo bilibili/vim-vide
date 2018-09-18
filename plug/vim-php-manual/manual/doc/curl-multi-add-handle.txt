@@ -1,0 +1,77 @@
+curl_multi_add_handle
+
+(PHP 5, PHP 7)
+
+curl_multi_add_handle — Add a normal cURL handle to a cURL multi handle
+
+==============================================================================
+*Description*
+
+    int curl_multi_add_handle ( resource $mh , resource $ch )~
+
+Adds the {ch} handle to the multi handle {mh}
+
+==============================================================================
+*Parameters*
+
+{mh}
+
+    A cURL multi handle returned by |curl_multi_init|.
+
+{ch}
+
+    A cURL handle returned by |curl_init|.
+
+==============================================================================
+*Return* *Values*
+
+Returns 0 on success, or one of the CURLM_XXX errors code.
+
+==============================================================================
+*Examples*
+
+Example #1 curl_multi_add_handle() example
+
+This example will create two cURL handles, add them to a multi handle, and
+process them asynchronously.
+
+<?php >
+    // create both cURL resources
+    $ch1 = curl_init();
+    $ch2 = curl_init();
+
+    // set URL and other appropriate options
+    curl_setopt($ch1, CURLOPT_URL, "http://www.example.com/");
+    curl_setopt($ch1, CURLOPT_HEADER, 0);
+    curl_setopt($ch2, CURLOPT_URL, "http://www.php.net/");
+    curl_setopt($ch2, CURLOPT_HEADER, 0);
+
+    //create the multiple cURL handle
+    $mh = curl_multi_init();
+
+    //add the two handles
+    curl_multi_add_handle($mh,$ch1);
+    curl_multi_add_handle($mh,$ch2);
+
+    $running=null;
+    //execute the handles
+    do {
+        curl_multi_exec($mh,$running);
+    } while($running > 0);
+
+    //close all the handles
+    curl_multi_remove_handle($mh, $ch1);
+    curl_multi_remove_handle($mh, $ch2);
+    curl_multi_close($mh);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |curl_multi_remove_handle| - Remove a multi handle from a set of cURL
+    handles
+  * |curl_multi_init| - Returns a new cURL multi handle
+  * |curl_init| - Initialize a cURL session
+
+
+vim:ft=help:

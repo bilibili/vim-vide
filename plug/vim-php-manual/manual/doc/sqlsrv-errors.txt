@@ -1,0 +1,95 @@
+sqlsrv_errors
+
+(No version information available, might only be in Git)
+
+sqlsrv_errors — Returns error and warning information about the last SQLSRV
+operation performed
+
+==============================================================================
+*Description*
+
+    mixed sqlsrv_errors ([ int $errorsOrWarnings ] )~
+
+Returns error and warning information about the last SQLSRV operation
+performed.
+
+==============================================================================
+*Parameters*
+
+{errorsOrWarnings}
+
+    Determines whether error information, warning information, or both are
+    returned. If this parameter is not supplied, both error information and
+    warning information are returned. The following are the supported values
+    for this parameter: SQLSRV_ERR_ALL, SQLSRV_ERR_ERRORS,
+    SQLSRV_ERR_WARNINGS.
+
+==============================================================================
+*Return* *Values*
+
+If errors and/or warnings occurred on the last sqlsrv operation, an array of
+arrays containing error information is returned. If no errors and/or warnings
+occurred on the last sqlsrv operation, NULL is returned. The following table
+describes the structure of the returned arrays:
+
+                       Array returned by sqlsrv_errors
+  Key                                 Description
+         For errors that originate from the ODBC driver, the SQLSTATE returned
+SQLSTATE by ODBC. For errors that originate from the Microsoft Drivers for PHP
+         for SQL Server, a SQLSTATE of IMSSP. For warnings that originate from
+         the Microsoft Drivers for PHP for SQL Server, a SQLSTATE of 01SSP.
+         For errors that originate from SQL Server, the native SQL Server
+         error code. For errors that originate from the ODBC driver, the error
+code     code returned by ODBC. For errors that originate from the Microsoft
+         Drivers for PHP for SQL Server, the Microsoft Drivers for PHP for SQL
+         Server error code.
+message  A description of the error.
+
+==============================================================================
+*Examples*
+
+Example #1 functionname() example
+
+<?php >
+    $serverName = "serverName/sqlexpress";
+    $connectionInfo = array( "Database"=>"dbName", "UID"=>"username", "PWD"=>
+    "password");
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
+    if( $conn === false ) {
+         die( print_r( sqlsrv_errors(), true));
+    }
+
+    /* Set up a query to select an invalid column name. */
+    $sql = "SELECT BadColumnName FROM Table_1";
+
+    /* Execution of the query will fail because of the bad column name. */
+    $stmt = sqlsrv_query( $conn, $sql );
+    if( $stmt === false ) {
+        if( ($errors = sqlsrv_errors() ) != null) {
+            foreach( $errors as $error ) {
+                echo "SQLSTATE: ".$error[ 'SQLSTATE']."<br />";
+                echo "code: ".$error[ 'code']."<br />";
+                echo "message: ".$error[ 'message']."<br />";
+            }
+        }
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+By default, warnings generated on a call to any SQLSRV function are treated as
+errors. This means that if a warning occurs on a call to a SQLSRV function,
+the function returns FALSE. However, warnings that correspond to SQLSTATE
+values 01000, 01001, 01003, and 01S02 are never treated as errors. For
+information about changing this behavior, see |sqlsrv_configure| and the
+WarningsReturnAsErrors setting.
+
+==============================================================================
+*See* *Also*
+
+  * |sqlsrv_configure| - Changes the driver error handling and logging
+    configurations
+
+
+vim:ft=help:

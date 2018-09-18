@@ -1,0 +1,65 @@
+ftp_exec
+
+(PHP 4 >= 4.0.3, PHP 5, PHP 7)
+
+ftp_exec — Requests execution of a command on the FTP server
+
+==============================================================================
+*Description*
+
+    bool ftp_exec ( resource $ftp_stream , string $command )~
+
+Sends a SITE EXEC {command} request to the FTP server.
+
+==============================================================================
+*Parameters*
+
+{ftp_stream}
+
+    The link identifier of the FTP connection.
+
+{command}
+
+    The command to execute.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the command was successful (server sent response code: 200);
+otherwise returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 ftp_exec() example
+
+<?php >
+
+    // variable initialization
+    $command = 'ls -al >files.txt';
+
+    // set up basic connection
+    $conn_id = ftp_connect($ftp_server);
+
+    // login with username and password
+    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+
+    // execute command
+    if (ftp_exec($conn_id, $command)) {
+        echo "$command executed successfully\n";
+    } else {
+        echo "could not execute $command\n";
+    }
+
+    // close the connection
+    ftp_close($conn_id);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ftp_raw| - Sends an arbitrary command to an FTP server
+
+
+vim:ft=help:

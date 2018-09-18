@@ -1,0 +1,107 @@
+eio_grp_add
+
+(PECL eio >= 0.0.1dev)
+
+eio_grp_add — Adds a request to the request group.
+
+==============================================================================
+*Description*
+
+    void eio_grp_add ( resource $grp , resource $req )~
+
+eio_grp_add() adds a request to the request group.
+
+==============================================================================
+*Parameters*
+
+{grp}
+
+    The request group resource returned by |eio_grp|
+
+{req}
+
+    The request resource
+
+==============================================================================
+*Return* *Values*
+
+eio_grp_add() doesn't return a value.
+
+==============================================================================
+*Examples*
+
+Example #1 Grouping requests
+
+<?php >
+    /*
+     * Create a group request to open, read and close a file
+     */
+
+    // Create temporary file and write some bytes to it
+    $temp_filename = dirname(__FILE__) ."/eio-file.tmp";
+    $fp = fopen($temp_filename, "w");
+    fwrite($fp, "some data");
+    fclose($fp);
+
+    /* Is called when the group requests are done */
+    function my_grp_done($data, $result) {
+     var_dump($result == 0);
+     @unlink($data);
+    }
+
+    /* Is called when eio_open() done */
+    function my_grp_file_opened_callback($data, $result) {
+     global $grp;
+
+     // $result should contain the file descriptor
+     var_dump($result > 0);
+
+     // Create eio_read() request and add it to the group
+     // Pass file descriptor to the callback
+     $req = eio_read($result, 4, 0,
+       EIO_PRI_DEFAULT, "my_grp_file_read_callback", $result);
+     eio_grp_add($grp, $req);
+    }
+
+    /* Is called when eio_read() done */
+    function my_grp_file_read_callback($data, $result) {
+     global $grp;
+
+     // Read bytes
+     var_dump($result);
+
+     // Create eio_close() request and add it to the group
+     // $data should contain the file descriptor
+     $req = eio_close($data);
+     eio_grp_add($grp, $req);
+    }
+
+    // Create request group
+    $grp = eio_grp("my_grp_done", $temp_filename);
+    var_dump($grp);
+
+    // Create eio_open() request and add it to the group
+    $req = eio_open($temp_filename, EIO_O_RDWR | EIO_O_APPEND , NULL,
+      EIO_PRI_DEFAULT, "my_grp_file_opened_callback", NULL);
+    eio_grp_add($grp, $req);
+
+    // Process requests
+    eio_event_loop();
+<?>
+
+The above example will output something similar to:
+
+resource(6) of type (EIO Group Descriptor)
+bool(true)
+string(4) "some"
+bool(true)
+
+==============================================================================
+*See* *Also*
+
+  * eio_grp
+  * eio_grp_cancel
+  * eio_grp_limit
+
+
+vim:ft=help:

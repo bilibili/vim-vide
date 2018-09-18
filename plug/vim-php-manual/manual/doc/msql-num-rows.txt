@@ -1,0 +1,33 @@
+msql_num_rows
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_num_rows — Get number of rows in result
+
+==============================================================================
+*Description*
+
+    int msql_num_rows ( resource $query_identifier )~
+
+msql_num_rows() returns the number of rows in a result set.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |msql_query|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of rows in the result set.
+
+==============================================================================
+*See* *Also*
+
+  * |msql_num_fields| - Get number of fields in result
+
+
+vim:ft=help:

@@ -1,0 +1,29 @@
+imap_last_error
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_last_error — Gets the last IMAP error that occurred during this page
+request
+
+==============================================================================
+*Description*
+
+    string imap_last_error ( void )~
+
+Gets the full text of the last IMAP error message that occurred on the current
+page. The error stack is untouched; calling imap_last_error() subsequently,
+with no intervening errors, will return the same error.
+
+==============================================================================
+*Return* *Values*
+
+Returns the full text of the last IMAP error message that occurred on the
+current page. Returns FALSE if no error messages are available.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_errors| - Returns all of the IMAP errors that have occurred
+
+
+vim:ft=help:

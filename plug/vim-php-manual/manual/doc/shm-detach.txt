@@ -1,0 +1,36 @@
+shm_detach
+
+(PHP 4, PHP 5, PHP 7)
+
+shm_detach — Disconnects from shared memory segment
+
+==============================================================================
+*Description*
+
+    bool shm_detach ( resource $shm_identifier )~
+
+shm_detach() disconnects from the shared memory given by the {shm_identifier}
+created by |shm_attach|. Remember, that shared memory still exist in the Unix
+system and the data is still present.
+
+==============================================================================
+*Parameters*
+
+{shm_identifier}
+
+    A shared memory resource handle as returned by |shm_attach|
+
+==============================================================================
+*Return* *Values*
+
+shm_detach() always returns TRUE.
+
+==============================================================================
+*See* *Also*
+
+  * |shm_attach| - Creates or open a shared memory segment
+  * |shm_remove| - Removes shared memory from Unix systems
+  * |shm_remove_var| - Removes a variable from shared memory
+
+
+vim:ft=help:

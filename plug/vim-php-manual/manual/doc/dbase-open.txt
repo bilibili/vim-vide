@@ -1,0 +1,82 @@
+dbase_open
+
+(PHP 5 < 5.3.0, dbase 5, dbase 7)
+
+dbase_open — Opens a database
+
+==============================================================================
+*Description*
+
+    resource dbase_open ( string $filename , int $mode )~
+
+dbase_open() opens a dBase database with the given access mode.
+
+    Note: When safe mode is enabled, PHP checks whether the files or
+    directories being operated upon have the same UID (owner) as the script
+    that is being executed.
+
+    Note:
+
+    This function is affected by open_basedir.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The name of the database. It can be a relative or absolute path to the
+    file where dBase will store your data.
+
+{mode}
+
+    An integer which correspond to those for the `open()` system call
+    (Typically 0 means read-only, 1 means write-only, and 2 means read and
+    write).
+
+        Note:
+
+        You can't open a dBase file in write-only mode as the function will
+        fail to read the headers information and thus you can't use 1 as
+        {mode}.
+
+    As of dbase 7.0.0 you can use DBASE_RDONLY and DBASE_RDWR, respectively,
+    to specify the {mode}.
+
+==============================================================================
+*Changelog*
+
+  Version                        Description
+dbase 7.0.0 The return value is now a resource instead of an int.
+
+==============================================================================
+*Examples*
+
+Example #1 Opening a dBase database file
+
+<?php >
+
+    // open in read-only mode
+    $db = dbase_open('/tmp/test.dbf', 0);
+
+    if ($db) {
+      // read some data ..
+      
+      dbase_close($db);
+    }
+
+<?>
+
+==============================================================================
+*Return* *Values*
+
+Returns a database link identifier if the database is successfully opened, or
+FALSE if an error occurred.
+
+==============================================================================
+*See* *Also*
+
+  * |dbase_create| - Creates a database
+  * |dbase_close| - Closes a database
+
+
+vim:ft=help:

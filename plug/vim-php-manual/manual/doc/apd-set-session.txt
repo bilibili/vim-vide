@@ -1,0 +1,43 @@
+apd_set_session
+
+(PECL apd 0.2-0.4)
+
+apd_set_session — Changes or sets the current debugging level
+
+==============================================================================
+*Description*
+
+    void apd_set_session ( int $debug_level )~
+
+This can be used to increase or decrease debugging in a different area of your
+application.
+
+==============================================================================
+*Parameters*
+
+{ debug_level}
+
+    An integer which is formed by adding together the XXX_TRACE constants.
+
+    It is not recommended to use MEMORY_TRACE. It is very slow and does not
+    appear to be accurate. ASSIGNMENT_TRACE is not implemented yet.
+
+    To turn on all functional traces (TIMING, FUNCTIONS, ARGS SUMMARY (like
+    strace -c)) use the value 99
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 apd_set_session() example
+
+<?php >
+    apd_set_session(9);
+<?>
+
+
+vim:ft=help:

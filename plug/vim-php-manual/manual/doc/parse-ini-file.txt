@@ -1,0 +1,233 @@
+parse_ini_file
+
+(PHP 4, PHP 5, PHP 7)
+
+parse_ini_file — Parse a configuration file
+
+==============================================================================
+*Description*
+
+    array parse_ini_file ( string $filename [, bool $process_sections = false~
+    [, int $scanner_mode = INI_SCANNER_NORMAL ]] )~
+
+parse_ini_file() loads in the ini file specified in {filename}, and returns
+the settings in it in an associative array.
+
+The structure of the ini file is the same as the php.ini's.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The filename of the ini file being parsed.
+
+{process_sections}
+
+    By setting the {process_sections} parameter to TRUE, you get a
+    multidimensional array, with the section names and settings included. The
+    default for {process_sections} is FALSE
+
+{scanner_mode}
+
+    Can either be INI_SCANNER_NORMAL (default) or INI_SCANNER_RAW. If
+    INI_SCANNER_RAW is supplied, then option values will not be parsed.
+
+    As of PHP 5.6.1 can also be specified as INI_SCANNER_TYPED. In this mode
+    boolean, null and integer types are preserved when possible. String values
+    "true", "on" and "yes" are converted to TRUE. "false", "off", "no" and
+    "none" are considered FALSE. "null" is converted to NULL in typed mode.
+    Also, all numeric strings are converted to integer type if it is possible.
+
+==============================================================================
+*Return* *Values*
+
+The settings are returned as an associative array on success, and FALSE on
+failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+7.0.0   Hash marks (#) are no longer recognized as comments.
+5.6.1   Added new INI_SCANNER_TYPED mode.
+        Added optional {scanner_mode} parameter. Single quotes may now be used
+5.3.0   around variable assignments. Hash marks (#) should no longer be used
+        as comments and will throw a deprecation warning if used.
+5.2.7   On syntax error this function will return FALSE rather than an empty
+        array.
+        Keys and section names consisting of numbers are now evaluated as PHP
+5.2.4   integers thus numbers starting by 0 are evaluated as octals and
+        numbers starting by 0x are evaluated as hexadecimals.
+5.0.0   Values enclosed in double quotes can contain new lines.
+4.2.1   This function is now affected by safe mode and open_basedir.
+
+==============================================================================
+*Examples*
+
+Example #1 Contents of sample.ini
+
+; This is a sample configuration file
+; Comments start with ';', as in php.ini
+
+[first_section]
+one = 1
+five = 5
+animal = BIRD
+
+[second_section]
+path = "/usr/local/bin"
+URL = "http://www.example.com/~username"
+
+[third_section]
+phpversion[] = "5.0"
+phpversion[] = "5.1"
+phpversion[] = "5.2"
+phpversion[] = "5.3"
+
+urls[svn] = "http://svn.php.net"
+urls[git] = "http://git.php.net"
+
+Example #2 parse_ini_file() example
+
+Constants may also be parsed in the ini file so if you define a constant as an
+ini value before running parse_ini_file(), it will be integrated into the
+results. Only ini values are evaluated. For example:
+
+<?php >
+
+    define('BIRD', 'Dodo bird');
+
+    // Parse without sections
+    $ini_array = parse_ini_file("sample.ini");
+    print_r($ini_array);
+
+    // Parse with sections
+    $ini_array = parse_ini_file("sample.ini", true);
+    print_r($ini_array);
+
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [one] => 1
+    [five] => 5
+    [animal] => Dodo bird
+    [path] => /usr/local/bin
+    [URL] => http://www.example.com/~username
+    [phpversion] => Array
+        (
+            [0] => 5.0
+            [1] => 5.1
+            [2] => 5.2
+            [3] => 5.3
+        )
+
+    [urls] => Array
+        (
+            [svn] => http://svn.php.net
+            [git] => http://git.php.net
+        )
+
+)
+Array
+(
+    [first_section] => Array
+        (
+            [one] => 1
+            [five] => 5
+            [animal] => Dodo bird
+        )
+
+    [second_section] => Array
+        (
+            [path] => /usr/local/bin
+            [URL] => http://www.example.com/~username
+        )
+
+    [third_section] => Array
+        (
+            [phpversion] => Array
+                (
+                    [0] => 5.0
+                    [1] => 5.1
+                    [2] => 5.2
+                    [3] => 5.3
+                )
+
+            [urls] => Array
+                (
+                    [svn] => http://svn.php.net
+                    [git] => http://git.php.net
+                )
+
+        )
+
+)
+
+Example #3 parse_ini_file() parsing a php.ini file
+
+<?php >
+    // A simple function used for comparing the results below
+    function yesno($expression)
+    {
+        return($expression ? 'Yes' : 'No');
+    }
+
+    // Get the path to php.ini using the php_ini_loaded_file() 
+    // function available as of PHP 5.2.4
+    $ini_path = php_ini_loaded_file();
+
+    // Parse php.ini
+    $ini = parse_ini_file($ini_path);
+
+    // Print and compare the values, note that using get_cfg_var()
+    // will give the same results for parsed and loaded here
+    echo '(parsed) magic_quotes_gpc = ' . yesno($ini['magic_quotes_gpc']) . 
+    PHP_EOL;
+    echo '(loaded) magic_quotes_gpc = ' . yesno(get_cfg_var('magic_quotes_gpc'))
+     . PHP_EOL;
+<?>
+
+The above example will output something similar to:
+
+(parsed) magic_quotes_gpc = Yes
+(loaded) magic_quotes_gpc = Yes
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function has nothing to do with the php.ini file. It is already
+    processed by the time you run your script. This function can be used to
+    read in your own application's configuration files.
+
+    Note:
+
+    If a value in the ini file contains any non-alphanumeric characters it
+    needs to be enclosed in double-quotes (").
+
+    Note: There are reserved words which must not be used as keys for ini
+    files. These include: null, yes, no, true, false, on, off, none. Values
+    null, off, no and false result in "", and values on, yes and true result
+    in "1", unless INI_SCANNER_TYPED mode is used (as of PHP 5.6.1).
+    Characters ?{}|&~!()^" must not be used anywhere in the key and have a
+    special meaning in the value.
+
+    Note:
+
+    Entries without an equal sign are ignored. For example, "foo" is ignored
+    whereas "bar =" is parsed and added with an empty value. For example,
+    MySQL has a "no-auto-rehash" setting in my.cnf that does not take a value,
+    so it is ignored.
+
+==============================================================================
+*See* *Also*
+
+  * |parse_ini_string| - Parse a configuration string
+
+
+vim:ft=help:

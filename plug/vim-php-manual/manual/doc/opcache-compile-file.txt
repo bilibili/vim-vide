@@ -1,0 +1,40 @@
+opcache_compile_file
+
+(PHP 5 >= 5.5.5, PHP 7, PECL ZendOpcache > 7.0.2)
+
+opcache_compile_file — Compiles and caches a PHP script without executing it
+
+==============================================================================
+*Description*
+
+    boolean opcache_compile_file ( string $file )~
+
+This function compiles a PHP script and adds it to the opcode cache without
+executing it. This can be used to prime the cache after a Web server restart
+by pre-caching files that will be included in later requests.
+
+==============================================================================
+*Parameters*
+
+{file}
+
+    The path to the PHP script to be compiled.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {file} was compiled successfully or FALSE on failure.
+
+==============================================================================
+*Errors/Exceptions*
+
+If {file} cannot be loaded or compiled, an error of level E_WARNING is
+generated. You may use @ to suppress this warning.
+
+==============================================================================
+*See* *Also*
+
+  * |opcache_invalidate| - Invalidates a cached script
+
+
+vim:ft=help:

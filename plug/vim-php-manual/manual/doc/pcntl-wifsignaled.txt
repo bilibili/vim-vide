@@ -1,0 +1,37 @@
+pcntl_wifsignaled
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+pcntl_wifsignaled — Checks whether the status code represents a termination
+due to a signal
+
+==============================================================================
+*Description*
+
+    bool pcntl_wifsignaled ( int $status )~
+
+Checks whether the child process exited because of a signal which was not
+caught.
+
+==============================================================================
+*Parameters*
+
+{status}
+
+    The {status} parameter is the status parameter supplied to a successful
+    call to |pcntl_waitpid|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the child process exited because of a signal which was not
+caught, FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_waitpid| - Waits on or returns the status of a forked child
+  * |pcntl_signal| - Installs a signal handler
+
+
+vim:ft=help:

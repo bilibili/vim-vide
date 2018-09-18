@@ -1,0 +1,39 @@
+dba_exists
+
+(PHP 4, PHP 5, PHP 7)
+
+dba_exists — Check whether key exists
+
+==============================================================================
+*Description*
+
+    bool dba_exists ( string $key , resource $handle )~
+
+dba_exists() checks whether the specified {key} exists in the database.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    The key the check is performed for.
+
+{handle}
+
+    The database handler, returned by |dba_open| or |dba_popen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the key exists, FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |dba_delete| - Delete DBA entry specified by key
+  * |dba_fetch| - Fetch data specified by key
+  * |dba_insert| - Insert entry
+  * |dba_replace| - Replace or insert entry
+
+
+vim:ft=help:

@@ -1,0 +1,39 @@
+fann_set_rprop_increase_factor
+
+(PECL fann >= 1.0.0)
+
+fann_set_rprop_increase_factor — Sets the increase factor used during RPROP
+training
+
+==============================================================================
+*Description*
+
+    bool fann_set_rprop_increase_factor ( resource $ann , float~
+    $rprop_increase_factor )~
+
+Sets the increase factor used during RPROP training.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{rprop_increase_factor}
+
+    The increase factor.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_rprop_increase_factor| - Returns the increase factor used during
+    RPROP training
+
+
+vim:ft=help:

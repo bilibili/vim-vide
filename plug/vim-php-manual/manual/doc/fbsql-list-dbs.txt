@@ -1,0 +1,65 @@
+fbsql_list_dbs
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_list_dbs — List databases available on a FrontBase server
+
+==============================================================================
+*Description*
+
+    resource fbsql_list_dbs ([ resource $link_identifier ] )~
+
+Return a result pointer containing the databases available from the current
+fbsql daemon. Use the |fbsql_tablename| to traverse this result pointer.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+==============================================================================
+*Return* *Values*
+
+Returns a result pointer or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_list_dbs() example
+
+<?php >
+    $link = fbsql_connect('localhost', 'myname', 'secret');
+    $db_list = fbsql_list_dbs($link);
+
+    while ($row = fbsql_fetch_object($db_list)) {
+        echo $row->Database . "\n";
+    }
+<?>
+
+The above example will output something similar to:
+
+database1
+database2
+database3
+...
+
+    Note:
+
+    The above code would just as easily work with |fbsql_fetch_row| or other
+    similar functions.
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_list_fields| - List FrontBase result fields
+  * |fbsql_list_tables| - List tables in a FrontBase database
+
+
+vim:ft=help:

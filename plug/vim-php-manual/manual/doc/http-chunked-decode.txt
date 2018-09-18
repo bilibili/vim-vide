@@ -1,0 +1,49 @@
+http_chunked_decode
+
+(PECL pecl_http >= 0.1.0)
+
+http_chunked_decode — Decode chunked-encoded data
+
+==============================================================================
+*Description*
+
+    string http_chunked_decode ( string $encoded )~
+
+Decodes a string which is HTTP-chunked encoded.
+
+==============================================================================
+*Parameters*
+
+{encoded}
+
+    chunked encoded string
+
+==============================================================================
+*Return* *Values*
+
+Returns the decoded string on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A http_chunked_decode() example
+
+<?php >
+    $string = "".
+        "05\r\n".
+        "this \r\n".
+        "07\r\n".
+        "string \r\n".
+        "12\r\n".
+        "is chunked encoded\r\n".
+        "01\n\r\n".
+        "00";
+    echo http_chunked_decode($string);
+<?>
+
+The above example will output:
+
+this string is chunked encoded
+
+
+vim:ft=help:

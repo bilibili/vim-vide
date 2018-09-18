@@ -1,0 +1,46 @@
+inotify_read
+
+(PECL inotify >= 0.1.2)
+
+inotify_read — Read events from an inotify instance
+
+==============================================================================
+*Description*
+
+    array inotify_read ( resource $inotify_instance )~
+
+Read inotify events from an inotify instance.
+
+==============================================================================
+*Parameters*
+
+{inotify_instance}
+
+    Resource returned by |inotify_init|
+
+==============================================================================
+*Return* *Values*
+
+An array of inotify events or FALSE if no events was pending and
+{inotify_instance} is non-blocking. Each event is an array with the following
+keys:
+
+  * wd is a watch descriptor returned by |inotify_add_watch|
+  * mask is a bit mask of events
+  * cookie is a unique id to connect related events (e.g. IN_MOVE_FROM and
+    IN_MOVE_TO)
+  * name is the name of a file (e.g. if a file was modified in a watched
+    directory)
+
+==============================================================================
+*See* *Also*
+
+  * |inotify_init| - Initialize an inotify instance
+  * |stream_select| - Runs the equivalent of the select() system call on the
+    given arrays of streams with a timeout specified by tv_sec and tv_usec
+  * |stream_set_blocking| - Set blocking/non-blocking mode on a stream
+  * |inotify_queue_len| - Return a number upper than zero if there are pending
+    events
+
+
+vim:ft=help:

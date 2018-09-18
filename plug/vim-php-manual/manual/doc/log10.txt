@@ -1,0 +1,32 @@
+log10
+
+(PHP 4, PHP 5, PHP 7)
+
+log10 — Base-10 logarithm
+
+==============================================================================
+*Description*
+
+    float log10 ( float $arg )~
+
+Returns the base-10 logarithm of {arg}.
+
+==============================================================================
+*Parameters*
+
+{arg}
+
+    The argument to process
+
+==============================================================================
+*Return* *Values*
+
+The base-10 logarithm of {arg}
+
+==============================================================================
+*See* *Also*
+
+  * |log| - Natural logarithm
+
+
+vim:ft=help:

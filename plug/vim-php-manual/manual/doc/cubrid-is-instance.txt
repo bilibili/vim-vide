@@ -1,0 +1,76 @@
+cubrid_is_instance
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_is_instance — Check whether the instance pointed by OID exists
+
+==============================================================================
+*Description*
+
+    int cubrid_is_instance ( resource $conn_identifier , string $oid )~
+
+The cubrid_is_instance() function is used to check whether the instance
+pointed by the given {oid} exists or not.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    Connection identifier.
+
+{oid}
+
+    OID of the instance that you want to check the existence.
+
+==============================================================================
+*Return* *Values*
+
+1, if such instance exists;
+
+0, if such instance does not exist;
+
+-1, in case of error
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_is_instance() example
+
+<?php >
+    $conn = cubrid_connect("localhost", 33000, "demodb");
+
+    $sql = <<<EOD
+    SELECT host_year, medal, game_date 
+    FROM game 
+    WHERE athlete_code IN 
+        (SELECT code FROM athlete WHERE name='Thorpe Ian');
+    EOD;
+
+    $req = cubrid_execute($conn, $sql, CUBRID_INCLUDE_OID);
+    $oid = cubrid_current_oid($req);
+
+    $res = cubrid_is_instance ($conn, $oid);
+    if ($res == 1) {
+        echo "Instance pointed by $oid exists.\n";
+    } else if ($res == 0){
+        echo "Instance pointed by $oid doesn't exist.\n";
+    } else {
+        echo "error\n";
+    }
+
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+Instance pointed by @0|0|0 doesn't exist.
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_drop| - Delete an instance using OID
+  * |cubrid_get_class_name| - Get the class name using OID
+
+
+vim:ft=help:

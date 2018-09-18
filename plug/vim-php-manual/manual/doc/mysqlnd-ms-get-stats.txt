@@ -1,0 +1,418 @@
+mysqlnd_ms_get_stats
+
+(PECL mysqlnd_ms >= 1.0.0)
+
+mysqlnd_ms_get_stats — Returns query distribution and connection statistics
+
+==============================================================================
+*Description*
+
+    array mysqlnd_ms_get_stats ( void )~
+
+Returns an array of statistics collected by the replication and load balancing
+plugin.
+
+The PHP configuration setting mysqlnd_ms.collect_statistics controls the
+collection of statistics. The collection of statistics is disabled by default
+for performance reasons.
+
+The scope of the statistics is the PHP process. Depending on your deployment
+model a PHP process may handle one or multiple requests.
+
+Statistics are aggregated for all connections and all storage handler. It is
+not possible to tell how much queries originating from mysqli, PDO_MySQL or
+mysql API calls have contributed to the aggregated data values.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+Returns NULL if the PHP configuration directive mysqlnd_ms.enable has disabled
+the plugin. Otherwise, returns array of statistics.
+
+Array of statistics
+
+                Statistic                                 Description                 Version
+                                           The semantics of this statistic has
+                                           changed between 1.0.1 - 1.1.0.
+
+                                           The meaning for version 1.0.1 is as
+                                           follows. Number of statements considered
+                                           as read-only by the built-in query
+                                           analyzer. Neither statements which begin
+                                           with a SQL hint to force use of slave nor
+                                           statements directed to a slave by an
+                                           user-defined callback are included. The
+                                           total number of statements sent to the
+                                           slaves is use_slave + use_slave_sql_hint +
+                                           use_slave_callback.
+
+                                           PECL/mysqlnd_ms 1.1.0 introduces a new
+                                           concept of chained filters. The statistics
+                                           is now set by the internal load balancing
+use_slave                                  filter. With version 1.1.0 the load        Since
+                                           balancing filter is always the last in the 1.0.0.
+                                           filter chain, if used. In future versions
+                                           a load balancing filter may be followed by
+                                           other filters causing another change in
+                                           the meaning of the statistic. If, in the
+                                           future, a load balancing filter is
+                                           followed by another filter it is no longer
+                                           guaranteed that the statement, which
+                                           increments use_slave, will be executed on
+                                           the slaves.
+
+                                           The meaning for version 1.1.0 is as
+                                           follows. Number of statements sent to the
+                                           slaves. Statements directed to a slave by
+                                           the user filter (an user-defined callback)
+                                           are not included. The latter are counted
+                                           by use_slave_callback.
+
+                                           The semantics of this statistic has
+                                           changed between 1.0.1 - 1.1.0.
+
+                                           The meaning for version 1.0.1 is as
+                                           follows. Number of statements not
+                                           considered as read-only by the built-in
+                                           query analyzer. Neither statements which
+                                           begin with a SQL hint to force use of
+                                           master nor statements directed to a master
+                                           by an user-defined callback are included.
+                                           The total number of statements sent to the
+                                           master is use_master + use_master_sql_hint
+                                           + use_master_callback.
+
+                                           PECL/mysqlnd_ms 1.1.0 introduces a new
+                                           concept of chained filters. The statictics
+                                           is now set by the internal load balancing
+use_master                                 filter. With version 1.1.0 the load        Since
+                                           balancing filter is always the last in the 1.0.0.
+                                           filter chain, if used. In future versions
+                                           a load balancing filter may be followed by
+                                           other filters causing another change in
+                                           the meaning of the statistic. If, in the
+                                           future, a load balancing filter is
+                                           followed by another filter it is no longer
+                                           guaranteed that the statement, which
+                                           increments use_master, will be executed on
+                                           the slaves.
+
+                                           The meaning for version 1.1.0 is as
+                                           follows. Number of statements sent to the
+                                           masters. Statements directed to a master
+                                           by the user filter (an user-defined
+                                           callback) are not included. The latter are
+                                           counted by use_master_callback.
+
+                                           Number of statements the built-in query
+                                           analyzer recommends sending to a slave
+                                           because they contain no SQL hint to force
+                                           use of a certain server. The
+                                           recommendation may be overruled in the
+use_slave_guess                            following. It is not guaranteed whether    Since
+                                           the statement will be executed on a slave  1.1.0.
+                                           or not. This is how often the internal
+                                           is_select function has guessed that a
+                                           slave shall be used. Please, see also the
+                                           user space function 
+                                           |mysqlnd_ms_query_is_select|.
+                                           Number of statements the built-in query
+                                           analyzer recommends sending to a master
+                                           because they contain no SQL hint to force
+                                           use of a certain server. The
+                                           recommendation may be overruled in the
+use_master_guess                           following. It is not guaranteed whether    Since
+                                           the statement will be executed on a slave  1.1.0.
+                                           or not. This is how often the internal
+                                           is_select function has guessed that a
+                                           master shall be used. Please, see also the
+                                           user space function 
+                                           |mysqlnd_ms_query_is_select|.
+                                           Number of statements sent to a slave       Since
+use_slave_sql_hint                         because statement begins with the SQL hint 1.0.0.
+                                           to force use of slave.
+                                           Number of statements sent to a master      Since
+use_master_sql_hint                        because statement begins with the SQL hint 1.0.0.
+                                           to force use of master.
+                                           Number of statements sent to server which
+use_last_used_sql_hint                     has run the previous statement, because    Since
+                                           statement begins with the SQL hint to      1.0.0.
+                                           force use of previously used server.
+                                           Number of statements sent to a slave
+use_slave_callback                         because an user-defined callback has       Since
+                                           chosen a slave server for statement        1.0.0.
+                                           execution.
+                                           Number of statements sent to a master
+use_master_callback                        because an user-defined callback has       Since
+                                           chosen a master server for statement       1.0.0.
+                                           execution.
+                                           Number of successfully opened slave
+                                           connections from configurations not using
+non_lazy_connections_slave_success         lazy connections. The total number of      Since
+                                           successfully opened slave connections is   1.0.0.
+                                           non_lazy_connections_slave_success +
+                                           lazy_connections_slave_success
+                                           Number of failed slave connection attempts
+                                           from configurations not using lazy
+non_lazy_connections_slave_failure         connections. The total number of failed    Since
+                                           slave connection attempts is               1.0.0.
+                                           non_lazy_connections_slave_failure +
+                                           lazy_connections_slave_failure
+                                           Number of successfully opened master
+                                           connections from configurations not using
+non_lazy_connections_master_success        lazy connections. The total number of      Since
+                                           successfully opened master connections is  1.0.0.
+                                           non_lazy_connections_master_success +
+                                           lazy_connections_master_success
+                                           Number of failed master connection
+                                           attempts from configurations not using
+non_lazy_connections_master_failure        lazy connections. The total number of      Since
+                                           failed master connection attempts is       1.0.0.
+                                           non_lazy_connections_master_failure +
+                                           lazy_connections_master_failure
+                                           Number of successfully opened slave        Since
+lazy_connections_slave_success             connections from configurations using lazy 1.0.0.
+                                           connections.
+                                           Number of failed slave connection attempts Since
+lazy_connections_slave_failure             from configurations using lazy connections 1.0.0.
+                                           .
+                                           Number of successfully opened master       Since
+lazy_connections_master_success            connections from configurations using lazy 1.0.0.
+                                           connections.
+                                           Number of failed master connection         Since
+lazy_connections_master_failure            attempts from configurations using lazy    1.0.0.
+                                           connections.
+                                           Number of autocommit mode activations via
+                                           API calls. This figure may be used to
+                                           monitor activity related to the plugin
+                                           configuration setting trx_stickiness. If,
+                                           for example, you want to know if a certain
+                                           API call invokes the mysqlnd library       Since
+trx_autocommit_on                          function trx_autocommit(), which is a      1.0.0.
+                                           requirement for trx_stickiness, you may
+                                           call the user API function in question and
+                                           check if the statistic has changed. The
+                                           statistic is modified only by the plugins
+                                           internal subclassed trx_autocommit()
+                                           method.
+trx_autocommit_off                         Number of autocommit mode deactivations    Since
+                                           via API calls.                             1.0.0.
+                                           Number of statements redirected to the     Since
+trx_master_forced                          master while trx_stickiness=master and     1.0.0.
+                                           autocommit mode is disabled.
+                                           Number of successful SQL injections in
+gtid_autocommit_injections_success         autocommit mode as part of the plugins     Since
+                                           client-side global transaction id          1.2.0.
+                                           emulation.
+                                           Number of failed SQL injections in
+gtid_autocommit_injections_failure         autocommit mode as part of the plugins     Since
+                                           client-side global transaction id          1.2.0.
+                                           emulation.
+                                           Number of successful SQL injections in
+gtid_commit_injections_success             commit mode as part of the plugins         Since
+                                           client-side global transaction id          1.2.0.
+                                           emulation.
+                                           Number of failed SQL injections in commit  Since
+gtid_commit_injections_failure             mode as part of the plugins client-side    1.2.0.
+                                           global transaction id emulation.
+                                           Number of successful SQL injections when
+                                           implicit commit is detected as part of the
+                                           plugins client-side global transaction id
+                                           emulation. Implicit commit happens, for
+                                           example, when autocommit has been turned
+                                           off, a query is executed and autocommit is
+                                           enabled again. In that case, the statement
+gtid_implicit_commit_injections_success    will be committed by the server and SQL to Since
+                                           maintain is injected before the autocommit 1.2.0.
+                                           is re-enabled. Another sequence causing an
+                                           implicit commit is begin(), query(), begin
+                                           (). The second call to begin() will
+                                           implicitly commit the transaction started
+                                           by the first call to begin(). begin()
+                                           refers to internal library calls not
+                                           actual PHP user API calls.
+                                           Number of failed SQL injections when
+                                           implicit commit is detected as part of the
+                                           plugins client-side global transaction id
+                                           emulation. Implicit commit happens, for
+gtid_implicit_commit_injections_failure    example, when autocommit has been turned   Since
+                                           off, a query is executed and autocommit is 1.2.0.
+                                           enabled again. In that case, the statement
+                                           will be committed by the server and SQL to
+                                           maintain is injected before the autocommit
+                                           is re-enabled.
+                                           How often an operation has been retried
+transient_error_retries                    when a transient error was detected. See   Since
+                                           also, transient_error plugin configuration 1.6.0.
+                                           file setting.
+                                           Number of successful
+                                           sharding.lookup_servers remote procedure
+                                           calls to MySQL Fabric. A call is
+                                           considered successful if the plugin could
+                                           reach MySQL Fabric and got any reply. The
+fabric_sharding_lookup_servers_success     reply itself may or may not be understood  Since
+                                           by the plugin. Success refers to the       1.6.0.
+                                           network transport only. If the reply was
+                                           not understood or indicates a valid error
+                                           condition,
+                                           fabric_sharding_lookup_servers_xml_failure
+                                           gets incremented.
+                                           Number of failed sharding.lookup_servers
+                                           remote procedure calls to MySQL Fabric. A
+fabric_sharding_lookup_servers_failure     remote procedure call is considered failed Since
+                                           if there was a network error in connecting 1.6.0.
+                                           to, writing to or reading from MySQL
+                                           Fabric.
+                                           Time spent connecting to,writing to and
+                                           reading from MySQL Fabrich during the      Since
+fabric_sharding_lookup_servers_time_total  sharding.lookup_servers remote procedure   1.6.0.
+                                           call. The value is aggregated for all
+                                           calls. Time is measured in microseconds.
+                                           Total number of bytes received from MySQL  Since
+fabric_sharding_lookup_servers_bytes_total Fabric in reply to sharding.lookup_servers 1.6.0.
+                                           calls.
+                                           How often a reply from MySQL Fabric to
+                                           sharding.lookup_servers calls was not
+fabric_sharding_lookup_servers_xml_failure understood. Please note, the current       Since
+                                           experimental implementation does not       1.6.0.
+                                           distinguish between valid errors returned
+                                           and malformed replies.
+xa_begin                                   How many XA/distributed transactions have  Since
+                                           been started using |mysqlnd_ms_xa_begin|.  1.6.0.
+                                           How many XA/distributed transactions have  Since
+xa_commit_success                          been successfully committed using |        1.6.0.
+                                           mysqlnd_ms_xa_commit|.
+                                           How many XA/distributed transactions       Since
+xa_commit_failure                          failed to commit during |                  1.6.0.
+                                           mysqlnd_ms_xa_commit|.
+                                           How many XA/distributed transactions have
+                                           been successfully rolled back using |
+xa_rollback_success                        mysqlnd_ms_xa_rollback|. The figure does   Since
+                                           not include implict rollbacks performed as 1.6.0.
+                                           a result of |mysqlnd_ms_xa_commit|
+                                           failure.
+                                           How many XA/distributed transactions could
+                                           not be rolled back. This includes failures
+                                           of |mysqlnd_ms_xa_rollback| but also       Since
+xa_rollback_failure                        failured during rollback when closing a    1.6.0.
+                                           connection, if rollback_on_close is set.
+                                           Please, see also xa_rollback_on_close
+                                           below.
+                                           Total number of participants in any XA     Since
+xa_participants                            transaction started with |                 1.6.0.
+                                           mysqlnd_ms_xa_begin|.
+                                           How many XA transactions have been rolled
+                                           back implicitly when a connection was
+xa_rollback_on_close                       close and rollback_on_close is set.        Since
+                                           Depending on your coding policies, this    1.6.0.
+                                           may hint a flaw in your code as you may
+                                           prefer to explicitly clean up resources.
+pool_masters_total                         Number of master servers (connections) in  Since
+                                           the internal connection pool.              1.6.0.
+pool_slaves_total                          Number of slave servers (connections) in   Since
+                                           the internal connection pool.              1.6.0.
+                                           Number of master servers (connections)
+pool_masters_active                        from the internal connection pool which    Since
+                                           are currently used for picking a           1.6.0.
+                                           connection.
+                                           Number of slave servers (connections) from Since
+pool_slaves_active                         the internal connection pool which are     1.6.0.
+                                           currently used for picking a connection.
+                                           How often the active connection list has   Since
+pool_updates                               been replaced and a new set of master and  1.6.0.
+                                           slave servers had been installed.
+                                           How often a master connection has been     Since
+pool_master_reactivated                    reused after being flushed from the active 1.6.0.
+                                           list.
+                                           How often a slave connection has been      Since
+pool_slave_reactivated                     reused after being flushed from the active 1.6.0.
+                                           list.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_ms_get_stats() example
+
+<?php >
+    printf("mysqlnd_ms.enable = %d\n", ini_get("mysqlnd_ms.enable"));
+    printf("mysqlnd_ms.collect_statistics = %d\n", ini_get(
+    "mysqlnd_ms.collect_statistics"));
+    var_dump(mysqlnd_ms_get_stats());
+<?>
+
+The above example will output:
+
+mysqlnd_ms.enable = 1
+mysqlnd_ms.collect_statistics = 1
+array(26) {
+  ["use_slave"]=>
+  string(1) "0"
+  ["use_master"]=>
+  string(1) "0"
+  ["use_slave_guess"]=>
+  string(1) "0"
+  ["use_master_guess"]=>
+  string(1) "0"
+  ["use_slave_sql_hint"]=>
+  string(1) "0"
+  ["use_master_sql_hint"]=>
+  string(1) "0"
+  ["use_last_used_sql_hint"]=>
+  string(1) "0"
+  ["use_slave_callback"]=>
+  string(1) "0"
+  ["use_master_callback"]=>
+  string(1) "0"
+  ["non_lazy_connections_slave_success"]=>
+  string(1) "0"
+  ["non_lazy_connections_slave_failure"]=>
+  string(1) "0"
+  ["non_lazy_connections_master_success"]=>
+  string(1) "0"
+  ["non_lazy_connections_master_failure"]=>
+  string(1) "0"
+  ["lazy_connections_slave_success"]=>
+  string(1) "0"
+  ["lazy_connections_slave_failure"]=>
+  string(1) "0"
+  ["lazy_connections_master_success"]=>
+  string(1) "0"
+  ["lazy_connections_master_failure"]=>
+  string(1) "0"
+  ["trx_autocommit_on"]=>
+  string(1) "0"
+  ["trx_autocommit_off"]=>
+  string(1) "0"
+  ["trx_master_forced"]=>
+  string(1) "0"
+  ["gtid_autocommit_injections_success"]=>
+  string(1) "0"
+  ["gtid_autocommit_injections_failure"]=>
+  string(1) "0"
+  ["gtid_commit_injections_success"]=>
+  string(1) "0"
+  ["gtid_commit_injections_failure"]=>
+  string(1) "0"
+  ["gtid_implicit_commit_injections_success"]=>
+  string(1) "0"
+  ["gtid_implicit_commit_injections_failure"]=>
+  string(1) "0"
+  ["transient_error_retries"]=>
+  string(1) "0"
+}
+
+==============================================================================
+*See* *Also*
+
+  * Runtime configuration
+  * mysqlnd_ms.collect_statistics
+  * mysqlnd_ms.enable
+  * Monitoring
+
+
+vim:ft=help:

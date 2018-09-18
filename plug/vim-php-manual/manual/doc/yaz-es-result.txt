@@ -1,0 +1,35 @@
+yaz_es_result
+
+(PHP 4 >= 4.2.0, PECL yaz >= 0.9.0)
+
+yaz_es_result — Inspects Extended Services Result
+
+==============================================================================
+*Description*
+
+    array yaz_es_result ( resource $id )~
+
+This function inspects the last returned Extended Service result from a
+server. An Extended Service is initiated by either yaz_item_order() or |yaz_es
+|.
+
+==============================================================================
+*Parameters*
+
+{id}
+
+    The connection resource returned by |yaz_connect|.
+
+==============================================================================
+*Return* *Values*
+
+Returns array with element targetReference for the reference for the extended
+service operation (generated and returned from the server).
+
+==============================================================================
+*See* *Also*
+
+  * |yaz_es| - Prepares for an Extended Service Request
+
+
+vim:ft=help:

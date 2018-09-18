@@ -1,0 +1,58 @@
+http_negotiate_charset
+
+(PECL pecl_http >= 0.1.0)
+
+http_negotiate_charset — Negotiate client's preferred character set
+
+==============================================================================
+*Description*
+
+    string http_negotiate_charset ( array $supported [, array &$result ] )~
+
+This function negotiates the clients preferred charset based on its
+Accept-Charset HTTP header. The qualifier is recognized and charsets without
+qualifier are rated highest.
+
+==============================================================================
+*Parameters*
+
+{supported}
+
+    array containing the supported charsets as values
+
+{result}
+
+    will be filled with an array containing the negotiation results
+
+==============================================================================
+*Return* *Values*
+
+Returns the negotiated charset or the default charset (i.e. first array entry)
+if none match.
+
+==============================================================================
+*Examples*
+
+Example #1 Using http_negotiate_charset()
+
+<?php >
+    $charsets = array(
+            'iso-8859-1', // default
+            'iso-8859-2',
+            'iso-8859-15',
+            'utf-8'
+    );
+
+    $pref = http_negotiate_charset($charsets, $result);
+
+    if (strcmp($pref, 'iso-8859-1')) {
+            iconv_set_encoding('internal_encoding', 'iso-8859-1');
+            iconv_set_encoding('output_encoding', $pref);
+            ob_start('ob_iconv_handler');
+    }
+
+    print_r($result);
+<?>
+
+
+vim:ft=help:

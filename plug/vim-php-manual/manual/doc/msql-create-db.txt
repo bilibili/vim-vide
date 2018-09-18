@@ -1,0 +1,39 @@
+msql_create_db
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_create_db — Create mSQL database
+
+==============================================================================
+*Description*
+
+    bool msql_create_db ( string $database_name [, resource $link_identifier~
+    ] )~
+
+msql_create_db() attempts to create a new database on the mSQL server.
+
+==============================================================================
+*Parameters*
+
+{database_name}
+
+    The name of the mSQL database.
+
+{ link_identifier}
+
+    The mSQL connection. If not specified, the last link opened by 
+    |msql_connect| is assumed. If no such link is found, the function will try
+    to establish a link as if |msql_connect| was called, and use it.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |msql_drop_db| - Drop (delete) mSQL database
+
+
+vim:ft=help:

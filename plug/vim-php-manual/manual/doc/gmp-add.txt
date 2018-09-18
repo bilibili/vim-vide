@@ -1,0 +1,53 @@
+gmp_add
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+gmp_add — Add numbers
+
+==============================================================================
+*Description*
+
+    GMP gmp_add ( GMP $a , GMP $b )~
+
+Add two numbers.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    The first summand (augent).
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+{b}
+
+    The second summand (addend).
+
+    Either a GMP number resource in PHP 5.5 and earlier, a GMP object in PHP
+    5.6 and later, or a numeric string provided that it is possible to convert
+    the latter to a number.
+
+==============================================================================
+*Return* *Values*
+
+A GMP number representing the sum of the arguments.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_add() example
+
+<?php >
+    $sum = gmp_add("123456789012345", "76543210987655");
+    echo gmp_strval($sum) . "\n";
+<?>
+
+The above example will output:
+
+200000000000000
+
+
+vim:ft=help:

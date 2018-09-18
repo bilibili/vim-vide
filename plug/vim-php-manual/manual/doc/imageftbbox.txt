@@ -1,0 +1,109 @@
+imageftbbox
+
+(PHP 4 >= 4.0.7, PHP 5, PHP 7)
+
+imageftbbox — Give the bounding box of a text using fonts via freetype2
+
+==============================================================================
+*Description*
+
+    array imageftbbox ( float $size , float $angle , string $fontfile ,~
+    string $text [, array $extrainfo ] )~
+
+This function calculates and returns the bounding box in pixels for a FreeType
+text.
+
+==============================================================================
+*Parameters*
+
+{size}
+
+    The font size. Depending on your version of GD, this should be specified
+    as the pixel size (GD1) or point size (GD2).
+
+{angle}
+
+    Angle in degrees in which {text} will be measured.
+
+{fontfile}
+
+    The name of the TrueType font file (can be a URL). Depending on which
+    version of the GD library that PHP is using, it may attempt to search for
+    files that do not begin with a leading '/' by appending '.ttf' to the
+    filename and searching along a library-defined font path.
+
+{text}
+
+    The string to be measured.
+
+{extrainfo}
+
+     Possible array indexes for {extrainfo}
+        Key     Type            Meaning
+    linespacing float Defines drawing linespacing
+
+==============================================================================
+*Return* *Values*
+
+imageftbbox() returns an array with 8 elements representing four points making
+the bounding box of the text:
+
+0 lower left corner, X position
+1 lower left corner, Y position
+2 lower right corner, X position
+3 lower right corner, Y position
+4 upper right corner, X position
+5 upper right corner, Y position
+6 upper left corner, X position
+7 upper left corner, Y position
+
+The points are relative to the text regardless of the {angle}, so "upper left"
+means in the top left-hand corner seeing the text horizontally.
+
+==============================================================================
+*Examples*
+
+Example #1 imageftbbox() example
+
+<?php >
+    // Create a 300x150 image
+    $im = imagecreatetruecolor(300, 150);
+    $black = imagecolorallocate($im, 0, 0, 0);
+    $white = imagecolorallocate($im, 255, 255, 255);
+
+    // Set the background to be white
+    imagefilledrectangle($im, 0, 0, 299, 299, $white);
+
+    // Path to our font file
+    $font = './arial.ttf';
+
+    // First we create our bounding box
+    $bbox = imageftbbox(10, 0, $font, 'The PHP Documentation Group');
+
+    // This is our cordinates for X and Y
+    $x = $bbox[0] + (imagesx($im) / 2) - ($bbox[4] / 2) - 5;
+    $y = $bbox[1] + (imagesy($im) / 2) - ($bbox[5] / 2) - 5;
+
+    imagefttext($im, 10, 0, $x, $y, $black, $font, 'The PHP Documentation Group');
+
+    // Output to browser
+    header('Content-Type: image/png');
+
+    imagepng($im);
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available if PHP is compiled with freetype
+    support (--with-freetype-dir=DIR )
+
+==============================================================================
+*See* *Also*
+
+  * |imagefttext| - Write text to the image using fonts using FreeType 2
+  * |imagettfbbox| - Give the bounding box of a text using TrueType fonts
+
+
+vim:ft=help:

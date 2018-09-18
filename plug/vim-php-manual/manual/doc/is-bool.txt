@@ -1,0 +1,56 @@
+is_bool
+
+(PHP 4, PHP 5, PHP 7)
+
+is_bool — Finds out whether a variable is a boolean
+
+==============================================================================
+*Description*
+
+    bool is_bool ( mixed $var )~
+
+Finds whether the given variable is a boolean.
+
+==============================================================================
+*Parameters*
+
+{var}
+
+    The variable being evaluated.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {var} is a boolean, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 is_bool() examples
+
+<?php >
+    $a = false;
+    $b = 0;
+
+    // Since $a is a boolean, it will return true
+    if (is_bool($a) === true) {
+        echo "Yes, this is a boolean";
+    }
+
+    // Since $b is not a boolean, it will return false
+    if (is_bool($b) === false) {
+        echo "No, this is not a boolean";
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |is_float| - Finds whether the type of a variable is float
+  * |is_int| - Find whether the type of a variable is integer
+  * |is_string| - Find whether the type of a variable is string
+  * |is_object| - Finds whether a variable is an object
+  * |is_array| - Finds whether a variable is an array
+
+
+vim:ft=help:

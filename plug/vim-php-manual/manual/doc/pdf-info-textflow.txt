@@ -1,0 +1,16 @@
+PDF_info_textflow
+
+(PECL pdflib >= 2.0.0)
+
+PDF_info_textflow — Query textflow state
+
+==============================================================================
+*Description*
+
+    float PDF_info_textflow ( resource $pdfdoc , int $textflow , string~
+    $keyword )~
+
+Queries the current state of a textflow.
+
+
+vim:ft=help:

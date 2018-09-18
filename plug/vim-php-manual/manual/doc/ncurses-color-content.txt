@@ -1,0 +1,52 @@
+ncurses_color_content
+
+(PHP 4 >= 4.3.0, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_color_content — Retrieves RGB components of a color
+
+==============================================================================
+*Description*
+
+    int ncurses_color_content ( int $color , int &$r , int &$g , int &$b )~
+
+Retrieves the red, green, and blue components for the given color definition.
+Terminal color capabilities must be initialized with |ncurses_start_color|
+prior to calling this function.
+
+==============================================================================
+*Parameters*
+
+{color}
+
+    The number of the color to retrieve information for. May be one of the
+    pre-defined color constants.
+
+{r}
+
+    A reference to which to return the red component of the color. The value
+    returned to the reference will be between 0 and 1000.
+
+{g}
+
+    A reference to which to return the green component of the color. The value
+    returned to the reference will be between 0 and 1000.
+
+{b}
+
+    A reference to which to return the blue component of the color. The value
+    returned to the reference will be between 0 and 1000.
+
+==============================================================================
+*Return* *Values*
+
+Returns -1 if the function was successful, and 0 if ncurses or terminal color
+capabilities have not been initialized.
+
+==============================================================================
+*See* *Also*
+
+  * |ncurses_init_color| - Define a terminal color
+  * |ncurses_start_color| - Initializes color functionality
+
+
+vim:ft=help:

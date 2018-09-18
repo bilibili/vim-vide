@@ -1,0 +1,75 @@
+dbx_sort
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5, PECL dbx >= 1.1.0)
+
+dbx_sort — Sort a result from a dbx_query by a custom sort function
+
+==============================================================================
+*Description*
+
+    bool dbx_sort ( object $result , string $user_compare_function )~
+
+Sort a result from a |dbx_query| call with a custom sort function.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    A result set returned by |dbx_query|.
+
+{user_compare_function}
+
+    The user-defined comparison function. It must accept two arguments and
+    return an integer less than, equal to, or greater than zero if the first
+    argument is considered to be respectively less than, equal to, or greater
+    than the second.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 dbx_sort() example
+
+<?php >
+    function user_re_order($a, $b) 
+    {
+        $rv = dbx_compare($a, $b, "parentid", DBX_CMP_DESC);
+        if (!$rv) {
+            $rv = dbx_compare($a, $b, "id", DBX_CMP_NUMBER);
+        }
+        return $rv;
+    }
+
+    $link   = dbx_connect(DBX_ODBC, "", "db", "username", "password")
+        or die("Could not connect");
+
+    $result = dbx_query($link, 
+    "SELECT id, parentid, description FROM tbl ORDER BY id");
+        // data in $result is now ordered by id
+
+    dbx_sort($result, "user_re_order");
+        // data in $result is now ordered by parentid (descending), then by id
+
+    dbx_close($link);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    It is always better to use ORDER BY SQL clause instead of dbx_sort() if
+    possible.
+
+==============================================================================
+*See* *Also*
+
+  * |dbx_compare| - Compare two rows for sorting purposes
+
+
+vim:ft=help:

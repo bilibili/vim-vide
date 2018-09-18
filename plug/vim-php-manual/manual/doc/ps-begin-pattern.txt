@@ -1,0 +1,98 @@
+ps_begin_pattern
+
+(PECL ps >= 1.2.0)
+
+ps_begin_pattern — Start a new pattern
+
+==============================================================================
+*Description*
+
+    int ps_begin_pattern ( resource $psdoc , float $width , float $height ,~
+    float $xstep , float $ystep , int $painttype )~
+
+Starts a new pattern. A pattern is like a page containing e.g. a drawing which
+can be used for filling areas. It is used like a color by calling |ps_setcolor
+| and setting the color space to pattern.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{width}
+
+    The width of the pattern in pixel.
+
+{height}
+
+    The height of the pattern in pixel.
+
+{x-step}
+
+    The distance in pixel of placements of the pattern in horizontal
+    direction.
+
+{y-step}
+
+    The distance in pixel of placements of the pattern in vertical direction.
+
+{painttype}
+
+    Must be 1 or 2.
+
+==============================================================================
+*Return* *Values*
+
+The identifier of the pattern or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Creating and using a pattern
+
+<?php >
+    $ps = ps_new();
+
+    if (!ps_open_file($ps, "pattern.ps")) {
+      print "Cannot open PostScript file\n";
+      exit;
+    }
+
+    ps_set_parameter($ps, "warning", "true");
+    ps_set_info($ps, "Creator", "pattern.php");
+    ps_set_info($ps, "Author", "Uwe Steinmann");
+    ps_set_info($ps, "Title", "Pattern example");
+
+
+    $pspattern = ps_begin_pattern($ps, 10.0, 10.0, 10.0, 10.0, 1);
+    ps_setlinewidth($ps, 0.2);
+    ps_setcolor($ps, "stroke", "rgb", 0.0, 0.0, 1.0, 0.0);
+    ps_moveto($ps, 0, 0);
+    ps_lineto($ps, 7, 7);
+    ps_stroke($ps);
+    ps_moveto($ps, 0, 7);
+    ps_lineto($ps, 7, 0);
+    ps_stroke($ps);
+    ps_end_pattern($ps);
+
+    ps_begin_page($ps, 596, 842);
+    ps_setcolor($ps, "both", "pattern", $pspattern, 0.0, 0.0, 0.0);
+    ps_rect($ps, 50, 400, 200, 200);
+    ps_fill($ps);
+    ps_end_page($ps);
+
+    ps_close($ps);
+    ps_delete($ps);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ps_end_pattern| - End a pattern
+  * |ps_setcolor| - Sets current color
+  * |ps_shading_pattern| - Creates a pattern based on a shading
+
+
+vim:ft=help:

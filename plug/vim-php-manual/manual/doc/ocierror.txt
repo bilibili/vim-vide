@@ -1,0 +1,18 @@
+ocierror
+
+(PHP 4, PHP 5, PHP 7, PECL OCI8 >= 1.0.0)
+
+ocierror — Alias of |oci_error|
+
+==============================================================================
+*Description*
+
+Alias of |oci_error|
+
+Warning
+
+This alias has been DEPRECATED as of PHP 5.4.0. Relying on this alias is
+highly discouraged.
+
+
+vim:ft=help:

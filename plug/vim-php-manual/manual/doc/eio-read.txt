@@ -1,0 +1,124 @@
+eio_read
+
+(PECL eio >= 0.0.1dev)
+
+eio_read — Read from a file descriptor at given offset.
+
+==============================================================================
+*Description*
+
+    resource eio_read ( mixed $fd , int $length , int $offset , int $pri ,~
+    callable $callback [, mixed $data = NULL ] )~
+
+eio_read() reads up to {length} bytes from {fd} file descriptor at {offset}.
+The read bytes are stored in {result} argument of {callback}.
+
+==============================================================================
+*Parameters*
+
+{fd}
+
+    Stream, Socket resource, or numeric file descriptor
+
+{length}
+
+    Maximum number of bytes to read.
+
+{offset}
+
+    Offset within the file.
+
+{pri}
+
+    The request priority: EIO_PRI_DEFAULT, EIO_PRI_MIN, EIO_PRI_MAX, or NULL.
+    If NULL passed, {pri} internally is set to EIO_PRI_DEFAULT.
+
+{callback}
+
+    {callback} function is called when the request is done. It should match
+    the following prototype:
+    void callback(mixed $data, int $result[, resource $req]);
+
+    {data}
+
+        is custom data passed to the request.
+
+    {result}
+
+        request-specific result value; basically, the value returned by
+        corresponding system call.
+
+    {req}
+
+        is optional request resource which can be used with functions like 
+        |eio_get_last_error|
+
+{data}
+
+    Arbitrary variable passed to {callback}.
+
+==============================================================================
+*Return* *Values*
+
+eio_read() stores read bytes in {result} argument of {callback} function.
+
+==============================================================================
+*Examples*
+
+Example #1 eio_read() example
+
+<?php >
+    // Open a temporary file and write some bytes there
+    $temp_filename = "eio-temp-file.tmp";
+    $fp = fopen($temp_filename, "w");
+    fwrite($fp, "1234567890");
+    fclose($fp);
+
+    /* Is called when eio_read() is done */
+    function my_read_cb($data, $result) {
+        global $temp_filename;
+
+     // Output read bytes
+        var_dump($result);
+
+     // Close file
+        eio_close($data);
+        eio_event_loop();
+
+     // Remove temporary file
+        @unlink($temp_filename);
+    }
+
+    /* Is called when eio_open() is done */
+    function my_file_opened_callback($data, $result) {
+     // $result should contain the file descriptor
+        if ($result > 0) {
+      // Read 5 bytes starting from third
+            eio_read($result, 5, 2, EIO_PRI_DEFAULT, "my_read_cb", $result);
+            eio_event_loop();
+        } else {
+      // eio_open() failed
+            unlink($data);
+        }
+    }
+
+    // Open the file for reading and writing
+    eio_open($temp_filename, EIO_O_RDWR, NULL,
+        EIO_PRI_DEFAULT, "my_file_opened_callback", $temp_filename);
+    eio_event_loop();
+<?>
+
+The above example will output something similar to:
+
+string(5) "34567"
+
+==============================================================================
+*See* *Also*
+
+  * eio_open
+  * eio_write
+  * eio_close
+  * eio_event_loop
+
+
+vim:ft=help:

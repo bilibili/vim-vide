@@ -1,0 +1,50 @@
+time
+
+(PHP 4, PHP 5, PHP 7)
+
+time — Return current Unix timestamp
+
+==============================================================================
+*Description*
+
+    int time ( void )~
+
+Returns the current time measured in the number of seconds since the Unix
+Epoch (January 1 1970 00:00:00 GMT).
+
+==============================================================================
+*Examples*
+
+Example #1 time() example
+
+<?php >
+    $nextWeek = time() + (7 * 24 * 60 * 60);
+                       // 7 days; 24 hours; 60 mins; 60 secs
+    echo 'Now:       '. date('Y-m-d') ."\n";
+    echo 'Next Week: '. date('Y-m-d', $nextWeek) ."\n";
+    // or using strtotime():
+    echo 'Next Week: '. date('Y-m-d', strtotime('+1 week')) ."\n";
+<?>
+
+The above example will output something similar to:
+
+Now:       2005-03-30
+Next Week: 2005-04-06
+Next Week: 2005-04-06
+
+==============================================================================
+*Notes*
+
+Tip
+
+Timestamp of the start of the request is available in $_SERVER['REQUEST_TIME']
+since PHP 5.1.
+
+==============================================================================
+*See* *Also*
+
+  * |date| - Format a local time/date
+  * |microtime| - Return current Unix timestamp with microseconds
+
+
+vim:ft=help:

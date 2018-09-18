@@ -1,0 +1,71 @@
+udm_cat_list
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5, PECL mnogosearch >= 1.0.0)
+
+udm_cat_list — Get all the categories on the same level with the current one
+
+==============================================================================
+*Description*
+
+    array udm_cat_list ( resource $agent , string $category )~
+
+Gets all the categories on the same level with the current one.
+
+The function can be useful for developing categories tree browser.
+
+==============================================================================
+*Parameters*
+
+{agent}
+
+    A link to Agent, received after call to |udm_alloc_agent|.
+
+{category}
+
+==============================================================================
+*Return* *Values*
+
+Returns an array listing all categories of the same level as the current
+{category} in the categories tree.
+
+The returned array consists of pairs. Elements with even index numbers contain
+the category paths, odd elements contain the corresponding category names.
+
+$array[0] will contain '020300'
+  $array[1] will contain 'Audi'
+  $array[2] will contain '020301'
+  $array[3] will contain 'BMW'
+  $array[4] will contain '020302'
+  $array[5] will contain 'Opel'
+  ...
+ etc.
+
+==============================================================================
+*Examples*
+
+Following is an example of displaying links of the current level in format:
+
+Audi
+  BMW
+  Opel
+  ...
+
+Example #1 udm_cat_list()example
+
+<?php >
+     $cat_list_arr = udm_cat_list($udm_agent, $cat);
+     $cat_list = '';
+     for ($i=0; $i<count($cat_list_arr); $i+=2) {
+        $path = $cat_list_arr[$i];
+        $name = $cat_list_arr[$i+1];
+        $cat_list .= "<a href=\"$_SERVER[PHP_SELF]?cat=$path\">$name</a><br />";
+     }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |udm_cat_path| - Get the path to the current category
+
+
+vim:ft=help:

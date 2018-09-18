@@ -1,0 +1,37 @@
+variant_get_type
+
+(PHP 5, PHP 7)
+
+variant_get_type — Returns the type of a variant object
+
+==============================================================================
+*Description*
+
+    int variant_get_type ( variant $variant )~
+
+Returns the type of a variant object.
+
+==============================================================================
+*Parameters*
+
+{variant}
+
+    The variant object.
+
+==============================================================================
+*Return* *Values*
+
+This function returns an integer value that indicates the type of {variant},
+which can be an instance of COM, DOTNET or VARIANT classes. The return value
+can be compared to one of the VT_XXX constants.
+
+The return value for COM and DOTNET objects will usually be VT_DISPATCH; the
+only reason this function works for those classes is because COM and DOTNET
+are descendants of VARIANT.
+
+In PHP versions prior to 5, you could obtain this information from instances
+of the VARIANT class ONLY, by reading a fake {type} property. See the VARIANT
+class for more information on this.
+
+
+vim:ft=help:

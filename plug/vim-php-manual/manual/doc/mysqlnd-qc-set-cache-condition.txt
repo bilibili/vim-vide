@@ -1,0 +1,83 @@
+mysqlnd_qc_set_cache_condition
+
+(PECL mysqlnd_qc >= 1.1.0)
+
+mysqlnd_qc_set_cache_condition — Set conditions for automatic caching
+
+==============================================================================
+*Description*
+
+    bool mysqlnd_qc_set_cache_condition ( int $condition_type , mixed~
+    $condition , mixed $condition_option )~
+
+Sets a condition for automatic caching of statements which do not contain the
+necessary SQL hints to enable caching of them.
+
+==============================================================================
+*Parameters*
+
+{condition_type}
+
+    Type of the condition. The only allowed value is
+    MYSQLND_QC_CONDITION_META_SCHEMA_PATTERN.
+
+{condition}
+
+    Parameter for the condition set with condition_type. Parameter type and
+    structure depend on condition_type
+
+    If condition_type equals MYSQLND_QC_CONDITION_META_SCHEMA_PATTERN
+    condition must be a string. The string sets a pattern. Statements are
+    cached if table and database meta data entry of their result sets match
+    the pattern. The pattern is checked for a match with the db and org_table
+    meta data entries provided by the underlying MySQL client server library.
+    Please, check the MySQL Reference manual for details about the two
+    entries. The db and org_table values are concatenated with a dot (.)
+    before matched against condition. Pattern matching supports the wildcards
+    % and _. The wildcard % will match one or many arbitrary characters. _
+    will match one arbitrary character. The escape symbol is backslash.
+
+{condition_option}
+
+    Option for condition. Type and structure depend on condition_type.
+
+    If condition_type equals MYSQLND_QC_CONDITION_META_SCHEMA_PATTERN
+    condition_options is the TTL to be used.
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_qc_set_cache_condition() example
+
+<?php >
+    /* Cache all accesses to tables with the name "new%" in schema/
+    database "db_example" for 1 second */
+    if (!mysqlnd_qc_set_cache_condition(MYSQLND_QC_CONDITION_META_SCHEMA_PATTERN, 
+    "db_example.new%", 1)) {
+      die("Failed to set cache condition!");
+    }
+
+    $mysqli = new mysqli("host", "user", "password", "db_example", "port");
+    /* cached although no SQL hint given  */
+    $mysqli->query("SELECT id, title FROM news");
+
+    $pdo_mysql = new PDO("mysql:host=host;dbname=db_example;port=port", "user", 
+    "password");
+    /* not cached: no SQL hint, no pattern match */
+    $pdo_mysql->query("SELECT id, title FROM latest_news");
+    /* cached: TTL 1 second, pattern match */
+    $pdo_mysql->query("SELECT id, title FROM news");
+<?>
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on FAILURE.
+
+==============================================================================
+*See* *Also*
+
+  * Quickstart: pattern based caching
+
+
+vim:ft=help:

@@ -1,0 +1,67 @@
+highlight_string
+
+(PHP 4, PHP 5, PHP 7)
+
+highlight_string — Syntax highlighting of a string
+
+==============================================================================
+*Description*
+
+    mixed highlight_string ( string $str [, bool $return = false ] )~
+
+Outputs or returns html markup for a syntax highlighted version of the given
+PHP code using the colors defined in the built-in syntax highlighter for PHP.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The PHP code to be highlighted. This should include the opening tag.
+
+{return}
+
+    Set this parameter to TRUE to make this function return the highlighted
+    code.
+
+==============================================================================
+*Return* *Values*
+
+If {return} is set to TRUE, returns the highlighted code as a string instead
+of printing it out. Otherwise, it will return TRUE on success, FALSE on
+failure.
+
+==============================================================================
+*Examples*
+
+Example #1 highlight_string() example
+
+<?php >
+    highlight_string('<?php phpinfo(); ?>');
+<?>
+
+The above example will output:
+
+<code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php phpinfo</span><span style="color: #007700">(); </span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    When the {return} parameter is used, this function uses internal output
+    buffering so it cannot be used inside an |ob_start| callback function.
+
+The HTML markup generated is subject to change.
+
+==============================================================================
+*See* *Also*
+
+  * |highlight_file| - Syntax highlighting of a file
+  * Highlighting INI directives
+
+
+vim:ft=help:

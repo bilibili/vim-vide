@@ -1,0 +1,29 @@
+stats_rand_gen_ibinomial
+
+(PECL stats >= 1.0.0)
+
+stats_rand_gen_ibinomial — Generates a single random deviate from a binomial
+distribution whose number of trials is "n" (n >= 0) and whose probability of
+an event in each trial is "pp" ([0;1]). Method : algorithm BTPE
+
+==============================================================================
+*Description*
+
+    int stats_rand_gen_ibinomial ( int $n , float $pp )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{n}
+
+{pp}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

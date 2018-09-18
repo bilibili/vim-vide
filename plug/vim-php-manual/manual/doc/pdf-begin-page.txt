@@ -1,0 +1,18 @@
+PDF_begin_page
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_begin_page — Start new page [deprecated]
+
+==============================================================================
+*Description*
+
+    bool PDF_begin_page ( resource $pdfdoc , float $width , float $height )~
+
+Adds a new page to the document. Returns TRUE on success or FALSE on failure.
+
+This function is deprecated since PDFlib version 6, use |PDF_begin_page_ext|
+instead.
+
+
+vim:ft=help:

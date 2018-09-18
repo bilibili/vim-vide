@@ -1,0 +1,81 @@
+libxml_set_external_entity_loader
+
+(PHP 5 >= 5.4.0, PHP 7)
+
+libxml_set_external_entity_loader — Changes the default external entity loader
+
+==============================================================================
+*Description*
+
+    void libxml_set_external_entity_loader ( callable $resolver_function )~
+
+Changes the default external entity loader.
+
+==============================================================================
+*Parameters*
+
+{resolver_function}
+
+    A callable that takes three arguments. Two strings, a public id and system
+    id, and a context (an array with four keys) as the third argument. This
+    callback should return a resource, a string from which a resource can be
+    opened, or NULL.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 libxml_set_external_entity_loader() example
+
+<?php >
+    $xml = <<<XML
+    <!DOCTYPE foo PUBLIC "-//FOO/BAR" "http://example.com/foobar">
+    <foo>bar</foo>
+    XML;
+
+    $dtd = <<<DTD
+    <!ELEMENT foo (#PCDATA)>
+    DTD;
+
+    libxml_set_external_entity_loader(
+        function ($public, $system, $context) use($dtd) {
+            var_dump($public);
+            var_dump($system);
+            var_dump($context);
+            $f = fopen("php://temp", "r+");
+            fwrite($f, $dtd);
+            rewind($f);
+            return $f;
+        }
+    );
+
+    $dd = new DOMDocument;
+    $r  = $dd->loadXML($xml);
+
+    var_dump($dd->validate());
+<?>
+
+The above example will output:
+
+string(10) "-//FOO/BAR"
+string(25) "http://example.com/foobar"
+array(4) {
+    ["directory"]    => NULL
+    ["intSubName"]   => NULL
+    ["extSubURI"]    => NULL
+    ["extSubSystem"] => NULL
+}
+bool(true)
+
+==============================================================================
+*See* *Also*
+
+  * |libxml_disable_entity_loader| - Disable the ability to load external
+    entities
+
+
+vim:ft=help:

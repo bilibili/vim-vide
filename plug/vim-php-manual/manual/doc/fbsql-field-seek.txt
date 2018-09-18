@@ -1,0 +1,39 @@
+fbsql_field_seek
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_field_seek — Set result pointer to a specified field offset
+
+==============================================================================
+*Description*
+
+    bool fbsql_field_seek ( resource $result [, int $field_offset ] )~
+
+Seeks to the specified field offset. If the next call to |fbsql_fetch_field|
+doesn't include a field offset, the field offset specified in fbsql_field_seek
+() will be returned.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    A result identifier returned by |fbsql_query| or |fbsql_db_query|.
+
+{field_offset}
+
+    The numerical offset of the field. The field index starts at 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_fetch_field| - Get column information from a result and return as
+    an object
+
+
+vim:ft=help:

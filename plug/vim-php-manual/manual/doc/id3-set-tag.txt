@@ -1,0 +1,87 @@
+id3_set_tag
+
+(PECL id3 >= 0.1)
+
+id3_set_tag — Update information stored in an ID3 tag
+
+==============================================================================
+*Description*
+
+    bool id3_set_tag ( string $filename , array $tag [, int $version =~
+    ID3_V1_0 ] )~
+
+id3_set_tag() is used to change the information stored of an ID3 tag. If no
+tag has been present, it will be added to the file.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The path to the MP3 file
+
+    Instead of a filename you may also pass a valid stream resource
+
+{tag}
+
+    An associative array of tag keys and values
+
+    The following keys may be used in the associative array:
+
+                        Keys in the associative array
+      key                   possible value                    available in
+                                                                 version
+    title   string with maximum of 30 characters           v1.0, v1.1
+    artist  string with maximum of 30 characters           v1.0, v1.1
+    album   string with maximum of 30 characters           v1.0, v1.1
+    year    4 digits                                       v1.0, v1.1
+    genre   integer value between 0 and 147                v1.0, v1.1
+    comment string with maximum of 30 characters (28 in    v1.0, v1.1
+            v1.1)
+    track   integer between 0 and 255                      v1.1
+
+{version}
+
+    Allows you to specify the version of the tag as MP3 files may contain
+    both, version 1.x and version 2.x tags
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 id3_set_tag() example
+
+<?php >
+    $data = array(
+                  "title" => "Re:Start",
+                  "artist" => "Re:\Legion",
+                  "comment" => "A nice track"
+                 );
+    $result = id3_set_tag( "path/to/example.mp3", $data, ID3_V1_0 );
+    if ($result === true) {
+        echo "Tag successfully updated\n";
+    }
+<?>
+
+If the file is writable, this will output:
+
+Tag successfully updated
+
+==============================================================================
+*Notes*
+
+    Note: Currently id3_set_tag() only supports version 1.0 and 1.1.
+
+==============================================================================
+*See* *Also*
+
+  * |id3_remove_tag| - Remove an existing ID3 tag
+  * |id3_get_tag| - Get all information stored in an ID3 tag
+  * |id3_get_version| - Get version of an ID3 tag
+
+
+vim:ft=help:

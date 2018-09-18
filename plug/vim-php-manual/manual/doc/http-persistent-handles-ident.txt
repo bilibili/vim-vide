@@ -1,0 +1,78 @@
+http_persistent_handles_ident
+
+(PECL pecl_http >= 1.5.0)
+
+http_persistent_handles_ident — Get/set ident of persistent handles
+
+==============================================================================
+*Description*
+
+    string http_persistent_handles_ident ([ string $ident ] )~
+
+Query or define the ident of persistent handles.
+
+==============================================================================
+*Parameters*
+
+{ident}
+
+    the identification string
+
+==============================================================================
+*Return* *Values*
+
+Returns the prior ident as string on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A http_persistent_handles_ident() example
+
+<?php >
+    echo http_persistent_handles_ident("CUSTOM"), "\n";
+    echo http_persistent_handles_ident("MyApp1"), "\n";
+    http_get("http://www.example.com/");
+    print_r(http_persistent_handles_count());
+<?>
+
+The above example will output:
+
+
+GLOBAL
+CUSTOM
+stdClass Object
+(
+[http_request] => Array
+(
+[MyApp1] => Array
+(
+[used] => 0
+[free] => 1
+)
+
+)
+
+[http_request_datashare] => Array
+(
+[GLOBAL] => Array
+(
+[used] => 1
+[free] => 0
+)
+
+)
+
+[http_request_pool] => Array
+(
+)
+
+)
+
+==============================================================================
+*See* *Also*
+
+  * |http_persistent_handles_count| - Stat persistent handles
+  * |http_persistent_handles_clean| - Clean up persistent handles
+
+
+vim:ft=help:

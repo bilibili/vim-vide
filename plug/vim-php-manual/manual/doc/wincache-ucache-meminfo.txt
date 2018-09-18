@@ -1,0 +1,73 @@
+wincache_ucache_meminfo
+
+(PECL wincache >= 1.1.0)
+
+wincache_ucache_meminfo — Retrieves information about user cache memory usage
+
+==============================================================================
+*Description*
+
+    array wincache_ucache_meminfo ( void )~
+
+Retrieves information about memory usage by user cache.
+
+==============================================================================
+*Return* *Values*
+
+Array of meta data about user cache memory usage or FALSE on failure
+
+The array returned by this function contains the following elements:
+
+  * memory_total - amount of memory in bytes allocated for the user cache
+  * memory_free - amount of free memory in bytes available for the user cache
+  * num_used_blks - number of memory blocks used by the user cache
+  * num_free_blks - number of free memory blocks available for the user cache
+  * memory_overhead - amount of memory in bytes used for the user cache
+    internal structures
+
+==============================================================================
+*Examples*
+
+Example #1 A wincache_ucache_meminfo() example
+
+<pre>
+<?php >
+    print_r(wincache_ucache_meminfo());
+<?>
+</pre>
+
+The above example will output:
+
+Array
+(
+    [memory_total] => 5242880
+    [memory_free] => 5215056
+    [num_used_blks] => 6
+    [num_free_blks] => 3
+    [memory_overhead] => 176
+)
+
+==============================================================================
+*See* *Also*
+
+  * |wincache_fcache_fileinfo| - Retrieves information about files cached in
+    the file cache
+  * |wincache_fcache_meminfo| - Retrieves information about file cache memory
+    usage
+  * |wincache_ocache_fileinfo| - Retrieves information about files cached in
+    the opcode cache
+  * |wincache_rplist_fileinfo| - Retrieves information about resolve file path
+    cache
+  * |wincache_rplist_meminfo| - Retrieves information about memory usage by
+    the resolve file path cache
+  * |wincache_refresh_if_changed| - Refreshes the cache entries for the cached
+    files
+  * |wincache_ucache_info| - Retrieves information about data stored in the
+    user cache
+  * |wincache_scache_info| - Retrieves information about files cached in the
+    session cache
+  * |wincache_scache_meminfo| - Retrieves information about session cache
+    memory usage
+
+
+vim:ft=help:

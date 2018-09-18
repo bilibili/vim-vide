@@ -1,0 +1,41 @@
+openal_stream
+
+(PECL openal >= 0.1.0)
+
+openal_stream — Begin streaming on a source
+
+==============================================================================
+*Description*
+
+    resource openal_stream ( resource $source , int $format , int $rate )~
+
+==============================================================================
+*Parameters*
+
+{source}
+
+    An Open AL(Source) resource (previously created by |openal_source_create|
+    ).
+
+{format}
+
+    Format of {data}, one of: AL_FORMAT_MONO8, AL_FORMAT_MONO16,
+    AL_FORMAT_STEREO8 and AL_FORMAT_STEREO16
+
+{rate}
+
+    Frequency of data to stream given in Hz.
+
+==============================================================================
+*Return* *Values*
+
+Returns a stream resource on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |openal_source_create| - Generate a source resource
+  * |fwrite| - Binary-safe file write
+
+
+vim:ft=help:

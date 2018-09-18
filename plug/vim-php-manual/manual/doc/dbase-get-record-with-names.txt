@@ -1,0 +1,77 @@
+dbase_get_record_with_names
+
+(PHP 5 < 5.3.0, dbase 5, dbase 7)
+
+dbase_get_record_with_names — Gets a record from a database as an associative
+array
+
+==============================================================================
+*Description*
+
+    array dbase_get_record_with_names ( resource $dbase_identifier , int~
+    $record_number )~
+
+Gets a record from a dBase database as an associative array.
+
+==============================================================================
+*Parameters*
+
+{dbase_identifier}
+
+    The database link identifier, returned by |dbase_open| or |dbase_create|.
+
+{record_number}
+
+    The index of the record between 1 and dbase_numrecords($dbase_identifier).
+
+==============================================================================
+*Return* *Values*
+
+An associative array with the record. This will also include a key named
+deleted which is set to 1 if the record has been marked for deletion (see 
+|dbase_delete_record|). Therefore it is not possible to retrieve the value of a
+field named deleted with this function.
+
+Each field is converted to the appropriate PHP type, except:
+
+  * Dates are left as strings.
+  * DateTime values are converted to strings.
+  * Integers outside the range PHP_INT_MIN..PHP_INT_MAX are returned as
+    strings.
+  * Before dbase 7.0.0, booleans (L) were converted to 1 or 0.
+
+On error, dbase_get_record_with_names() will return FALSE.
+
+==============================================================================
+*Changelog*
+
+  Version                         Description
+dbase 7.0.0 {dbase_identifier} is now a resource instead of an int.
+
+==============================================================================
+*Examples*
+
+Example #1 Listing all the registered members in the database
+
+<?php >
+    // open in read-only mode
+    $db = dbase_open('/tmp/test.dbf', 0);
+
+    if ($db) {
+      $record_numbers = dbase_numrecords($db);
+      for ($i = 1; $i <= $record_numbers; $i++) {
+          $row = dbase_get_record_with_names($db, $i);
+          if ($row['ismember'] == 1) {
+              echo "Member #$i: " . trim($row['name']) . "\n";
+          }
+      }
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |dbase_get_record| - Gets a record from a database as an indexed array
+
+
+vim:ft=help:

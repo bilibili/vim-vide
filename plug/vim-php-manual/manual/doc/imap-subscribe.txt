@@ -1,0 +1,36 @@
+imap_subscribe
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_subscribe — Subscribe to a mailbox
+
+==============================================================================
+*Description*
+
+    bool imap_subscribe ( resource $imap_stream , string $mailbox )~
+
+Subscribe to a new mailbox.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{mailbox}
+
+    The mailbox name, see |imap_open| for more information
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_unsubscribe| - Unsubscribe from a mailbox
+
+
+vim:ft=help:

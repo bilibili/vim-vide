@@ -1,0 +1,35 @@
+maxdb_stmt_close
+
+maxdb_stmt::close
+
+(PECL maxdb >= 1.0)
+
+maxdb_stmt_close -- maxdb_stmt::close — Closes a prepared statement
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_stmt_close ( resource $stmt )~
+
+Object oriented style
+
+    bool maxdb_stmt::close ( void )~
+
+Closes a prepared statement. maxdb_stmt_close() also deallocates the statement
+handle pointed to by {stmt}. If the current statement has pending or unread
+results, this function cancels them so that the next query can be executed.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_prepare| - Prepare an SQL statement for execution
+
+
+vim:ft=help:

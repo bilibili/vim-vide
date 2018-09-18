@@ -1,0 +1,65 @@
+settype
+
+(PHP 4, PHP 5, PHP 7)
+
+settype — Set the type of a variable
+
+==============================================================================
+*Description*
+
+    bool settype ( mixed &$var , string $type )~
+
+Set the type of variable {var} to {type}.
+
+==============================================================================
+*Parameters*
+
+{var}
+
+    The variable being converted.
+
+{type}
+
+    Possibles values of {type} are:
+      + "boolean" or "bool"
+      + "integer" or "int"
+      + "float" or "double"
+      + "string"
+      + "array"
+      + "object"
+      + "null"
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 settype() example
+
+<?php >
+    $foo = "5bar"; // string
+    $bar = true;   // boolean
+
+    settype($foo, "integer"); // $foo is now 5   (integer)
+    settype($bar, "string");  // $bar is now "1" (string)
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Maximum value for "int" is PHP_INT_MAX.
+
+==============================================================================
+*See* *Also*
+
+  * |gettype| - Get the type of a variable
+  * type-casting
+  * type-juggling
+
+
+vim:ft=help:

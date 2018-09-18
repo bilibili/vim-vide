@@ -1,0 +1,33 @@
+trader_trange
+
+(PECL trader >= 0.2.0)
+
+trader_trange — True Range
+
+==============================================================================
+*Description*
+
+    array trader_trange ( array $high , array $low , array $close )~
+
+==============================================================================
+*Parameters*
+
+{high}
+
+    High price, array of real values.
+
+{low}
+
+    Low price, array of real values.
+
+{close}
+
+    Closing price, array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

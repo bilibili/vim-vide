@@ -1,0 +1,37 @@
+readline_callback_handler_remove
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+readline_callback_handler_remove — Removes a previously installed callback
+handler and restores terminal settings
+
+==============================================================================
+*Description*
+
+    bool readline_callback_handler_remove ( void )~
+
+Removes a previously installed callback handler and restores terminal
+settings.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if a previously installed callback handler was removed, or FALSE
+if one could not be found.
+
+==============================================================================
+*Examples*
+
+See |readline_callback_handler_install| for an example of how to use the
+readline callback interface.
+
+==============================================================================
+*See* *Also*
+
+  * |readline_callback_handler_install| - Initializes the readline callback
+    interface and terminal, prints the prompt and returns immediately
+  * |readline_callback_read_char| - Reads a character and informs the readline
+    callback interface when a line is received
+
+
+vim:ft=help:

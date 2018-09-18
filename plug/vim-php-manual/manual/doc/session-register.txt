@@ -1,0 +1,104 @@
+session_register
+
+(PHP 4, PHP 5 < 5.4.0)
+
+session_register — Register one or more global variables with the current
+session
+
+==============================================================================
+*Description*
+
+    bool session_register ( mixed $name [, mixed $... ] )~
+
+session_register() accepts a variable number of arguments, any of which can be
+either a string holding the name of a variable or an array consisting of
+variable names or other arrays. For each name, session_register() registers
+the global variable with that name in the current session.
+
+You can also create a session variable by simply setting the appropriate
+member of the $_SESSION array.
+<?php >
+    // Use of session_register() is deprecated
+    $barney = "A big purple dinosaur.";
+    session_register("barney");
+
+    // Use of $_SESSION is preferred
+    $_SESSION["zim"] = "An invader from another planet.";
+<?>
+
+If |session_start| was not called before this function is called, an implicit
+call to |session_start| with no parameters will be made. $_SESSION does not
+mimic this behavior and requires |session_start| before use.
+
+Warning
+
+This function has been DEPRECATED as of PHP 5.3.0 and REMOVED as of PHP 5.4.0.
+
+==============================================================================
+*Parameters*
+
+{name}
+
+    A string holding the name of a variable or an array consisting of variable
+    names or other arrays.
+
+{...}
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+Caution
+
+If you want your script to work regardless of register_globals, you need to
+instead use the $_SESSION array as $_SESSION entries are automatically
+registered. If your script uses session_register(), it will not work in
+environments where the PHP directive register_globals is disabled.
+
+    Note: register_globals: important note
+
+    As of PHP 4.2.0, the default value for the PHP directive register_globals
+    is off. The PHP community discourages developers from relying on this
+    directive, and encourages the use of other means, such as the superglobals
+    .
+
+Caution
+
+This registers a global variable. If you want to register a session variable
+from within a function, you need to make sure to make it global using the
+`global` keyword or the $GLOBALS[] array, or use the special session arrays as
+noted below.
+
+Caution
+
+If you are using $_SESSION, do not use session_register(), 
+|session_is_registered|, and |session_unregister|.
+
+    Note:
+
+    It is currently impossible to register resource variables in a session.
+    For example, you cannot create a connection to a database and store the
+    connection id as a session variable and expect the connection to still be
+    valid the next time the session is restored. PHP functions that return a
+    resource are identified by having a return type of resource in their
+    function definition. A list of functions that return resources are
+    available in the resource types appendix.
+
+    If $_SESSION is used, assign values to $_SESSION. For example: $_SESSION
+    ['var'] = 'ABC';
+
+==============================================================================
+*See* *Also*
+
+  * |session_is_registered| - Find out whether a global variable is registered
+    in a session
+  * |session_unregister| - Unregister a global variable from the current
+    session
+  * $_SESSION
+
+
+vim:ft=help:

@@ -1,0 +1,17 @@
+maxdb_embedded_connect
+
+(PECL maxdb >= 1.0)
+
+maxdb_embedded_connect — Open a connection to an embedded MaxDB server
+
+==============================================================================
+*Description*
+
+    resource maxdb_embedded_connect ([ string $dbname ] )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

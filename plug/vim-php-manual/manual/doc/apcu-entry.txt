@@ -1,0 +1,109 @@
+apcu_entry
+
+(PECL apcu >= 5.1.0)
+
+apcu_entry — Atomically fetch or generate a cache entry
+
+==============================================================================
+*Description*
+
+    mixed apcu_entry ( string $key , callable $generator [, int $ttl = 0 ] )~
+
+Atomically attempts to find {key} in the cache, if it cannot be found
+{generator} is called, passing {key} as the only argument. The return value of
+the call is then cached with the optionally specified {ttl}, and returned.
+
+    Note: When control enters apcu_entry() the lock for the cache is acquired
+    exclusively, it is released when control leaves apcu_entry(): In effect,
+    this turns the body of {generator} into a critical section, disallowing
+    two processes from executing the same code paths concurrently. In
+    addition, it prohibits the concurrent execution of any other APCu
+    functions, since they will acquire the same lock.
+
+Warning
+
+The only APCu function that can be called safely by {generator} is apcu_entry
+().
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    Identity of cache entry
+
+{generator}
+
+    A callable that accepts {key} as the only argument and returns the value
+    to cache.
+
+{ttl}
+
+    Time To Live; store {var} in the cache for {ttl} seconds. After the {ttl}
+    has passed, the stored variable will be expunged from the cache (on the
+    next request). If no {ttl} is supplied (or if the {ttl} is 0), the value
+    will persist until it is removed from the cache manually, or otherwise
+    fails to exist in the cache (clear, restart, etc.).
+
+==============================================================================
+*Return* *Values*
+
+Returns the cached value
+
+==============================================================================
+*Examples*
+
+Example #1 An apcu_entry() example
+
+<?php >
+    $config = apcu_entry("config", function($key) {
+     return [
+       "fruit" => apcu_entry("config.fruit", function($key){
+         return [
+           "apples",
+           "pears"
+         ];
+       }), 
+       "people" => apcu_entry("config.people", function($key){
+         return [
+          "bob",
+          "joe",
+          "niki"
+         ];
+       })
+     ];
+    });
+
+    var_dump($config);
+<?>
+
+The above example will output:
+
+array(2) {
+  ["fruit"]=>
+  array(2) {
+    [0]=>
+    string(6) "apples"
+    [1]=>
+    string(5) "pears"
+  }
+  ["people"]=>
+  array(3) {
+    [0]=>
+    string(3) "bob"
+    [1]=>
+    string(3) "joe"
+    [2]=>
+    string(4) "niki"
+  }
+}
+
+==============================================================================
+*See* *Also*
+
+  * |apcu_store| - Cache a variable in the data store
+  * |apcu_fetch| - Fetch a stored variable from the cache
+  * |apcu_delete| - Removes a stored variable from the cache
+
+
+vim:ft=help:

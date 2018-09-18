@@ -1,0 +1,71 @@
+ncurses_getmouse
+
+(PHP 4 >= 4.2.0, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_getmouse — Reads mouse event
+
+==============================================================================
+*Description*
+
+    bool ncurses_getmouse ( array &$mevent )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+ncurses_getmouse() reads mouse event out of queue.
+
+==============================================================================
+*Parameters*
+
+{mevent}
+
+    Event options will be delivered in this parameter which has to be an
+    array, passed by reference (see example below).
+
+    On success an associative array with following keys will be delivered:
+      + "id" : Id to distinguish multiple devices
+
+      + "x" : screen relative x-position in character cells
+
+      + "y" : screen relative y-position in character cells
+
+      + "z" : currently not supported
+
+      + "mmask" : Mouse action
+
+==============================================================================
+*Return* *Values*
+
+Returns FALSE if a mouse event is actually visible in the given window,
+otherwise returns TRUE.
+
+==============================================================================
+*Examples*
+
+Example #1 ncurses_getmouse() example
+
+<?php >
+    switch (ncurses_getch()){
+      case NCURSES_KEY_MOUSE:
+        if (!ncurses_getmouse($mevent)){
+          if ($mevent["mmask"] & NCURSES_MOUSE_BUTTON1_PRESSED){
+            $mouse_x = $mevent["x"]; // Save mouse position
+            $mouse_y = $mevent["y"];
+          }
+        }
+      break;
+
+      default:
+        /* .... */
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ncurses_ungetmouse| - Pushes mouse event to queue
+
+
+vim:ft=help:

@@ -1,0 +1,76 @@
+mssql_field_name
+
+(PHP 4, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_field_name — Get the name of a field
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * PDOStatement::getColumnMeta()
+  * |sqlsrv_field_metadata|
+  * |odbc_field_name|
+
+==============================================================================
+*Description*
+
+    string mssql_field_name ( resource $result [, int $offset = -1 ] )~
+
+Returns the name of field no. {offset} in {result}.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mssql_query|.
+
+{offset}
+
+    The field offset, starts at 0. If omitted, the current field is used.
+
+==============================================================================
+*Return* *Values*
+
+The name of the specified field index on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mssql_field_name() example
+
+<?php >
+    // Send a select query to MSSQL
+    $query = mssql_query('SELECT [username], [name], [email] FROM [php].[dbo].
+    [userlist]');
+
+    echo 'Result set contains the following field(s):', PHP_EOL;
+
+    // Dump all field names in result
+    for ($i = 0; $i < mssql_num_fields($query); ++$i) {
+        echo ' - ' . mssql_field_name($query, $i), PHP_EOL;
+    }
+
+    // Free the query result
+    mssql_free_result($query);
+<?>
+
+The above example will output something similar to:
+
+Result set contains the following field(s):
+ - username
+ - name
+ - email
+
+==============================================================================
+*See* *Also*
+
+  * |mssql_field_length| - Get the length of a field
+  * |mssql_field_type| - Gets the type of a field
+
+
+vim:ft=help:

@@ -1,0 +1,33 @@
+posix_ttyname
+
+(PHP 4, PHP 5, PHP 7)
+
+posix_ttyname — Determine terminal device name
+
+==============================================================================
+*Description*
+
+    string posix_ttyname ( mixed $fd )~
+
+Returns a string for the absolute path to the current terminal device that is
+open on the file descriptor {fd}.
+
+==============================================================================
+*Parameters*
+
+{fd}
+
+    The file descriptor, which is expected to be either a file resource or an 
+    integer. An integer will be assumed to be a file descriptor that can be
+    passed directly to the underlying system call.
+
+    In almost all cases, you will want to provide a file resource.
+
+==============================================================================
+*Return* *Values*
+
+On success, returns a string of the absolute path of the {fd}. On failure,
+returns FALSE
+
+
+vim:ft=help:

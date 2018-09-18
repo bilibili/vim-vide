@@ -1,0 +1,28 @@
+fann_get_total_connections
+
+(PECL fann >= 1.0.0)
+
+fann_get_total_connections — Get the total number of connections in the entire
+network
+
+==============================================================================
+*Description*
+
+    int fann_get_total_connections ( resource $ann )~
+
+Get the total number of connections in the entire network.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+==============================================================================
+*Return* *Values*
+
+Total number of connections in the entire network, or FALSE on error
+
+
+vim:ft=help:

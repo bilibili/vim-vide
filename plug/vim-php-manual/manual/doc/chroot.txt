@@ -1,0 +1,50 @@
+chroot
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+chroot — Change the root directory
+
+==============================================================================
+*Description*
+
+    bool chroot ( string $directory )~
+
+Changes the root directory of the current process to {directory}, and changes
+the current working directory to "/".
+
+This function is only available to GNU and BSD systems, and only when using
+the CLI, CGI or Embed SAPI. Also, this function requires root privileges.
+
+==============================================================================
+*Parameters*
+
+{directory}
+
+    The path to change the root directory to.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 chroot() example
+
+<?php >
+    chroot("/path/to/your/chroot/");
+    echo getcwd();
+<?>
+
+The above example will output:
+
+/
+
+==============================================================================
+*Notes*
+
+    Note: This function is not implemented on Windows platforms.
+
+
+vim:ft=help:

@@ -1,0 +1,62 @@
+bcompiler_load
+
+(PECL bcompiler >= 0.4)
+
+bcompiler_load — Reads and creates classes from a bz compressed file
+
+==============================================================================
+*Description*
+
+    bool bcompiler_load ( string $filename )~
+
+Reads data from a bzcompressed file and creates classes from the bytecodes.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The bzcompressed file path, as a string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 bcompiler_load() example
+
+<?php >
+
+    bcompiler_load("/tmp/example");
+
+    print_r(get_defined_classes());
+
+<?>
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+    Note:
+
+    Please use include or require statements to parse bytecodes, it's more
+    portable and convenient way than using this function.
+
+    Please note that this function won't execute script body code contained in
+    the bytecode file.
+
+==============================================================================
+*See* *Also*
+
+  * |bcompiler_load_exe| - Reads and creates classes from a bcompiler exe file
+
+
+vim:ft=help:

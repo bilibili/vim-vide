@@ -1,0 +1,77 @@
+oci_field_is_null
+
+(PHP 5, PHP 7, PECL OCI8 >= 1.1.0)
+
+oci_field_is_null — Checks if a field in the currently fetched row is NULL
+
+==============================================================================
+*Description*
+
+    bool oci_field_is_null ( resource $statement , mixed $field )~
+
+Checks if the given {field} from the current row of {statement} is NULL.
+
+==============================================================================
+*Parameters*
+
+{statement}
+
+    A valid OCI statement identifier.
+
+{field}
+
+    Can be the field's index (1-based) or name.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {field} is NULL, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 |oci_field_name| example
+
+<?php >
+
+    // Create the table with:
+    //   CREATE TABLE mytab (c1 NUMBER);
+    //   INSERT INTO mytab VALUES (1);
+    //   INSERT INTO mytab VALUES (NULL);
+
+    $conn = oci_connect("hr", "hrpwd", "localhost/XE");
+    if (!$conn) {
+        $m = oci_error();
+        trigger_error(htmlentities($m['message']), E_USER_ERROR);
+    }
+
+    $stid = oci_parse($conn, "SELECT * FROM mytab");
+    oci_execute($stid);
+
+    while (($row = oci_fetch_array($stid, OCI_RETURN_NULLS)) != false) {
+        $ncols = oci_num_fields($stid);
+        for ($col = 1; $col <= $ncols; $col++) {
+            var_dump(oci_field_is_null($stid, $col));
+        }    
+    }
+
+    // Outputs:
+    //    bool(false)
+    //    bool(true)
+
+    oci_free_statement($stid);
+    oci_close($conn);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    In PHP versions before 5.0.0 you must use |ocicolumnisnull| instead. This
+    name still can be used, it was left as alias of oci_field_is_null() for
+    downwards compatability. This, however, is deprecated and not recommended.
+
+
+vim:ft=help:

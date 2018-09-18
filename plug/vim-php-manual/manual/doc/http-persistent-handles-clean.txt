@@ -1,0 +1,33 @@
+http_persistent_handles_clean
+
+(PECL pecl_http >= 1.5.0)
+
+http_persistent_handles_clean — Clean up persistent handles
+
+==============================================================================
+*Description*
+
+    string http_persistent_handles_clean ([ string $ident ] )~
+
+Clean up (close) persistent handles, optionally identified with ident.
+
+==============================================================================
+*Parameters*
+
+{clean}
+
+    the identification string
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |http_persistent_handles_ident| - Get/set ident of persistent handles
+  * |http_persistent_handles_count| - Stat persistent handles
+
+
+vim:ft=help:

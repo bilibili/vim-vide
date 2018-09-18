@@ -1,0 +1,34 @@
+mcrypt_enc_get_iv_size
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+mcrypt_enc_get_iv_size — Returns the size of the IV of the opened algorithm
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    int mcrypt_enc_get_iv_size ( resource $td )~
+
+This function returns the size of the IV of the algorithm specified by the
+encryption descriptor in bytes. An IV is used in cbc, cfb and ofb modes, and
+in some algorithms in stream mode.
+
+==============================================================================
+*Parameters*
+
+{td}
+
+    The encryption descriptor.
+
+==============================================================================
+*Return* *Values*
+
+Returns the size of the IV, or 0 if the IV is ignored by the algorithm.
+
+
+vim:ft=help:

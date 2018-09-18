@@ -1,0 +1,56 @@
+fdf_open
+
+(PHP 4, PHP 5, PHP 7)
+
+fdf_open — Open a FDF document
+
+==============================================================================
+*Description*
+
+    resource fdf_open ( string $filename )~
+
+Opens a file with form data.
+
+You can also use |fdf_open_string| to process the results of a PDF form POST
+request.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the FDF file. This file must contain the data as returned from a
+    PDF form or created using |fdf_create| and |fdf_save|.
+
+==============================================================================
+*Return* *Values*
+
+Returns a FDF document handle, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 Accessing the form data
+
+<?php >
+    // Save the FDF data into a temp file
+    $fdffp = fopen("test.fdf", "w");
+    fwrite($fdffp, $HTTP_FDF_DATA, strlen($HTTP_FDF_DATA));
+    fclose($fdffp);
+
+    // Open temp file and evaluate data
+    $fdf = fdf_open("test.fdf");
+    /* ... */
+    fdf_close($fdf);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fdf_open_string| - Read a FDF document from a string
+  * |fdf_close| - Close an FDF document
+  * |fdf_create| - Create a new FDF document
+  * |fdf_save| - Save a FDF document
+
+
+vim:ft=help:

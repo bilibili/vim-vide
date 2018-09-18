@@ -1,0 +1,40 @@
+fann_set_train_error_function
+
+(PECL fann >= 1.0.0)
+
+fann_set_train_error_function — Sets the error function used during training
+
+==============================================================================
+*Description*
+
+    bool fann_set_train_error_function ( resource $ann , int $error_function~
+)~
+
+Sets the error function used during training.
+
+The error functions are described further in error functions constants.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{error_function}
+
+    The error function constant
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_train_error_function| - Returns the error function used during
+    training
+
+
+vim:ft=help:

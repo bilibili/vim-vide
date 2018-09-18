@@ -1,0 +1,69 @@
+cubrid_send_glo
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_send_glo — Read data from glo and send it to std output
+
+==============================================================================
+*Description*
+
+    int cubrid_send_glo ( resource $conn_identifier , string $oid )~
+
+The cubrid_send_glo() function is used to read data from glo instance and
+sends it to the PHP standard output.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    Connection identifier.
+
+{oid}
+
+    Oid of the glo instance that you want to read data from.
+
+==============================================================================
+*Return* *Values*
+
+TRUE, when process is successful.
+
+FALSE, when process is unsuccessful.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_send_glo() example
+
+<?php >
+    $req = cubrid_execute ($con, "select image from person where id =1");
+    if ($req) {
+      list ($oid) = cubrid_fetch($req);
+      cubrid_close_request($req);
+      Header ("Content-type: image/jpeg");
+      cubrid_send_glo ($con, $oid);
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    For backward compatibility, the following deprecated alias may be used: 
+    cubrid_send_glo()
+
+    Note:
+
+    This function is removed from CUBRID 3.1.
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_new_glo| - Create a glo instance
+  * |cubrid_save_to_glo| - Save requested file in a GLO instance
+  * |cubrid_load_from_glo| - Read data from a GLO instance and save it in a
+    file
+
+
+vim:ft=help:

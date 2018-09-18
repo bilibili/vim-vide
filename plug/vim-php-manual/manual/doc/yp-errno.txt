@@ -1,0 +1,26 @@
+yp_errno
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5)
+
+yp_errno — Returns the error code of the previous operation
+
+==============================================================================
+*Description*
+
+    int yp_errno ( void )~
+
+Returns the error code of the previous operation.
+
+==============================================================================
+*Return* *Values*
+
+Returns one of the YPERR_XXX error constants.
+
+==============================================================================
+*See* *Also*
+
+  * |yp_err_string| - Returns the error string associated with the given error
+    code
+
+
+vim:ft=help:

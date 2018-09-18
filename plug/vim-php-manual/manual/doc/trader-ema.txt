@@ -1,0 +1,29 @@
+trader_ema
+
+(PECL trader >= 0.2.0)
+
+trader_ema — Exponential Moving Average
+
+==============================================================================
+*Description*
+
+    array trader_ema ( array $real [, integer $timePeriod ] )~
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+{timePeriod}
+
+    Number of period. Valid range from 2 to 100000.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

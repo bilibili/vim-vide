@@ -1,0 +1,38 @@
+socket_clear_error
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+socket_clear_error — Clears the error on the socket or the last error code
+
+==============================================================================
+*Description*
+
+    void socket_clear_error ([ resource $socket ] )~
+
+This function clears the error code on the given socket or the global last
+socket error if no socket is specified.
+
+This function allows explicitly resetting the error code value either of a
+socket or of the extension global last error code. This may be useful to
+detect within a part of the application if an error occurred or not.
+
+==============================================================================
+*Parameters*
+
+{socket}
+
+    A valid socket resource created with |socket_create|.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |socket_last_error| - Returns the last error on the socket
+  * |socket_strerror| - Return a string describing a socket error
+
+
+vim:ft=help:

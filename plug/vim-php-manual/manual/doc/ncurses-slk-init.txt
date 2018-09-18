@@ -1,0 +1,41 @@
+ncurses_slk_init
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_slk_init — Initializes soft label key functions
+
+==============================================================================
+*Description*
+
+    bool ncurses_slk_init ( int $format )~
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+Initializes soft label key functions
+
+This function must be called before |ncurses_init| or |ncurses_newwin| is
+called.
+
+==============================================================================
+*Parameters*
+
+{format}
+
+    If |ncurses_init| eventually uses a line from stdscr to emulate the soft
+    labels, then this parameter determines how the labels are arranged of the
+    screen.
+
+    0 indicates a 3-2-3 arrangement of the labels, 1 indicates a 4-4
+    arrangement and 2 indicates the PC like 4-4-4 mode, but in addition an
+    index line will be created.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

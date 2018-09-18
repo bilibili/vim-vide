@@ -1,0 +1,35 @@
+ibase_blob_cancel
+
+(PHP 5, PHP 7)
+
+ibase_blob_cancel — Cancel creating blob
+
+==============================================================================
+*Description*
+
+    bool ibase_blob_cancel ( resource $blob_handle )~
+
+This function will discard a BLOB if it has not yet been closed by 
+|ibase_blob_close|.
+
+==============================================================================
+*Parameters*
+
+{blob_handle}
+
+    A BLOB handle opened with |ibase_blob_create|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ibase_blob_close| - Close blob
+  * |ibase_blob_create| - Create a new blob for adding data
+  * |ibase_blob_import| - Create blob, copy file in it, and close it
+
+
+vim:ft=help:

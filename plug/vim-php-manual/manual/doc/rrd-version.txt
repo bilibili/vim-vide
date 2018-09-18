@@ -1,0 +1,25 @@
+rrd_version
+
+(PECL rrd >= 1.0.0)
+
+rrd_version — Gets information about underlying rrdtool library
+
+==============================================================================
+*Description*
+
+    string rrd_version ( void )~
+
+Returns information about underlying rrdtool library.
+
+==============================================================================
+*Parameters*
+
+This function has no parameters.
+
+==============================================================================
+*Return* *Values*
+
+String with rrdtool version number e.g. "1.4.3".
+
+
+vim:ft=help:

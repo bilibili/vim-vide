@@ -1,0 +1,16 @@
+PDF_delete
+
+(PHP 4 >= 4.0.5, PECL pdflib >= 1.0.0)
+
+PDF_delete — Delete PDFlib object
+
+==============================================================================
+*Description*
+
+    bool PDF_delete ( resource $pdfdoc )~
+
+Deletes a PDFlib object, and frees all internal resources. Returns TRUE on
+success or FALSE on failure.
+
+
+vim:ft=help:

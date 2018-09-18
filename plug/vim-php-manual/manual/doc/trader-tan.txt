@@ -1,0 +1,28 @@
+trader_tan
+
+(PECL trader >= 0.2.0)
+
+trader_tan — Vector Trigonometric Tan
+
+==============================================================================
+*Description*
+
+    array trader_tan ( array $real )~
+
+Calculates the tangent for each value in {real} and returns the resulting
+array.
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

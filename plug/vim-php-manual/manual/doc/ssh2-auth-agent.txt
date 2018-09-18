@@ -1,0 +1,49 @@
+ssh2_auth_agent
+
+(PECL ssh2 >= 0.12)
+
+ssh2_auth_agent — Authenticate over SSH using the ssh agent
+
+==============================================================================
+*Description*
+
+    bool ssh2_auth_agent ( resource $session , string $username )~
+
+Authenticate over SSH using the ssh agent
+
+    Note: The ssh2_auth_agent() function will only be available when the ssh2
+    extension is compiled with libssh >= 1.2.3.
+
+==============================================================================
+*Parameters*
+
+{session}
+
+    An SSH connection link identifier, obtained from a call to |ssh2_connect|.
+
+{username}
+
+    Remote user name.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Authenticating with a ssh agent
+
+<?php >
+    $connection = ssh2_connect('shell.example.com', 22);
+
+    if (ssh2_auth_agent($connection, 'username')) {
+      echo "Authentication Successful!\n";
+    } else {
+      die('Authentication Failed...');
+    }
+<?>
+
+
+vim:ft=help:

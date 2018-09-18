@@ -1,0 +1,39 @@
+win32_start_service
+
+(PECL win32service SVN)
+
+win32_start_service — Starts a service
+
+==============================================================================
+*Description*
+
+    int win32_start_service ( string $servicename [, string $machine ] )~
+
+Attempts to start the named service. Usually requires administrative
+privileges.
+
+==============================================================================
+*Parameters*
+
+{servicename}
+
+    The short name of the service.
+
+{machine}
+
+    Optional machine name. If omitted, the local machine is used.
+
+==============================================================================
+*Return* *Values*
+
+Returns WIN32_NO_ERROR on success, FALSE if there is a problem with the
+parameters or a Win32 Error Code on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |win32_stop_service| - Stops a service
+  * Win32 Error Codes
+
+
+vim:ft=help:

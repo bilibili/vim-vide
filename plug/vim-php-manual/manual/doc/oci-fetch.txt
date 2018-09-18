@@ -1,0 +1,120 @@
+oci_fetch
+
+(PHP 5, PHP 7, PECL OCI8 >= 1.1.0)
+
+oci_fetch — Fetches the next row from a query into internal buffers
+
+==============================================================================
+*Description*
+
+    bool oci_fetch ( resource $statement )~
+
+Fetches the next row from a query into internal buffers accessible either with
+|oci_result|, or by using variables previously defined with 
+|oci_define_by_name|.
+
+See |oci_fetch_array| for general information about fetching data.
+
+==============================================================================
+*Parameters*
+
+{statement}
+
+    A valid OCI8 statement identifier created by |oci_parse| and executed by 
+    |oci_execute|, or a REF CURSOR statement identifier.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE if there are no more rows in the {statement}.
+
+==============================================================================
+*Examples*
+
+Example #1 oci_fetch() with defined variables
+
+<?php >
+
+    $conn = oci_connect('hr', 'welcome', 'localhost/XE');
+    if (!$conn) {
+        $e = oci_error();
+        trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+
+    $sql = 'SELECT location_id, city FROM locations WHERE location_id < 1200';
+    $stid = oci_parse($conn, $sql);
+
+    // The defines MUST be done before executing
+    oci_define_by_name($stid, 'LOCATION_ID', $locid);
+    oci_define_by_name($stid, 'CITY', $city);
+
+    oci_execute($stid);
+
+    //
+     Each fetch populates the previously defined variables with the next row's data
+    while (oci_fetch($stid)) {
+        echo "Location id $locid is $city<br>\n";
+    }
+
+    // Displays:
+    //   Location id 1000 is Roma
+    //   Location id 1100 is Venice
+
+    oci_free_statement($stid);
+    oci_close($conn);
+
+<?>
+
+Example #2 oci_fetch() with |oci_result|
+
+<?php >
+
+    $conn = oci_connect('hr', 'welcome', 'localhost/XE');
+    if (!$conn) {
+        $e = oci_error();
+        trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+
+    $sql = 'SELECT location_id, city FROM locations WHERE location_id < 1200';
+    $stid = oci_parse($conn, $sql);
+    oci_execute($stid);
+
+    while (oci_fetch($stid)) {
+        echo oci_result($stid, 'LOCATION_ID') . " is ";
+        echo oci_result($stid, 'CITY') . "<br>\n";
+    }
+
+    // Displays:
+    //   1000 is Roma
+    //   1100 is Venice
+
+    oci_free_statement($stid);
+    oci_close($conn);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Will not return rows from Oracle Database 12c Implicit Result Sets. Use 
+    |oci_fetch_array| instead.
+
+==============================================================================
+*See* *Also*
+
+  * |oci_define_by_name| - Associates a PHP variable with a column for query
+    fetches
+  * |oci_fetch_all| - Fetches multiple rows from a query into a
+    two-dimensional array
+  * |oci_fetch_array| - Returns the next row from a query as an associative or
+    numeric array
+  * |oci_fetch_assoc| - Returns the next row from a query as an associative
+    array
+  * |oci_fetch_object| - Returns the next row from a query as an object
+  * |oci_fetch_row| - Returns the next row from a query as a numeric array
+  * |oci_result| - Returns field's value from the fetched row
+
+
+vim:ft=help:

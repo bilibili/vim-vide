@@ -1,0 +1,42 @@
+msql_list_tables
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_list_tables — List tables in an mSQL database
+
+==============================================================================
+*Description*
+
+    resource msql_list_tables ( string $database [, resource $link_identifier~
+    ] )~
+
+msql_list_tables() lists the tables on the specified {database}.
+
+==============================================================================
+*Parameters*
+
+{database}
+
+    The name of the database.
+
+{ link_identifier}
+
+    The mSQL connection. If not specified, the last link opened by 
+    |msql_connect| is assumed. If no such link is found, the function will try
+    to establish a link as if |msql_connect| was called, and use it.
+
+==============================================================================
+*Return* *Values*
+
+Returns a result set which may be traversed with any function that fetches
+result sets, such as |msql_fetch_array|. On failure, this function will return
+FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |msql_list_fields| - List result fields
+  * |msql_list_dbs| - List mSQL databases on server
+
+
+vim:ft=help:

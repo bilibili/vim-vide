@@ -1,0 +1,70 @@
+xml_set_external_entity_ref_handler
+
+(PHP 4, PHP 5, PHP 7)
+
+xml_set_external_entity_ref_handler — Set up external entity reference handler
+
+==============================================================================
+*Description*
+
+    bool xml_set_external_entity_ref_handler ( resource $parser , callable~
+    $handler )~
+
+Sets the external entity reference handler function for the XML parser
+{parser}.
+
+==============================================================================
+*Parameters*
+
+{parser}
+
+    A reference to the XML parser to set up external entity reference handler
+    function.
+
+{handler}
+
+    {handler} is a string containing the name of a function that must exist
+    when |xml_parse| is called for {parser}.
+
+    The function named by {handler} must accept five parameters, and should
+    return an integer value.If the value returned from the handler is FALSE
+    (which it will be if no value is returned), the XML parser will stop
+    parsing and |xml_get_error_code| will return
+    XML_ERROR_EXTERNAL_ENTITY_HANDLING.
+
+    handler ( resource $parser , string $open_entity_names , string $base ,~
+    string $system_id , string $public_id )~
+
+    {parser}
+        The first parameter, parser, is a reference to the XML parser calling
+        the handler.
+    {open_entity_names}
+        The second parameter, {open_entity_names}, is a space-separated list
+        of the names of the entities that are open for the parse of this
+        entity (including the name of the referenced entity).
+    {base}
+        This is the base for resolving the system identifier ({system_id}) of
+        the external entity.Currently this parameter will always be set to an
+        empty string.
+    {system_id}
+        The fourth parameter, {system_id}, is the system identifier as
+        specified in the entity declaration.
+    {public_id}
+        The fifth parameter, {public_id}, is the public identifier as
+        specified in the entity declaration, or an empty string if none was
+        specified; the whitespace in the public identifier will have been
+        normalized as required by the XML spec.
+
+    If a handler function is set to an empty string, or FALSE, the handler in
+    question is disabled.
+
+        Note: Instead of a function name, an array containing an object
+        reference and a method name can also be supplied.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

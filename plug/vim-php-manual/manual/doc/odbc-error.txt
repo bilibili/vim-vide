@@ -1,0 +1,38 @@
+odbc_error
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+odbc_error — Get the last error code
+
+==============================================================================
+*Description*
+
+    string odbc_error ([ resource $connection_id ] )~
+
+Returns a six-digit ODBC state, or an empty string if there has been no
+errors.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+==============================================================================
+*Return* *Values*
+
+If {connection_id} is specified, the last state of that connection is
+returned, else the last state of any connection is returned.
+
+This function returns meaningful value only if last odbc query failed (i.e. 
+|odbc_exec| returned FALSE).
+
+==============================================================================
+*See* *Also*
+
+  * |odbc_errormsg| - Get the last error message
+  * |odbc_exec| - Prepare and execute an SQL statement
+
+
+vim:ft=help:

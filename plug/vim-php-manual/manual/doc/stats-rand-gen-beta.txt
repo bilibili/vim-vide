@@ -1,0 +1,27 @@
+stats_rand_gen_beta
+
+(PECL stats >= 1.0.0)
+
+stats_rand_gen_beta — Generates beta random deviate
+
+==============================================================================
+*Description*
+
+    float stats_rand_gen_beta ( float $a , float $b )~
+
+Returns a random deviate from the beta distribution with parameters A and B.
+The density of the beta is x^(a-1) * (1-x)^(b-1) / B(a,b) for 0 < x <. Method
+R. C. H. Cheng.
+
+==============================================================================
+*Parameters*
+
+{a}
+
+{b}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

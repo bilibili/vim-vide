@@ -1,0 +1,56 @@
+mcrypt_enc_get_supported_key_sizes
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+mcrypt_enc_get_supported_key_sizes — Returns an array with the supported
+keysizes of the opened algorithm
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    array mcrypt_enc_get_supported_key_sizes ( resource $td )~
+
+Gets the supported key sizes of the opened algorithm.
+
+==============================================================================
+*Parameters*
+
+{td}
+
+    The encryption descriptor.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with the key sizes supported by the algorithm specified by
+the encryption descriptor. If it returns an empty array then all key sizes
+between 1 and |mcrypt_enc_get_key_size| are supported by the algorithm.
+
+==============================================================================
+*Examples*
+
+Example #1 mcrypt_enc_get_supported_key_sizes() example
+
+<?php >
+        $td = mcrypt_module_open('rijndael-256', '', 'ecb', '');
+        var_dump(mcrypt_enc_get_supported_key_sizes($td));
+<?>
+
+The above example will output:
+
+array(3) {
+  [0]=>
+  int(16)
+  [1]=>
+  int(24)
+  [2]=>
+  int(32)
+}
+
+
+vim:ft=help:

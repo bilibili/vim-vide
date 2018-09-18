@@ -1,0 +1,53 @@
+variant_mod
+
+(PHP 5, PHP 7)
+
+variant_mod — Divides two variants and returns only the remainder
+
+==============================================================================
+*Description*
+
+    mixed variant_mod ( mixed $left , mixed $right )~
+
+Divides {left} by {right} and returns the remainder.
+
+==============================================================================
+*Parameters*
+
+{left}
+
+    The left operand.
+
+{right}
+
+    The right operand.
+
+    Note:
+
+    As with all the variant arithmetic functions, the parameters for this
+    function can be either a PHP native type (integer, string, floating point,
+    boolean or NULL), or an instance of a COM, VARIANT or DOTNET class. PHP
+    native types will be converted to variants using the same rules as found
+    in the constructor for the VARIANT class. COM and DOTNET objects will have
+    the value of their default property taken and used as the variant value.
+
+    The variant arithmetic functions are wrappers around the similarly named
+    functions in the COM library; for more information on these functions,
+    consult the MSDN library. The PHP functions are named slightly
+    differently; for example |variant_add| in PHP corresponds to VarAdd() in
+    the MSDN documentation.
+
+==============================================================================
+*Return* *Values*
+
+Returns the remainder of the division.
+
+==============================================================================
+*See* *Also*
+
+  * |variant_div| - Returns the result from dividing two variants
+  * |variant_idiv| - Converts variants to integers and then returns the result
+    from dividing them
+
+
+vim:ft=help:

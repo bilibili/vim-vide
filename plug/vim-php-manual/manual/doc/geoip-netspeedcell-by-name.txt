@@ -1,0 +1,61 @@
+geoip_netspeedcell_by_name
+
+(PECL geoip >= 1.1.0)
+
+geoip_netspeedcell_by_name — Get the Internet connection speed
+
+==============================================================================
+*Description*
+
+    string geoip_netspeedcell_by_name ( string $hostname )~
+
+The geoip_netspeedcell_by_name() function will return the Internet connection
+type and speed corresponding to a hostname or an IP address.
+
+This function is only available if using GeoIP Library version 1.4.8 or newer.
+
+This function is currently only available to users who have bought a
+commercial GeoIP NetSpeedCell Edition. A warning will be issued if the proper
+database cannot be located.
+
+The return value is a string, common values are:
+
+  * Cable/DSL
+  * Dialup
+  * Cellular
+  * Corporate
+
+==============================================================================
+*Parameters*
+
+{hostname}
+
+    The hostname or IP address.
+
+==============================================================================
+*Return* *Values*
+
+Returns the connection speed on success, or FALSE if the address cannot be
+found in the database.
+
+==============================================================================
+*Examples*
+
+Example #1 A geoip_netspeedcell_by_name() example
+
+This will output the connection speed of the host example.com.
+
+<?php >
+    $netspeed = geoip_netspeedcell_by_name('www.example.com');
+
+    if ($netspeed) {
+        echo 'The connection type is: '. $netspeed;
+    }
+<?>
+
+The above example will output:
+
+The connection type is: Corporate
+
+
+vim:ft=help:

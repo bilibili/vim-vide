@@ -1,0 +1,51 @@
+ingres_num_rows
+
+(PHP 4 >= 4.0.2, PHP 5 <= 5.0.5, PECL ingres >= 1.0.0)
+
+ingres_num_rows — Get the number of rows affected or returned by a query
+
+==============================================================================
+*Description*
+
+    int ingres_num_rows ( resource $result )~
+
+This function primarily is meant to get the number of rows modified in the
+database. However, it can be used to retrieve the number of rows to fetch for
+a SELECT statement.
+
+    Note:
+
+    If scrollable cursors are disabled and this function is called before
+    using |ingres_fetch_array|, |ingres_fetch_object|, or |ingres_fetch_row|,
+    the server will delete the result's data and the script will be unable to
+    get them.
+
+    Instead, you should retrieve the result's data using one of these fetch
+    functions in a loop until it returns FALSE, indicating that no more
+    results are available.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The result identifier for a query
+
+==============================================================================
+*Return* *Values*
+
+For delete, insert, or update queries, ingres_num_rows() returns the number of
+rows affected by the query. For other queries, ingres_num_rows() returns the
+number of rows in the query's result.
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_query| - Send an SQL query to Ingres
+  * |ingres_fetch_array| - Fetch a row of result into an array
+  * |ingres_fetch_assoc| - Fetch a row of result into an associative array
+  * |ingres_fetch_object| - Fetch a row of result into an object
+  * |ingres_fetch_row| - Fetch a row of result into an enumerated array
+
+
+vim:ft=help:

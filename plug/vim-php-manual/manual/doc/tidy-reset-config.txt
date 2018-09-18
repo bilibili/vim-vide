@@ -1,0 +1,26 @@
+tidy_reset_config
+
+(PECL tidy >= 0.7.0)
+
+tidy_reset_config — Restore Tidy configuration to default values
+
+==============================================================================
+*Description*
+
+    bool tidy_reset_config ( void )~
+
+This function restores the Tidy configuration to the default values.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Notes*
+
+    Note: This function is only available in Tidy 1.0. It became obsolete in
+    Tidy 2.0, and thus has been removed.
+
+
+vim:ft=help:

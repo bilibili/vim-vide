@@ -1,0 +1,13 @@
+msql_tablename
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_tablename — Alias of |msql_result|
+
+==============================================================================
+*Description*
+
+This function is an alias of |msql_result|.
+
+
+vim:ft=help:

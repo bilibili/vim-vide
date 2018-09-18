@@ -1,0 +1,13 @@
+dns_get_mx
+
+(PHP 5, PHP 7)
+
+dns_get_mx — Alias of |getmxrr|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |getmxrr|.
+
+
+vim:ft=help:

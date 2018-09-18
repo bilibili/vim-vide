@@ -1,0 +1,13 @@
+get_required_files
+
+(PHP 4, PHP 5, PHP 7)
+
+get_required_files — Alias of |get_included_files|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |get_included_files|.
+
+
+vim:ft=help:

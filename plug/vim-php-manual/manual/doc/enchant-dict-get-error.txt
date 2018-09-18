@@ -1,0 +1,28 @@
+enchant_dict_get_error
+
+(PHP 5 >= 5.3.0, PHP 7, PECL enchant >= 0.1.0 )
+
+enchant_dict_get_error — Returns the last error of the current
+spelling-session
+
+==============================================================================
+*Description*
+
+    string enchant_dict_get_error ( resource $dict )~
+
+Returns the last error of the current spelling-session
+
+==============================================================================
+*Parameters*
+
+{dict}
+
+    Dictinaray resource
+
+==============================================================================
+*Return* *Values*
+
+Returns the error message as string or FALSE if no error occurred.
+
+
+vim:ft=help:

@@ -1,0 +1,25 @@
+maxdb_stmt_reset
+
+maxdb_stmt::reset
+
+(PECL maxdb >= 1.0)
+
+maxdb_stmt_reset -- maxdb_stmt::reset — Resets a prepared statement
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    bool maxdb_stmt_reset ( resource $stmt )~
+
+Object oriented style
+
+    bool maxdb_stmt::reset ( void )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

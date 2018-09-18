@@ -1,0 +1,54 @@
+stream_get_line
+
+(PHP 5, PHP 7)
+
+stream_get_line — Gets line from stream resource up to a given delimiter
+
+==============================================================================
+*Description*
+
+    string stream_get_line ( resource $handle , int $length [, string $ending~
+    ] )~
+
+Gets a line from the given handle.
+
+Reading ends when {length} bytes have been read, when the string specified by
+{ending} is found (which is not included in the return value), or on EOF
+(whichever comes first).
+
+This function is nearly identical to |fgets| except in that it allows end of
+line delimiters other than the standard \n, \r, and \r\n, and does not return
+the delimiter itself.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    A valid file handle.
+
+{length}
+
+    The number of bytes to read from the handle.
+
+{ending}
+
+    An optional string delimiter.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string of up to {length} bytes read from the file pointed to by
+{handle}.
+
+If an error occurs, returns FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |fread| - Binary-safe file read
+  * |fgets| - Gets line from file pointer
+  * |fgetc| - Gets character from file pointer
+
+
+vim:ft=help:

@@ -1,0 +1,92 @@
+ldap_compare
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+ldap_compare — Compare value of attribute found in entry specified with DN
+
+==============================================================================
+*Description*
+
+    mixed ldap_compare ( resource $link_identifier , string $dn , string~
+    $attribute , string $value )~
+
+Compare {value} of {attribute} with value of same attribute in an LDAP
+directory entry.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    An LDAP link identifier, returned by |ldap_connect|.
+
+{dn}
+
+    The distinguished name of an LDAP entity.
+
+{attribute}
+
+    The attribute name.
+
+{value}
+
+    The compared value.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {value} matches otherwise returns FALSE. Returns -1 on error.
+
+==============================================================================
+*Examples*
+
+The following example demonstrates how to check whether or not given password
+matches the one defined in DN specified entry.
+
+Example #1 Complete example of password check
+
+<?php >
+
+    $ds=ldap_connect("localhost");  // assuming the LDAP server is on this host
+
+    if ($ds) {
+
+        // bind
+        if (ldap_bind($ds)) {
+
+            // prepare data
+            $dn = "cn=Matti Meikku, ou=My Unit, o=My Company, c=FI";
+            $value = "secretpassword";
+            $attr = "password";
+
+            // compare value
+            $r=ldap_compare($ds, $dn, $attr, $value);
+
+            if ($r === -1) {
+                echo "Error: " . ldap_error($ds);
+            } elseif ($r === true) {
+                echo "Password correct.";
+            } elseif ($r === false) {
+                echo "Wrong guess! Password incorrect.";
+            }
+
+        } else {
+            echo "Unable to bind to LDAP server.";
+        }
+
+        ldap_close($ds);
+
+    } else {
+        echo "Unable to connect to LDAP server.";
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+Warning
+
+ldap_compare() can NOT be used to compare BINARY values!
+
+
+vim:ft=help:

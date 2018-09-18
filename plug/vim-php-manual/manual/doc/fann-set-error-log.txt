@@ -1,0 +1,31 @@
+fann_set_error_log
+
+(PECL fann >= 1.0.0)
+
+fann_set_error_log — Sets where the errors are logged to
+
+==============================================================================
+*Description*
+
+    void fann_set_error_log ( resource $errdat , string $log_file )~
+
+Sets where the errors are logged to.
+
+==============================================================================
+*Parameters*
+
+{errdat}
+
+    Either neural network resource or neural network trainining data resource.
+
+{log_file}
+
+    The log file path.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

@@ -1,0 +1,70 @@
+odbc_columns
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_columns — Lists the column names in specified tables
+
+==============================================================================
+*Description*
+
+    resource odbc_columns ( resource $connection_id [, string $qualifier [,~
+    string $schema [, string $table_name [, string $column_name ]]]] )~
+
+Lists all columns in the requested range.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+{qualifier}
+
+    The qualifier.
+
+{schema}
+
+    The owner.
+
+{table_name}
+
+    The table name.
+
+{column_name}
+
+    The column name.
+
+The {schema}, {table_name}, and {column_name} accept search patterns ('%' to
+match zero or more characters and '_' to match a single character).
+
+==============================================================================
+*Return* *Values*
+
+Returns an ODBC result identifier or FALSE on failure.
+
+The result set has the following columns:
+
+  * TABLE_QUALIFIER
+  * TABLE_SCHEM
+  * TABLE_NAME
+  * COLUMN_NAME
+  * DATA_TYPE
+  * TYPE_NAME
+  * PRECISION
+  * LENGTH
+  * SCALE
+  * RADIX
+  * NULLABLE
+  * REMARKS
+
+The result set is ordered by TABLE_QUALIFIER, TABLE_SCHEM and TABLE_NAME.
+
+==============================================================================
+*See* *Also*
+
+  * |odbc_columnprivileges| - Lists columns and associated privileges for the
+    given table to retrieve associated privileges
+
+
+vim:ft=help:

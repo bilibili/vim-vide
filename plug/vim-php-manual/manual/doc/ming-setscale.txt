@@ -1,0 +1,28 @@
+ming_setscale
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7, PECL ming SVN)
+
+ming_setscale — Set the global scaling factor.
+
+==============================================================================
+*Description*
+
+    void ming_setscale ( float $scale )~
+
+Sets the scale of the output SWF. Inside the SWF file, coordinates are
+measured in TWIPS, rather than PIXELS. There are 20 TWIPS in 1 pixel.
+
+==============================================================================
+*Parameters*
+
+{scale}
+
+    The scale to be set.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

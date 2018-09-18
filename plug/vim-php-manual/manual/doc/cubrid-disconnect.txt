@@ -1,0 +1,68 @@
+cubrid_disconnect
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_disconnect — Close a database connection
+
+==============================================================================
+*Description*
+
+    bool cubrid_disconnect ([ resource $conn_identifier ] )~
+
+The cubrid_disconnect() function closes the connection handle and disconnects
+from server. If any request handle is not closed at this point, it will be
+closed. It is similar to the CUBRID MySQL compatible function |cubrid_close|.
+
+==============================================================================
+*Parameters*
+
+{conn_identifier}
+
+    Connection identifier.
+
+==============================================================================
+*Return* *Values*
+
+TRUE, when process is successful.
+
+FALSE, when process is unsuccessful.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_disconnect() example
+
+<?php >
+    $con = cubrid_connect ("localhost", 33000, "demodb");
+    if ($con) {
+       echo "connected successfully";
+       
+       $req = cubrid_execute( $con, "create table person(id int,name char(10))");
+       if ($req) {
+          cubrid_close_request($req);
+          cubrid_commit($con);
+       } else {
+          cubrid_rollback($con);
+       }
+       
+       $req = cubrid_execute( $con, "insert into person values(1,'James')");
+       if ($req) {
+          cubrid_close_request($req);
+          cubrid_commit($con);
+       } else {
+          cubrid_rollback($con);
+       }
+       cubrid_disconnect($con);
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_close| - Close CUBRID connection
+  * |cubrid_connect| - Open a connection to a CUBRID Server
+  * |cubrid_connect_with_url| - Establish the environment for connecting to
+    CUBRID server
+
+
+vim:ft=help:

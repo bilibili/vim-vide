@@ -1,0 +1,69 @@
+ctype_alnum
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+ctype_alnum — Check for alphanumeric character(s)
+
+==============================================================================
+*Description*
+
+    bool ctype_alnum ( string $text )~
+
+Checks if all of the characters in the provided string, {text}, are
+alphanumeric.
+
+==============================================================================
+*Parameters*
+
+{text}
+
+    The tested string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if every character in {text} is either a letter or a digit, FALSE
+otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 A ctype_alnum() example (using the default locale)
+
+<?php >
+    $strings = array('AbCd1zyZ9', 'foo!#$bar');
+    foreach ($strings as $testcase) {
+        if (ctype_alnum($testcase)) {
+            echo "The string $testcase consists of all letters or digits.\n";
+        } else {
+            echo "The string $testcase does not consist of all letters or digits.\
+    n";
+        }
+    }
+<?>
+
+The above example will output:
+
+The string AbCd1zyZ9 consists of all letters or digits.
+The string foo!#$bar does not consist of all letters or digits.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    If an integer between -128 and 255 inclusive is provided, it is
+    interpreted as the ASCII value of a single character (negative values have
+    256 added in order to allow characters in the Extended ASCII range). Any
+    other integer is interpreted as a string containing the decimal digits of
+    the integer.
+
+==============================================================================
+*See* *Also*
+
+  * |ctype_alpha| - Check for alphabetic character(s)
+  * |ctype_digit| - Check for numeric character(s)
+  * |setlocale| - Set locale information
+
+
+vim:ft=help:

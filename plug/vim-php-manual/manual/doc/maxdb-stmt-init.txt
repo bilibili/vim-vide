@@ -1,0 +1,40 @@
+maxdb_stmt_init
+
+maxdb::stmt_init
+
+(PECL maxdb >= 1.0)
+
+maxdb_stmt_init -- maxdb::stmt_init — Initializes a statement and returns an
+resource for use with maxdb_stmt_prepare
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    resource maxdb_stmt_init ( resource $link )~
+
+Object oriented style
+
+    object maxdb::stmt_init ( void )~
+
+Allocates and initializes a statement resource suitable for 
+|maxdb_stmt_prepare|.
+
+    Note:
+
+    Any subsequent calls to any maxdb_stmt function will fail until 
+    |maxdb_stmt_prepare| was called.
+
+==============================================================================
+*Return* *Values*
+
+Returns an resource.
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_stmt_prepare| - Prepare an SQL statement for execution
+
+
+vim:ft=help:

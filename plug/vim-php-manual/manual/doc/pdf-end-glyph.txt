@@ -1,0 +1,15 @@
+PDF_end_glyph
+
+(PECL pdflib >= 2.0.0)
+
+PDF_end_glyph — Terminate glyph definition for Type 3 font
+
+==============================================================================
+*Description*
+
+    bool PDF_end_glyph ( resource $pdfdoc )~
+
+Terminates a glyph definition for a Type 3 font.
+
+
+vim:ft=help:

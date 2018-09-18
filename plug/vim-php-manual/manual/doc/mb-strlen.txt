@@ -1,0 +1,51 @@
+mb_strlen
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+mb_strlen — Get string length
+
+==============================================================================
+*Description*
+
+    mixed mb_strlen ( string $str [, string $encoding =~
+    mb_internal_encoding() ] )~
+
+Gets the length of a string.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The string being checked for length.
+
+{encoding}
+
+    The {encoding} parameter is the character encoding. If it is omitted, the
+    internal character encoding value will be used.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of characters in string {str} having character encoding
+{encoding}. A multi-byte character is counted as 1.
+
+Returns FALSE if the given {encoding} is invalid.
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_internal_encoding| - Set/Get internal character encoding
+  * |grapheme_strlen| - Get string length in grapheme units
+  * |iconv_strlen| - Returns the character count of string
+  * |strlen| - Get string length
+
+
+vim:ft=help:

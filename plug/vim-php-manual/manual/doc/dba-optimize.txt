@@ -1,0 +1,32 @@
+dba_optimize
+
+(PHP 4, PHP 5, PHP 7)
+
+dba_optimize — Optimize database
+
+==============================================================================
+*Description*
+
+    bool dba_optimize ( resource $handle )~
+
+dba_optimize() optimizes the underlying database.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    The database handler, returned by |dba_open| or |dba_popen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |dba_sync| - Synchronize database
+
+
+vim:ft=help:

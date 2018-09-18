@@ -1,0 +1,88 @@
+imagecropauto
+
+(PHP 5 >= 5.5.0, PHP 7)
+
+imagecropauto — Crop an image automatically using one of the available modes
+
+==============================================================================
+*Description*
+
+    resource imagecropauto ( resource $image [, int $mode = -1 [, float~
+    $threshold = .5 [, int $color = -1 ]]] )~
+
+Automatically crops an image according to the given {mode}.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{mode}
+
+    One of the following constants:
+
+    IMG_CROP_DEFAULT
+        Attempts to use IMG_CROP_TRANSPARENT and if it fails it falls back to
+        IMG_CROP_SIDES.
+    IMG_CROP_TRANSPARENT
+        Crops out a transparent background.
+    IMG_CROP_BLACK
+        Crops out a black background.
+    IMG_CROP_WHITE
+        Crops out a white background.
+    IMG_CROP_SIDES
+        Uses the 4 corners of the image to attempt to detect the background to
+        crop.
+    IMG_CROP_THRESHOLD
+        Crops an image using the given {threshold} and {color}.
+
+{threshold}
+
+    Specifies the tolerance in percent to be used while comparing the image
+    color and the color to crop. The method used to calculate the color
+    difference is based on the color distance in the RGB(a) cube.
+
+    Used only in IMG_CROP_THRESHOLD mode.
+
+{color}
+
+    Either an RGB color value or a palette index.
+
+    Used only in IMG_CROP_THRESHOLD mode.
+
+==============================================================================
+*Return* *Values*
+
+Returns a cropped image resource on success or FALSE on failure. If no
+cropping would occur, or the complete image would be cropped, that is treated
+as failure, i.e. |imagecrop| returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 Proper handling of auto-cropping
+
+As noted in the return value section, imagecropauto() returns FALSE when there
+is either nothing to crop or the whole image would be cropped. In this example
+we have an image resource $im which should be automatically cropped only if
+there is something to crop; otherwise we want to proceed with the original
+image.
+
+<?php >
+    $cropped = imagecropauto($im, IMG_CROP_DEFAULT);
+    if ($cropped !== false) { // in case a new image resource was returned
+        imagedestroy($im);    // we destroy the original image
+        $im = $cropped;       // and assign the cropped image to $im
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |imagecrop| - Crop an image to the given rectangle
+
+
+vim:ft=help:

@@ -1,0 +1,63 @@
+iconv_strrpos
+
+(PHP 5, PHP 7)
+
+iconv_strrpos — Finds the last occurrence of a needle within a haystack
+
+==============================================================================
+*Description*
+
+    int iconv_strrpos ( string $haystack , string $needle [, string $charset~
+    = ini_get("iconv.internal_encoding") ] )~
+
+Finds the last occurrence of a {needle} within a {haystack}.
+
+In contrast to |strrpos|, the return value of iconv_strrpos() is the number of
+characters that appear before the needle, rather than the offset in bytes to
+the position where the needle has been found. The characters are counted on
+the basis of the specified character set {charset}.
+
+==============================================================================
+*Parameters*
+
+{haystack}
+
+    The entire string.
+
+{needle}
+
+    The searched substring.
+
+{charset}
+
+    If {charset} parameter is omitted, {string} are assumed to be encoded in
+    iconv.internal_encoding.
+
+If {haystack} or {needle} is not a string, it is converted to a string and
+applied as the ordinal value of a character.
+
+==============================================================================
+*Return* *Values*
+
+Returns the numeric position of the last occurrence of {needle} in {haystack}.
+
+If {needle} is not found, iconv_strrpos() will return FALSE.
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*See* *Also*
+
+  * |strrpos| - Find the position of the last occurrence of a substring in a
+    string
+  * |iconv_strpos| - Finds position of first occurrence of a needle within a
+    haystack
+  * |mb_strrpos| - Find position of last occurrence of a string in a string
+
+
+vim:ft=help:

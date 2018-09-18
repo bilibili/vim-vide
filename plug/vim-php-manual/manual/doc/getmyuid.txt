@@ -1,0 +1,29 @@
+getmyuid
+
+(PHP 4, PHP 5, PHP 7)
+
+getmyuid — Gets PHP script owner's UID
+
+==============================================================================
+*Description*
+
+    int getmyuid ( void )~
+
+Gets the user ID of the current script.
+
+==============================================================================
+*Return* *Values*
+
+Returns the user ID of the current script, or FALSE on error.
+
+==============================================================================
+*See* *Also*
+
+  * |getmygid| - Get PHP script owner's GID
+  * |getmypid| - Gets PHP's process ID
+  * |get_current_user| - Gets the name of the owner of the current PHP script
+  * |getmyinode| - Gets the inode of the current script
+  * |getlastmod| - Gets time of last page modification
+
+
+vim:ft=help:

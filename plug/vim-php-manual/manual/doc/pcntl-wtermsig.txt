@@ -1,0 +1,37 @@
+pcntl_wtermsig
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+pcntl_wtermsig — Returns the signal which caused the child to terminate
+
+==============================================================================
+*Description*
+
+    int pcntl_wtermsig ( int $status )~
+
+Returns the number of the signal that caused the child process to terminate.
+This function is only useful if |pcntl_wifsignaled| returned TRUE.
+
+==============================================================================
+*Parameters*
+
+{status}
+
+    The {status} parameter is the status parameter supplied to a successful
+    call to |pcntl_waitpid|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the signal number, as an integer.
+
+==============================================================================
+*See* *Also*
+
+  * |pcntl_waitpid| - Waits on or returns the status of a forked child
+  * |pcntl_signal| - Installs a signal handler
+  * |pcntl_wifsignaled| - Checks whether the status code represents a
+    termination due to a signal
+
+
+vim:ft=help:

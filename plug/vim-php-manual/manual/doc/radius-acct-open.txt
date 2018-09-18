@@ -1,0 +1,30 @@
+radius_acct_open
+
+(PECL radius >= 1.1.0)
+
+radius_acct_open — Creates a Radius handle for accounting
+
+==============================================================================
+*Description*
+
+    resource radius_acct_open ( void )~
+
+==============================================================================
+*Return* *Values*
+
+Returns a handle on success, FALSE on error. This function only fails if
+insufficient memory is available.
+
+==============================================================================
+*Examples*
+
+Example #1 radius_acct_open() example
+
+<?php >
+    $res = radius_acct_open ()
+        or die ("Could not create handle");
+    print("Handle successfully created");
+<?>
+
+
+vim:ft=help:

@@ -1,0 +1,50 @@
+mb_ereg_match
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+mb_ereg_match — Regular expression match for multibyte string
+
+==============================================================================
+*Description*
+
+    bool mb_ereg_match ( string $pattern , string $string [, string $option =~
+    "msr" ] )~
+
+A regular expression match for a multibyte string
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    The regular expression pattern.
+
+{string}
+
+    The string being evaluated.
+
+{option}
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {string} matches the regular expression {pattern}, FALSE if
+not.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The internal encoding or the character encoding specified by 
+    |mb_regex_encoding| will be used as the character encoding for this
+    function.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_regex_encoding| - Set/Get character encoding for multibyte regex
+  * |mb_ereg| - Regular expression match with multibyte support
+
+
+vim:ft=help:

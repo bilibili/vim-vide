@@ -1,0 +1,27 @@
+m_initconn
+
+(PHP 4 >= 4.3.9, PHP 5 <= 5.0.5, PECL mcve >= 1.0.0)
+
+m_initconn — Create and initialize an MCVE_CONN structure
+
+==============================================================================
+*Description*
+
+    resource m_initconn ( void )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Return* *Values*
+
+Returns an MCVE_CONN resource.
+
+==============================================================================
+*See* *Also*
+
+  * |m_destroyconn| - Destroy the connection and MCVE_CONN structure
+
+
+vim:ft=help:

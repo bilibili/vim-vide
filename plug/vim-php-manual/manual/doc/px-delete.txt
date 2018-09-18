@@ -1,0 +1,27 @@
+px_delete
+
+(PECL paradox >= 1.0.0)
+
+px_delete — Deletes resource of paradox database
+
+==============================================================================
+*Description*
+
+    bool px_delete ( resource $pxdoc )~
+
+Deletes the resource of the paradox file and frees all memory.
+
+==============================================================================
+*Parameters*
+
+{pxdoc}
+
+    Resource identifier of the paradox database as returned by |px_new|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+
+vim:ft=help:

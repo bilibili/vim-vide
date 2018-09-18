@@ -1,0 +1,30 @@
+svn_fs_copy
+
+(PECL svn >= 0.2.0)
+
+svn_fs_copy — Copies a file or a directory, returns true if all is ok, false
+otherwise
+
+==============================================================================
+*Description*
+
+    bool svn_fs_copy ( resource $from_root , string $from_path , resource~
+    $to_root , string $to_path )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+Copies a file or a directory, returns true if all is ok, false otherwise
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

@@ -1,0 +1,28 @@
+trader_ceil
+
+(PECL trader >= 0.2.0)
+
+trader_ceil — Vector Ceil
+
+==============================================================================
+*Description*
+
+    array trader_ceil ( array $real )~
+
+Calculates the next higest integer for each value in {real} and returns the
+resulting array.
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

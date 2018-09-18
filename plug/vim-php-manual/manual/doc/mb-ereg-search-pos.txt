@@ -1,0 +1,57 @@
+mb_ereg_search_pos
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+mb_ereg_search_pos — Returns position and length of a matched part of the
+multibyte regular expression for a predefined multibyte string
+
+==============================================================================
+*Description*
+
+    array mb_ereg_search_pos ([ string $pattern [, string $option =~
+    "ms" ]] )~
+
+Returns position and length of a matched part of the multibyte regular
+expression for a predefined multibyte string
+
+The string for match is specified by |mb_ereg_search_init|. If it is not
+specified, the previous one will be used.
+
+==============================================================================
+*Parameters*
+
+{pattern}
+
+    The search pattern.
+
+{option}
+
+    The search option.
+
+==============================================================================
+*Return* *Values*
+
+An array containing two elements. The first element is the offset, in bytes,
+where the match begins relative to the start of the search string, and the
+second element is the length in bytes of the match.
+
+If an error occurs, FALSE is returned.
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The internal encoding or the character encoding specified by 
+    |mb_regex_encoding| will be used as the character encoding for this
+    function.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_regex_encoding| - Set/Get character encoding for multibyte regex
+  * |mb_ereg_search_init| - Setup string and regular expression for a
+    multibyte regular expression match
+
+
+vim:ft=help:

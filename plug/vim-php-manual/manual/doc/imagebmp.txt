@@ -1,0 +1,59 @@
+imagebmp
+
+(PHP 7 >= 7.2.0)
+
+imagebmp — Output a BMP image to browser or file
+
+==============================================================================
+*Description*
+
+    bool imagebmp ( resource $image , mixed $to [, bool $compressed = TRUE ]~
+)~
+
+Outputs or saves a BMP version of the given {image}.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{to}
+
+    The path or an open stream resource (which is automatically being closed
+    after this function returns) to save the file to. If not set or NULL, the
+    raw image stream will be outputted directly.
+
+{compressed}
+
+    Whether the BMP should be compressed with run-length encoding (RLE), or
+    not.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Saving a BMP file
+
+<?php >
+    // Create a blank image and add some text
+    $im = imagecreatetruecolor(120, 20);
+    $text_color = imagecolorallocate($im, 233, 14, 91);
+
+    imagestring($im, 1, 5, 5,  'BMP with PHP', $text_color);
+
+    // Save the image
+    imagebmp($im, 'php.bmp');
+
+    // Free up memory
+    imagedestroy($im);
+<?>
+
+
+vim:ft=help:

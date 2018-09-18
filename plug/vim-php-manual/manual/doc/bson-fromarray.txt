@@ -1,0 +1,46 @@
+BSON\fromArray
+
+(mongodb >=0.2.0)
+
+BSON\fromArray — Description
+
+==============================================================================
+*Description*
+
+    ReturnType BSON\fromArray ( string $array )~
+
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Examples*
+
+Example #1 BSON\fromArray() example
+
+<?php >
+
+    /* ... */
+
+<?>
+
+The above example will output something similar to:
+
+...
+
+==============================================================================
+*See* *Also*
+
+  * 
+
+
+vim:ft=help:

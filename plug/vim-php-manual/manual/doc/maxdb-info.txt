@@ -1,0 +1,104 @@
+maxdb_info
+
+maxdb::info
+
+(PECL maxdb >= 1.0)
+
+maxdb_info -- maxdb::info — Retrieves information about the most recently
+executed query
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    string maxdb_info ( resource $link )~
+
+Object oriented style
+
+string $maxdb->info;
+
+The maxdb_info() function returns a string providing information about the
+last query executed. The nature of this string is provided below:
+
+                      Possible maxdb_info return values
+             Query type                        Example result string
+INSERT INTO...SELECT...              Records: 100 Duplicates: 0 Warnings: 0
+INSERT INTO...VALUES (...),(...),    Records: 3 Duplicates: 0 Warnings: 0
+(...)
+LOAD DATA INFILE ...                 Records: 1 Deleted: 0 Skipped: 0
+                                     Warnings: 0
+ALTER TABLE ...                      Records: 3 Duplicates: 0 Warnings: 0
+UPDATE ...                           Rows matched: 40 Changed: 40 Warnings: 0
+
+    Note:
+
+    Queries which do not fall into one of the above formats are not supported.
+    In these situations, maxdb_info() will return an empty string.
+
+==============================================================================
+*Return* *Values*
+
+A character string representing additional information about the most recently
+executed query.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    $maxdb->query("CREATE TABLE temp.t1 LIKE hotel.city");
+
+    /* INSERT INTO .. SELECT */
+    $maxdb->query("INSERT INTO temp.t1 SELECT * FROM hotel.city");
+    printf("%s\n", $maxdb->info);
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    /* check connection */
+    if (maxdb_connect_errno()) {
+       printf("Connect failed: %s\n", maxdb_connect_error());
+       exit();
+    }
+
+    maxdb_query($link, "CREATE TABLE temp.t1 LIKE hotel.city");
+
+    /* INSERT INTO .. SELECT */
+    maxdb_query($link, "INSERT INTO temp.t1 SELECT * FROM hotel.city");
+    printf("%s\n", maxdb_info($link));
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Records: 25 Duplicates: 0 Warnings: 0
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_affected_rows| - Gets the number of affected rows in a previous
+    MaxDB operation
+  * |maxdb_warning_count| - Returns the number of warnings from the last query
+    for the given link
+  * |maxdb_num_rows| - Gets the number of rows in a result
+
+
+vim:ft=help:

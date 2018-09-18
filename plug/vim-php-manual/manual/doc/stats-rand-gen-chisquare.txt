@@ -1,0 +1,26 @@
+stats_rand_gen_chisquare
+
+(PECL stats >= 1.0.0)
+
+stats_rand_gen_chisquare — Generates random deviate from the distribution of a
+chisquare with "df" degrees of freedom random variable.
+
+==============================================================================
+*Description*
+
+    float stats_rand_gen_chisquare ( float $df )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{df}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

@@ -1,0 +1,87 @@
+mysql_list_dbs
+
+(PHP 4, PHP 5)
+
+mysql_list_dbs — List databases available on a MySQL server
+
+Warning
+
+This function was deprecated in PHP 5.4.0, and it and the entire original
+MySQL extension was removed in PHP 7.0.0. Instead, use either the actively
+developed MySQLi or PDO_MySQL extensions. See also the MySQL: choosing an API
+guide and its related FAQ entry for additional information. Alternatives to
+this function include:
+
+  * SQL Query: SHOW DATABASES
+
+==============================================================================
+*Description*
+
+    resource mysql_list_dbs ([ resource $link_identifier = NULL ] )~
+
+Returns a result pointer containing the databases available from the current
+mysql daemon.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    The MySQL connection. If the link identifier is not specified, the last
+    link opened by |mysql_connect| is assumed. If no such link is found, it
+    will try to create one as if |mysql_connect| had been called with no
+    arguments. If no connection is found or established, an E_WARNING level
+    error is generated.
+
+==============================================================================
+*Return* *Values*
+
+Returns a result pointer resource on success, or FALSE on failure. Use the 
+|mysql_tablename| function to traverse this result pointer, or any function for
+result tables, such as |mysql_fetch_array|.
+
+==============================================================================
+*Examples*
+
+Example #1 mysql_list_dbs() example
+
+<?php >
+    // Usage without mysql_list_dbs()
+    $link = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+    $res = mysql_query("SHOW DATABASES");
+
+    while ($row = mysql_fetch_assoc($res)) {
+        echo $row['Database'] . "\n";
+    }
+
+    // Deprecated as of PHP 5.4.0
+    $link = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+    $db_list = mysql_list_dbs($link);
+
+    while ($row = mysql_fetch_object($db_list)) {
+         echo $row->Database . "\n";
+    }
+<?>
+
+The above example will output something similar to:
+
+database1
+database2
+database3
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    For backward compatibility, the following deprecated alias may be used: 
+    mysql_listdbs()
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_db_name| - Retrieves database name from the call to mysql_list_dbs
+  * |mysql_select_db| - Select a MySQL database
+
+
+vim:ft=help:

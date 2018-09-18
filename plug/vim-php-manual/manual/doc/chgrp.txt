@@ -1,0 +1,64 @@
+chgrp
+
+(PHP 4, PHP 5, PHP 7)
+
+chgrp — Changes file group
+
+==============================================================================
+*Description*
+
+    bool chgrp ( string $filename , mixed $group )~
+
+Attempts to change the group of the file {filename} to {group}.
+
+Only the superuser may change the group of a file arbitrarily; other users may
+change the group of a file to any group of which that user is a member.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the file.
+
+{group}
+
+    A group name or number.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Changing a file's group
+
+<?php >
+    $filename = 'shared_file.txt';
+    $format = "%s's Group ID @ %s: %d\n";
+    printf($format, $filename, date('r'), filegroup($filename));
+    chgrp($filename, 8);
+    clearstatcache(); // do not cache filegroup() results
+    printf($format, $filename, date('r'), filegroup($filename));
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function will not work on remote files as the file to be
+    examined must be accessible via the server's filesystem.
+
+    Note: When safe mode is enabled, PHP checks whether the files or
+    directories being operated upon have the same UID (owner) as the script
+    that is being executed.
+
+==============================================================================
+*See* *Also*
+
+  * |chown| - Changes file owner
+  * |chmod| - Changes file mode
+
+
+vim:ft=help:

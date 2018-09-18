@@ -1,0 +1,149 @@
+fsockopen
+
+(PHP 4, PHP 5, PHP 7)
+
+fsockopen — Open Internet or Unix domain socket connection
+
+==============================================================================
+*Description*
+
+    resource fsockopen ( string $hostname [, int $port = -1 [, int &$errno [,~
+    string &$errstr [, float $timeout =~
+    ini_get("default_socket_timeout") ]]]] )~
+
+Initiates a socket connection to the resource specified by {hostname}.
+
+PHP supports targets in the Internet and Unix domains as described in List of
+Supported Socket Transports. A list of supported transports can also be
+retrieved using |stream_get_transports|.
+
+The socket will by default be opened in blocking mode. You can switch it to
+non-blocking mode by using |stream_set_blocking|.
+
+The function |stream_socket_client| is similar but provides a richer set of
+options, including non-blocking connection and the ability to provide a stream
+context.
+
+==============================================================================
+*Parameters*
+
+{hostname}
+
+    If OpenSSL support is installed, you may prefix the {hostname} with either
+    ssl:// or tls:// to use an SSL or TLS client connection over TCP/IP to
+    connect to the remote host.
+
+{port}
+
+    The port number. This can be omitted and skipped with -1 for transports
+    that do not use ports, such as unix://.
+
+{errno}
+
+    If provided, holds the system level error number that occurred in the
+    system-level connect() call.
+
+    If the value returned in {errno} is 0 and the function returned FALSE, it
+    is an indication that the error occurred before the connect() call. This
+    is most likely due to a problem initializing the socket.
+
+{errstr}
+
+    The error message as a string.
+
+{timeout}
+
+    The connection timeout, in seconds.
+
+        Note:
+
+        If you need to set a timeout for reading/writing data over the socket,
+        use |stream_set_timeout|, as the {timeout} parameter to fsockopen()
+        only applies while connecting the socket.
+
+==============================================================================
+*Return* *Values*
+
+fsockopen() returns a file pointer which may be used together with the other
+file functions (such as |fgets|, |fgetss|, |fwrite|, |fclose|, and |feof|). If
+the call fails, it will return FALSE
+
+==============================================================================
+*Errors/Exceptions*
+
+Throws E_WARNING if {hostname} is not a valid domain.
+
+==============================================================================
+*Examples*
+
+Example #1 fsockopen() Example
+
+<?php >
+    $fp = fsockopen("www.example.com", 80, $errno, $errstr, 30);
+    if (!$fp) {
+        echo "$errstr ($errno)<br />\n";
+    } else {
+        $out = "GET / HTTP/1.1\r\n";
+        $out .= "Host: www.example.com\r\n";
+        $out .= "Connection: Close\r\n\r\n";
+        fwrite($fp, $out);
+        while (!feof($fp)) {
+            echo fgets($fp, 128);
+        }
+        fclose($fp);
+    }
+<?>
+
+Example #2 Using UDP connection
+
+The example below shows how to retrieve the day and time from the UDP service
+"daytime" (port 13) in your own machine.
+
+<?php >
+    $fp = fsockopen("udp://127.0.0.1", 13, $errno, $errstr);
+    if (!$fp) {
+        echo "ERROR: $errno - $errstr<br />\n";
+    } else {
+        fwrite($fp, "\n");
+        echo fread($fp, 26);
+        fclose($fp);
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Depending on the environment, the Unix domain or the optional connect
+    timeout may not be available.
+
+Warning
+
+UDP sockets will sometimes appear to have opened without an error, even if the
+remote host is unreachable. The error will only become apparent when you read
+or write data to/from the socket. The reason for this is because UDP is a
+"connectionless" protocol, which means that the operating system does not try
+to establish a link for the socket until it actually needs to send or receive
+data.
+
+    Note: When specifying a numerical IPv6 address (e.g. fe80::1), you must
+    enclose the IP in square brackets—for example, tcp://[fe80::1]:80.
+
+==============================================================================
+*See* *Also*
+
+  * |pfsockopen| - Open persistent Internet or Unix domain socket connection
+  * |stream_socket_client| - Open Internet or Unix domain socket connection
+  * |stream_set_blocking| - Set blocking/non-blocking mode on a stream
+  * |stream_set_timeout| - Set timeout period on a stream
+  * |fgets| - Gets line from file pointer
+  * |fgetss| - Gets line from file pointer and strip HTML tags
+  * |fwrite| - Binary-safe file write
+  * |fclose| - Closes an open file pointer
+  * |feof| - Tests for end-of-file on a file pointer
+  * |socket_connect| - Initiates a connection on a socket
+  * The Curl extension
+
+
+vim:ft=help:

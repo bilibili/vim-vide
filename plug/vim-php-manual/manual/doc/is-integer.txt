@@ -1,0 +1,13 @@
+is_integer
+
+(PHP 4, PHP 5, PHP 7)
+
+is_integer — Alias of |is_int|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |is_int|.
+
+
+vim:ft=help:

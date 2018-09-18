@@ -1,0 +1,44 @@
+odbc_primarykeys
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_primarykeys — Gets the primary keys for a table
+
+==============================================================================
+*Description*
+
+    resource odbc_primarykeys ( resource $connection_id , string $qualifier ,~
+    string $owner , string $table )~
+
+Returns a result identifier that can be used to fetch the column names that
+comprise the primary key for a table.
+
+==============================================================================
+*Parameters*
+
+{connection_id}
+
+    The ODBC connection identifier, see |odbc_connect| for details.
+
+{qualifier}
+
+{owner}
+
+{table}
+
+==============================================================================
+*Return* *Values*
+
+Returns an ODBC result identifier or FALSE on failure.
+
+The result set has the following columns:
+
+  * TABLE_QUALIFIER
+  * TABLE_OWNER
+  * TABLE_NAME
+  * COLUMN_NAME
+  * KEY_SEQ
+  * PK_NAME
+
+
+vim:ft=help:

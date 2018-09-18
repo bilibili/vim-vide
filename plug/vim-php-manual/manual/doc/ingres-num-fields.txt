@@ -1,0 +1,37 @@
+ingres_num_fields
+
+(PHP 4 >= 4.0.2, PHP 5 <= 5.0.5, PECL ingres >= 1.0.0)
+
+ingres_num_fields — Get the number of fields returned by the last query
+
+==============================================================================
+*Description*
+
+    int ingres_num_fields ( resource $result )~
+
+ingres_num_fields() returns the number of fields in the results returned by
+the Ingres server after a call to |ingres_query|.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The query result identifier
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of fields
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_query| - Send an SQL query to Ingres
+  * |ingres_fetch_array| - Fetch a row of result into an array
+  * |ingres_fetch_assoc| - Fetch a row of result into an associative array
+  * |ingres_fetch_object| - Fetch a row of result into an object
+  * |ingres_fetch_row| - Fetch a row of result into an enumerated array
+
+
+vim:ft=help:

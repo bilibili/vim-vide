@@ -1,0 +1,81 @@
+imap_delete
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_delete — Mark a message for deletion from current mailbox
+
+==============================================================================
+*Description*
+
+    bool imap_delete ( resource $imap_stream , int $msg_number [, int~
+    $options = 0 ] )~
+
+Marks messages listed in {msg_number} for deletion. Messages marked for
+deletion will stay in the mailbox until either |imap_expunge| is called or 
+|imap_close| is called with the optional parameter CL_EXPUNGE.
+
+==============================================================================
+*Parameters*
+
+{ imap_stream}
+
+    An IMAP stream returned by |imap_open|.
+
+{msg_number}
+
+    The message number
+
+{options}
+
+    You can set the FT_UID which tells the function to treat the {msg_number}
+    argument as an UID.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE.
+
+==============================================================================
+*Examples*
+
+Example #1 imap_delete() example
+
+<?php >
+
+    $mbox = imap_open("{imap.example.org}INBOX", "username", "password")
+        or die("Can't connect: " . imap_last_error());
+
+    $check = imap_mailboxmsginfo($mbox);
+    echo "Messages before delete: " . $check->Nmsgs . "<br />\n";
+
+    imap_delete($mbox, 1);
+
+    $check = imap_mailboxmsginfo($mbox);
+    echo "Messages after  delete: " . $check->Nmsgs . "<br />\n";
+
+    imap_expunge($mbox);
+
+    $check = imap_mailboxmsginfo($mbox);
+    echo "Messages after expunge: " . $check->Nmsgs . "<br />\n";
+
+    imap_close($mbox);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    IMAP mailboxes may not have their message flags saved between connections,
+    so |imap_expunge| should be called during the same connection in order to
+    guarantee that messages marked for deletion will actually be purged.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_undelete| - Unmark the message which is marked deleted
+  * |imap_expunge| - Delete all messages marked for deletion
+  * |imap_close| - Close an IMAP stream
+
+
+vim:ft=help:

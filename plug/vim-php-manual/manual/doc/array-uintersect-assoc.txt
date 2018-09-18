@@ -1,0 +1,80 @@
+array_uintersect_assoc
+
+(PHP 5, PHP 7)
+
+array_uintersect_assoc — Computes the intersection of arrays with additional
+index check, compares data by a callback function
+
+==============================================================================
+*Description*
+
+    array array_uintersect_assoc ( array $array1 , array $array2 [, array~
+    $... ], callable $value_compare_func )~
+
+Computes the intersection of arrays with additional index check, compares data
+by a callback function.
+
+Note that the keys are used in the comparison unlike in |array_uintersect|.
+The data is compared by using a callback function.
+
+==============================================================================
+*Parameters*
+
+{array1}
+
+    The first array.
+
+{array2}
+
+    The second array.
+
+{value_compare_func}
+
+    The comparison function must return an integer less than, equal to, or
+    greater than zero if the first argument is considered to be respectively
+    less than, equal to, or greater than the second. Note that before PHP
+    7.0.0 this integer had to be in the range from -2147483648 to 2147483647.
+
+
+    int callback ( mixed $a, mixed $b )~
+
+==============================================================================
+*Return* *Values*
+
+Returns an array containing all the values of {array1} that are present in all
+the arguments.
+
+==============================================================================
+*Examples*
+
+Example #1 array_uintersect_assoc() example
+
+<?php >
+    $array1 = array("a" => "green", "b" => "brown", "c" => "blue", "red");
+    $array2 = array("a" => "GREEN", "B" => "brown", "yellow", "red");
+
+    print_r(array_uintersect_assoc($array1, $array2, "strcasecmp"));
+<?>
+
+The above example will output:
+
+Array
+(
+    [a] => green
+)
+
+==============================================================================
+*See* *Also*
+
+  * |array_uintersect| - Computes the intersection of arrays, compares data by
+    a callback function
+  * |array_intersect_assoc| - Computes the intersection of arrays with
+    additional index check
+  * |array_intersect_uassoc| - Computes the intersection of arrays with
+    additional index check, compares indexes by a callback function
+  * |array_uintersect_uassoc| - Computes the intersection of arrays with
+    additional index check, compares data and indexes by separate callback
+    functions
+
+
+vim:ft=help:

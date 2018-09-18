@@ -1,0 +1,93 @@
+enchant_dict_quick_check
+
+(PHP 5 >= 5.3.0, PHP 7, PECL enchant:0.2.0-1.0.1)
+
+enchant_dict_quick_check — Check the word is correctly spelled and provide
+suggestions
+
+==============================================================================
+*Description*
+
+    bool enchant_dict_quick_check ( resource $dict , string $word [, array~
+    &$suggestions ] )~
+
+If the word is correctly spelled return TRUE, otherwise return FALSE, if
+suggestions variable is provided, fill it with spelling alternatives.
+
+==============================================================================
+*Parameters*
+
+{dict}
+
+    Dictionary resource
+
+{word}
+
+    The word to check
+
+{suggestions}
+
+    If the word is not correctly spelled, this variable will contain an array
+    of suggestions.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if the word is correctly spelled or FALSE
+
+==============================================================================
+*Examples*
+
+Example #1 A enchant_dict_quick_check() example
+
+<?php >
+    $tag = 'en_US';
+    $r = enchant_broker_init();
+
+    if (enchant_broker_dict_exists($r,$tag)) {
+        $d = enchant_broker_request_dict($r, $tag);
+        enchant_dict_quick_check($d, 'soong', $suggs);
+        print_r($suggs);
+    }
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => song
+    [1] => snog
+    [2] => soon
+    [3] => Sang
+    [4] => Sung
+    [5] => sang
+    [6] => sung
+    [7] => sponge
+    [8] => spongy
+    [9] => snag
+    [10] => snug
+    [11] => sonic
+    [12] => sing
+    [13] => songs
+    [14] => Son
+    [15] => Sonja
+    [16] => Synge
+    [17] => son
+    [18] => Sejong
+    [19] => sarong
+    [20] => sooner
+    [21] => Sony
+    [22] => sown
+    [23] => scone
+    [24] => song's
+)
+
+==============================================================================
+*See* *Also*
+
+  * |enchant_dict_check| - Check whether a word is correctly spelled or not
+  * |enchant_dict_suggest| - Will return a list of values if any of those
+    pre-conditions are not met
+
+
+vim:ft=help:

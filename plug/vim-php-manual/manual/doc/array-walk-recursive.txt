@@ -1,0 +1,79 @@
+array_walk_recursive
+
+(PHP 5, PHP 7)
+
+array_walk_recursive — Apply a user function recursively to every member of an
+array
+
+==============================================================================
+*Description*
+
+    bool array_walk_recursive ( array &$array , callable $callback [, mixed~
+    $userdata = NULL ] )~
+
+Applies the user-defined {callback} function to each element of the {array}.
+This function will recurse into deeper arrays.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    The input array.
+
+{callback}
+
+    Typically, {callback} takes on two parameters. The {array} parameter's
+    value being the first, and the key/index second.
+
+        Note:
+
+        If {callback} needs to be working with the actual values of the array,
+        specify the first parameter of {callback} as a reference. Then, any
+        changes made to those elements will be made in the original array
+        itself.
+
+{userdata}
+
+    If the optional {userdata} parameter is supplied, it will be passed as the
+    third parameter to the {callback}.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 array_walk_recursive() example
+
+<?php >
+    $sweet = array('a' => 'apple', 'b' => 'banana');
+    $fruits = array('sweet' => $sweet, 'sour' => 'lemon');
+
+    function test_print($item, $key)
+    {
+        echo "$key holds $item\n";
+    }
+
+    array_walk_recursive($fruits, 'test_print');
+<?>
+
+The above example will output:
+
+a holds apple
+b holds banana
+sour holds lemon
+
+You may notice that the key 'sweet' is never displayed. Any key that holds an 
+array will not be passed to the function.
+
+==============================================================================
+*See* *Also*
+
+  * |array_walk| - Apply a user supplied function to every member of an array
+  * information about the callback type
+
+
+vim:ft=help:

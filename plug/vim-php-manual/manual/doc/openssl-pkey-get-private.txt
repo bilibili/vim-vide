@@ -1,0 +1,38 @@
+openssl_pkey_get_private
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+openssl_pkey_get_private — Get a private key
+
+==============================================================================
+*Description*
+
+    resource openssl_pkey_get_private ( mixed $key [, string $passphrase =~
+    "" ] )~
+
+|openssl_get_privatekey| parses {key} and prepares it for use by other
+functions.
+
+==============================================================================
+*Parameters*
+
+{key}
+
+    {key} can be one of the following:
+     1. a string having the format file://path/to/file.pem. The named file
+        must contain a PEM encoded certificate/private key (it may contain
+        both).
+     2. A PEM formatted private key.
+
+{passphrase}
+
+    The optional parameter {passphrase} must be used if the specified key is
+    encrypted (protected by a passphrase).
+
+==============================================================================
+*Return* *Values*
+
+Returns a positive key resource identifier on success, or FALSE on error.
+
+
+vim:ft=help:

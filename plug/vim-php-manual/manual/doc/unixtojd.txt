@@ -1,0 +1,33 @@
+unixtojd
+
+(PHP 4, PHP 5, PHP 7)
+
+unixtojd — Convert Unix timestamp to Julian Day
+
+==============================================================================
+*Description*
+
+    int unixtojd ([ int $timestamp = time() ] )~
+
+Return the Julian Day for a Unix {timestamp} (seconds since 1.1.1970), or for
+the current day if no {timestamp} is given.
+
+==============================================================================
+*Parameters*
+
+{timestamp}
+
+    A unix timestamp to convert.
+
+==============================================================================
+*Return* *Values*
+
+A julian day number as integer.
+
+==============================================================================
+*See* *Also*
+
+  * |jdtounix| - Convert Julian Day to Unix timestamp
+
+
+vim:ft=help:

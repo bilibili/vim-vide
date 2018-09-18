@@ -1,0 +1,81 @@
+mysql_fetch_lengths
+
+(PHP 4, PHP 5)
+
+mysql_fetch_lengths — Get the length of each output in a result
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_fetch_lengths()
+  * PDOStatement::getColumnMeta()
+
+==============================================================================
+*Description*
+
+    array mysql_fetch_lengths ( resource $result )~
+
+Returns an array that corresponds to the lengths of each field in the last row
+fetched by MySQL.
+
+mysql_fetch_lengths() stores the lengths of each result column in the last row
+returned by |mysql_fetch_row|, |mysql_fetch_assoc|, |mysql_fetch_array|, and 
+|mysql_fetch_object| in an array, starting at offset 0.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mysql_query|.
+
+==============================================================================
+*Return* *Values*
+
+An array of lengths on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A mysql_fetch_lengths() example
+
+<?php >
+    $result = mysql_query("SELECT id,email FROM people WHERE id = '42'");
+    if (!$result) {
+        echo 'Could not run query: ' . mysql_error();
+        exit;
+    }
+    $row     = mysql_fetch_assoc($result);
+    $lengths = mysql_fetch_lengths($result);
+
+    print_r($row);
+    print_r($lengths);
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [id] => 42
+    [email] => user@example.com
+)
+Array
+(
+    [0] => 2
+    [1] => 16
+)
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_field_len| - Returns the length of the specified field
+  * |mysql_fetch_row| - Get a result row as an enumerated array
+  * |strlen| - Get string length
+
+
+vim:ft=help:

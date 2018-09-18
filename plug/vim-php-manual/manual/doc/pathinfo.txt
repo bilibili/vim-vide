@@ -1,0 +1,137 @@
+pathinfo
+
+(PHP 4 >= 4.0.3, PHP 5, PHP 7)
+
+pathinfo — Returns information about a file path
+
+==============================================================================
+*Description*
+
+    mixed pathinfo ( string $path [, int $options = PATHINFO_DIRNAME |~
+    PATHINFO_BASENAME | PATHINFO_EXTENSION | PATHINFO_FILENAME ] )~
+
+pathinfo() returns information about {path}: either an associative array or a
+string, depending on {options}.
+
+    Note:
+
+    For information on retrieving the current path info, read the section on
+    predefined reserved variables.
+
+Caution
+
+pathinfo() is locale aware, so for it to parse a path containing multibyte
+characters correctly, the matching locale must be set using the |setlocale|
+function.
+
+==============================================================================
+*Parameters*
+
+{path}
+
+    The path to be parsed.
+
+{options}
+
+    If present, specifies a specific element to be returned; one of
+    PATHINFO_DIRNAME, PATHINFO_BASENAME, PATHINFO_EXTENSION or
+    PATHINFO_FILENAME.
+
+    If {options} is not specified, returns all available elements.
+
+==============================================================================
+*Return* *Values*
+
+If the {options} parameter is not passed, an associative array containing the
+following elements is returned: dirname, basename, extension (if any), and
+filename.
+
+    Note:
+
+    If the {path} has more than one extension, PATHINFO_EXTENSION returns only
+    the last one and PATHINFO_FILENAME only strips the last one. (see first
+    example below).
+
+    Note:
+
+    If the {path} does not have an extension, no extension element will be
+    returned (see second example below).
+
+    Note:
+
+    If the basename of the {path} starts with a dot, the following characters
+    are interpreted as extension, and the filename is empty (see third example
+    below).
+
+If {options} is present, returns a string containing the requested element.
+
+==============================================================================
+*Changelog*
+
+Version                Description
+5.2.0   The PATHINFO_FILENAME constant was added.
+
+==============================================================================
+*Examples*
+
+Example #1 pathinfo() Example
+
+<?php >
+    $path_parts = pathinfo('/www/htdocs/inc/lib.inc.php');
+
+    echo $path_parts['dirname'], "\n";
+    echo $path_parts['basename'], "\n";
+    echo $path_parts['extension'], "\n";
+    echo $path_parts['filename'], "\n"; // since PHP 5.2.0
+<?>
+
+The above example will output:
+
+/www/htdocs/inc
+lib.inc.php
+php
+lib.inc
+
+Example #2 pathinfo() example showing difference between null and no extension
+
+<?php >
+    $path_parts = pathinfo('/path/emptyextension.');
+    var_dump($path_parts['extension']);
+
+    $path_parts = pathinfo('/path/noextension');
+    var_dump($path_parts['extension']);
+<?>
+
+The above example will output something similar to:
+
+string(0) ""
+
+Notice: Undefined index: extension in test.php on line 6
+NULL
+
+Example #3 pathinfo() example for a dot-file
+
+<?php >
+    print_r(pathinfo('/some/path/.test'));
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [dirname] => /some/path
+    [basename] => .test
+    [extension] => test
+    [filename] =>
+)
+
+==============================================================================
+*See* *Also*
+
+  * |dirname| - Returns a parent directory's path
+  * |basename| - Returns trailing name component of path
+  * |parse_url| - Parse a URL and return its components
+  * |realpath| - Returns canonicalized absolute pathname
+
+
+vim:ft=help:

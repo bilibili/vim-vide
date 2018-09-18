@@ -1,0 +1,170 @@
+bindec
+
+(PHP 4, PHP 5, PHP 7)
+
+bindec — Binary to decimal
+
+==============================================================================
+*Description*
+
+    number bindec ( string $binary_string )~
+
+Returns the decimal equivalent of the binary number represented by the
+{binary_string} argument.
+
+bindec() converts a binary number to an integer or, if needed for size
+reasons, float.
+
+bindec() interprets all {binary_string} values as unsigned integers. This is
+because bindec() sees the most significant bit as another order of magnitude
+rather than as the sign bit.
+
+==============================================================================
+*Parameters*
+
+{binary_string}
+
+    The binary string to convert
+
+Warning
+
+The parameter must be a string. Using other data types will produce unexpected
+results.
+
+==============================================================================
+*Return* *Values*
+
+The decimal value of {binary_string}
+
+==============================================================================
+*Examples*
+
+Example #1 bindec() example
+
+<?php >
+    echo bindec('110011') . "\n";
+    echo bindec('000110011') . "\n";
+
+    echo bindec('111');
+<?>
+
+The above example will output:
+
+51
+51
+7
+
+Example #2 bindec() interprets input as unsigned integers
+
+<?php >
+    /*
+     * The lesson from this example is in the output
+     * rather than the PHP code itself.
+     */
+
+    $magnitude_lower = pow(2, (PHP_INT_SIZE * 8) - 2);
+    p($magnitude_lower - 1);
+    p($magnitude_lower, 'See the rollover?  Watch it next time around...');
+
+    p(PHP_INT_MAX, 'PHP_INT_MAX');
+    p(~PHP_INT_MAX, 'interpreted to be one more than PHP_INT_MAX');
+
+    if (PHP_INT_SIZE == 4) {
+        $note = 'interpreted to be the largest unsigned integer';
+    } else {
+        $note = 'interpreted to be the largest unsigned integer
+                  (18446744073709551615) but skewed by float precision';
+    }
+    p(-1, $note);
+
+
+    function p($input, $note = '') {
+        echo "input:        $input\n";
+
+        $format = '%0' . (PHP_INT_SIZE * 8) . 'b';
+        $bin = sprintf($format, $input);
+        echo "binary:       $bin\n";
+
+        ini_set('precision', 20);  // For readability on 64 bit boxes.
+        $dec = bindec($bin);
+        echo 'bindec():     ' . $dec . "\n";
+
+        if ($note) {
+            echo "NOTE:         $note\n";
+        }
+
+        echo "\n";
+    }
+<?>
+
+Output of the above example on 32 bit machines:
+
+input:        1073741823
+binary:       00111111111111111111111111111111
+bindec():     1073741823
+
+input:        1073741824
+binary:       01000000000000000000000000000000
+bindec():     1073741824
+NOTE:         See the rollover?  Watch it next time around...
+
+input:        2147483647
+binary:       01111111111111111111111111111111
+bindec():     2147483647
+NOTE:         PHP_INT_MAX
+
+input:        -2147483648
+binary:       10000000000000000000000000000000
+bindec():     2147483648
+NOTE:         interpreted to be one more than PHP_INT_MAX
+
+input:        -1
+binary:       11111111111111111111111111111111
+bindec():     4294967295
+NOTE:         interpreted to be the largest unsigned integer
+
+Output of the above example on 64 bit machines:
+
+input:        4611686018427387903
+binary:       0011111111111111111111111111111111111111111111111111111111111111
+bindec():     4611686018427387903
+
+input:        4611686018427387904
+binary:       0100000000000000000000000000000000000000000000000000000000000000
+bindec():     4611686018427387904
+NOTE:         See the rollover?  Watch it next time around...
+
+input:        9223372036854775807
+binary:       0111111111111111111111111111111111111111111111111111111111111111
+bindec():     9223372036854775807
+NOTE:         PHP_INT_MAX
+
+input:        -9223372036854775808
+binary:       1000000000000000000000000000000000000000000000000000000000000000
+bindec():     9223372036854775808
+NOTE:         interpreted to be one more than PHP_INT_MAX
+
+input:        -1
+binary:       1111111111111111111111111111111111111111111111111111111111111111
+bindec():     18446744073709551616
+NOTE:         interpreted to be the largest unsigned integer
+              (18446744073709551615) but skewed by float precision
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    The function can convert numbers that are too large to fit into the
+    platforms integer type, larger values are returned as float in that case.
+
+==============================================================================
+*See* *Also*
+
+  * |decbin| - Decimal to binary
+  * |octdec| - Octal to decimal
+  * |hexdec| - Hexadecimal to decimal
+  * |base_convert| - Convert a number between arbitrary bases
+
+
+vim:ft=help:

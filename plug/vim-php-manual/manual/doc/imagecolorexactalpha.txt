@@ -1,0 +1,88 @@
+imagecolorexactalpha
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+imagecolorexactalpha — Get the index of the specified color + alpha
+
+==============================================================================
+*Description*
+
+    int imagecolorexactalpha ( resource $image , int $red , int $green , int~
+    $blue , int $alpha )~
+
+Returns the index of the specified color+alpha in the palette of the image.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{red}
+
+    Value of red component.
+
+{green}
+
+    Value of green component.
+
+{blue}
+
+    Value of blue component.
+
+{alpha}
+
+    A value between 0 and 127. 0 indicates completely opaque while 127
+    indicates completely transparent.
+
+The colors parameters are integers between 0 and 255 or hexadecimals between
+0x00 and 0xFF.
+
+==============================================================================
+*Return* *Values*
+
+Returns the index of the specified color+alpha in the palette of the image, or
+-1 if the color does not exist in the image's palette.
+
+==============================================================================
+*Examples*
+
+Example #1 Get colors from the GD logo
+
+<?php >
+
+    // Setup an image
+    $im = imagecreatefrompng('./gdlogo.png');
+
+    $colors   = Array();
+    $colors[] = imagecolorexactalpha($im, 255, 0, 0, 0);
+    $colors[] = imagecolorexactalpha($im, 0, 0, 0, 127);
+    $colors[] = imagecolorexactalpha($im, 255, 255, 255, 55);
+    $colors[] = imagecolorexactalpha($im, 100, 255, 52, 20);
+
+    print_r($colors);
+
+    // Free from memory
+    imagedestroy($im);
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => 16711680
+    [1] => 2130706432
+    [2] => 939524095
+    [3] => 342163252
+)
+
+==============================================================================
+*See* *Also*
+
+  * |imagecolorclosestalpha| - Get the index of the closest color to the
+    specified color + alpha
+
+
+vim:ft=help:

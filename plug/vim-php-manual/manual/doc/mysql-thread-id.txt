@@ -1,0 +1,66 @@
+mysql_thread_id
+
+(PHP 4 >= 4.3.0, PHP 5)
+
+mysql_thread_id — Return the current thread ID
+
+Warning
+
+This extension was deprecated in PHP 5.5.0, and it was removed in PHP 7.0.0.
+Instead, the MySQLi or PDO_MySQL extension should be used. See also MySQL:
+choosing an API guide and related FAQ for more information. Alternatives to
+this function include:
+
+  * mysqli_thread_id()
+
+==============================================================================
+*Description*
+
+    int mysql_thread_id ([ resource $link_identifier = NULL ] )~
+
+Retrieves the current thread ID. If the connection is lost, and a reconnect
+with |mysql_ping| is executed, the thread ID will change. This means only
+retrieve the thread ID when needed.
+
+==============================================================================
+*Parameters*
+
+{ link_identifier}
+
+    The MySQL connection. If the link identifier is not specified, the last
+    link opened by |mysql_connect| is assumed. If no such link is found, it
+    will try to create one as if |mysql_connect| had been called with no
+    arguments. If no connection is found or established, an E_WARNING level
+    error is generated.
+
+==============================================================================
+*Return* *Values*
+
+The thread ID on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mysql_thread_id() example
+
+<?php >
+    $link = mysql_connect('localhost', 'mysql_user', 'mysql_password');
+    $thread_id = mysql_thread_id($link);
+    if ($thread_id){
+        printf("current thread id is %d\n", $thread_id);
+    }
+<?>
+
+The above example will output something similar to:
+
+current thread id is 73
+
+==============================================================================
+*See* *Also*
+
+  * |mysql_ping| - Ping a server connection or reconnect if there is no
+    connection
+  * |mysql_list_processes| - List MySQL processes
+
+
+vim:ft=help:

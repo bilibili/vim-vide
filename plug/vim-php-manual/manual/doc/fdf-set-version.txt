@@ -1,0 +1,41 @@
+fdf_set_version
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+fdf_set_version — Sets version number for a FDF file
+
+==============================================================================
+*Description*
+
+    bool fdf_set_version ( resource $fdf_document , string $version )~
+
+Sets the FDF {version} for the given document.
+
+Some features supported by this extension are only available in newer FDF
+versions.
+
+==============================================================================
+*Parameters*
+
+{fdf_document}
+
+    The FDF document handle, returned by |fdf_create|, |fdf_open| or 
+    |fdf_open_string|.
+
+{version}
+
+    The version number. For the current FDF toolkit 5.0, this may be either
+    1.2, 1.3 or 1.4.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |fdf_get_version| - Gets version number for FDF API or file
+
+
+vim:ft=help:

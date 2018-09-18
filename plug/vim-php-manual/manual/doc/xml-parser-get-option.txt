@@ -1,0 +1,32 @@
+xml_parser_get_option
+
+(PHP 4, PHP 5, PHP 7)
+
+xml_parser_get_option — Get options from an XML parser
+
+==============================================================================
+*Description*
+
+    mixed xml_parser_get_option ( resource $parser , int $option )~
+
+Gets an option value from an XML parser.
+
+==============================================================================
+*Parameters*
+
+{parser}
+    A reference to the XML parser to get an option from.
+{option}
+    Which option to fetch. XML_OPTION_CASE_FOLDING and
+    XML_OPTION_TARGET_ENCODING are available. See |xml_parser_set_option| for
+    their description.
+
+==============================================================================
+*Return* *Values*
+
+This function returns FALSE if {parser} does not refer to a valid parser or if
+{option} isn't valid (generates also a E_WARNING). Else the option's value is
+returned.
+
+
+vim:ft=help:

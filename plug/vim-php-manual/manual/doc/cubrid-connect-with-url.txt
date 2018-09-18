@@ -1,0 +1,172 @@
+cubrid_connect_with_url
+
+(PECL CUBRID >= 8.3.1)
+
+cubrid_connect_with_url — Establish the environment for connecting to CUBRID
+server
+
+==============================================================================
+*Description*
+
+    resource cubrid_connect_with_url ( string $conn_url [, string $userid [,~
+    string $passwd [, bool $new_link = false ]]] )~
+
+The cubrid_connect_with_url() function is used to establish the environment
+for connecting to your server by using connection information passed with an
+url string argument. If the HA feature is enabled in CUBRID, you must specify
+the connection information of the standby server, which is used for failover
+when failure occurs, in the url string argument of this function. If the user
+name and password is not given, then the "PUBLIC" connection will be made by
+default.
+
+<url> ::= CUBRID:<host>:<db_name>:<db_user>:<db_password>:[?<properties>]
+
+<properties> ::= <property> [&<property>]
+
+<properties> ::= alhosts=<alternative_hosts>[ &rctime=<time>]
+
+<properties> ::= login_timeout=<milli_sec>
+
+<properties> ::= query_timeout=<milli_sec>
+
+<properties> ::= disconnect_on_query_timeout=true|false
+
+<alternative_hosts> ::= <standby_broker1_host>:<port> [,
+<standby_broker2_host>:<port>]
+
+<host> := HOSTNAME | IP_ADDR
+
+<time> := SECOND
+
+<milli_sec> := MILLI SECOND
+
+  * host : A host name or IP address of the master database
+  * db_name : A name of the database
+  * db_user : A name of the database user
+  * db_password : A database user password
+  * alhosts : Specifies the broker information of the standby server, which is
+    used for failover when it is impossible to connect to the active server.
+    You can specify multiple brokers for failover, and the connection to the
+    brokers is attempted in the order listed in alhosts
+  * rctime : An interval between the attempts to connect to the active broker
+    in which failure occurred. After a failure occurs, the system connects to
+    the broker specified by althosts (failover), terminates the transaction,
+    and then attempts to connect to the active broker of the master database
+    at every rctime. The default value is 600 seconds.
+  * login_timeout : Timeout value (unit: msec.) for database login. The
+    default value is 0, which means infinite postponement.
+  * query_timeout : Timeout value (unit: msec.) for query request. Upon
+    timeout, a message to cancel requesting a query transferred to server is
+    sent. The return value can depend on the disconnect_on_query_timeout
+    configuration; even though the message to cancel a request is sent to
+    server, that request may succeed.
+  * disconnect_on_query_timeout : Configures a value whether to immediately
+    return an error of function being executed upon timeout. The default value
+    is false.
+
+    Note:
+
+    ? and : that are used as identifiers in PHP connection URL can't be
+    included in the password. The following is an example of a password that
+    is invalid to use as connection URL because it contains "?:".
+
+    $url = "CUBRID:localhost:33000:tdb:dba:12?:?login_timeout=100";
+
+    Passwords that contain ? or : may be passed as a separate parameter.
+
+    $url = "CUBRID:localhost:33000:tbd:::?login_timeout=100";
+
+    $conn = cubrid_connect_with_url($url, "dba", "12?");
+
+    If user or password is empty,you can't delete ":",the following is an
+    example.
+
+    $url = "CUBRID:localhost:33000:demodb:::";
+
+==============================================================================
+*Parameters*
+
+{conn_url}
+
+    A character string that contains server connection information.
+
+{userid}
+
+    User name for the database.
+
+{passwd}
+
+    User password.
+
+{new_link}
+
+    If a second call is made to cubrid_connect_with_url() with the same
+    arguments, no new connection will be established, but instead, the
+    connection identifier of the already opened connection will be returned.
+    The {new_link} parameter modifies this behavior and makes 
+    cubrid_connect_with_url() always open a new connection, even if 
+    cubrid_connect_with_url() was called before with the same parameters.
+
+==============================================================================
+*Return* *Values*
+
+Connection identifier, when process is successful.
+
+FALSE, when process is unsuccessful.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_connect_with_url() url without properties example
+
+<?php >
+    $conn_url = "CUBRID:localhost:33000:demodb:dba::";
+    $con = cubrid_connect_with_url($conn_url);
+
+    if ($con) {
+       echo "connected successfully";
+       cubrid_execute($con, "create table person(id int,name char(16))");
+       $req =cubrid_execute($con, "insert into person values(1,'James')");
+
+       if ($req) {
+          cubrid_close_request($req);
+          cubrid_commit($con);
+       } else {
+          cubrid_rollback($con);
+       }
+       cubrid_disconnect($con);
+    }
+<?>
+
+Example #2 cubrid_connect_with_url() url with properties example
+
+<?php >
+    $conn_url = "CUBRID:127.0.0.1:33000:demodb:dba::?login_timeout=100"
+    $con = cubrid_connect_with_url ($conn_url);
+
+    if ($con) {
+       echo "connected successfully";
+       cubrid_execute($con, "create table person(id int,name char(16))");
+       $req =cubrid_execute($con, "insert into person values(1,'James')");
+
+       if ($req) {
+          cubrid_close_request($req);
+          cubrid_commit($con);
+       } else {
+          cubrid_rollback($con);
+       }
+       cubrid_disconnect($con);
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_connect| - Open a connection to a CUBRID Server
+  * |cubrid_pconnect| - Open a persistent connection to a CUBRID server
+  * |cubrid_pconnect_with_url| - Open a persistent connection to CUBRID server
+  * |cubrid_disconnect| - Close a database connection
+  * |cubrid_close| - Close CUBRID connection
+
+
+vim:ft=help:

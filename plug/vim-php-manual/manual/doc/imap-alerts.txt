@@ -1,0 +1,30 @@
+imap_alerts
+
+(PHP 4, PHP 5, PHP 7)
+
+imap_alerts — Returns all IMAP alert messages that have occurred
+
+==============================================================================
+*Description*
+
+    array imap_alerts ( void )~
+
+Returns all of the IMAP alert messages generated since the last imap_alerts()
+call, or the beginning of the page.
+
+When imap_alerts() is called, the alert stack is subsequently cleared. The 
+IMAP specification requires that these messages be passed to the user.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array of all of the IMAP alert messages generated or FALSE if no
+alert messages are available.
+
+==============================================================================
+*See* *Also*
+
+  * |imap_errors| - Returns all of the IMAP errors that have occurred
+
+
+vim:ft=help:

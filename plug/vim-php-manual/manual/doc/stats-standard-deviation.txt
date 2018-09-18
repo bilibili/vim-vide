@@ -1,0 +1,35 @@
+stats_standard_deviation
+
+(PECL stats >= 1.0.0)
+
+stats_standard_deviation — Returns the standard deviation
+
+==============================================================================
+*Description*
+
+    float stats_standard_deviation ( array $a [, bool $sample = false ] )~
+
+==============================================================================
+*Parameters*
+
+{a}
+
+    The array of data to find the standard deviation for. Note that all values
+    of the array will be cast to float.
+
+{sample}
+
+    Indicates if {a} represents a sample of the population; defaults to FALSE.
+
+==============================================================================
+*Return* *Values*
+
+Returns the standard deviation on success; FALSE on failure.
+
+==============================================================================
+*Errors/Exceptions*
+
+Raises an E_WARNING when there are fewer than 2 values in {a}.
+
+
+vim:ft=help:

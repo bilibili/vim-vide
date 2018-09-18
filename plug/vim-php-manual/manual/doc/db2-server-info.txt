@@ -1,0 +1,224 @@
+db2_server_info
+
+(PECL ibm_db2 >= 1.1.1)
+
+db2_server_info — Returns an object with properties that describe the DB2
+database server
+
+==============================================================================
+*Description*
+
+    object db2_server_info ( resource $connection )~
+
+This function returns an object with read-only properties that return
+information about the IBM DB2, Cloudscape, or Apache Derby database server.
+The following table lists the database server properties:
+
+                          Database server properties
+    Property name     Return                    Description
+                       type
+                             The name of the database server to which you are
+DBMS_NAME             string connected. For DB2 servers this is a combination
+                             of DB2 followed by the operating system on which
+                             the database server is running.
+                             The version of the database server, in the form
+                             of a string "MM.mm.uuuu" where MM is the major
+DBMS_VER              string version, mm is the minor version, and uuuu is the
+                             update. For example, "08.02.0001" represents
+                             major version 8, minor version 2, update 1.
+DB_CODEPAGE           int    The code page of the database to which you are
+                             connected.
+DB_NAME               string The name of the database to which you are
+                             connected.
+                             The default transaction isolation level supported
+                             by the server:
+
+                             UR
+
+                                 Uncommitted read: changes are immediately
+                                 visible by all concurrent transactions.
+
+                             CS
+
+                                 Cursor stability: a row read by one
+                                 transaction can be altered and committed by a
+                                 second concurrent transaction.
+
+                             RS
+DFT_ISOLATION         string
+                                 Read stability: a transaction can add or
+                                 remove rows matching a search condition or a
+                                 pending transaction.
+
+                             RR
+
+                                 Repeatable read: data affected by pending
+                                 transaction is not available to other
+                                 transactions.
+
+                             NC
+
+                                 No commit: any changes are visible at the end
+                                 of a successful operation. Explicit commits
+                                 and rollbacks are not allowed.
+
+IDENTIFIER_QUOTE_CHAR string The character used to delimit an identifier.
+INST_NAME             string The instance on the database server that contains
+                             the database.
+                             An array of the isolation options supported by
+ISOLATION_OPTION      array  the database server. The isolation options are
+                             described in the DFT_ISOLATION property.
+KEYWORDS              array  An array of the keywords reserved by the database
+                             server.
+                             TRUE if the database server supports the use of %
+LIKE_ESCAPE_CLAUSE    bool   and _ wildcard characters. FALSE if the database
+                             server does not support these wildcard
+                             characters.
+MAX_COL_NAME_LEN      int    Maximum length of a column name supported by the
+                             database server, expressed in bytes.
+MAX_IDENTIFIER_LEN    int    Maximum length of an SQL identifier supported by
+                             the database server, expressed in characters.
+                             Maximum size of columns combined in an index
+MAX_INDEX_SIZE        int    supported by the database server, expressed in
+                             bytes.
+MAX_PROC_NAME_LEN     int    Maximum length of a procedure name supported by
+                             the database server, expressed in bytes.
+MAX_ROW_SIZE          int    Maximum length of a row in a base table supported
+                             by the database server, expressed in bytes.
+MAX_SCHEMA_NAME_LEN   int    Maximum length of a schema name supported by the
+                             database server, expressed in bytes.
+MAX_STATEMENT_LEN     int    Maximum length of an SQL statement supported by
+                             the database server, expressed in bytes.
+MAX_TABLE_NAME_LEN    int    Maximum length of a table name supported by the
+                             database server, expressed in bytes.
+                             TRUE if the database server supports columns that
+NON_NULLABLE_COLUMNS  bool   can be defined as NOT NULL, FALSE if the database
+                             server does not support columns defined as NOT
+                             NULL.
+                             TRUE if the database server supports the use of
+PROCEDURES            bool   the CALL statement to call stored procedures,
+                             FALSE if the database server does not support the
+                             CALL statement.
+                             A string containing all of the characters other
+SPECIAL_CHARS         string than a-Z, 0-9, and underscore that can be used in
+                             an identifier name.
+                             The level of conformance to the ANSI/ISO SQL-92
+                             specification offered by the database server:
+
+                             ENTRY
+
+                                 Entry-level SQL-92 compliance.
+
+                             FIPS127
+SQL_CONFORMANCE       string
+                                 FIPS-127-2 transitional compliance.
+
+                             FULL
+
+                                 Full level SQL-92 compliance.
+
+                             INTERMEDIATE
+
+                                 Intermediate level SQL-92 compliance.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    Specifies an active DB2 client connection.
+
+==============================================================================
+*Return* *Values*
+
+Returns an object on a successful call. Returns FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A db2_server_info() example
+
+To retrieve information about the server, you must pass a valid database
+connection resource to db2_server_info().
+
+<?php >
+
+    $conn = db2_connect('sample', 'db2inst1', 'ibmdb2');
+
+    $server = db2_server_info( $conn );
+
+    if ($server) {
+        echo "DBMS_NAME: ";                 var_dump( $server->DBMS_NAME );
+        echo "DBMS_VER: ";                  var_dump( $server->DBMS_VER );
+        echo "DB_CODEPAGE: ";               var_dump( $server->DB_CODEPAGE );
+        echo "DB_NAME: ";                   var_dump( $server->DB_NAME );
+        echo "INST_NAME: ";                 var_dump( $server->INST_NAME );
+        echo "SPECIAL_CHARS: ";             var_dump( $server->SPECIAL_CHARS );
+        echo "KEYWORDS: ";                  var_dump( sizeof($server->KEYWORDS) );
+        echo "DFT_ISOLATION: ";             var_dump( $server->DFT_ISOLATION );
+        echo "ISOLATION_OPTION: ";
+        $il = '';
+        foreach( $server->ISOLATION_OPTION as $opt )
+        {
+           $il .= $opt." ";
+        }
+        var_dump( $il );
+        echo "SQL_CONFORMANCE: ";           var_dump( $server->SQL_CONFORMANCE );
+        echo "PROCEDURES: ";                var_dump( $server->PROCEDURES );
+        echo "IDENTIFIER_QUOTE_CHAR: ";     var_dump( $server->
+    IDENTIFIER_QUOTE_CHAR );
+        echo "LIKE_ESCAPE_CLAUSE: ";        var_dump( $server->LIKE_ESCAPE_CLAUSE 
+    );
+        echo "MAX_COL_NAME_LEN: ";          var_dump( $server->MAX_COL_NAME_LEN );
+        echo "MAX_ROW_SIZE: ";              var_dump( $server->MAX_ROW_SIZE );
+        echo "MAX_IDENTIFIER_LEN: ";        var_dump( $server->MAX_IDENTIFIER_LEN 
+    );
+        echo "MAX_INDEX_SIZE: ";            var_dump( $server->MAX_INDEX_SIZE );
+        echo "MAX_PROC_NAME_LEN: ";         var_dump( $server->MAX_PROC_NAME_LEN 
+    );
+        echo "MAX_SCHEMA_NAME_LEN: ";       var_dump( $server->
+    MAX_SCHEMA_NAME_LEN );
+        echo "MAX_STATEMENT_LEN: ";         var_dump( $server->MAX_STATEMENT_LEN 
+    );
+        echo "MAX_TABLE_NAME_LEN: ";        var_dump( $server->MAX_TABLE_NAME_LEN 
+    );
+        echo "NON_NULLABLE_COLUMNS: ";      var_dump( $server->
+    NON_NULLABLE_COLUMNS );
+
+        db2_close($conn);
+    }
+<?>
+
+The above example will output:
+
+DBMS_NAME: string(9) "DB2/LINUX"
+DBMS_VER: string(10) "08.02.0000"
+DB_CODEPAGE: int(1208)
+DB_NAME: string(6) "SAMPLE"
+INST_NAME: string(8) "db2inst1"
+SPECIAL_CHARS: string(2) "@#"
+KEYWORDS: int(179)
+DFT_ISOLATION: string(2) "CS"
+ISOLATION_OPTION: string(12) "UR CS RS RR "
+SQL_CONFORMANCE: string(7) "FIPS127"
+PROCEDURES: bool(true)
+IDENTIFIER_QUOTE_CHAR: string(1) """
+LIKE_ESCAPE_CLAUSE: bool(true)
+MAX_COL_NAME_LEN: int(30)
+MAX_ROW_SIZE: int(32677)
+MAX_IDENTIFIER_LEN: int(18)
+MAX_INDEX_SIZE: int(1024)
+MAX_PROC_NAME_LEN: int(128)
+MAX_SCHEMA_NAME_LEN: int(30)
+MAX_STATEMENT_LEN: int(2097152)
+MAX_TABLE_NAME_LEN: int(128)
+NON_NULLABLE_COLUMNS: bool(true)
+
+==============================================================================
+*See* *Also*
+
+  * |db2_client_info| - Returns an object with properties that describe the
+    DB2 database client
+
+
+vim:ft=help:

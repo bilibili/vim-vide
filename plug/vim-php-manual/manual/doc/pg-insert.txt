@@ -1,0 +1,82 @@
+pg_insert
+
+(PHP 4 >= 4.3.0, PHP 5, PHP 7)
+
+pg_insert — Insert array into table
+
+==============================================================================
+*Description*
+
+    mixed pg_insert ( resource $connection , string $table_name , array~
+    $assoc_array [, int $options = PGSQL_DML_EXEC ] )~
+
+pg_insert() inserts the values of {assoc_array} into the table specified by
+{table_name}. If {options} is specified, |pg_convert| is applied to
+{assoc_array} with the specified options.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource.
+
+{table_name}
+
+    Name of the table into which to insert rows. The table {table_name} must
+    at least have as many columns as {assoc_array} has elements.
+
+{assoc_array}
+
+    An array whose keys are field names in the table {table_name}, and whose
+    values are the values of those fields that are to be inserted.
+
+{options}
+
+    Any number of PGSQL_CONV_OPTS, PGSQL_DML_NO_CONV, PGSQL_DML_ESCAPE,
+    PGSQL_DML_EXEC, PGSQL_DML_ASYNC or PGSQL_DML_STRING combined. If
+    PGSQL_DML_STRING is part of the {options} then query string is returned.
+    When PGSQL_DML_NO_CONV or PGSQL_DML_ESCAPE is set, it does not call 
+    |pg_convert| internally.
+
+==============================================================================
+*Return* *Values*
+
+Returns the connection resource on success, or FALSE on failure. Returns 
+string if PGSQL_DML_STRING is passed via {options}.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_insert() example
+
+<?php  >
+      $dbconn = pg_connect('dbname=foo');
+      // This is safe, since $_POST is converted automatically
+      $res = pg_insert($dbconn, 'post_log', $_POST);
+      if ($res) {
+          echo "POST data is successfully logged\n";
+      } else {
+          echo "User must have sent wrong inputs\n";
+      }
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                               Description
+5.6.0    Unless PGSQL_DML_STRING is passed, the function now returns the
+         connection resource instead of TRUE on success.
+5.6.0    No longer experimental. Added PGSQL_DML_ESCAPE constant, TRUE/FALSE
+         and NULL data type support.
+5.5.3/   Direct SQL injection to {table_name} and Indirect SQL injection to
+5.4.19   identifiers are fixed.
+
+==============================================================================
+*See* *Also*
+
+  * |pg_convert| - Convert associative array values into suitable for SQL
+    statement
+
+
+vim:ft=help:

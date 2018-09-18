@@ -1,0 +1,58 @@
+pclose
+
+(PHP 4, PHP 5, PHP 7)
+
+pclose — Closes process file pointer
+
+==============================================================================
+*Description*
+
+    int pclose ( resource $handle )~
+
+Closes a file pointer to a pipe opened by |popen|.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    The file pointer must be valid, and must have been returned by a
+    successful call to |popen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns the termination status of the process that was run. In case of an
+error then -1 is returned.
+
+    Note:
+
+    If PHP has been compiled with --enable-sigchild, the return value of this
+    function is undefined.
+
+==============================================================================
+*Examples*
+
+Example #1 pclose() example
+
+<?php >
+    $handle = popen('/bin/ls', 'r');
+    pclose($handle);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: Unix Only:
+
+    pclose() is internally implemented using the waitpid(3) system call. To
+    obtain the real exit status code the |pcntl_wexitstatus| function should
+    be used.
+
+==============================================================================
+*See* *Also*
+
+  * |popen| - Opens process file pointer
+
+
+vim:ft=help:

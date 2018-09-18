@@ -1,0 +1,119 @@
+each
+
+(PHP 4, PHP 5, PHP 7)
+
+each — Return the current key and value pair from an array and advance the
+array cursor
+
+==============================================================================
+*Description*
+
+    array each ( array &$array )~
+
+Return the current key and value pair from an array and advance the array
+cursor.
+
+After each() has executed, the array cursor will be left on the next element
+of the array, or past the last element if it hits the end of the array. You
+have to use |reset| if you want to traverse the array again using each.
+
+==============================================================================
+*Parameters*
+
+{array}
+
+    The input array.
+
+==============================================================================
+*Return* *Values*
+
+Returns the current key and value pair from the array {array}. This pair is
+returned in a four-element array, with the keys 0, 1, key, and value. Elements
+0 and key contain the key name of the array element, and 1 and value contain
+the data.
+
+If the internal pointer for the array points past the end of the array
+contents, each() returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 each() examples
+
+<?php >
+    $foo = array("bob", "fred", "jussi", "jouni", "egon", "marliese");
+    $bar = each($foo);
+    print_r($bar);
+<?>
+
+$bar now contains the following key/value pairs:
+
+Array
+(
+    [1] => bob
+    [value] => bob
+    [0] => 0
+    [key] => 0
+)
+
+<?php >
+    $foo = array("Robert" => "Bob", "Seppo" => "Sepi");
+    $bar = each($foo);
+    print_r($bar);
+<?>
+
+$bar now contains the following key/value pairs:
+
+Array
+(
+    [1] => Bob
+    [value] => Bob
+    [0] => Robert
+    [key] => Robert
+)
+
+each() is typically used in conjunction with |list| to traverse an array,
+here's an example:
+
+Example #2 Traversing an array with each()
+
+<?php >
+    $fruit = array('a' => 'apple', 'b' => 'banana', 'c' => 'cranberry');
+
+    reset($fruit);
+    while (list($key, $val) = each($fruit)) {
+        echo "$key => $val\n";
+    }
+<?>
+
+The above example will output:
+
+a => apple
+b => banana
+c => cranberry
+
+Caution
+
+Because assigning an array to another variable resets the original array's
+pointer, our example above would cause an endless loop had we assigned $fruit
+to another variable inside the loop.
+
+Warning
+
+each() will also accept objects, but may return unexpected results. It's
+therefore not recommended to iterate though object properties with each().
+
+==============================================================================
+*See* *Also*
+
+  * |key| - Fetch a key from an array
+  * |list| - Assign variables as if they were an array
+  * |current| - Return the current element in an array
+  * |reset| - Set the internal pointer of an array to its first element
+  * |next| - Advance the internal array pointer of an array
+  * |prev| - Rewind the internal array pointer
+  * foreach
+  * Object Iteration
+
+
+vim:ft=help:

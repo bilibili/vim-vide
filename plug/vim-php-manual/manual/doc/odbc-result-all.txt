@@ -1,0 +1,32 @@
+odbc_result_all
+
+(PHP 4, PHP 5, PHP 7)
+
+odbc_result_all — Print result as HTML table
+
+==============================================================================
+*Description*
+
+    int odbc_result_all ( resource $result_id [, string $format ] )~
+
+Prints all rows from a result identifier produced by |odbc_exec|. The result
+is printed in HTML table format.
+
+==============================================================================
+*Parameters*
+
+{result_id}
+
+    The result identifier.
+
+{format}
+
+    Additional overall table formatting.
+
+==============================================================================
+*Return* *Values*
+
+Returns the number of rows in the result or FALSE on error.
+
+
+vim:ft=help:

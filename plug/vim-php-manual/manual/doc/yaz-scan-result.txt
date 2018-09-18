@@ -1,0 +1,42 @@
+yaz_scan_result
+
+(PHP 4 >= 4.0.5, PECL yaz >= 0.9.0)
+
+yaz_scan_result — Returns Scan Response result
+
+==============================================================================
+*Description*
+
+    array yaz_scan_result ( resource $id [, array &$result ] )~
+
+yaz_scan_result() returns terms and associated information as received from
+the server in the last performed |yaz_scan|.
+
+==============================================================================
+*Parameters*
+
+{id}
+
+    The connection resource returned by |yaz_connect|.
+
+{result}
+
+    If given, this array will be modified to hold additional information taken
+    from the Scan Response:
+      + number - Number of entries returned
+
+      + stepsize - Step size
+
+      + position - Position of term
+
+      + status - Scan status
+
+==============================================================================
+*Return* *Values*
+
+Returns an array (0..n-1) where n is the number of terms returned. Each value
+is a pair where the first item is the term, and the second item is the
+result-count.
+
+
+vim:ft=help:

@@ -1,0 +1,110 @@
+mssql_bind
+
+(PHP 4 >= 4.0.7, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_bind — Adds a parameter to a stored procedure or a remote stored
+procedure
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * PDOStatement::bindParam()
+  * PDOStatement::bindValue()
+  * |sqlsrv_prepare|
+  * |odbc_prepare|
+
+==============================================================================
+*Description*
+
+    bool mssql_bind ( resource $stmt , string $param_name , mixed &$var , int~
+    $type [, bool $is_output = false [, bool $is_null = false [, int $maxlen~
+    = -1 ]]] )~
+
+Binds a parameter to a stored procedure or a remote stored procedure.
+
+==============================================================================
+*Parameters*
+
+{stmt}
+
+    Statement resource, obtained with |mssql_init|.
+
+{param_name}
+
+    The parameter name, as a string.
+
+        Note:
+
+        You have to include the @ character, like in the T-SQL syntax. See the
+        explanation included in |mssql_execute|.
+
+{var}
+
+    The PHP variable you'll bind the MSSQL parameter to. It is passed by
+    reference, to retrieve OUTPUT and RETVAL values after the procedure
+    execution.
+
+{type}
+
+    One of: SQLTEXT, SQLVARCHAR, SQLCHAR, SQLINT1, SQLINT2, SQLINT4, SQLBIT,
+    SQLFLT4, SQLFLT8, SQLFLTN.
+
+{is_output}
+
+    Whether the value is an OUTPUT parameter or not. If it's an OUTPUT
+    parameter and you don't mention it, it will be treated as a normal input
+    parameter and no error will be thrown.
+
+{is_null}
+
+    Whether the parameter is NULL or not. Passing the NULL value as {var} will
+    not do the job.
+
+{maxlen}
+
+    Used with char/varchar values. You have to indicate the length of the data
+    so if the parameter is a varchar(50), the type must be SQLVARCHAR and this
+    value 50.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mssql_bind() example
+
+<?php >
+    // Connect to MSSQL and select the database
+    mssql_connect('KALLESPC\SQLEXPRESS', 'sa', 'phpfi');
+    mssql_select_db('php');
+
+    // Create a new stored prodecure
+    $stmt = mssql_init('NewUserRecord');
+
+    // Bind the field names
+    mssql_bind($stmt, '@username',  'Kalle',  SQLVARCHAR,  false,  false,  60);
+    mssql_bind($stmt, '@name',      'Kalle',  SQLVARCHAR,  false,  false,  60);
+    mssql_bind($stmt, '@age',       19,       SQLINT1,     false,  false,   3);
+
+    // Execute
+    mssql_execute($stmt);
+
+    // Free statement
+    mssql_free_statement($stmt);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mssql_execute| - Executes a stored procedure on a MS SQL server database
+  * |mssql_free_statement| - Free statement memory
+  * |mssql_init| - Initializes a stored procedure or a remote stored procedure
+
+
+vim:ft=help:

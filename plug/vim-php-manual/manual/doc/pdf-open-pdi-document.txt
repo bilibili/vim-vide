@@ -1,0 +1,16 @@
+PDF_open_pdi_document
+
+(PECL pdflib >= 2.1.0)
+
+PDF_open_pdi_document — Prepare a pdi document
+
+==============================================================================
+*Description*
+
+    int PDF_open_pdi_document ( resource $p , string $filename , string~
+    $optlist )~
+
+Open a disk-based or virtual PDF document and prepare it for later use.
+
+
+vim:ft=help:

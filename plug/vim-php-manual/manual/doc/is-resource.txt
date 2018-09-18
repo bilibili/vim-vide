@@ -1,0 +1,55 @@
+is_resource
+
+(PHP 4, PHP 5, PHP 7)
+
+is_resource — Finds whether a variable is a resource
+
+==============================================================================
+*Description*
+
+    bool is_resource ( mixed $var )~
+
+Finds whether the given variable is a resource.
+
+==============================================================================
+*Parameters*
+
+{var}
+
+    The variable being evaluated.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if {var} is a resource, FALSE otherwise.
+
+==============================================================================
+*Examples*
+
+Example #1 is_resource() example
+
+<?php >
+
+    $db_link = @mysql_connect('localhost', 'mysql_user', 'mysql_pass');
+    if (!is_resource($db_link)) {
+        die('Can\'t connect : ' . mysql_error());
+    }
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    is_resource() is not a strict type-checking method: it will return FALSE
+    if {var} is a resource variable that has been closed.
+
+==============================================================================
+*See* *Also*
+
+  * The resource-type documentation
+  * |get_resource_type| - Returns the resource type
+
+
+vim:ft=help:

@@ -1,0 +1,128 @@
+file_put_contents
+
+(PHP 5, PHP 7)
+
+file_put_contents — Write a string to a file
+
+==============================================================================
+*Description*
+
+    int file_put_contents ( string $filename , mixed $data [, int $flags = 0~
+    [, resource $context ]] )~
+
+This function is identical to calling |fopen|, |fwrite| and |fclose|
+successively to write data to a file.
+
+If {filename} does not exist, the file is created. Otherwise, the existing
+file is overwritten, unless the FILE_APPEND flag is set.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    Path to the file where to write the data.
+
+{data}
+
+    The data to write. Can be either a string, an array or a stream resource.
+
+    If {data} is a stream resource, the remaining buffer of that stream will
+    be copied to the specified file. This is similar with using 
+    |stream_copy_to_stream|.
+
+    You can also specify the {data} parameter as a single dimension array.
+    This is equivalent to file_put_contents($filename, implode('', $array)).
+
+{flags}
+
+    The value of {flags} can be any combination of the following flags, joined
+    with the binary OR (|) operator.
+
+                               Available flags
+            Flag                              Description
+    FILE_USE_INCLUDE_PATH Search for {filename} in the include directory. See
+                          include_path for more information.
+    FILE_APPEND           If file {filename} already exists, append the data
+                          to the file instead of overwriting it.
+                          Acquire an exclusive lock on the file while
+                          proceeding to the writing. In other words, a |flock|
+    LOCK_EX               call happens between the |fopen| call and the 
+                          |fwrite| call. This is not identical to an |fopen|
+                          call with mode "x".
+
+{context}
+
+    A valid context resource created with |stream_context_create|.
+
+==============================================================================
+*Return* *Values*
+
+This function returns the number of bytes that were written to the file, or
+FALSE on failure.
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*Examples*
+
+Example #1 Simple usage example
+
+<?php >
+    $file = 'people.txt';
+    // Open the file to get existing content
+    $current = file_get_contents($file);
+    // Append a new person to the file
+    $current .= "John Smith\n";
+    // Write the contents back to the file
+    file_put_contents($file, $current);
+<?>
+
+Example #2 Using flags
+
+<?php >
+    $file = 'people.txt';
+    // The new person to add to the file
+    $person = "John Smith\n";
+    // Write the contents to the file, 
+    // using the FILE_APPEND flag to append the content to the end of the file
+    //
+     and the LOCK_EX flag to prevent anyone else writing to the file at the same time
+    file_put_contents($file, $person, FILE_APPEND | LOCK_EX);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.1.0   Added support for LOCK_EX and the ability to pass a stream resource to
+        the {data} parameter
+
+==============================================================================
+*Notes*
+
+    Note: This function is binary-safe.
+
+Tip
+
+A URL can be used as a filename with this function if the fopen wrappers have
+been enabled. See |fopen| for more details on how to specify the filename. See
+the Supported Protocols and Wrappers for links to information about what
+abilities the various wrappers have, notes on their usage, and information on
+any predefined variables they may provide.
+
+==============================================================================
+*See* *Also*
+
+  * |fopen| - Opens file or URL
+  * |fwrite| - Binary-safe file write
+  * |file_get_contents| - Reads entire file into a string
+  * |stream_context_create| - Creates a stream context
+
+
+vim:ft=help:

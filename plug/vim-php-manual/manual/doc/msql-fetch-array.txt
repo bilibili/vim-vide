@@ -1,0 +1,82 @@
+msql_fetch_array
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_fetch_array — Fetch row as array
+
+==============================================================================
+*Description*
+
+    array msql_fetch_array ( resource $result [, int $result_type ] )~
+
+msql_fetch_array() is an extended version of |msql_fetch_row|. In addition to
+storing the data in the numeric indices of the result array, it also stores
+the data in associative indices, using the field names as keys.
+
+An important thing to note is that using msql_fetch_array() is NOT
+significantly slower than using |msql_fetch_row|, while it provides a
+significant added value.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |msql_query|.
+
+{result_type}
+
+    A constant that can take the following values: MSQL_ASSOC, MSQL_NUM, and
+    MSQL_BOTH with MSQL_BOTH being the default.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array that corresponds to the fetched row, or FALSE if there are no
+more rows.
+
+==============================================================================
+*Examples*
+
+Example #1 msql_fetch_array() example
+
+<?php >
+    $con = msql_connect();
+    if (!$con) {
+        die('Server connection problem: ' . msql_error());
+    }
+
+    if (!msql_select_db('test', $con)) {
+        die('Database connection problem: ' . msql_error());
+    }
+
+    $result = msql_query('SELECT id, name FROM people', $con);
+    if (!$result) {
+        die('Query execution problem: ' . msql_error());
+    }
+
+    while ($row = msql_fetch_array($result, MSQL_ASSOC)) {
+        echo $row['id'] . ': ' . $row['name'] . "\n";
+    }
+
+    msql_free_result($result);
+<?>
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.0.4   A bug was fixed when retrieving data from columns containing NULL
+        values. Such columns were not placed into the resulting array.
+
+==============================================================================
+*See* *Also*
+
+  * |msql_fetch_row| - Get row as enumerated array
+  * |msql_fetch_object| - Fetch row as object
+  * |msql_data_seek| - Move internal row pointer
+  * |msql_result| - Get result data
+
+
+vim:ft=help:

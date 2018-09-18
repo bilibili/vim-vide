@@ -1,0 +1,125 @@
+imagejpeg
+
+(PHP 4, PHP 5, PHP 7)
+
+imagejpeg — Output image to browser or file
+
+==============================================================================
+*Description*
+
+    bool imagejpeg ( resource $image [, mixed $to [, int $quality ]] )~
+
+imagejpeg() creates a JPEG file from the given {image}.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{to}
+
+    The path or an open stream resource (which is automatically being closed
+    after this function returns) to save the file to. If not set or NULL, the
+    raw image stream will be outputted directly.
+
+    To skip this argument in order to provide the {quality} parameter, use
+    NULL.
+
+{quality}
+
+    {quality} is optional, and ranges from 0 (worst quality, smaller file) to
+    100 (best quality, biggest file). The default is the default IJG quality
+    value (about 75).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Outputting a JPEG image to the browser
+
+<?php >
+    // Create a blank image and add some text
+    $im = imagecreatetruecolor(120, 20);
+    $text_color = imagecolorallocate($im, 233, 14, 91);
+    imagestring($im, 1, 5, 5,  'A Simple Text String', $text_color);
+
+    // Set the content type header - in this case image/jpeg
+    header('Content-Type: image/jpeg');
+
+    // Output the image
+    imagejpeg($im);
+
+    // Free up memory
+    imagedestroy($im);
+<?>
+
+The above example will output something similar to:
+
+Output of example : Outputting a JPEG image
+
+Example #2 Saving a JPEG image to a file
+
+<?php >
+    // Create a blank image and add some text
+    $im = imagecreatetruecolor(120, 20);
+    $text_color = imagecolorallocate($im, 233, 14, 91);
+    imagestring($im, 1, 5, 5,  'A Simple Text String', $text_color);
+
+    // Save the image as 'simpletext.jpg'
+    imagejpeg($im, 'simpletext.jpg');
+
+    // Free up memory
+    imagedestroy($im);
+<?>
+
+Example #3 Outputting the image at 75% quality to the browser
+
+<?php >
+    // Create a blank image and add some text
+    $im = imagecreatetruecolor(120, 20);
+    $text_color = imagecolorallocate($im, 233, 14, 91);
+    imagestring($im, 1, 5, 5,  'A Simple Text String', $text_color);
+
+    // Set the content type header - in this case image/jpeg
+    header('Content-Type: image/jpeg');
+
+    // Skip the to parameter using NULL, then set the quality to 75%
+    imagejpeg($im, NULL, 75);
+
+    // Free up memory
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    If you want to output Progressive JPEGs, you need to set interlacing on
+    with |imageinterlace|.
+
+==============================================================================
+*Changelog*
+
+Version                            Description
+5.4.0   Added support for passing a stream resource to {to}.
+5.4.0   Disallowed passing an empty string to {to} to skip this argument.
+
+==============================================================================
+*See* *Also*
+
+  * |imagepng| - Output a PNG image to either the browser or a file
+  * |imagegif| - Output image to browser or file
+  * |imagewbmp| - Output image to browser or file
+  * |imageinterlace| - Enable or disable interlace
+  * |imagetypes| - Return the image types supported by this PHP build
+
+
+vim:ft=help:

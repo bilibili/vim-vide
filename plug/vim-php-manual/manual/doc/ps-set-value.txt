@@ -1,0 +1,62 @@
+ps_set_value
+
+(PECL ps >= 1.1.0)
+
+ps_set_value — Sets certain values
+
+==============================================================================
+*Description*
+
+    bool ps_set_value ( resource $psdoc , string $name , float $value )~
+
+Sets several values which are used by many functions. Parameters are by
+definition float values.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{name}
+
+    The {name} can be one of the following:
+
+    textrendering
+
+        The way how text is shown.
+
+    textx
+
+        The x coordinate for text output.
+
+    texty
+
+        The y coordinate for text output.
+
+    wordspacing
+
+        The distance between words relative to the width of a space.
+
+    leading
+
+        The distance between lines in pixels.
+
+{value}
+
+    The value of the parameter.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |ps_get_value| - Gets certain values
+  * |ps_set_parameter| - Sets certain parameters
+
+
+vim:ft=help:

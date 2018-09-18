@@ -1,0 +1,76 @@
+sybase_fetch_array
+
+(PHP 4, PHP 5)
+
+sybase_fetch_array — Fetch row as array
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    array sybase_fetch_array ( resource $result )~
+
+sybase_fetch_array() is an extended version of |sybase_fetch_row|. In addition
+to storing the data in the numeric indices of the result array, it also stores
+the data in associative indices, using the field names as keys.
+
+An important thing to note is that using sybase_fetch_array() is NOT
+significantly slower than using |sybase_fetch_row|, while it provides a
+significant added value.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+==============================================================================
+*Return* *Values*
+
+Returns an array that corresponds to the fetched row, or FALSE if there are no
+more rows.
+
+    Note:
+
+    When selecting fields with identical names (for instance, in a join), the
+    associative indices will have a sequential number prepended. See the
+    example for details.
+
+==============================================================================
+*Examples*
+
+Example #1 Identical fieldnames
+
+<?php >
+
+    $dbh = sybase_connect('SYBASE', '', '');
+    $q = sybase_query('SELECT * FROM p, a WHERE p.person_id= a.person_id');
+    var_dump(sybase_fetch_array($q));
+    sybase_close($dbh);
+<?>
+
+The above example would produce the following output (assuming the two tables
+only have each one column called "person_id"):
+
+array(4) {
+  [0]=>
+  int(1)
+  ["person_id"]=>
+  int(1)
+  [1]=>
+  int(1)
+  ["person_id1"]=>
+  int(1)
+}
+
+==============================================================================
+*See* *Also*
+
+  * |sybase_fetch_row| - Get a result row as an enumerated array
+  * |sybase_fetch_assoc| - Fetch a result row as an associative array
+  * |sybase_fetch_object| - Fetch a row as an object
+
+
+vim:ft=help:

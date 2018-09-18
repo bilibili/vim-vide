@@ -1,0 +1,47 @@
+uopz_undefine
+
+(PECL uopz >= 1.0.0)
+
+uopz_undefine — Undefine a constant
+
+==============================================================================
+*Description*
+
+    void uopz_undefine ( string $class , string $constant )~
+    void uopz_undefine ( string $constant )~
+
+Removes the constant at runtime
+
+==============================================================================
+*Parameters*
+
+{class}
+
+    The name of the class containing {constant}
+
+{constant}
+
+    The name of an existing constant
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Examples*
+
+Example #1 uopz_undefine() example
+
+<?php >
+    define("MY", true);
+
+    uopz_undefine("MY");
+
+    var_dump(defined("MY"));
+<?>
+
+The above example will output something similar to:
+
+bool(false)
+
+
+vim:ft=help:

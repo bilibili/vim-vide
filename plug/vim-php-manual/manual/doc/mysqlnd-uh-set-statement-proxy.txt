@@ -1,0 +1,45 @@
+mysqlnd_uh_set_statement_proxy
+
+(PECL mysqlnd-uh >= 1.0.0-alpha)
+
+mysqlnd_uh_set_statement_proxy — Installs a proxy for mysqlnd statements
+
+==============================================================================
+*Description*
+
+    bool mysqlnd_uh_set_statement_proxy ( MysqlndUhStatement~
+    &$statement_proxy )~
+
+Installs a proxy for mysqlnd statements. The proxy object will be used for all
+mysqlnd prepared statement objects, regardless which PHP MySQL extension (
+mysqli, mysql, PDO_MYSQL) has created them as long as the extension is
+compiled to use the mysqlnd library.
+
+The function can be disabled with mysqlnd_uh.enable. If mysqlnd_uh.enable is
+set to FALSE the function will not install the proxy and always return TRUE.
+Additionally, an error of the type E_WARNING may be emitted. The error message
+may read like PHP Warning: mysqlnd_uh_set_statement_proxy(): (Mysqlnd User
+Handler) The plugin has been disabled by setting the configuration parameter
+mysqlnd_uh.enable = false. The proxy has not been installed [...].
+
+==============================================================================
+*Parameters*
+
+{statement_proxy}
+
+    The mysqlnd statement proxy object of type MysqlndUhStatement
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success. Otherwise, returns FALSE
+
+==============================================================================
+*See* *Also*
+
+  * |mysqlnd_uh_set_connection_proxy| - Installs a proxy for mysqlnd
+    connections
+  * mysqlnd_uh.enable
+
+
+vim:ft=help:

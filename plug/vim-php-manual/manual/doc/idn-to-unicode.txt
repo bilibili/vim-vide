@@ -1,0 +1,13 @@
+idn_to_unicode
+
+(No version information available, might only be in Git)
+
+idn_to_unicode — Alias of |idn_to_utf8|
+
+==============================================================================
+*Description*
+
+This function is an alias of: |idn_to_utf8|.
+
+
+vim:ft=help:

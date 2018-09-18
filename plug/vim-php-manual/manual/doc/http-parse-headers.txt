@@ -1,0 +1,62 @@
+http_parse_headers
+
+(PECL pecl_http >= 0.10.0)
+
+http_parse_headers — Parse HTTP headers
+
+==============================================================================
+*Description*
+
+    array http_parse_headers ( string $header )~
+
+Parses HTTP headers into an associative array.
+
+==============================================================================
+*Parameters*
+
+{header}
+
+    string containing HTTP headers
+
+==============================================================================
+*Return* *Values*
+
+Returns an array on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Using http_parse_headers()
+
+<?php >
+    $headers = "content-type: text/html; charset=UTF-8\r\n".
+      "Server: Funky/1.0\r\n".
+      "Set-Cookie: foo=bar\r\n".
+      "Set-Cookie: baz=quux\r\n".
+      "Folded: works\r\n\ttoo\r\n";
+    print_r(http_parse_headers($headers));
+<?>
+
+The above example will output:
+
+Array
+(
+  [Content-Type] => text/html; charset=UTF-8
+  [Server] => Funky/1.0
+  [Set-Cookie] => Array
+  (
+    [0] => foo=bar
+    [1] => baz=quux
+  )
+  [Folded] => works
+    too
+)
+
+==============================================================================
+*See* *Also*
+
+  * |http_parse_message| - Parse HTTP messages
+  * |http_parse_cookie| - Parse HTTP cookie
+
+
+vim:ft=help:

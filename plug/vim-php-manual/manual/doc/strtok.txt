@@ -1,0 +1,87 @@
+strtok
+
+(PHP 4, PHP 5, PHP 7)
+
+strtok — Tokenize string
+
+==============================================================================
+*Description*
+
+    string strtok ( string $str , string $token )~
+    string strtok ( string $token )~
+
+strtok() splits a string ({str}) into smaller strings (tokens), with each
+token being delimited by any character from {token}. That is, if you have a
+string like "This is an example string" you could tokenize this string into
+its individual words by using the space character as the token.
+
+Note that only the first call to strtok uses the string argument. Every
+subsequent call to strtok only needs the token to use, as it keeps track of
+where it is in the current string. To start over, or to tokenize a new string
+you simply call strtok with the string argument again to initialize it. Note
+that you may put multiple tokens in the token parameter. The string will be
+tokenized when any one of the characters in the argument is found.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The string being split up into smaller strings (tokens).
+
+{token}
+
+    The delimiter used when splitting up {str}.
+
+==============================================================================
+*Return* *Values*
+
+A string token.
+
+==============================================================================
+*Examples*
+
+Example #1 strtok() example
+
+<?php >
+    $string = "This is\tan example\nstring";
+    /* Use tab and newline as tokenizing characters as well  */
+    $tok = strtok($string, " \n\t");
+
+    while ($tok !== false) {
+        echo "Word=$tok<br />";
+        $tok = strtok(" \n\t");
+    }
+<?>
+
+Example #2 strtok() behavior on empty part found
+
+<?php >
+    $first_token  = strtok('/something', '/');
+    $second_token = strtok('/');
+    var_dump($first_token, $second_token);
+<?>
+
+The above example will output:
+
+    string(9) "something"
+    bool(false)
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function may return Boolean FALSE, but may also return a non-Boolean
+value which evaluates to FALSE. Please read the section on Booleans for more
+information. Use the === operator for testing the return value of this
+function.
+
+==============================================================================
+*See* *Also*
+
+  * |split| - Split string into array by regular expression
+  * |explode| - Split a string by string
+
+
+vim:ft=help:

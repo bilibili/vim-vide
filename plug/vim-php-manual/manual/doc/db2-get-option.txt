@@ -1,0 +1,202 @@
+db2_get_option
+
+(PECL ibm_db2 >= 1.6.0)
+
+db2_get_option — Retrieves an option value for a statement resource or a
+connection resource
+
+==============================================================================
+*Description*
+
+    string db2_get_option ( resource $resource , string $option )~
+
+Retrieves the value of a specified option value for a statement resource or a
+connection resource.
+
+==============================================================================
+*Parameters*
+
+{resource}
+
+    A valid statement resource as returned from |db2_prepare| or a valid
+    connection resource as returned from |db2_connect| or |db2_pconnect|.
+
+{option}
+
+    A valid statement or connection options. The following new options are
+    available as of ibm_db2 version 1.6.0. They provide useful tracking
+    information that can be set during execution with db2_get_option().
+
+
+        Note:
+
+        Prior versions of ibm_db2 do not support these new options.
+
+        When the value in each option is being set, some servers might not
+        handle the entire length provided and might truncate the value.
+
+        To ensure that the data specified in each option is converted
+        correctly when transmitted to a host system, use only the characters A
+        through Z, 0 through 9, and the underscore (_) or period (.).
+
+    {userid}
+
+        SQL_ATTR_INFO_USERID - A pointer to a null-terminated character string
+        used to identify the client user ID sent to the host database server
+        when using DB2 Connect.
+
+
+            Note:
+
+            DB2 for z/OS and OS/390 servers support up to a length of 16
+            characters. This user-id is not to be confused with the
+            authentication user-id, it is for identification purposes only and
+            is not used for any authorization.
+
+    {acctstr}
+
+        SQL_ATTR_INFO_ACCTSTR - A pointer to a null-terminated character
+        string used to identify the client accounting string sent to the host
+        database server when using DB2 Connect.
+
+
+            Note:
+
+            DB2 for z/OS and OS/390 servers support up to a length of 200
+            characters.
+
+    {applname}
+
+        SQL_ATTR_INFO_APPLNAME - A pointer to a null-terminated character
+        string used to identify the client application name sent to the host
+        database server when using DB2 Connect.
+
+
+            Note:
+
+            DB2 for z/OS and OS/390 servers support up to a length of 32
+            characters.
+
+    {wrkstnname}
+
+        SQL_ATTR_INFO_WRKSTNNAME - A pointer to a null-terminated character
+        string used to identify the client workstation name sent to the host
+        database server when using DB2 Connect.
+
+
+            Note:
+
+            DB2 for z/OS and OS/390 servers support up to a length of 18
+            characters.
+
+The following table specifies which options are compatible with the available
+resource types:
+
+                     Resource-Parameter Matrix
+   Key              Value                    Resource Type
+                                    Connection Statement Result Set
+userid     SQL_ATTR_INFO_USERID     X          X         -
+acctstr    SQL_ATTR_INFO_ACCTSTR    X          X         -
+applname   SQL_ATTR_INFO_APPLNAME   X          X         -
+wrkstnname SQL_ATTR_INFO_WRKSTNNAME X          X         -
+
+==============================================================================
+*Return* *Values*
+
+Returns the current setting of the connection attribute provided on success or
+FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 Setting and retrieving parameters through a connection resource
+
+<?php >
+    /* Database Connection Parameters */
+    $database = 'SAMPLE';
+    $user     = 'db2inst1';
+    $password = 'ibmdb2';
+
+    /* Obtain Connection Resource */
+    $conn = db2_connect($database, $user, $password);
+
+    echo "Client attributes passed through connection string:\n";
+
+    /* Create the associative options array with valid key-value pairs */
+    /* Assign the attributes through connection string */
+    /* Access the options specified */
+    $options1 = array('userid' => 'db2inst1');
+    $conn1 = db2_connect($database, $user, $password, $options1);
+    $val = db2_get_option($conn1, 'userid');
+    echo $val . "\n";
+
+    $options2 = array('acctstr' => 'account');
+    $conn2 = db2_connect($database, $user, $password, $options2);
+    $val = db2_get_option($conn2, 'acctstr');
+    echo $val . "\n";
+
+    $options3 = array('applname' => 'myapp');
+    $conn3 = db2_connect($database, $user, $password, $options3);
+    $val = db2_get_option($conn3, 'applname');
+    echo $val . "\n";
+
+    $options4 = array('wrkstnname' => 'workstation');
+    $conn4 = db2_connect($database, $user, $password, $options4);
+    $val = db2_get_option($conn4, 'wrkstnname');
+    echo $val . "\n";
+
+    echo "Client attributes passed post-connection:\n";
+
+    /* Create the associative options array with valid key-value pairs */
+    /* Assign the attributes after a connection is made */
+    /* Access the options specified */
+    $options5 = array('userid' => 'db2inst1');
+    $conn5 = db2_connect($database, $user, $password);
+    $rc = db2_set_option($conn5, $options5, 1);
+    $val = db2_get_option($conn5, 'userid');
+    echo $val . "\n";
+
+    $options6 = array('acctstr' => 'account');
+    $conn6 = db2_connect($database, $user, $password);
+    $rc = db2_set_option($conn6, $options6, 1);
+    $val = db2_get_option($conn6, 'acctstr');
+    echo $val . "\n";
+
+    $options7 = array('applname' => 'myapp');
+    $conn7 = db2_connect($database, $user, $password);
+    $rc = db2_set_option($conn7, $options7, 1);
+    $val = db2_get_option($conn7, 'applname');
+    echo $val . "\n";
+
+    $options8 = array('wrkstnname' => 'workstation');
+    $conn8 = db2_connect($database, $user, $password);
+    $rc = db2_set_option($conn8, $options8, 1);
+    $val = db2_get_option($conn8, 'wrkstnname');
+    echo $val . "\n";
+<?>
+
+The above example will output:
+
+Client attributes passed through connection string:
+db2inst1
+account
+myapp
+workstation
+Client attributes passed post-connection:
+db2inst1
+account
+myapp
+workstation
+
+==============================================================================
+*See* *Also*
+
+  * |db2_connect| - Returns a connection to a database
+  * |db2_cursor_type| - Returns the cursor type used by a statement resource
+  * |db2_exec| - Executes an SQL statement directly
+  * |db2_set_option| - Set options for connection or statement resources
+  * |db2_pconnect| - Returns a persistent connection to a database
+  * |db2_prepare| - Prepares an SQL statement to be executed
+
+
+vim:ft=help:

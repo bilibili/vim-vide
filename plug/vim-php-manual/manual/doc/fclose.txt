@@ -1,0 +1,47 @@
+fclose
+
+(PHP 4, PHP 5, PHP 7)
+
+fclose — Closes an open file pointer
+
+==============================================================================
+*Description*
+
+    bool fclose ( resource $handle )~
+
+The file pointed to by {handle} is closed.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    The file pointer must be valid, and must point to a file successfully
+    opened by |fopen| or |fsockopen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A simple fclose() example
+
+<?php >
+
+    $handle = fopen('somefile.txt', 'r');
+
+    fclose($handle);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |fopen| - Opens file or URL
+  * |fsockopen| - Open Internet or Unix domain socket connection
+
+
+vim:ft=help:

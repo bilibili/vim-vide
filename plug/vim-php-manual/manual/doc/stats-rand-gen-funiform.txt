@@ -1,0 +1,28 @@
+stats_rand_gen_funiform
+
+(PECL stats >= 1.0.0)
+
+stats_rand_gen_funiform — Generates uniform float between low (exclusive) and
+high (exclusive)
+
+==============================================================================
+*Description*
+
+    float stats_rand_gen_funiform ( float $low , float $high )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{low}
+
+{high}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

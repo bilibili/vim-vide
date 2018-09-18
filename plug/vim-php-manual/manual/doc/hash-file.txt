@@ -1,0 +1,64 @@
+hash_file
+
+(PHP 5 >= 5.1.2, PHP 7, PECL hash >= 1.1)
+
+hash_file — Generate a hash value using the contents of a given file
+
+==============================================================================
+*Description*
+
+    string hash_file ( string $algo , string $filename [, bool $raw_output =~
+    false ] )~
+
+==============================================================================
+*Parameters*
+
+{algo}
+
+    Name of selected hashing algorithm (i.e. "md5", "sha256", "haval160,4",
+    etc..)
+
+{filename}
+
+    URL describing location of file to be hashed; Supports fopen wrappers.
+
+{raw_output}
+
+    When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string containing the calculated message digest as lowercase hexits
+unless {raw_output} is set to true in which case the raw binary representation
+of the message digest is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 Using hash_file()
+
+<?php >
+    /* Create a file to calculate hash of */
+    file_put_contents('example.txt', 
+    'The quick brown fox jumped over the lazy dog.');
+
+    echo hash_file('md5', 'example.txt');
+<?>
+
+The above example will output:
+
+5c6ffbdd40d9556b73a21e63c3e0e904
+
+==============================================================================
+*See* *Also*
+
+  * |hash| - Generate a hash value (message digest)
+  * |hash_hmac_file| - Generate a keyed hash value using the HMAC method and
+    the contents of a given file
+  * |hash_update_file| - Pump data into an active hashing context from a file
+  * |md5_file| - Calculates the md5 hash of a given file
+  * |sha1_file| - Calculate the sha1 hash of a file
+
+
+vim:ft=help:

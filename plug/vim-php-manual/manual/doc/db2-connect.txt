@@ -1,0 +1,461 @@
+db2_connect
+
+(PECL ibm_db2 >= 1.0.0)
+
+db2_connect — Returns a connection to a database
+
+==============================================================================
+*Description*
+
+    resource db2_connect ( string $database , string $username , string~
+    $password [, array $options ] )~
+
+Creates a new connection to an IBM DB2 Universal Database, IBM Cloudscape, or
+Apache Derby database.
+
+==============================================================================
+*Parameters*
+
+{database}
+
+    For a cataloged connection to a database, {database} represents the
+    database alias in the DB2 client catalog.
+
+    For an uncataloged connection to a database, {database} represents a
+    complete connection string in the following format:
+
+    DATABASE={database};HOSTNAME={hostname};PORT={port};PROTOCOL=TCPIP;UID={username};PWD={password};
+
+    where the parameters represent the following values:
+
+    {database}
+
+        The name of the database.
+
+    {hostname}
+
+        The hostname or IP address of the database server.
+
+    {port}
+
+        The TCP/IP port on which the database is listening for requests.
+
+    {username}
+
+        The username with which you are connecting to the database.
+
+    {password}
+
+        The password with which you are connecting to the database.
+
+{username}
+
+    The username with which you are connecting to the database.
+
+    For uncataloged connections, you must pass a NULL value or empty string.
+
+{password}
+
+    The password with which you are connecting to the database.
+
+    For uncataloged connections, you must pass a NULL value or empty string.
+
+{options}
+
+    An associative array of connection options that affect the behavior of the
+    connection, where valid array keys include:
+
+    {autocommit}
+
+        Passing the DB2_AUTOCOMMIT_ON value turns autocommit on for this
+        connection handle.
+
+        Passing the DB2_AUTOCOMMIT_OFF value turns autocommit off for this
+        connection handle.
+
+    {DB2_ATTR_CASE}
+
+        Passing the DB2_CASE_NATURAL value specifies that column names are
+        returned in natural case.
+
+        Passing the DB2_CASE_LOWER value specifies that column names are
+        returned in lower case.
+
+        Passing the DB2_CASE_UPPER value specifies that column names are
+        returned in upper case.
+
+    {CURSOR}
+
+        Passing the DB2_FORWARD_ONLY value specifies a forward-only cursor for
+        a statement resource. This is the default cursor type and is supported
+        on all database servers.
+
+        Passing the DB2_SCROLLABLE value specifies a scrollable cursor for a
+        statement resource. This mode enables random access to rows in a
+        result set, but currently is supported only by IBM DB2 Universal
+        Database.
+
+    The following new option is available in ibm_db2 version 1.7.0 and later.
+
+    {trustedcontext}
+
+        Passing the DB2_TRUSTED_CONTEXT_ENABLE value turns trusted context on
+        for this connection handle. This parameter cannot be set using 
+        |db2_set_option|.
+
+        This key works only if the database is cataloged (even if the database
+        is local), or if you specify the full DSN when you create the
+        connection.
+
+        To catalog the database, use following commands:
+
+        db2 catalog tcpip node loopback remote <SERVERNAME> server <SERVICENAME>
+        db2 catalog database <LOCALDBNAME> as <REMOTEDBNAME> at node loopback
+        db2 "update dbm cfg using svcename <SERVICENAME>"
+        db2set DB2COMM=TCPIP
+
+    The following new i5/OS options are available in ibm_db2 version 1.5.1 and
+    later.
+
+    {i5_lib}
+
+        A character value that indicates the default library that will be used
+        for resolving unqualified file references. This is not valid if the
+        connection is using system naming mode.
+
+    {i5_naming}
+
+        DB2_I5_NAMING_ON value turns on DB2 UDB CLI iSeries system naming
+        mode. Files are qualified using the slash (/) delimiter. Unqualified
+        files are resolved using the library list for the job.
+
+        DB2_I5_NAMING_OFF value turns off DB2 UDB CLI default naming mode,
+        which is SQL naming. Files are qualified using the period (.)
+        delimiter. Unqualified files are resolved using either the default
+        library or the current user ID.
+
+    {i5_commit}
+
+        The {i5_commit} attribute should be set before the db2_connect(). If
+        the value is changed after the connection has been established, and
+        the connection is to a remote data source, the change does not take
+        effect until the next successful db2_connect() for the connection
+        handle.
+
+
+            Note:
+
+            The php.ini setting {ibm_db2.i5_allow_commit}==0 or
+            DB2_I5_TXN_NO_COMMIT is the default, but may be overridden with
+            the {i5_commit} option.
+
+        DB2_I5_TXN_NO_COMMIT - Commitment control is not used.
+
+        DB2_I5_TXN_READ_UNCOMMITTED - Dirty reads, nonrepeatable reads, and
+        phantoms are possible.
+
+        DB2_I5_TXN_READ_COMMITTED - Dirty reads are not possible.
+        Nonrepeatable reads, and phantoms are possible.
+
+        DB2_I5_TXN_REPEATABLE_READ - Dirty reads and nonrepeatable reads are
+        not possible. Phantoms are possible.
+
+        DB2_I5_TXN_SERIALIZABLE - Transactions are serializable. Dirty reads,
+        non-repeatable reads, and phantoms are not possible
+
+    {i5_query_optimize}
+
+        DB2_FIRST_IO All queries are optimized with the goal of returning the
+        first page of output as fast as possible. This goal works well when
+        the output is controlled by a user who is most likely to cancel the
+        query after viewing the first page of output data. Queries coded with
+        an OPTIMIZE FOR nnn ROWS clause honor the goal specified by the
+        clause.
+
+        DB2_ALL_IO All queries are optimized with the goal of running the
+        entire query to completion in the shortest amount of elapsed time.
+        This is a good option when the output of a query is being written to a
+        file or report, or the interface is queuing the output data. Queries
+        coded with an OPTIMIZE FOR nnn ROWS clause honor the goal specified by
+        the clause. This is the default.
+
+    {i5_dbcs_alloc}
+
+        DB2_I5_DBCS_ALLOC_ON value turns on DB2 6X allocation scheme for DBCS
+        translation column size growth.
+
+        DB2_I5_DBCS_ALLOC_OFF value turns off DB2 6X allocation scheme for
+        DBCS translation column size growth.
+
+        Note: php.ini setting {ibm_db2.i5_dbcs_alloc}==0 or
+        DB2_I5_DBCS_ALLOC_OFF is the default, but may be overridden with the
+        {i5_dbcs_alloc} option.
+
+    {i5_date_fmt}
+
+        DB2_I5_FMT_ISO - The International Organization for Standardization
+        (ISO) date format yyyy-mm-dd is used. This is the default.
+
+        DB2_I5_FMT_USA - The United States date format mm/dd/yyyy is used.
+
+        DB2_I5_FMT_EUR - The European date format dd.mm.yyyy is used.
+
+        DB2_I5_FMT_JIS - The Japanese Industrial Standard date format
+        yyyy-mm-dd is used.
+
+        DB2_I5_FMT_MDY - The date format mm/dd/yyyy is used.
+
+        DB2_I5_FMT_DMY - The date format dd/mm/yyyy is used.
+
+        DB2_I5_FMT_YMD - The date format yy/mm/dd is used.
+
+        DB2_I5_FMT_JUL - The Julian date format yy/ddd is used.
+
+        DB2_I5_FMT_JOB - The job default is used.
+
+    {i5_date_sep}
+
+        DB2_I5_SEP_SLASH - A slash ( / ) is used as the date separator. This
+        is the default.
+
+        DB2_I5_SEP_DASH - A dash ( - ) is used as the date separator.
+
+        DB2_I5_SEP_PERIOD - A period ( . ) is used as the date separator.
+
+        DB2_I5_SEP_COMMA - A comma ( , ) is used as the date separator.
+
+        DB2_I5_SEP_BLANK - A blank is used as the date separator.
+
+        DB2_I5_SEP_JOB - The job default is used
+
+    {i5_time_fmt}
+
+        DB2_I5_FMT_ISO - The International Organization for Standardization
+        (ISO) time format hh.mm.ss is used. This is the default.
+
+        DB2_I5_FMT_USA - The United States time format hh:mmxx is used, where
+        xx is AM or PM.
+
+        DB2_I5_FMT_EUR - The European time format hh.mm.ss is used.
+
+        DB2_I5_FMT_JIS - The Japanese Industrial Standard time format hh:mm:ss
+        is used.
+
+        DB2_I5_FMT_HMS - The hh:mm:ss format is used.
+
+    {i5_time_sep}
+
+        DB2_I5_SEP_COLON - A colon ( : ) is used as the time separator. This
+        is the default.
+
+        DB2_I5_SEP_PERIOD - A period ( . ) is used as the time separator.
+
+        DB2_I5_SEP_COMMA - A comma ( , ) is used as the time separator.
+
+        DB2_I5_SEP_BLANK - A blank is used as the time separator.
+
+        DB2_I5_SEP_JOB - The job default is used.
+
+    {i5_decimal_sep}
+
+        DB2_I5_SEP_PERIOD - A period ( . ) is used as the decimal separator.
+        This is the default.
+
+        DB2_I5_SEP_COMMA - A comma ( , ) is used as the decimal separator.
+
+        DB2_I5_SEP_JOB - The job default is used.
+
+    The following new i5/OS option is available in ibm_db2 version 1.8.0 and
+    later.
+
+    {i5_libl}
+
+        A character value that indicates the library list that will be used
+        for resolving unqualified file references. Specify the library list
+        elements separated by blanks 'i5_libl'=>"MYLIB YOURLIB ANYLIB".
+
+            Note:
+
+            {i5_libl} calls qsys2/qcmdexc('cmd',cmdlen), which is only
+            available in i5/OS V5R4 and later.
+
+==============================================================================
+*Return* *Values*
+
+Returns a connection handle resource if the connection attempt is successful.
+If the connection attempt fails, db2_connect() returns FALSE.
+
+==============================================================================
+*Examples*
+
+Example #1 Creating a cataloged connection
+
+Cataloged connections require you to have previously cataloged the target
+database through the DB2 Command Line Processor (CLP) or DB2 Configuration
+Assistant.
+
+<?php >
+    $database = 'SAMPLE';
+    $user = 'db2inst1';
+    $password = 'ibmdb2';
+
+    $conn = db2_connect($database, $user, $password);
+
+    if ($conn) {
+        echo "Connection succeeded.";
+        db2_close($conn);
+    }
+    else {
+        echo "Connection failed.";
+    }
+<?>
+
+The above example will output:
+
+Connection succeeded.
+
+Example #2 Creating an uncataloged connection
+
+An uncataloged connection enables you to dynamically connect to a database.
+
+<?php >
+    $database = 'SAMPLE';
+    $user = 'db2inst1';
+    $password = 'ibmdb2';
+    $hostname = 'localhost';
+    $port = 50000;
+
+    $conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$database;" .
+      "HOSTNAME=$hostname;PORT=$port;PROTOCOL=TCPIP;UID=$user;PWD=$password;";
+    $conn = db2_connect($conn_string, '', '');
+
+    if ($conn) {
+        echo "Connection succeeded.";
+        db2_close($conn);
+    }
+    else {
+        echo "Connection failed.";
+    }
+<?>
+
+The above example will output:
+
+Connection succeeded.
+
+Example #3 Creating a connection with autocommit off by default
+
+Passing an array of options to db2_connect() enables you to modify the default
+behavior of the connection handle.
+
+<?php >
+    $database = 'SAMPLE';
+    $user = 'db2inst1';
+    $password = 'ibmdb2';
+    $options = array('autocommit' => DB2_AUTOCOMMIT_OFF);
+
+    $conn = db2_connect($database, $user, $password, $options);
+
+    if ($conn) {
+        echo "Connection succeeded.\n";
+        if (db2_autocommit($conn)) {
+             echo "Autocommit is on.\n";
+        }
+        else {
+             echo "Autocommit is off.\n";
+        }
+        db2_close($conn);
+    }
+    else {
+        echo "Connection failed.";
+    }
+<?>
+
+The above example will output:
+
+Connection succeeded.
+Autocommit is off.
+
+Example #4 i5/OS best performance
+
+To achieve best performance for your i5/OS ibm_db2 1.5.1 PHP application use
+the default host, userid, and password for your db2_connect().
+
+<?php >
+      $library = "ADC";
+      $i5 = db2_connect("", "", "", array("i5_lib"=>"qsys2"));
+      $result = db2_exec($i5, 
+           "select * from systables where table_schema = '$library'");
+      while ($row = db2_fetch_both($result)) {               
+         echo $row['TABLE_NAME']."</br>";                     
+      }                                                      
+      db2_close($i5);
+<?>
+
+The above example will output:
+
+ANIMALS
+NAMES
+PICTURES
+
+Example #5 Using trusted context
+
+The following example shows how to enable trusted context, switch users, and
+get the current user ID.
+
+<?php >
+
+    $database = "SAMPLE";
+    $hostname = "localhost";
+    $port = 50000;
+    $authID = "db2inst1";
+    $auth_pass = "ibmdb2";
+
+    $tc_user = "tcuser";
+    $tc_pass = "tcpassword";
+
+    $dsn = "DATABASE=$database;HOSTNAME=$hostname;PORT=$port;
+      PROTOCOL=TCPIP;UID=$authID;PWD=$auth_pass;";
+    $options = array ("trustedcontext" => DB2_TRUSTED_CONTEXT_ENABLE);
+
+    $tc_conn = db2_connect($dsn, "", "", $options);
+    if($tc_conn) {
+        echo "Explicit trusted connection succeeded.\n";
+
+        if(db2_get_option($tc_conn, "trustedcontext")) {
+            $userBefore = db2_get_option($tc_conn, "trusted_user");
+            
+            //Do some work as user 1.
+
+            //Switching to trusted user.
+            $parameters = array("trusted_user" => $tc_user, 
+              "trusted_password" => $tcuser_pass);
+            $res = db2_set_option ($tc_conn, $parameters, 1);
+
+            $userAfter = db2_get_option($tc_conn, "trusted_user");
+            //Do more work as trusted user.
+
+            if($userBefore != $userAfter) {
+                echo "User has been switched." . "\n";    
+            }
+        }
+
+        db2_close($tc_conn);
+    }
+    else {
+        echo "Explicit trusted connection failed.\n";
+    }
+<?>
+
+The above example will output:
+
+Explicit trusted connection succeeded.
+User has been switched.
+
+==============================================================================
+*See* *Also*
+
+  * |db2_close| - Closes a database connection
+  * |db2_pconnect| - Returns a persistent connection to a database
+
+
+vim:ft=help:

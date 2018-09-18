@@ -1,0 +1,17 @@
+iis_remove_server
+
+(PECL iisfunc SVN)
+
+iis_remove_server — Removes the virtual web server indicated by ServerInstance
+
+==============================================================================
+*Description*
+
+    int iis_remove_server ( int $server_instance )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+
+vim:ft=help:

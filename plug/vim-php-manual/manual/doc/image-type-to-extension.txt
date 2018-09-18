@@ -1,0 +1,53 @@
+image_type_to_extension
+
+(PHP 5 >= 5.2.0, PHP 7)
+
+image_type_to_extension — Get file extension for image type
+
+==============================================================================
+*Description*
+
+    string image_type_to_extension ( int $imagetype [, bool $include_dot =~
+    TRUE ] )~
+
+Returns the extension for the given IMAGETYPE_XXX constant.
+
+==============================================================================
+*Parameters*
+
+{imagetype}
+
+    One of the IMAGETYPE_XXX constant.
+
+{include_dot}
+
+    Whether to prepend a dot to the extension or not. Default to TRUE.
+
+==============================================================================
+*Return* *Values*
+
+A string with the extension corresponding to the given image type.
+
+==============================================================================
+*Examples*
+
+Example #1 image_type_to_extension() example
+
+<?php >
+    // Create image instance
+    $im = imagecreatetruecolor(100, 100);
+
+    // Save image
+    imagepng($im, './test' . image_type_to_extension(IMAGETYPE_PNG));
+    imagedestroy($im);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function does not require the GD image library.
+
+
+vim:ft=help:

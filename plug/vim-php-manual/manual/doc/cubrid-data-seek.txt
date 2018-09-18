@@ -1,0 +1,81 @@
+cubrid_data_seek
+
+(PECL CUBRID >= 8.3.0)
+
+cubrid_data_seek — Move the internal row pointer of the CUBRID result
+
+==============================================================================
+*Description*
+
+    bool cubrid_data_seek ( resource $result , int $row_number )~
+
+This function performs the moving of the internal row pointer of the CUBRID
+result (associated with the specified result identifier) to point to a
+specific row number. There are functions, such as |cubrid_fetch_assoc|, which
+use the current stored value of {row number}.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The result.
+
+{row_number}
+
+    This is the desired row number of the new result pointer.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_data_seek() example
+
+<?php >
+    $conn = cubrid_connect("127.0.0.1", 33000, "demodb");
+
+    $req = cubrid_execute($conn, "SELECT * FROM code");
+    cubrid_data_seek($req, 0);
+
+    $result = cubrid_fetch_row($req);
+    var_dump($result);
+
+    cubrid_data_seek($req, 2);
+    $result = cubrid_fetch_row($req);
+    var_dump($result);
+
+    cubrid_data_seek($req, 4);
+    $result = cubrid_fetch_row($req);
+    var_dump($result);
+
+    cubrid_close_request($req);
+    cubrid_disconnect($conn);
+<?>
+
+The above example will output:
+
+array(2) {
+  [0]=>
+  string(1) "X"
+  [1]=>
+  string(5) "Mixed"
+}
+array(2) {
+  [0]=>
+  string(1) "M"
+  [1]=>
+  string(3) "Man"
+}
+array(2) {
+  [0]=>
+  string(1) "S"
+  [1]=>
+  string(6) "Silver"
+}
+
+
+vim:ft=help:

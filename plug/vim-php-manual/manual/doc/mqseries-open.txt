@@ -1,0 +1,79 @@
+mqseries_open
+
+(PECL mqseries >= 0.10.0)
+
+mqseries_open — MQSeries MQOPEN
+
+==============================================================================
+*Description*
+
+    void mqseries_open ( resource $hconn , array &$objDesc , int $option ,~
+    resource &$hobj , resource &$compCode , resource &$reason )~
+
+The mqseries_open() (MQOPEN) call establishes access to an object.
+
+==============================================================================
+*Parameters*
+
+{hConn}
+
+    Connection handle.
+
+    This handle represents the connection to the queue manager.
+
+{objDesc}
+
+    Object descriptor. (MQOD)
+
+{options}
+
+    Options that control the action of the function.
+
+{hObj}
+
+    Object handle.
+
+    This handle represents the object to be used.
+
+{compCode}
+
+    Completion code.
+
+{reason}
+
+    Reason code qualifying the compCode.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 mqseries_open() example
+
+<?php >
+        $mqods = array('ObjectName' => 'TESTQ');
+        mqseries_open(
+                    $conn,
+                    $mqods,
+                    MQSERIES_MQOO_INPUT_AS_Q_DEF | 
+    MQSERIES_MQOO_FAIL_IF_QUIESCING | MQSERIES_MQOO_OUTPUT,
+                    $obj,
+                    $comp_code,
+                    $reason);
+        if ($comp_code !== MQSERIES_MQCC_OK) {
+            printf("open CompCode:%d Reason:%d Text:%s<br>\n", $comp_code, $reason
+    , mqseries_strerror($reason));
+            exit;
+        }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |mqseries_close| - MQSeries MQCLOSE
+
+
+vim:ft=help:

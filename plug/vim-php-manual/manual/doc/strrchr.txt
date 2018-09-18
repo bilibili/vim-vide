@@ -1,0 +1,69 @@
+strrchr
+
+(PHP 4, PHP 5, PHP 7)
+
+strrchr — Find the last occurrence of a character in a string
+
+==============================================================================
+*Description*
+
+    string strrchr ( string $haystack , mixed $needle )~
+
+This function returns the portion of {haystack} which starts at the last
+occurrence of {needle} and goes until the end of {haystack}.
+
+==============================================================================
+*Parameters*
+
+{haystack}
+
+    The string to search in
+
+{needle}
+
+    If {needle} contains more than one character, only the first is used. This
+    behavior is different from that of |strstr|.
+
+    If {needle} is not a string, it is converted to an integer and applied as
+    the ordinal value of a character.
+
+==============================================================================
+*Return* *Values*
+
+This function returns the portion of string, or FALSE if {needle} is not
+found.
+
+==============================================================================
+*Changelog*
+
+Version            Description
+4.3.0   This function is now binary safe.
+
+==============================================================================
+*Examples*
+
+Example #1 strrchr() example
+
+<?php >
+    // get last directory in $PATH
+    $dir = substr(strrchr($PATH, ":"), 1);
+
+    // get everything after last newline
+    $text = "Line 1\nLine 2\nLine 3";
+    $last = substr(strrchr($text, 10), 1 );
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: This function is binary-safe.
+
+==============================================================================
+*See* *Also*
+
+  * |strstr| - Find the first occurrence of a string
+  * |strrpos| - Find the position of the last occurrence of a substring in a
+    string
+
+
+vim:ft=help:

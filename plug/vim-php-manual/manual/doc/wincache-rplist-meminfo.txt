@@ -1,0 +1,81 @@
+wincache_rplist_meminfo
+
+(PECL wincache >= 1.0.0)
+
+wincache_rplist_meminfo — Retrieves information about memory usage by the
+resolve file path cache
+
+==============================================================================
+*Description*
+
+    array wincache_rplist_meminfo ( void )~
+
+Retrieves information about memory usage by resolve file path cache.
+
+==============================================================================
+*Return* *Values*
+
+Array of meta data that describes memory usage by resolve file path cache. or
+FALSE on failure
+
+The array returned by this function contains the following elements:
+
+  * memory_total - amount of memory in bytes allocated for the resolve file
+    path cache
+  * memory_free - amount of free memory in bytes available for the resolve
+    file path cache
+  * num_used_blks - number of memory blocks used by the resolve file path
+    cache
+  * num_free_blks - number of free memory blocks available for the resolve
+    file path cache
+  * memory_overhead - amount of memory in bytes used for the internal
+    structures of resolve file path cache
+
+==============================================================================
+*Examples*
+
+Example #1 A wincache_rplist_meminfo() example
+
+<pre>
+<?php >
+    print_r(wincache_rplist_meminfo());
+<?>
+</pre>
+
+The above example will output:
+
+Array
+(
+    [memory_total] => 9437184
+    [memory_free] => 9416744
+    [num_used_blks] => 23
+    [num_free_blks] => 1
+    [memory_overhead] => 416
+)
+
+==============================================================================
+*See* *Also*
+
+  * |wincache_fcache_fileinfo| - Retrieves information about files cached in
+    the file cache
+  * |wincache_fcache_meminfo| - Retrieves information about file cache memory
+    usage
+  * |wincache_ocache_fileinfo| - Retrieves information about files cached in
+    the opcode cache
+  * |wincache_ocache_meminfo| - Retrieves information about opcode cache
+    memory usage
+  * |wincache_rplist_fileinfo| - Retrieves information about resolve file path
+    cache
+  * |wincache_refresh_if_changed| - Refreshes the cache entries for the cached
+    files
+  * |wincache_ucache_meminfo| - Retrieves information about user cache memory
+    usage
+  * |wincache_ucache_info| - Retrieves information about data stored in the
+    user cache
+  * |wincache_scache_info| - Retrieves information about files cached in the
+    session cache
+  * |wincache_scache_meminfo| - Retrieves information about session cache
+    memory usage
+
+
+vim:ft=help:

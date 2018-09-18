@@ -1,0 +1,43 @@
+http_match_modified
+
+(PECL pecl_http >= 0.1.0)
+
+http_match_modified — Match last modification
+
+==============================================================================
+*Description*
+
+    bool http_match_modified ([ int $timestamp = -1 [, bool $for_range =~
+    false ]] )~
+
+Matches the given Unix timestamp against the clients If-Modified-Since resp.
+If-Unmodified-Since HTTP headers.
+
+==============================================================================
+*Parameters*
+
+{timestamp}
+
+    Unix timestamp; current time, if omitted
+
+{for_range}
+
+    if set to TRUE, the header usually used to validate HTTP ranges will be
+    checked
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if timestamp represents an earlier date than the header, else
+FALSE.
+
+==============================================================================
+*See* *Also*
+
+  * |http_match_etag| - Match ETag
+  * |http_match_request_header| - Match any header
+  * |http_cache_etag| - Caching by ETag
+  * |http_cache_last_modified| - Caching by last modification
+
+
+vim:ft=help:

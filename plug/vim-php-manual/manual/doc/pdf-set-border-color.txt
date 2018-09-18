@@ -1,0 +1,20 @@
+PDF_set_border_color
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_set_border_color — Set border color of annotations [deprecated]
+
+==============================================================================
+*Description*
+
+    bool PDF_set_border_color ( resource $p , float $red , float $green ,~
+    float $blue )~
+
+Sets the border color for all kinds of annotations. Returns TRUE on success or
+FALSE on failure.
+
+This function is deprecated since PDFlib version 6, use the option
+{annotcolor} in |PDF_create_annotation| instead.
+
+
+vim:ft=help:

@@ -1,0 +1,34 @@
+dbplus_ropen
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_ropen — Open relation file local
+
+==============================================================================
+*Description*
+
+    resource dbplus_ropen ( string $name )~
+
+dbplus_ropen() will open the relation {file} locally for quick access without
+any client/server overhead. Access is read only and only |dbplus_curr| and 
+|dbplus_next| may be applied to the returned relation.
+
+==============================================================================
+*Parameters*
+
+{name}
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

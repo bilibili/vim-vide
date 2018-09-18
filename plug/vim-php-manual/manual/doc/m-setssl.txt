@@ -1,0 +1,31 @@
+m_setssl
+
+(PHP 4 >= 4.3.9, PHP 5 <= 5.0.5, PECL mcve >= 1.0.0)
+
+m_setssl — Set the connection method to SSL
+
+==============================================================================
+*Description*
+
+    int m_setssl ( resource $conn , string $host , int $port )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{ conn}
+
+    An MCVE_CONN resource returned by |m_initengine|.
+
+{host}
+
+{port}
+
+==============================================================================
+*Return* *Values*
+
+
+vim:ft=help:

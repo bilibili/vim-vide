@@ -1,0 +1,61 @@
+mb_strpos
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+mb_strpos — Find position of first occurrence of string in a string
+
+==============================================================================
+*Description*
+
+    int mb_strpos ( string $haystack , string $needle [, int $offset = 0 [,~
+    string $encoding = mb_internal_encoding() ]] )~
+
+Finds position of the first occurrence of a string in a string.
+
+Performs a multi-byte safe |strpos| operation based on number of characters.
+The first character's position is 0, the second character position is 1, and
+so on.
+
+==============================================================================
+*Parameters*
+
+{haystack}
+
+    The string being checked.
+
+{needle}
+
+    The string to find in {haystack}. In contrast with |strpos|, numeric
+    values are not applied as the ordinal value of a character.
+
+{offset}
+
+    The search offset. If it is not specified, 0 is used. A negative offset
+    counts from the end of the string.
+
+{encoding}
+
+    The {encoding} parameter is the character encoding. If it is omitted, the
+    internal character encoding value will be used.
+
+==============================================================================
+*Return* *Values*
+
+Returns the numeric position of the first occurrence of {needle} in the
+{haystack} string. If {needle} is not found, it returns FALSE.
+
+==============================================================================
+*Changelog*
+
+Version                  Description
+7.1.0   Support for negative {offset}s has been added.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_internal_encoding| - Set/Get internal character encoding
+  * |strpos| - Find the position of the first occurrence of a substring in a
+    string
+
+
+vim:ft=help:

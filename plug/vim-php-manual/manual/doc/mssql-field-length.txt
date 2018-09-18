@@ -1,0 +1,82 @@
+mssql_field_length
+
+(PHP 4, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_field_length — Get the length of a field
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * PDOStatement::getColumnMeta()
+  * |sqlsrv_field_metadata|
+  * |odbc_field_len|
+
+==============================================================================
+*Description*
+
+    int mssql_field_length ( resource $result [, int $offset = -1 ] )~
+
+Returns the length of field no. {offset} in {result}.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |mssql_query|.
+
+{offset}
+
+    The field offset, starts at 0. If omitted, the current field is used.
+
+==============================================================================
+*Return* *Values*
+
+The length of the specified field index on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 mssql_field_length() example
+
+<?php >
+    // Connect to MSSQL and select the database
+    mssql_connect('MANGO\SQLEXPRESS', 'sa', 'phpfi');
+    mssql_select_db('php');
+
+    // Send a select query to MSSQL
+    $query = mssql_query('SELECT [name], [age] FROM [php].[dbo].[persons]');
+
+    // Print the field length
+    echo 'The field \'age\' has a data length of ' . mssql_field_length($query, 1
+    );
+
+    // Free the query result
+    mssql_free_result($query);
+<?>
+
+The above example will output something similar to:
+
+The field 'age' has a data length of 4
+
+==============================================================================
+*Notes*
+
+    Note: Note to Windows Users
+
+    Due to a limitation in the underlying API used by PHP (MS DBLib C API),
+    the length of VARCHAR fields is limited to 255. If you need to store more
+    data, use a TEXT field instead.
+
+==============================================================================
+*See* *Also*
+
+  * |mssql_field_name| - Get the name of a field
+  * |mssql_field_type| - Gets the type of a field
+
+
+vim:ft=help:

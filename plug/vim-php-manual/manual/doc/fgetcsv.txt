@@ -1,0 +1,114 @@
+fgetcsv
+
+(PHP 4, PHP 5, PHP 7)
+
+fgetcsv — Gets line from file pointer and parse for CSV fields
+
+==============================================================================
+*Description*
+
+    array fgetcsv ( resource $handle [, int $length = 0 [, string $delimiter~
+    = "," [, string $enclosure = '"' [, string~
+    $escape = "\" ]]]] )~
+
+Similar to |fgets| except that fgetcsv() parses the line it reads for fields
+in CSV format and returns an array containing the fields read.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    A valid file pointer to a file successfully opened by |fopen|, |popen|, or
+    |fsockopen|.
+
+{length}
+
+    Must be greater than the longest line (in characters) to be found in the
+    CSV file (allowing for trailing line-end characters). Otherwise the line
+    is split in chunks of {length} characters, unless the split would occur
+    inside an enclosure.
+
+    Omitting this parameter (or setting it to 0 in PHP 5.1.0 and later) the
+    maximum line length is not limited, which is slightly slower.
+
+{delimiter}
+
+    The optional {delimiter} parameter sets the field delimiter (one character
+    only).
+
+{enclosure}
+
+    The optional {enclosure} parameter sets the field enclosure character (one
+    character only).
+
+{escape}
+
+    The optional {escape} parameter sets the escape character (one character
+    only).
+
+==============================================================================
+*Return* *Values*
+
+Returns an indexed array containing the fields read.
+
+    Note:
+
+    A blank line in a CSV file will be returned as an array comprising a
+    single null field, and will not be treated as an error.
+
+    Note: If PHP is not properly recognizing the line endings when reading
+    files either on or created by a Macintosh computer, enabling the
+    auto_detect_line_endings run-time configuration option may help resolve
+    the problem.
+
+fgetcsv() returns NULL if an invalid {handle} is supplied or FALSE on other
+errors, including end of file.
+
+==============================================================================
+*Changelog*
+
+Version                             Description
+5.3.0   The {escape} parameter was added
+5.1.0   The {length} is now optional. Default is 0, meaning no length limit.
+4.3.5   fgetcsv() is now binary safe
+
+==============================================================================
+*Examples*
+
+Example #1 Read and print the entire contents of a CSV file
+
+<?php >
+    $row = 1;
+    if (($handle = fopen("test.csv", "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            $num = count($data);
+            echo "<p> $num fields in line $row: <br /></p>\n";
+            $row++;
+            for ($c=0; $c < $num; $c++) {
+                echo $data[$c] . "<br />\n";
+            }
+        }
+        fclose($handle);
+    }
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Locale setting is taken into account by this function. If LANG is e.g.
+    en_US.UTF-8, files in one-byte encoding are read wrong by this function.
+
+==============================================================================
+*See* *Also*
+
+  * |str_getcsv| - Parse a CSV string into an array
+  * |explode| - Split a string by string
+  * |file| - Reads entire file into an array
+  * |pack| - Pack data into binary string
+  * |fputcsv| - Format line as CSV and write to file pointer
+
+
+vim:ft=help:

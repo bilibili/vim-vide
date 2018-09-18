@@ -1,0 +1,58 @@
+get_resource_type
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+get_resource_type — Returns the resource type
+
+==============================================================================
+*Description*
+
+    string get_resource_type ( resource $handle )~
+
+This function gets the type of the given resource.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    The evaluated resource handle.
+
+==============================================================================
+*Return* *Values*
+
+If the given {handle} is a resource, this function will return a string
+representing its type. If the type is not identified by this function, the
+return value will be the string Unknown.
+
+This function will return NULL and generate an error if {handle} is not a 
+resource.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+PHP     If {handle} is not a resource this functions returns NULL. Formerly,
+5.3.0   FALSE has been returned.
+
+==============================================================================
+*Examples*
+
+Example #1 get_resource_type() example
+
+<?php >
+    // prints: mysql link
+    $c = mysql_connect();
+    echo get_resource_type($c) . "\n";
+
+    // prints: stream
+    $fp = fopen("foo", "w");
+    echo get_resource_type($fp) . "\n";
+
+    // prints: domxml document
+    $doc = new_xmldoc("1.0");
+    echo get_resource_type($doc->doc) . "\n";
+<?>
+
+
+vim:ft=help:

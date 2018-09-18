@@ -1,0 +1,27 @@
+newt_listbox_clear
+
+(PECL newt >= 0.1)
+
+newt_listbox_clear —
+
+==============================================================================
+*Description*
+
+    void newt_listbox_clear ( resource $listobx )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{listobx}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

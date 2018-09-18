@@ -1,0 +1,45 @@
+dbplus_rsecindex
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_rsecindex — Create a new secondary index for a relation
+
+==============================================================================
+*Description*
+
+    mixed dbplus_rsecindex ( resource $relation , mixed $domlist , int $type~
+)~
+
+dbplus_rsecindex() will create a new secondary index for {relation} with
+consists of the domains specified by {domlist} and is of type {type}
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+{domlist}
+
+    A combination of domains. May be passed as a single domain name string or
+    as an array of domain names.
+
+{type}
+
+==============================================================================
+*Return* *Values*
+
+Returns resource on success or DBPLUS_ERR_UNKNOWN on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

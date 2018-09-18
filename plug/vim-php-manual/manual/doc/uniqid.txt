@@ -1,0 +1,90 @@
+uniqid
+
+(PHP 4, PHP 5, PHP 7)
+
+uniqid — Generate a unique ID
+
+==============================================================================
+*Description*
+
+    string uniqid ([ string $prefix = "" [, bool $more_entropy =~
+    false ]] )~
+
+Gets a prefixed unique identifier based on the current time in microseconds.
+
+Caution
+
+This function does not generate cryptographically secure values, and should
+not be used for cryptographic purposes. If you need a cryptographically secure
+value, consider using |random_int|, |random_bytes|, or 
+|openssl_random_pseudo_bytes| instead.
+
+Warning
+
+This function does not guarantee uniqueness of return value. Since most
+systems adjust system clock by NTP or like, system time is changed constantly.
+Therefore, it is possible that this function does not return unique ID for the
+process/thread. Use {more_entropy} to increase likelihood of uniqueness.
+
+==============================================================================
+*Parameters*
+
+{prefix}
+
+    Can be useful, for instance, if you generate identifiers simultaneously on
+    several hosts that might happen to generate the identifier at the same
+    microsecond.
+
+    With an empty {prefix}, the returned string will be 13 characters long. If
+    {more_entropy} is TRUE, it will be 23 characters.
+
+{more_entropy}
+
+    If set to TRUE, uniqid() will add additional entropy (using the combined
+    linear congruential generator) at the end of the return value, which
+    increases the likelihood that the result will be unique.
+
+==============================================================================
+*Return* *Values*
+
+Returns timestamp based unique identifier as a string.
+
+Warning
+
+This function tries to create unique identifier, but it does not guarantee
+100% uniqueness of return value.
+
+==============================================================================
+*Examples*
+
+Example #1 uniqid() Example
+
+<?php >
+    /* A uniqid, like: 4b3403665fea6 */
+    printf("uniqid(): %s\r\n", uniqid());
+
+    /* We can also prefix the uniqid, this the same as 
+     * doing:
+     *
+     * $uniqid = $prefix . uniqid();
+     * $uniqid = uniqid($prefix);
+     */
+    printf("uniqid('php_'): %s\r\n", uniqid('php_'));
+
+    /* We can also activate the more_entropy parameter, which is 
+     * required on some systems, like Cygwin. This makes uniqid()
+     * produce a value like: 4b340550242239.64159797
+     */
+    printf("uniqid('', true): %s\r\n", uniqid('', true));
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Under Cygwin, the {more_entropy} must be set to TRUE for this function to
+    work.
+
+
+vim:ft=help:

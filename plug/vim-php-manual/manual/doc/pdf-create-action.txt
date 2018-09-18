@@ -1,0 +1,16 @@
+PDF_create_action
+
+(PECL pdflib >= 2.0.0)
+
+PDF_create_action — Create action for objects or events
+
+==============================================================================
+*Description*
+
+    int PDF_create_action ( resource $pdfdoc , string $type , string $optlist~
+)~
+
+Creates an action which can be applied to various objects and events.
+
+
+vim:ft=help:

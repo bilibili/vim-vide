@@ -1,0 +1,104 @@
+hash_pbkdf2
+
+(PHP 5 >= 5.5.0, PHP 7)
+
+hash_pbkdf2 — Generate a PBKDF2 key derivation of a supplied password
+
+==============================================================================
+*Description*
+
+    string hash_pbkdf2 ( string $algo , string $password , string $salt , int~
+    $iterations [, int $length = 0 [, bool $raw_output = false ]] )~
+
+==============================================================================
+*Parameters*
+
+{algo}
+
+    Name of selected hashing algorithm (i.e. md5, sha256, haval160,4, etc..)
+    See |hash_algos| for a list of supported algorithms.
+
+{password}
+
+    The password to use for the derivation.
+
+{salt}
+
+    The salt to use for the derivation. This value should be generated
+    randomly.
+
+{iterations}
+
+    The number of internal iterations to perform for the derivation.
+
+{length}
+
+    The length of the output string. If {raw_output} is TRUE this corresponds
+    to the byte-length of the derived key, if {raw_output} is FALSE this
+    corresponds to twice the byte-length of the derived key (as every byte of
+    the key is returned as two hexits).
+
+    If 0 is passed, the entire output of the supplied algorithm is used.
+
+{raw_output}
+
+    When set to TRUE, outputs raw binary data. FALSE outputs lowercase hexits.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string containing the derived key as lowercase hexits unless
+{raw_output} is set to TRUE in which case the raw binary representation of the
+derived key is returned.
+
+==============================================================================
+*Errors/Exceptions*
+
+An E_WARNING will be raised if the algorithm is unknown, the {iterations}
+parameter is less than or equal to 0, the {length} is less than 0 or the
+{salt} is too long (greater than INT_MAX - 4).
+
+==============================================================================
+*Examples*
+
+Example #1 hash_pbkdf2() example, basic usage
+
+<?php >
+    $password = "password";
+    $iterations = 1000;
+
+    // Generate a random IV using mcrypt_create_iv(),
+    // openssl_random_pseudo_bytes() or another suitable source of randomness
+    $salt = mcrypt_create_iv(16, MCRYPT_DEV_URANDOM);
+
+    $hash = hash_pbkdf2("sha256", $password, $salt, $iterations, 20);
+    echo $hash;
+<?>
+
+The above example will output something similar to:
+
+120fb6cffcf8b32c43e7
+
+==============================================================================
+*Notes*
+
+Caution
+
+The PBKDF2 method can be used for hashing passwords for storage. However, it
+should be noted that |password_hash| or |crypt| with CRYPT_BLOWFISH are better
+suited for password storage.
+
+==============================================================================
+*See* *Also*
+
+  * |crypt| - One-way string hashing
+  * |password_hash| - Creates a password hash
+  * |hash| - Generate a hash value (message digest)
+  * |hash_algos| - Return a list of registered hashing algorithms
+  * |hash_init| - Initialize an incremental hashing context
+  * |hash_hmac| - Generate a keyed hash value using the HMAC method
+  * |hash_hmac_file| - Generate a keyed hash value using the HMAC method and
+    the contents of a given file
+
+
+vim:ft=help:

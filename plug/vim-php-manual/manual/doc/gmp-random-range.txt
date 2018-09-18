@@ -1,0 +1,51 @@
+gmp_random_range
+
+(PHP 5 >= 5.6.3, PHP 7)
+
+gmp_random_range — Random number
+
+==============================================================================
+*Description*
+
+    GMP gmp_random_range ( GMP $min , GMP $max )~
+
+Generate a random number. The number will be between {min} and {max}.
+
+{min} and {max} can both be negative but {min} must always be less than {max}.
+
+==============================================================================
+*Parameters*
+
+{min}
+
+    A GMP number representing the lower bound for the random number
+
+{max}
+
+    A GMP number representing the upper bound for the random number
+
+==============================================================================
+*Return* *Values*
+
+A random GMP number.
+
+==============================================================================
+*Examples*
+
+Example #1 gmp_random_range() example
+
+<?php >
+    $rand1 = gmp_random_range(0, 100);    // random number between 0 and 100
+    $rand2 = gmp_random_range(-100, -10); // random number between -100 and -10
+
+    echo gmp_strval($rand1) . "\n";
+    echo gmp_strval($rand2) . "\n";
+<?>
+
+The above example will output:
+
+42
+-67
+
+
+vim:ft=help:

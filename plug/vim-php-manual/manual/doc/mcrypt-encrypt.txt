@@ -1,0 +1,145 @@
+mcrypt_encrypt
+
+(PHP 4 >= 4.0.2, PHP 5, PHP 7)
+
+mcrypt_encrypt — Encrypts plaintext with given parameters
+
+Warning
+
+This function has been DEPRECATED as of PHP 7.1.0. Relying on this function is
+highly discouraged.
+
+==============================================================================
+*Description*
+
+    string mcrypt_encrypt ( string $cipher , string $key , string $data ,~
+    string $mode [, string $iv ] )~
+
+Encrypts the data and returns it.
+
+==============================================================================
+*Parameters*
+
+{cipher}
+
+    One of the MCRYPT_ciphername constants, or the name of the algorithm as
+    string.
+
+{key}
+
+    The key with which the data will be encrypted. If the provided key size is
+    not supported by the cipher, the function will emit a warning and return
+    FALSE
+
+{data}
+
+    The data that will be encrypted with the given {cipher} and {mode}. If the
+    size of the data is not n * blocksize, the data will be padded with '\0'.
+
+    The returned crypttext can be larger than the size of the data that was
+    given by {data}.
+
+{mode}
+
+    One of the MCRYPT_MODE_modename constants, or one of the following
+    strings: "ecb", "cbc", "cfb", "ofb", "nofb" or "stream".
+
+{iv}
+
+    Used for the initialization in CBC, CFB, OFB modes, and in some algorithms
+    in STREAM mode. If the provided IV size is not supported by the chaining
+    mode or no IV was provided, but the chaining mode requires one, the
+    function will emit a warning and return FALSE.
+
+==============================================================================
+*Return* *Values*
+
+Returns the encrypted data as a string or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        Invalid {key} and {iv} sizes are no longer accepted. mcrypt_encrypt()
+5.6.0   will now throw a warning and return FALSE if the inputs are invalid.
+        Previously keys and IVs were padded with '\0' bytes to the next valid
+        size.
+
+==============================================================================
+*Examples*
+
+Example #1 mcrypt_encrypt() Example
+
+<?php >
+        # --- ENCRYPTION ---
+
+        # the key should be random binary, use scrypt, bcrypt or PBKDF2 to
+        # convert a string into a key
+        # key is specified using hexadecimal
+        $key = pack('H*', 
+    "bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
+        
+        # show key size use either 16, 24 or 32 byte keys for AES-128, 192
+        # and 256 respectively
+        $key_size =  strlen($key);
+        echo "Key size: " . $key_size . "\n";
+        
+        $plaintext = "This string was AES-256 / CBC / ZeroBytePadding encrypted.";
+
+        # create a random IV to use with CBC encoding
+        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+        
+        # creates a cipher text compatible with AES (Rijndael block size = 128)
+        # to keep the text confidential 
+        # only suitable for encoded input that never ends with value 00h
+        # (because of default zero padding)
+        $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key,
+                                     $plaintext, MCRYPT_MODE_CBC, $iv);
+
+        # prepend the IV for it to be available for decryption
+        $ciphertext = $iv . $ciphertext;
+        
+        # encode the resulting cipher text so it can be represented by a string
+        $ciphertext_base64 = base64_encode($ciphertext);
+
+        echo  $ciphertext_base64 . "\n";
+
+        # === WARNING ===
+
+        # Resulting cipher text has no integrity or authenticity added
+        # and is not protected against padding oracle attacks.
+        
+        # --- DECRYPTION ---
+        
+        $ciphertext_dec = base64_decode($ciphertext_base64);
+        
+        # retrieves the IV, iv_size should be created using mcrypt_get_iv_size()
+        $iv_dec = substr($ciphertext_dec, 0, $iv_size);
+        
+        # retrieves the cipher text (everything except the $iv_size in the front)
+        $ciphertext_dec = substr($ciphertext_dec, $iv_size);
+
+        # may remove 00h valued characters from end of plain text
+        $plaintext_dec = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key,
+                                        $ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec
+    );
+        
+        echo  $plaintext_dec . "\n";
+<?>
+
+The above example will output:
+
+Key size: 32
+ENJW8mS2KaJoNB5E5CoSAAu0xARgsR1bdzFWpEn+poYw45q+73az5kYi4j+0haevext1dGrcW8Qi59txfCBV8BBj3bzRP3dFCp3CPQSJ8eU=
+This string was AES-256 / CBC / ZeroBytePadding encrypted.
+
+==============================================================================
+*See* *Also*
+
+  * |mcrypt_decrypt| - Decrypts crypttext with given parameters
+  * |mcrypt_module_open| - Opens the module of the algorithm and the mode to
+    be used
+
+
+vim:ft=help:

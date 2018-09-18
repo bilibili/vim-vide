@@ -1,0 +1,35 @@
+sinh
+
+(PHP 4 >= 4.1.0, PHP 5, PHP 7)
+
+sinh — Hyperbolic sine
+
+==============================================================================
+*Description*
+
+    float sinh ( float $arg )~
+
+Returns the hyperbolic sine of {arg}, defined as (exp(arg) - exp(-arg))/2.
+
+==============================================================================
+*Parameters*
+
+{arg}
+
+    The argument to process
+
+==============================================================================
+*Return* *Values*
+
+The hyperbolic sine of {arg}
+
+==============================================================================
+*See* *Also*
+
+  * |sin| - Sine
+  * |asinh| - Inverse hyperbolic sine
+  * |cosh| - Hyperbolic cosine
+  * |tanh| - Hyperbolic tangent
+
+
+vim:ft=help:

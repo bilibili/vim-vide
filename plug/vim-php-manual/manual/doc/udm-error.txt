@@ -1,0 +1,27 @@
+udm_error
+
+(PHP 4 >= 4.0.5, PHP 5 <= 5.0.5, PECL mnogosearch >= 1.0.0)
+
+udm_error — Get mnoGoSearch error message
+
+==============================================================================
+*Description*
+
+    string udm_error ( resource $agent )~
+
+Gets the agent error message.
+
+==============================================================================
+*Parameters*
+
+{agent}
+
+    A link to Agent, received after call to |udm_alloc_agent|.
+
+==============================================================================
+*Return* *Values*
+
+udm_error() returns mnoGoSearch error message, empty string if no error.
+
+
+vim:ft=help:

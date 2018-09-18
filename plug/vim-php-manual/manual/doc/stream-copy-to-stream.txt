@@ -1,0 +1,70 @@
+stream_copy_to_stream
+
+(PHP 5, PHP 7)
+
+stream_copy_to_stream — Copies data from one stream to another
+
+==============================================================================
+*Description*
+
+    int stream_copy_to_stream ( resource $source , resource $dest [, int~
+    $maxlength = -1 [, int $offset = 0 ]] )~
+
+Makes a copy of up to {maxlength} bytes of data from the current position (or
+from the {offset} position, if specified) in {source} to {dest}. If
+{maxlength} is not specified, all remaining content in {source} will be
+copied.
+
+==============================================================================
+*Parameters*
+
+{source}
+
+    The source stream
+
+{dest}
+
+    The destination stream
+
+{maxlength}
+
+    Maximum bytes to copy
+
+{offset}
+
+    The offset where to start to copy data
+
+==============================================================================
+*Return* *Values*
+
+Returns the total count of bytes copied, or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version         Description
+5.1.0   Added the {offset} parameter
+
+==============================================================================
+*Examples*
+
+Example #1 A stream_copy_to_stream() example
+
+<?php >
+    $src = fopen('http://www.example.com', 'r');
+    $dest1 = fopen('first1k.txt', 'w');
+    $dest2 = fopen('remainder.txt', 'w');
+
+    echo stream_copy_to_stream($src, $dest1, 1024) . " bytes copied to first1k.txt
+    \n";
+    echo stream_copy_to_stream($src, $dest2) . " bytes copied to remainder.txt\n";
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |copy| - Copies file
+
+
+vim:ft=help:

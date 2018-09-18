@@ -1,0 +1,44 @@
+trader_stochrsi
+
+(PECL trader >= 0.2.0)
+
+trader_stochrsi — Stochastic Relative Strength Index
+
+==============================================================================
+*Description*
+
+    array trader_stochrsi ( array $real [, integer $timePeriod [, integer~
+    $fastK_Period [, integer $fastD_Period [, integer $fastD_MAType ]]]] )~
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+{timePeriod}
+
+    Number of period. Valid range from 2 to 100000.
+
+{fastK_Period}
+
+    Time period for building the Fast-K line. Valid range from 1 to 100000.
+
+{fastD_Period}
+
+    Smoothing for making the Fast-D line. Valid range from 1 to 100000,
+    usually set to 3.
+
+{fastD_MAType}
+
+    Type of Moving Average for Fast-D. TRADER_MA_TYPE_* series of constants
+    should be used.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

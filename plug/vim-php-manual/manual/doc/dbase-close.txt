@@ -1,0 +1,57 @@
+dbase_close
+
+(PHP 5 < 5.3.0, dbase 5, dbase 7)
+
+dbase_close — Closes a database
+
+==============================================================================
+*Description*
+
+    bool dbase_close ( resource $dbase_identifier )~
+
+Closes the given database link identifier.
+
+==============================================================================
+*Parameters*
+
+{dbase_identifier}
+
+    The database link identifier, returned by |dbase_open| or |dbase_create|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+  Version                         Description
+dbase 7.0.0 {dbase_identifier} is now a resource instead of an int.
+
+==============================================================================
+*Examples*
+
+Example #1 Closing a dBase database file
+
+<?php >
+
+    // open in read-only mode
+    $db = dbase_open('/tmp/test.dbf', 0);
+
+    if ($db) {
+      // read some data ..
+      
+      dbase_close($db);
+    }
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |dbase_open| - Opens a database
+  * |dbase_create| - Creates a database
+
+
+vim:ft=help:

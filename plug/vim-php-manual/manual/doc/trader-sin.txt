@@ -1,0 +1,27 @@
+trader_sin
+
+(PECL trader >= 0.2.0)
+
+trader_sin — Vector Trigonometric Sin
+
+==============================================================================
+*Description*
+
+    array trader_sin ( array $real )~
+
+Calculates the sine for each value in {real} and returns the resulting array.
+
+==============================================================================
+*Parameters*
+
+{real}
+
+    Array of real values.
+
+==============================================================================
+*Return* *Values*
+
+Returns an array with calculated data or false on failure.
+
+
+vim:ft=help:

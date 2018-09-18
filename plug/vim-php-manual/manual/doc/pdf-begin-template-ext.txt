@@ -1,0 +1,16 @@
+PDF_begin_template_ext
+
+(PECL pdflib >= 2.1.0)
+
+PDF_begin_template_ext — Start template definition
+
+==============================================================================
+*Description*
+
+    int PDF_begin_template_ext ( resource $pdfdoc , float $width , float~
+    $height , string $optlist )~
+
+Starts a new template definition.
+
+
+vim:ft=help:

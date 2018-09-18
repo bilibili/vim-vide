@@ -1,0 +1,137 @@
+cubrid_query
+
+(PECL CUBRID >= 8.3.1)
+
+cubrid_query — Send a CUBRID query
+
+==============================================================================
+*Description*
+
+    resource cubrid_query ( string $query [, resource $conn_identifier ] )~
+
+cubrid_query() sends a unique query (multiple queries are not supported) to
+the currently active database on the server that's associated with the
+specified {conn_identifier}.
+
+==============================================================================
+*Parameters*
+
+{query}
+
+    An SQL query
+
+    Data inside the query should be |properly escaped|.
+
+{conn_identifier}
+
+    The CUBRID connection. If the connection identifier is not specified, the
+    last connection opened by |cubrid_connect| is assumed.
+
+==============================================================================
+*Return* *Values*
+
+For SELECT, SHOW, DESCRIBE, EXPLAIN and other statements returning resultset, 
+cubrid_query() returns a resource on success, or FALSE on error.
+
+For other type of SQL statements, INSERT, UPDATE, DELETE, DROP, etc, 
+cubrid_query() returns TRUE on success or FALSE on error.
+
+The returned result resource should be passed to |cubrid_fetch_array|, and
+other functions for dealing with result tables, to access the returned data.
+
+Use |cubrid_num_rows| to find out how many rows were returned for a SELECT
+statement or |cubrid_affected_rows| to find out how many rows were affected by
+a DELETE, INSERT, REPLACE, or UPDATE statement.
+
+cubrid_query() will also fail and return FALSE if the user does not have
+permission to access the table(s) referenced by the query.
+
+==============================================================================
+*Examples*
+
+Example #1 Invalid Query
+
+The following query is syntactically invalid, so cubrid_query() fails and
+returns FALSE.
+
+<?php >
+    $conn = cubrid_connect('localhost', 33000, 'demodb');
+
+    $result = cubrid_query('SELECT * WHERE 1=1');
+    if (!$result) {
+        die('Invalid query: ' . cubrid_error());
+    }
+
+<?>
+
+Example #2 Valid Query
+
+The following query is valid, so cubrid_query() returns a resource.
+
+<?php >
+    // This could be supplied by a user, for example
+    $firstname = 'fred';
+    $lastname  = 'fox';
+
+    $conn = cubrid_connect('localhost', 33000, 'demodb');
+
+    cubrid_execute($conn,"DROP TABLE if exists friends");
+    cubrid_execute($conn,"create table friends
+    (firstname varchar,lastname varchar,address char(24),age int)");
+    cubrid_execute($conn,"insert into friends values('fred','fox','home-1','20')"
+    );
+    cubrid_execute($conn,"insert into friends values('blue','cat','home-2','21')"
+    );
+    // Formulate Query
+    // This is the best way to perform an SQL query
+    // For more examples, see cubrid_real_escape_string()
+    $query = sprintf(
+    "SELECT firstname, lastname, address, age FROM friends WHERE firstname=
+    '%s' AND lastname='%s'",
+    cubrid_real_escape_string($firstname),
+    cubrid_real_escape_string($lastname));
+
+    // Perform Query
+    $result = cubrid_query($query);
+
+    // Check result
+    //
+     This shows the actual query sent to CUBRID, and the error. Useful for debugging.
+    if (!$result) {
+        $message  = 'Invalid query: ' . cubrid_error() . "\n";
+        $message .= 'Whole query: ' . $query;
+        die($message);
+    }
+
+    // Use result
+    //
+     Attempting to print $result won't allow access to information in the resource
+    // One of the cubrid result functions must be used
+    // See also cubrid_result(), cubrid_fetch_array(), cubrid_fetch_row(), etc.
+    while ($row = cubrid_fetch_assoc($result)) {
+        echo $row['firstname'];
+        echo $row['lastname'];
+        echo $row['address'];
+        echo $row['age'];
+    }
+
+    // Free the resources associated with the result set
+    // This is done automatically at the end of the script
+    cubrid_free_result($result);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_connect| - Open a connection to a CUBRID Server
+  * |cubrid_error| - Get the error message
+  * |cubrid_real_escape_string| - Escape special characters in a string for
+    use in an SQL statement
+  * |cubrid_result| - Return the value of a specific field in a specific row
+  * |cubrid_fetch_assoc| - Return the associative array that corresponds to
+    the fetched row
+  * |cubrid_unbuffered_query| - Perform a query without fetching the results
+    into memory
+
+
+vim:ft=help:

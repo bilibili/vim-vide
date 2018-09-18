@@ -1,0 +1,85 @@
+ncurses_init_pair
+
+(PHP 4 >= 4.0.7, PHP 5 < 5.3.0, PECL ncurses >= 1.0.0)
+
+ncurses_init_pair — Define a color pair
+
+==============================================================================
+*Description*
+
+    int ncurses_init_pair ( int $pair , int $fg , int $bg )~
+
+Defines or redefines the given color pair to have the given foreground and
+background colors. If the color pair was previously initialized, the screen is
+refreshed and all occurrences of it are changed to reflect the new definition.
+
+Color capabilities must be initialized using |ncurses_start_color| before
+calling this function. The first color pair (color pair 0) is assumed to be
+white on black by default, but can be changed using 
+|ncurses_assume_default_colors|.
+
+==============================================================================
+*Parameters*
+
+{pair}
+
+    The number of the color pair to define.
+
+{fg}
+
+    The foreground color for the color pair. May be one of the pre-defined
+    colors or one defined by |ncurses_init_color| if the terminal has color
+    changing capabilities.
+
+{bg}
+
+    The background color for the color pair. May be one of the pre-defined
+    colors or one defined by |ncurses_init_color| if the terminal has color
+    changing capabilities.
+
+==============================================================================
+*Return* *Values*
+
+Returns -1 if the function was successful, and 0 if ncurses or color support
+were not initialized.
+
+==============================================================================
+*Notes*
+
+Note that color changing capabilities are not required for defining color
+pairs of pre-existing colors, but only for changing definitions (red, green,
+and blue components) of colors themselves per |ncurses_init_color|.
+
+==============================================================================
+*Examples*
+
+Example #1 Writing a string with a specified color to the screen
+
+<?php >
+    ncurses_init();
+
+    // If the terminal supports colors, initialize and set active color
+    if (ncurses_has_colors()) {
+        ncurses_start_color();
+        ncurses_init_pair(1, NCURSES_COLOR_YELLOW, NCURSES_COLOR_BLUE);
+        ncurses_color_set(1);
+    }
+
+    // Write a string at specified location
+    ncurses_mvaddstr(10, 10, "Hello world! Yellow on blue text!");
+
+    // Flush output to screen
+    ncurses_refresh();
+
+    ncurses_end();
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ncurses_pair_content| - Retrieves foreground and background colors of a
+    color pair
+  * |ncurses_start_color| - Initializes color functionality
+
+
+vim:ft=help:

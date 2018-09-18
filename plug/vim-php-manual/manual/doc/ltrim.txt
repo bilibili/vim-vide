@@ -1,0 +1,92 @@
+ltrim
+
+(PHP 4, PHP 5, PHP 7)
+
+ltrim — Strip whitespace (or other characters) from the beginning of a string
+
+==============================================================================
+*Description*
+
+    string ltrim ( string $str [, string $character_mask ] )~
+
+Strip whitespace (or other characters) from the beginning of a string.
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The input string.
+
+{character_mask}
+
+    You can also specify the characters you want to strip, by means of the
+    {character_mask} parameter. Simply list all characters that you want to be
+    stripped. With .. you can specify a range of characters.
+
+==============================================================================
+*Return* *Values*
+
+This function returns a string with whitespace stripped from the beginning of
+{str}. Without the second parameter, ltrim() will strip these characters:
+
+  * " " (ASCII 32 (0x20)), an ordinary space.
+  * "\t" (ASCII 9 (0x09)), a tab.
+  * "\n" (ASCII 10 (0x0A)), a new line (line feed).
+  * "\r" (ASCII 13 (0x0D)), a carriage return.
+  * "\0" (ASCII 0 (0x00)), the NUL-byte.
+  * "\x0B" (ASCII 11 (0x0B)), a vertical tab.
+
+==============================================================================
+*Examples*
+
+Example #1 Usage example of ltrim()
+
+<?php >
+
+    $text = "\t\tThese are a few words :) ...  ";
+    $binary = "\x09Example string\x0A";
+    $hello  = "Hello World";
+    var_dump($text, $binary, $hello);
+
+    print "\n";
+
+
+    $trimmed = ltrim($text);
+    var_dump($trimmed);
+
+    $trimmed = ltrim($text, " \t.");
+    var_dump($trimmed);
+
+    $trimmed = ltrim($hello, "Hdle");
+    var_dump($trimmed);
+
+    // trim the ASCII control characters at the beginning of $binary
+    // (from 0 to 31 inclusive)
+    $clean = ltrim($binary, "\x00..\x1F");
+    var_dump($clean);
+
+<?>
+
+The above example will output:
+
+string(32) "        These are a few words :) ...  "
+string(16) "    Example string
+"
+string(11) "Hello World"
+
+string(30) "These are a few words :) ...  "
+string(30) "These are a few words :) ...  "
+string(7) "o World"
+string(15) "Example string
+"
+
+==============================================================================
+*See* *Also*
+
+  * |trim| - Strip whitespace (or other characters) from the beginning and end
+    of a string
+  * |rtrim| - Strip whitespace (or other characters) from the end of a string
+
+
+vim:ft=help:

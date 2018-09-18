@@ -1,0 +1,82 @@
+imagecolorexact
+
+(PHP 4, PHP 5, PHP 7)
+
+imagecolorexact — Get the index of the specified color
+
+==============================================================================
+*Description*
+
+    int imagecolorexact ( resource $image , int $red , int $green , int $blue~
+)~
+
+Returns the index of the specified color in the palette of the image.
+
+If you created the image from a file, only colors used in the image are
+resolved. Colors present only in the palette are not resolved.
+
+==============================================================================
+*Parameters*
+
+{ image}
+
+    An image resource, returned by one of the image creation functions, such
+    as |imagecreatetruecolor|.
+
+{red}
+
+    Value of red component.
+
+{green}
+
+    Value of green component.
+
+{blue}
+
+    Value of blue component.
+
+==============================================================================
+*Return* *Values*
+
+Returns the index of the specified color in the palette, or -1 if the color
+does not exist.
+
+==============================================================================
+*Examples*
+
+Example #1 Get colors from the GD logo
+
+<?php >
+    // Setup an image
+    $im = imagecreatefrompng('./gdlogo.png');
+
+    $colors   = Array();
+    $colors[] = imagecolorexact($im, 255, 0, 0);
+    $colors[] = imagecolorexact($im, 0, 0, 0);
+    $colors[] = imagecolorexact($im, 255, 255, 255);
+    $colors[] = imagecolorexact($im, 100, 255, 52);
+
+    print_r($colors);
+
+    // Free from memory
+    imagedestroy($im);
+<?>
+
+The above example will output something similar to:
+
+Array
+(
+    [0] => 16711680
+    [1] => 0
+    [2] => 16777215
+    [3] => 6618932
+)
+
+==============================================================================
+*See* *Also*
+
+  * |imagecolorclosest| - Get the index of the closest color to the specified
+    color
+
+
+vim:ft=help:

@@ -1,0 +1,57 @@
+fbsql_select_db
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_select_db — Select a FrontBase database
+
+==============================================================================
+*Description*
+
+    bool fbsql_select_db ([ string $database_name [, resource~
+    $link_identifier ]] )~
+
+Sets the current active database on the given link identifier.
+
+The client contacts FBExec to obtain the port number to use for the connection
+to the database. If the database name is a number the system will use that as
+a port number and it will not ask FBExec for the port number. The FrontBase
+server can be stared as FRontBase -FBExec=No -port=<port number> <database
+name>.
+
+Every subsequent call to |fbsql_query| will be made on the active database.
+
+==============================================================================
+*Parameters*
+
+{database_name}
+
+    The name of the database to be selected.
+
+    If the database is protected with a database password, the you must call 
+    |fbsql_database_password| before selecting the database.
+
+{ link_identifier}
+
+    A FrontBase link identifier returned by |fbsql_connect| or |fbsql_pconnect
+    |.
+
+    If optional and not specified, the function will try to find an open link
+    to the FrontBase server and if no such link is found it will try to create
+    one as if |fbsql_connect| was called with no arguments.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |fbsql_connect| - Open a connection to a FrontBase Server
+  * |fbsql_pconnect| - Open a persistent connection to a FrontBase Server
+  * |fbsql_database_password| - Sets or retrieves the password for a FrontBase
+    database
+  * |fbsql_query| - Send a FrontBase query
+
+
+vim:ft=help:

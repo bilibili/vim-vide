@@ -1,0 +1,49 @@
+mb_strwidth
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+mb_strwidth — Return width of string
+
+==============================================================================
+*Description*
+
+    int mb_strwidth ( string $str [, string $encoding =~
+    mb_internal_encoding() ] )~
+
+Returns the width of string {str}.
+
+Multi-byte characters are usually twice the width of single byte characters.
+
+   Characters width
+     Chars       Width
+U+0000 - U+0019  0
+U+0020 - U+1FFF  1
+U+2000 - U+FF60  2
+U+FF61 - U+FF9F  1
+U+FFA0 -         2
+
+==============================================================================
+*Parameters*
+
+{str}
+
+    The string being decoded.
+
+{encoding}
+
+    The {encoding} parameter is the character encoding. If it is omitted, the
+    internal character encoding value will be used.
+
+==============================================================================
+*Return* *Values*
+
+The width of string {str}.
+
+==============================================================================
+*See* *Also*
+
+  * |mb_strimwidth| - Get truncated string with specified width
+  * |mb_internal_encoding| - Set/Get internal character encoding
+
+
+vim:ft=help:

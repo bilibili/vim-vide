@@ -1,0 +1,29 @@
+mcrypt_ofb
+
+(PHP 4, PHP 5)
+
+mcrypt_ofb — Encrypts/decrypts data in OFB mode
+
+Warning
+
+This function was DEPRECATED in PHP 5.5.0, and REMOVED in PHP 7.0.0.
+
+Alternatives to this function include:
+
+  * |mcrypt_decrypt|
+  * |mcrypt_encrypt|
+
+==============================================================================
+*Description*
+
+    string mcrypt_ofb ( int $cipher , string $key , string $data , int $mode~
+    , string $iv )~
+    string mcrypt_ofb ( string $cipher , string $key , string $data , int~
+    $mode [, string $iv ] )~
+
+The first prototype is when linked against libmcrypt 2.2.x, the second when
+linked against libmcrypt 2.4.x or higher. The {mode} should be either
+MCRYPT_ENCRYPT or MCRYPT_DECRYPT.
+
+
+vim:ft=help:

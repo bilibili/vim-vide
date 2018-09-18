@@ -1,0 +1,71 @@
+ingres_fetch_proc_return
+
+(PECL ingres >= 1.4.0)
+
+ingres_fetch_proc_return — Get the return value from a procedure call
+
+==============================================================================
+*Description*
+
+    int ingres_fetch_proc_return ( resource $result )~
+
+This function is used to retrieve the return value following the execution of
+an Ingres database procedure (stored procedure).
+
+    Note:
+
+    If used with a row-producing procedure, this function should be called
+    after all the rows from the procedure have been fetched using 
+    |ingres_fetch_array|, |ingres_fetch_object| or |ingres_fetch_row|. This
+    function will eliminate any rows yet to be fetched should there be any
+    left over.
+
+==============================================================================
+*Parameters*
+
+{result}
+
+    The result identifier for a query
+
+==============================================================================
+*Return* *Values*
+
+Returns an integer if there is a return value otherwise it will return NULL.
+
+==============================================================================
+*Examples*
+
+Example #1 Get the return value from a procedure call
+
+<?php >
+
+    $link = ingres_connect($database);
+
+    if ( ingres_errno() != 0 ) {
+        $error_text = ingres_error();
+        die($error_text);
+    }
+
+    $result = ingres_query($link, "execute procedure php_proc (value = 1000)");
+
+    if ( ingres_errno() != 0 ) {
+        $error_text = ingres_error();
+        die($error_text);
+    }
+
+    echo "return value - " . ingres_fetch_proc_return($result) . "\n";
+
+    ingres_close($link);
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |ingres_query| - Send an SQL query to Ingres
+  * |ingres_fetch_array| - Fetch a row of result into an array
+  * |ingres_fetch_object| - Fetch a row of result into an object
+  * |ingres_fetch_row| - Fetch a row of result into an enumerated array
+
+
+vim:ft=help:

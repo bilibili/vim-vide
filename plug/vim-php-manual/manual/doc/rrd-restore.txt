@@ -1,0 +1,36 @@
+rrd_restore
+
+(PECL rrd >= 0.9.0)
+
+rrd_restore — Restores the RRD file from XML dump.
+
+==============================================================================
+*Description*
+
+    bool rrd_restore ( string $xml_file , string $rrd_file [, array $options~
+    ] )~
+
+Restores the RRD file from the XML dump.
+
+==============================================================================
+*Parameters*
+
+{xml_file}
+
+    XML filename with the dump of the original RRD database file.
+
+{rrd_file}
+
+    Restored RRD database file name.
+
+{options}
+
+    Array of options for restoring. See man page for rrd restore.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, FALSE otherwise.
+
+
+vim:ft=help:

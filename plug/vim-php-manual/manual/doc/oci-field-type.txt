@@ -1,0 +1,103 @@
+oci_field_type
+
+(PHP 5, PHP 7, PECL OCI8 >= 1.1.0)
+
+oci_field_type — Returns a field's data type name
+
+==============================================================================
+*Description*
+
+    mixed oci_field_type ( resource $statement , mixed $field )~
+
+Returns a field's data type name.
+
+==============================================================================
+*Parameters*
+
+{statement}
+
+    A valid OCI statement identifier.
+
+{field}
+
+    Can be the field's index (1-based) or name.
+
+==============================================================================
+*Return* *Values*
+
+Returns the field data type as a string, or FALSE on errors.
+
+==============================================================================
+*Examples*
+
+Example #1 oci_field_type() example
+
+<?php >
+
+    // Create the table with:
+    //   CREATE TABLE mytab (number_col NUMBER, varchar2_col varchar2(1), 
+    //                       clob_col CLOB, date_col DATE);
+
+    $conn = oci_connect("hr", "hrpwd", "localhost/XE");
+    if (!$conn) {
+        $m = oci_error();
+        trigger_error(htmlentities($m['message']), E_USER_ERROR);
+    }
+
+    $stid = oci_parse($conn, "SELECT * FROM mytab");
+    oci_execute($stid, OCI_DESCRIBE_ONLY); //
+     Use OCI_DESCRIBE_ONLY if not fetching rows
+
+    echo "<table border=\"1\">\n";
+    echo "<tr>";
+    echo "<th>Name</th>";
+    echo "<th>Type</th>";
+    echo "<th>Length</th>";
+    echo "</tr>\n";
+
+    $ncols = oci_num_fields($stid);
+
+    for ($i = 1; $i <= $ncols; $i++) {
+        $column_name  = oci_field_name($stid, $i);
+        $column_type  = oci_field_type($stid, $i);
+        $column_size  = oci_field_size($stid, $i);
+
+        echo "<tr>";
+        echo "<td>$column_name</td>";
+        echo "<td>$column_type</td>";
+        echo "<td>$column_size</td>";
+        echo "</tr>\n";
+    }
+
+    echo "</table>\n";
+
+    // Outputs:
+    //    Name           Type       Length
+    //    NUMBER_COL    NUMBER        22
+    //    VARCHAR2_COL  VARCHAR2       1
+    //    CLOB_COL      CLOB        4000
+    //    DATE_COL      DATE           7
+
+    oci_free_statement($stid);
+    oci_close($conn);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    In PHP versions before 5.0.0 you must use |ocicolumntype| instead. This
+    name still can be used, it was left as alias of oci_field_type() for
+    downwards compatability. This, however, is deprecated and not recommended.
+
+==============================================================================
+*See* *Also*
+
+  * |oci_num_fields| - Returns the number of result columns in a statement
+  * |oci_field_name| - Returns the name of a field from the statement
+  * |oci_field_size| - Returns field's size
+
+
+vim:ft=help:

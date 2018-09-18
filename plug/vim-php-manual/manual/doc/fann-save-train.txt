@@ -1,0 +1,37 @@
+fann_save_train
+
+(PECL fann >= 1.0.0)
+
+fann_save_train — Save the training structure to a file
+
+==============================================================================
+*Description*
+
+    bool fann_save_train ( resource $data , string $file_name )~
+
+Save the training data to a file, with the format as specified in 
+|fann_read_train_from_file|.
+
+==============================================================================
+*Parameters*
+
+{data}
+
+    Neural network training data resource.
+
+{file_name}
+
+    The file name of the file where training data is saved to.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_read_train_from_file| - Reads a file that stores training data
+
+
+vim:ft=help:

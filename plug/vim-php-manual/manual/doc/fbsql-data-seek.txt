@@ -1,0 +1,67 @@
+fbsql_data_seek
+
+(PHP 4 >= 4.0.6, PHP 5, PHP 7)
+
+fbsql_data_seek — Move internal result pointer
+
+==============================================================================
+*Description*
+
+    bool fbsql_data_seek ( resource $result , int $row_number )~
+
+Moves the internal row pointer of the FrontBase result associated with the
+specified result identifier to point to the specified row number.
+
+The next call to |fbsql_fetch_row| would return that row.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    A result identifier returned by |fbsql_query| or |fbsql_db_query|.
+
+{row_number}
+
+    The row number. Starts at 0.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 fbsql_data_seek() example
+
+<?php >
+    $link = fbsql_pconnect("localhost", "_SYSTEM", "secret")
+        or die("Could not connect");
+
+    fbsql_select_db("samp_db")
+        or die("Could not select database");
+
+    $query = "SELECT last_name, first_name FROM friends;";
+    $result = fbsql_query($query)
+        or die("Query failed");
+
+    // fetch rows in reverse order
+
+    for ($i = fbsql_num_rows($result) - 1; $i >=0; $i--) {
+        if (!fbsql_data_seek($result, $i)) {
+            printf("Cannot seek to row %d\n", $i);
+            continue;
+        }
+
+        if (!($row = fbsql_fetch_object($result)))
+            continue;
+
+        echo $row->last_name . $row->first_name . "<br />\n";
+    }
+
+    fbsql_free_result($result);
+<?>
+
+
+vim:ft=help:

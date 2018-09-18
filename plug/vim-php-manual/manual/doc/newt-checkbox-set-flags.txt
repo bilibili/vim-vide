@@ -1,0 +1,30 @@
+newt_checkbox_set_flags
+
+(PECL newt >= 0.1)
+
+newt_checkbox_set_flags — Configures checkbox resource
+
+==============================================================================
+*Description*
+
+    void newt_checkbox_set_flags ( resource $checkbox , int $flags , int~
+    $sense )~
+
+This function allows to set various flags on checkbox resource.
+
+==============================================================================
+*Parameters*
+
+{checkbox}
+
+{flags}
+
+{sense}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

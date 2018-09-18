@@ -1,0 +1,90 @@
+http_get
+
+(PECL pecl_http >= 0.1.0)
+
+http_get — Perform GET request
+
+==============================================================================
+*Description*
+
+    string http_get ( string $url [, array $options [, array &$info ]] )~
+
+Performs an HTTP GET request on the supplied url.
+
+See the full list of request options.
+
+==============================================================================
+*Parameters*
+
+{url}
+
+    URL
+
+{options}
+
+    request options
+
+{info}
+
+    Will be filled with request/response information
+
+==============================================================================
+*Return* *Values*
+
+Returns the HTTP response(s) as string on success, or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 A http_get() example
+
+<?php >
+    $response = http_get("http://www.example.com/", array("timeout"=>1), $info);
+    print_r($info);
+<?>
+
+The above example will output:
+
+array (
+  'effective_url' => 'http://www.example.com/',
+  'response_code' => 302,
+  'connect_code' => 0,
+  'filetime' => -1,
+  'total_time' => 0.212348,
+  'namelookup_time' => 0.038296,
+  'connect_time' => 0.104144,
+  'pretransfer_time' => 0.104307,
+  'starttransfer_time' => 0.212077,
+  'redirect_time' => 0,
+  'redirect_count' => 0,
+  'size_upload' => 0,
+  'size_download' => 218,
+  'speed_download' => 1026,
+  'speed_upload' => 0,
+  'header_size' => 307,
+  'request_size' => 103,
+  'ssl_verifyresult' => 0,
+  'ssl_engines' =>
+  array (
+    0 => 'dynamic',
+    1 => 'cswift',
+    2 => 'chil',
+    3 => 'atalla',
+    4 => 'nuron',
+    5 => 'ubsec',
+    6 => 'aep',
+    7 => 'sureware',
+    8 => '4758cca',
+  ),
+  'content_length_download' => 218,
+  'content_length_upload' => 0,
+  'content_type' => 'text/html',
+  'httpauth_avail' => 0,
+  'proxyauth_avail' => 0,
+  'num_connects' => 1,
+  'os_errno' => 0,
+  'error' => '',
+)
+
+
+vim:ft=help:

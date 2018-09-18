@@ -1,0 +1,34 @@
+bzflush
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+bzflush — Force a write of all buffered data
+
+==============================================================================
+*Description*
+
+    bool bzflush ( resource $bz )~
+
+Forces a write of all buffered bzip2 data for the file pointer {bz}.
+
+==============================================================================
+*Parameters*
+
+{bz}
+
+    The file pointer. It must be valid and must point to a file successfully
+    opened by |bzopen|.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * |bzread| - Binary safe bzip2 file read
+  * |bzwrite| - Binary safe bzip2 file write
+
+
+vim:ft=help:

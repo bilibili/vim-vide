@@ -1,0 +1,35 @@
+gupnp_context_get_subscription_timeout
+
+(PECL gupnp >= 0.1.0)
+
+gupnp_context_get_subscription_timeout — Get the event subscription timeout
+
+==============================================================================
+*Description*
+
+    int gupnp_context_get_subscription_timeout ( resource $context )~
+
+Get the event subscription timeout (in seconds), or 0 meaning there is no
+timeout.
+
+==============================================================================
+*Parameters*
+
+{context}
+
+    A context identifier, returned by |gupnp_context_new|.
+
+==============================================================================
+*Return* *Values*
+
+The event subscription timeout in seconds.
+
+==============================================================================
+*See* *Also*
+
+  * |gupnp_context_new| - Create a new context
+  * |gupnp_context_set_subscription_timeout| - Sets the event subscription
+    timeout
+
+
+vim:ft=help:

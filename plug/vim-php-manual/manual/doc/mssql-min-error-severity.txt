@@ -1,0 +1,56 @@
+mssql_min_error_severity
+
+(PHP 4, PHP 5, PECL odbtp >= 1.1.1)
+
+mssql_min_error_severity — Sets the minimum error severity
+
+Warning
+
+This function was REMOVED in PHP 7.0.0.
+
+==============================================================================
+*Description*
+
+    void mssql_min_error_severity ( int $severity )~
+
+Sets the minimum error severity.
+
+==============================================================================
+*Parameters*
+
+{severity}
+
+    The new error severity.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*Examples*
+
+Example #1 mssql_min_error_severity() example
+
+<?php >
+    // Connect to MSSQL and select the database
+    mssql_connect('KALLESPC\SQLEXPRESS', 'sa', 'phpfi');
+    mssql_select_db('php');
+
+    // Set the minimum error severity to not include SQL 
+    // syntax errors by setting it to something greater than 
+    // or equal to 1.
+    mssql_min_error_severity(1);
+
+    // Send a query we know that will cause an syntax error, in
+    // this case we use the MySQL quote signs instead of wrapping 
+    // square brackets around the field and table names.
+    $query = mssql_query('SELECT `syntax`, `error` FROM `MSSQL`');
+
+    if (!$query) {
+        // Custom error handler ...
+    }
+<?>
+
+
+vim:ft=help:

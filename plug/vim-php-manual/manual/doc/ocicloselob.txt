@@ -1,0 +1,18 @@
+ocicloselob
+
+(PHP 4 >= 4.0.6, PECL OCI8 1.0)
+
+ocicloselob — Alias of OCI-Lob::close()
+
+==============================================================================
+*Description*
+
+Alias of OCI-Lob::close()
+
+Warning
+
+This alias has been DEPRECATED as of PHP 5.4.0. Relying on this alias is
+highly discouraged.
+
+
+vim:ft=help:

@@ -1,0 +1,37 @@
+getmypid
+
+(PHP 4, PHP 5, PHP 7)
+
+getmypid — Gets PHP's process ID
+
+==============================================================================
+*Description*
+
+    int getmypid ( void )~
+
+Gets the current PHP process ID.
+
+==============================================================================
+*Return* *Values*
+
+Returns the current PHP process ID, or FALSE on error.
+
+==============================================================================
+*Notes*
+
+Warning
+
+Process IDs are not unique, thus they are a weak entropy source. We recommend
+against relying on pids in security-dependent contexts.
+
+==============================================================================
+*See* *Also*
+
+  * |getmygid| - Get PHP script owner's GID
+  * |getmyuid| - Gets PHP script owner's UID
+  * |get_current_user| - Gets the name of the owner of the current PHP script
+  * |getmyinode| - Gets the inode of the current script
+  * |getlastmod| - Gets time of last page modification
+
+
+vim:ft=help:

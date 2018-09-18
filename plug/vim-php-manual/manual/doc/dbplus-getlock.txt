@@ -1,0 +1,46 @@
+dbplus_getlock
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_getlock — Get a write lock on a tuple
+
+==============================================================================
+*Description*
+
+    int dbplus_getlock ( resource $relation , string $tuple )~
+
+Requests a write lock on the specified {tuple}.
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+{tuple}
+
+==============================================================================
+*Return* *Values*
+
+Returns zero on success or a non-zero error code, especially
+DBPLUS_ERR_WLOCKED on failure.
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+==============================================================================
+*See* *Also*
+
+  * |dbplus_freelock| - Release write lock on tuple
+  * |dbplus_freerlocks| - Free all tuple locks on given relation
+  * |dbplus_freealllocks| - Free all locks held by this client
+
+
+vim:ft=help:

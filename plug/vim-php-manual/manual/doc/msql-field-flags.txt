@@ -1,0 +1,33 @@
+msql_field_flags
+
+(PHP 4, PHP 5, PHP 7)
+
+msql_field_flags — Get field flags
+
+==============================================================================
+*Description*
+
+    string msql_field_flags ( resource $result , int $field_offset )~
+
+msql_field_flags() returns the field flags of the specified field.
+
+==============================================================================
+*Parameters*
+
+{ result}
+
+    The result resource that is being evaluated. This result comes from a call
+    to |msql_query|.
+
+{ field_offset}
+
+    The numerical field offset. The {field_offset} starts at 1.
+
+==============================================================================
+*Return* *Values*
+
+Returns a string containing the field flags of the specified key. This can be:
+primary key not null, not null, primary key, unique not null or unique.
+
+
+vim:ft=help:

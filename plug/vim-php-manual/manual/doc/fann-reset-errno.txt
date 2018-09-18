@@ -1,0 +1,33 @@
+fann_reset_errno
+
+(PECL fann >= 1.0.0)
+
+fann_reset_errno — Resets the last error number
+
+==============================================================================
+*Description*
+
+    void fann_reset_errno ( resource $errdat )~
+
+Resets the last error number.
+
+==============================================================================
+*Parameters*
+
+{errdat}
+
+    Either neural network resource or neural network trainining data resource.
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_errno| - Returns the last error number
+  * |fann_reset_errstr| - Resets the last error string
+
+
+vim:ft=help:

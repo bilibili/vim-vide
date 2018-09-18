@@ -1,0 +1,118 @@
+oci_parse
+
+(PHP 5, PHP 7, PECL OCI8 >= 1.1.0)
+
+oci_parse — Prepares an Oracle statement for execution
+
+==============================================================================
+*Description*
+
+    resource oci_parse ( resource $connection , string $sql_text )~
+
+Prepares {sql_text} using {connection} and returns the statement identifier,
+which can be used with |oci_bind_by_name|, |oci_execute| and other functions.
+
+Statement identifiers can be freed with |oci_free_statement| or by setting the
+variable to NULL.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    An Oracle connection identifier, returned by |oci_connect|, |oci_pconnect|
+    , or |oci_new_connect|.
+
+{sql_text}
+
+    The SQL or PL/SQL statement.
+
+    SQL statements should not end with a semi-colon (";"). PL/SQL statements
+    should end with a semi-colon (";").
+
+==============================================================================
+*Return* *Values*
+
+Returns a statement handle on success, or FALSE on error.
+
+==============================================================================
+*Examples*
+
+Example #1 oci_parse() example for SQL statements
+
+<?php >
+
+    $conn = oci_connect('hr', 'welcome', 'localhost/XE');
+
+    // Parse the statement. Note there is no final semi-colon in the SQL statement
+    $stid = oci_parse($conn, 'SELECT * FROM employees');
+    oci_execute($stid);
+
+    echo "<table border='1'>\n";
+    while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
+        echo "<tr>\n";
+        foreach ($row as $item) {
+            echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : 
+    "&nbsp;") . "</td>\n";
+        }
+        echo "</tr>\n";
+    }
+    echo "</table>\n";
+
+<?>
+
+Example #2 oci_parse() example for PL/SQL statements
+
+<?php >
+
+    /*
+      Before running the PHP program, create a stored procedure in
+      SQL*Plus or SQL Developer:
+
+      CREATE OR REPLACE PROCEDURE myproc(p1 IN NUMBER, p2 OUT NUMBER) AS
+      BEGIN
+          p2 := p1 * 2;
+      END;
+
+    */
+
+    $conn = oci_connect('hr', 'welcome', 'localhost/XE');
+    if (!$conn) {
+        $e = oci_error();
+        trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+    }
+
+    $p1 = 8;
+
+    // When parsing PL/
+    SQL programs, there should be a final semi-colon in the string
+    $stid = oci_parse($conn, 'begin myproc(:p1, :p2); end;');
+    oci_bind_by_name($stid, ':p1', $p1);
+    oci_bind_by_name($stid, ':p2', $p2, 40);
+
+    oci_execute($stid);
+
+    print "$p2\n";   // prints 16
+
+    oci_free_statement($stid);
+    oci_close($conn);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function does not validate {sql_text}. The only way to find out if
+    {sql_text} is a valid SQL or PL/SQL statement is to execute it.
+
+==============================================================================
+*See* *Also*
+
+  * |oci_execute| - Executes a statement
+  * |oci_free_statement| - Frees all resources associated with statement or
+    cursor
+
+
+vim:ft=help:

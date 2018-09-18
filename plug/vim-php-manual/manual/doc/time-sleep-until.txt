@@ -1,0 +1,67 @@
+time_sleep_until
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+time_sleep_until — Make the script sleep until the specified time
+
+==============================================================================
+*Description*
+
+    bool time_sleep_until ( float $timestamp )~
+
+Makes the script sleep until the specified {timestamp}.
+
+==============================================================================
+*Parameters*
+
+{timestamp}
+
+    The timestamp when the script should wake.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Changelog*
+
+Version                     Description
+5.3.0   This function is now available on Windows platforms.
+
+==============================================================================
+*Errors/Exceptions*
+
+If the specified {timestamp} is in the past, this function will generate a
+E_WARNING.
+
+==============================================================================
+*Examples*
+
+Example #1 A time_sleep_until() example
+
+<?php >
+
+    //returns false and generates a warning
+    var_dump(time_sleep_until(time()-1));
+
+    // may only work on faster computers, will sleep up to 0.2 seconds
+    var_dump(time_sleep_until(microtime(true)+0.2));
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note: All signals will be delivered after the script wakes up.
+
+==============================================================================
+*See* *Also*
+
+  * |sleep| - Delay execution
+  * |usleep| - Delay execution in microseconds
+  * |time_nanosleep| - Delay for a number of seconds and nanoseconds
+  * |set_time_limit| - Limits the maximum execution time
+
+
+vim:ft=help:

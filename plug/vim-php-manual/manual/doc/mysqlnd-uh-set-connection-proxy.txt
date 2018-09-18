@@ -1,0 +1,95 @@
+mysqlnd_uh_set_connection_proxy
+
+(PECL mysqlnd-uh >= 1.0.0-alpha)
+
+mysqlnd_uh_set_connection_proxy — Installs a proxy for mysqlnd connections
+
+==============================================================================
+*Description*
+
+    bool mysqlnd_uh_set_connection_proxy ( MysqlndUhConnection~
+    &$connection_proxy [, mysqli &$mysqli_connection ] )~
+
+Installs a proxy object to hook mysqlnd's connection objects methods. Once
+installed, the proxy will be used for all MySQL connections opened with mysqli
+, mysql or PDO_MYSQL, assuming that the listed extensions are compiled to use
+the mysqlnd library.
+
+The function can be disabled with mysqlnd_uh.enable. If mysqlnd_uh.enable is
+set to FALSE the function will not install the proxy and always return TRUE.
+Additionally, an error of the type E_WARNING may be emitted. The error message
+may read like PHP Warning: mysqlnd_uh_set_connection_proxy(): (Mysqlnd User
+Handler) The plugin has been disabled by setting the configuration parameter
+mysqlnd_uh.enable = false. The proxy has not been installed [...].
+
+==============================================================================
+*Parameters*
+
+{connection_proxy}
+
+    A proxy object of type MysqlndUhConnection.
+
+{mysqli_connection}
+
+    Object of type mysqli. If given, the proxy will be set for this particular
+    connection only.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success. Otherwise, returns FALSE
+
+==============================================================================
+*Examples*
+
+Example #1 mysqlnd_uh_set_connection_proxy() example
+
+<?php >
+    $mysqli = new mysqli("localhost", "root", "", "test");
+    $mysqli->query("SELECT 'No proxy installed, yet'");
+
+    class proxy extends MysqlndUhConnection {
+     public function query($res, $query) {
+       printf("%s(%s)\n", __METHOD__, var_export(func_get_args(), true));
+       $ret = parent::query($res, $query);
+       printf("%s returns %s\n", __METHOD__, var_export($ret, true));
+       return $ret;
+     }
+    }
+    mysqlnd_uh_set_connection_proxy(new proxy());
+
+    $mysqli->query("SELECT 'mysqlnd rocks!'");
+
+    $mysql = mysql_connect("localhost", "root", "", "test");
+    mysql_query("SELECT 'Ahoy Andrey!'", $mysql);
+
+    $pdo = new PDO("mysql:host=localhost;dbname=test", "root", "");
+    $pdo->query("SELECT 'Moin Johannes!'");
+<?>
+
+The above example will output:
+
+proxy::query(array (
+  0 => NULL,
+  1 => 'SELECT \'mysqlnd rocks!\'',
+))
+proxy::query returns true
+proxy::query(array (
+  0 => NULL,
+  1 => 'SELECT \'Ahoy Andrey!\'',
+))
+proxy::query returns true
+proxy::query(array (
+  0 => NULL,
+  1 => 'SELECT \'Moin Johannes!\'',
+))
+proxy::query returns true
+
+==============================================================================
+*See* *Also*
+
+  * |mysqlnd_uh_set_statement_proxy| - Installs a proxy for mysqlnd statements
+  * mysqlnd_uh.enable
+
+
+vim:ft=help:

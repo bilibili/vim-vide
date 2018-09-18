@@ -1,0 +1,42 @@
+ps_set_parameter
+
+(PECL ps >= 1.1.0)
+
+ps_set_parameter — Sets certain parameters
+
+==============================================================================
+*Description*
+
+    bool ps_set_parameter ( resource $psdoc , string $name , string $value )~
+
+Sets several parameters which are used by many functions. Parameters are by
+definition string values.
+
+==============================================================================
+*Parameters*
+
+{psdoc}
+
+    Resource identifier of the postscript file as returned by |ps_new|.
+
+{name}
+
+    For a list of possible names see |ps_get_parameter|.
+
+{value}
+
+    The value of the parameter.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*See* *Also*
+
+  * ps_get_parameters()
+  * |ps_set_value| - Sets certain values
+
+
+vim:ft=help:

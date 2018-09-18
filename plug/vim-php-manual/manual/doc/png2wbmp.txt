@@ -1,0 +1,70 @@
+png2wbmp
+
+(PHP 4 >= 4.0.5, PHP 5, PHP 7)
+
+png2wbmp — Convert PNG image file to WBMP image file
+
+Warning
+
+png2wbmp() has been deprecated as of PHP 7.2.0, and will be removed as of PHP
+8.0.0. Use |imagecreatefrompng| and |imagewbmp| instead.
+
+==============================================================================
+*Description*
+
+    bool png2wbmp ( string $pngname , string $wbmpname , int $dest_height ,~
+    int $dest_width , int $threshold )~
+
+Converts a PNG file into a WBMP file.
+
+==============================================================================
+*Parameters*
+
+{pngname}
+
+    Path to PNG file.
+
+{wbmpname}
+
+    Path to destination WBMP file.
+
+{dest_height}
+
+    Destination image height.
+
+{dest_width}
+
+    Destination image width.
+
+{threshold}
+
+    Threshold value, between 0 and 8 (inclusive).
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success or FALSE on failure.
+
+==============================================================================
+*Examples*
+
+Example #1 png2wbmp() example
+
+<?php >
+    // Path to the target png
+    $path = './test.png';
+
+    // Get the image sizes
+    $image = getimagesize($path);
+
+    // Convert image
+    png2wbmp($path, './test.wbmp', $image[1], $image[0], 7);
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |jpeg2wbmp| - Convert JPEG image file to WBMP image file
+
+
+vim:ft=help:

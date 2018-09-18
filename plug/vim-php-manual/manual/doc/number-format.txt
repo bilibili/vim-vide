@@ -1,0 +1,97 @@
+number_format
+
+(PHP 4, PHP 5, PHP 7)
+
+number_format — Format a number with grouped thousands
+
+==============================================================================
+*Description*
+
+    string number_format ( float $number [, int $decimals = 0 ] )~
+    string number_format ( float $number , int $decimals = 0 , string~
+    $dec_point = "." , string $thousands_sep = "," )~
+
+This function accepts either one, two, or four parameters (not three):
+
+If only one parameter is given, {number} will be formatted without decimals,
+but with a comma (",") between every group of thousands.
+
+If two parameters are given, {number} will be formatted with {decimals}
+decimals with a dot (".") in front, and a comma (",") between every group of
+thousands.
+
+If all four parameters are given, {number} will be formatted with {decimals}
+decimals, {dec_point} instead of a dot (".") before the decimals and
+{thousands_sep} instead of a comma (",") between every group of thousands.
+
+==============================================================================
+*Parameters*
+
+{number}
+
+    The number being formatted.
+
+{decimals}
+
+    Sets the number of decimal points.
+
+{dec_point}
+
+    Sets the separator for the decimal point.
+
+{thousands_sep}
+
+    Sets the thousands separator.
+
+==============================================================================
+*Return* *Values*
+
+A formatted version of {number}.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+        This function now supports multiple bytes in {dec_point} and
+5.4.0   {thousands_sep}. Only the first byte of each separator was used in
+        older versions.
+
+==============================================================================
+*Examples*
+
+Example #1 number_format() Example
+
+For instance, French notation usually use two decimals, comma (',') as decimal
+separator, and space (' ') as thousand separator. This is achieved with this
+line :
+
+<?php >
+
+    $number = 1234.56;
+
+    // english notation (default)
+    $english_format_number = number_format($number);
+    // 1,235
+
+    // French notation
+    $nombre_format_francais = number_format($number, 2, ',', ' ');
+    // 1 234,56
+
+    $number = 1234.5678;
+
+    // english notation without thousands separator
+    $english_format_number = number_format($number, 2, '.', '');
+    // 1234.57
+
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |money_format| - Formats a number as a currency string
+  * |sprintf| - Return a formatted string
+  * |printf| - Output a formatted string
+  * |sscanf| - Parses input from a string according to a format
+
+
+vim:ft=help:

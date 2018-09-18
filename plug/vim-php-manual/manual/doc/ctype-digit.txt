@@ -1,0 +1,98 @@
+ctype_digit
+
+(PHP 4 >= 4.0.4, PHP 5, PHP 7)
+
+ctype_digit — Check for numeric character(s)
+
+==============================================================================
+*Description*
+
+    bool ctype_digit ( string $text )~
+
+Checks if all of the characters in the provided string, {text}, are numerical.
+
+==============================================================================
+*Parameters*
+
+{text}
+
+    The tested string.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE if every character in the string {text} is a decimal digit, FALSE
+otherwise.
+
+==============================================================================
+*Changelog*
+
+Version                              Description
+5.1.0   Before PHP 5.1.0, this function returned TRUE when {text} was an empty
+        string.
+
+==============================================================================
+*Examples*
+
+Example #1 A ctype_digit() example
+
+<?php >
+    $strings = array('1820.20', '10002', 'wsl!12');
+    foreach ($strings as $testcase) {
+        if (ctype_digit($testcase)) {
+            echo "The string $testcase consists of all digits.\n";
+        } else {
+            echo "The string $testcase does not consist of all digits.\n";
+        }
+    }
+<?>
+
+The above example will output:
+
+The string 1820.20 does not consist of all digits.
+The string 10002 consists of all digits.
+The string wsl!12 does not consist of all digits.
+
+Example #2 A ctype_digit() example comparing strings with integers
+
+<?php >
+
+    $numeric_string = '42';
+    $integer        = 42;
+
+    ctype_digit($numeric_string);  // true
+    ctype_digit($integer);         // false (ASCII 42 is the * character)
+
+    is_numeric($numeric_string);   // true
+    is_numeric($integer);          // true
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    This function expects a string to be useful, so for example passing in an 
+    integer may not return the expected result. However, also note that HTML
+    forms will result in numeric strings and not integers. See also the types
+    section of the manual.
+
+    Note:
+
+    If an integer between -128 and 255 inclusive is provided, it is
+    interpreted as the ASCII value of a single character (negative values have
+    256 added in order to allow characters in the Extended ASCII range). Any
+    other integer is interpreted as a string containing the decimal digits of
+    the integer.
+
+==============================================================================
+*See* *Also*
+
+  * |ctype_alnum| - Check for alphanumeric character(s)
+  * |ctype_xdigit| - Check for character(s) representing a hexadecimal digit
+  * |is_numeric| - Finds whether a variable is a number or a numeric string
+  * |is_int| - Find whether the type of a variable is integer
+  * |is_string| - Find whether the type of a variable is string
+
+
+vim:ft=help:

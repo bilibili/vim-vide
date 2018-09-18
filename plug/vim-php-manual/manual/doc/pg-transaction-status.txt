@@ -1,0 +1,57 @@
+pg_transaction_status
+
+(PHP 5 >= 5.1.0, PHP 7)
+
+pg_transaction_status — Returns the current in-transaction status of the
+server.
+
+==============================================================================
+*Description*
+
+    int pg_transaction_status ( resource $connection )~
+
+Returns the current in-transaction status of the server.
+
+Caution
+
+pg_transaction_status() will give incorrect results when using a PostgreSQL
+7.3 server that has the parameter autocommit set to off. The server-side
+autocommit feature has been deprecated and does not exist in later server
+versions.
+
+==============================================================================
+*Parameters*
+
+{connection}
+
+    PostgreSQL database connection resource.
+
+==============================================================================
+*Return* *Values*
+
+The status can be PGSQL_TRANSACTION_IDLE (currently idle),
+PGSQL_TRANSACTION_ACTIVE (a command is in progress), PGSQL_TRANSACTION_INTRANS
+(idle, in a valid transaction block), or PGSQL_TRANSACTION_INERROR (idle, in a
+failed transaction block). PGSQL_TRANSACTION_UNKNOWN is reported if the
+connection is bad. PGSQL_TRANSACTION_ACTIVE is reported only when a query has
+been sent to the server and not yet completed.
+
+==============================================================================
+*Examples*
+
+Example #1 pg_transaction_status() example
+
+<?php >
+      $dbconn = pg_connect("dbname=publisher") or die("Could not connect");
+      $stat = pg_transaction_status($dbconn);
+      if ($stat === PGSQL_TRANSACTION_UNKNOWN) {
+          echo 'Connection is bad';
+      } else if ($stat === PGSQL_TRANSACTION_IDLE) {
+          echo 'Connection is currently idle';
+      } else {
+          echo 'Connection is in a transaction state';
+      }    
+<?>
+
+
+vim:ft=help:

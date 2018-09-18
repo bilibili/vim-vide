@@ -1,0 +1,131 @@
+maxdb_stmt_result_metadata
+
+maxdb_stmt::result_metadata
+
+(PECL maxdb >= 1.0)
+
+maxdb_stmt_result_metadata -- maxdb_stmt::result_metadata — Returns result set
+metadata from a prepared statement
+
+==============================================================================
+*Description*
+
+Procedural style
+
+    resource maxdb_stmt_result_metadata ( resource $stmt )~
+
+Object oriented style
+
+    resource maxdb_stmt::result_metadata ( void )~
+
+If a statement passed to |maxdb_prepare| is one that produces a result set, 
+maxdb_stmt_result_metadata() returns the result resource that can be used to
+process the meta information such as total number of fields and individual
+field information.
+
+    Note:
+
+    This result set pointer can be passed as an argument to any of the
+    field-based functions that process result set metadata, such as:
+      + |maxdb_num_fields|
+
+      + |maxdb_fetch_field|
+
+      + |maxdb_fetch_field_direct|
+
+      + |maxdb_fetch_fields|
+
+      + |maxdb_field_count|
+
+      + |maxdb_field_seek|
+
+      + |maxdb_field_tell|
+
+      + |maxdb_free_result|
+
+The result set structure should be freed when you are done with it, which you
+can do by passing it to |maxdb_free_result|
+
+    Note:
+
+    The result set returned by maxdb_stmt_result_metadata() contains only
+    metadata. It does not contain any row results. The rows are obtained by
+    using the statement handle with |maxdb_fetch|.
+
+==============================================================================
+*Return* *Values*
+
+maxdb_stmt_result_metadata() returns a result resource or FALSE if an error
+occurred.
+
+==============================================================================
+*Examples*
+
+Example #1 Object oriented style
+
+<?php >
+    $maxdb = new maxdb("localhost", "MONA", "RED", "DEMODB");
+
+    $maxdb->query("CREATE TABLE temp.friends (id int, name varchar(20))");
+
+    $maxdb->query("INSERT INTO temp.friends VALUES (1,'Hartmut')");
+    $maxdb->query("INSERT INTO temp.friends VALUES (2, 'Ulf')");
+
+    $stmt = $maxdb->prepare("SELECT id, name FROM temp.friends");
+    $stmt->execute();
+
+    /* get resultset for metadata */
+    $result = $stmt->result_metadata();
+
+    /* retrieve field information from metadata result set */
+    $field = $result->fetch_field();
+
+    printf("Fieldname: %s\n", $field->name);
+
+    /* close resultset */
+    $result->close();
+
+    /* close connection */
+    $maxdb->close();
+<?>
+
+Example #2 Procedural style
+
+<?php >
+    $link = maxdb_connect("localhost", "MONA", "RED", "DEMODB");
+
+    maxdb_query($link, "CREATE TABLE temp.friends (id int, name varchar(20))");
+
+    maxdb_query($link, "INSERT INTO temp.friends VALUES (1,'Hartmut')");
+    maxdb_query($link, "INSERT INTO temp.friends VALUES (2, 'Ulf')");
+
+    $stmt = maxdb_prepare($link, "SELECT id, name FROM temp.friends");
+    maxdb_stmt_execute($stmt);
+
+    /* get resultset for metadata */
+    $result = maxdb_stmt_result_metadata($stmt);
+
+    /* retrieve field information from metadata result set */
+    $field = maxdb_fetch_field($result);
+
+    printf("Fieldname: %s\n", $field->name);
+
+    /* close resultset */
+    maxdb_free_result($result);
+
+    /* close connection */
+    maxdb_close($link);
+<?>
+
+The above example will output something similar to:
+
+Fieldname: ID
+
+==============================================================================
+*See* *Also*
+
+  * |maxdb_prepare| - Prepare an SQL statement for execution
+  * |maxdb_free_result| - Frees the memory associated with a result
+
+
+vim:ft=help:

@@ -1,0 +1,88 @@
+fseek
+
+(PHP 4, PHP 5, PHP 7)
+
+fseek — Seeks on a file pointer
+
+==============================================================================
+*Description*
+
+    int fseek ( resource $handle , int $offset [, int $whence = SEEK_SET ] )~
+
+Sets the file position indicator for the file referenced by {handle}. The new
+position, measured in bytes from the beginning of the file, is obtained by
+adding {offset} to the position specified by {whence}.
+
+In general, it is allowed to seek past the end-of-file; if data is then
+written, reads in any unwritten region between the end-of-file and the sought
+position will yield bytes with value 0. However, certain streams may not
+support this behavior, especially when they have an underlying fixed size
+storage.
+
+==============================================================================
+*Parameters*
+
+{handle}
+
+    A file system pointer resource that is typically created using |fopen|.
+
+{offset}
+
+    The offset.
+
+    To move to a position before the end-of-file, you need to pass a negative
+    value in {offset} and set {whence} to SEEK_END.
+
+{whence}
+
+    {whence} values are:
+      + SEEK_SET - Set position equal to {offset} bytes.
+      + SEEK_CUR - Set position to current location plus {offset}.
+      + SEEK_END - Set position to end-of-file plus {offset}.
+
+==============================================================================
+*Return* *Values*
+
+Upon success, returns 0; otherwise, returns -1.
+
+==============================================================================
+*Examples*
+
+Example #1 fseek() example
+
+<?php >
+
+    $fp = fopen('somefile.txt', 'r');
+
+    // read some data
+    $data = fgets($fp, 4096);
+
+    // move back to the beginning of the file
+    // same as rewind($fp);
+    fseek($fp, 0);
+
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    If you have opened the file in append (a or a+) mode, any data you write
+    to the file will always be appended, regardless of the file position, and
+    the result of calling fseek() will be undefined.
+
+    Note:
+
+    Not all streams support seeking. For those that do not support seeking,
+    forward seeking from the current position is accomplished by reading and
+    discarding data; other forms of seeking will fail.
+
+==============================================================================
+*See* *Also*
+
+  * |ftell| - Returns the current position of the file read/write pointer
+  * |rewind| - Rewind the position of a file pointer
+
+
+vim:ft=help:

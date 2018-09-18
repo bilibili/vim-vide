@@ -1,0 +1,59 @@
+dbx_error
+
+(PHP 4 >= 4.0.6, PHP 5 <= 5.0.5, PECL dbx >= 1.1.0)
+
+dbx_error — Report the error message of the latest function call in the module
+
+==============================================================================
+*Description*
+
+    string dbx_error ( object $link_identifier )~
+
+dbx_error() returns the last error message.
+
+==============================================================================
+*Parameters*
+
+{link_identifier}
+
+    The DBX link object returned by |dbx_connect|
+
+==============================================================================
+*Return* *Values*
+
+Returns a string containing the error message from the last function call of
+the abstracted module (e.g. mysql module). If there are multiple connections
+in the same module, just the last error is given. If there are connections on
+different modules, the latest error is returned for the module specified by
+the {link_identifier} parameter.
+
+==============================================================================
+*Examples*
+
+Example #1 dbx_error() example
+
+<?php >
+    $link   = dbx_connect(DBX_MYSQL, "localhost", "db", "username", "password")
+        or die("Could not connect");
+
+    $result = dbx_query($link, "select id from non_existing_table");
+    if ($result == 0) {
+        echo dbx_error($link);
+    }
+    dbx_close($link);
+<?>
+
+==============================================================================
+*Notes*
+
+    Note:
+
+    Always refer to the module-specific documentation as well.
+
+    The error message for Microsoft SQL Server is actually the result of the 
+    |mssql_get_last_message| function.
+
+    The error message for Oracle (oci8) is not implemented yet.
+
+
+vim:ft=help:

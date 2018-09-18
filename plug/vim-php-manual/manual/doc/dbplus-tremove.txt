@@ -1,0 +1,41 @@
+dbplus_tremove
+
+(PHP 4 <= 4.1.0, PECL dbplus >= 0.9)
+
+dbplus_tremove — Remove tuple and return new current tuple
+
+==============================================================================
+*Description*
+
+    int dbplus_tremove ( resource $relation , array $tuple [, array &$current~
+    ] )~
+
+dbplus_tremove() removes {tuple} from {relation} if it perfectly matches a
+tuple within the relation. {current}, if given, will contain the data of the
+new current tuple after calling dbplus_tremove().
+
+==============================================================================
+*Parameters*
+
+{relation}
+
+    A relation opened by |dbplus_open|.
+
+{tuple}
+
+{current}
+
+==============================================================================
+*Return* *Values*
+
+==============================================================================
+*Notes*
+
+Warning
+
+This function is EXPERIMENTAL. The behaviour of this function, its name, and
+surrounding documentation may change without notice in a future release of
+PHP. This function should be used at your own risk.
+
+
+vim:ft=help:

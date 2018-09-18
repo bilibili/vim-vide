@@ -1,0 +1,77 @@
+exif_thumbnail
+
+(PHP 4 >= 4.2.0, PHP 5, PHP 7)
+
+exif_thumbnail — Retrieve the embedded thumbnail of a TIFF or JPEG image
+
+==============================================================================
+*Description*
+
+    string exif_thumbnail ( string $filename [, int &$width [, int &$height~
+    [, int &$imagetype ]]] )~
+
+exif_thumbnail() reads the embedded thumbnail of a TIFF or JPEG image.
+
+If you want to deliver thumbnails through this function, you should send the
+mimetype information using the |header| function.
+
+It is possible that exif_thumbnail() cannot create an image but can determine
+its size. In this case, the return value is FALSE but {width} and {height} are
+set.
+
+==============================================================================
+*Parameters*
+
+{filename}
+
+    The name of the image file being read. This image contains an embedded
+    thumbnail.
+
+{width}
+
+    The return width of the returned thumbnail.
+
+{height}
+
+    The returned height of the returned thumbnail.
+
+{imagetype}
+
+    The returned image type of the returned thumbnail. This is either TIFF or 
+    JPEG.
+
+==============================================================================
+*Return* *Values*
+
+Returns the embedded thumbnail, or FALSE if the image contains no thumbnail.
+
+==============================================================================
+*Examples*
+
+Example #1 exif_thumbnail() example
+
+<?php >
+    if (array_key_exists('file', $_REQUEST)) {
+        $image = exif_thumbnail($_REQUEST['file'], $width, $height, $type);
+    } else {
+        $image = false;
+    }
+    if ($image!==false) {
+        header('Content-type: ' .image_type_to_mime_type($type));
+        echo $image;
+        exit;
+    } else {
+        // no thumbnail available, handle the error here
+        echo 'No thumbnail available';
+    }
+<?>
+
+==============================================================================
+*See* *Also*
+
+  * |exif_read_data| - Reads the EXIF headers from JPEG or TIFF
+  * |image_type_to_mime_type| - Get Mime-Type for image-type returned by
+    getimagesize, exif_read_data, exif_thumbnail, exif_imagetype
+
+
+vim:ft=help:

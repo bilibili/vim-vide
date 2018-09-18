@@ -1,0 +1,29 @@
+newt_grid_free
+
+(PECL newt >= 0.1)
+
+newt_grid_free —
+
+==============================================================================
+*Description*
+
+    void newt_grid_free ( resource $grid , bool $recurse )~
+Warning
+
+This function is currently not documented; only its argument list is
+available.
+
+==============================================================================
+*Parameters*
+
+{grid}
+
+{recurse}
+
+==============================================================================
+*Return* *Values*
+
+No value is returned.
+
+
+vim:ft=help:

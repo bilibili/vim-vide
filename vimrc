@@ -95,7 +95,7 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 "
 " vim-plug
 "
-call plug#begin('~/.vimplug')
+call plug#begin('~/.vim/plug')
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'vim-syntastic/syntastic'
 Plug 'alvan/vim-php-manual'

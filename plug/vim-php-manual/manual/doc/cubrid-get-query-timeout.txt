@@ -1,0 +1,67 @@
+cubrid_get_query_timeout
+
+(PECL CUBRID >= 8.4.1)
+
+cubrid_get_query_timeout — Get the query timeout value of the request
+
+==============================================================================
+*Description*
+
+    int cubrid_get_query_timeout ( resource $req_identifier )~
+
+The cubrid_get_query_timeout() function is used to get the query timeout of
+the request.
+
+==============================================================================
+*Parameters*
+
+{req_identifier}
+
+    Request identifier.
+
+==============================================================================
+*Return* *Values*
+
+Success: the query timeout value of the current request. Units of msec.
+
+Failure: FALSE
+
+==============================================================================
+*Examples*
+
+Example #1 cubrid_get_query_timeout() example
+
+<?php >
+
+    $host = "localhost";
+    $port = 33000;
+    $db = "demodb";
+
+    $conn =
+    cubrid_connect_with_url("CUBRID:$host:$port:$db:::?login_timeout=50000&
+    query_timeout=5000&disconnect_on_query_timeout=yes");
+
+    $req = cubrid_prepare($conn, "SELECT * FROM code");
+
+    $timeout = cubrid_get_query_timeout($req);
+    var_dump($timeout);
+
+    cubrid_set_query_timeout($req, 1000);
+    $timeout = cubrid_get_query_timeout($req);
+    var_dump($timeout);
+
+    cubrid_close($conn);
+<?>
+
+The above example will output:
+
+int(5000)
+int(1000)
+
+==============================================================================
+*See* *Also*
+
+  * |cubrid_set_query_timeout| - Set the timeout time of query execution
+
+
+vim:ft=help:

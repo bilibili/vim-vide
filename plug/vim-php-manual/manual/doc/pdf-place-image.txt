@@ -1,0 +1,19 @@
+PDF_place_image
+
+(PHP 4, PECL pdflib >= 1.0.0)
+
+PDF_place_image — Place image on the page [deprecated]
+
+==============================================================================
+*Description*
+
+    bool PDF_place_image ( resource $pdfdoc , int $image , float $x , float~
+    $y , float $scale )~
+
+Places an image and scales it. Returns TRUE on success or FALSE on failure.
+
+This function is deprecated since PDFlib version 5, use |PDF_fit_image|
+instead.
+
+
+vim:ft=help:

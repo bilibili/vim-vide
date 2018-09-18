@@ -1,0 +1,37 @@
+fann_set_sarprop_step_error_shift
+
+(PECL fann >= 1.0.0)
+
+fann_set_sarprop_step_error_shift — Sets the sarprop step error shift
+
+==============================================================================
+*Description*
+
+    bool fann_set_sarprop_step_error_shift ( resource $ann , float~
+    $sarprop_step_error_shift )~
+
+Sets the sarprop step error shift.
+
+==============================================================================
+*Parameters*
+
+{ann}
+
+    Neural network resource.
+
+{sarprop_step_error_shift}
+
+    The sarprop step error shift.
+
+==============================================================================
+*Return* *Values*
+
+Returns TRUE on success, or FALSE otherwise.
+
+==============================================================================
+*See* *Also*
+
+  * |fann_get_sarprop_step_error_shift| - Returns the sarprop step error shift
+
+
+vim:ft=help:
