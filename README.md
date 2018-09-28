@@ -49,7 +49,7 @@
 
 ## Install (安装)
 
-    wget http://pble9gz3k.bkt.clouddn.com/vim-vide.tgz && tar xvf ./vim-vide.tgz -C ~
+    wget http://static.tjx.be/vim-vide.tgz && tar xvf ./vim-vide.tgz -C ~
 
 ## Upgrade Plugins (升级插件)
 
