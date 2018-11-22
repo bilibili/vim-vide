@@ -6,22 +6,15 @@
 "     \__/     |__| |_______/ |_______|
 "                                      
 
-autocmd BufNewFile *.lua 0r /tmp/lua.template
-autocmd BufNewFile *.lua normal gnp
-autocmd BufNewFile *.php 0r /tmp/php.template
-autocmd BufNewFile *.php normal gnp
+autocmd BufNewFile *.lua,*.sh,*.php 0r !~/.vim/template.sh %:e
 autocmd BufRead,BufNewFile *.conf setfiletype conf
 autocmd BufRead *.php set includeexpr=substitute(v:fname,'\\\','/','g')
 autocmd BufRead *.php set include=^#\s*use
 autocmd BufRead *.php set suffixesadd+=.php
-autocmd BufWinEnter *.mako set filetype=html
+autocmd BufWinEnter *.volt,*.tp,*.mako set filetype=html
 autocmd BufWinEnter *.sls set filetype=yaml
-autocmd BufWinEnter *.tp set filetype=html
-autocmd BufWinEnter *.volt set filetype=html
 autocmd GUIEnter * silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 autocmd FileType php setlocal commentstring=//\ %s
-call system('bash ~/.vim/lua.template > /tmp/lua.template')
-call system('bash ~/.vim/php.template > /tmp/php.template')
 call system('mkdir -p ~/.vimtmp/undodir ~/.vimtmp/backupdir ~/.vimtmp/directory')
 colorscheme torte
 filetype on
@@ -36,6 +29,7 @@ nmap <leader>a :set filetype=awk        <CR>
 nmap <leader>c :set filetype=css        <CR>
 nmap <leader>d :set filetype=htmldjango <CR>
 nmap <leader>e :set filetype=sed        <CR>
+nmap <leader>g :set filetype=go         <CR>
 nmap <leader>h :set filetype=html       <CR>
 nmap <leader>j :set filetype=javascript <CR>
 nmap <leader>l :set filetype=lua        <CR>
@@ -96,16 +90,19 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 " vim-plug
 "
 call plug#begin('~/.vim/plug')
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'vim-syntastic/syntastic'
-Plug 'alvan/vim-php-manual'
-Plug 'plasticboy/vim-markdown'
-Plug 'godlygeek/tabular'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-commentary'
-Plug 'kien/ctrlp.vim'
-Plug 'tmhedberg/matchit'
 Plug 'airblade/vim-gitgutter'
+Plug 'alvan/vim-php-manual'
+Plug 'cespare/vim-toml'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'plasticboy/vim-markdown'
+Plug 'roxma/vim-paste-easy'
+Plug 'scrooloose/nerdtree'
+Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-commentary'
+Plug 'vim-syntastic/syntastic'
 call plug#end()
 
 let g:vim_markdown_folding_disabled = 1
@@ -116,6 +113,15 @@ let g:gitgutter_max_signs=10000
 "
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_quiet_messages = { "level": "errors" }
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+"
+" go-vim
+"
+let g:go_version_warning = 0
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
 
 "
 " NERDTree
