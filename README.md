@@ -1,4 +1,10 @@
-# Vide
+![](http://blog.aicircle.site/img/vim-vide/screenshots.png)
+
+目录
+===
+
+<details>
+<summary>点击展开目录菜单</summary>
 
 <!-- vim-markdown-toc GFM -->
 
@@ -7,49 +13,50 @@
 * [Features (特色功能)](#features-特色功能)
     * [vim-plug](#vim-plug)
     * [Statusline (状态栏)](#statusline-状态栏)
-    * [Shortcuts (快捷键)](#shortcuts-快捷键)
     * [Backup (备份路径)](#backup-备份路径)
     * [Template (模板)](#template-模板)
-* [Plugins (插件列表)](#plugins-插件列表)
-    * [php-manual](#php-manual)
-    * [utime.vim](#utimevim)
-* [Alternatives同类产品](#alternatives同类产品)
 * [什么是vim,为什么要使用vim](#什么是vim为什么要使用vim)
     * [历史](#历史)
-    * [帮助](#帮助)
+    * [帮助文档](#帮助文档)
     * [vim的五种模式](#vim的五种模式)
     * [vim的哲学](#vim的哲学)
-    * [过渡阶段](#过渡阶段)
+* [vim基本操作](#vim基本操作)
     * [打开/切换文件](#打开切换文件)
     * [退出/保存](#退出保存)
     * [编辑](#编辑)
     * [删除](#删除)
-    * [代码补全](#代码补全)
     * [移动](#移动)
     * [复制/粘贴](#复制粘贴)
-* [vim的一些高级用法](#vim的一些高级用法)
+    * [搜索](#搜索)
+* [vim进阶](#vim进阶)
+    * [代码补全](#代码补全)
     * [拖动功能](#拖动功能)
-    * [转换文件编码和格式](#转换文件编码和格式)
+    * [设置编码和格式](#设置编码和格式)
     * [代码折叠](#代码折叠)
     * [分割窗口](#分割窗口)
     * [宏](#宏)
+* [vim插件](#vim插件)
     * [必装插件](#必装插件)
-    * [一些vim命令行](#一些vim命令行)
-    * [vim&md来解决问题的一些工具](#vimmd来解决问题的一些工具)
-* [一些资源](#一些资源)
-    * [拥有你自己的vimrc](#拥有你自己的vimrc)
+    * [NERDTree操作命令](#nerdtree操作命令)
+    * [vim-commentary操作命令](#vim-commentary操作命令)
+* [资源](#资源)
     * [vim资源](#vim资源)
-    * [一些我自己不用的方法](#一些我自己不用的方法)
+    * [其他](#其他)
 
 <!-- vim-markdown-toc -->
+</details>
 
 ## Install (安装)
 
-    wget http://static.tjx.be/vim-vide.tgz && tar xvf ./vim-vide.tgz -C ~
+```bash
+wget http://static.tjx.be/vim-vide.tgz && tar xvf ./vim-vide.tgz -C ~
+```
 
 ## Upgrade Plugins (升级插件)
 
-    vim +PlugClean[!] +PlugUpdate +qa
+```bash
+vim +PlugClean[!] +PlugUpdate +qa
+```
 
 ## Features (特色功能)
 
@@ -65,9 +72,11 @@ https://github.com/junegunn/vim-plug
 Origin vim config statusline, much faster than airline or powerline!
 (vim原生配置实现的状态栏，信息很全，比airline或者powerline快数倍！！！)
 
-    (Vide)  README.md[+] /home/tjx/vide [unix:utf-8:MARKDOWN]       18,5      50%
-    +----+  +----------+ +------------+ +-------------------+       +--+      +-+
-    1       2         3                 4                           5         6
+```bash
+(Vide)  README.md[+] /home/tjx/vide [unix:utf-8:MARKDOWN]       18,5      50%
++----+  +----------+ +------------+ +-------------------+       +--+      +-+
+1       2         3                 4                           5         6
+```
 
 1. Logo
 1. Relative path (相对路径)
@@ -76,22 +85,8 @@ Origin vim config statusline, much faster than airline or powerline!
 1. Row-position, col position (行号，列号)
 1. Percent of rows (当前行在总行数中的百分比)
 
-### Shortcuts (快捷键)
-
-- ctrl-L clear search highlight
-- \3 NERDTree-Find
-- \a :set filetype=awk
-- \c :set filetype=css
-- \h :set filetype=html
-- \j :set filetype=javascript 
-- \l :set filetype=lua
-- \m :set filetype=markdown
-- \p :set filetype=php
-- \s :set filetype=sh
-- \v :set filetype=vim
-- \y :set filetype=python
-
 ### Backup (备份路径)
+
 - 撤销文件夹 ~/.vimtmp/undodir
 - 备份文件夹 ~/.vimtmp/backupdir
 - 交换文件夹 ~/.vimtmp/directory .swp files
@@ -101,33 +96,15 @@ Origin vim config statusline, much faster than airline or powerline!
 - call system('bash ~/.vim/lua.template > /tmp/lua.template')
 - call system('bash ~/.vim/php.template > /tmp/php.template')
 
-## Plugins (插件列表)
-
-### php-manual
-
-Shift-K on php function to lookup in php-manual
-
-### utime.vim
-
-    let g:timeStampFormat = '170101'
-    let g:timeStampString = '%y%m%d'
-    let g:timeStampLeader = 'version'
-
-## Alternatives同类产品
-
-- spf13/spf13-vim: The ultimate vim distribution
-  https://github.com/spf13/spf13-vim
-
-- wklken/k-vim: vim配置
-  https://github.com/wklken/k-vim
-
 ## 什么是vim,为什么要使用vim
 
 ### 历史
 
-    ed -> ex(sed) -> vi -> vim -> gvim / macvim
+```bash
+ed -> ex(sed) -> vi -> vim -> gvim / macvim
+```
 
-### 帮助
+### 帮助文档
 
 - `vimtutor`
 
@@ -151,20 +128,18 @@ Shift-K on php function to lookup in php-manual
 
 ### vim的哲学
 
-    执行次数 + 操作 + 范围
-    次数 1,2,3
-    操作 v d c
-    范围 a i w p $ " ' { ( [ t
-    
-     ni hao tang jun xin
-     $('nihao')
-     <a href="xx" >kjkjk </a>
+```bash
+执行次数 + 操作 + 范围
+次数 1,2,3
+操作 v d c
+范围 a i w p $ " ' { ( [ t
 
-### 过渡阶段
+ ni hao tang jun xin
+ $('nihao')
+ <a href="xx" >kjkjk </a>
+```
 
-- `:set mouse=a`
-
-  设置鼠标可区域选择，跟普通的编辑器一样可以进行拖选
+## vim基本操作
 
 ### 打开/切换文件
 
@@ -208,6 +183,7 @@ Shift-K on php function to lookup in php-manual
 | `=-`            | 格式化当前行代码                                           |
 | `gg=G`          | 格式化所有代码                                             |
 | `<Shift> + v`   | 可视化多选                                                 |
+| `:set mouse=a`  | 设置鼠标可区域选择，跟普通的编辑器一样可以进行拖选         |
 
 ### 删除
 
@@ -216,15 +192,6 @@ Shift-K on php function to lookup in php-manual
 | `dd`  | 删除当前行                                  |
 | `ndd` | 删除包含当前行的n行数据（从当前行往下删除） |
 | `dG`  | 删除包含当前行及之后的全部行                |
-
-### 代码补全
-
-| 命令          | 代码         |
-| ------------- | ------------ |
-| `<Ctrl> + p ` | 往前搜索补全 |
-| `<Ctrl> + n ` | 往后搜索补全 |
-| `<Ctrl> + e ` | 取消补全     |
-| `<Ctrl> + y ` | 确定补全     |
 
 ### 移动
 
@@ -253,7 +220,29 @@ Shift-K on php function to lookup in php-manual
 | `P`      | 粘贴到上部 |
 | `x`、`X` | 剪切       |
 
-## vim的一些高级用法
+### 搜索
+
+| 命令                     | 功能                              |
+| ------------------------ | --------------------------------- |
+| `f`  / `F`               | 当前行搜索，til，正向 / 反向      |
+| `t` / `T`                | 当前行搜索，until，正向 / 反向    |
+| `;`、`,`                 | 重复当前行搜索                    |
+| `/`、`?`                 | 当前文件搜索，向上搜索 / 向下搜索 |
+| `:grep -r` / `:!grep -r` | 跨文件搜索                        |
+| `n`                      | 下一个匹配内容                    |
+| `N`                      | 上一个匹配内容                    |
+| `ctrl-L`                 | 清除搜索高亮                      |
+
+## vim进阶
+
+### 代码补全
+
+| 命令          | 代码         |
+| ------------- | ------------ |
+| `<Ctrl> + p ` | 往前搜索补全 |
+| `<Ctrl> + n ` | 往后搜索补全 |
+| `<Ctrl> + e ` | 取消补全     |
+| `<Ctrl> + y ` | 确定补全     |
 
 ### 拖动功能
 
@@ -263,7 +252,7 @@ Shift-K on php function to lookup in php-manual
 | `zb` | 将当前行定位到屏幕底部 |
 | `zt` | 将当前行定位到屏幕顶部 |
 
-### 转换文件编码和格式
+### 设置编码和格式
 
 | 命令                           | 功能                                           |
 | ------------------------------ | ---------------------------------------------- |
@@ -271,6 +260,17 @@ Shift-K on php function to lookup in php-manual
 | `:set fileencodings`           | 检测打开文档编码的顺序，一般设置为utf-8、cp936 |
 | `:set fileencoding`            | 保存文档的编码，一般为utf-8                    |
 | `:set encoding`                | vim本身界面的编码，一般和文档无关              |
+| `\3`    | `NERDTree-Find`            |
+| `\a`     | `:set filetype=awk`        |
+| `\c`     | `:set filetype=css`        |
+| `\h`     | `:set filetype=html`       |
+| `\j`     | `:set filetype=javascript` |
+| `\l`     | `:set filetype=lua`        |
+| `\m`     | `:set filetype=markdown`   |
+| `\p`     | `:set filetype=php`        |
+| `\s`     | `:set filetype=sh`         |
+| `\v`     | `:set filetype=vim`        |
+| `\y`     | `:set filetype=python`     |
 
 ### 代码折叠
 
@@ -299,6 +299,8 @@ Shift-K on php function to lookup in php-manual
 | `qa` | 录制到a |
 | `@a` | 播放a   |
 
+## vim插件
+
 ### 必装插件
 
 | 名称           | 功能                 |
@@ -310,48 +312,35 @@ Shift-K on php function to lookup in php-manual
 | vim-gitgutter  | 观察git状态          |
 | vim-commentary | 强大的注释插件       |
 
-### 一些vim命令行
+### NERDTree操作命令
 
-```
-:'<,'>w !
-:make
-:X        - 加密
-:r        - 载入文件
-:s///gc
-:!sort    - 命令行过滤
-:normal / :global - 非常强大,但是本人不常用
-```
+| 命令 | 功能                                     |
+| ---- | ---------------------------------------- |
+| `o`  | 打开/关闭文件或目录                      |
+| `t`  | 在新标签页中打开                         |
+| `T`  | 在后台标签页打开                         |
+| `!`  | 执行此文件                               |
+| `p`  | 到上层目录                               |
+| `P`  | 到根目录                                 |
+| `K`  | 到第一个节点                             |
+| `J`  | 到最后一个节点                           |
+| `u`  | 打开上层目录                             |
+| `m`  | 显示文件系统菜单（添加、删除、移动操作） |
+| `?`  | 帮助，再按一下关闭                       |
+| `q`  | 关闭                                     |
+| `\3` | `NERDTree-Find`                          |
 
-### vim&md来解决问题的一些工具
+### vim-commentary操作命令
 
-    vs / notepad++ / elipse / idea / sublime - 都有相应的vim插件
-    vimium - chrome
-    ppt - pandoc
-    博客 - pelican
+| 快捷键 | 功能                               |
+| ------ | ---------------------------------- |
+| `gcc`  | 注释当前行（普通模式下）           |
+| `gc`   | 注释当前选中内容（可视多选模式下） |
+| `gcap` | 注释当前所在段落                   |
+| `gcu`  | 注释上一次注释的部分               |
+| `gcgc` | 取消一组相邻的注释                 |
 
-## 一些资源
-
-### 拥有你自己的vimrc
-
-    spf13/spf13-vim https://github.com/spf13/spf13-vim
-    mrytsr / tvim - Git@OSC - OSChina.Net http://git.oschina.net/mrytsr/tvim
-    
-    .vimrc
-    /home/tjx/.vim/
-    |-- autoload
-    |  `-- pathogen.vim
-    |-- bundle
-    |  |-- ack.vim
-    |  |-- vimproc.vim-master
-    |  |-- vim-startify
-    |  `-- xpt-0.4.8
-    |-- tmp
-    |  |-- backupdir
-    |  |-- directory
-    |  |-- NerdBookmarks.txt
-    |  |-- undodir
-    |  `-- view
-    `-- vimrc
+## 资源
 
 ### vim资源
 
@@ -366,7 +355,7 @@ Shift-K on php function to lookup in php-manual
 - [VimGolf - real Vim ninjas count every keystroke!](http://vimgolf.com/)
 - [Vim Awesome](http://vimawesome.com/)
 
-### 一些我自己不用的方法
+### 其他
 
 - [用DBGPavim在Vim中调试PHP/Python程序](https://brookhong.github.io/2014/09/27/dbgpavim-cn.html)
 - [Cscope的使用（领略Vim + Cscope的强大魅力） - 面码的个人空间 - 开源中国社区](http://my.oschina.net/u/572632/blog/267471)
