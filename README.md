@@ -1,4 +1,4 @@
-![screenshots](https://imgchr.com/i/k2sIMt)
+![screenshots](https://github.com/SMILEORIGIN/imgs/blob/master/vim-vide/screenshots.png)
 
 目录
 ===
