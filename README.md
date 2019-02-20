@@ -1,4 +1,4 @@
-![screenshots](http://blog.aicircle.site/img/vim-vide/screenshots.webp)
+![screenshots](http://blog.aicircle.site/screenshots.png)
 
 目录
 ===
