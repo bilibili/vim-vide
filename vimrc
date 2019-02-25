@@ -127,16 +127,17 @@ let g:go_fmt_command = "goimports"
 " NERDTree
 "
 let g:NERDTreeDirArrowExpandable  = '@'
+let g:NERDTreeNodeDelimiter       = "\u00a0"
 let g:NERDTreeDirArrowCollapsible = '-'
-let g:NERDTreeShowHidden            = 0
-let g:NERDTreeBookmarksFile         = $HOME.'/.vimtmp/NerdBookmarks.txt'
-let g:NERDTreeShowBookmarks         = 1
-let g:NERDTreeShowFiles             = 1
-let g:NERDTreeShowLineNumbers       = 0
-let g:NERDTreeWinSize               = 29
-let g:NERDTreeMinimalUI             = 1
-let g:NERDTreeDirArrows             = 1
-let g:NERDTreeIgnore                = [
+let g:NERDTreeShowHidden          = 0
+let g:NERDTreeBookmarksFile       = $HOME.'/.vimtmp/NerdBookmarks.txt'
+let g:NERDTreeShowBookmarks       = 1
+let g:NERDTreeShowFiles           = 1
+let g:NERDTreeShowLineNumbers     = 0
+let g:NERDTreeWinSize             = 29
+let g:NERDTreeMinimalUI           = 1
+let g:NERDTreeDirArrows           = 1
+let g:NERDTreeIgnore              = [
             \ '.*\.class', 
             \ '.*\.pyc', 
             \ '.*\.chm', 
