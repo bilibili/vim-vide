@@ -346,7 +346,7 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 ## 交流群
 
 ### QQ交流群
-群号：1019096841
+群号：1019096841  
 扫码进群：  
 ![QQ Group QR Code](./img/QR.png)
 
