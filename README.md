@@ -8,6 +8,9 @@
 
 <!-- vim-markdown-toc GFM -->
 
+* [交流群](#交流群)
+    * [QQ交流群](#qq交流群)
+    * [Telegram](#telegram)
 * [Install (安装)](#install-安装)
 * [Upgrade Plugins (升级插件)](#upgrade-plugins-升级插件)
 * [Features (特色功能)](#features-特色功能)
@@ -39,13 +42,24 @@
     * [必装插件](#必装插件)
     * [NERDTree操作命令](#nerdtree操作命令)
     * [vim-commentary操作命令](#vim-commentary操作命令)
-* [交流群](#交流群)
 * [资源](#资源)
     * [vim资源](#vim资源)
     * [其他](#其他)
 
 <!-- vim-markdown-toc -->
 </details>
+
+## 交流群
+
+### QQ交流群
+
+群号：1019096841  
+扫码进群：  
+![QQ Group QR Code](./img/QR.png)
+
+### Telegram
+
+Channel Invite via Link: [https://t.me/joinchat/AAAAAFenzdpRz4RqRduUOg](https://t.me/joinchat/AAAAAFenzdpRz4RqRduUOg)
 
 ## Install (安装)
 
@@ -340,9 +354,6 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 | `gcap` | 注释当前所在段落                   |
 | `gcu`  | 注释上一次注释的部分               |
 | `gcgc` | 取消一组相邻的注释                 |
-
-## 交流群
-QQ交流群：1019096841
 
 ## 资源
 
