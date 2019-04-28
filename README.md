@@ -1,4 +1,4 @@
-![screenshots](https://github.com/SMILEORIGIN/imgs/blob/master/vim-vide/screenshots.png)
+![screenshots](./img/screenshots.png)
 
 目录
 ===
@@ -39,6 +39,7 @@
     * [必装插件](#必装插件)
     * [NERDTree操作命令](#nerdtree操作命令)
     * [vim-commentary操作命令](#vim-commentary操作命令)
+* [交流群](#交流群)
 * [资源](#资源)
     * [vim资源](#vim资源)
     * [其他](#其他)
@@ -339,6 +340,9 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 | `gcap` | 注释当前所在段落                   |
 | `gcu`  | 注释上一次注释的部分               |
 | `gcgc` | 取消一组相邻的注释                 |
+
+## 交流群
+QQ交流群：1019096841
 
 ## 资源
 
