@@ -40,6 +40,8 @@
     * [NERDTree操作命令](#nerdtree操作命令)
     * [vim-commentary操作命令](#vim-commentary操作命令)
 * [交流群](#交流群)
+    * [QQ交流群](#qq交流群)
+    * [Telegram](#telegram)
 * [资源](#资源)
     * [vim资源](#vim资源)
     * [其他](#其他)
@@ -342,7 +344,14 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 | `gcgc` | 取消一组相邻的注释                 |
 
 ## 交流群
-QQ交流群：1019096841
+
+### QQ交流群
+群号：1019096841
+扫码进群：  
+![QQ Group QR Code](./img/QR.png)
+
+### Telegram
+Channel Invite via Link: [https://t.me/joinchat/AAAAAFenzdpRz4RqRduUOg](https://t.me/joinchat/AAAAAFenzdpRz4RqRduUOg)
 
 ## 资源
 
