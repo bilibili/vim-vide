@@ -1,10 +1,10 @@
-" ____    ____  __   _______   _______ 
+" ____    ____  __   _______   _______
 " \   \  /   / |  | |       \ |   ____|
-"  \   \/   /  |  | |  .--.  ||  |__   
-"   \      /   |  | |  |  |  ||   __|  
-"    \    /    |  | |  '--'  ||  |____ 
+"  \   \/   /  |  | |  .--.  ||  |__
+"   \      /   |  | |  |  |  ||   __|
+"    \    /    |  | |  '--'  ||  |____
 "     \__/     |__| |_______/ |_______|
-"                                      
+"
 
 autocmd BufNewFile *.lua,*.sh,*.php 0r !~/.vim/template.sh %:e
 autocmd BufRead,BufNewFile *.conf setfiletype conf
@@ -49,7 +49,7 @@ set shiftwidth=4 tabstop=4 smarttab
 set clipboard+=unnamed
 set complete-=i
 set cursorline
-set expandtab  
+set expandtab
 set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936 fileencoding=utf-8
 set foldmethod=manual
 set hidden hlsearch
@@ -57,21 +57,21 @@ set ignorecase smartcase
 set noautochdir
 set noshowmatch
 set nowrapscan
-set number      
+set number
 set pastetoggle=<F5>
 set path+=./model/,./ctrl/,./lib/,*/templates/,*/static/,..,*/src/main/java/
 set printoptions=formfeed:y,header:0,paper:A4,duplex:off,syntax:n
-set scrolloff=1                             
+set scrolloff=1
 set shell=/bin/bash
-set nocompatible               
+set nocompatible
 set showcmd                                 " Show cmd in vim-cmdline.
 set t_Co=256                                " Make vim look better in putty.
 set textwidth=0
-set undodir=~/.vimtmp/undodir 
-            \ directory=~/.vimtmp/directory 
-            \ backupdir=~/.vimtmp/backupdir 
+set undodir=~/.vimtmp/undodir
+            \ directory=~/.vimtmp/directory
+            \ backupdir=~/.vimtmp/backupdir
             \ viewdir=~/.vimtmp/view
-            \ undofile 
+            \ undofile
 set vb t_vb=                                " Turn off bi-sound of vim.
 set wildignore+=*.git\\*,*.tgz,*.zip,*.url,*.pyc,*.class
 syntax on
@@ -81,7 +81,7 @@ syntax on
 "
 set laststatus=2
 set statusline=(Vide)\ \ %<%f
-set statusline+=%w%h%m%r                 
+set statusline+=%w%h%m%r
 set statusline+=\ %{getcwd()}
 set statusline+=\ [%{&ff}:%{&fenc}:%Y]
 set statusline+=%=%-14.(%l,%c%V%)\ %p%%
@@ -138,9 +138,9 @@ let g:NERDTreeWinSize             = 29
 let g:NERDTreeMinimalUI           = 1
 let g:NERDTreeDirArrows           = 1
 let g:NERDTreeIgnore              = [
-            \ '.*\.class', 
-            \ '.*\.pyc', 
-            \ '.*\.chm', 
+            \ '.*\.class',
+            \ '.*\.pyc',
+            \ '.*\.chm',
             \ '.*\.ttf',
             \ '.*\.lnk',
             \ '.*\.cproj',
@@ -161,16 +161,16 @@ let g:NERDTreeIndicatorMapCustom = {
             \ "Deleted"   : "✖",
             \ "Dirty"     : "✗",
             \ "Clean"     : "✔︎",
-            \ "Unknown"   : "?" 
+            \ "Unknown"   : "?"
             \ }
 
 "
 " ctrlp
 "
-" Making CtrlP.vim load 100x faster — A Tiny Piece of Vim — Medm 
+" Making CtrlP.vim load 100x faster — A Tiny Piece of Vim — Medm
 " https://medium.com/a-tiny-piece-of-vim/making-ctrlp-vim-load-100x-faster-7a722fae7df6#.emcvo89nx
 let g:ctrlp_user_command = [
-            \ '.git/', 
+            \ '.git/',
             \ 'git --git-dir=%s/.git ls-files -oc --exclude-standard'
             \ ]
 let g:ctrlp_match_window       = 'bottom,order:btt,min:5,max:5,results:10'
