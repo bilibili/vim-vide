@@ -58,10 +58,6 @@
 扫码进群：  
 ![QQ Group QR Code](./img/QR.png)
 
-### Telegram
-
-Channel Invite via Link: [https://t.me/joinchat/AAAAAFenzdpRz4RqRduUOg](https://t.me/joinchat/AAAAAFenzdpRz4RqRduUOg)
-
 ## Install (安装)
 
 如果您之前有定制自己的`vim`配置，**请先备份`~/.vim`目录**，以下操作会覆盖`~/.vim`目录
