@@ -90,10 +90,13 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 " vim-plug
 "
 call plug#begin('~/.vim/plug')
+" Plug 'vim-scripts/taglist.vim'
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'pangloss/vim-javascript'
 Plug 'airblade/vim-gitgutter'
+Plug 'posva/vim-vue'
 Plug 'alvan/vim-php-manual'
 Plug 'cespare/vim-toml'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'mzlogin/vim-markdown-toc'
@@ -127,7 +130,7 @@ let g:go_fmt_command = "goimports"
 " NERDTree
 "
 let g:NERDTreeDirArrowExpandable  = '@'
-let g:NERDTreeNodeDelimiter       = "\u00a0"
+" let g:NERDTreeNodeDelimiter       = "\u00a0"
 let g:NERDTreeDirArrowCollapsible = '-'
 let g:NERDTreeShowHidden          = 0
 let g:NERDTreeBookmarksFile       = $HOME.'/.vimtmp/NerdBookmarks.txt'

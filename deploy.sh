@@ -8,3 +8,13 @@ cd $(dirname $(dirname $realpath))
 tar czvf /tmp/vim-vide.tgz $(basename $(dirname $realpath))
 qshell rput static vim-vide.tgz /tmp/vim-vide.tgz
 
+#
+# git-hooks
+# Automatic version numbers of your git repository using git hooks
+# https://gist.github.com/sg-s/2ddd0fe91f6037ffb1bce28be0e74d4e
+#
+test -e .git && test ! -e .git/hooks/pre-commit && {
+    wget -O .git/hooks/pre-commit 'http://bvcstatic.acgvideo.com/pre-commit-autoversion' && \
+        chmod +x .git/hooks/pre-commit
+}
+
