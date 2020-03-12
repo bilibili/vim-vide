@@ -10,7 +10,6 @@
 
 * [交流群](#交流群)
     * [QQ交流群](#qq交流群)
-    * [Telegram](#telegram)
 * [Install (安装)](#install-安装)
 * [Uninstall (卸载)](#uninstall-卸载)
 * [Upgrade Plugins (升级插件)](#upgrade-plugins-升级插件)
@@ -62,7 +61,7 @@
 
 如果您之前有定制自己的`vim`配置，**请先备份`~/.vim`目录**，以下操作会覆盖`~/.vim`目录
 ```bash
-wget http://static.tjx.be/vim-vide.tgz && tar xvf ./vim-vide.tgz -C ~
+wget http://static.tjx.be/vim-vide-20200312.tgz && tar xvf ./vim-vide.tgz -C ~
 ```
 
 ## Uninstall (卸载)
