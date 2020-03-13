@@ -92,6 +92,7 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 call plug#begin('~/.vim/plug')
 " Plug 'vim-scripts/taglist.vim'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'wgwoods/vim-systemd-syntax'
 Plug 'leafgarland/typescript-vim'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-lua-ftplugin'
