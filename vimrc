@@ -77,10 +77,13 @@ set wildignore+=*.git\\*,*.tgz,*.zip,*.url,*.pyc,*.class
 syntax on
 
 "
-" statusline
+"" statusline
 "
+function Version ()
+    return system("grep -o '^v[0-9]*' ~/.vim/version|tr -d '\n'")
+endfunction
 set laststatus=2
-set statusline=(Vide)\ \ %<%f
+set statusline=(Vide.%{Version()})\ \ %<%f
 set statusline+=%w%h%m%r
 set statusline+=\ %{getcwd()}
 set statusline+=\ [%{&ff}:%{&fenc}:%Y]
