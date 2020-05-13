@@ -6,7 +6,7 @@
 realpath=$(realpath $0)
 cd $(dirname $(dirname $realpath))
 tar czvf /tmp/vim-vide.tgz $(basename $(dirname $realpath))
-qshell rput -w static vim-vide-20200314.tgz /tmp/vim-vide.tgz
+qshell rput -w bvcstatic vim-vide-20200513.tgz /tmp/vim-vide.tgz
 
 #
 # git-hooks
