@@ -18,12 +18,12 @@
     * [Statusline (状态栏)](#statusline-状态栏)
     * [Backup (备份路径)](#backup-备份路径)
     * [Template (模板)](#template-模板)
-* [什么是vim,为什么要使用vim](#什么是vim为什么要使用vim)
+* [什么是Vim,为什么要使用Vim](#什么是vim为什么要使用vim)
     * [历史](#历史)
     * [帮助文档](#帮助文档)
-    * [vim的五种模式](#vim的五种模式)
-    * [vim的哲学](#vim的哲学)
-* [vim基本操作](#vim基本操作)
+    * [Vim的五种模式](#vim的五种模式)
+    * [Vim的哲学](#vim的哲学)
+* [Vim基本操作](#vim基本操作)
     * [打开/切换文件](#打开切换文件)
     * [退出/保存](#退出保存)
     * [编辑](#编辑)
@@ -31,19 +31,19 @@
     * [移动](#移动)
     * [复制/粘贴](#复制粘贴)
     * [搜索](#搜索)
-* [vim进阶](#vim进阶)
+* [Vim进阶](#vim进阶)
     * [代码补全](#代码补全)
     * [拖动功能](#拖动功能)
     * [设置编码和格式](#设置编码和格式)
     * [代码折叠](#代码折叠)
     * [分割窗口](#分割窗口)
     * [宏](#宏)
-* [vim插件](#vim插件)
+* [Vim插件](#vim插件)
     * [必装插件](#必装插件)
     * [NERDTree操作命令](#nerdtree操作命令)
     * [vim-commentary操作命令](#vim-commentary操作命令)
 * [资源](#资源)
-    * [vim资源](#vim资源)
+    * [Vim资源](#vim资源)
     * [其他](#其他)
 
 <!-- vim-markdown-toc -->
@@ -59,7 +59,7 @@
 
 ## Install (安装)
 
-如果您之前有定制自己的`vim`配置，**请先备份`~/.vim`目录**，以下操作会覆盖`~/.vim`目录
+如果您之前有定制自己的`Vim`配置，**请先备份`~/.vim`目录**，以下操作会覆盖`~/.vim`目录
 ```bash
 wget http://upos-sz-staticks3.bilivideo.com/appstaticboss/vim-vide-20200812.tgz && tar xvf ./vim-vide-20200812.tgz -C ~
 ```
@@ -83,14 +83,14 @@ vim +PlugClean[!] +PlugUpdate +qa
 ### vim-plug
 
 Base on vim-plug, A minimalist Vim plugin manager.
-新一代的vim配置管理组件，体积最小，plugit用了并行下载，速度较顺序下载的vundle快很多！！！
+新一代的Vim配置管理组件，体积最小，plugit用了并行下载，速度较顺序下载的vundle快很多！！！
 
 https://github.com/junegunn/vim-plug
 
 ### Statusline (状态栏)
 
-Origin vim config statusline, much faster than airline or powerline!
-(vim原生配置实现的状态栏，信息很全，比airline或者powerline快数倍！！！)
+Origin Vim config statusline, much faster than airline or powerline!
+(Vim原生配置实现的状态栏，信息很全，比airline或者powerline快数倍！！！)
 
 ```bash
 (Vide)  README.md[+] /home/tjx/vide [unix:utf-8:MARKDOWN]       18,5      50%
@@ -116,25 +116,25 @@ Origin vim config statusline, much faster than airline or powerline!
 - call system('bash ~/.vim/lua.template > /tmp/lua.template')
 - call system('bash ~/.vim/php.template > /tmp/php.template')
 
-## 什么是vim,为什么要使用vim
+## 什么是Vim,为什么要使用Vim
 
 ### 历史
 
 ```bash
-ed -> ex(sed) -> vi -> vim -> gvim / macvim
+ed -> ex(sed) -> Vi -> Vim -> gVim / macvim
 ```
 
 ### 帮助文档
 
 - `vimtutor`
 
-  命令行直接运行，非vim编辑器内命令
+  命令行直接运行，非Vim编辑器内命令
 
 - `:h`
 
-  vim内部命令
+  Vim内部命令
 
-### vim的五种模式
+### Vim的五种模式
 
 1. 插入模式（和普通编辑器的模式差不多）
 
@@ -142,11 +142,11 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 
 3. 可视模式
 
-4. 命令行模式（扩展vim的功能，vim的精髓所在）
+4. 命令行模式（扩展Vim的功能，Vim的精髓所在）
 
 5. 选择模式（不常用）
 
-### vim的哲学
+### Vim的哲学
 
 ```bash
 执行次数 + 操作 + 范围
@@ -159,7 +159,7 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
  <a href="xx" >kjkjk </a>
 ```
 
-## vim基本操作
+## Vim基本操作
 
 ### 打开/切换文件
 
@@ -180,12 +180,12 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 | 命令        | 功能                                           |
 | ----------- | ---------------------------------------------- |
 | `:w`        | 保存                                           |
-| `:w!`       | 强制保存，不退出vim                            |
+| `:w!`       | 强制保存，不退出Vim                            |
 | `:q`        | 退出                                           |
 | `:q!`       | 强制退出不保存                                 |
 | `:wq`、`ZZ` | 保存并退出                                     |
 | `:wq!`      | 强制保存，并退出                               |
-| `:w file`   | 将修改另存到file中，不退出vim                  |
+| `:w file`   | 将修改另存到file中，不退出Vim                  |
 | `:e!`       | 放弃所有修改，从上次保存文件开始再编辑命令历史 |
 
 ### 编辑
@@ -253,7 +253,7 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 | `N`                      | 上一个匹配内容                    |
 | `ctrl-L`                 | 清除搜索高亮                      |
 
-## vim进阶
+## Vim进阶
 
 ### 代码补全
 
@@ -279,7 +279,7 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 | `:set fileformat unix dos mas` | 让换行符自由切换                               |
 | `:set fileencodings`           | 检测打开文档编码的顺序，一般设置为utf-8、cp936 |
 | `:set fileencoding`            | 保存文档的编码，一般为utf-8                    |
-| `:set encoding`                | vim本身界面的编码，一般和文档无关              |
+| `:set encoding`                | Vim本身界面的编码，一般和文档无关              |
 | `\3`    | `NERDTree-Find`            |
 | `\a`     | `:set filetype=awk`        |
 | `\c`     | `:set filetype=css`        |
@@ -319,7 +319,7 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 | `qa` | 录制到a |
 | `@a` | 播放a   |
 
-## vim插件
+## Vim插件
 
 ### 必装插件
 
@@ -362,7 +362,7 @@ ed -> ex(sed) -> vi -> vim -> gvim / macvim
 
 ## 资源
 
-### vim资源
+### Vim资源
 
 - [Vimbits](http://www.vimbits.com/)
 - [简明 Vim 练级攻略 | 酷 壳 - CoolShell.cn](http://coolshell.cn/articles/5426.html)
