@@ -61,7 +61,7 @@
 
 如果您之前有定制自己的`Vim`配置，**请先备份`~/.vim`目录**，以下操作会覆盖`~/.vim`目录
 ```bash
-wget http://upos-sz-staticks3.bilivideo.com/appstaticboss/vim-vide-20200812.tgz && tar xvf ./vim-vide-20200812.tgz -C ~
+wget http://upos-sz-staticcos.bilivideo.com/appstaticboss/vim-vide-20200812.tgz && tar xvf ./vim-vide-20200812.tgz -C ~
 ```
 
 ## Uninstall (卸载)
