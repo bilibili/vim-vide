@@ -16,7 +16,7 @@ autocmd BufWinEnter *.sls set filetype=yaml
 autocmd GUIEnter * silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
 autocmd FileType php setlocal commentstring=//\ %s
 call system('mkdir -p ~/.vimtmp/undodir ~/.vimtmp/backupdir ~/.vimtmp/directory')
-colorscheme torte
+" colorscheme torte
 filetype on
 filetype plugin indent on
 filetype plugin on
@@ -79,15 +79,25 @@ syntax on
 "
 "" statusline
 "
-function Version ()
-    return system("grep -o '^v[0-9]*' ~/.vim/version|tr -d '\n'")
-endfunction
+" function Version ()
+"     return system("grep -o '^v[0-9]*' ~/.vim/version|tr -d '\n'")
+" endfunction
+" set statusline=(Vide.%{Version()})\ \ %<%f
+" set statusline+=%w%h%m%r
+" set statusline+=\ %{getcwd()}
+" set statusline+=\ [%{&ff}:%{&fenc}:%Y]
+" set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 set laststatus=2
-set statusline=(Vide.%{Version()})\ \ %<%f
-set statusline+=%w%h%m%r
-set statusline+=\ %{getcwd()}
-set statusline+=\ [%{&ff}:%{&fenc}:%Y]
-set statusline+=%=%-14.(%l,%c%V%)\ %p%%
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'readonly', 'filename', 'modified', 'method' ] ]
+  \ },
+  \ 'component': {
+  \     'lineinfo': "%{line('.') . '/' . line('$')}",
+  \   }
+  \ }
+
 
 "
 " vim-plug
@@ -95,6 +105,9 @@ set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 call plug#begin('~/.vim/plug')
 " Plug 'vim-scripts/taglist.vim'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'github/copilot'
+Plug 'itchyny/lightline.vim'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'wgwoods/vim-systemd-syntax'
 Plug 'leafgarland/typescript-vim'
 Plug 'xolox/vim-misc'
@@ -112,8 +125,11 @@ Plug 'roxma/vim-paste-easy'
 Plug 'scrooloose/nerdtree'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 call plug#end()
+
+set background=dark
+colorscheme PaperColor
 
 let g:vim_markdown_folding_disabled = 1
 let g:gitgutter_max_signs=10000

@@ -1,0 +1,143 @@
+"检查plug vim管理器是否存在
+if empty(glob('$HOME/.vim/autoload/plug.vim'))
+  let command = 'curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  echo 'plug vim not exitst'
+  execute '!'.command
+endif
+"使用plug包管理器管理插件包
+call plug#begin('~/.vim/plugged')
+"开始的导航界面
+Plug 'mhinz/vim-startify'
+"轻量彩色工具栏
+Plug 'itchyny/lightline.vim'
+"添加文件icon支持
+Plug 'ryanoasis/vim-devicons'
+"树状的文件浏览窗口
+Plug 'preservim/nerdtree'
+Plug 'majutsushi/tagbar'
+"格式代码，对齐符号或空格
+Plug 'godlygeek/tabular'
+"编辑括号、引号和标签等包围结构
+Plug 'tpope/vim-surround'
+"整行或整段注释代码
+Plug 'tpope/vim-commentary'
+"增强.命令的重复
+Plug 'tpope/vim-repeat'
+"用括号做常用命名的mapping
+Plug 'tpope/vim-unimpaired'
+"基于搜字符来快速跳转
+Plug 'easymotion/vim-easymotion'
+"主题
+Plug 'arcticicestudio/nord-vim'
+Plug 'NLKNguyen/papercolor-theme'
+"高亮多个选中的关键字
+Plug 'lfv89/vim-interestingwords'
+"自动补全的括号
+Plug 'jiangmiao/auto-pairs'
+"常用的snippets
+Plug 'honza/vim-snippets'
+"C++的语法高亮
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+call plug#end()
+
+"开启文件插件
+filetype plugin on
+"设置高亮主题和风格
+set background=dark
+set termguicolors
+" colorscheme nord
+colorscheme PaperColor
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+"打开 matchit.vim, 增强%匹配跳转的功能
+runtime macros/matchit.vim
+set clipboard=unnamed
+"语法高亮
+syntax on
+set re=0
+"显示行号
+set number
+set relativenumber
+"显示光标所在位置的行号和列号
+set ruler
+"高亮光标所在行
+set cursorline
+"隐藏鼠标指针
+set mousehide
+"设置帮助语言为中文
+set helplang=ch
+"设置鼠标可用
+set mouse=a
+"设置显示正在输入的命令
+set showcmd
+"不使用缓存文件
+set nobackup
+set noswapfile
+"快速的响应时间
+set updatetime=300
+"打开命令菜单的补全
+set wildmenu
+set wildmode=longest:list,full
+"关闭高亮搜索
+set nohlsearch
+"设置 leader key
+let mapleader=";"
+"设置字符编码
+set encoding=utf-8
+"倒数第二行显示状态行
+set laststatus=2
+"设置tab为2个空格
+set tabstop=2
+set expandtab
+"设置缩进为2个空格
+set shiftwidth=2
+"强制写入文件
+cmap w!! w !sudo tee % > /dev/null
+"设置跳转窗口的快捷键
+nmap <C-J> <C-W>j
+nmap <C-K> <C-W>k
+nmap <C-L> <C-W>l
+nmap <C-H> <C-W>h
+"设置折叠代码的快捷键
+nnoremap <space> za
+"设置保存和退出的快捷键
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>x :x<CR>
+"设置关闭tab的快捷键
+nnoremap <C-T> :tabclose<CR>
+nnoremap <leader>t :TagbarToggle<CR>
+let g:tagbar_width=25
+"设置快捷键启动NERDTree
+nnoremap <leader>' :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=25
+let g:NERDTreeDirArrowExpandable  = ''
+let g:NERDTreeDirArrowCollapsible = ''
+let g:webdevicons_conceal_nerdtree_brackets = 1
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
+
+let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'readonly', 'filename', 'modified', 'method' ] ]
+  \ },
+  \ 'component': {
+  \     'lineinfo': "%{line('.') . '/' . line('$')}",
+  \   }
+  \ }
+let g:EasyMotion_leader_key = 'f'
+"设置Interesting Word快捷键
+nnoremap <silent> <leader>h :call InterestingWords('n')<CR>
+nnoremap <silent> <leader>c :call UncolorAllWords()<CR>
+nnoremap <silent> n :call WordNavigation('forward')<CR>
+nnoremap <silent> N :call WordNavigation('backward')<CR>
+let g:interestingWordsTermColors = ['154', '121', '211', '137', '214', '222']
+let g:interestingWordsGUIColors  = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
+
+autocmd Filetype python setlocal ts=4 sw=4 expandtab
+autocmd FileType python,shell set commentstring=#\ %s
+autocmd FileType c,cpp set commentstring=//\ %s
+
